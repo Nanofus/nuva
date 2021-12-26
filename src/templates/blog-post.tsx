@@ -16,8 +16,6 @@ const BlogPostTemplate = ({ data: { previous, next, post } }: BlogPostTemplatePa
     alt: post.featuredImage?.node?.alt || ``,
   };
 
-  console.log(post.content.toString().indexOf("<script"));
-
   return (
     <Layout>
       <Seo title={post.title} description={post.excerpt} />
