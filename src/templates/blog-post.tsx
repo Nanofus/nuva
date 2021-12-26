@@ -1,26 +1,20 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image"
-import parse from "html-react-parser"
-import InnerHTML from 'dangerously-set-html-content'
+import React from "react";
+import { Link, graphql } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
+import parse from "html-react-parser";
+import InnerHTML from "dangerously-set-html-content";
 
-// We're using Gutenberg so we need the block styles
-// these are copied into this project due to a conflict in the postCSS
-// version used by the Gatsby and @wordpress packages that causes build
-// failures.
-// @todo update this once @wordpress upgrades their postcss version
-import "../css/@wordpress/block-library/build-style/style.css"
-import "../css/@wordpress/block-library/build-style/theme.css"
+import Bio from "../components/bio";
+import Layout from "../components/layout";
+import Seo from "../components/seo";
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import { BlogPostTemplateParams, Post } from "../types";
 
-const BlogPostTemplate = ({ data: { previous, next, post } }) => {
+const BlogPostTemplate = ({ data: { previous, next, post } }: BlogPostTemplateParams) => {
   const featuredImage = {
     data: null, //post.featuredImage?.node?.localFile?.childImageSharp?.gatsbyImageData,
     alt: post.featuredImage?.node?.alt || ``,
-  }
+  };
 
   console.log(post.content.toString().indexOf("<script"));
 
@@ -49,7 +43,9 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
         </header>
 
         {!!post.content && (
-          <section itemProp="articleBody"><InnerHTML html={post.content} /></section>
+          <section itemProp="articleBody">
+            <InnerHTML html={post.content} />
+          </section>
         )}
 
         <hr />
@@ -87,10 +83,10 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
         </ul>
       </nav>
     </Layout>
-  )
-}
+  );
+};
 
-export default BlogPostTemplate
+export default BlogPostTemplate;
 
 /*
 localFile {
@@ -139,4 +135,4 @@ export const pageQuery = graphql`
       title
     }
   }
-`
+`;

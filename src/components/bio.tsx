@@ -5,10 +5,10 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from "react"
+import React from "react";
 //import { useStaticQuery, graphql } from "gatsby"
 
-const Bio = (props) => {
+const Bio = props => {
   const author = props.author.node;
 
   const avatarUrl = author?.avatar?.url;
@@ -24,7 +24,7 @@ const Bio = (props) => {
       )}
       {author?.firstName && (
         <p>
-          Written by <strong>{author.firstName}</strong>
+          Kirjoittanut <strong>{author.firstName}</strong>
           {` `}
           {author?.description || null}
           {` `}
@@ -36,7 +36,7 @@ const Bio = (props) => {
         </p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Bio
+export default Bio;
