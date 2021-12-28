@@ -2,9 +2,15 @@ export interface Post {
   uri: string;
   title: string;
   content: string;
-  featuredImage: any;
   excerpt: string;
   author: { node: Author };
+  additionalFields: {
+    authors: string;
+    featuredImage: string;
+    theme: string;
+    scripts: string;
+    styles: string;
+  }
   date: Date;
 }
 
@@ -12,7 +18,7 @@ export interface Author {
   firstName: string;
 }
 
-export interface BlogPostTemplateParams {
+export interface PostTemplateParams {
     data: {
         previous: Post,
         next: Post,

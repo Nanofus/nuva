@@ -7,7 +7,7 @@ import Seo from "../components/seo";
 
 import { Post } from "../types";
 
-const BlogIndex = ({
+const Index = ({
   data,
   pageContext: { nextPagePath, previousPagePath },
 }) => {
@@ -96,7 +96,7 @@ const BlogIndex = ({
   );
 };
 
-export default BlogIndex;
+export default Index;
 
 export const pageQuery = graphql`
   query WordPressPostArchive($offset: Int!, $postsPerPage: Int!) {

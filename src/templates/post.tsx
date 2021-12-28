@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
 import parse from "html-react-parser";
 import InnerHTML from "dangerously-set-html-content";
 
@@ -8,20 +7,18 @@ import Bio from "../components/bio";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 
-import { BlogPostTemplateParams, Post } from "../types";
+import "../css/predefined-formatting.scss";
 
-const BlogPostTemplate = ({ data: { previous, next, post } }: BlogPostTemplateParams) => {
-  const featuredImage = {
-    data: null, //post.featuredImage?.node?.localFile?.childImageSharp?.gatsbyImageData,
-    alt: post.featuredImage?.node?.alt || ``,
-  };
+import { PostTemplateParams, Post } from "../types";
+
+const PostTemplate = ({ data: { previous, next, post } }: PostTemplateParams) => {
 
   return (
     <Layout>
       <Seo title={post.title} description={post.excerpt} />
 
       <article
-        className="blog-post"
+        className="post"
         itemScope
         itemType="http://schema.org/Article"
       >
@@ -31,10 +28,10 @@ const BlogPostTemplate = ({ data: { previous, next, post } }: BlogPostTemplatePa
           <p>{post.date}</p>
 
           {/* if we have a featured image for this post let's display it */}
-          {featuredImage?.data && (
-            <GatsbyImage
-              image={featuredImage.data}
-              alt={featuredImage.alt}
+          {post.additionalFields?.featuredImage && (
+            <img
+              src={post.additionalFields.featuredImage}
+              alt="Featured image"
               style={{ marginBottom: 50 }}
             />
           )}
@@ -53,7 +50,7 @@ const BlogPostTemplate = ({ data: { previous, next, post } }: BlogPostTemplatePa
         </footer>
       </article>
 
-      <nav className="blog-post-nav">
+      <nav className="post-nav">
         <ul
           style={{
             display: `flex`,
@@ -84,7 +81,7 @@ const BlogPostTemplate = ({ data: { previous, next, post } }: BlogPostTemplatePa
   );
 };
 
-export default BlogPostTemplate;
+export default PostTemplate;
 
 /*
 localFile {
@@ -98,7 +95,7 @@ localFile {
           }
 */
 export const pageQuery = graphql`
-  query BlogPostById(
+  query PostById(
     $id: String!
     $previousPostId: String
     $nextPostId: String

@@ -21,16 +21,16 @@ exports.createPages = async gatsbyUtilities => {
   }
 
   // If there are posts, create pages for them
-  await createIndividualBlogPostPages({ posts, gatsbyUtilities });
+  await createIndividualPostPages({ posts, gatsbyUtilities });
 
   // And a paginated archive
-  await createBlogPostArchive({ posts, gatsbyUtilities });
+  await createPostArchive({ posts, gatsbyUtilities });
 };
 
 /**
- * This function creates all the individual blog pages in this site
+ * This function creates all the individual pages in this site
  */
-const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
+const createIndividualPostPages = async ({ posts, gatsbyUtilities }) =>
   Promise.all(
     posts.map(({ previous, post, next }) =>
       // createPage is an action passed to createPages
@@ -40,14 +40,14 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
         // This is a good idea so that internal links and menus work 👍
         path: post.uri,
 
-        // use the blog post template as the page component
-        component: path.resolve(`./src/templates/blog-post.tsx`),
+        // use the post template as the page component
+        component: path.resolve(`./src/templates/post.tsx`),
 
         // `context` is available in the template as a prop and
         // as a variable in GraphQL.
         context: {
           // we need to add the post id here
-          // so our blog post template knows which blog post
+          // so our post template knows which post
           // the current page is (when you open it in a browser)
           id: post.id,
 
@@ -60,9 +60,9 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
   );
 
 /**
- * This function creates all the individual blog pages in this site
+ * This function creates all the individual pages in this site
  */
-async function createBlogPostArchive({ posts, gatsbyUtilities }) {
+async function createPostArchive({ posts, gatsbyUtilities }) {
   const graphqlResult = await gatsbyUtilities.graphql(/* GraphQL */ `
     {
       wp {
@@ -85,11 +85,11 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 
       const getPagePath = page => {
         if (page > 0 && page <= totalPages) {
-          // Since our homepage is our blog page
+          // Since our homepage is our page
           // we want the first page to be "/" and any additional pages
           // to be numbered.
-          // "/blog/2" for example
-          return page === 1 ? `/` : `/blog/${page}`;
+          // "/post/2" for example
+          return page === 1 ? `/` : `/post/${page}`;
         }
 
         return null;
@@ -100,8 +100,8 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
       await gatsbyUtilities.actions.createPage({
         path: getPagePath(pageNumber),
 
-        // use the blog post archive template as the page component
-        component: path.resolve(`./src/templates/blog-post-archive.tsx`),
+        // use the post archive template as the page component
+        component: path.resolve(`./src/templates/index.tsx`),
 
         // `context` is available in the template as a prop and
         // as a variable in GraphQL.
@@ -124,7 +124,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 
 /**
  * This function queries Gatsby's GraphQL server and asks for
- * All WordPress blog posts. If there are any GraphQL error it throws an error
+ * All WordPress posts. If there are any GraphQL error it throws an error
  * Otherwise it will return the posts 🙌
  *
  * We're passing in the utilities we got from createPages.
@@ -133,7 +133,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 async function getPosts({ graphql, reporter }) {
   const graphqlResult = await graphql(/* GraphQL */ `
     query WpPosts {
-      # Query all WordPress blog posts sorted by date
+      # Query all WordPress posts sorted by date
       allWpPost(sort: { fields: [date], order: DESC }) {
         edges {
           previous {
@@ -157,7 +157,7 @@ async function getPosts({ graphql, reporter }) {
 
   if (graphqlResult.errors) {
     reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
+      `There was an error loading your posts`,
       graphqlResult.errors
     );
     return;
