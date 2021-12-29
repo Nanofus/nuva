@@ -52,8 +52,7 @@ const client = new ApolloClient({
 export const wrapPageElement = ({ element, props }) => {
   return (
     <ApolloProvider client={client}>
-      <Login />
-      <ViewerInformation />
+      <Menu />
       {element}
     </ApolloProvider>
   );
@@ -85,6 +84,21 @@ const LOGIN = gql`
   }
 `;
 
+class Menu extends React.Component {
+  render() {
+    return (
+      <div className="menu">
+        <Login />
+        {localStorage.getItem("authToken") && [<ViewerInformation />]}
+      </div>
+    );
+  }
+}
+
+function LoggedIn() {
+  return !!localStorage.getItem("authToken");
+}
+
 function Login() {
   const [login, { error, reset }] = useMutation(LOGIN, {
     refetchQueries: [VIEWER],
@@ -97,27 +111,44 @@ function Login() {
       }
     },
   });
+  const logout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userId");
+  };
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  
+
   return (
     <>
       <div>
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-        <input type="text" value={password} onChange={e => setPassword(e.target.value)} />
-        <button
-          onClick={() => {
-            login({
-              variables: {
-                username: username,
-                password: password,
-              },
-            });
-          }}
-        >
-          Login
-        </button>
+        {LoggedIn && [
+          <input
+            type="text"
+            name="username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />,
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />,
+          <button
+            onClick={() => {
+              login({
+                variables: {
+                  username: username,
+                  password: password,
+                },
+              });
+            }}
+          >
+            Login
+          </button>,
+        ]}
+        {!LoggedIn && <button onClick={logout()}>Log Out</button>}
       </div>
       {error && <button onClick={() => reset()}>{error.message}</button>}
     </>
