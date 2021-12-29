@@ -136,7 +136,6 @@ function handleLogout() {
 
 function Login(props) {
   const [login, { error, reset }] = useMutation(LOGIN, {
-    refetchQueries: [VIEWER],
     onCompleted({ login }) {
       console.log(login);
       if (login) {

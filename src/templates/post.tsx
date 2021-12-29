@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 import parse from "html-react-parser";
-import InnerHTML from "dangerously-set-html-content";
 
 import Bio from "../components/bio";
 import Layout from "../components/layout";
@@ -37,11 +36,9 @@ const PostTemplate = ({ data: { previous, next, post } }: PostTemplateParams) =>
           )}
         </header>
 
-        {!!post.content && (
-          <section itemProp="articleBody">
-            <InnerHTML html={post.content} />
-          </section>
-        )}
+        <section itemProp="articleBody">
+          <div dangerouslySetInnerHTML={{ __html: post.content}} />
+        </section>
 
         <hr />
 
