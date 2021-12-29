@@ -19,7 +19,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-import React, { useState } from "react";
+import React, { useState, setState } from "react";
 
 // Logs when the client route changes
 export const onRouteUpdate = ({ location, prevLocation }) => {
@@ -76,6 +76,7 @@ const LOGIN = gql`
       }
     ) {
       authToken
+      refreshToken
       user {
         id
         name
@@ -85,44 +86,72 @@ const LOGIN = gql`
 `;
 
 class Menu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = fetchUserInfo();
+    this.loginFunc = this.login.bind(this);
+    this.logoutFunc = this.logout.bind(this);
+  }
+
+  login(userInfo) {
+    handleLogin(userInfo.authToken, userInfo.userName);
+    this.setState(fetchUserInfo());
+  }
+  logout() {
+    handleLogout();
+    this.setState(fetchUserInfo());
+  }
+
   render() {
     return (
       <div className="menu">
-        <Login />
-        {localStorage.getItem("authToken") && [<ViewerInformation />]}
+        <Login onLogin={this.loginFunc} onLogout={this.logoutFunc} />
+        <ViewerInformation userInfo={this.state.userInfo} />
       </div>
     );
   }
+}
+
+function fetchUserInfo() {
+  return { userInfo: { userName: localStorage.getItem("userId"), authToken: localStorage.getItem("authToken") } };
 }
 
 function LoggedIn() {
   return !!localStorage.getItem("authToken");
 }
 
-function Login() {
+function handleLogin(authToken, userName) {
+  client.clearStore();
+  localStorage.setItem("authToken", authToken);
+  localStorage.setItem("userId", userName);
+  client.link = authLink.concat(httpLink);
+}
+
+function handleLogout() {
+  client.clearStore();
+  localStorage.removeItem("authToken");
+  localStorage.removeItem("userId");
+  client.link = authLink.concat(httpLink);
+}
+
+function Login(props) {
   const [login, { error, reset }] = useMutation(LOGIN, {
     refetchQueries: [VIEWER],
     onCompleted({ login }) {
       console.log(login);
       if (login) {
-        localStorage.setItem("authToken", login.authToken);
-        localStorage.setItem("userId", login.user.name);
-        client.link = authLink.concat(httpLink);
+        props.onLogin({ authToken: login.refreshToken, userName: login.user.name });
       }
     },
   });
-  const logout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userId");
-  };
-
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   return (
     <>
       <div>
-        {LoggedIn && [
+        {!LoggedIn() && [
           <input
             type="text"
             name="username"
@@ -148,15 +177,15 @@ function Login() {
             Login
           </button>,
         ]}
-        {!LoggedIn && <button onClick={logout()}>Log Out</button>}
+        {LoggedIn() && <button onClick={() => props.onLogout()}>Log Out</button>}
       </div>
       {error && <button onClick={() => reset()}>{error.message}</button>}
     </>
   );
 }
 
-function ViewerInformation() {
-  const { loading, error, data } = useQuery(VIEWER);
+function ViewerInformation(props) {
+  /*const { loading, error, data } = useQuery(VIEWER);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
@@ -164,5 +193,9 @@ function ViewerInformation() {
     <div key={data.viewer}>
       <p>Username: {data.viewer?.firstName}</p>
     </div>
-  );
+  );*/
+
+  const { userInfo } = props;
+
+  return <span>{userInfo.userName}</span>
 }
