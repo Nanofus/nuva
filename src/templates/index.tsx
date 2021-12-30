@@ -28,62 +28,59 @@ const Index = ({
   const nextPosts: Post[] = posts.slice(1, 4);
   const restOfPosts: Post[] = posts.slice(4);
 
+  let featuredStyle = {
+    backgroundImage: "url(" + firstPost.additionalFields.featuredimage + ")",
+  };
+
   return (
     <Layout isHomePage={true}>
       <Seo title="Kaikki julkaisut" />
 
-      <div className="firstPost">
-        <span>
-          <Link to={firstPost.uri} itemProp="url">
-            <span itemProp="headline">{parse(firstPost.title)}</span>
-          </Link>
-        </span>
-        <span> </span>
-        <span>{firstPost.author.node.firstName}</span>
-        <span> </span>
-        <small>{firstPost.date}</small>
+      <div className="allPosts">
+        <div className="firstPost">
+          <div className="featuredImage" style={featuredStyle}></div>
+          <div className="firstPostText">
+            <Link to={firstPost.uri} itemProp="url">
+              <h2 itemProp="headline">{parse(firstPost.title)}</h2>
+            </Link>
+            {firstPost.additionalFields.authors ? <h4>{firstPost.additionalFields.authors.map((author, i) => {
+              <span>{author.firstName} </span>
+            })}</h4> : <h4>{firstPost.author.node.firstName}</h4>}
+            <h5>{firstPost.date}</h5>
+          </div>
+        </div>
+
+        <ol className="featuredPosts" style={{ listStyle: `none` }}>
+          {nextPosts.map(post => {
+            return (
+              <li key={post.uri}>
+                <Link to={post.uri} itemProp="url">
+                  <h6 itemProp="headline">{parse(post.title)}</h6>
+                </Link>
+                {post.additionalFields.authors ? <span>{post.additionalFields.authors.map((author, i) => {
+                  <span>{author.firstName} </span>
+                })}</span> : <span>{post.author.node.firstName}</span>}
+                <span>{post.date}</span>
+              </li>
+            );
+          })}
+        </ol>
+        <ol className="allPosts" style={{ listStyle: `none` }}>
+          {restOfPosts.map(post => {
+            return (
+              <li key={post.uri}>
+                <Link to={post.uri} itemProp="url">
+                  <span itemProp="headline">{parse(post.title)}</span>
+                </Link>
+                <span> </span>
+                <span>{post.author.node.firstName}</span>
+                <span> </span>
+                <small>{post.date}</small>
+              </li>
+            );
+          })}
+        </ol>
       </div>
-
-      <ol className="featuredPosts" style={{ listStyle: `none` }}>
-        {nextPosts.map(post => {
-          const title = post.title;
-
-          return (
-            <li key={post.uri}>
-              <span>
-                <Link to={post.uri} itemProp="url">
-                  <span itemProp="headline">{parse(title)}</span>
-                </Link>
-              </span>
-              <span> </span>
-              <span>{post.author.node.firstName}</span>
-              <span> </span>
-              <small>{post.date}</small>
-              {/*<section itemProp="description">{parse(post.excerpt)}</section>*/}
-            </li>
-          );
-        })}
-      </ol>
-      <ol className="allPosts" style={{ listStyle: `none` }}>
-        {restOfPosts.map(post => {
-          const title = post.title;
-
-          return (
-            <li key={post.uri}>
-              <span>
-                <Link to={post.uri} itemProp="url">
-                  <span itemProp="headline">{parse(title)}</span>
-                </Link>
-              </span>
-              <span> </span>
-              <span>{post.author.node.firstName}</span>
-              <span> </span>
-              <small>{post.date}</small>
-              {/*<section itemProp="description">{parse(post.excerpt)}</section>*/}
-            </li>
-          );
-        })}
-      </ol>
 
       {previousPagePath && (
         <>
@@ -107,13 +104,19 @@ export const pageQuery = graphql`
     ) {
       nodes {
         uri
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "MMMM DD, YYYY", locale: "fi")
         title
         excerpt
         author {
           node {
             firstName
           }
+        }
+        additionalFields {
+          authors {
+            firstName
+          }
+          featuredimage
         }
       }
     }

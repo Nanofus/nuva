@@ -27,23 +27,31 @@ const PostTemplate = ({ data: { previous, next, post } }: PostTemplateParams) =>
           <p>{post.date}</p>
 
           {/* if we have a featured image for this post let's display it */}
-          {post.additionalFields?.featuredImage && (
+          {/*post.additionalFields?.featuredimage && (
             <img
-              src={post.additionalFields.featuredImage}
+              src={post.additionalFields.featuredimage}
               alt="Featured image"
               style={{ marginBottom: 50 }}
             />
-          )}
+          )*/}
         </header>
 
         <section itemProp="articleBody">
-          <div dangerouslySetInnerHTML={{ __html: post.content}} />
+          <div className="articleContent" dangerouslySetInnerHTML={{ __html: post.content }} />
+          {post.additionalFields.scripts &&
+            <script>{post.additionalFields.scripts}</script>
+          }
+          {post.additionalFields.styles &&
+            <style>{post.additionalFields.styles}</style>
+          }
         </section>
 
         <hr />
 
         <footer>
-          <Bio author={post.author} />
+          {post.additionalFields.authors ? post.additionalFields.authors.map((author, i) =>
+            <Bio author={author} key={i} />
+          ) : <Bio author={post.author} />}
         </footer>
       </article>
 
@@ -102,12 +110,7 @@ export const pageQuery = graphql`
       excerpt
       content
       title
-      date(formatString: "MMMM DD, YYYY")
-      featuredImage {
-        node {
-          altText
-        }
-      }
+      date(formatString: "MMMM DD, YYYY", locale: "fi")
       author {
         node {
           firstName
@@ -116,6 +119,19 @@ export const pageQuery = graphql`
             url
           }
         }
+      }
+      additionalFields {
+        authors {
+          firstName
+          description
+          avatar {
+            url
+          }
+        }
+        featuredimage,
+        scripts,
+        styles,
+        theme
       }
     }
     previous: wpPost(id: { eq: $previousPostId }) {

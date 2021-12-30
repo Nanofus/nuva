@@ -5,8 +5,8 @@ export interface Post {
   excerpt: string;
   author: { node: Author };
   additionalFields: {
-    authors: string;
-    featuredImage: string;
+    authors: Author[];
+    featuredimage: string;
     theme: string;
     scripts: string;
     styles: string;

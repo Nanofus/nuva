@@ -1,5 +1,10 @@
 /* CSS Custom Properties Definitions */
 
+@font-face {
+  font-family: "Trajan Pro";
+  src: url("./fonts/Trajan\ Pro\ Regular.ttf") format("truetype");
+}
+
 :root {
   --maxWidth-none: "none";
   --maxWidth-xs: 20rem;
@@ -10,8 +15,9 @@
   --maxWidth-2xl: 42rem;
   --maxWidth-3xl: 48rem;
   --maxWidth-4xl: 56rem;
+  --maxWidth-6xl: 72rem;
   --maxWidth-full: "100%";
-  --maxWidth-wrapper: var(--maxWidth-2xl);
+  --maxWidth-wrapper: var(--maxWidth-6xl);
   --spacing-px: "1px";
   --spacing-0: 0;
   --spacing-1: 0.25rem;
@@ -27,11 +33,12 @@
   --spacing-20: 5rem;
   --spacing-24: 6rem;
   --spacing-32: 8rem;
-  --fontFamily-sans: Montserrat, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --fontFamily-serif: "Merriweather", "Georgia", Cambria, "Times New Roman",
-    Times, serif;
+  --spacing-40: 10rem;
+  --spacing-48: 12rem;
+  --spacing-56: 14rem;
+  --spacing-64: 16rem;
+  --fontFamily-sans: "Trajan Pro", "Times New Roman";
+  --fontFamily-serif: "Merriweather", "Georgia", Cambria, "Times New Roman", Times, serif;
   --font-body: var(--fontFamily-serif);
   --font-heading: var(--fontFamily-sans);
   --fontWeight-normal: 400;
@@ -54,14 +61,18 @@
   --fontSize-5: 2.074rem;
   --fontSize-6: 2.488rem;
   --fontSize-7: 2.986rem;
-  --color-primary: #005b99;
+  --color-primary: #43adf3;
+  --color-primary-hover: #3fa0e0;
+  --color-primary-active: #3a95d1;
   --color-text: #2e353f;
   --color-text-light: #4f5969;
   --color-heading: #1a202c;
   --color-heading-black: black;
   --color-accent: #d1dce5;
   --color-background: white;
-  --shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  --shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  --slight-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  --slight-shadow-hover: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 /* HTML elements */
@@ -83,6 +94,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--fontSize-1);
   color: var(--color-text);
+  background-color: var(--color-heading);
 }
 
 footer {
@@ -93,6 +105,7 @@ hr {
   background: var(--color-accent);
   height: 1px;
   border: 0;
+  margin: var(--spacing-0) var(--spacing-0) var(--spacing-8) var(--spacing-0);
 }
 
 /* Heading */
@@ -108,6 +121,7 @@ h6 {
   margin-bottom: var(--spacing-6);
   line-height: var(--lineHeight-tight);
   letter-spacing: -0.025em;
+  text-align: center;
 }
 
 h2,
@@ -243,22 +257,173 @@ a:focus {
 
 /* Custom classes */
 
-.menu {
-  width: 20rem;
-  height: 25rem;
-  position: fixed;
-  background-color: var(--color-background);
+.firstPost {
+  position: relative;
+  overflow: hidden;
+  margin-left: calc(-1 * var(--spacing-56));
+  margin-right: calc(-1 * var(--spacing-56));
+}
+
+.firstPost .featuredImage {
+  position: absolute;
+  height: var(--spacing-64);
+  width: var(--maxWidth-wrapper);
+
+  transform: scale(1.1);
+  filter: blur(16px);
+  -webkit-filter: blur(16px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.firstPost .firstPostText {
+  position: relative;
+}
+
+.articleContent > p:first-of-type:first-letter {
+  font-size: 300%;
+  padding: 7px 0px;
+  margin-right: 6px;
+  float: left;
+}
+
+.window {
+  z-index: 1;
   padding: 1rem;
-  top: 1rem;
-  right: 1rem;
+  border-radius: 1rem;
+  background-color: var(--color-background);
   box-shadow: var(--shadow);
+}
+
+.menu {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  overflow: hidden;
+  transition: 0.5s;
+
+  .wrapper {
+    width: 18rem;
+    height: 25rem;
+  }
+  &.open {
+    width: 20rem;
+    height: 25rem;
+  }
+  &.closed {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.iconRow {
+  margin-top: -0.25rem;
+  margin-left: -0.2rem;
+  height: 1.25rem;
+
+  .icon {
+    margin-right: 0.5rem;
+    float: right;
+  }
+  
+  .left {
+    float: left;
+  }
+}
+
+.separator {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.__react_component_tooltip.tooltip {
+  padding: 0.4rem;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
   border-radius: 1rem;
 }
 
+.helpWrapper {
+  position: fixed;
+  left: 0; 
+  right: 0; 
+  top: 5rem;
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 30rem;
+  height: 40rem;
+}
+
+button {
+  border: 0;
+  padding: 0.7rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  border-radius: 3rem;
+  margin: 0.5rem;
+  background-color: var(--color-primary);
+  box-shadow: var(--slight-shadow);
+  transition: 0.2s;
+  &:hover {
+    box-shadow: var(--slight-shadow-hover);
+    background-color: var(--color-primary-hover)
+  }
+  &:active {
+    box-shadow: var(--slight-shadow-hover);
+    background-color: var(--color-primary-active);
+  }
+}
+
+.list {
+  padding-left: var(--spacing-8);
+  li {
+    margin-bottom: 0;
+  }
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 0.2rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  border: 0;
+  border-bottom: 1px solid var(--color-accent);
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid var(--color-primary);
+  border-color: var(--color-primary) transparent var(--color-primary) transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .global-wrapper {
+  background-color: var(--color-background);
   margin: var(--spacing-0) auto;
   max-width: var(--maxWidth-wrapper);
-  padding: var(--spacing-10) var(--spacing-5);
+  padding: var(--spacing-10) var(--spacing-56);
+  border-radius: 0.5rem;
 }
 
 .global-wrapper[data-is-root-path="true"] .bio {
@@ -325,6 +490,7 @@ a:focus {
 .post header p {
   font-size: var(--fontSize-2);
   font-family: var(--font-heading);
+  text-align: center;
 }
 
 .post-nav ul {
@@ -345,5 +511,11 @@ a:focus {
   ul,
   ol {
     list-style-position: inside;
+  }
+}
+
+@media (max-width: 48rem) {
+  .global-wrapper {
+    padding: var(--spacing-10) var(--spacing-5);
   }
 }
