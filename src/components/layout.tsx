@@ -19,7 +19,7 @@ const Layout = ({ isHomePage = false, children }) => {
   `);
 
   return (
-    <div className="global-wrapper" data-is-root-path={isHomePage}>
+    <div className="main-wrapper" data-is-root-path={isHomePage}>
       <header className="global-header">
         {isHomePage ? (
           <h1 className="main-heading">

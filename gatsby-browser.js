@@ -157,9 +157,9 @@ class Menu extends React.Component {
       <div className={"menu window " + (this.state.menuOpen ? "open" : "closed")}>
         <div className="wrapper">
           <div className="iconRow">
-            <i className="icon left fas fa-bars" onClick={this.toggleMenuFunc}></i>
-            {this.state.loggedIn && <i className="icon fas fa-sign-out-alt" data-tip="Kirjaudu ulos" onClick={() => this.logout()}></i>}
+            <i className="icon fas fa-bars" onClick={this.toggleMenuFunc}></i>
             <i className="icon fas fa-question-circle" data-tip="Tietoa" onClick={() => this.props.onHelpOpen()}></i>
+            {this.state.loggedIn && <i className="icon fas fa-sign-out-alt" data-tip="Kirjaudu ulos" onClick={() => this.logout()}></i>}
           </div>
           <hr className="separator" />
           {this.state.loading ?
@@ -302,6 +302,11 @@ function Help(props) {
           <li>Kirjanmerkit</li>
           <li>Teemat</li>
           <li>Esimääritellyt tyylit</li>
+          <li>Anfangitoggle</li>
+          <li>Menun viimeiseltä margin pois</li>
+          <li>Menunapit isommaksi</li>
+          <li>Menun pinnaus</li>
+          <li>Musiikkisoittimen tyyli</li>
         </ul>
         <span>Sivu tehty <a href="https://www.gatsbyjs.com/" target="_blank">Gatsbylla</a> ja <a href="https://reactjs.org/" target="_blank">Reactilla</a>.</span>
       </div>
