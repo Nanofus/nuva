@@ -465,8 +465,10 @@ input[type="password"] {
 
 .global-wrapper {
   background-color: var(--color-background);
-  margin: var(--spacing-0) auto;
   max-width: var(--maxWidth-wrapper);
+  margin: var(--spacing-0) auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   padding: var(--spacing-10) var(--spacing-56);
   border-radius: 0.5rem;
 }
