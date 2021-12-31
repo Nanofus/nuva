@@ -30,7 +30,7 @@ const Bio = props => {
       )}
       {authors && (
         <p>
-          Kirjoittaneet <br/><br/><strong>{authors.map((author, i) => <span key={i}>{author}<br /></span>)}</strong>
+          Kirjoittaneet <br /><br /><strong>{authors.map((author, i) => <span key={i}>{author}<br /></span>)}</strong>
         </p>
       )}
     </div>

@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import parse from "html-react-parser";
+import { Toaster } from "react-hot-toast";
+import ReactTooltip from "react-tooltip";
+import Connection from "./connection";
+import Help from "./help";
+import Menu from "./menu";
 
 const Layout = ({ isHomePage = false, children }) => {
   const {
@@ -18,24 +23,41 @@ const Layout = ({ isHomePage = false, children }) => {
     }
   `);
 
+  const openHelp = () => {
+    setHelpOpen(true);
+  }
+  const closeHelp = () => {
+    setHelpOpen(false);
+    ReactTooltip.hide();
+  }
+
+  const [helpOpen, setHelpOpen] = useState(false);
+
   return (
-    <div className="global-wrapper">
-      <header className="global-header">
-        {isHomePage ? (
-          <h1 className="main-heading">
-            <Link to="/">{parse(title)}</Link>
-          </h1>
-        ) : (
-          <Link className="header-link-home" to="/">
-            {title}
-          </Link>
-        )}
-      </header>
+    <Connection>
+      <Toaster />
+      <ReactTooltip place="bottom" effect="solid" className="tooltip" />
+      <Menu onHelpOpen={openHelp} />
+      {helpOpen && <Help onClose={closeHelp} />}
+      <div className="global-wrapper">
+        <header className="global-header">
+          {isHomePage ? (
+            <h1 className="main-heading">
+              <Link to="/">{parse(title)}</Link>
+            </h1>
+          ) : (
+            <Link className="header-link-home" to="/">
+              {title}
+            </Link>
+          )}
+        </header>
 
-      <main>{children}</main>
+        <main>{children}</main>
 
-      <footer>© {new Date().getFullYear()} Klaanon.fi</footer>
-    </div>
+        <footer>© {new Date().getFullYear()} Klaanon.fi</footer>
+      </div>
+    </Connection>
+
   );
 };
 

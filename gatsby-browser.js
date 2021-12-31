@@ -7,16 +7,3 @@ import "./src/css/normalize.css";
 
 // custom CSS styles
 import "./src/css/style.scss";
-
-import React from "react";
-import Wrapper from "./src/components/wrapper";
-import Connection from "./src/components/connection";
-
-// Wraps every page in a component
-export const wrapPageElement = ({ element, props }) => {
-  return (
-    <Connection>
-      <Wrapper element={element} />
-    </Connection>
-  );
-};
