@@ -39,6 +39,11 @@ module.exports = {
         develop: {
           hardCacheData: true,
         },
+        debug: {
+          graphql: {
+            writeQueriesToDisk: true,
+          },
+        },
       },
     },
 

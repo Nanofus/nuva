@@ -20,10 +20,10 @@ const Help = props => {
                     <li>Kommentointi</li>
                     <li>Kirjanmerkit</li>
                     <li>Teemat</li>
+                    <li>Haku</li>
+                    <li>Kategoriasivut</li>
+                    <li>Tagisivut</li>
                     <li>Esimääritellyt tyylit</li>
-                    <li>Anfangitoggle</li>
-                    <li>Menun viimeiseltä margin pois</li>
-                    <li>Menunapit isommaksi</li>
                     <li>Menun pinnaus</li>
                     <li>Musiikkisoittimen tyyli</li>
                 </ul>

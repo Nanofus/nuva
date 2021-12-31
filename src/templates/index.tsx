@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby";
 import parse from "html-react-parser";
 
 import Layout from "../components/layout";
-import Seo from "../components/seo";
+import Header from "../components/header";
 
 import { Post } from "../types";
 
@@ -16,7 +16,7 @@ const Index = ({
   if (!posts.length) {
     return (
       <Layout isHomePage={true}>
-        <Seo title="Kaikki julkaisut" />
+        <Header title="Kaikki julkaisut" />
         <p>
           Ei julkaisuja.
         </p>
@@ -34,7 +34,7 @@ const Index = ({
 
   return (
     <Layout isHomePage={true}>
-      <Seo title="Kaikki julkaisut" />
+      <Header title="Kaikki julkaisut" />
 
       <div className="allPosts">
         <div className="firstPost">
@@ -57,8 +57,8 @@ const Index = ({
                 <Link to={post.uri} itemProp="url">
                   <h6 itemProp="headline">{parse(post.title)}</h6>
                 </Link>
-                {post.additionalFields.authors ? <span>{post.additionalFields.authors.map((author, i) => {
-                  <span>{author.firstName} </span>
+                {post.additionalFields.authorgroup ? <span>{post.additionalFields.authorgroup.split(",").map((author, i) => {
+                  <span>{author.trim()} </span>
                 })}</span> : <span>{post.author.node.firstName}</span>}
                 <span>{post.date}</span>
               </li>
@@ -113,9 +113,7 @@ export const pageQuery = graphql`
           }
         }
         additionalFields {
-          authors {
-            firstName
-          }
+          authorgroup
           featuredimage
         }
       }

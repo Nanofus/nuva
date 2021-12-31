@@ -3,7 +3,7 @@ import ReactTooltip from "react-tooltip";
 import ViewerInformation from "./viewer-information";
 import Login from "./login";
 import React from "react";
-import { fetchUserInfo, handleLogin, handleLogout } from "../../gatsby-browser";
+import { fetchUserInfo, handleLogin, handleLogout } from "./connection";
 
 export default class Menu extends React.Component<any, any> {
     private loginFunc: any;
@@ -48,7 +48,7 @@ export default class Menu extends React.Component<any, any> {
             <div className={"menu window " + (this.state.menuOpen ? "open" : "closed")}>
                 <div className="wrapper">
                     <div className="iconRow">
-                        <i className="icon fas fa-bars" onClick={this.toggleMenuFunc}></i>
+                        <i className="icon left fas fa-bars" onClick={this.toggleMenuFunc}></i>
                         <i className="icon fas fa-question-circle" data-tip="Tietoa" onClick={() => this.props.onHelpOpen()}></i>
                         {this.state.loggedIn && <i className="icon fas fa-sign-out-alt" data-tip="Kirjaudu ulos" onClick={() => this.logout()}></i>}
                     </div>

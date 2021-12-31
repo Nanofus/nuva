@@ -27,8 +27,6 @@ const Login = props => {
         onCompleted({ login }) {
             props.setLoading(false);
             if (login) {
-                setUsername("");
-                setPassword("");
                 props.onLogin({ authToken: login.refreshToken, userName: login.user.name });
             }
         },
@@ -36,11 +34,8 @@ const Login = props => {
             props.setLoading(false);
             if (error.message == "incorrect_password") {
                 toast.error("Väärä salasana.");
-                setPassword("");
             } else if (error.message == "invalid_username") {
                 toast.error("Kelvoton käyttäjätunnus.");
-                setUsername("");
-                setPassword("");
             } else {
                 toast.error("Kirjautuminen epäonnistui.");
             }
@@ -56,6 +51,7 @@ const Login = props => {
                 {!props.loggedIn && [
                     <input
                         type="text"
+                        key="username"
                         name="username"
                         value={username}
                         placeholder="Käyttäjätunnus"
@@ -63,12 +59,14 @@ const Login = props => {
                     />,
                     <input
                         type="password"
+                        key="password"
                         name="password"
                         value={password}
                         placeholder="Salasana"
                         onChange={e => setPassword(e.target.value)}
                     />,
                     <button
+                        key="button"
                         onClick={() => {
                             if (!username || !password) {
                                 if (!username) toast.error("Käyttäjätunnus tyhjä.")

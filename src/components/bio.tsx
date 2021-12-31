@@ -9,30 +9,28 @@ import React from "react";
 //import { useStaticQuery, graphql } from "gatsby"
 
 const Bio = props => {
-  const author = props.author.node;
-
-  const avatarUrl = author?.avatar?.url;
+  const author = props.author?.node;
+  const authors = props.authors ? props.authors.split(',').map(author => author.trim()) : null;
 
   return (
     <div className="bio">
-      {avatarUrl && (
+      {author?.avatar?.url && (
         <img
           alt={author?.firstName || ``}
           className="bio-avatar"
-          src={avatarUrl}
+          src={author?.avatar?.url}
         />
       )}
       {author?.firstName && (
         <p>
-          Kirjoittanut <strong>{author.firstName}</strong>
+          Kirjoittanut <strong>{author?.firstName}</strong>
           {` `}
           {author?.description || null}
-          {` `}
-          {author?.twitter && (
-            <a href={`https://twitter.com/${author?.twitter || ``}`}>
-              You should follow them on Twitter
-            </a>
-          )}
+        </p>
+      )}
+      {authors && (
+        <p>
+          Kirjoittaneet <br/><br/><strong>{authors.map((author, i) => <span key={i}>{author}<br /></span>)}</strong>
         </p>
       )}
     </div>

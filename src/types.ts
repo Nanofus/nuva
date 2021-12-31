@@ -5,11 +5,12 @@ export interface Post {
   excerpt: string;
   author: { node: Author };
   additionalFields: {
-    authors: Author[];
+    authorgroup: string;
     featuredimage: string;
     theme: string;
     scripts: string;
     styles: string;
+    initialletter: boolean;
   }
   date: Date;
 }
@@ -22,6 +23,6 @@ export interface PostTemplateParams {
     data: {
         previous: Post,
         next: Post,
-        post: Post,
+        post: any,
     }
 }
