@@ -43,9 +43,8 @@ const Index = ({
             <Link to={firstPost.uri} itemProp="url">
               <h2 itemProp="headline">{parse(firstPost.title)}</h2>
             </Link>
-            {firstPost.additionalFields.authors ? <h4>{firstPost.additionalFields.authors.map((author, i) => {
-              <span>{author.firstName} </span>
-            })}</h4> : <h4>{firstPost.author.node.firstName}</h4>}
+            <h5>{firstPost.additionalFields.authorgroup ? <span>{firstPost.additionalFields.authorgroup}</span>
+              : <span>{firstPost.author.node.firstName}</span>}</h5>
             <h5>{firstPost.date}</h5>
           </div>
         </div>
@@ -57,9 +56,8 @@ const Index = ({
                 <Link to={post.uri} itemProp="url">
                   <h6 itemProp="headline">{parse(post.title)}</h6>
                 </Link>
-                {post.additionalFields.authorgroup ? <span>{post.additionalFields.authorgroup.split(",").map((author, i) => {
-                  <span>{author.trim()} </span>
-                })}</span> : <span>{post.author.node.firstName}</span>}
+                {post.additionalFields.authorgroup ? <span>{post.additionalFields.authorgroup}</span>
+                  : <span>{post.author.node.firstName}</span>}
                 <span>{post.date}</span>
               </li>
             );
@@ -73,7 +71,8 @@ const Index = ({
                   <span itemProp="headline">{parse(post.title)}</span>
                 </Link>
                 <span> </span>
-                <span>{post.author.node.firstName}</span>
+                {post.additionalFields.authorgroup ? <span>{post.additionalFields.authorgroup}</span>
+                  : <span>{post.author.node.firstName}</span>}
                 <span> </span>
                 <small>{post.date}</small>
               </li>
