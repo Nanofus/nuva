@@ -50,17 +50,7 @@ const PostTemplate = ({ data: { previous, next, post } }: PostTemplateParams) =>
       >
         <header>
           <h1 itemProp="headline">{parse(post.title)}</h1>
-
           <p>{post.date}</p>
-
-          {/* if we have a featured image for this post let's display it */}
-          {/*post.additionalFields?.featuredimage && (
-            <img
-              src={post.additionalFields.featuredimage}
-              alt="Featured image"
-              style={{ marginBottom: 50 }}
-            />
-          )*/}
         </header>
 
         <section itemProp="articleBody">

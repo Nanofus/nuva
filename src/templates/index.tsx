@@ -7,19 +7,14 @@ import Header from "../components/header";
 
 import { Post } from "../types";
 
-const Index = ({
-  data,
-  pageContext: { nextPagePath, previousPagePath },
-}) => {
+const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
   const posts: Post[] = data.allWpPost.nodes;
 
   if (!posts.length) {
     return (
       <Layout isHomePage={true}>
         <Header title="Kaikki julkaisut" />
-        <p>
-          Ei julkaisuja.
-        </p>
+        <p>Ei julkaisuja.</p>
       </Layout>
     );
   }
@@ -40,11 +35,18 @@ const Index = ({
         <div className="firstPost">
           <div className="featuredImage" style={featuredStyle}></div>
           <div className="firstPostText">
-            <Link to={firstPost.uri} itemProp="url">
-              <h2 itemProp="headline">{parse(firstPost.title)}</h2>
-            </Link>
-            <h5>{firstPost.additionalFields.authorgroup ? <span>{firstPost.additionalFields.authorgroup}</span>
-              : <span>{firstPost.author.node.firstName}</span>}</h5>
+            <h2 itemProp="headline">
+              <Link to={firstPost.uri} itemProp="url">
+                {parse(firstPost.title)}
+              </Link>
+            </h2>
+            <h5>
+              {firstPost.additionalFields.authorgroup ? (
+                <span>{firstPost.additionalFields.authorgroup}</span>
+              ) : (
+                <span>{firstPost.author.node.firstName}</span>
+              )}
+            </h5>
             <h5>{firstPost.date}</h5>
           </div>
         </div>
@@ -53,12 +55,19 @@ const Index = ({
           {nextPosts.map(post => {
             return (
               <li key={post.uri}>
-                <Link to={post.uri} itemProp="url">
-                  <h6 itemProp="headline">{parse(post.title)}</h6>
-                </Link>
-                {post.additionalFields.authorgroup ? <span>{post.additionalFields.authorgroup}</span>
-                  : <span>{post.author.node.firstName}</span>}
-                <span>{post.date}</span>
+                <h5 itemProp="headline">
+                  <Link to={post.uri} itemProp="url">
+                    {parse(post.title)}
+                  </Link>
+                </h5>
+                <span className="postListField">
+                  {post.additionalFields.authorgroup ? (
+                    <span>{post.additionalFields.authorgroup}</span>
+                  ) : (
+                    <span>{post.author.node.firstName}</span>
+                  )}
+                </span>
+                <span className="postListField">{post.date}</span>
               </li>
             );
           })}
@@ -67,14 +76,21 @@ const Index = ({
           {restOfPosts.map(post => {
             return (
               <li key={post.uri}>
-                <Link to={post.uri} itemProp="url">
-                  <span itemProp="headline">{parse(post.title)}</span>
-                </Link>
-                <span> </span>
-                {post.additionalFields.authorgroup ? <span>{post.additionalFields.authorgroup}</span>
-                  : <span>{post.author.node.firstName}</span>}
-                <span> </span>
-                <small>{post.date}</small>
+                <span className="postListField" itemProp="headline">
+                  <Link to={post.uri} itemProp="url">
+                    {parse(post.title)}
+                  </Link>
+                </span>
+                <span className="postListField">
+                  {post.additionalFields.authorgroup ? (
+                    <span>{post.additionalFields.authorgroup}</span>
+                  ) : (
+                    <span>{post.author.node.firstName}</span>
+                  )}
+                </span>
+                <span className="postListField">
+                  <small>{post.date}</small>
+                </span>
               </li>
             );
           })}

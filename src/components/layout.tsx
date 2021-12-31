@@ -4,6 +4,7 @@ import parse from "html-react-parser";
 import { Toaster } from "react-hot-toast";
 import ReactTooltip from "react-tooltip";
 import Connection from "./connection";
+import Navigation from "./navigation";
 import Help from "./help";
 import Menu from "./menu";
 
@@ -25,11 +26,11 @@ const Layout = ({ isHomePage = false, children }) => {
 
   const openHelp = () => {
     setHelpOpen(true);
-  }
+  };
   const closeHelp = () => {
     setHelpOpen(false);
     ReactTooltip.hide();
-  }
+  };
 
   const [helpOpen, setHelpOpen] = useState(false);
 
@@ -42,9 +43,12 @@ const Layout = ({ isHomePage = false, children }) => {
       <div className="global-wrapper">
         <header className="global-header">
           {isHomePage ? (
-            <h1 className="main-heading">
-              <Link to="/">{parse(title)}</Link>
-            </h1>
+            <>
+              <h1 className="main-heading">
+                <Link to="/">{parse(title)}</Link>
+              </h1>
+              <Navigation />
+            </>
           ) : (
             <Link className="header-link-home" to="/">
               {title}
@@ -57,7 +61,6 @@ const Layout = ({ isHomePage = false, children }) => {
         <footer>© {new Date().getFullYear()} Klaanon.fi</footer>
       </div>
     </Connection>
-
   );
 };
 

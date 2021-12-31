@@ -159,18 +159,14 @@ h6 {
   font-size: var(--fontSize-1);
 }
 
-h1 > a {
-  color: inherit;
-  text-decoration: none;
-}
-
+h1 > a,
 h2 > a,
 h3 > a,
 h4 > a,
 h5 > a,
 h6 > a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 /* Prose */
@@ -317,6 +313,33 @@ a:focus {
   }
 }
 
+.postListField {
+  margin-right: 1rem;
+}
+
+.firstPost {
+  h5 {
+    margin: 1rem;
+    &:last-of-type {
+      margin-bottom: 3rem;
+    }
+  }
+  h2, h5 {
+    margin-left: var(--spacing-32);
+    text-align: left;
+  }
+  margin-bottom: var(--spacing-10);
+}
+
+.featuredPosts {
+  h5 {
+    margin: 1rem;
+    margin-left: 0;
+    text-align: left;
+    display: inline-block;
+  }
+}
+
 .iconRow {
   margin-top: -0.5rem;
   margin-left: -0.4rem;
@@ -352,11 +375,22 @@ a:focus {
   border-radius: 1rem;
 }
 
+.navigation {
+  display: flex;
+  justify-content: center;
+
+  .navigationItem {
+    padding: 0.5rem;
+  }
+}
+
 .helpWrapper {
   position: fixed;
   left: 0;
   right: 0;
-  top: 5rem;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
   margin-left: auto;
   margin-right: auto;
   width: 30rem;
