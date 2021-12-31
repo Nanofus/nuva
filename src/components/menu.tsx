@@ -45,7 +45,7 @@ export default class Menu extends React.Component<any, any> {
   }
 
   render() {
-    if (isBrowser) return (
+    return (
       <div className={"menu window " + (this.state.menuOpen ? "open" : "closed")} >
         <div className="wrapper">
           <div className="iconRow">
@@ -65,6 +65,5 @@ export default class Menu extends React.Component<any, any> {
         </div>
       </div >
     );
-    return <></>;
   }
 }
