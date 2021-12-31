@@ -4,6 +4,7 @@ import ViewerInformation from "./viewer-information";
 import Login from "./login";
 import React from "react";
 import { fetchUserInfo, handleLogin, handleLogout } from "./connection";
+import { isBrowser } from "../util";
 
 export default class Menu extends React.Component<any, any> {
   private loginFunc: any;
@@ -14,7 +15,7 @@ export default class Menu extends React.Component<any, any> {
     super(props);
     this.state = {
       ...fetchUserInfo(),
-      loggedIn: !!localStorage.getItem("authToken"),
+      loggedIn: isBrowser ? !!localStorage.getItem("authToken") : false,
       menuOpen: false,
     };
     this.loginFunc = this.login.bind(this);
@@ -44,8 +45,8 @@ export default class Menu extends React.Component<any, any> {
   }
 
   render() {
-    return (
-      <div className={"menu window " + (this.state.menuOpen ? "open" : "closed")}>
+    if (isBrowser) return (
+      <div className={"menu window " + (this.state.menuOpen ? "open" : "closed")} >
         <div className="wrapper">
           <div className="iconRow">
             <i className="icon left fas fa-bars" onClick={this.toggleMenuFunc}></i>
@@ -62,7 +63,8 @@ export default class Menu extends React.Component<any, any> {
             </div>
           }
         </div>
-      </div>
+      </div >
     );
+    return <></>;
   }
 }

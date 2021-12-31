@@ -20,6 +20,7 @@ const Help = ({ onClose }) => {
           <li>Kommenttien postaaminen</li>
           <li>Kirjanmerkit</li>
           <li>Teemat</li>
+          <li>Layout CSS irti ulkoasu-CSS:stä</li>
           <li>Haku</li>
           <li>Kategoriasivut</li>
           <li>Tagisivut</li>

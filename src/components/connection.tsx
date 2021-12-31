@@ -8,6 +8,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { toast } from "react-hot-toast";
+import { isBrowser } from "../util";
 
 const httpLink = createHttpLink({
   uri: "https://klaanon.fi/wp/graphql",
@@ -31,7 +32,12 @@ const client = new ApolloClient({
 });
 
 export const fetchUserInfo = () => {
-  return { userInfo: { userName: localStorage.getItem("userId"), authToken: localStorage.getItem("authToken") } };
+  return {
+    userInfo: {
+      userName: isBrowser ? localStorage.getItem("userId") : undefined,
+      authToken: isBrowser ? localStorage.getItem("authToken") : undefined
+    }
+  };
 }
 
 export const handleLogin = (authToken, userName) => {
