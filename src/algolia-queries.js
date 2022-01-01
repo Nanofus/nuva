@@ -1,5 +1,5 @@
-const indexName = `klaanon`
-const pageQuery = `posts: allWpPost {
+const indexName = `klaanon`;
+const pageQuery = `{ posts: allWpPost {
     nodes {
       objectID:id
       categories {
@@ -25,14 +25,16 @@ const pageQuery = `posts: allWpPost {
         }
       }
     }
-  }`
+  }
+}`;
 
 const queries = [
-    {
-        query: pageQuery,
-        transformer: ({ data }) => data.posts.nodes,
-        indexName,
-        settings: { attributesToSnippet: [`excerpt:20`] },
-    },
-]
-module.exports = queries
+  {
+    query: pageQuery,
+    transformer: ({ data }) => data.posts.nodes,
+    indexName,
+    settings: { attributesToSnippet: [`excerpt:20`] },
+  },
+];
+
+module.exports = queries;
