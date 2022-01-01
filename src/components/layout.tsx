@@ -3,6 +3,7 @@ import { Link, useStaticQuery, graphql } from "gatsby";
 import parse from "html-react-parser";
 import { Toaster } from "react-hot-toast";
 import ReactTooltip from "react-tooltip";
+import { motion } from "framer-motion"
 import Connection from "./connection";
 import Navigation from "./navigation";
 import Help from "./help";
@@ -41,6 +42,14 @@ const Layout = ({ isHomePage = false, children }) => {
       <Menu onHelpOpen={openHelp} />
       {helpOpen && <Help onClose={closeHelp} />}
       <div className="global-wrapper">
+        {/*<motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            type: "tween",
+            duration: 0.1
+          }}>*/}
         <header className="global-header">
           {isHomePage ? (
             <>
@@ -59,8 +68,9 @@ const Layout = ({ isHomePage = false, children }) => {
         <main>{children}</main>
 
         <footer>© {new Date().getFullYear()} Klaanon.fi</footer>
-      </div>
-    </Connection>
+        {/*</motion.div>*/}
+      </div >
+    </Connection >
   );
 };
 

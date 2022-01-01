@@ -6,6 +6,8 @@
  *
  */
 
+require("dotenv").config()
+
 module.exports = {
   /**
    * Adding plugins to this array adds them to your Gatsby site.
@@ -87,6 +89,15 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
 
     `gatsby-plugin-sass`,
+
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        queries: require("./src/algolia-queries")
+      },
+    }
 
     /**
      * this (optional) plugin enables Progressive Web App + Offline functionality
