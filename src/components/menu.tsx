@@ -2,7 +2,7 @@ import ReactTooltip from "react-tooltip";
 
 import ViewerInformation from "./viewer-information";
 import Login from "./login";
-import React, { useEffect } from "react";
+import React from "react";
 import { fetchUserInfo, handleLogin, handleLogout } from "./connection";
 import { isBrowser } from "../util";
 

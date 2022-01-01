@@ -1,4 +1,4 @@
-const indexName = `klaanon`;
+const indexName = `Posts`;
 const pageQuery = `{ posts: allWpPost {
     nodes {
       objectID:id

@@ -32,7 +32,7 @@ const Index = ({ data, pageContext: { nextPagePath, previousPagePath } }) => {
       <div className="allPosts">
         <FeaturedPost post={firstPost} />
         <PostsList posts={nextPosts} highlighted={true} />
-        <PostsList posts={restOfPosts} />
+        <PostsList posts={restOfPosts} highlighted={false} />
       </div>
 
       {/*previousPagePath && (

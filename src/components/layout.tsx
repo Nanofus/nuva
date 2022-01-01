@@ -3,7 +3,7 @@ import { Link, useStaticQuery, graphql } from "gatsby";
 import parse from "html-react-parser";
 import { Toaster } from "react-hot-toast";
 import ReactTooltip from "react-tooltip";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import Connection from "./connection";
 import Navigation from "./navigation";
 import Help from "./help";
@@ -69,8 +69,8 @@ const Layout = ({ isHomePage = false, children }) => {
 
         <footer>© {new Date().getFullYear()} Klaanon.fi</footer>
         {/*</motion.div>*/}
-      </div >
-    </Connection >
+      </div>
+    </Connection>
   );
 };
 
