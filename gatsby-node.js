@@ -14,6 +14,7 @@ const chunk = require(`lodash/chunk`);
 exports.createPages = async gatsbyUtilities => {
   // Query our posts from the GraphQL server
   const posts = await getPosts(gatsbyUtilities);
+  const tags = await getTags(gatsbyUtilities);
 
   // If there are no posts in WordPress, don't do anything
   if (!posts.length) {
@@ -25,6 +26,9 @@ exports.createPages = async gatsbyUtilities => {
 
   // And a paginated archive
   await createPostArchive({ posts, gatsbyUtilities });
+
+  // And a paginated archive
+  await createIndividualTagPages({ tags, gatsbyUtilities });
 };
 
 /**
@@ -57,6 +61,20 @@ const createIndividualPostPages = async ({ posts, gatsbyUtilities }) =>
         },
       })
     )
+  );
+
+const createIndividualTagPages = async ({ tags, gatsbyUtilities }) =>
+  Promise.all(
+    tags.map((tag) => {
+      gatsbyUtilities.actions.createPage({
+        path: '/tag/' + tag.node.slug,
+        component: path.resolve(`./src/templates/tag.tsx`),
+        context: {
+          tag: tag.node.name,
+          slug: tag.node.slug
+        },
+      })
+    })
   );
 
 /**
@@ -164,4 +182,29 @@ async function getPosts({ graphql, reporter }) {
   }
 
   return graphqlResult.data.allWpPost.edges;
+}
+
+async function getTags({ graphql, reporter }) {
+  const graphqlResult = await graphql(/* GraphQL */ `
+    query TagsPageQuery {
+      allWpTag {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
+    }
+  `);
+
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your posts`,
+      graphqlResult.errors
+    );
+    return;
+  }
+
+  return graphqlResult.data.allWpTag.edges;
 }

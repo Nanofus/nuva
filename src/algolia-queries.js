@@ -18,6 +18,7 @@ const pageQuery = `{ posts: allWpPost {
       excerpt
       slug
       date
+      uri
       tags {
         nodes {
           name

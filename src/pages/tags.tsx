@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 
 import Layout from "../components/layout";
 import Header from "../components/header";
@@ -11,7 +11,7 @@ const TagsPage = ({ data, location }) => {
       <h1>Tagit</h1>
       <div className="tagContainer">
         {data.allWpTag.nodes.map((node, i) => {
-          return <div className="tag" key={i}>{node.name} </div>;
+          return <Link className="tag" key={i} to={"/tag/" + node.slug}>{node.name}</Link>;
         })}
       </div>
     </Layout>
@@ -23,6 +23,7 @@ export const TagsPageQuery = graphql`
     allWpTag(sort: { fields: [name], order: ASC }) {
       nodes {
         name
+        slug
         id
       }
     }
