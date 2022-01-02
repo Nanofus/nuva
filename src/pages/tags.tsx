@@ -6,7 +6,7 @@ import Header from "../components/header";
 
 const TagsPage = ({ data, location }) => {
   return (
-    <Layout>
+    <Layout isHomePage={true}>
       <Header title="Tagit" />
       <h1>Tagit</h1>
       <div className="tagContainer">

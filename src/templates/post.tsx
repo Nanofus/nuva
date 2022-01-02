@@ -11,6 +11,7 @@ import "../css/predefined-formatting.scss";
 
 import { PostTemplateParams, Post } from "../types";
 import { newestFirst } from "../util";
+import { NodeStack } from "framer-motion/types/projection/shared/stack";
 
 const PostTemplate = ({
   data: { previous, next, post },
@@ -77,9 +78,9 @@ const PostTemplate = ({
           <div className="tagContainer">
             {post.tags.nodes.map((node, i) => {
               return (
-                <div className="tag" key={i}>
+                <Link className="tag" key={i} to={"/tag/" + node.slug}>
                   {node.name}
-                </div>
+                </Link>
               );
             })}
           </div>
@@ -182,6 +183,7 @@ export const pageQuery = graphql`
         nodes {
           id
           name
+          slug
         }
       }
     }

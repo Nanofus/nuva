@@ -16,7 +16,8 @@ const Tag = (props) => {
 
   return (
     <Layout isHomePage={true}>
-      <Header title="Tagi: " />
+      <Header title={tag} />
+      <h1>Tagi: {tag}</h1>
       <PostsList posts={posts} highlighted={false} />
     </Layout >
   );
