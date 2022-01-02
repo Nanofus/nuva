@@ -12,8 +12,10 @@ import "../css/predefined-formatting.scss";
 import { PostTemplateParams, Post } from "../types";
 import { newestFirst } from "../util";
 
-const PostTemplate = ({ data: { previous, next, post } }: PostTemplateParams) => {
-  let buildComments = (comments) => {
+const PostTemplate = ({
+  data: { previous, next, post },
+}: PostTemplateParams) => {
+  let buildComments = comments => {
     let parentedComments = [];
     let rootComments = [];
     for (let comment of comments) {
@@ -31,11 +33,12 @@ const PostTemplate = ({ data: { previous, next, post } }: PostTemplateParams) =>
           comment.children.push(parentedComment);
         }
       }
-      if (comment.children) comment.children = comment.children.sort(newestFirst);
+      if (comment.children)
+        comment.children = comment.children.sort(newestFirst);
     }
     rootComments = rootComments.sort(newestFirst);
     return rootComments;
-  }
+  };
 
   let comments = buildComments(post.comments.nodes);
 
@@ -43,40 +46,62 @@ const PostTemplate = ({ data: { previous, next, post } }: PostTemplateParams) =>
     <Layout>
       <Header title={post.title} description={post.excerpt} />
 
-      <article
-        className="post"
-        itemScope
-        itemType="http://schema.org/Article"
-      >
+      <article className="post" itemScope itemType="http://schema.org/Article">
         <header>
           <h1 itemProp="headline">{parse(post.title)}</h1>
           <p>{post.date}</p>
         </header>
 
         <section itemProp="articleBody">
-          <div className={"articleContent " + (post.additionalFields.initialletter ? "hasLargeInitialLetter" : null)} dangerouslySetInnerHTML={{ __html: post.content }} />
-          {post.additionalFields.scripts &&
+          <div
+            className={
+              "articleContent " +
+              (post.additionalFields.initialletter
+                ? "hasLargeInitialLetter"
+                : null)
+            }
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+          {post.additionalFields.scripts && (
             <script>{post.additionalFields.scripts}</script>
-          }
-          {post.additionalFields.styles &&
+          )}
+          {post.additionalFields.styles && (
             <style>{post.additionalFields.styles}</style>
-          }
+          )}
+        </section>
+
+        <hr />
+
+        <section className="tags">
+          <h4>Tagit</h4>
+          <div className="tagContainer">
+            {post.tags.nodes.map((node, i) => {
+              return (
+                <div className="tag" key={i}>
+                  {node.name}
+                </div>
+              );
+            })}
+          </div>
         </section>
 
         <hr />
 
         <section className="comments">
           <h4>Kommentit</h4>
-          {comments.map((comment, i) => <Comment comment={comment} key={i} />)}
+          {comments.map((comment, i) => (
+            <Comment comment={comment} key={i} />
+          ))}
         </section>
 
         <hr />
 
         <footer>
-          {post.additionalFields.authorgroup ?
-            <Bio authors={post.additionalFields.authorgroup} /> :
+          {post.additionalFields.authorgroup ? (
+            <Bio authors={post.additionalFields.authorgroup} />
+          ) : (
             <Bio author={post.author} />
-          }
+          )}
         </footer>
       </article>
 
@@ -114,11 +139,7 @@ const PostTemplate = ({ data: { previous, next, post } }: PostTemplateParams) =>
 export default PostTemplate;
 
 export const pageQuery = graphql`
-  query PostById(
-    $id: String!
-    $previousPostId: String
-    $nextPostId: String
-  ) {
+  query PostById($id: String!, $previousPostId: String, $nextPostId: String) {
     post: wpPost(id: { eq: $id }) {
       id
       excerpt
@@ -155,6 +176,12 @@ export const pageQuery = graphql`
           date(formatString: "HH:MM MMMM DD, YYYY", locale: "fi")
           id
           parentId
+        }
+      }
+      tags {
+        nodes {
+          id
+          name
         }
       }
     }

@@ -13,6 +13,9 @@ const Navigation = () => {
         <a href="https://arkisto.klaanon.fi/soundtracks/">Soundtracks</a>
       </div>
       <div className="navigationItem">
+        <Link to="/tags">Tagit</Link>
+      </div>
+      <div className="navigationItem">
         <Search indices={searchIndices} />
       </div>
     </nav>

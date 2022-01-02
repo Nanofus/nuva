@@ -383,6 +383,28 @@ a:focus {
   }
 }
 
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  font-size: 80%;
+  display: inline-block;
+  background-color: var(--color-primary);
+  border: none;
+  color: var(--color-background);
+  padding: 0.3rem 0.6rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0.1rem 0.2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
 .helpWrapper {
   position: fixed;
   left: 0;
@@ -396,8 +418,18 @@ a:focus {
   height: 40rem;
 }
 
+.comment {
+  width: 80%;
+  margin: auto;
+}
+
 .childComments {
   margin-left: 6rem;
+}
+
+img {
+  width: 100%;
+  height: 100%;
 }
 
 button {
