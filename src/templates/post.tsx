@@ -73,6 +73,16 @@ const PostTemplate = ({
 
         <hr />
 
+        <section>
+          {post.additionalFields.authorgroup ? (
+            <Bio authors={post.additionalFields.authorgroup} />
+          ) : (
+            <Bio author={post.author} />
+          )}
+        </section>
+
+        <hr />
+
         <section className="tags">
           <h4>Tagit</h4>
           <div className="tagContainer">
@@ -94,16 +104,6 @@ const PostTemplate = ({
             <Comment comment={comment} key={i} />
           ))}
         </section>
-
-        <hr />
-
-        <footer>
-          {post.additionalFields.authorgroup ? (
-            <Bio authors={post.additionalFields.authorgroup} />
-          ) : (
-            <Bio author={post.author} />
-          )}
-        </footer>
       </article>
 
       <nav className="post-nav">
