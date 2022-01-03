@@ -15,6 +15,7 @@ exports.createPages = async gatsbyUtilities => {
   // Query our posts from the GraphQL server
   const posts = await getPosts(gatsbyUtilities);
   const tags = await getTags(gatsbyUtilities);
+  const categories = await getCategories(gatsbyUtilities);
 
   // If there are no posts in WordPress, don't do anything
   if (!posts.length) {
@@ -27,8 +28,9 @@ exports.createPages = async gatsbyUtilities => {
   // And a paginated archive
   await createPostArchive({ posts, gatsbyUtilities });
 
-  // And a paginated archive
   await createIndividualTagPages({ tags, gatsbyUtilities });
+
+  await createIndividualCategoryPages({ categories, gatsbyUtilities });
 };
 
 /**
@@ -65,15 +67,29 @@ const createIndividualPostPages = async ({ posts, gatsbyUtilities }) =>
 
 const createIndividualTagPages = async ({ tags, gatsbyUtilities }) =>
   Promise.all(
-    tags.map((tag) => {
+    tags.map(tag => {
       gatsbyUtilities.actions.createPage({
         path: "/tag/" + encodeURI(tag.node.slug),
         component: path.resolve(`./src/templates/tag.tsx`),
         context: {
           tag: tag.node.name,
-          slug: tag.node.slug
+          slug: tag.node.slug,
         },
-      })
+      });
+    })
+  );
+
+  const createIndividualCategoryPages = async ({ categories, gatsbyUtilities }) =>
+  Promise.all(
+    categories.map(category => {
+      gatsbyUtilities.actions.createPage({
+        path: "/category/" + encodeURI(category.node.slug),
+        component: path.resolve(`./src/templates/category.tsx`),
+        context: {
+          category: category.node.name,
+          slug: category.node.slug,
+        },
+      });
     })
   );
 
@@ -207,4 +223,31 @@ async function getTags({ graphql, reporter }) {
   }
 
   return graphqlResult.data.allWpTag.edges;
+}
+
+async function getCategories({ graphql, reporter }) {
+  const graphqlResult = await graphql(/* GraphQL */ `
+    query CategoriesQuery {
+      allWpCategory {
+        edges {
+          node {
+            name
+            id
+            parentId
+            slug
+          }
+        }
+      }
+    }
+  `);
+
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your posts`,
+      graphqlResult.errors
+    );
+    return;
+  }
+
+  return graphqlResult.data.allWpCategory.edges;
 }

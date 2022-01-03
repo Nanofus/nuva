@@ -427,6 +427,30 @@ a:focus {
   margin-left: 6rem;
 }
 
+.categoryWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.categories {
+  display: none;
+  position: absolute;
+  top: var(--spacing-12);
+  left: 0;
+  width: max-content;
+  z-index: 1;
+}
+
+.categoryWrapper:hover {
+  .categories {
+    display: block;
+  }
+}
+
+.childCategories {
+  margin-left: 6rem;
+}
+
 button {
   border: 0;
   padding: 0.7rem;

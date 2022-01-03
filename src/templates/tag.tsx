@@ -11,7 +11,6 @@ const Tag = (props) => {
   const { data, pageContext } = props;
   const { tag } = pageContext;
 
-  console.log(data.allWpPost.edges.node);
   const posts = data.allWpPost.edges.map(node => node.node);
 
   return (

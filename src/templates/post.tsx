@@ -9,39 +9,14 @@ import Comment from "../components/comment";
 
 import "../css/predefined-formatting.scss";
 
-import { PostTemplateParams, Post } from "../types";
-import { newestFirst } from "../util";
-import { NodeStack } from "framer-motion/types/projection/shared/stack";
+import { PostTemplateParams } from "../types";
+import { buildTaxonomyTree, newestFirstSort } from "../util";
 
 const PostTemplate = ({
   data: { previous, next, post },
 }: PostTemplateParams) => {
-  let buildComments = comments => {
-    let parentedComments = [];
-    let rootComments = [];
-    for (let comment of comments) {
-      if (comment.children) comment.children = [];
-      if (comment.parentId) {
-        parentedComments.push(comment);
-      } else {
-        rootComments.push(comment);
-      }
-    }
-    for (let comment of comments) {
-      for (let parentedComment of parentedComments) {
-        if (parentedComment.parentId === comment.id) {
-          if (!comment.children) comment.children = [];
-          comment.children.push(parentedComment);
-        }
-      }
-      if (comment.children)
-        comment.children = comment.children.sort(newestFirst);
-    }
-    rootComments = rootComments.sort(newestFirst);
-    return rootComments;
-  };
 
-  let comments = buildComments(post.comments.nodes);
+  let comments = buildTaxonomyTree(post.comments.nodes, newestFirstSort);
 
   return (
     <Layout>
