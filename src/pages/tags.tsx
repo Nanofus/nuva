@@ -11,7 +11,7 @@ const TagsPage = ({ data, location }) => {
       <h1>Tagit</h1>
       <div className="tagContainer">
         {data.allWpTag.nodes.map((node, i) => {
-          return <Link className="tag" key={i} to={"/tag/" + node.slug}>{node.name}</Link>;
+          return <Link className="tag" key={i} to={"/tag/" + encodeURI(node.slug)}>{node.name}</Link>;
         })}
       </div>
     </Layout>

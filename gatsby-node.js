@@ -67,7 +67,7 @@ const createIndividualTagPages = async ({ tags, gatsbyUtilities }) =>
   Promise.all(
     tags.map((tag) => {
       gatsbyUtilities.actions.createPage({
-        path: '/tag/' + tag.node.slug,
+        path: "/tag/" + encodeURI(tag.node.slug),
         component: path.resolve(`./src/templates/tag.tsx`),
         context: {
           tag: tag.node.name,
