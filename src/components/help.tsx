@@ -18,17 +18,21 @@ const Help = ({ onClose }) => {
         <span>Kepe teki vähän juttuja. Seuraavassa puuttuvat featuret, ei missään erityisessä järjestyksessä.</span>
         <ul className="list">
           <li>Kommenttien postaaminen</li>
+          <li>Kaikkien postausten listan sivutus</li>
+          <li>Päivämäärät vanhan ropen postien nimiin</li>
+          <li>Uudet kommentit näkyviin</li>
+          <li>Viestien kommenttimäärät etusivulle</li>
+          <li>Viestin creditsit monipuolisemmiksi ja selkeämmiksi (kirjoittajat, kuvittajat jne.)</li>
+          <li>Tagipilven kuratointi (kunnon tagit ja meemitagit)</li>
+          <li>"Yksityisyys-hätäkytkin"</li>
+          <li>Enemmän esikatselukuvia etusivulle, blur pois (se on tällä hetkellä placeholder)</li>
           <li>Kirjanmerkit</li>
           <li>Teemat</li>
-          <li>Layout CSS irti ulkoasu-CSS:stä</li>
-          <li>Haku</li>
-          <li>Kategoriasivut</li>
-          <li>Tagisivut</li>
           <li>Tilastosivu</li>
           <li>Esimääritellyt tyylit</li>
           <li>Menun pinnaus</li>
           <li>Musiikkisoittimen tyyli</li>
-          <li>Jostain kumman syystä spesifisti Nenyn käyttäjätietojen haku epäonnistuu...?</li>
+          <li>Nenyn käyttäjätietojen haku epäonnistuu koska tältä ei ole yhtään ropepostia</li>
         </ul>
         <span>Sivu tehty <a href="https://www.gatsbyjs.com/" target="_blank">Gatsbylla</a> ja <a href="https://reactjs.org/" target="_blank">Reactilla</a>.</span>
       </div>

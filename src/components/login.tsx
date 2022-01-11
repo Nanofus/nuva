@@ -7,7 +7,7 @@ const LOGIN = gql`
   mutation LoginUser($username: String!, $password: String!) {
     login(
       input: {
-        clientMutationId: "aaaaa"
+        clientMutationId: "LoginUser"
         username: $username
         password: $password
       }
@@ -17,6 +17,7 @@ const LOGIN = gql`
       user {
         id
         name
+        email
       }
     }
   }
@@ -27,7 +28,7 @@ const Login = ({ setLoading, onLogin, loggedIn }) => {
     onCompleted({ login }) {
       setLoading(false);
       if (login) {
-        onLogin({ authToken: login.refreshToken, userName: login.user.name });
+        onLogin({ authToken: login.refreshToken, userName: login.user.name, email: login.user.email });
       }
     },
     onError(error) {

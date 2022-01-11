@@ -11,6 +11,7 @@ import "../css/predefined-formatting.scss";
 
 import { PostTemplateParams } from "../types";
 import { buildTaxonomyTree, newestFirstSort } from "../util";
+import CommentReplyBox from "../components/comment-reply-box";
 
 const PostTemplate = ({
   data: { previous, next, post },
@@ -78,6 +79,8 @@ const PostTemplate = ({
           {comments.map((comment, i) => (
             <Comment comment={comment} key={i} />
           ))}
+          <h5>Jätä kommentti</h5>
+          <CommentReplyBox comment={null} unparentedPostId={post.postId}/>
         </section>
       </article>
 
@@ -118,6 +121,7 @@ export const pageQuery = graphql`
   query PostById($id: String!, $previousPostId: String, $nextPostId: String) {
     post: wpPost(id: { eq: $id }) {
       id
+      postId
       excerpt
       content
       title
@@ -145,6 +149,12 @@ export const pageQuery = graphql`
           author {
             node {
               name
+            }
+          }
+          commentId
+          commentedOn {
+            node {
+              id
             }
           }
           content

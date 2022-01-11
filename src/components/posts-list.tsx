@@ -24,7 +24,7 @@ const PostsList = ({ posts, highlighted }) => {
             )}
             <span className="postListField">
               {post.additionalFields.authorgroup ? (
-                <span>{post.additionalFields.authorgroup}</span>
+                <span>{post.additionalFields.authorgroup}aa</span>
               ) : (
                 <span>{post.author.node.firstName}</span>
               )}

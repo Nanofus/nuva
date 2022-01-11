@@ -4,7 +4,7 @@ import ViewerInformation from "./viewer-information";
 import Login from "./login";
 import React from "react";
 import { fetchUserInfo, handleLogin, handleLogout } from "./connection";
-import { isBrowser } from "../util";
+import { isBrowser, loggedIn } from "../util";
 
 export default class Menu extends React.Component<any, any> {
   private loginFunc: any;
@@ -16,7 +16,7 @@ export default class Menu extends React.Component<any, any> {
     super(props);
     this.state = {
       ...fetchUserInfo(),
-      loggedIn: isBrowser ? !!localStorage.getItem("authToken") : false,
+      loggedIn: loggedIn(),
       menuOpen: false,
     };
     this.loginFunc = this.login.bind(this);
@@ -51,7 +51,7 @@ export default class Menu extends React.Component<any, any> {
 
   login(userInfo) {
     this.setState({ loggedIn: true });
-    handleLogin(userInfo.authToken, userInfo.userName);
+    handleLogin(userInfo.authToken, userInfo.userName, userInfo.email);
     this.setState(fetchUserInfo());
   }
   logout() {

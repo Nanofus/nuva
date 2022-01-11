@@ -42,7 +42,7 @@ export const pageQuery = graphql`
           uri
           author {
             node {
-              name
+              firstName
             }
           }
           categories {

@@ -8,6 +8,10 @@ export const alphabeticalSort = (a, b) => {
 
 export const isBrowser = typeof window !== "undefined";
 
+export const loggedIn = () => {
+  return isBrowser ? !!localStorage.getItem("authToken") : false;
+}
+
 export const buildTaxonomyTree = (comments, sortFunction) => {
   let parentedComments = [];
   let rootComments = [];

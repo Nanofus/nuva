@@ -40,10 +40,11 @@ export const fetchUserInfo = () => {
   };
 }
 
-export const handleLogin = (authToken, userName) => {
+export const handleLogin = (authToken, userName, userEmail) => {
   client.clearStore();
   localStorage.setItem("authToken", authToken);
   localStorage.setItem("userId", userName);
+  localStorage.setItem("userEmail", userEmail);
   client.link = authLink.concat(httpLink);
   toast.success('Kirjautuminen onnistui!');
 }
@@ -52,6 +53,7 @@ export const handleLogout = () => {
   client.clearStore();
   localStorage.removeItem("authToken");
   localStorage.removeItem("userId");
+  localStorage.removeItem("userEmail");
   client.link = authLink.concat(httpLink);
   toast.success('Kirjauduit ulos.');
 }
