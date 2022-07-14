@@ -9,14 +9,14 @@
 	guarantees are made. Don't use it to organise your life.)
 */
 
-const base = 'https://api.svelte.dev';
+import WPAPI from 'wpapi';
+const wp = new WPAPI({ endpoint: 'https://klaanon.fi/wp-json' });
 
-export function api(method: string, resource: string, data?: Record<string, unknown>) {
-	return fetch(`${base}/${resource}`, {
-		method,
-		headers: {
-			'content-type': 'application/json'
-		},
-		body: data && JSON.stringify(data)
-	});
+export async function posts() {
+	return await wp.posts().then((data) => {
+		console.log(data);
+		return data;
+	}).catch(function(err) {
+		console.error(err);
+	});;
 }

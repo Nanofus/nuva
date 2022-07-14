@@ -1,9 +1,8 @@
-import { api } from './_api';
-import type { RequestHandler } from './__types';
+import { posts } from './_api';
 
-export const get: RequestHandler = async ({ locals }) => {
+export const get = async ({ locals }: any) => {
 	// locals.userid comes from src/hooks.js
-	const response = await api('GET', `todos/${locals.userid}`);
+	const response = await posts();
 
 	if (response.status === 404) {
 		// user hasn't created a todo list.
@@ -47,7 +46,7 @@ const redirect = {
 	}
 };
 
-export const patch: RequestHandler = async ({ request, locals }) => {
+export const patch: RequestHandler = async ({ request, locals }: any) => {
 	const form = await request.formData();
 
 	await api('PATCH', `todos/${locals.userid}/${form.get('uid')}`, {
@@ -58,7 +57,7 @@ export const patch: RequestHandler = async ({ request, locals }) => {
 	return redirect;
 };
 
-export const del: RequestHandler = async ({ request, locals }) => {
+export const del: RequestHandler = async ({ request, locals }: any) => {
 	const form = await request.formData();
 
 	await api('DELETE', `todos/${locals.userid}/${form.get('uid')}`);
