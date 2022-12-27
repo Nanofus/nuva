@@ -3,5 +3,5 @@
 </script>
 
 <html lang="fi">
-	<div>{@html data.post.content}</div>
+	<div>{@html data.post?.content}</div>
 </html>

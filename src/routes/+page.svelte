@@ -3,7 +3,6 @@
 
 	export let data: any;
     let fetching = false;
-    console.log(data);
 
     const fetchMorePosts = async () => {
         fetching = true;
