@@ -1,8 +1,8 @@
 import { error } from '@sveltejs/kit';
-import { getAllPosts } from '$lib/api';
+import { getPosts } from '$lib/api';
 
 export async function load() {
-    const posts = await getAllPosts();
-    if (posts) return { posts: posts };
+    const posts = await getPosts();
+    if (posts) return posts;
     throw error(404, 'Not found');
 }

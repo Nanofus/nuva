@@ -1,4 +1,4 @@
-import { API_PATH } from "$lib/config";
+import { API_PATH, POSTS_PER_FETCH } from "$lib/config";
 
 export const getPostBySlug = async (slug: string) => {
     return (await fetch(API_PATH, {
@@ -26,31 +26,12 @@ export const getPostBySlug = async (slug: string) => {
     })).json();
 }
 
-export const getAllPosts = async () => {
-    // This needs to be iterative
-    // since GraphQL only returns a limited number of items at once
-    const itemsPerIteration = 100;
-    let result: any[] = [];
+export const getPosts = async (after = null) => {
     let params: any = {
-        first: itemsPerIteration,
-        after: null
+        first: POSTS_PER_FETCH,
+        after: `"${after}"`
     }
-    while (true) {
-        let data = await getAllPostsPaginated(params);
-        let pageInfo = data.data.posts.pageInfo;
-        let posts = data.data.posts.edges.map((edge: any) => edge.node);
-        params = {
-            first: itemsPerIteration,
-            after: `"${pageInfo.endCursor}"`
-        }
-        result = [...result, ...posts];
-        if (!pageInfo.hasNextPage) break;
-    }
-    return result;
-}
-
-const getAllPostsPaginated = async (params: any) => {
-    return (await fetch(API_PATH, {
+    const data = await (await fetch(API_PATH, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -80,4 +61,12 @@ const getAllPostsPaginated = async (params: any) => {
             `,
         }),
     })).json();
+    console.log(data);
+    let pageInfo = data.data.posts.pageInfo;
+    let posts = data.data.posts.edges.map((edge: any) => edge.node);
+    return {
+        posts, 
+        endCursor: pageInfo.endCursor,
+        hasNextPage: pageInfo.hasNextPage
+    }
 }
