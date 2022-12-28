@@ -1,14 +1,16 @@
 <script lang="ts">
-	import { getPosts } from "$lib/api";
+	import { getPostsByTag } from "$lib/api";
 
 	export let data: any;
     let fetching = false;
 
     const fetchMorePosts = async () => {
         fetching = true;
-        const newData = await getPosts(data.endCursor);
+        const newData = await getPostsByTag(data.tagSlug, data.endCursor);
         data = {
             posts: [...data.posts, ...newData.posts],
+            tagSlug: data.tagSlug,
+            tag: data.tag,
             endCursor: newData.endCursor,
             hasNextPage: newData.hasNextPage,
         };
@@ -17,20 +19,13 @@
 </script>
 
 <html lang="fi">
-	<h2>Kaikki ropeosat</h2>
+	<h2>Tagi: {data.tag}</h2>
 	<ul>
 		{#each data.posts as post}
 			<li><a href="/posts/{post.slug}">{post.title}</a></li>
 		{/each}
 	</ul>
-    {#if data.hasNextPage && !fetching}
-        <button on:click={fetchMorePosts}>Lataa lisää</button>
-    {/if}
+	{#if data.hasNextPage && !fetching}
+		<button on:click={fetchMorePosts}>Lataa lisää</button>
+	{/if}
 </html>
-
-<style lang="scss">
-    ul {
-        list-style: none;
-        padding: 0;
-    }
-</style>

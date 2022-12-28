@@ -19,6 +19,7 @@
 	{:else if loggedIn === false}
 		<Login />
 	{/if}
+    <h1>Klaanon Nuva</h1>
 	<Navigation />
 	<slot />
 	<SvelteToast options={{ reversed: true, intro: { y: -50 } }} />

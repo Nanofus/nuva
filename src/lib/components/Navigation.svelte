@@ -1,5 +1,7 @@
 <nav>
 	<a href="/">Etusivu</a>
+	<a href="/categories">Kategoriat</a>
+	<a href="/tags">Tagit</a>
 </nav>
 
 <style lang="scss">

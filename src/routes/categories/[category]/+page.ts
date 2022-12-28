@@ -1,9 +1,8 @@
 import { error } from '@sveltejs/kit';
-import { getPostsByTag } from '$lib/api';
+import { getPostsByCategory } from '$lib/api';
 
 export async function load({ params }: any) {
-    const data = await getPostsByTag(params.tag);
-    console.log('SSR', data);
+    const data = await getPostsByCategory(params.category);
     if (data) return data;
     throw error(404, 'Not found');
 }
