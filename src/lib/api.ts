@@ -123,7 +123,7 @@ export const getPostsByCategory = async (category: string, after = null) => {
     }
 }
 
-export const getPosts = async (after = null) => {
+export const getPosts = async (after = null, searchTerm: string = "") => {
     const data = await (await fetch(API_PATH, {
         method: 'POST',
         headers: {
@@ -132,7 +132,7 @@ export const getPosts = async (after = null) => {
         body: JSON.stringify({
             query: `
             query AllPostsPaginated {
-                posts(first: ${POSTS_PER_FETCH}, after: ${`"${after}"`}) {
+                posts(where: {search: "${decodeURI(searchTerm)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -153,6 +153,7 @@ export const getPosts = async (after = null) => {
     let posts = data.data.posts.edges.map((edge: any) => edge.node);
     return {
         posts,
+        searchTerm: searchTerm === "" ? null : searchTerm,
         endCursor: pageInfo.endCursor,
         hasNextPage: pageInfo.hasNextPage
     }
