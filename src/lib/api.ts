@@ -1,4 +1,4 @@
-import { API_PATH, POSTS_PER_FETCH } from "$lib/config";
+import { API_PATH, POSTS_PER_FETCH, QUERIES } from "$lib/config";
 import { toast } from '@zerodevx/svelte-toast'
 import { browser } from '$app/environment'; 
 
@@ -13,7 +13,7 @@ export const getPostBySlug = async (slug: string) => {
         body: JSON.stringify({
             query: `
             query PostBySlug {
-                postBy(slug: "${slug}") {
+                post(idType: SLUG, id: "${slug}") {
                     title
                     rawDate: date
                     author {
@@ -21,7 +21,7 @@ export const getPostBySlug = async (slug: string) => {
                         firstName
                         description
                         avatar {
-                          url
+                            url
                         }
                       }
                     }
@@ -41,6 +41,52 @@ export const getPostBySlug = async (slug: string) => {
     })).json();
 }
 
+export const getPostsByTag = async (tag: string, after = null) => {
+    let params: any = {
+        first: POSTS_PER_FETCH,
+        after: `"${after}"`
+    }
+    const data = await (await fetch(API_PATH, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            query: `
+            query PostsByTag {
+                posts(where: {tagSlugIn: "${tag}"}, first: ${params.first}, after: ${params.after}) {
+                    ${QUERIES.pageInfo}
+                    edges {
+                        cursor
+                        node {
+                            additionalFields {
+                                authorgroup
+                            }
+                            slug
+                            title
+                        }
+                    }
+                }
+                tag(id: "${tag}", idType: SLUG) {
+                    name
+                }
+            }
+            `,
+        }),
+    })).json();
+    console.log('API', data);
+    let pageInfo = data.data.posts.pageInfo;
+    let tagName = data.data.tag.name;
+    let posts = data.data.posts.edges.map((edge: any) => edge.node);
+    return {
+        posts,
+        tag: tagName,
+        tagSlug: tag,
+        endCursor: pageInfo.endCursor,
+        hasNextPage: pageInfo.hasNextPage
+    }
+}
+
 export const getPosts = async (after = null) => {
     let params: any = {
         first: POSTS_PER_FETCH,
@@ -55,17 +101,12 @@ export const getPosts = async (after = null) => {
             query: `
             query AllPostsPaginated {
                 posts(first: ${params.first}, after: ${params.after}) {
-                    pageInfo {
-                        hasNextPage
-                        hasPreviousPage
-                        startCursor
-                        endCursor
-                    }
+                    ${QUERIES.pageInfo}
                     edges {
                         cursor
                         node {
                             additionalFields {
-                            authorgroup
+                                authorgroup
                             }
                             slug
                             title
@@ -114,23 +155,18 @@ export const login = async (username: string, password: string) => {
                 ) {
                   authToken
                   refreshToken
-                  user {
-                    id
-                    name
-                    email
-                  }
                 }
               }
             `,
         }),
     })).json();
-    console.log(loginResponse);
     loginResponse.errors?.forEach((error: any) => {
         toast.push(error.message);
     });
     if (loginResponse.data.login) {
         localStorage.setItem("auth", JSON.stringify({
-            username: loginResponse.data.login.user.name,
+            username,
+            password,
             authToken: loginResponse.data.login.authToken,
             refreshToken: loginResponse.data.login.refreshToken
         }))
