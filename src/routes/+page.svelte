@@ -1,36 +1,29 @@
 <script lang="ts">
-	import { getPosts } from "$lib/api";
+	import { getPosts } from '$lib/api';
+	import PostList from '$lib/components/PostList.svelte';
 
 	export let data: any;
-    let fetching = false;
+	let fetching = false;
 
-    const fetchMorePosts = async () => {
-        fetching = true;
-        const newData = await getPosts(data.endCursor);
-        data = {
-            posts: [...data.posts, ...newData.posts],
-            endCursor: newData.endCursor,
-            hasNextPage: newData.hasNextPage,
-        };
-        fetching = false;
-    }
+	const fetchMorePosts = async () => {
+		fetching = true;
+		const newData = await getPosts(data.endCursor);
+		data = {
+			posts: [...data.posts, ...newData.posts],
+			endCursor: newData.endCursor,
+			hasNextPage: newData.hasNextPage
+		};
+		fetching = false;
+	};
 </script>
 
 <html lang="fi">
 	<h2>Kaikki ropeosat</h2>
-	<ul>
-		{#each data.posts as post}
-			<li><a href="/posts/{post.slug}">{post.title}</a></li>
-		{/each}
-	</ul>
-    {#if data.hasNextPage && !fetching}
-        <button on:click={fetchMorePosts}>Lataa lisää</button>
-    {/if}
+	<PostList posts={data.posts} />
+	{#if data.hasNextPage && !fetching}
+		<button on:click={fetchMorePosts}>Lataa lisää</button>
+	{/if}
 </html>
 
 <style lang="scss">
-    ul {
-        list-style: none;
-        padding: 0;
-    }
 </style>

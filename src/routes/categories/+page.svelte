@@ -9,7 +9,7 @@
 			<li>
 				<a href="/categories/{category.slug}">{category.name}</a>
 				{#if category.children.length > 0}
-					<ul class='child-list'>
+					<ul class="child-list">
 						{#each category.children as child}
 							<li>
 								<a href="/categories/{child.slug}">{child.name}</a>
@@ -27,8 +27,8 @@
 		list-style: none;
 		padding: 0;
 
-        &.child-list {
-            padding-left: 1em;
-        }
+		&.child-list {
+			padding-left: 1em;
+		}
 	}
 </style>

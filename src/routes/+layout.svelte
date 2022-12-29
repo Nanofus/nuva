@@ -14,12 +14,8 @@
 </script>
 
 <div id="app">
-	{#if loggedIn === undefined}
-		<LoadingSpinner />
-	{:else if loggedIn === false}
-		<Login />
-	{/if}
-    <h1>Klaanon Nuva</h1>
+	<Login />
+	<h1>Klaanon Nuva</h1>
 	<Navigation />
 	<slot />
 	<SvelteToast options={{ reversed: true, intro: { y: -50 } }} />

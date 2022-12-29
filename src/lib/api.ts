@@ -1,65 +1,48 @@
-import { API_PATH, POSTS_PER_FETCH, QUERIES } from "$lib/config";
-import { toast } from '@zerodevx/svelte-toast'
+import { API_PATH, LOCALSTORAGE_AUTH_KEY, POSTS_PER_FETCH, QUERIES } from '$lib/config';
+import { toast } from '@zerodevx/svelte-toast';
 import { browser } from '$app/environment';
+import { error } from '@sveltejs/kit';
+import { loginInfo } from './stores';
 
 export const getPostBySlug = async (slug: string) => {
-    const authToken = browser ? getAuthInfo()?.authToken : null;
-    return (await fetch(API_PATH, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': authToken ? `Bearer ${authToken}` : "",
-        },
-        body: JSON.stringify({
-            query: `
+	const authToken = browser ? getAuthInfo()?.authToken : null;
+	const data = await (
+		await fetch(API_PATH, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authToken ? `Bearer ${authToken}` : ''
+			},
+			body: JSON.stringify({
+				query: `
             query PostBySlug {
                 post(idType: SLUG, id: "${slug}") {
-                    title
-                    rawDate: date
-                    author {
-                      node {
-                        firstName
-                        description
-                        avatar {
-                            url
-                        }
-                      }
-                    }
-                    additionalFields {
-                        authorgroup
-                        featuredimage
-                        initialletter
-                        scripts
-                        styles
-                        theme
-                    }
-                    content
+                    ${QUERIES.postContent}
                 }
             }
-            `,
-        }),
-    })).json();
-}
+            `
+			})
+		})
+	).json();
+	return data;
+};
 
 export const getPostsByTag = async (tag: string, after = null) => {
-    const data = await (await fetch(API_PATH, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            query: `
+	const data = await (
+		await fetch(API_PATH, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				query: `
             query PostsByTag {
                 posts(where: {tagSlugIn: "${tag}"}, first: ${POSTS_PER_FETCH}, after: ${`"${after}"`}) {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
                         node {
-                            additionalFields {
-                                authorgroup
-                            }
-                            slug
-                            title
+                            ${QUERIES.postMeta}
                         }
                     }
                 }
@@ -67,29 +50,32 @@ export const getPostsByTag = async (tag: string, after = null) => {
                     name
                 }
             }
-            `,
-        }),
-    })).json();
-    let pageInfo = data.data.posts.pageInfo;
-    let tagName = data.data.tag.name;
-    let posts = data.data.posts.edges.map((edge: any) => edge.node);
-    return {
-        posts,
-        tag: tagName,
-        tagSlug: tag,
-        endCursor: pageInfo.endCursor,
-        hasNextPage: pageInfo.hasNextPage
-    }
-}
+            `
+			})
+		})
+	).json();
+	if (!data.data.tag) throw error(404, 'Not found');
+	let pageInfo = data.data.posts.pageInfo;
+	let tagName = data.data.tag.name;
+	let posts = data.data.posts.edges.map((edge: any) => edge.node);
+	return {
+		posts,
+		tag: tagName,
+		tagSlug: tag,
+		endCursor: pageInfo.endCursor,
+		hasNextPage: pageInfo.hasNextPage
+	};
+};
 
 export const getPostsByCategory = async (category: string, after = null) => {
-    const data = await (await fetch(API_PATH, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            query: `
+	const data = await (
+		await fetch(API_PATH, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				query: `
             query PostsByCategory {
                 category(id: "${category}", idType: SLUG) {
                     name
@@ -98,75 +84,74 @@ export const getPostsByCategory = async (category: string, after = null) => {
                         edges {
                             cursor
                             node {
-                                additionalFields {
-                                    authorgroup
-                                }
-                                slug
-                                title
+                                ${QUERIES.postMeta}
                             }
                         }
                     }
                 }
             }
-            `,
-        }),
-    })).json();
-    let pageInfo = data.data.category.posts.pageInfo;
-    let categoryName = data.data.category.name;
-    let posts = data.data.category.posts.edges.map((edge: any) => edge.node);
-    return {
-        posts,
-        category: categoryName,
-        tagSlug: category,
-        endCursor: pageInfo.endCursor,
-        hasNextPage: pageInfo.hasNextPage
-    }
-}
+            `
+			})
+		})
+	).json();
+	if (!data.data.category) throw error(404, 'Not found');
+	let pageInfo = data.data.category.posts.pageInfo;
+	let categoryName = data.data.category.name;
+	let posts = data.data.category.posts.edges.map((edge: any) => edge.node);
+	return {
+		posts,
+		category: categoryName,
+		tagSlug: category,
+		endCursor: pageInfo.endCursor,
+		hasNextPage: pageInfo.hasNextPage
+	};
+};
 
-export const getPosts = async (after = null, searchTerm: string = "") => {
-    const data = await (await fetch(API_PATH, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            query: `
+export const getPosts = async (after = null, searchTerm: string = '') => {
+	const data = await (
+		await fetch(API_PATH, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				query: `
             query AllPostsPaginated {
-                posts(where: {search: "${decodeURI(searchTerm)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
+                posts(where: {search: "${decodeURI(
+									searchTerm
+								)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
                         node {
-                            additionalFields {
-                                authorgroup
-                            }
-                            slug
-                            title
+                            ${QUERIES.postMeta}
                         }
                     }
                 }
               }
-            `,
-        }),
-    })).json();
-    let pageInfo = data.data.posts.pageInfo;
-    let posts = data.data.posts.edges.map((edge: any) => edge.node);
-    return {
-        posts,
-        searchTerm: searchTerm === "" ? null : searchTerm,
-        endCursor: pageInfo.endCursor,
-        hasNextPage: pageInfo.hasNextPage
-    }
-}
+            `
+			})
+		})
+	).json();
+	let pageInfo = data.data.posts.pageInfo;
+	let posts = data.data.posts.edges.map((edge: any) => edge.node);
+	return {
+		posts,
+		searchTerm: searchTerm === '' ? null : searchTerm,
+		endCursor: pageInfo.endCursor,
+		hasNextPage: pageInfo.hasNextPage
+	};
+};
 
 export const getTags = async (after = null) => {
-    const data = await (await fetch(API_PATH, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            query: `
+	const data = await (
+		await fetch(API_PATH, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				query: `
             query AllTagsPaginated {
                 tags(first: ${POSTS_PER_FETCH}, after: ${`"${after}"`}) {
                     ${QUERIES.pageInfo}
@@ -179,26 +164,28 @@ export const getTags = async (after = null) => {
                     }
                 }
               }
-            `,
-        }),
-    })).json();
-    let pageInfo = data.data.tags.pageInfo;
-    let tags = data.data.tags.edges.map((edge: any) => edge.node);
-    return {
-        tags,
-        endCursor: pageInfo.endCursor,
-        hasNextPage: pageInfo.hasNextPage
-    }
-}
+            `
+			})
+		})
+	).json();
+	let pageInfo = data.data.tags.pageInfo;
+	let tags = data.data.tags.edges.map((edge: any) => edge.node);
+	return {
+		tags,
+		endCursor: pageInfo.endCursor,
+		hasNextPage: pageInfo.hasNextPage
+	};
+};
 
 export const getCategories = async () => {
-    const data = await (await fetch(API_PATH, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            query: `
+	const data = await (
+		await fetch(API_PATH, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				query: `
             query AllCategories {
                 categories {
                     nodes {
@@ -212,51 +199,54 @@ export const getCategories = async () => {
                     }
                   }
               }
-            `,
-        }),
-    })).json();
-    let categories: any[] = [];
-    data.data.categories.nodes.forEach((category: any) => {
-        if (!category.parent) {
-            category.children = [];
-            categories.push(category);
-        }
-    });
-    data.data.categories.nodes.forEach((category: any) => {
-        if (category.parent?.node.slug !== null) {
-            categories.forEach((parentCategory: any) => {
-                if (parentCategory.slug === category.parent?.node.slug) {
-                    parentCategory.children.push(category);
-                }
-            });
-        }
-    });
-    return { categories };
-}
+            `
+			})
+		})
+	).json();
+	let categories: any[] = [];
+	data.data.categories.nodes.forEach((category: any) => {
+		if (!category.parent) {
+			category.children = [];
+			categories.push(category);
+		}
+	});
+	data.data.categories.nodes.forEach((category: any) => {
+		if (category.parent?.node.slug !== null) {
+			categories.forEach((parentCategory: any) => {
+				if (parentCategory.slug === category.parent?.node.slug) {
+					parentCategory.children.push(category);
+				}
+			});
+		}
+	});
+	return { categories };
+};
 
 export const getAuthInfo = () => {
-    if (localStorage !== undefined) {
-        return localStorage.getItem("auth") ? JSON.parse(localStorage.getItem("auth") as string) : null;
-    }
-    return null;
-}
+	if (localStorage !== undefined) {
+		return localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth') as string) : null;
+	}
+	return null;
+};
 
 export const isLoggedIn = () => {
-    return !!getAuthInfo();
-}
+	return !!getAuthInfo();
+};
 
 export const logout = () => {
-    localStorage.removeItem('auth');
-}
+	loginInfo.set(null);
+	localStorage.removeItem(LOCALSTORAGE_AUTH_KEY);
+};
 
 export const login = async (username: string, password: string) => {
-    const loginResponse = await (await fetch(API_PATH, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            query: `
+	const loginResponse = await (
+		await fetch(API_PATH, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				query: `
             mutation LoginUser {
                 login(
                   input: {
@@ -269,18 +259,20 @@ export const login = async (username: string, password: string) => {
                   refreshToken
                 }
               }
-            `,
-        }),
-    })).json();
-    loginResponse.errors?.forEach((error: any) => {
-        toast.push(error.message);
-    });
-    if (loginResponse.data.login) {
-        localStorage.setItem("auth", JSON.stringify({
-            username,
-            password,
-            authToken: loginResponse.data.login.authToken,
-            refreshToken: loginResponse.data.login.refreshToken
-        }))
-    }
-}
+            `
+			})
+		})
+	).json();
+	loginResponse.errors?.forEach((error: any) => {
+		toast.push(error.message);
+	});
+	if (loginResponse.data.login) {
+		const loginData = {
+			username,
+			authToken: loginResponse.data.login.authToken,
+			refreshToken: loginResponse.data.login.refreshToken
+		};
+		localStorage.setItem('auth', JSON.stringify(loginData));
+		loginInfo.set(loginData);
+	}
+};

@@ -8,7 +8,7 @@
 		display: inline-block;
 		position: absolute;
 		left: calc(50% - 24px);
-        top: calc(50% - 24px);
+		top: calc(50% - 24px);
 		&:after,
 		&:before {
 			content: '';
