@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { getPostsByTag } from '$lib/api';
+	import { getPostListByTag } from '$lib/database';
 	import PostList from '$lib/components/PostList.svelte';
+    import { type PostListByTagResponse } from '$lib/types';
 
-	export let data: any;
+	export let data: PostListByTagResponse;
 	let fetching = false;
 
 	const fetchMorePosts = async () => {
 		fetching = true;
-		const newData = await getPostsByTag(data.tagSlug, data.endCursor);
+		const newData = await getPostListByTag(data.tagSlug, data.endCursor);
 		data = {
 			posts: [...data.posts, ...newData.posts],
 			tagSlug: data.tagSlug,

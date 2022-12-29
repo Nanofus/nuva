@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
-	import { isLoggedIn } from '$lib/api';
+	import { isLoggedIn } from '$lib/database';
 	import Login from '$lib/components/Login.svelte';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
@@ -19,7 +19,7 @@
 	<Header />
 	<Navigation />
 	<slot />
-	<SvelteToast options={{ reversed: true, intro: { y: -50 } }} />
+	<SvelteToast options={{ reversed: true, intro: { y: -20 } }} />
 </div>
 
 <style lang="scss" global>

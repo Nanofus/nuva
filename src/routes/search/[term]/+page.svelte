@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { getPosts } from '$lib/api';
+	import { getPostList } from '$lib/database';
 	import PostList from '$lib/components/PostList.svelte';
+    import { type PostListBySearchResponse } from '$lib/types';
 
-	export let data: any;
+	export let data: PostListBySearchResponse;
 	let fetching = false;
 
 	const fetchMorePosts = async () => {
 		fetching = true;
-		const newData = await getPosts(data.endCursor, data.searchTerm);
+		const newData = await getPostList(data.endCursor, data.searchTerm);
 		data = {
 			posts: [...data.posts, ...newData.posts],
 			searchTerm: data.searchTerm,

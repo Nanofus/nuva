@@ -3,9 +3,10 @@ import { toast } from '@zerodevx/svelte-toast';
 import { browser } from '$app/environment';
 import { error } from '@sveltejs/kit';
 import { loginInfo } from '$lib/stores';
-import { dataToPost, dataToCategories, dataToPostMeta, type PostMeta, type Post, type Tag, dataToTags, type PostListResponse, type TagListResponse, type CategoryListResponse, type AuthInfo } from '$lib/types';
+import { dataToPost, dataToPostMeta, dataToTags, dataToCategories } from '$lib/database.mappers';
+import type { Post, PostMeta, PostListResponse, TagListResponse, Tag, CategoryListResponse, AuthInfo, PostListBySearchResponse, PostListByTagResponse, PostListByCategoryResponse } from '$lib/types';
 
-export const getPostBySlug = async (slug: string) => {
+export const getPostBySlug = async (slug: string): Promise<Post> => {
 	const authToken = browser ? getAuthInfo()?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
@@ -29,7 +30,7 @@ export const getPostBySlug = async (slug: string) => {
 	return post;
 };
 
-export const getPostsByTag = async (tag: string, after = null) => {
+export const getPostListByTag = async (tag: string, after = null): Promise<PostListByTagResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -59,7 +60,7 @@ export const getPostsByTag = async (tag: string, after = null) => {
 	if (!response.data.tag) throw error(404, 'Not found');
 	let pageInfo = response.data.posts.pageInfo;
 	let tagName = response.data.tag.name;
-	let posts: PostMeta = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
+	let posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
 	return {
 		posts,
 		tag: tagName,
@@ -69,7 +70,7 @@ export const getPostsByTag = async (tag: string, after = null) => {
 	};
 };
 
-export const getPostsByCategory = async (category: string, after = null) => {
+export const getPostListByCategory = async (category: string, after = null): Promise<PostListByCategoryResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -109,7 +110,7 @@ export const getPostsByCategory = async (category: string, after = null) => {
 	};
 };
 
-export const getPosts = async (after = null, searchTerm: string = '') : Promise<PostListResponse> => {
+export const getPostList = async (after = null, searchTerm: string = '') : Promise<PostListBySearchResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -145,7 +146,7 @@ export const getPosts = async (after = null, searchTerm: string = '') : Promise<
 	};
 };
 
-export const getTags = async (after = null) : Promise<TagListResponse> => {
+export const getTagList = async (after = null) : Promise<TagListResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -179,7 +180,7 @@ export const getTags = async (after = null) : Promise<TagListResponse> => {
 	};
 };
 
-export const getCategories = async () : Promise<CategoryListResponse> => {
+export const getCategoryList = async () : Promise<CategoryListResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -213,16 +214,16 @@ export const getAuthInfo = (): AuthInfo | null => {
 	return null;
 };
 
-export const isLoggedIn = () => {
+export const isLoggedIn = (): boolean => {
 	return !!getAuthInfo();
 };
 
-export const logout = () => {
+export const logout = (): void => {
 	loginInfo.set(null);
 	localStorage.removeItem(LOCALSTORAGE_AUTH_KEY);
 };
 
-export const login = async (username: string, password: string) => {
+export const login = async (username: string, password: string): Promise<boolean> => {
 	const loginResponse = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -259,5 +260,7 @@ export const login = async (username: string, password: string) => {
 		localStorage.setItem('auth', JSON.stringify(loginData));
 		loginInfo.set(loginData);
 		toast.push("Sisäänkirjautuminen onnistui!");
+		return true;
 	}
+	return false;
 };

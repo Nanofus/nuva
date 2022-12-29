@@ -1,5 +1,7 @@
 <script lang="ts">
-	export let data: any;
+    import { CategoryListResponse } from '$lib/types';
+
+	export let data: CategoryListResponse;
 </script>
 
 <html lang="fi">

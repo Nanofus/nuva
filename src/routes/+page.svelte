@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { getPosts } from '$lib/api';
+	import { getPostList } from '$lib/database';
 	import PostList from '$lib/components/PostList.svelte';
+    import { type PostListResponse } from '$lib/types';
 
-	export let data: any;
+	export let data: PostListResponse;
 	let fetching = false;
 
 	const fetchMorePosts = async () => {
 		fetching = true;
-		const newData = await getPosts(data.endCursor);
+		const newData = await getPostList(data.endCursor);
 		data = {
 			posts: [...data.posts, ...newData.posts],
 			endCursor: newData.endCursor,

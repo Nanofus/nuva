@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { login, logout, isLoggedIn } from '$lib/api';
+	import { login, logout, isLoggedIn } from '$lib/database';
 	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 	import { loginInfo } from '$lib/stores';
 	let loggedIn = null;

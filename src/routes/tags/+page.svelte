@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { getTags } from '$lib/api';
+	import { getTagList } from '$lib/database';
+    import { type TagListResponse } from '$lib/types';
 
-	export let data: any;
+	export let data: TagListResponse;
 	let fetching = false;
 
 	const fetchMoreTags = async () => {
 		fetching = true;
-		const newData = await getTags(data.endCursor);
+		const newData = await getTagList(data.endCursor);
 		data = {
 			tags: [...data.tags, ...newData.tags],
 			endCursor: newData.endCursor,

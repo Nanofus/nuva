@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { getPostsByCategory } from '$lib/api';
+	import { getPostListByCategory } from '$lib/database';
+    import { type PostListByCategoryResponse } from '$lib/types';
 	import PostList from '$lib/components/PostList.svelte';
 
-	export let data: any;
+	export let data: PostListByCategoryResponse;
 	let fetching = false;
 
 	const fetchMorePosts = async () => {
 		fetching = true;
-		const newData = await getPostsByCategory(data.categorySlug, data.endCursor);
+		const newData = await getPostListByCategory(data.categorySlug, data.endCursor);
 		data = {
 			posts: [...data.posts, ...newData.posts],
 			categorySlug: data.categorySlug,

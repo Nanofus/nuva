@@ -1,6 +1,6 @@
 import type { Hierarchical } from '$lib/types';
 
-export const objectsToTree = (arr: Hierarchical[]) => {
+export const objectsToHierarchy = (arr: Hierarchical[]) => {
     let arrMap = new Map(arr.map((item: Hierarchical) => [item._id, item]));
     let tree = [];
 
