@@ -8,4 +8,4 @@ export const load: Load = async ({ params }): Promise<PostListByTagResponse> => 
 		if (response) return response;
 	}
 	throw error(404, 'Not found');
-}
+};

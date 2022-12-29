@@ -8,4 +8,4 @@ export const load: Load = async ({ params }): Promise<Post> => {
 		if (response) return response;
 	}
 	throw error(404, 'Not found');
-}
+};

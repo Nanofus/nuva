@@ -6,4 +6,4 @@ export const load: Load = async (): Promise<PostListResponse> => {
 	const response = await getPostList();
 	if (response) return response;
 	throw error(404, 'Not found');
-}
+};

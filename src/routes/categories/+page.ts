@@ -6,4 +6,4 @@ export const load: Load = async (): Promise<CategoryListResponse> => {
 	const response = await getCategoryList();
 	if (response) return response;
 	throw error(404, 'Not found');
-}
+};
