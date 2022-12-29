@@ -7,7 +7,6 @@ import { dataToPost, dataToPostMeta, dataToTags, dataToCategories } from '$lib/d
 import type {
 	Post,
 	PostMeta,
-	PostListResponse,
 	TagListResponse,
 	Tag,
 	CategoryListResponse,
@@ -17,7 +16,7 @@ import type {
 	PostListByCategoryResponse
 } from '$lib/types';
 
-export const getPostBySlug = async (slug: string): Promise<Post> => {
+export const getPostBySlug = async (slug: string): Promise<Post | null> => {
 	const authToken = browser ? getAuthInfo()?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
@@ -37,7 +36,7 @@ export const getPostBySlug = async (slug: string): Promise<Post> => {
 			})
 		})
 	).json();
-	const post: Post = dataToPost(response.data.post);
+	const post: Post | null = dataToPost(response.data.post);
 	return post;
 };
 

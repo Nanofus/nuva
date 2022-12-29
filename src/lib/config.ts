@@ -1,6 +1,7 @@
 export const API_PATH = 'https://klaanon.fi/wp/graphql';
 export const POSTS_PER_FETCH = 100;
 export const LOCALSTORAGE_AUTH_KEY = 'auth';
+export const LOCALE = 'fi-FI';
 
 export const QUERIES = {
 	pageInfo: `

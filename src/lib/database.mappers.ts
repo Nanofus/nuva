@@ -8,20 +8,21 @@ export const dataToPostMeta = (data: any): PostMeta => {
 		date: new Date(data.rawDate),
 		authors: data.additionalFields.authorgroup
 			? data.additionalFields.authorgroup.replace(' ', '').split(',')
-			: data.author.node.name,
+			: [ data.author.node.name ],
 		featuredImage: data.additionalFields.featuredimage,
 		commentCount: data.commentCount
 	};
 };
 
-export const dataToPost = (data: any): Post => {
+export const dataToPost = (data: any): Post | null => {
+	if (!data) return null;
 	const post: Post = {
 		title: data.title,
 		slug: data.slug,
 		date: new Date(data.rawDate),
 		authors: data.additionalFields.authorgroup
 			? data.additionalFields.authorgroup.replace(' ', '').split(',')
-			: data.author.node.name,
+			: [ data.author.node.name ],
 		featuredImage: data.additionalFields.featuredimage,
 		commentCount: data.commentCount,
 		initialLetter: data.additionalFields.initialletter,

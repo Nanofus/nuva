@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { LOCALE } from '$lib/config';
 	import type { PostMeta } from '$lib/types';
 
 	export let posts: PostMeta[];
@@ -6,7 +7,11 @@
 
 <ul class="post-list">
 	{#each posts as post}
-		<li><a href="/posts/{post.slug}">{post.title}</a></li>
+		<li>
+			<span class="link"><a href="/posts/{post.slug}">{post.title}</a> ({post.commentCount})</span>
+			<span class="date">{post.date.toLocaleDateString(LOCALE)}</span>
+			<span class="authors">{post.authors.join(', ')}</span>
+		</li>
 	{/each}
 </ul>
 
