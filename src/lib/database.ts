@@ -43,7 +43,7 @@ export const getPostBySlug = async (slug: string): Promise<Post> => {
 
 export const getPostListByTag = async (
 	tag: string,
-	after = null
+	after: string | null = null
 ): Promise<PostListByTagResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -86,7 +86,7 @@ export const getPostListByTag = async (
 
 export const getPostListByCategory = async (
 	category: string,
-	after = null
+	after: string | null = null
 ): Promise<PostListByCategoryResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -130,7 +130,7 @@ export const getPostListByCategory = async (
 };
 
 export const getPostList = async (
-	after = null,
+	after: string | null = null,
 	searchTerm: string = ''
 ): Promise<PostListBySearchResponse> => {
 	const response = await (
@@ -162,13 +162,13 @@ export const getPostList = async (
 	let posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
 	return {
 		posts,
-		searchTerm: searchTerm === '' ? null : searchTerm,
+		searchTerm,
 		endCursor: pageInfo.endCursor,
 		hasNextPage: pageInfo.hasNextPage
 	};
 };
 
-export const getTagList = async (after = null): Promise<TagListResponse> => {
+export const getTagList = async (after: string | null = null): Promise<TagListResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',

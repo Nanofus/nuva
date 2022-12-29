@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getTagList } from '$lib/database';
-	import { type TagListResponse } from '$lib/types';
+	import type { TagListResponse } from '$lib/types';
 
 	export let data: TagListResponse;
 	let fetching = false;

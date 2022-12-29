@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { type Post } from '$lib/types';
+	import type { Post } from '$lib/types';
 
 	export let data: Post;
 	let loading = true;

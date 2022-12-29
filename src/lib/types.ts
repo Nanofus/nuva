@@ -27,6 +27,7 @@ export type Post = PostMeta & {
 export type Category = Hierarchical & {
 	slug: string;
 	name: string;
+	children: Category[];
 };
 
 export type Tag = {
@@ -38,6 +39,7 @@ export type Comment = Hierarchical & {
 	date: Date;
 	author: string;
 	content: string;
+	children: Comment[];
 };
 
 export type Paginated = {
@@ -50,7 +52,7 @@ export type PostListResponse = Paginated & {
 };
 
 export type PostListBySearchResponse = PostListResponse & {
-	searchTerm: string | null;
+	searchTerm: string;
 };
 
 export type PostListByCategoryResponse = PostListResponse & {

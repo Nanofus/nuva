@@ -1,5 +1,7 @@
 <script lang="ts">
-	export let posts: Post[];
+	import type { PostMeta } from "$lib/types";
+
+	export let posts: PostMeta[];
 </script>
 
 <ul class="post-list">

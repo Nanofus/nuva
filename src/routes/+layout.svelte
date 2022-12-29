@@ -4,7 +4,6 @@
 	import { isLoggedIn } from '$lib/database';
 	import Login from '$lib/components/Login.svelte';
 	import Navigation from '$lib/components/Navigation.svelte';
-	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 	import Header from '$lib/components/Header.svelte';
 
 	let loggedIn: boolean;
