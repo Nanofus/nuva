@@ -16,10 +16,10 @@
 	const dispatch = createEventDispatcher();
 
 	const sendComment = async () => {
-        await postComment(postId, parent, content);
+		await postComment(postId, parent, content);
 		dispatch('commentSent');
-        content = "";
-        open = false;
+		content = '';
+		open = false;
 	};
 </script>
 

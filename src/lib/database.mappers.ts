@@ -8,7 +8,7 @@ export const dataToPostMeta = (data: any): PostMeta => {
 		date: new Date(data.rawDate),
 		authors: data.additionalFields.authorgroup
 			? data.additionalFields.authorgroup.replace(' ', '').split(',')
-			: [ data.author.node.name ],
+			: [data.author.node.name],
 		featuredImage: data.additionalFields.featuredimage,
 		commentCount: data.commentCount
 	};
@@ -26,7 +26,7 @@ export const dataToCommentsForPost = (nodes: any): Comment[] => {
 		};
 	});
 	return objectsToHierarchy(comments) as Comment[];
-}
+};
 
 export const dataToPost = (data: any): Post | null => {
 	if (!data) return null;
@@ -37,7 +37,7 @@ export const dataToPost = (data: any): Post | null => {
 		date: new Date(data.rawDate),
 		authors: data.additionalFields.authorgroup
 			? data.additionalFields.authorgroup.replace(' ', '').split(',')
-			: [ data.author.node.name ],
+			: [data.author.node.name],
 		featuredImage: data.additionalFields.featuredimage,
 		commentCount: data.commentCount,
 		initialLetter: data.additionalFields.initialletter,

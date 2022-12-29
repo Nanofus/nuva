@@ -37,6 +37,6 @@
 <main class="post-content">{@html post.content}</main>
 
 <footer class="post-footer">
-    <TagList tags={post.tags} />
-    <CommentArea post={post} />
+	<TagList tags={post.tags} />
+	<CommentArea {post} />
 </footer>

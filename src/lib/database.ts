@@ -3,7 +3,13 @@ import { toast } from '@zerodevx/svelte-toast';
 import { browser } from '$app/environment';
 import { error } from '@sveltejs/kit';
 import { loginInfo } from '$lib/stores';
-import { dataToPost, dataToPostMeta, dataToTags, dataToCategories, dataToCommentsForPost } from '$lib/database.mappers';
+import {
+	dataToPost,
+	dataToPostMeta,
+	dataToTags,
+	dataToCategories,
+	dataToCommentsForPost
+} from '$lib/database.mappers';
 import type {
 	Post,
 	PostMeta,
@@ -168,8 +174,8 @@ export const getPostList = async (
 				query: `
             query AllPostsPaginated {
                 posts(where: {search: "${decodeURI(
-					searchTerm
-				)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
+									searchTerm
+								)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -312,7 +318,11 @@ export const login = async (username: string, password: string): Promise<boolean
 	return false;
 };
 
-export const postComment = async (postId: number, parent: number, content: string): Promise<boolean> => {
+export const postComment = async (
+	postId: number,
+	parent: number,
+	content: string
+): Promise<boolean> => {
 	if (!isLoggedIn()) return false;
 	const authToken = browser ? getAuthInfo()?.authToken : null;
 	const response = await (
@@ -334,7 +344,8 @@ export const postComment = async (postId: number, parent: number, content: strin
 						}
 					}`
 			})
-		})).json();
+		})
+	).json();
 	response.errors?.forEach((error: any) => {
 		toast.push(error.message);
 	});
@@ -343,4 +354,4 @@ export const postComment = async (postId: number, parent: number, content: strin
 		return true;
 	}
 	return false;
-}
+};

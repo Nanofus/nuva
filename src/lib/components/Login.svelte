@@ -1,12 +1,15 @@
 <script lang="ts">
-	import { login, logout, isLoggedIn } from '$lib/database';
+	import { login, logout } from '$lib/database';
 	import { loginInfo } from '$lib/stores';
+	import { onMount } from 'svelte';
 	let loggedIn: boolean | null = null;
 	let password = '';
 	let username = '';
 
-	loginInfo.subscribe((loginInfo) => {
-		loggedIn = loginInfo ? true : false;
+	onMount(() => {
+		loginInfo.subscribe((loginInfo) => {
+			loggedIn = loginInfo ? true : false;
+		});
 	});
 </script>
 

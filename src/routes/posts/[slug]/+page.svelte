@@ -15,7 +15,7 @@
 	{#if loading}
 		<div>Ladataan...</div>
 	{:else if data.content}
-		<PostView post={data}></PostView>
+		<PostView post={data} />
 	{:else}
 		<h2>Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.</h2>
 	{/if}

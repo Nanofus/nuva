@@ -9,9 +9,9 @@
 
 	const dispatch = createEventDispatcher();
 
-    const commentSent = () => {
-        dispatch('commentSent');
-    }
+	const commentSent = () => {
+		dispatch('commentSent');
+	};
 </script>
 
 <div class="comment">
@@ -22,10 +22,10 @@
 	<div class="comment-content">{@html comment.content}</div>
 	<div class="child-comments">
 		{#each comment.children as child}
-			<svelte:self on:commentSent={commentSent} comment={child} postId={postId} />
+			<svelte:self on:commentSent={commentSent} comment={child} {postId} />
 		{/each}
 	</div>
-	<CommentReply on:commentSent={commentSent} postId={postId} parent={comment._id} />
+	<CommentReply on:commentSent={commentSent} {postId} parent={comment._id} />
 </div>
 
 <style lang="scss">
