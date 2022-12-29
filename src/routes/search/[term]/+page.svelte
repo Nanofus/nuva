@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getPostList } from '$lib/database';
 	import PostList from '$lib/components/PostList.svelte';
-    import { type PostListBySearchResponse } from '$lib/types';
+	import { type PostListBySearchResponse } from '$lib/types';
 
 	export let data: PostListBySearchResponse;
 	let fetching = false;

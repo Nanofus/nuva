@@ -3,14 +3,14 @@ export const POSTS_PER_FETCH = 100;
 export const LOCALSTORAGE_AUTH_KEY = 'auth';
 
 export const QUERIES = {
-    pageInfo: `
+	pageInfo: `
         pageInfo {
             hasNextPage
             hasPreviousPage
             startCursor
             endCursor
         }`,
-    postMeta: `
+	postMeta: `
         title
         slug
         rawDate: date
@@ -24,7 +24,7 @@ export const QUERIES = {
             featuredimage
         }
         commentCount`,
-    postContent: `
+	postContent: `
         title
         slug
         rawDate: date

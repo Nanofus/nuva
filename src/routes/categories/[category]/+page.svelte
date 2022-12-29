@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getPostListByCategory } from '$lib/database';
-    import { type PostListByCategoryResponse } from '$lib/types';
+	import { type PostListByCategoryResponse } from '$lib/types';
 	import PostList from '$lib/components/PostList.svelte';
 
 	export let data: PostListByCategoryResponse;

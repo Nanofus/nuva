@@ -4,7 +4,18 @@ import { browser } from '$app/environment';
 import { error } from '@sveltejs/kit';
 import { loginInfo } from '$lib/stores';
 import { dataToPost, dataToPostMeta, dataToTags, dataToCategories } from '$lib/database.mappers';
-import type { Post, PostMeta, PostListResponse, TagListResponse, Tag, CategoryListResponse, AuthInfo, PostListBySearchResponse, PostListByTagResponse, PostListByCategoryResponse } from '$lib/types';
+import type {
+	Post,
+	PostMeta,
+	PostListResponse,
+	TagListResponse,
+	Tag,
+	CategoryListResponse,
+	AuthInfo,
+	PostListBySearchResponse,
+	PostListByTagResponse,
+	PostListByCategoryResponse
+} from '$lib/types';
 
 export const getPostBySlug = async (slug: string): Promise<Post> => {
 	const authToken = browser ? getAuthInfo()?.authToken : null;
@@ -30,7 +41,10 @@ export const getPostBySlug = async (slug: string): Promise<Post> => {
 	return post;
 };
 
-export const getPostListByTag = async (tag: string, after = null): Promise<PostListByTagResponse> => {
+export const getPostListByTag = async (
+	tag: string,
+	after = null
+): Promise<PostListByTagResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -70,7 +84,10 @@ export const getPostListByTag = async (tag: string, after = null): Promise<PostL
 	};
 };
 
-export const getPostListByCategory = async (category: string, after = null): Promise<PostListByCategoryResponse> => {
+export const getPostListByCategory = async (
+	category: string,
+	after = null
+): Promise<PostListByCategoryResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -100,7 +117,9 @@ export const getPostListByCategory = async (category: string, after = null): Pro
 	if (!response.data.category) throw error(404, 'Not found');
 	let pageInfo = response.data.category.posts.pageInfo;
 	let categoryName = response.data.category.name;
-	let posts: PostMeta[] = response.data.category.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
+	let posts: PostMeta[] = response.data.category.posts.edges.map((edge: any) =>
+		dataToPostMeta(edge.node)
+	);
 	return {
 		posts,
 		category: categoryName,
@@ -110,7 +129,10 @@ export const getPostListByCategory = async (category: string, after = null): Pro
 	};
 };
 
-export const getPostList = async (after = null, searchTerm: string = '') : Promise<PostListBySearchResponse> => {
+export const getPostList = async (
+	after = null,
+	searchTerm: string = ''
+): Promise<PostListBySearchResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -121,8 +143,8 @@ export const getPostList = async (after = null, searchTerm: string = '') : Promi
 				query: `
             query AllPostsPaginated {
                 posts(where: {search: "${decodeURI(
-					searchTerm
-				)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
+									searchTerm
+								)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -146,7 +168,7 @@ export const getPostList = async (after = null, searchTerm: string = '') : Promi
 	};
 };
 
-export const getTagList = async (after = null) : Promise<TagListResponse> => {
+export const getTagList = async (after = null): Promise<TagListResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -180,7 +202,7 @@ export const getTagList = async (after = null) : Promise<TagListResponse> => {
 	};
 };
 
-export const getCategoryList = async () : Promise<CategoryListResponse> => {
+export const getCategoryList = async (): Promise<CategoryListResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
@@ -209,7 +231,9 @@ export const getCategoryList = async () : Promise<CategoryListResponse> => {
 
 export const getAuthInfo = (): AuthInfo | null => {
 	if (localStorage !== undefined) {
-		return localStorage.getItem(LOCALSTORAGE_AUTH_KEY) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY) as string) : null;
+		return localStorage.getItem(LOCALSTORAGE_AUTH_KEY)
+			? JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY) as string)
+			: null;
 	}
 	return null;
 };
@@ -252,14 +276,14 @@ export const login = async (username: string, password: string): Promise<boolean
 		toast.push(error.message);
 	});
 	if (loginResponse.data.login) {
-		const loginData : AuthInfo = {
+		const loginData: AuthInfo = {
 			username,
 			authToken: loginResponse.data.login.authToken,
 			refreshToken: loginResponse.data.login.refreshToken
 		};
 		localStorage.setItem('auth', JSON.stringify(loginData));
 		loginInfo.set(loginData);
-		toast.push("Sisäänkirjautuminen onnistui!");
+		toast.push('Sisäänkirjautuminen onnistui!');
 		return true;
 	}
 	return false;
