@@ -3,7 +3,7 @@ import { getCategoryList } from '$lib/database';
 import type { CategoryListResponse } from '$lib/types';
 
 export const load: Load = async (): Promise<CategoryListResponse> => {
-	const categories = await getCategoryList();
-	if (categories) return categories;
+	const response = await getCategoryList();
+	if (response) return response;
 	throw error(404, 'Not found');
 }

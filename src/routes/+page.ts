@@ -3,7 +3,7 @@ import { getPostList } from '$lib/database';
 import type { PostListResponse } from '$lib/types';
 
 export const load: Load = async (): Promise<PostListResponse> => {
-	const data = await getPostList();
-	if (data) return data;
+	const response = await getPostList();
+	if (response) return response;
 	throw error(404, 'Not found');
 }

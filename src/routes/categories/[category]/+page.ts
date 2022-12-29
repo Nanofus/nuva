@@ -3,7 +3,9 @@ import { getPostListByCategory } from '$lib/database';
 import type { PostListByCategoryResponse } from '$lib/types';
 
 export const load: Load = async ({ params }): Promise<PostListByCategoryResponse> => {
-	const data = await getPostListByCategory(params.category!);
-	if (data) return data;
+	if (params.category) {
+		const response = await getPostListByCategory(params.category);
+		if (response) return response;
+	}
 	throw error(404, 'Not found');
 }
