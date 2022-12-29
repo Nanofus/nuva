@@ -1,8 +1,8 @@
-import { error } from '@sveltejs/kit';
+import { error, type Load } from '@sveltejs/kit';
 import { getPostList } from '$lib/database';
 import type { PostListResponse } from '$lib/types';
 
-export async function load(): Promise<PostListResponse> {
+export const load: Load = async (): Promise<PostListResponse> => {
 	const data = await getPostList();
 	if (data) return data;
 	throw error(404, 'Not found');
