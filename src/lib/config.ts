@@ -3,41 +3,34 @@ export const POSTS_PER_FETCH = 100;
 export const LOCALSTORAGE_AUTH_KEY = 'auth';
 
 export const QUERIES = {
-	pageInfo: `
+    pageInfo: `
         pageInfo {
             hasNextPage
             hasPreviousPage
             startCursor
             endCursor
         }`,
-	postMeta: `
+    postMeta: `
         title
         slug
         rawDate: date
         author {
             node {
-                firstName
-                description
-                avatar {
-                    url
-                }
+                name
             }
         }
         additionalFields {
             authorgroup
             featuredimage
-        }`,
-	postContent: `
+        }
+        commentCount`,
+    postContent: `
         title
         slug
         rawDate: date
         author {
             node {
-                firstName
-                description
-                avatar {
-                    url
-                }
+                name
             }
         }
         additionalFields {
@@ -47,6 +40,32 @@ export const QUERIES = {
             scripts
             styles
             theme
+        }
+        categories {
+            nodes {
+                slug
+                name
+            }
+        }
+        tags {
+            nodes {
+                name
+                slug
+            }
+        }
+        commentCount
+        comments {
+            nodes {
+                date
+                author {
+                    node {
+                        name
+                    }
+                }
+                content
+                id
+                parentId
+            }
         }
         content`
 };

@@ -3,6 +3,6 @@ import { getPostBySlug } from '$lib/api';
 
 export async function load({ params }: any) {
 	const post = await getPostBySlug(params.slug);
-	if (post) return { post: post.data.post };
+	if (post) return { post: post };
 	throw error(404, 'Not found');
 }

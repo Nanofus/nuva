@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 import { getPosts } from '$lib/api';
 
 export async function load() {
-	const posts = await getPosts();
-	if (posts) return posts;
+	const data = await getPosts();
+	if (data) return data;
 	throw error(404, 'Not found');
 }

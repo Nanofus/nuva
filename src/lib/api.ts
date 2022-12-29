@@ -2,11 +2,12 @@ import { API_PATH, LOCALSTORAGE_AUTH_KEY, POSTS_PER_FETCH, QUERIES } from '$lib/
 import { toast } from '@zerodevx/svelte-toast';
 import { browser } from '$app/environment';
 import { error } from '@sveltejs/kit';
-import { loginInfo } from './stores';
+import { loginInfo } from '$lib/stores';
+import { dataToPost, dataToCategories, dataToPostMeta, type PostMeta, type Post, type Tag, dataToTags, type PostListResponse, type TagListResponse, type CategoryListResponse, type AuthInfo } from '$lib/types';
 
 export const getPostBySlug = async (slug: string) => {
 	const authToken = browser ? getAuthInfo()?.authToken : null;
-	const data = await (
+	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
 			headers: {
@@ -24,11 +25,12 @@ export const getPostBySlug = async (slug: string) => {
 			})
 		})
 	).json();
-	return data;
+	const post: Post = dataToPost(response.data.post);
+	return post;
 };
 
 export const getPostsByTag = async (tag: string, after = null) => {
-	const data = await (
+	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
 			headers: {
@@ -54,10 +56,10 @@ export const getPostsByTag = async (tag: string, after = null) => {
 			})
 		})
 	).json();
-	if (!data.data.tag) throw error(404, 'Not found');
-	let pageInfo = data.data.posts.pageInfo;
-	let tagName = data.data.tag.name;
-	let posts = data.data.posts.edges.map((edge: any) => edge.node);
+	if (!response.data.tag) throw error(404, 'Not found');
+	let pageInfo = response.data.posts.pageInfo;
+	let tagName = response.data.tag.name;
+	let posts: PostMeta = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
 	return {
 		posts,
 		tag: tagName,
@@ -68,7 +70,7 @@ export const getPostsByTag = async (tag: string, after = null) => {
 };
 
 export const getPostsByCategory = async (category: string, after = null) => {
-	const data = await (
+	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
 			headers: {
@@ -94,21 +96,21 @@ export const getPostsByCategory = async (category: string, after = null) => {
 			})
 		})
 	).json();
-	if (!data.data.category) throw error(404, 'Not found');
-	let pageInfo = data.data.category.posts.pageInfo;
-	let categoryName = data.data.category.name;
-	let posts = data.data.category.posts.edges.map((edge: any) => edge.node);
+	if (!response.data.category) throw error(404, 'Not found');
+	let pageInfo = response.data.category.posts.pageInfo;
+	let categoryName = response.data.category.name;
+	let posts: PostMeta[] = response.data.category.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
 	return {
 		posts,
 		category: categoryName,
-		tagSlug: category,
+		categorySlug: category,
 		endCursor: pageInfo.endCursor,
 		hasNextPage: pageInfo.hasNextPage
 	};
 };
 
-export const getPosts = async (after = null, searchTerm: string = '') => {
-	const data = await (
+export const getPosts = async (after = null, searchTerm: string = '') : Promise<PostListResponse> => {
+	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
 			headers: {
@@ -118,8 +120,8 @@ export const getPosts = async (after = null, searchTerm: string = '') => {
 				query: `
             query AllPostsPaginated {
                 posts(where: {search: "${decodeURI(
-									searchTerm
-								)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
+					searchTerm
+				)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -133,8 +135,8 @@ export const getPosts = async (after = null, searchTerm: string = '') => {
 			})
 		})
 	).json();
-	let pageInfo = data.data.posts.pageInfo;
-	let posts = data.data.posts.edges.map((edge: any) => edge.node);
+	let pageInfo = response.data.posts.pageInfo;
+	let posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
 	return {
 		posts,
 		searchTerm: searchTerm === '' ? null : searchTerm,
@@ -143,8 +145,8 @@ export const getPosts = async (after = null, searchTerm: string = '') => {
 	};
 };
 
-export const getTags = async (after = null) => {
-	const data = await (
+export const getTags = async (after = null) : Promise<TagListResponse> => {
+	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
 			headers: {
@@ -168,8 +170,8 @@ export const getTags = async (after = null) => {
 			})
 		})
 	).json();
-	let pageInfo = data.data.tags.pageInfo;
-	let tags = data.data.tags.edges.map((edge: any) => edge.node);
+	let pageInfo = response.data.tags.pageInfo;
+	let tags: Tag[] = dataToTags(response.data.tags.edges.map((edge: any) => edge.node));
 	return {
 		tags,
 		endCursor: pageInfo.endCursor,
@@ -177,8 +179,8 @@ export const getTags = async (after = null) => {
 	};
 };
 
-export const getCategories = async () => {
-	const data = await (
+export const getCategories = async () : Promise<CategoryListResponse> => {
+	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
 			headers: {
@@ -191,11 +193,8 @@ export const getCategories = async () => {
                     nodes {
                         name
                         slug
-                        parent {
-                            node {
-                                slug
-                            }
-                        }
+						id
+						parentId
                     }
                   }
               }
@@ -203,28 +202,13 @@ export const getCategories = async () => {
 			})
 		})
 	).json();
-	let categories: any[] = [];
-	data.data.categories.nodes.forEach((category: any) => {
-		if (!category.parent) {
-			category.children = [];
-			categories.push(category);
-		}
-	});
-	data.data.categories.nodes.forEach((category: any) => {
-		if (category.parent?.node.slug !== null) {
-			categories.forEach((parentCategory: any) => {
-				if (parentCategory.slug === category.parent?.node.slug) {
-					parentCategory.children.push(category);
-				}
-			});
-		}
-	});
+	const categories = dataToCategories(response.data.categories.nodes);
 	return { categories };
 };
 
-export const getAuthInfo = () => {
+export const getAuthInfo = (): AuthInfo | null => {
 	if (localStorage !== undefined) {
-		return localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth') as string) : null;
+		return localStorage.getItem(LOCALSTORAGE_AUTH_KEY) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY) as string) : null;
 	}
 	return null;
 };
@@ -267,7 +251,7 @@ export const login = async (username: string, password: string) => {
 		toast.push(error.message);
 	});
 	if (loginResponse.data.login) {
-		const loginData = {
+		const loginData : AuthInfo = {
 			username,
 			authToken: loginResponse.data.login.authToken,
 			refreshToken: loginResponse.data.login.refreshToken

@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { LOCALSTORAGE_AUTH_KEY } from './config';
+import { LOCALSTORAGE_AUTH_KEY } from '$lib/config';
 import { browser } from '$app/environment';
 
 export const loginInfo = writable(

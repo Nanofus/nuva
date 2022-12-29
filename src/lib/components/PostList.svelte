@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let posts: any[];
+	export let posts: Post[];
 </script>
 
 <ul class="post-list">
