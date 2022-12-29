@@ -29,6 +29,7 @@ export const QUERIES = {
         title
         slug
         rawDate: date
+        databaseId
         author {
             node {
                 name
@@ -55,6 +56,8 @@ export const QUERIES = {
             }
         }
         commentCount
+        content`,
+    postComments: `
         comments {
             nodes {
                 date
@@ -64,9 +67,8 @@ export const QUERIES = {
                     }
                 }
                 content
-                id
-                parentId
+                databaseId
+                parentDatabaseId
             }
-        }
-        content`
+        }`
 };

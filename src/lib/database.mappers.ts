@@ -14,9 +14,24 @@ export const dataToPostMeta = (data: any): PostMeta => {
 	};
 };
 
+export const dataToCommentsForPost = (nodes: any): Comment[] => {
+	const comments = nodes.map((comment: any) => {
+		return {
+			date: new Date(comment.date),
+			author: comment.author.node.name,
+			content: comment.content,
+			children: [],
+			_id: comment.databaseId,
+			_parentId: comment.parentDatabaseId
+		};
+	});
+	return objectsToHierarchy(comments) as Comment[];
+}
+
 export const dataToPost = (data: any): Post | null => {
 	if (!data) return null;
 	const post: Post = {
+		_id: data.databaseId,
 		title: data.title,
 		slug: data.slug,
 		date: new Date(data.rawDate),
@@ -42,18 +57,8 @@ export const dataToPost = (data: any): Post | null => {
 				name: tag.name
 			};
 		}),
-		comments: data.comments.nodes.map((comment: any) => {
-			return {
-				date: new Date(comment.date),
-				author: comment.author.node.name,
-				content: comment.content,
-				children: [],
-				_id: comment.id,
-				_parentId: comment.parentId
-			};
-		})
+		comments: dataToCommentsForPost(data.comments.nodes)
 	};
-	post.comments = objectsToHierarchy(post.comments) as Comment[];
 	return post;
 };
 
@@ -63,8 +68,8 @@ export const dataToCategories = (data: any): Category[] => {
 			slug: category.slug,
 			name: category.name,
 			children: [],
-			_id: category.id,
-			_parentId: category.parentId
+			_id: category.databaseId,
+			_parentId: category.parentDatabaseId
 		};
 	});
 	categories = objectsToHierarchy(categories) as Category[];

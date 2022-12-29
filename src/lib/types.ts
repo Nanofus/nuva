@@ -1,6 +1,6 @@
 export type Hierarchical = {
-	_id: string;
-	_parentId: string;
+	_id: number;
+	_parentId: number;
 	children: Hierarchical[];
 };
 
@@ -14,6 +14,7 @@ export type PostMeta = {
 };
 
 export type Post = PostMeta & {
+	_id: number;
 	initialLetter: boolean;
 	scripts: string;
 	styles: string;

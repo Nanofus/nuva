@@ -3,7 +3,7 @@ import { toast } from '@zerodevx/svelte-toast';
 import { browser } from '$app/environment';
 import { error } from '@sveltejs/kit';
 import { loginInfo } from '$lib/stores';
-import { dataToPost, dataToPostMeta, dataToTags, dataToCategories } from '$lib/database.mappers';
+import { dataToPost, dataToPostMeta, dataToTags, dataToCategories, dataToCommentsForPost } from '$lib/database.mappers';
 import type {
 	Post,
 	PostMeta,
@@ -13,7 +13,8 @@ import type {
 	AuthInfo,
 	PostListBySearchResponse,
 	PostListByTagResponse,
-	PostListByCategoryResponse
+	PostListByCategoryResponse,
+	Comment
 } from '$lib/types';
 
 export const getPostBySlug = async (slug: string): Promise<Post | null> => {
@@ -30,6 +31,7 @@ export const getPostBySlug = async (slug: string): Promise<Post | null> => {
             query PostBySlug {
                 post(idType: SLUG, id: "${slug}") {
                     ${QUERIES.postContent}
+					${QUERIES.postComments}
                 }
             }
             `
@@ -38,6 +40,30 @@ export const getPostBySlug = async (slug: string): Promise<Post | null> => {
 	).json();
 	const post: Post | null = dataToPost(response.data.post);
 	return post;
+};
+
+export const getCommentsForPostBySlug = async (slug: string): Promise<Comment[]> => {
+	const authToken = browser ? getAuthInfo()?.authToken : null;
+	const response = await (
+		await fetch(API_PATH, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authToken ? `Bearer ${authToken}` : ''
+			},
+			body: JSON.stringify({
+				query: `
+            query CommentsForPostBySlug {
+                post(idType: SLUG, id: "${slug}") {
+					${QUERIES.postComments}
+                }
+            }
+            `
+			})
+		})
+	).json();
+	const comments: Comment[] = dataToCommentsForPost(response.data.post.comments.nodes);
+	return comments;
 };
 
 export const getPostListByTag = async (
@@ -142,8 +168,8 @@ export const getPostList = async (
 				query: `
             query AllPostsPaginated {
                 posts(where: {search: "${decodeURI(
-									searchTerm
-								)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
+					searchTerm
+				)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -215,8 +241,8 @@ export const getCategoryList = async (): Promise<CategoryListResponse> => {
                     nodes {
                         name
                         slug
-						id
-						parentId
+						databaseId
+						parentDatabaseId
                     }
                   }
               }
@@ -247,7 +273,7 @@ export const logout = (): void => {
 };
 
 export const login = async (username: string, password: string): Promise<boolean> => {
-	const loginResponse = await (
+	const response = await (
 		await fetch(API_PATH, {
 			method: 'POST',
 			headers: {
@@ -256,29 +282,27 @@ export const login = async (username: string, password: string): Promise<boolean
 			body: JSON.stringify({
 				query: `
             mutation LoginUser {
-                login(
-                  input: {
-                    clientMutationId: "LoginUser"
-                    username: "${username}"
-                    password: "${password}"
-                  }
-                ) {
-                  authToken
-                  refreshToken
+                login(input: {
+						clientMutationId: "LoginUser"
+						username: "${username}"
+						password: "${password}"
+				}) {
+					authToken
+					refreshToken
                 }
               }
             `
 			})
 		})
 	).json();
-	loginResponse.errors?.forEach((error: any) => {
+	response.errors?.forEach((error: any) => {
 		toast.push(error.message);
 	});
-	if (loginResponse.data.login) {
+	if (response.data.login) {
 		const loginData: AuthInfo = {
 			username,
-			authToken: loginResponse.data.login.authToken,
-			refreshToken: loginResponse.data.login.refreshToken
+			authToken: response.data.login.authToken,
+			refreshToken: response.data.login.refreshToken
 		};
 		localStorage.setItem('auth', JSON.stringify(loginData));
 		loginInfo.set(loginData);
@@ -287,3 +311,36 @@ export const login = async (username: string, password: string): Promise<boolean
 	}
 	return false;
 };
+
+export const postComment = async (postId: number, parent: number, content: string): Promise<boolean> => {
+	if (!isLoggedIn()) return false;
+	const authToken = browser ? getAuthInfo()?.authToken : null;
+	const response = await (
+		await fetch(API_PATH, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authToken ? `Bearer ${authToken}` : ''
+			},
+			body: JSON.stringify({
+				query: `
+					mutation PostComment {
+						createComment(input: {
+							commentOn: ${postId}, 
+							parent: ${parent},
+							content: "${content}"
+						}) {
+							success
+						}
+					}`
+			})
+		})).json();
+	response.errors?.forEach((error: any) => {
+		toast.push(error.message);
+	});
+	if (response.data.createComment.success) {
+		toast.push('Kommentti lisätty!');
+		return true;
+	}
+	return false;
+}
