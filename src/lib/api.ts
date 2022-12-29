@@ -274,5 +274,6 @@ export const login = async (username: string, password: string) => {
 		};
 		localStorage.setItem('auth', JSON.stringify(loginData));
 		loginInfo.set(loginData);
+		toast.push("Sisäänkirjautuminen onnistui!");
 	}
 };

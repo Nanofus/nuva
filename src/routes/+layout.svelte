@@ -5,6 +5,7 @@
 	import Login from '$lib/components/Login.svelte';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
+    import Header from '$lib/components/Header.svelte';
 
 	let loggedIn: boolean;
 
@@ -15,7 +16,7 @@
 
 <div id="app">
 	<Login />
-	<h1>Klaanon Nuva</h1>
+	<Header />
 	<Navigation />
 	<slot />
 	<SvelteToast options={{ reversed: true, intro: { y: -50 } }} />
