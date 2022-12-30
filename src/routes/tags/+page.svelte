@@ -17,7 +17,7 @@
 	};
 </script>
 
-<html lang="fi">
+<main>
 	<h2>Tagit</h2>
 	<ul>
 		{#each data.tags as tag}
@@ -27,7 +27,7 @@
 	{#if data.hasNextPage && !fetching}
 		<button on:click={fetchMoreTags}>Lataa lisää</button>
 	{/if}
-</html>
+</main>
 
 <style lang="scss">
 	ul {

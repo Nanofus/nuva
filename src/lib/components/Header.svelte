@@ -11,8 +11,9 @@
 
 <style>
     header {
-        background-image: url({url);
+        background-image: url({url});
     }
+
     h1 {
         font-size: 0;
     }

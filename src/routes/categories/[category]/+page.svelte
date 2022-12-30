@@ -20,10 +20,10 @@
 	};
 </script>
 
-<html lang="fi">
+<main>
 	<h2>Kategoria: {data.category}</h2>
 	<PostList posts={data.posts} />
 	{#if data.hasNextPage && !fetching}
 		<button on:click={fetchMorePosts}>Lataa lisää</button>
 	{/if}
-</html>
+</main>

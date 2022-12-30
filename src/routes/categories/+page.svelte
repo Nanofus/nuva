@@ -4,7 +4,7 @@
 	export let data: CategoryListResponse;
 </script>
 
-<html lang="fi">
+<main>
 	<h2>Kategoriat</h2>
 	<ul>
 		{#each data.categories as category}
@@ -22,7 +22,7 @@
 			</li>
 		{/each}
 	</ul>
-</html>
+</main>
 
 <style lang="scss">
 	ul {

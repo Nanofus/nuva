@@ -19,10 +19,10 @@
 	};
 </script>
 
-<html lang="fi">
+<main>
 	<h2>Haku: {data.searchTerm}</h2>
 	<PostList posts={data.posts} />
 	{#if data.hasNextPage && !fetching}
 		<button on:click={fetchMorePosts}>Lataa lisää</button>
 	{/if}
-</html>
+</main>

@@ -18,13 +18,13 @@
 	};
 </script>
 
-<html lang="fi">
+<main>
 	<h2>Kaikki ropeosat</h2>
 	<PostList posts={data.posts} />
 	{#if data.hasNextPage && !fetching}
 		<button on:click={fetchMorePosts}>Lataa lisää</button>
 	{/if}
-</html>
+</main>
 
 <style lang="scss">
 </style>
