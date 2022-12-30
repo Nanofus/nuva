@@ -6,6 +6,9 @@
 	import Navigation from '$lib/components/Navigation.svelte';
 	import Header from '$lib/components/Header.svelte';
 
+    // Global styles
+    import '../lib/style/style.scss';
+
 	let loggedIn: boolean;
 
 	onMount(() => {
@@ -18,7 +21,3 @@
 <Navigation />
 <slot />
 <SvelteToast options={{ reversed: true, intro: { y: -20 } }} />
-
-<style lang="scss" global>
-	@import '../lib/style/style.scss';
-</style>
