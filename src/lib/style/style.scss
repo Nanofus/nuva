@@ -1,0 +1,35 @@
+/**********
+ * Layout *
+ **********/
+
+#page {
+  position: relative;
+  margin: auto;
+  min-width: 606px;
+  width: 100%;
+  max-width: 1200px;
+
+  > * {
+    position: relative;
+    width: 100%;
+    float: left;
+    clear: both;
+    box-sizing: border-box;
+  }
+
+  > header {
+    height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
+  }
+}
+
+
+
+/**********
+ * Themes *
+ **********/
+
+body.default {
+
+  background-color: var(--background-dark);
+
+}

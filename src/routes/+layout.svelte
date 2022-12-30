@@ -13,13 +13,11 @@
 	});
 </script>
 
-<div id="app">
-	<Login />
-	<Header />
-	<Navigation />
-	<slot />
-	<SvelteToast options={{ reversed: true, intro: { y: -20 } }} />
-</div>
+<Login />
+<Header />
+<Navigation />
+<slot />
+<SvelteToast options={{ reversed: true, intro: { y: -20 } }} />
 
 <style lang="scss" global>
 	@import '../lib/style/style.scss';
