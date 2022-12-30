@@ -1,6 +1,6 @@
 <script>
     let url =
-        "https://klaanon.fi/wp/wp-content/themes/klaanon/header-images/"
+        "https://klaanon.fi/wp/wp-content/themes/klaanon/header-images/banner"
         + Math.round(1 + 6*Math.random())
         + ".png";
 </script>
