@@ -1,5 +1,5 @@
 <script>
-    import { browser } from 'svelte';
+    import { browser } from '$app/environment';
 
     let url;
     if (!browser || typeof url === "undefined") url =
