@@ -7,11 +7,14 @@
 
 <header>
     <h1>Klaanon Nuva</h1>
+    <img id="banner" src="{url}" />
 </header>
 
 <style>
-    header {
-        background-image: url({url});
+    header > * {
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     h1 {
