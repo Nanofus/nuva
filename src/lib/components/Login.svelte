@@ -30,5 +30,11 @@
 <style lang="scss">
 	.login-area {
 		margin: 1rem;
+		position: fixed;
+		top: 1rem;
+		right: 1rem;
+		width: auto;
+		background-color: rgba(255,255,255,0.8);
+		padding: 0.5em;
 	}
 </style>

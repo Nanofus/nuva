@@ -1,27 +1,50 @@
-@import 'variables.scss';
+/***********
+ * General *
+ ***********/
 
-/**********
- * Layout *
- **********/
+#page > nav {
+  background: rgba(0, 0, 0, 0) linear-gradient(#252525, #0a0a0a) repeat scroll 0 0;
+  font-family: var(--nav-font-family);
 
-#page {
-  position: relative;
-  margin: auto;
-  min-width: 606px;
-  width: 100%;
-  max-width: 1200px;
+  a {
+    padding: 0.25em;
 
-  > * {
-    position: relative;
-    width: 100%;
-    float: left;
-    clear: both;
-    box-sizing: border-box;
+    &:link, &:visited {
+      color: var(--main-nav-color);
+      text-decoration: none;
+    }
+
+    &:active, &:hover {
+      color: var(--text-light);
+      background-color: var(--hover-light);
+    }
   }
 
-  > header {
-    height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
-  }
+}
+
+
+
+/**************
+ * Typography *
+ **************/
+
+p {
+  font-family: var(--body-text-font-family);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--header-font-family);
+  font-weight: normal;
+}
+
+a, a:link, a:visited {
+  color: var(--link-light);
+  text-decoration: underline;
+}
+
+a:hover, a:active {
+  color: var(--hover-light);
+  text-decoration: none;
 }
 
 
@@ -33,5 +56,10 @@
 body.default {
 
   background-color: var(--background-dark);
+  background-image: var(--background-image-default);
+
+  main {
+    background-color: var(--background-light);
+  }
 
 }

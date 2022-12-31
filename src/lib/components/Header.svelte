@@ -14,6 +14,10 @@
 </header>
 
 <style>
+    header {
+        height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
+    }
+
     header > * {
         position: absolute;
         top: 0;

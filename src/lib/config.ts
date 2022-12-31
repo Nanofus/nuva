@@ -3,6 +3,11 @@ export const POSTS_PER_FETCH = 100;
 export const LOCALSTORAGE_AUTH_KEY = 'auth';
 export const LOCALE = 'fi-FI';
 
+export const SITE_NAME = 'Klaanon Nuva';
+export const SITE_NAME_DELIMITER = '—';
+
+export const FONT_PATH = 'https://meri.klaanon.fi/fonts'
+
 export const QUERIES = {
 	pageInfo: `
         pageInfo {

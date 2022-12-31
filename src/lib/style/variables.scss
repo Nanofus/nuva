@@ -1,13 +1,4 @@
 :root {
-	--text-light: #222;
-	--text-dark: #fff;
-	--hover-light: #dedede;
-	--hover-dark: #3a3a3a;
-	--background-light: #fff;
-	--background-dark: #222;
-	--link-light: #1976d2;
-	--link-dark: #81d4fa;
-	--selection: #ffff00;
 	--text-area-height: 120px;
 	--font-size-body: 1.4rem;
 	--font-size-h1: 3rem;
@@ -18,4 +9,36 @@
 	--toastContainerLeft: calc(50vw - 8rem);
 	--header-banner-dimensions-ratio: 6; // width divided by height
 	--page-max-width: 1200px;
+}
+
+
+/* Typography */
+
+:root {
+	--header-font-family: "Trajan Pro", serif;
+	--nav-font-family: "Voya Nui", sans-serif;
+	--body-text-font-family: "Times New Roman", serif;
+}
+
+
+/* Images */
+
+:root {
+	--background-image-default: url(images/bg.webp);
+}
+
+
+/* Colors */
+
+:root {
+	--text-light: rgba(0,0,0,0.75);
+	--text-dark: rgba(255,255,255,0.8);
+	--hover-light: #76AFCC;
+	--hover-dark: #3a3a3a;
+	--background-light: #fff;
+	--background-dark: #000000;
+	--link-light: #5a869d;
+	--link-dark: #81d4fa;
+	--selection: #ffff00;
+	--main-nav-color: #FFFFFF;
 }

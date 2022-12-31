@@ -11,7 +11,7 @@
 	});
 </script>
 
-<main>
+<article>
 	{#if loading}
 		<div>Ladataan...</div>
 	{:else if data.content}
@@ -19,4 +19,4 @@
 	{:else}
 		<h2>Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.</h2>
 	{/if}
-</main>
+</article>

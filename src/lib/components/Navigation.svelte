@@ -6,14 +6,16 @@
 	<a href="/">Etusivu</a>
 	<a href="/categories">Kategoriat</a>
 	<a href="/tags">Tagit</a>
+	<a href="https://arkisto.klaanon.fi/soundtracks/">Soundtrackit</a>
 	<Search />
 </nav>
 
 <style lang="scss">
 	nav {
-		margin: 1rem;
-		margin-left: 10%;
-		margin-right: 10%;
+		height: 3em;
+		padding: 0;
+		margin: 0;
+		line-height: 2.5em;
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
