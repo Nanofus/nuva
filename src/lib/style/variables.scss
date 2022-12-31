@@ -1,14 +1,12 @@
 :root {
 	--text-area-height: 120px;
-	--font-size-body: 1.4rem;
-	--font-size-h1: 3rem;
-	--font-size-h2: 2rem;
 	--toastContainerBottom: auto;
 	--toastContainerRight: auto;
 	--toastContainerTop: 3rem;
 	--toastContainerLeft: calc(50vw - 8rem);
 	--header-banner-dimensions-ratio: 6; // width divided by height
 	--page-max-width: 1200px;
+	--article-text-width: 606px;
 }
 
 
@@ -16,15 +14,21 @@
 
 :root {
 	--header-font-family: "Trajan Pro", serif;
+	--header-secondary-font-family: "Optimus Princeps", "Trajan Pro", serif;
+	--highlight-font-family: "Inconsolata", sans-serif;
 	--nav-font-family: "Voya Nui", sans-serif;
-	--body-text-font-family: "Times New Roman", serif;
+	--body-text-font-family: "Noto Serif", serif;
+	--font-size-body: 1.4rem;
+	--font-size-h1: 3rem;
+	--font-size-h2: 2rem;
 }
 
 
 /* Images */
 
 :root {
-	--background-image-default: url(images/bg.webp);
+	--background-image-default: url(/images/bg.webp);
+	--hr-background-image: url(/images/hrbg.png);
 }
 
 

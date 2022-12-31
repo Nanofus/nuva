@@ -3,7 +3,7 @@
 	import type { Post } from '$lib/types';
 	import { onMount } from 'svelte';
 	import TagList from '$lib/components/TagList.svelte';
-	import CommentArea from './CommentArea.svelte';
+	import CommentArea from '$lib/components/CommentArea.svelte';
 
 	export let post: Post;
 
@@ -29,14 +29,23 @@
 	{/if}
 
 	<div class="post-meta">
-		<span class="post-authors">{post.authors.join(', ')}</span>
-		<span class="post-date">{post.date.toLocaleDateString(LOCALE)}</span>
+		<time class="post-date">{post.date.toLocaleDateString(LOCALE)}</time>
+		<span class="post-authors">{post.authors}</span>
+		<span class="post-comments-link">
+			<a href="#comments">{post.commentCount} kommenttia</a>
+		</span>
 	</div>
 </header>
 
-<main class="post-content">{@html post.content}</main>
+<div class="post-content">{@html post.content}</div>
 
 <footer class="post-footer">
 	<TagList tags={post.tags} />
 	<CommentArea {post} />
 </footer>
+
+<style lang="scss">
+	.post-content {
+		margin: 2rem 0;
+	}
+</style>

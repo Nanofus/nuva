@@ -14,9 +14,16 @@
 	};
 </script>
 
-<div class="comments">
+<div id="comments" class="comments">
+	<h2>{post.commentCount} kommenttia</h2>
 	{#each post.comments as comment}
 		<CommentView on:commentSent={refreshComments} postId={post._id} {comment} />
 	{/each}
 	<CommentReply on:commentSent={refreshComments} postId={post._id} parent={0} />
 </div>
+
+<style lang="scss">
+	.comments {
+		margin-top: 5rem;
+	}
+</style>

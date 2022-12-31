@@ -9,6 +9,7 @@
     // Global styles
     import '$lib/style/variables.scss';
     import '$lib/style/style.scss';
+    import 'genericons-neue/icon-font/Genericons-Neue.min.css';
 
 	let loggedIn: boolean;
 
@@ -42,9 +43,9 @@
     #page {
         position: relative;
         margin: auto;
-        min-width: 606px;
+        min-width: var(--article-text-width);
         width: 100%;
-        max-width: 1200px;
+        max-width: var(--page-max-width);
 
         > * {
             position: relative;
@@ -59,5 +60,4 @@
         }
 
     }
-
 </style>

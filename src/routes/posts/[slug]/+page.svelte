@@ -20,3 +20,10 @@
 		<h2>Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.</h2>
 	{/if}
 </article>
+
+<style lang="scss">
+	article {
+		width: var(--article-text-width);
+		padding: 0 calc((var(--page-max-width) - var(--article-text-width)) / 2);
+	}
+</style>

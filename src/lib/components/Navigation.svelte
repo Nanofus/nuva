@@ -14,7 +14,8 @@
 	nav {
 		height: 3em;
 		padding: 0;
-		margin: 0;
+		width: 101%;
+		margin: 0 0 0 -0.5%;
 		line-height: 2.5em;
 		display: flex;
 		justify-content: center;
