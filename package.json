@@ -32,6 +32,5 @@
 	"dependencies": {
 		"@zerodevx/svelte-toast": "1.0.0-rc.1",
 		"dotenv": "^16.0.3",
-		"genericons-neue": "^4.0.5"
 	}
 }
