@@ -1,0 +1,247 @@
+@font-face {
+	font-family: "Argor Brujsh Scaqh";
+	src: url("ARGBRUJS.eot");
+	src: url("ARGBRUJS.otf");														
+	src: url("ARGBRUJS.svg");														
+	src: url("ARGBRUJS.ttf");														
+	src: url("ARGBRUJS.woff");
+}
+@font-face {
+	font-family: "Biometric Joe";
+	src: url("BIOMETRIC_JOE.eot");
+	src: url("BIOMETRIC_JOE.otf");														
+	src: url("BIOMETRIC_JOE.svg");														
+	src: url("BIOMETRIC_JOE.ttf");														
+	src: url("BIOMETRIC_JOE.woff");
+}
+@font-face {
+	font-family: "Blood Crow";
+	src: url("Blood_Crow.eot");
+	src: url("Blood_Crow.otf");
+	src: url("Blood_Crow.svg");
+	src: url("Blood_Crow.ttf");
+	src: url("Blood_Crow.woff");
+}
+@font-face {
+    font-family: "Bloody Impact";
+    src: url("Bloody_Impact.ttf");
+}
+@font-face {
+	font-family: "Cookie";
+	src: url("Cookie.eot");
+	src: url("Cookie.otf");
+	src: url("Cookie.svg");
+	src: url("Cookie.ttf");
+	src: url("Cookie.woff");
+}
+@font-face {
+	font-family: "Dom Diagonal Bold BT";
+	src: url("Dom Diagonal Bold BT.eot");
+	src: url("Dom Diagonal Bold BT.otf");
+	src: url("Dom Diagonal Bold BT.svg");
+	src: url("Dom Diagonal Bold BT.ttf");
+	src: url("Dom Diagonal Bold BT.woff");
+}
+@font-face {
+	font-family: "Electrolize";
+	src: url("Electrolize-Regular.eot");
+	src: url("Electrolize-Regular.otf");														
+	src: url("Electrolize-Regular.svg");														
+	src: url("Electrolize-Regular.ttf");														
+	src: url("Electrolize-Regular.woff");
+}
+@font-face {
+	font-family: "Elementary Gothic";
+	src: url("Elementary_Gothic.otf");														
+	src: url("Elementary_Gothic.ttf");														
+}
+@font-face {
+	font-family: "Feira de Fruta";
+	src: url("FEIRA_DA_FRUTA.eot");
+	src: url("FEIRA_DA_FRUTA.otf");														
+	src: url("FEIRA_DA_FRUTA.svg");														
+	src: url("FEIRA_DA_FRUTA.ttf");														
+	src: url("FEIRA_DA_FRUTA.woff");
+}
+@font-face {
+	font-family: 'Fredericka the Great', cursive;
+	src: url("frederick.ttf");
+}
+@font-face {
+    font-family: "Ginga";
+    src: url("Ginga.otf");
+}
+@font-face {
+	font-family: "Helveticrap";
+	src: url("Helveticrap.ttf");														
+}
+@font-face {
+    font-family: "Impact";
+    src: url("impact.ttf");
+}
+@font-face {
+	font-family: "Matoran";
+	src: url("Matoran.otf");
+	src: url("Matoran.svg");
+	src: url("Matoran.ttf");
+	src: url("Matoran.woff");
+}
+@font-face {
+    font-family: "Merriweather";
+    src: url("Merriweather.ttf");
+}
+@font-face {
+	font-family: "Niew CroMagnon";
+	src: url("NIEW_CROMAGNON.eot");
+	src: url("NIEW_CROMAGNON.otf");														
+	src: url("NIEW_CROMAGNON.svg");														
+	src: url("NIEW_CROMAGNON.ttf");														
+	src: url("NIEW_CROMAGNON.woff");
+}
+@font-face {
+	font-family: "Olde English Regular";
+	src: url("OldeEnglish.eot");
+	src: url("OldeEnglish.otf");
+	src: url("OldeEnglish.svg");
+	src: url("OldeEnglish.ttf");
+	src: url("OldeEnglish.woff");
+}
+@font-face {
+	font-family: "Optimus Princeps";
+	font-weight: normal;
+	src: url("OptimusPrinceps.eot");
+	src: url("OptimusPrinceps.otf");
+	src: url("OptimusPrinceps.svg");
+	src: url("OptimusPrinceps.ttf");
+	src: url("OptimusPrinceps.woff");
+}
+@font-face {
+	font-family: "Optimus Princeps";
+	font-weight: bold;
+	src: url("OptimusPrincepsSemiBold.eot");
+	src: url("OptimusPrincepsSemiBold.otf");
+	src: url("OptimusPrincepsSemiBold.svg");
+	src: url("OptimusPrincepsSemiBold.ttf");
+	src: url("OptimusPrincepsSemiBold.woff");
+}
+@font-face {
+	font-family: "Quicksand";
+	font-weight: light;
+	src: url("Quicksand-Light.eot");
+	src: url("Quicksand-Light.otf");
+	src: url("Quicksand-Light.svg");
+	src: url("Quicksand-Light.ttf");
+	src: url("Quicksand-Light.woff");
+}
+@font-face {
+	font-family: "Rahkshi";
+	src: url("Rahkshi.ttf");
+}
+@font-face {
+	font-family: "Reconstructed Matoran";
+	src: url("hexatoran.otf");
+	src: url("hexatoran.svg");
+	src: url("hexatoran.ttf");
+	src: url("hexatoran.woff");
+}
+@font-face {
+	font-family: "Rise From The Grave";
+	src: url("RiseFro.eot");
+	src: url("RiseFro.otf");
+	src: url("RiseFro.svg");
+	src: url("RiseFro.ttf");
+	src: url("RiseFro.woff");
+}
+@font-face {
+	font-family: "Ropa Sans";
+	src: url("RopaSans-Regular.eot");
+	src: url("RopaSans-Regular.otf");
+	src: url("RopaSans-Regular.svg");
+	src: url("RopaSans-Regular.ttf");
+	src: url("RopaSans-Regular.woff");
+}
+@font-face {
+	font-family: "Rose Caps";
+	src: url("rosecaps.ttf");
+}
+@font-face {
+	font-family: "Trajan Pro";
+	src: url("TRAJANPRO-REGULAR.eot");
+	src: url("TRAJANPRO-REGULAR.otf");
+	src: url("TRAJANPRO-REGULAR.svg");
+	src: url("TRAJANPRO-REGULAR.ttf");
+	src: url("TRAJANPRO-REGULAR.woff");
+}
+@font-face {
+	font-family: "VonFont";
+	src: url("VonFont.ttf");
+}
+@font-face {
+	font-family: "Voya Nui";
+	src: url("VoyaNuiGF.otf");
+	src: url("VoyaNuiGF.svg");
+	src: url("VoyaNuiGF.ttf");
+	src: url("VoyaNuiGF.woff");
+}
+@font-face {
+	font-family: "Sevillana";
+	src: url("Sevillana-Regular.eot");
+	src: url("Sevillana-Regular.otf");
+	src: url("Sevillana-Regular.svg");
+	src: url("Sevillana-Regular.ttf");
+	src: url("Sevillana-Regular.woff");
+}
+@font-face {
+    font-family: "SF Gushing Meadow";
+	src: url("SF Gushing Meadow.eot");
+	src: url("SF Gushing Meadow.otf");
+	src: url("SF Gushing Meadow.svg");
+	src: url("SF Gushing Meadow.ttf");
+	src: url("SF Gushing Meadow.woff");
+}
+@font-face {
+	font-family: 'Static';
+	src: url('static.otf');
+	src: url('static.svg');
+	src: url('static.ttf');
+	src: url('static.woff');
+}
+
+
+/* Computer Modern Unicode */
+@font-face {
+	font-family:	"CMU Serif";
+	src: url("CMU_Serif/cmunrm.eot");
+	src: url("CMU_Serif/cmunrm.otf");														
+	src: url("CMU_Serif/cmunrm.svg");														
+	src: url("CMU_Serif/cmunrm.ttf");														
+	src: url("CMU_Serif/cmunrm.woff");
+}
+@font-face {
+	font-family:	"CMU Serif";
+	font-weight:	bold;
+	src: url("CMU_Serif/cmunbx.eot");
+	src: url("CMU_Serif/cmunbx.otf");			
+	src: url("CMU_Serif/cmunbx.svg");			
+	src: url("CMU_Serif/cmunbx.ttf");			
+	src: url("CMU_Serif/cmunbx.woff");
+}
+@font-face {
+	font-family:	"CMU Serif";
+	font-style: 	italic;
+	src: url("CMU_Serif/cmunti.eot");
+	src: url("CMU_Serif/cmunti.otf"); 								
+	src: url("CMU_Serif/cmunti.svg"); 								
+	src: url("CMU_Serif/cmunti.ttf"); 								
+	src: url("CMU_Serif/cmunti.woff");
+}
+@font-face {
+	font-family:	"CMU Serif";
+	font-weight:	bold;
+	font-style: 	italic;
+	src: url("CMU_Serif/cmunbi.eot");
+	src: url("CMU_Serif/cmunbi.otf");			
+	src: url("CMU_Serif/cmunbi.svg");			
+	src: url("CMU_Serif/cmunbi.ttf");			
+	src: url("CMU_Serif/cmunbi.woff");
+}

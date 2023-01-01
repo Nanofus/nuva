@@ -1,28 +1,198 @@
-@import 'variables.scss';
+/***********
+ * General *
+ ***********/
 
-/**********
- * Layout *
- **********/
 
-#page {
-  position: relative;
-  margin: auto;
-  min-width: 606px;
-  width: 100%;
-  max-width: 1200px;
+/* Navigation */
 
-  > * {
-    position: relative;
-    width: 100%;
-    float: left;
-    clear: both;
-    box-sizing: border-box;
+#page > nav {
+  background: rgba(0, 0, 0, 0) linear-gradient(#252525, #0a0a0a) repeat scroll 0 0;
+  font-family: var(--nav-font-family);
+
+  a {
+    padding: 0.25em;
+
+    &:link, &:visited {
+      color: var(--main-nav-color);
+      text-decoration: none;
+    }
+
+    &:active, &:hover {
+      color: var(--text-light);
+      background-color: var(--hover-light);
+    }
   }
 
-  > header {
-    height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
+}
+
+
+/* Post media */
+
+article {
+
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+
+  button {
+    border: 0;
+  }
+
+}
+
+
+/* Tag list*/
+
+.tags li {
+  background: rgba(0, 0, 0, 0.1);
+  margin: 0.125rem 0.25rem;
+  position: relative;
+  border-radius: 0.25rem;
+  font-size: 0.8em;
+  font-weight: 700;
+  line-height: 1.2727272727;
+  font-family: var(--accent-font-family);
+  text-transform: uppercase;
+
+  a {
+    display: block;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.03);
   }
 }
+
+.tags {
+  text-align: center;
+}
+
+
+/* Post meta */
+
+.post-meta {
+  font-family: var(--accent-font-family);
+  font-weight: bold;
+
+  > * {
+    margin: 0 1rem 0 0;
+
+    &:before {
+      margin-right: 0.2rem;
+      position: relative;
+      top: 0.1rem;
+      font: normal 1rem/1 "Genericons-Neue";
+    }
+
+    a, a:link, a:visited {
+      text-decoration: none;
+    }
+  }
+
+  .categories {
+    text-transform: uppercase;
+  }
+}
+
+.post-date:before, .post-authors:before {
+  content: "\f303";
+}
+
+.post-authors:before {
+  content: "\f304";
+}
+
+.post-comments-link:before {
+  content: "\f300";
+}
+
+.search-area button:before {
+  content: "\f400";
+  position: relative;
+  font: normal 1rem/1 "Genericons-Neue";
+  top: 0.1rem;
+  margin-right: 0.1rem;
+}
+
+
+/* Comment section */
+
+.comment-header {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: var(--accent-font-family);
+  font-size: 1.25em;
+}
+
+
+/* Sidebar */
+
+.sidebar {
+  background: rgba(0,0,0,1);
+  color: var(--text-dark);
+}
+
+
+
+
+/**************
+ * Typography *
+ **************/
+
+
+body {
+  font-family: var(--body-text-font-family);
+}
+
+p {
+  text-align: justify;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--header-font-family);
+  font-weight: normal;
+  text-shadow: 0 0 1.25rem rgba(0,0,0,0.75);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  text-align: center;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h4 {
+  font-family: var(--header-secondary-font-family);
+  font-size: 1.8rem;
+  margin: 0.625rem 0;
+}
+
+a, a:link, a:visited {
+  color: var(--link-light);
+  text-decoration: underline;
+}
+
+a:hover, a:active {
+  color: var(--hover-light);
+  text-decoration: none;
+}
+
+hr {
+  width: 100px;
+  height: 26px;
+  position: relative;
+  margin: 25px auto;
+  border: 0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: var(--hr-background-image);
+}
+
 
 
 
@@ -30,8 +200,15 @@
  * Themes *
  **********/
 
-body.default {
+
+body.classic {
 
   background-color: var(--background-dark);
+  background-image: var(--background-image-default);
+
+  main {
+    background-color: var(--background-light);
+    box-shadow: 0 0 1rem rgba(0,0,0,1) inset;
+  }
 
 }

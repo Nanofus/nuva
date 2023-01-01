@@ -4,25 +4,23 @@
 	export let data: CategoryListResponse;
 </script>
 
-<main>
-	<h2>Kategoriat</h2>
-	<ul>
-		{#each data.categories as category}
-			<li>
-				<a href="/categories/{category.slug}">{category.name}</a>
-				{#if category.children.length > 0}
-					<ul class="child-list">
-						{#each category.children as child}
-							<li>
-								<a href="/categories/{child.slug}">{child.name}</a>
-							</li>
-						{/each}
-					</ul>
-				{/if}
-			</li>
-		{/each}
-	</ul>
-</main>
+<h2>Kategoriat</h2>
+<ul>
+	{#each data.categories as category}
+		<li>
+			<a href="/categories/{category.slug}">{category.name}</a>
+			{#if category.children.length > 0}
+				<ul class="child-list">
+					{#each category.children as child}
+						<li>
+							<a href="/categories/{child.slug}">{child.name}</a>
+						</li>
+					{/each}
+				</ul>
+			{/if}
+		</li>
+	{/each}
+</ul>
 
 <style lang="scss">
 	ul {

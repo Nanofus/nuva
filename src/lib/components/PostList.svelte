@@ -6,10 +6,15 @@
 </script>
 
 <ul class="post-list">
+		<li class="list-header">
+			<span class="link">Viesti (kommentteja)</span>
+			<span class="date">Julkaisupäivä</span>
+			<span class="authors">Kirjoittajat</span>
+		</li>
 	{#each posts as post}
 		<li>
 			<span class="link"><a href="/posts/{post.slug}">{post.title}</a> ({post.commentCount})</span>
-			<span class="date">{post.date.toLocaleDateString(LOCALE)}</span>
+			<time class="date">{post.date.toLocaleDateString(LOCALE)}</time>
 			<span class="authors">{post.authors.join(', ')}</span>
 		</li>
 	{/each}
@@ -19,5 +24,31 @@
 	ul {
 		list-style: none;
 		padding: 0;
+	}
+
+	li {
+		width: 100%;
+		display: flex;
+	}
+
+	.link {
+		flex: 7;
+
+		a {
+			margin-right: 0.5rem;
+		}
+	}
+
+	.date {
+		flex: 2;
+	}
+
+	.authors {
+		flex: 3;
+	}
+
+	.list-header {
+		font-weight: bold;
+		margin-bottom: 0.5rem;
 	}
 </style>

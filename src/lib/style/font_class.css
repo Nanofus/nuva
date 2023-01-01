@@ -1,0 +1,83 @@
+@CHARSET "UTF-8";
+/* Erikoismuotoilut */
+.feterra       {font-family: Impact; font-size: 1em;}
+.feterra-gore  {font-family: "Bloody Impact"; font-size: 1em;}
+.frederick     {font-family: "Fredericka the Great", cursive;}
+.ghotic        {font-family: "Elementary Gothic"; font-size: 100%;}
+.harakka       {font-family: "Sevillana"; font-size: 1.25em; color: #000000; font-weight: bold;}
+.hexatoran     {font-family: "Reconstructed Matoran"; font-size: 150%;}
+.jouera        {font-family: "Courier New"; font-weight: bold; text-transform: uppercase;}
+.kauno         {font-family: "Cookie"; font-size: 1.5em; line-height: 1em;}
+.kuiskaus      {font-family: "Quicksand"; font-weight: bold; font-size: 120% !important;}
+.makuta        {font-family: "Trajan Pro"; color: #000000;}
+.matoran       {font-family: "Matoran"; font-size: 150%;}
+.mielitietty   {font-family: "Sevillana"; font-size: 1.5em; color: #0000FF;}
+.nauru         {font-weight: bold; color: #000000;}
+.polttari      {font-family: "Biometric Joe"; font-size: 150% !important; color: #000000;}
+.rahkshi       {font-family: "Rahkshi"; font-size: 100%; color: #FF0000;}
+.roseinitials  {font-family: "Rose Caps"; font-size: 100%;}
+.static        {font-family: "Static"; font-size: 1.5em; color: rgba(0,0,0,0.75); font-variant: small-caps;}
+.tappaja-jaken {font-family: "Rise From The Grave", sans-serif; color: #000000; font-variant: small-caps; font-size: 1.25em;}
+.tarkastaja    {font-family: "Merriweather", serif; color: #FF69B4; font-size: 0.9em;}
+.vahki         {font-family: courier; text-transform: uppercase;}
+.viktor        {font-family: "VonFont"; animation: viktor 200ms linear 0s infinite; font-size: 3rem; text-shadow: 0px 0px 0.05em #000000;}
+.zumolle       {font-family: "Ginga", "Sevillana"; font-size: 3.5rem; color: #AA00AA; line-height: 0.75em;}
+
+/* Perusmuotoilut */
+.bold      {font-weight: bold !important;}
+.italic    {font-style: italic !important;}
+.allcaps   {text-transform: uppercase !important;}
+.smallcaps {font-variant: small-caps !important;}
+
+/* Tasaukset */
+.left, .left p     {text-align: left !important;}
+.right, .right p   {text-align: right !important;}
+.center, .center p {text-align: center !important;}
+
+/* Palstoitus */
+.twocolumns		{
+	column-rule: 1px solid rgba(0,0,0,0.3); -moz-column-rule: 1px solid rgba(0,0,0,0.3); -webkit-column-rule: 1px solid rgba(0,0,0,0.3);
+	column-count: 2; -moz-column-count: 2; -webkit-column-count: 2;
+	column-gap: 40px; -moz-column-gap: 40px; -webkit-column-gap: 40px;
+}
+
+/* Fonttikoko */
+.small  {font-size: 0.8em !important;}
+.big    {font-size: 1.2em !important;}
+.bigg   {font-size: 1.5em !important;}
+.biggg  {font-size: 1.8em !important;}
+.double {font-size: 2em !important;}
+
+
+
+/********************************************/
+/* TYHJÄT RIVIVÄLIT, SAATANAN KERETTILÄISET */
+div.rv1 {height: 1em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv2 {height: 3em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv3 {height: 6em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv4 {height: 9em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv5 {height: 12em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv6 {height: 15em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv7 {height: 18em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv8 {height: 21em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv9 {height: 24em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv10 {height: 27em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv11 {height: 30em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv12 {height: 33em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv13 {height: 36em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv14 {height: 39em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv15 {height: 42em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv16 {height: 45em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv17 {height: 48em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv18 {height: 51em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv19 {height: 54em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv20 {height: 57em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+div.rv21 {height: 60em; width: 100%; min-height: 10px; display: block; padding: 10px 0;}
+
+/* DOKTOR VIKTOR VON NEBULA */
+@keyframes viktor {
+    0% {color: #000000;}
+    50% {color: #000000;}
+    51% {color: #FE0D0D;}
+    100% {color: #FE0D0D;}
+}

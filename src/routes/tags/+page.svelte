@@ -17,17 +17,15 @@
 	};
 </script>
 
-<main>
-	<h2>Tagit</h2>
-	<ul>
-		{#each data.tags as tag}
-			<li><a href="/tags/{tag.slug}">{tag.name}</a></li>
-		{/each}
-	</ul>
-	{#if data.hasNextPage && !fetching}
-		<button on:click={fetchMoreTags}>Lataa lisää</button>
-	{/if}
-</main>
+<h2>Tagit</h2>
+<ul>
+	{#each data.tags as tag}
+		<li><a href="/tags/{tag.slug}">{tag.name}</a></li>
+	{/each}
+</ul>
+{#if data.hasNextPage && !fetching}
+	<button on:click={fetchMoreTags}>Lataa lisää</button>
+{/if}
 
 <style lang="scss">
 	ul {
