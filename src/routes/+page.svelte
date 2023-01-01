@@ -43,7 +43,7 @@
 	}
 
 	section, aside {
-		padding: 3em;
+		padding: 3em 0 3em 3em;
 		box-sizing: border-box;
 	}
 </style>
