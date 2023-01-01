@@ -24,6 +24,6 @@
 <style lang="scss">
 	article {
 		width: var(--article-text-width);
-		padding: 0 calc((var(--page-max-width) - var(--article-text-width)) / 2);
+		padding: 5em calc((var(--page-max-width) - var(--article-text-width)) / 2);
 	}
 </style>

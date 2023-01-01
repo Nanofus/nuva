@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import TagList from '$lib/components/TagList.svelte';
 	import CommentArea from '$lib/components/CommentArea.svelte';
+	import CategoryList from "$lib/components/CategoryList.svelte";
 
 	export let post: Post;
 
@@ -22,6 +23,9 @@
 </script>
 
 <header class="post-header">
+	<div class="post-meta">
+		<CategoryList categories={post.categories} />
+	</div>
 	<h1 class="post-title">{post.title}</h1>
 
 	{#if post.styles}

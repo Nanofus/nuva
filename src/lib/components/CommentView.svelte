@@ -15,10 +15,10 @@
 </script>
 
 <div class="comment">
-	<div class="comment-header">
+	<header class="comment-header">
 		<span class="comment-author">{comment.author}</span>
 		<span class="comment-date">{comment.date.toLocaleDateString(LOCALE)}</span>
-	</div>
+	</header>
 	<div class="comment-content">{@html comment.content}</div>
 	<div class="child-comments">
 		{#each comment.children as child}
@@ -32,13 +32,16 @@
 	.comment {
 		margin: 1rem 0;
 		padding: 0.5rem;
-		border: 1px solid #ccc;
+		border: 0.125em solid rgba(0,0,0,0.5);
 		border-radius: 0.5rem;
+		background: rgba(0,0,0,0.1);
 	}
 
 	.comment-header {
 		display: flex;
 		justify-content: space-between;
+		padding: 0 0.25rem 0.25rem;
+		border-bottom: 0.125rem solid rgba(0,0,0,0.5);
 	}
 
 	.comment-content {

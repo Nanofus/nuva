@@ -18,12 +18,32 @@
 	};
 </script>
 
+<section>
+	<h2>Kaikki ropeosat</h2>
+	<PostList posts={data.posts} />
+	{#if data.hasNextPage && !fetching}
+		<button on:click={fetchMorePosts}>Lataa lisää</button>
+	{/if}
+</section>
+<aside class="sidebar">
 
-<h2>Kaikki ropeosat</h2>
-<PostList posts={data.posts} />
-{#if data.hasNextPage && !fetching}
-	<button on:click={fetchMorePosts}>Lataa lisää</button>
-{/if}
+</aside>
 
 <style lang="scss">
+	:global(#page main) {
+		display: flex;
+	}
+
+	section {
+		flex: 4;
+	}
+
+	aside {
+		flex: 1;
+	}
+
+	section, aside {
+		padding: 3em;
+		box-sizing: border-box;
+	}
 </style>

@@ -55,9 +55,5 @@
             box-sizing: border-box;
         }
 
-        main {
-            padding: 2em;
-        }
-
     }
 </style>
