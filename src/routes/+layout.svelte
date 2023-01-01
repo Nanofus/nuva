@@ -9,7 +9,6 @@
     // Global styles
     import '$lib/style/variables.scss';
     import '$lib/style/style.scss';
-    import 'genericons-neue/icon-font/Genericons-Neue.min.css';
 
 	let loggedIn: boolean;
 
