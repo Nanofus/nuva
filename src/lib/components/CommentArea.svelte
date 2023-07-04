@@ -2,7 +2,6 @@
 	import type { Post } from '$lib/types';
 	import CommentView from '$lib/components/CommentView.svelte';
 	import CommentReply from './CommentReply.svelte';
-	import { createEventDispatcher } from 'svelte';
 	import { getCommentsForPostBySlug } from '$lib/database';
 
 	export let post: Post;
