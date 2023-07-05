@@ -11,7 +11,7 @@
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPostList(data.endCursor, data.searchTerm);
+    const newData = await getPostList(fetch, data.endCursor, data.searchTerm);
     data = {
       posts: [...data.posts, ...newData.posts],
       searchTerm: data.searchTerm,

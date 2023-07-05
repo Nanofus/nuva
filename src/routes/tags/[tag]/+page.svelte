@@ -12,7 +12,7 @@
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPostListByTag(data.tagSlug, data.endCursor);
+    const newData = await getPostListByTag(fetch, data.tagSlug, data.endCursor);
     data = {
       posts: [...data.posts, ...newData.posts],
       tagSlug: data.tagSlug,

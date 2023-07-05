@@ -9,9 +9,9 @@
   export let data: PostListByCategoryResponse;
   let fetching = false;
 
-  const fetchMorePosts = async () => {
+  const fetchMorePosts = async ({ fetch }) => {
     fetching = true;
-    const newData = await getPostListByCategory(data.categorySlug, data.endCursor);
+    const newData = await getPostListByCategory(fetch, data.categorySlug, data.endCursor);
     data = {
       posts: [...data.posts, ...newData.posts],
       categorySlug: data.categorySlug,

@@ -11,7 +11,7 @@
 
   const fetchMoreTags = async () => {
     fetching = true;
-    const newData = await getTagList(data.endCursor);
+    const newData = await getTagList(fetch, data.endCursor);
     data = {
       tags: [...data.tags, ...newData.tags],
       endCursor: newData.endCursor,
