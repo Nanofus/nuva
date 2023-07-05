@@ -1,8 +1,11 @@
 <script>
-	import { page } from '$app/stores';
-  import Head from "$lib/components/reusable/Head.svelte";
+  import { page } from "$app/stores";
+  import PageHead from "$lib/components/reusable/PageHead.svelte";
+  import PageContent from "$lib/components/reusable/PageContent.svelte";
 </script>
 
-<Head title={$page.status} />
+<PageHead title={$page.status} />
 
-<h1>Virhe {$page.status}</h1>
+<PageContent>
+  <h1>Virhe {$page.status}</h1>
+</PageContent>

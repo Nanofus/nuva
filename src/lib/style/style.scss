@@ -3,28 +3,6 @@
  ***********/
 
 
-/* Navigation */
-
-#page > nav {
-  background: rgba(0, 0, 0, 0) linear-gradient(#252525, #0a0a0a) repeat scroll 0 0;
-  font-family: var(--nav-font-family);
-
-  a {
-    padding: 0.25em;
-
-    &:link, &:visited {
-      color: var(--main-nav-color);
-      text-decoration: none;
-    }
-
-    &:active, &:hover {
-      color: var(--text-light);
-      background-color: var(--hover-light);
-    }
-  }
-
-}
-
 /* Post media */
 
 article {

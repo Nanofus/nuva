@@ -3,7 +3,7 @@
   import PostList from "$lib/components/PostList.svelte";
   import type { PostListResponse } from "$lib/types";
   import Button from "$lib/components/reusable/Button.svelte";
-  import Head from "$lib/components/reusable/Head.svelte";
+  import PageHead from "$lib/components/reusable/PageHead.svelte";
   import PageContent from "$lib/components/reusable/PageContent.svelte";
 
   export let data: PostListResponse;
@@ -21,7 +21,7 @@
   };
 </script>
 
-<Head />
+<PageHead />
 
 <PageContent>
   <h2>Kaikki ropeosat</h2>

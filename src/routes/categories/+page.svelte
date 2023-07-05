@@ -1,13 +1,13 @@
 <script lang="ts">
   import type { CategoryListResponse } from "$lib/types";
-  import Head from "$lib/components/reusable/Head.svelte";
+  import PageHead from "$lib/components/reusable/PageHead.svelte";
   import PageContent from "$lib/components/reusable/PageContent.svelte";
   import List from "$lib/components/reusable/List.svelte";
 
   export let data: CategoryListResponse;
 </script>
 
-<Head title="Kategoriat" />
+<PageHead title="Kategoriat" />
 
 <PageContent>
   <h2>Kategoriat</h2>

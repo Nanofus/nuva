@@ -5,7 +5,7 @@
   import Login from "$lib/components/Login.svelte";
   import Navigation from "$lib/components/Navigation.svelte";
   import Header from "$lib/components/Header.svelte";
-  import Head from "$lib/components/reusable/Head.svelte";
+  import PageHead from "$lib/components/reusable/PageHead.svelte";
 
   // Global styles
   import "$lib/style/variables.scss";
@@ -20,7 +20,7 @@
   });
 </script>
 
-<Head/>
+<PageHead />
 
 <div id="page">
   <Header />
@@ -34,10 +34,9 @@
 
 <style lang="scss">
   :global(body) {
-    width: 100%;
-    height: 100vh;
     margin: 0;
     padding: 0;
+    background-color: var(--background-dark);
   }
 
   #page {
@@ -46,13 +45,11 @@
     min-width: var(--article-text-width);
     width: 100%;
     max-width: var(--page-max-width);
+    background-color: var(--background-light);
+  }
 
-    > * {
-      position: relative;
-      width: 100%;
-      float: left;
-      clear: both;
-      box-sizing: border-box;
-    }
+  main {
+    padding-bottom: 3rch;
+    margin-bottom: 3rch;
   }
 </style>

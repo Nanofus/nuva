@@ -1,18 +1,22 @@
 <script lang="ts">
-	import type { Post } from '$lib/types';
-	import PostView from '$lib/components/PostView.svelte';
-  import Head from "$lib/components/reusable/Head.svelte";
-	import PageContent from "$lib/components/reusable/PageContent.svelte";
+  import type { Post } from "$lib/types";
+  import PageHead from "$lib/components/reusable/PageHead.svelte";
+  import PageContent from "$lib/components/reusable/PageContent.svelte";
+  import PostHeader from "$lib/components/PostHeader.svelte";
+  import PostFooter from "$lib/components/PostFooter.svelte";
+  import PostContent from "$lib/components/PostContent.svelte";
 
-	export let data: Post;
+  export let data: Post;
 </script>
 
-<Head title={data.title} />
+<PageHead title={data.title} />
 
 <PageContent>
-	{#if data.content}
-		<PostView post={data} />
-	{:else}
-		<h2>Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.</h2>
-	{/if}
+  {#if data.content}
+    <PostHeader post={data} />
+    <PostContent post={data} />
+    <PostFooter post={data} />
+  {:else}
+    <h2>Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.</h2>
+  {/if}
 </PageContent>

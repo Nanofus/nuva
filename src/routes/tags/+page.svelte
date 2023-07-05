@@ -2,7 +2,7 @@
   import { getTagList } from "$lib/database";
   import type { TagListResponse } from "$lib/types";
   import Button from "$lib/components/reusable/Button.svelte";
-  import Head from "$lib/components/reusable/Head.svelte";
+  import PageHead from "$lib/components/reusable/PageHead.svelte";
   import PageContent from "$lib/components/reusable/PageContent.svelte";
   import List from "$lib/components/reusable/List.svelte";
 
@@ -21,7 +21,7 @@
   };
 </script>
 
-<Head title="Tagit" />
+<PageHead title="Tagit" />
 
 <PageContent>
   <h2>Tagit</h2>

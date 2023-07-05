@@ -3,7 +3,7 @@
   import PostList from "$lib/components/PostList.svelte";
   import type { PostListByTagResponse } from "$lib/types";
   import Button from "$lib/components/reusable/Button.svelte";
-  import Head from "$lib/components/reusable/Head.svelte";
+  import PageHead from "$lib/components/reusable/PageHead.svelte";
   import PageContent from "$lib/components/reusable/PageContent.svelte";
 
   export let data: PostListByTagResponse;
@@ -23,7 +23,7 @@
   };
 </script>
 
-<Head title={data.tag} />
+<PageHead title={data.tag} />
 
 <PageContent>
   <h2>Tagi: {data.tag}</h2>
