@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
   let counter: number = 0;
 </script>
+
 <script lang="ts">
   export let name: string | null = null;
   export let label: string | null = null;
@@ -24,4 +25,19 @@
 {/if}
 
 <style lang="scss">
+  input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 </style>

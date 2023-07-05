@@ -1,19 +1,19 @@
-export type Hierarchical = {
+export interface Hierarchical {
   _id: number;
   _parentId: number;
-  children: Hierarchical[];
-};
+  children: this[];
+}
 
-export type PostMeta = {
+export interface PostMeta {
   title: string;
   slug: string;
   date: Date;
   authors: string[];
   featuredImage: string;
   commentCount: number;
-};
+}
 
-export type Post = PostMeta & {
+export interface Post extends PostMeta {
   _id: number;
   initialLetter: boolean;
   scripts: string;
@@ -23,59 +23,57 @@ export type Post = PostMeta & {
   categories: Category[];
   tags: Tag[];
   comments: Comment[];
-};
+}
 
-export type Category = Hierarchical & {
+export interface Category extends Hierarchical {
   slug: string;
   name: string;
-  children: Category[];
-};
+}
 
-export type Tag = {
+export interface Tag {
   slug: string;
   name: string;
-};
+}
 
-export type Comment = Hierarchical & {
+export interface Comment extends Hierarchical {
   date: Date;
   author: string;
   content: string;
-  children: Comment[];
-};
+}
 
-export type Paginated = {
+export interface Paginated {
   endCursor: string;
   hasNextPage: boolean | null;
-};
+}
 
-export type PostListResponse = Paginated & {
+export interface PostListResponse extends Paginated {
   posts: PostMeta[];
-};
+}
 
-export type PostListBySearchResponse = PostListResponse & {
+export interface PostListBySearchResponse extends PostListResponse {
   searchTerm: string;
-};
+}
 
-export type PostListByCategoryResponse = PostListResponse & {
+export interface PostListByCategoryResponse extends PostListResponse {
   category: string;
   categorySlug: string;
-};
+}
 
-export type PostListByTagResponse = PostListResponse & {
+export interface PostListByTagResponse extends PostListResponse {
   tag: string;
   tagSlug: string;
-};
+}
 
-export type TagListResponse = Paginated & {
+export interface TagListResponse extends Paginated {
   tags: Tag[];
-};
+}
 
-export type CategoryListResponse = {
+export interface CategoryListResponse {
   categories: Category[];
-};
+}
 
-export type AuthInfo = {
+export interface AuthInfo {
   username: string;
   authToken: string;
   refreshToken: string;
-};
+}

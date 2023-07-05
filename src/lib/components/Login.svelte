@@ -6,6 +6,7 @@
   import Input from "$lib/components/reusable/Input.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import Form from "$lib/components/reusable/Form.svelte";
+  import { toast } from "@zerodevx/svelte-toast";
 
   let loggedIn: boolean | null = null;
   let password = "";
@@ -17,6 +18,14 @@
   onMount(() => {
     loginInfo.subscribe((loginInfo) => loggedIn = !!loginInfo);
   });
+
+  let handleLogin = async () => {
+    if (!username || !password) {
+      toast.push("Täytä molemmat kentät.");
+      return;
+    }
+    await login(fetch, username, password);
+  }
 </script>
 
 <div class="login-area">
@@ -26,7 +35,7 @@
     <Form>
       <Input label="Käyttäjätunnus" name="username" bind:value={username} />
       <Input label="Salasana" name="password" type="password" bind:value={password} />
-      <Button on:click={async () => await login(fetch, username, password)}>Kirjaudu sisään</Button>
+      <Button on:click={handleLogin}>Kirjaudu sisään</Button>
     </Form>
   {:else if loggedIn}
     <span>{loggedInUsername}</span>

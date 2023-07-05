@@ -1,15 +1,16 @@
 <script lang="ts">
   import Search from "$lib/components/Search.svelte";
   import Login from "$lib/components/Login.svelte";
+  import NavItem from "$lib/components/reusable/NavItem.svelte";
 </script>
 
 <nav>
-  <a href="/">Etusivu</a>
-  <a href="/categories">Kategoriat</a>
-  <a href="/tags">Tagit</a>
-  <a href="https://arkisto.klaanon.fi/soundtracks/">Soundtrackit</a>
-  <Search />
-  <Login />
+  <NavItem target="/">Etusivu</NavItem>
+  <NavItem target="/categories">Kategoriat</NavItem>
+  <NavItem target="/tags">Tagit</NavItem>
+  <NavItem target="https://arkisto.klaanon.fi/soundtracks/">Soundtrackit</NavItem>
+  <NavItem><Search /></NavItem>
+  <NavItem><Login /></NavItem>
 </nav>
 
 <style lang="scss">
@@ -24,21 +25,5 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-
-    a {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-      padding: 0.25em;
-
-      &:link, &:visited {
-        color: var(--main-nav-color);
-        text-decoration: none;
-      }
-
-      &:active, &:hover {
-        color: var(--text-light);
-        background-color: var(--hover-light);
-      }
-    }
   }
 </style>

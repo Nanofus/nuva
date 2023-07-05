@@ -253,8 +253,8 @@ export const getCategoryList = async (
                     nodes {
                         name
                         slug
-						databaseId
-						parentDatabaseId
+                        databaseId
+                        parentDatabaseId
                     }
                   }
               }

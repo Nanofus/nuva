@@ -21,7 +21,7 @@ export const toastThemes = {
 
 export const objectsToHierarchy = (arr: Hierarchical[]) => {
   let arrMap = new Map(arr.map((item: Hierarchical) => [item._id, item]));
-  let tree = [];
+  let tree: Hierarchical[] = [];
 
   for (let i = 0; i < arr.length; i++) {
     let item = arr[i];
