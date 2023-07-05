@@ -14,7 +14,7 @@
 </script>
 
 <div id="comments">
-	<h2>{post.commentCount} kommenttia</h2>
+	<h2>{post.commentCount ? post.commentCount : 0} kommenttia</h2>
 	{#each post.comments as comment}
 		<CommentView on:commentSent={refreshComments} postId={post._id} {comment} />
 	{/each}
