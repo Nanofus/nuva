@@ -2,6 +2,7 @@
 	import { getPostListByCategory } from '$lib/database';
 	import type { PostListByCategoryResponse } from '$lib/types';
 	import PostList from '$lib/components/PostList.svelte';
+	import Button from "$lib/components/reusable/Button.svelte";
 
 	export let data: PostListByCategoryResponse;
 	let fetching = false;
@@ -23,5 +24,5 @@
 <h2>Kategoria: {data.category}</h2>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
-	<button on:click={fetchMorePosts}>Lataa lisää</button>
+	<Button on:click={fetchMorePosts}>Lataa lisää</Button>
 {/if}

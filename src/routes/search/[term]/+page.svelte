@@ -2,6 +2,7 @@
 	import { getPostList } from '$lib/database';
 	import PostList from '$lib/components/PostList.svelte';
 	import type { PostListBySearchResponse } from '$lib/types';
+	import Button from "$lib/components/reusable/Button.svelte";
 
 	export let data: PostListBySearchResponse;
 	let fetching = false;
@@ -22,5 +23,5 @@
 <h2>Haku: {data.searchTerm}</h2>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
-	<button on:click={fetchMorePosts}>Lataa lisää</button>
+	<Button on:click={fetchMorePosts}>Lataa lisää</Button>
 {/if}

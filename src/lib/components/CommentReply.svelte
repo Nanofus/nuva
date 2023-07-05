@@ -2,6 +2,7 @@
 	import { postComment } from '$lib/database';
 	import { loginInfo } from '$lib/stores';
 	import { createEventDispatcher } from 'svelte';
+	import Button from "$lib/components/reusable/Button.svelte";
 	let loggedIn: boolean | null = null;
 	loginInfo.subscribe((loginInfo) => {
 		loggedIn = loginInfo ? true : false;
@@ -16,6 +17,7 @@
 	const dispatch = createEventDispatcher();
 
 	const sendComment = async () => {
+		if (!content || content === "") return;
 		await postComment(postId, parent, content);
 		dispatch('commentSent');
 		content = '';
@@ -27,9 +29,9 @@
 	<div class="comment-reply">
 		{#if open}
 			<input type="multiline" placeholder="Vastaa..." bind:value={content} />
-			<button on:click={sendComment}>Lähetä</button>
+			<Button on:click={sendComment}>Lähetä</Button>
 		{:else}
-			<button on:click={() => (open = true)}>Vastaa</button>
+			<Button on:click={() => (open = true)}>Vastaa</Button>
 		{/if}
 	</div>
 {/if}

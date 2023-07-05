@@ -2,6 +2,7 @@
 	import { login, logout } from '$lib/database';
 	import { loginInfo } from '$lib/stores';
 	import { onMount } from 'svelte';
+	import Button from "$lib/components/reusable/Button.svelte";
 	let loggedIn: boolean | null = null;
 	let password = '';
 	let username = '';
@@ -21,9 +22,9 @@
 		<input name="username" type="username" bind:value={username} />
 		<label for="password">Salasana</label>
 		<input name="password" type="password" bind:value={password} />
-		<button on:click={async () => await login(username, password)}>Login</button>
+		<Button on:click={async () => await login(username, password)}>Login</Button>
 	{:else if loggedIn}
-		<button on:click={() => logout()}>Logout</button>
+		<Button on:click={() => logout()}>Logout</Button>
 	{/if}
 </div>
 

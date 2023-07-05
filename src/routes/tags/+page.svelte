@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getTagList } from '$lib/database';
 	import type { TagListResponse } from '$lib/types';
+	import Button from "$lib/components/reusable/Button.svelte";
 
 	export let data: TagListResponse;
 	let fetching = false;
@@ -24,7 +25,7 @@
 	{/each}
 </ul>
 {#if data.hasNextPage && !fetching}
-	<button on:click={fetchMoreTags}>Lataa lisää</button>
+	<Button on:click={fetchMoreTags}>Lataa lisää</Button>
 {/if}
 
 <style lang="scss">

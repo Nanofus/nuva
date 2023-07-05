@@ -8,6 +8,7 @@
 
 	onMount(() => {
 		loading = false;
+		if (data.content) console.log(data);
 	});
 </script>
 

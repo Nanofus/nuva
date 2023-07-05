@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Button from "$lib/components/reusable/Button.svelte";
+
 	let searchTerm = '';
 
 	const search = () => {
@@ -8,7 +10,7 @@
 
 <div class="search-area">
 	<input bind:value={searchTerm} type="text" placeholder="Hakusanat" />
-	<button on:click={search}>Etsi</button>
+	<Button on:click={search}>Etsi</Button>
 </div>
 
 <style lang="scss">
