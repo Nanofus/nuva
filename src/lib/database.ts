@@ -84,7 +84,7 @@ export const getPostListByTag = async (
       body: JSON.stringify({
         query: `
             query PostsByTag {
-                posts(where: {tagSlugIn: "${tag}"}, first: ${POSTS_PER_FETCH}, after: ${`"${after}"`}) {
+                posts(where: {tagSlugIn: "${tag}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -115,7 +115,7 @@ export const getPostListByTag = async (
 };
 
 export const getPostListByCategory = async (
-	fetch: Function,
+  fetch: Function,
   category: string,
   after: string | null = null
 ): Promise<PostListByCategoryResponse> => {
@@ -130,7 +130,7 @@ export const getPostListByCategory = async (
             query PostsByCategory {
                 category(id: "${category}", idType: SLUG) {
                     name
-                    posts(first: ${POSTS_PER_FETCH}, after: ${`"${after}"`}) {
+                    posts(first: ${POSTS_PER_FETCH}, after: "${after}") {
                         ${QUERIES.pageInfo}
                         edges {
                             cursor
@@ -213,7 +213,7 @@ export const getTagList = async (
       body: JSON.stringify({
         query: `
             query AllTagsPaginated {
-                tags(first: ${POSTS_PER_FETCH}, after: ${`"${after}"`}) {
+                tags(first: ${POSTS_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor

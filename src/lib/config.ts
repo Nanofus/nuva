@@ -1,24 +1,24 @@
-export const API_PATH = 'https://klaanon.fi/wp/graphql';
+export const API_PATH = "https://klaanon.fi/wp/graphql";
 export const POSTS_PER_FETCH = 100;
-export const LOCALSTORAGE_AUTH_KEY = 'auth';
-export const LOCALE = 'fi-FI';
+export const LOCALSTORAGE_AUTH_KEY = "auth";
+export const LOCALE = "fi-FI";
 
-export const SITE_NAME = 'Klaanon Nuva';
-export const SITE_NAME_DELIMITER = '—';
+export const SITE_NAME = "Klaanon Nuva";
+export const SITE_NAME_DELIMITER = "—";
 
 export const BANNER_COUNT = 7;
 
-export const FONT_PATH = 'https://meri.klaanon.fi/fonts'
+export const FONT_PATH = "https://meri.klaanon.fi/fonts";
 
 export const QUERIES = {
-	pageInfo: `
+  pageInfo: `
         pageInfo {
             hasNextPage
             hasPreviousPage
             startCursor
             endCursor
         }`,
-	postMeta: `
+  postMeta: `
         title
         slug
         rawDate: date
@@ -32,7 +32,7 @@ export const QUERIES = {
             featuredimage
         }
         commentCount`,
-	postContent: `
+  postContent: `
         title
         slug
         rawDate: date
@@ -64,7 +64,7 @@ export const QUERIES = {
         }
         commentCount
         content`,
-	postComments: `
+  postComments: `
         comments {
             nodes {
                 date

@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import { isLoggedIn } from "$lib/database";
-  import Login from "$lib/components/Login.svelte";
   import Navigation from "$lib/components/Navigation.svelte";
   import Header from "$lib/components/Header.svelte";
   import Footer from "$lib/components/Footer.svelte";

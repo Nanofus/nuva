@@ -18,8 +18,8 @@
     font-family: var(--nav-font-family);
     height: 3em;
     padding: 0;
-		width: 100%;
-		margin: 0;
+    width: 100%;
+    margin: 0;
     line-height: 2.5em;
     display: flex;
     justify-content: center;

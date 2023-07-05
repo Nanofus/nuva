@@ -12,7 +12,7 @@
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPostList(null, data.endCursor);
+    const newData = await getPostList(fetch, data.endCursor);
     data = {
       posts: [...data.posts, ...newData.posts],
       endCursor: newData.endCursor,

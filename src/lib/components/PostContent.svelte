@@ -10,7 +10,7 @@
     (1, eval)(post.scripts);
 
     // Parse JS from post content and eval it
-    var doc = document.implementation.createHTMLDocument(); // Sandbox
+    const doc = document.implementation.createHTMLDocument(); // Sandbox
     doc.body.innerHTML = post.content;
     [].map.call(doc.getElementsByTagName("script"), (scriptTag: HTMLScriptElement) => {
       (1, eval)(scriptTag.innerText);

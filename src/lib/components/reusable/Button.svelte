@@ -11,6 +11,6 @@
     color: #fff;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    border: 0px;
+    border: 0;
   }
 </style>

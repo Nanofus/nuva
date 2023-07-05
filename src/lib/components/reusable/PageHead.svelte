@@ -1,7 +1,7 @@
 <script>
-    import { SITE_NAME, SITE_NAME_DELIMITER } from "$lib/config";
+  import { SITE_NAME, SITE_NAME_DELIMITER } from "$lib/config";
 
-    export let title = null;
+  export let title = null;
 </script>
 
 <svelte:head>

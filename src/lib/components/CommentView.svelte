@@ -25,7 +25,7 @@
       <svelte:self on:commentSent={commentSent} comment={child} {postId} />
     {/each}
   </div>
-  <CommentReply on:commentSent={commentSent} {postId} parent={comment._id} />
+  <CommentReply on:commentSent={commentSent} parent={comment._id} {postId} />
 </div>
 
 <style lang="scss">

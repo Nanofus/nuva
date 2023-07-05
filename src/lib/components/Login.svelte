@@ -10,7 +10,7 @@
   let loggedIn: boolean | null = null;
   let password = "";
   let username = "";
-  let loggedInUsername = "";
+  let loggedInUsername;
 
   $: loggedIn ? loggedInUsername = <string>getAuthInfo()?.username : loggedInUsername = "";
 
@@ -26,9 +26,10 @@
     <Form>
       <Input label="Käyttäjätunnus" name="username" bind:value={username} />
       <Input label="Salasana" name="password" type="password" bind:value={password} />
-      <Button on:click={async () => await login(username, password)}>Kirjaudu sisään</Button>
+      <Button on:click={async () => await login(fetch, username, password)}>Kirjaudu sisään</Button>
     </Form>
   {:else if loggedIn}
-    <span>{loggedInUsername}</span> <Button on:click={() => logout()}>Kirjaudu ulos</Button>
+    <span>{loggedInUsername}</span>
+    <Button on:click={() => logout()}>Kirjaudu ulos</Button>
   {/if}
 </div>

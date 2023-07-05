@@ -1,48 +1,48 @@
 :root {
-	--text-area-height: 120px;
-	--toastContainerBottom: auto;
-	--toastContainerRight: auto;
-	--toastContainerTop: 3rem;
-	--toastContainerLeft: calc(50vw - 8rem);
-	--header-banner-dimensions-ratio: 6; // width divided by height
-	--page-max-width: 1190px;
-	--article-text-width: 606px;
+  --text-area-height: 120px;
+  --toastContainerBottom: auto;
+  --toastContainerRight: auto;
+  --toastContainerTop: 3rem;
+  --toastContainerLeft: calc(50vw - 8rem);
+  --header-banner-dimensions-ratio: 6; // width divided by height
+  --page-max-width: 1190px;
+  --article-text-width: 606px;
 }
 
 
 /* Typography */
 
 :root {
-	--header-font-family: "Trajan Pro", serif;
-	--header-secondary-font-family: "Optimus Princeps", "Trajan Pro", serif;
-	--accent-font-family: "Inconsolata", sans-serif;
-	--nav-font-family: "Voya Nui", sans-serif;
-	--body-text-font-family: "Noto Serif", serif;
-	--font-size-body: 1rem;
-	--font-size-h1: 3rem;
-	--font-size-h2: 2rem;
+  --header-font-family: "Trajan Pro", serif;
+  --header-secondary-font-family: "Optimus Princeps", "Trajan Pro", serif;
+  --accent-font-family: "Inconsolata", sans-serif;
+  --nav-font-family: "Voya Nui", sans-serif;
+  --body-text-font-family: "Noto Serif", serif;
+  --font-size-body: 1rem;
+  --font-size-h1: 3rem;
+  --font-size-h2: 2rem;
 }
 
 
 /* Images */
 
 :root {
-	--background-image-default: url(/images/bg.webp);
-	--hr-background-image: url(/images/hrbg.png);
+  --background-image-default: url("/images/bg.webp");
+  --hr-background-image: url("/images/hrbg.png");
 }
 
 
 /* Colors */
 
 :root {
-	--text-light: rgba(0,0,0,0.75);
-	--text-dark: rgba(255,255,255,0.8);
-	--hover-light: #76AFCC;
-	--hover-dark: #3a3a3a;
-	--background-light: #fff;
-	--background-dark: #000000;
-	--link-light: #5a869d;
-	--link-dark: #81d4fa;
-	--selection: #ffff00;
-	--main-nav-color: #FFFFFF;
+  --text-light: rgba(0, 0, 0, 0.75);
+  --text-dark: rgba(255, 255, 255, 0.8);
+  --hover-light: #76AFCC;
+  --hover-dark: #3a3a3a;
+  --background-light: #fff;
+  --background-dark: #000000;
+  --link-light: #5a869d;
+  --link-dark: #81d4fa;
+  --selection: #ffff00;
+  --main-nav-color: #FFFFFF;
 }

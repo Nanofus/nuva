@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script context="module" lang="ts">
   let counter: number = 0;
 </script>
 <script lang="ts">
@@ -20,7 +20,7 @@
 {#if type === "multiline"}
   <textarea id={elementId} {name} {placeholder} {value} on:input={handleInput}></textarea>
 {:else}
-  <input id={elementId} {name} {placeholder} {value} {type} on:input={handleInput}/>
+  <input id={elementId} {name} {placeholder} {value} {type} on:input={handleInput} />
 {/if}
 
 <style lang="scss">

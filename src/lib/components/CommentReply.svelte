@@ -1,7 +1,7 @@
 <script lang="ts">
   import { postComment } from "$lib/database";
   import { loginInfo } from "$lib/stores";
-	import { toast } from '@zerodevx/svelte-toast';
+  import { toast } from "@zerodevx/svelte-toast";
   import { createEventDispatcher } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
   import Input from "$lib/components/reusable/Input.svelte";
@@ -23,10 +23,10 @@
 
   const sendComment = async () => {
     if (!content || content === "") {
-			toast.push("Kommentti ei voi olla tyhjä", toastThemes.error);
-			return;
-		}
-    await postComment(postId, parent, content);
+      toast.push("Kommentti ei voi olla tyhjä", toastThemes.error);
+      return;
+    }
+    await postComment(fetch, postId, parent, content);
     dispatch("commentSent");
     content = "";
     open = false;
