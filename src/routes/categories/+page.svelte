@@ -1,34 +1,30 @@
 <script lang="ts">
-	import type { CategoryListResponse } from '$lib/types';
+  import type { CategoryListResponse } from "$lib/types";
+  import Head from "$lib/components/reusable/Head.svelte";
+  import PageContent from "$lib/components/reusable/PageContent.svelte";
+  import List from "$lib/components/reusable/List.svelte";
 
-	export let data: CategoryListResponse;
+  export let data: CategoryListResponse;
 </script>
 
-<h2>Kategoriat</h2>
-<ul>
-	{#each data.categories as category}
-		<li>
-			<a href="/categories/{category.slug}">{category.name}</a>
-			{#if category.children.length > 0}
-				<ul class="child-list">
-					{#each category.children as child}
-						<li>
-							<a href="/categories/{child.slug}">{child.name}</a>
-						</li>
-					{/each}
-				</ul>
-			{/if}
-		</li>
-	{/each}
-</ul>
+<Head title="Kategoriat" />
 
-<style lang="scss">
-	ul {
-		list-style: none;
-		padding: 0;
-
-		&.child-list {
-			padding-left: 1em;
-		}
-	}
-</style>
+<PageContent>
+  <h2>Kategoriat</h2>
+  <List>
+    {#each data.categories as category}
+      <li>
+        <a href="/categories/{category.slug}">{category.name}</a>
+        {#if category.children.length > 0}
+          <List>
+            {#each category.children as child}
+              <li>
+                <a href="/categories/{child.slug}">{child.name}</a>
+              </li>
+            {/each}
+          </List>
+        {/if}
+      </li>
+    {/each}
+  </List>
+</PageContent>

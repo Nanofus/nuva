@@ -13,7 +13,7 @@
 	};
 </script>
 
-<div id="comments" class="comments">
+<div id="comments">
 	<h2>{post.commentCount} kommenttia</h2>
 	{#each post.comments as comment}
 		<CommentView on:commentSent={refreshComments} postId={post._id} {comment} />

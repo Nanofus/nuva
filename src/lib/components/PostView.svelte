@@ -41,7 +41,7 @@
 	</div>
 </header>
 
-<div class="post-content">{@html post.content}</div>
+<article class="post-content">{@html post.content}</article>
 
 <footer class="post-footer">
 	<TagList tags={post.tags} />
@@ -49,7 +49,9 @@
 </footer>
 
 <style lang="scss">
-	.post-content {
+	article {
+    width: var(--article-text-width);
+		padding: 5em calc((var(--page-max-width) - var(--article-text-width)) / 2);
 		margin: 2rem 0;
 	}
 </style>

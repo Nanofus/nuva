@@ -6,7 +6,7 @@
 
 <ul class="categories">
     {#each categories as category}
-        <li><a href="/categories/{category.slug}" class="tag">{category.name}</a></li>
+        <li><a href="/categories/{category.slug}" class="category">{category.name}</a></li>
     {/each}
 </ul>
 

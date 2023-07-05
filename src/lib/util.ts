@@ -1,5 +1,24 @@
 import type { Hierarchical } from '$lib/types';
 
+export const toastThemes = {
+	error: {
+				theme: {
+					"--toastBackground": "#ff0000",
+					"--toastProgressBackground": "#ff0000",
+					"--toastProgressAfterBackground": "#ff0000",
+					"--toastColor": "#fff",
+				},
+			},
+	success: {
+				theme: {
+					"--toastBackground": "#00ff00",
+					"--toastProgressBackground": "#00ff00",
+					"--toastProgressAfterBackground": "#00ff00",
+					"--toastColor": "#fff",
+				},
+			},
+}
+
 export const objectsToHierarchy = (arr: Hierarchical[]) => {
 	let arrMap = new Map(arr.map((item: Hierarchical) => [item._id, item]));
 	let tree = [];

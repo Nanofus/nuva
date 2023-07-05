@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { LOCALE } from '$lib/config';
 	import type { PostMeta } from '$lib/types';
+	import List from "$lib/components/reusable/List.svelte";
 
 	export let posts: PostMeta[];
 </script>
 
-<ul class="post-list">
+<List>
 		<li class="list-header">
 			<span class="link">Viesti (kommentteja)</span>
 			<span class="date">Julkaisupäivä</span>
@@ -18,14 +19,9 @@
 			<span class="authors">{post.authors.join(', ')}</span>
 		</li>
 	{/each}
-</ul>
+</List>
 
 <style lang="scss">
-	ul {
-		list-style: none;
-		padding: 0;
-	}
-
 	li {
 		width: 100%;
 		display: flex;

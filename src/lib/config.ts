@@ -6,6 +6,8 @@ export const LOCALE = 'fi-FI';
 export const SITE_NAME = 'Klaanon Nuva';
 export const SITE_NAME_DELIMITER = '—';
 
+export const BANNER_COUNT = 7;
+
 export const FONT_PATH = 'https://meri.klaanon.fi/fonts'
 
 export const QUERIES = {

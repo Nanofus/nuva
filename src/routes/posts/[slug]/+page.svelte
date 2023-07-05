@@ -1,30 +1,18 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import type { Post } from '$lib/types';
 	import PostView from '$lib/components/PostView.svelte';
+  import Head from "$lib/components/reusable/Head.svelte";
+	import PageContent from "$lib/components/reusable/PageContent.svelte";
 
 	export let data: Post;
-	let loading = true;
-
-	onMount(() => {
-		loading = false;
-		if (data.content) console.log(data);
-	});
 </script>
 
-<article>
-	{#if loading}
-		<div>Ladataan...</div>
-	{:else if data.content}
+<Head title={data.title} />
+
+<PageContent>
+	{#if data.content}
 		<PostView post={data} />
 	{:else}
 		<h2>Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.</h2>
 	{/if}
-</article>
-
-<style lang="scss">
-	article {
-		width: var(--article-text-width);
-		padding: 5em calc((var(--page-max-width) - var(--article-text-width)) / 2);
-	}
-</style>
+</PageContent>

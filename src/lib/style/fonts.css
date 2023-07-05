@@ -1,3 +1,4 @@
+/*
 @font-face {
 	font-family: "Argor Brujsh Scaqh";
 	src: url("ARGBRUJS.eot");
@@ -206,9 +207,11 @@
 	src: url('static.ttf');
 	src: url('static.woff');
 }
+*/
 
 
 /* Computer Modern Unicode */
+/*
 @font-face {
 	font-family:	"CMU Serif";
 	src: url("CMU_Serif/cmunrm.eot");
@@ -245,3 +248,4 @@
 	src: url("CMU_Serif/cmunbi.ttf");			
 	src: url("CMU_Serif/cmunbi.woff");
 }
+*/

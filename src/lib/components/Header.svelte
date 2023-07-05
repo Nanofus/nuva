@@ -1,21 +1,18 @@
 <script>
-    import { browser } from '$app/environment';
+  import { BANNER_COUNT } from "$lib/config";
 
-    let url;
-    if (!browser || typeof url === "undefined") url =
-        "https://klaanon.fi/wp/wp-content/themes/klaanon/header-images/banner"
-        + Math.round(1 + 6*Math.random())
-        + ".png";
+  let header;
+  let bannerUrl = `url("https://klaanon.fi/wp/wp-content/themes/klaanon/header-images/banner${(new Date().getMinutes() % BANNER_COUNT) + 1}.png")`;
 </script>
 
-<header>
-    <h1>Klaanon Nuva</h1>
-    <img id="banner" src="{url}" />
+<header bind:this={header} style="background-image: {bannerUrl}">
+  <h1>Klaanon Nuva</h1>
 </header>
 
 <style>
     header {
         height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
+        background-position: center;
     }
 
     header > * {
