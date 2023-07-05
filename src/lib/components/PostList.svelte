@@ -1,51 +1,35 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
   import type { PostMeta } from "$lib/types";
-  import List from "$lib/components/reusable/List.svelte";
 
   export let posts: PostMeta[];
 </script>
 
-<List>
-  <li class="list-header">
-    <span class="link">Viesti (kommentteja)</span>
-    <span class="date">Julkaisupäivä</span>
-    <span class="authors">Kirjoittajat</span>
-  </li>
+<table>
+  <tr>
+    <th class="link">Nimi</th>
+    <th class="date">Julkaisu</th>
+    <th class="authors">Kirjoittajat</th>
+    <th class="comments">Kommentteja</th>
+  </tr>
   {#each posts as post}
-    <li>
-      <span class="link"><a href="/posts/{post.slug}">{post.title}</a> ({post.commentCount ? post.commentCount : 0}
-        )</span>
-      <time class="date">{post.date.toLocaleDateString(LOCALE)}</time>
-      <span class="authors">{post.authors.join(', ')}</span>
-    </li>
+    <tr>
+      <td class="link"><a href="/posts/{post.slug}">{post.title}</a></td>
+      <td class="date">{post.date.toLocaleDateString(LOCALE)}</td>
+      <td class="authors">{post.authors.join(', ')}</td>
+      <td class="comments">{post.commentCount ? post.commentCount : 0}</td>
+    </tr>
   {/each}
-</List>
+</table>
 
 <style lang="scss">
-  li {
+  table {
     width: 100%;
-    display: flex;
-  }
+    padding: 2rem;
 
-  .link {
-    flex: 7;
-
-    a {
-      margin-right: 0.5rem;
+    td, th {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
     }
-  }
-
-  .date {
-    flex: 2;
-  }
-
-  .authors {
-    flex: 3;
-  }
-
-  .list-header {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
   }
 </style>

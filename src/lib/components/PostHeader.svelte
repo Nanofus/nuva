@@ -1,14 +1,14 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
-  import CategoryList from "$lib/components/CategoryList.svelte";
   import type { Post } from "$lib/types";
+  import PostCategories from "$lib/components/PostCategories.svelte";
 
   export let post: Post;
 </script>
 
 <header class="post-header">
   <div class="post-meta">
-    <CategoryList categories={post.categories} />
+    <PostCategories categories={post.categories} />
   </div>
   <h1 class="post-title">{post.title}</h1>
   <div class="post-meta">
