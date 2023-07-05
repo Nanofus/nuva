@@ -1,9 +1,7 @@
 /***********
- * General *
+ * Post content *
  ***********/
 
-
-/* Post media */
 
 article {
   img {
@@ -11,100 +9,6 @@ article {
     vertical-align: middle;
   }
 }
-
-/* Tag list*/
-
-.tags li {
-  background: rgba(0, 0, 0, 0.1);
-  margin: 0.125rem 0.25rem;
-  position: relative;
-  border-radius: 0.25rem;
-  font-size: 0.8em;
-  font-weight: 700;
-  line-height: 1.2727272727;
-  font-family: var(--accent-font-family);
-  text-transform: uppercase;
-
-  a {
-    display: block;
-    text-decoration: none;
-    padding: 0.25rem 0.5rem;
-  }
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.03);
-  }
-}
-
-.tags {
-  text-align: center;
-}
-
-/* Post meta */
-
-.post-meta {
-  font-family: var(--accent-font-family);
-  font-weight: bold;
-
-  > * {
-    margin: 0 1rem 0 0;
-
-    &:before {
-      margin-right: 0.2rem;
-      position: relative;
-      top: 0.1rem;
-      font: normal 1rem/1 "Genericons-Neue";
-    }
-
-    a, a:link, a:visited {
-      text-decoration: none;
-    }
-  }
-
-  .categories {
-    text-transform: uppercase;
-  }
-}
-
-.post-date:before, .post-authors:before {
-  content: "\f303";
-}
-
-.post-authors:before {
-  content: "\f304";
-}
-
-.post-comments-link:before {
-  content: "\f300";
-}
-
-.search-area button:before {
-  content: "\f400";
-  position: relative;
-  font: normal 1rem/1 "Genericons-Neue";
-  top: 0.1rem;
-  margin-right: 0.1rem;
-}
-
-
-/* Comment section */
-
-.comment-header {
-  font-weight: bold;
-  text-transform: uppercase;
-  font-family: var(--accent-font-family);
-  font-size: 1.25em;
-}
-
-
-/* Sidebar */
-
-.sidebar {
-  background: rgba(0,0,0,1);
-  color: var(--text-dark);
-}
-
-
 
 
 /**************
@@ -123,7 +27,7 @@ p {
 h1, h2, h3, h4 {
   font-family: var(--header-font-family);
   font-weight: normal;
-  text-shadow: 0 0 1.25rem rgba(0,0,0,0.75);
+  text-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.75);
 }
 
 h1 {
@@ -163,21 +67,17 @@ hr {
 }
 
 
-
-
 /**********
  * Themes *
  **********/
 
 
 body.classic {
-
   background-color: var(--background-dark);
   background-image: var(--background-image-default);
 
   main {
     background-color: var(--background-light);
-    box-shadow: 0 0 1rem rgba(0,0,0,1) inset;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 1) inset;
   }
-
 }

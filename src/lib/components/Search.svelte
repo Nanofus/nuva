@@ -20,5 +20,13 @@
     margin: 0 1rem;
     vertical-align: middle;
     line-height: 3rem;
+
+    button:before {
+      content: "\f400";
+      position: relative;
+      font: normal 1rem/1 "Genericons-Neue";
+      top: 0.1rem;
+      margin-right: 0.1rem;
+    }
   }
 </style>

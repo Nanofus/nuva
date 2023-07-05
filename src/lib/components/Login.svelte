@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { login, logout } from "$lib/database";
+  import { getAuthInfo, login, logout } from "$lib/database";
   import { loginInfo } from "$lib/stores";
   import { onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
@@ -10,6 +10,9 @@
   let loggedIn: boolean | null = null;
   let password = "";
   let username = "";
+  let loggedInUsername = "";
+
+  $: loggedIn ? loggedInUsername = <string>getAuthInfo()?.username : loggedInUsername = "";
 
   onMount(() => {
     loginInfo.subscribe((loginInfo) => loggedIn = !!loginInfo);
@@ -23,21 +26,9 @@
     <Form>
       <Input label="Käyttäjätunnus" name="username" bind:value={username} />
       <Input label="Salasana" name="password" type="password" bind:value={password} />
-      <Button on:click={async () => await login(username, password)}>Login</Button>
+      <Button on:click={async () => await login(username, password)}>Kirjaudu sisään</Button>
     </Form>
   {:else if loggedIn}
-    <Button on:click={() => logout()}>Logout</Button>
+    <span>{loggedInUsername}</span> <Button on:click={() => logout()}>Kirjaudu ulos</Button>
   {/if}
 </div>
-
-<style lang="scss">
-  .login-area {
-    margin: 1rem;
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    width: auto;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 0.5em;
-  }
-</style>

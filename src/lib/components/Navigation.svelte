@@ -1,5 +1,6 @@
 <script lang="ts">
   import Search from "$lib/components/Search.svelte";
+  import Login from "$lib/components/Login.svelte";
 </script>
 
 <nav>
@@ -8,6 +9,7 @@
   <a href="/tags">Tagit</a>
   <a href="https://arkisto.klaanon.fi/soundtracks/">Soundtrackit</a>
   <Search />
+  <Login />
 </nav>
 
 <style lang="scss">
@@ -16,8 +18,8 @@
     font-family: var(--nav-font-family);
     height: 3em;
     padding: 0;
-    width: 100%;
-    margin: 0;
+		width: 100%;
+		margin: 0;
     line-height: 2.5em;
     display: flex;
     justify-content: center;

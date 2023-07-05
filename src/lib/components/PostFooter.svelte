@@ -10,3 +10,9 @@
   <TagList tags={post.tags} />
   <CommentArea {post} />
 </footer>
+
+<style lang="scss">
+  footer {
+    width: var(--article-text-width);
+  }
+</style>

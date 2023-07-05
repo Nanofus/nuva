@@ -19,3 +19,37 @@
 		</span>
   </div>
 </header>
+
+<style lang="scss">
+  .post-meta {
+    font-family: var(--accent-font-family);
+    font-weight: bold;
+
+    > * {
+      margin: 0 1rem 0 0;
+
+      &:before {
+        margin-right: 0.2rem;
+        position: relative;
+        top: 0.1rem;
+        font: normal 1rem/1 "Genericons-Neue";
+      }
+
+      a, a:link, a:visited {
+        text-decoration: none;
+      }
+    }
+
+    .post-date:before, .post-authors:before {
+      content: "\f303";
+    }
+
+    .post-authors:before {
+      content: "\f304";
+    }
+
+    .post-comments-link:before {
+      content: "\f300";
+    }
+  }
+</style>
