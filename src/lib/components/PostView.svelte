@@ -36,7 +36,7 @@
 		<time class="post-date">{post.date.toLocaleDateString(LOCALE)}</time>
 		<span class="post-authors">{post.authors.join(', ')}</span>
 		<span class="post-comments-link">
-			<a href="#comments">{post.commentCount} kommenttia</a>
+			<a href="#comments">{post.commentCount ? post.commentCount : 0} kommenttia</a>
 		</span>
 	</div>
 </header>

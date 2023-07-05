@@ -13,7 +13,7 @@
 		</li>
 	{#each posts as post}
 		<li>
-			<span class="link"><a href="/posts/{post.slug}">{post.title}</a> ({post.commentCount})</span>
+			<span class="link"><a href="/posts/{post.slug}">{post.title}</a> ({post.commentCount ? post.commentCount : 0})</span>
 			<time class="date">{post.date.toLocaleDateString(LOCALE)}</time>
 			<span class="authors">{post.authors.join(', ')}</span>
 		</li>
