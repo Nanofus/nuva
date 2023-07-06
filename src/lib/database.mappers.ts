@@ -14,7 +14,7 @@ export const dataToPostMeta = (data: any): PostMeta => {
   };
 };
 
-export const dataToCommentsForPost = (nodes: any): Comment[] => {
+export const dataToComments = (nodes: any): Comment[] => {
   const comments = nodes.map((comment: any) => {
     return {
       date: new Date(comment.date),
@@ -57,7 +57,7 @@ export const dataToPost = (data: any): Post | null => {
         name: tag.name
       };
     }),
-    comments: dataToCommentsForPost(data.comments.nodes)
+    comments: dataToComments(data.comments.nodes)
   };
 };
 

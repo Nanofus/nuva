@@ -4,7 +4,6 @@
   import PostList from "$lib/components/PostList.svelte";
   import Button from "$lib/components/reusable/Button.svelte";
   import PageHead from "$lib/components/reusable/PageHead.svelte";
-  import PageContent from "$lib/components/reusable/PageContent.svelte";
 
   export let data: PostListByCategoryResponse;
   let fetching = false;
@@ -25,10 +24,8 @@
 
 <PageHead title={data.category} />
 
-<PageContent>
-  <h2>Kategoria: {data.category}</h2>
-  <PostList posts={data.posts} />
-  {#if data.hasNextPage && !fetching}
-    <Button on:click={fetchMorePosts}>Lataa lisää</Button>
-  {/if}
-</PageContent>
+<h2>Kategoria: {data.category}</h2>
+<PostList posts={data.posts} />
+{#if data.hasNextPage && !fetching}
+  <Button on:click={fetchMorePosts}>Lataa lisää</Button>
+{/if}

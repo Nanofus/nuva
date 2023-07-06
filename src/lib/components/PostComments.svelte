@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Post } from "$lib/types";
-	import CommentReply from "$lib/components/CommentReply.svelte";
+	import CommentForm from "$lib/components/CommentForm.svelte";
 	import { getCommentsForPostBySlug } from "$lib/database";
   import Comment from "$lib/components/Comment.svelte";
 
@@ -18,7 +18,7 @@
   {#each post.comments as comment}
     <Comment on:commentSent={refreshComments} postId={post._id} {comment} />
   {/each}
-  <CommentReply on:commentSent={refreshComments} parent={0} postId={post._id} />
+  <CommentForm on:commentSent={refreshComments} parent={0} postId={post._id} />
 </div>
 
 <style lang="scss">

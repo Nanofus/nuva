@@ -2,16 +2,15 @@
   import { onMount } from "svelte";
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import { isLoggedIn } from "$lib/database";
-  import Navigation from "$lib/components/Navigation.svelte";
   import Header from "$lib/components/Header.svelte";
   import Footer from "$lib/components/Footer.svelte";
   import PageHead from "$lib/components/reusable/PageHead.svelte";
-
-  // Global styles
   import "$lib/style/variables.scss";
-  import "$lib/style/style.scss";
+  import "$lib/style/theme.scss";
   import "$lib/style/fonts.css";
   import "$lib/style/font_class.css";
+  import PageContent from "$lib/components/reusable/PageContent.svelte";
+  import Navigation from "$lib/components/Navigation.svelte";
 
   let loggedIn: boolean;
 
@@ -25,11 +24,11 @@
 <div id="page">
   <Header />
   <Navigation />
-  <main>
+  <PageContent>
     <slot />
-  </main>
-  <SvelteToast options={{ reversed: true, intro: { y: -20 } }} />
+  </PageContent>
   <Footer />
+  <SvelteToast options={{ reversed: true, intro: { y: -20 } }} />
 </div>
 
 <style lang="scss">
@@ -40,17 +39,24 @@
     background-image: var(--background-image-default);
   }
 
+  :global(::selection) {
+    background-color: var(--selection);
+  }
+
+  :global(img) {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+
+  :global(p) {
+    text-align: justify;
+  }
+
   #page {
     position: relative;
     margin: auto;
     min-width: var(--article-text-width);
     width: 100%;
     max-width: var(--page-max-width);
-  }
-
-  main {
-    padding-bottom: 3rch;
-    margin-bottom: 3rch;
-    background-color: var(--background-light);
   }
 </style>

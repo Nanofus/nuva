@@ -1,8 +1,6 @@
 <span class="loader"></span>
 
 <style lang="scss">
-  @import '../../style/variables.scss';
-
   .loader {
     width: 48px;
     height: 48px;

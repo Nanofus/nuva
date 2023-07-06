@@ -1,27 +1,10 @@
-/***********
- * Post content *
- ***********/
-
-
-article {
-  img {
-    max-width: 100%;
-    vertical-align: middle;
-  }
-}
-
 
 /**************
  * Typography *
  **************/
 
-
 body {
   font-family: var(--body-text-font-family);
-}
-
-p {
-  text-align: justify;
 }
 
 h1, h2, h3, h4 {
@@ -64,20 +47,4 @@ hr {
   background-repeat: no-repeat;
   background-position: center center;
   background-image: var(--hr-background-image);
-}
-
-
-/**********
- * Themes *
- **********/
-
-
-body.classic {
-  background-color: var(--background-dark);
-  background-image: var(--background-image-default);
-
-  main {
-    background-color: var(--background-light);
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 1) inset;
-  }
 }

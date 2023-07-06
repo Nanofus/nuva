@@ -3,7 +3,7 @@ import { toast } from "@zerodevx/svelte-toast";
 import { browser } from "$app/environment";
 import { error } from "@sveltejs/kit";
 import { loginInfo } from "$lib/stores";
-import { dataToCategories, dataToCommentsForPost, dataToPost, dataToPostMeta, dataToTags } from "$lib/database.mappers";
+import { dataToCategories, dataToComments, dataToPost, dataToPostMeta, dataToTags } from "$lib/database.mappers";
 import type {
   AuthInfo,
   CategoryListResponse,
@@ -67,7 +67,7 @@ export const getCommentsForPostBySlug = async (
       })
     })
   ).json();
-  return dataToCommentsForPost(response.data.post.comments.nodes);
+  return dataToComments(response.data.post.comments.nodes);
 };
 
 export const getPostListByTag = async (

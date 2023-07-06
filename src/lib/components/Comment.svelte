@@ -1,7 +1,7 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
   import type { Comment } from "$lib/types";
-  import CommentReply from "$lib/components/CommentReply.svelte";
+  import CommentForm from "$lib/components/CommentForm.svelte";
   import { createEventDispatcher } from "svelte";
 
   export let comment: Comment;
@@ -25,7 +25,7 @@
       <svelte:self on:commentSent={commentSent} comment={child} {postId} />
     {/each}
   </div>
-  <CommentReply on:commentSent={commentSent} parent={comment._id} {postId} />
+  <CommentForm on:commentSent={commentSent} parent={comment._id} {postId} />
 </div>
 
 <style lang="scss">

@@ -18,15 +18,15 @@
   });
 </script>
 
-<article class="post-content">
+<section class="post-content">
   {#if post.styles}
     <div class="post-style-container">{@html `<style>${post.styles}</style>`}</div>
   {/if}
   {@html post.content}
-</article>
+</section>
 
 <style lang="scss">
-  article {
+  section {
     width: var(--article-text-width);
     margin: 2rem 0;
   }
