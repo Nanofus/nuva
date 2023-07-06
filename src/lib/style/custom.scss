@@ -1,4 +1,6 @@
+
 /* Erikoismuotoilut */
+
 .feterra {
     font-family: Impact;
     font-size: 1em;
@@ -143,6 +145,7 @@
 }
 
 /* Tasaukset */
+
 .left, .left p {
     text-align: left !important;
 }
@@ -156,6 +159,7 @@
 }
 
 /* Palstoitus */
+
 .twocolumns {
     column-rule: 1px solid rgba(0, 0, 0, 0.3);
     -moz-column-rule: 1px solid rgba(0, 0, 0, 0.3);
@@ -169,6 +173,7 @@
 }
 
 /* Fonttikoko */
+
 .small {
     font-size: 0.8em !important;
 }
@@ -192,6 +197,8 @@
 
 /********************************************/
 /* TYHJÄT RIVIVÄLIT, SAATANAN KERETTILÄISET */
+/********************************************/
+
 div.rv1 {
     height: 1em;
     width: 100%;
@@ -361,6 +368,7 @@ div.rv21 {
 }
 
 /* DOKTOR VIKTOR VON NEBULA */
+
 @keyframes viktor {
     0% {
         color: #000000;

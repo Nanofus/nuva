@@ -11,7 +11,7 @@
 <div class="search-area">
   <Form>
     <Input bind:value={searchTerm} placeholder="Hakusanat" />
-    <Button on:click={search}>Etsi</Button>
+    <Button icon="\f400" on:click={search}>Etsi</Button>
   </Form>
 </div>
 
@@ -20,13 +20,5 @@
     margin: 0 1rem;
     vertical-align: middle;
     line-height: 3rem;
-
-    button:before {
-      content: "\f400";
-      position: relative;
-      font: normal 1rem/1 "Genericons-Neue";
-      top: 0.1rem;
-      margin-right: 0.1rem;
-    }
   }
 </style>

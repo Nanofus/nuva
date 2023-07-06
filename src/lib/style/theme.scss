@@ -1,10 +1,11 @@
-
-/**************
- * Typography *
- **************/
-
 body {
   font-family: var(--body-text-font-family);
+  background-color: var(--background-dark);
+  background-image: var(--background-image-default);
+}
+
+::selection {
+  background-color: var(--selection);
 }
 
 h1, h2, h3, h4 {

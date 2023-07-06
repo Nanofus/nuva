@@ -7,8 +7,8 @@
   import PageHead from "$lib/components/reusable/PageHead.svelte";
   import "$lib/style/variables.scss";
   import "$lib/style/theme.scss";
-  import "$lib/style/fonts.css";
-  import "$lib/style/font_class.css";
+  import "$lib/style/fonts.scss";
+  import "$lib/style/custom.scss";
   import PageContent from "$lib/components/reusable/PageContent.svelte";
   import Navigation from "$lib/components/Navigation.svelte";
 
@@ -35,12 +35,6 @@
   :global(body) {
     margin: 0;
     padding: 0;
-    background-color: var(--background-dark);
-    background-image: var(--background-image-default);
-  }
-
-  :global(::selection) {
-    background-color: var(--selection);
   }
 
   :global(img) {
