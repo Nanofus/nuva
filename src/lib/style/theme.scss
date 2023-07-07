@@ -25,15 +25,19 @@ h2 {
   font-size: var(--font-size-h2);
   text-align: center;
   margin: 4rem 0 2rem;
+  display: flex;
+  justify-content: center;
 
   &:before {
-    content: "— ";
+    content: "—";
     font-weight: lighter;
+    margin-right: 1rem;
   }
 
   &:after {
-    content: " —";
+    content: "—";
     font-weight: lighter;
+    margin-left: 1rem;
   }
 }
 
