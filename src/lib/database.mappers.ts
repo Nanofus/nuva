@@ -9,6 +9,18 @@ export const dataToPostMeta = (data: any): PostMeta => {
     authors: data.additionalFields.authorgroup
       ? data.additionalFields.authorgroup.replace(" ", "").split(",")
       : [data.author.node.name],
+    categories: data.categories.nodes.map((category: any) => {
+      return {
+        slug: category.slug,
+        name: category.name
+      };
+    }),
+    tags: data.tags.nodes.map((tag: any) => {
+      return {
+        slug: tag.slug,
+        name: tag.name
+      };
+    }),
     featuredImage: data.additionalFields.featuredimage,
     commentCount: data.commentCount
   };

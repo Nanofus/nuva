@@ -32,6 +32,18 @@ export const QUERIES = {
             authorgroup
             featuredimage
         }
+        categories {
+            nodes {
+                slug
+                name
+            }
+        }
+        tags {
+            nodes {
+                name
+                slug
+            }
+        }
         commentCount`,
   postContent: `
         title
