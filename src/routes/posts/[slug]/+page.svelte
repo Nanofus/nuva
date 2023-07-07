@@ -8,9 +8,8 @@
   export let data: Post;
 </script>
 
-<PageHead title={data.title} />
-
 {#if data.content}
+  <PageHead title={data.title} />
   <article>
     <PostHeader post={data} />
     <PostContent post={data} />
@@ -22,6 +21,6 @@
 
 <style lang="scss">
   article {
-    max-width: var(--article-text-width);
+    max-width: var(--article-max-width);
   }
 </style>

@@ -8,7 +8,7 @@
 
 <style lang="scss">
   ul {
-    max-width: var(--article-text-width);
+    max-width: var(--article-max-width);
     list-style: none;
     padding: 0;
     margin: 0;

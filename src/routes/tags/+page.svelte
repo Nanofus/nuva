@@ -39,7 +39,7 @@
 
 <style lang="scss">
   .tags {
-    max-width: var(--article-text-width);
+    max-width: var(--article-max-width);
     text-align: center;
   }
 </style>

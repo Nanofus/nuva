@@ -6,7 +6,7 @@
   export let post: Post;
 </script>
 
-<footer class="post-footer">
+<footer id="post-footer">
   <PostTags tags={post.tags} />
   <PostComments {post} />
 </footer>

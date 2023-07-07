@@ -6,9 +6,9 @@
   export let post: Post;
 </script>
 
-<header class="post-header">
-  <h1 class="post-title">{post.title}</h1>
-  <div class="post-meta">
+<header id="post-header">
+  <h1 id="post-title">{post.title}</h1>
+  <div id="post-meta">
     <span class="post-categories">
       {#each post.categories as category}
         <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a></span>
@@ -23,7 +23,7 @@
 </header>
 
 <style lang="scss">
-  .post-meta {
+  #post-meta {
     font-family: var(--accent-font-family);
     text-align: center;
 

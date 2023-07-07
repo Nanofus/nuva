@@ -5,14 +5,15 @@
   export let tags: Tag[];
 </script>
 
-<div class="tags">
+<div id="post-tags">
   {#each tags as tag}
     <Pill href="/tags/{tag.slug}">{tag.name}</Pill>
   {/each}
 </div>
 
 <style lang="scss">
-  .tags {
+  #post-tags {
+    margin-top: 5rch;
     text-align: center;
   }
 </style>

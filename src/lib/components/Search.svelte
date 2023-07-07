@@ -17,6 +17,6 @@
 
 <style lang="scss">
   .search-area {
-    width: calc(var(--article-text-width) / 2);
+    width: calc(var(--article-max-width) / 2);
   }
 </style>

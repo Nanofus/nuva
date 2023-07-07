@@ -51,7 +51,7 @@
         </Form>
       {/if}
     {:else}
-      <a href="#" on:click={() => (open = true)}>Kommentoi</a>
+      <a role="button" tabindex="0" on:click={() => (open = true)}>Kommentoi</a>
     {/if}
   </div>
 {/if}

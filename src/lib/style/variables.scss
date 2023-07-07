@@ -29,6 +29,7 @@
   --font-size-body: 1rem;
   --font-size-h1: 3rem;
   --font-size-h2: 1.8rem;
+  --font-size-h4: 1.5rem;
 }
 
 /* Images */
@@ -47,6 +48,6 @@
   --toastContainerLeft: calc(50vw - 8rem);
   --header-banner-dimensions-ratio: 6; // width divided by height
   --page-max-width: 76rem;
-  --article-text-width: 38rem;
+  --article-max-width: 38rem;
   --mobile-horizontal-padding: 1.5rem;
 }

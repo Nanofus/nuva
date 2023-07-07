@@ -37,18 +37,24 @@ h2 {
 
 h4 {
   font-family: var(--header-secondary-font-family);
-  font-size: 1.8rem;
+  font-size: var(--font-size-h4);
   margin: 0.625rem 0;
 }
 
 a, a:link, a:visited {
   color: var(--link);
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover, a:active {
   color: var(--link-hover);
   text-decoration: underline;
+}
+
+pre {
+  background-color: var(--hover-dark);
+  padding: 1rem;
 }
 
 hr {

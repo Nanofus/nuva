@@ -20,10 +20,10 @@
   });
 </script>
 
-<section class="post-content">
-  {#if post.styles}
-    <div class="post-style-container">{@html `<style>${post.styles}</style>`}</div>
-  {/if}
+{#if post.styles}
+  <div id="post-style-container">{@html `<style>${post.styles}</style>`}</div>
+{/if}
+<section id="post-content">
   {@html post.content}
 </section>
 

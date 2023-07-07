@@ -47,7 +47,7 @@
 
 <style lang="scss">
   .login-area {
-    width: calc(var(--article-text-width) / 2);
+    width: calc(var(--article-max-width) / 2);
   }
 
   .user-info {
