@@ -64,7 +64,6 @@
 
   main {
     padding-bottom: 6rem;
-    margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
