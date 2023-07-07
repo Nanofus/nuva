@@ -76,6 +76,9 @@
     :global(h1) {
       font-size: 2.5rem;
     }
+    :global(h2) {
+      font-size: 1.5rem;
+    }
 
     main {
       padding-left: var(--mobile-horizontal-padding);

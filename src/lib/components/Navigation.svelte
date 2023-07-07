@@ -22,4 +22,10 @@
     justify-content: center;
     flex-wrap: wrap;
   }
+
+  @media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+    nav {
+      justify-content: space-evenly;
+    }
+  }
 </style>

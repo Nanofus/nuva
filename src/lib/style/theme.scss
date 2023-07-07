@@ -13,11 +13,11 @@ h1, h2, h3, h4 {
   font-weight: normal;
   text-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.75);
   overflow-wrap: break-word;
+  transition: font-size var(--transition-speed) ease-in-out;
 }
 
 h1 {
   font-size: var(--font-size-h1);
-  transition: font-size var(--transition-speed) ease-in-out;
   text-align: center;
 }
 
