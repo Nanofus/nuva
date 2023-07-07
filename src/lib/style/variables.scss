@@ -40,12 +40,12 @@
 /* Sizing */
 
 :root {
-  --text-area-height: 120px;
   --toastContainerBottom: auto;
   --toastContainerRight: auto;
   --toastContainerTop: 3rem;
   --toastContainerLeft: calc(50vw - 8rem);
   --header-banner-dimensions-ratio: 6; // width divided by height
-  --page-max-width: 1190px;
-  --article-text-width: 606px;
+  --page-max-width: 76rem;
+  --article-text-width: 38rem;
+  --mobile-horizontal-padding: 3rem;
 }

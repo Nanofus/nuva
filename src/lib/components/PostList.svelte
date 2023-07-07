@@ -22,7 +22,7 @@
 
 <style lang="scss">
   table {
-    width: calc(var(--article-text-width) * 1.5);
+    max-width: calc(var(--article-text-width) * 1.5);
     padding: 2rem;
 
     td, th {

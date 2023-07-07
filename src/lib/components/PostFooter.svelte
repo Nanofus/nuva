@@ -13,6 +13,6 @@
 
 <style lang="scss">
   footer {
-    width: var(--article-text-width);
+    max-width: var(--article-text-width);
   }
 </style>

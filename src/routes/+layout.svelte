@@ -31,6 +31,8 @@
 </div>
 
 <style lang="scss">
+  @import "$lib/style/variables.scss";
+
   :global(body) {
     margin: 0;
     padding: 0;
@@ -53,7 +55,6 @@
   #page {
     position: relative;
     margin: auto;
-    min-width: var(--article-text-width);
     width: 100%;
     max-width: var(--page-max-width);
   }
@@ -65,7 +66,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
     background-color: var(--background-light);
+  }
+
+  @media screen and (max-width: 44rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+    main {
+      padding-left: var(--mobile-horizontal-padding);
+      padding-right: var(--mobile-horizontal-padding);
+    }
   }
 </style>
