@@ -37,6 +37,7 @@
     margin: 0;
     padding: 0;
     font-family: var(--body-text-font-family);
+    overflow-x: hidden;
   }
 
   :global(html) {
