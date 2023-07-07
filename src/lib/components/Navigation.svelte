@@ -9,8 +9,8 @@
   <NavItem target="/categories">Kategoriat</NavItem>
   <NavItem target="/tags">Tagit</NavItem>
   <NavItem target="https://arkisto.klaanon.fi/soundtracks/">Soundtrackit</NavItem>
-  <NavItem target="/search">Haku</NavItem>
   <NavItem target="/profile">Profiili</NavItem>
+  <NavItem target="/search">Haku</NavItem>
 </nav>
 
 <style lang="scss">

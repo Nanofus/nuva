@@ -38,8 +38,7 @@
   .comment-header {
     display: flex;
     justify-content: space-between;
-    border-bottom: 0.125rem solid rgba(0, 0, 0, 0.5);
+    border-bottom: 0.125rem solid var(--hover-dark);
     font-family: var(--accent-font-family);
-    font-size: 1.25em;
   }
 </style>

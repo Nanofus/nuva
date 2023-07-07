@@ -41,7 +41,7 @@
         <Button on:click={sendComment}>Lähetä</Button>
       </Form>
     {:else}
-      <Button on:click={() => (open = true)}>Vastaa</Button>
+      <a href="#" on:click={() => (open = true)}>Kommentoi</a>
     {/if}
   </div>
 {/if}

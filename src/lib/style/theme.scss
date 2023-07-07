@@ -21,6 +21,18 @@ h1 {
 
 h2 {
   font-size: var(--font-size-h2);
+  text-align: center;
+  margin: 4rem 0 2rem;
+
+  &:before {
+    content: "— ";
+    font-weight: lighter;
+  }
+
+  &:after {
+    content: " —";
+    font-weight: lighter;
+  }
 }
 
 h4 {
