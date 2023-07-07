@@ -23,6 +23,6 @@
 
 <style lang="scss">
   #post-comments {
-    margin-top: 5rch;
+    margin-top: 3rem;
   }
 </style>

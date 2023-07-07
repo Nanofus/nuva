@@ -13,7 +13,7 @@
 
 <style lang="scss">
   #post-tags {
-    margin-top: 5rch;
+    margin-top: 3rem;
     text-align: center;
   }
 </style>

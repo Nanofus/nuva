@@ -31,7 +31,9 @@ export const dataToComments = (nodes: any): Comment[] => {
       _parentId: comment.parentDatabaseId
     };
   });
-  return objectsToHierarchy(comments) as Comment[];
+  return (objectsToHierarchy(comments) as Comment[]).sort((a, b) => {
+    return a.date.getTime() - b.date.getTime();
+  });
 };
 
 export const dataToPost = (data: any): Post | null => {

@@ -63,7 +63,7 @@ export const QUERIES = {
                 name
             }
         }
-        tags {
+        tags(first: ${POSTS_PER_FETCH}) {
             nodes {
                 name
                 slug

@@ -19,7 +19,7 @@
   }
 
   a {
-    transition: 0.2s ease-in-out;
+    transition: var(--unfocus-speed)  ease-in-out;
 
     &:active, &:hover {
       color: var(--text-light);

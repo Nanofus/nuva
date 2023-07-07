@@ -41,6 +41,7 @@
 
   :global(html) {
     scrollbar-gutter: stable both-edges;
+    overflow-x: hidden;
   }
 
   :global(img) {
@@ -55,13 +56,14 @@
   #page {
     position: relative;
     margin: auto;
+    min-width: var(--page-min-width);
     width: 100%;
     max-width: var(--page-max-width);
   }
 
   main {
-    padding-bottom: 6rch;
-    margin-bottom: 3rch;
+    padding-bottom: 6rem;
+    margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,9 +72,17 @@
   }
 
   @media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+    :global(h1) {
+      font-size: 2.5rem;
+    }
+
     main {
       padding-left: var(--mobile-horizontal-padding);
       padding-right: var(--mobile-horizontal-padding);
+    }
+
+    :global(.hide-mobile) {
+      display: none;
     }
   }
 </style>

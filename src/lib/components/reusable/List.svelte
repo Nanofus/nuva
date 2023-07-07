@@ -10,7 +10,7 @@
   ul {
     max-width: var(--article-max-width);
     list-style: none;
-    padding: 0 0 3rch;
+    padding: 0 0 2rem;
     margin: 0;
 
     &.stagger {

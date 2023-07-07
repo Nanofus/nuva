@@ -48,6 +48,9 @@
   --toastContainerLeft: calc(50vw - 8rem);
   --header-banner-dimensions-ratio: 6; // width divided by height
   --page-max-width: 76rem;
+  --page-min-width: 22rem;
   --article-max-width: 38rem;
   --mobile-horizontal-padding: 1.5rem;
+  --transition-speed: 0.5s;
+  --unfocus-speed: 0.2s;
 }

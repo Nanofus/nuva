@@ -12,10 +12,12 @@ h1, h2, h3, h4 {
   font-family: var(--header-font-family);
   font-weight: normal;
   text-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.75);
+  overflow-wrap: break-word;
 }
 
 h1 {
   font-size: var(--font-size-h1);
+  transition: font-size var(--transition-speed) ease-in-out;
   text-align: center;
 }
 
@@ -54,6 +56,7 @@ a:hover, a:active {
 
 pre {
   background-color: var(--hover-dark);
+  white-space: pre-wrap;
   padding: 1rem;
 }
 
@@ -66,4 +69,21 @@ hr {
   background-repeat: no-repeat;
   background-position: center center;
   background-image: var(--hr-background-image);
+}
+
+.full-width, .max-width {
+  position: relative;
+  left: calc(-50vw + 50%);
+  width: 100vw;
+  max-width: var(--page-max-width);
+  overflow: hidden;
+}
+
+@media screen and (min-width: 76rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+  .full-width {
+    margin-left: calc((100vw - var(--page-max-width)) / 2);
+  }
+  .max-width {
+    max-width: 100vw;
+  }
 }

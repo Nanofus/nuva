@@ -41,6 +41,7 @@
   .tags {
     max-width: var(--article-max-width);
     text-align: center;
+    padding-bottom: 2rem;
   }
 </style>
 

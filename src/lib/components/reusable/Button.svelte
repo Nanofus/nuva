@@ -16,7 +16,7 @@
   button {
     align-self: center;
     width: fit-content;
-    transition: 0.2s ease-in-out;
+    transition: var(--unfocus-speed) ease-in-out;
     background: var(--accent-dark);
     color: var(--main-nav-color);
     padding: 0.3rem 0.5rem;
