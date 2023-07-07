@@ -16,6 +16,7 @@
     header {
         height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
         background-position: center;
+        background-repeat: no-repeat;
     }
 
     h1 {

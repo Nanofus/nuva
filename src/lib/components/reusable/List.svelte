@@ -1,8 +1,8 @@
 <script lang="ts">
-  export let table: boolean = false;
+  export let stagger: boolean = false;
 </script>
 
-<ul>
+<ul class="{stagger ? 'stagger' : null}">
   <slot />
 </ul>
 
@@ -10,7 +10,11 @@
   ul {
     max-width: var(--article-text-width);
     list-style: none;
-    padding: 0 0 0 2em;
+    padding: 0;
     margin: 0;
+
+    &.stagger {
+      padding: 0 0 0 2em;
+    }
   }
 </style>
