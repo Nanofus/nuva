@@ -69,7 +69,7 @@
     background-color: var(--background-light);
   }
 
-  @media screen and (max-width: 44rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+  @media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
     main {
       padding-left: var(--mobile-horizontal-padding);
       padding-right: var(--mobile-horizontal-padding);
