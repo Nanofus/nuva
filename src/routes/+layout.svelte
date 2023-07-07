@@ -37,6 +37,10 @@
     font-family: var(--body-text-font-family);
   }
 
+  :global(html) {
+    scrollbar-gutter: stable both-edges;
+  }
+
   :global(img) {
     max-width: 100%;
     vertical-align: middle;
