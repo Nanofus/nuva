@@ -73,6 +73,7 @@ export interface CategoryListResponse {
 }
 
 export interface AuthInfo {
+  displayName: string;
   username: string;
   authToken: string;
   refreshToken: string;

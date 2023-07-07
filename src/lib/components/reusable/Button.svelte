@@ -14,6 +14,8 @@
 
 <style lang="scss">
   button {
+    align-self: center;
+    width: fit-content;
     transition: 0.2s ease-in-out;
     background: var(--accent-dark);
     color: var(--main-nav-color);

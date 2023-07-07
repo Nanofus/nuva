@@ -9,42 +9,51 @@
   import { toast } from "@zerodevx/svelte-toast";
 
   let loggedIn: boolean | null = null;
-  let password = "";
-  let username = "";
-  let loggedInUsername;
-
-  $: loggedIn ? loggedInUsername = <string>getAuthInfo()?.username : loggedInUsername = "";
+  let passwordInput = "";
+  let usernameInput = "";
+  let userDisplayName;
 
   onMount(() => {
     loginInfo.subscribe((loginInfo) => loggedIn = !!loginInfo);
   });
 
+  $: loggedIn ? userDisplayName = <string>getAuthInfo()?.displayName : userDisplayName = "";
+
   let handleLogin = async () => {
-    if (!username || !password) {
+    if (!usernameInput || !passwordInput) {
       toast.push("Täytä molemmat kentät.");
       return;
     }
-    await login(fetch, username, password);
-  }
+    await login(fetch, usernameInput, passwordInput);
+  };
 </script>
 
 <div class="login-area">
   {#if loggedIn === null}
     <LoadingSpinner />
   {:else if !loggedIn}
-    <Form>
-      <Input label="Käyttäjätunnus" name="username" bind:value={username} />
-      <Input label="Salasana" name="password" type="password" bind:value={password} />
+    <Form vertical="true">
+      <Input label="Käyttäjätunnus" name="username" bind:value={usernameInput} />
+      <Input label="Salasana" name="password" type="password" bind:value={passwordInput} />
       <Button on:click={handleLogin}>Kirjaudu sisään</Button>
     </Form>
   {:else if loggedIn}
-    <span class="username">{loggedInUsername}</span>
-    <Button on:click={() => logout()}>Kirjaudu ulos</Button>
+    <div class="user-info">
+      <h2 class="username">{userDisplayName}</h2>
+      <Button on:click={() => logout()}>Kirjaudu ulos</Button>
+    </div>
   {/if}
 </div>
 
 <style lang="scss">
-  span.username {
-    color: var(--main-nav-color);
+  .login-area {
+    width: calc(var(--article-text-width) / 2);
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
 </style>

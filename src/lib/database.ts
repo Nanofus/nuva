@@ -320,7 +320,8 @@ export const login = async (
 	});
 	if (response.data.login) {
 		const loginData: AuthInfo = {
-			username: response.data.login.user.name,
+			displayName: response.data.login.user.name,
+			username: response.data.login.user.username,
 			authToken: response.data.login.authToken,
 			refreshToken: response.data.login.refreshToken
 		};

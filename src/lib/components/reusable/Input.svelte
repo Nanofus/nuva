@@ -13,18 +13,26 @@
   const handleInput = e => value = e.target.value;
 </script>
 
-{#if label}
-  <label for={elementId}>
-    {label}
-  </label>
-{/if}
-{#if type === "multiline"}
-  <textarea id={elementId} {name} {placeholder} {value} on:input={handleInput}></textarea>
-{:else}
-  <input id={elementId} {name} {placeholder} {value} {type} on:input={handleInput} />
-{/if}
+<div class="input">
+  {#if label}
+    <label for={elementId}>
+      {label}
+    </label>
+  {/if}
+  {#if type === "multiline"}
+    <textarea id={elementId} {name} {placeholder} {value} on:input={handleInput}></textarea>
+  {:else}
+    <input id={elementId} {name} {placeholder} {value} {type} on:input={handleInput} />
+  {/if}
+</div>
 
 <style lang="scss">
+  .input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+
   input {
     font-family: var(--accent-font-family);
     border: 1px solid #ccc;

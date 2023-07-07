@@ -9,7 +9,6 @@
   import "$lib/style/theme.scss";
   import "$lib/style/fonts.scss";
   import "$lib/style/custom.scss";
-  import PageContent from "$lib/components/reusable/PageContent.svelte";
   import Navigation from "$lib/components/Navigation.svelte";
 
   let loggedIn: boolean;
@@ -24,9 +23,9 @@
 <div id="page">
   <Header />
   <Navigation />
-  <PageContent>
+  <main>
     <slot />
-  </PageContent>
+  </main>
   <Footer />
   <SvelteToast options={{ reversed: true, intro: { y: -20 } }} />
 </div>
@@ -53,5 +52,16 @@
     min-width: var(--article-text-width);
     width: 100%;
     max-width: var(--page-max-width);
+  }
+
+  main {
+    padding-bottom: 6rch;
+    margin-bottom: 3rch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: var(--background-light);
   }
 </style>

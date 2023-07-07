@@ -16,7 +16,7 @@
   div.pill {
     display: inline-block;
     background: rgba(0, 0, 0, 0.1);
-    margin: 0.125rem 0.25rem;
+    margin: 0.25rem;
     position: relative;
     border-radius: 0.25rem;
     font-size: 0.8em;
