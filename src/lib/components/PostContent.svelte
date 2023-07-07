@@ -7,7 +7,9 @@
   onMount(() => {
     // Eval magic to run scripts in the post
     // (1, eval) is a trick to make eval run in the global scope
-    (1, eval)(post.scripts);
+    if (post.content.indexOf("<script>") === -1) {
+      (1, eval)(post.scripts);
+    }
 
     // Parse JS from post content and eval it
     const doc = document.implementation.createHTMLDocument(); // Sandbox
