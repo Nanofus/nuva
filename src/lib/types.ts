@@ -10,7 +10,6 @@ export interface PostMeta {
   date: Date;
   authors: string[];
   categories: Category[];
-  tags: Tag[];
   featuredImage: string;
   commentCount: number;
 }
@@ -22,6 +21,7 @@ export interface Post extends PostMeta {
   styles: string;
   theme: string;
   content: string;
+  tags: Tag[];
   comments: Comment[];
 }
 

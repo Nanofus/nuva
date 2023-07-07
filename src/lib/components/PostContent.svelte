@@ -29,7 +29,6 @@
 
 <style lang="scss">
   section {
-    max-width: var(--article-text-width);
     margin: 2rem 0;
   }
 </style>

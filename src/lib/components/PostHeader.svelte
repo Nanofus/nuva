@@ -7,11 +7,13 @@
 </script>
 
 <header class="post-header">
-  <div class="post-meta">
-    <PostCategories categories={post.categories} />
-  </div>
   <h1 class="post-title">{post.title}</h1>
   <div class="post-meta">
+    <span class="post-categories">
+      {#each post.categories as category}
+        <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a></span>
+      {/each}
+    </span>
     <time class="post-date">{post.date.toLocaleDateString(LOCALE)}</time>
     <span class="post-authors">{post.authors.join(', ')}</span>
     <span class="post-comments-link">
@@ -23,15 +25,18 @@
 <style lang="scss">
   .post-meta {
     font-family: var(--accent-font-family);
+    text-align: center;
 
     > * {
-      margin: 0 1rem 0 0;
+      display: inline-block;
+      margin-left: 0.2rem;
+      margin-right: 0.2rem;
 
       &:before {
-        margin-right: 0.2rem;
+        margin-right: 0.3rem;
         position: relative;
         top: 0.1rem;
-        font: normal 1rem/1 "Genericons-Neue";
+        font: normal 1rem "Genericons-Neue";
       }
     }
 
@@ -45,6 +50,14 @@
 
     .post-comments-link:before {
       content: "\f300";
+    }
+
+    .post-categories:before {
+      content: "\f301";
+    }
+
+    .post-category:not(:last-child):after {
+      content: ', ';
     }
   }
 </style>

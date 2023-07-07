@@ -19,3 +19,9 @@
 {:else}
   <h2>Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.</h2>
 {/if}
+
+<style lang="scss">
+  article {
+    max-width: var(--article-text-width);
+  }
+</style>

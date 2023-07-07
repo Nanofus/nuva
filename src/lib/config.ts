@@ -38,12 +38,6 @@ export const QUERIES = {
                 name
             }
         }
-        tags {
-            nodes {
-                name
-                slug
-            }
-        }
         commentCount`,
   postContent: `
         title

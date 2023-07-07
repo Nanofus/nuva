@@ -366,7 +366,7 @@ export const postComment = async (
 		toast.push(error.message);
 	});
 	if (response.data.createComment.success) {
-		toast.push('Kommentti lisätty!');
+		toast.push('Kommentti lähetetty!');
 		return true;
 	}
 	return false;

@@ -10,9 +10,3 @@
   <PostTags tags={post.tags} />
   <PostComments {post} />
 </footer>
-
-<style lang="scss">
-  footer {
-    max-width: var(--article-text-width);
-  }
-</style>

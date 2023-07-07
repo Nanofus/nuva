@@ -15,12 +15,6 @@ export const dataToPostMeta = (data: any): PostMeta => {
         name: category.name
       };
     }),
-    tags: data.tags.nodes.map((tag: any) => {
-      return {
-        slug: tag.slug,
-        name: tag.name
-      };
-    }),
     featuredImage: data.additionalFields.featuredimage,
     commentCount: data.commentCount
   };
