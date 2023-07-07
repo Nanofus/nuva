@@ -4,7 +4,7 @@
   let button;
 
   if (icon && button) {
-    button.setAttribute('data-content', icon);
+    button.setAttribute("data-content", icon);
   }
 </script>
 
@@ -14,15 +14,20 @@
 
 <style lang="scss">
   button {
-    &:hover {
-      cursor: pointer;
-    }
-
-    background: #000;
-    color: #fff;
-    padding: 0.5rem;
+    transition: 0.2s ease-in-out;
+    background: var(--accent-dark);
+    color: var(--main-nav-color);
+    padding: 0.3rem 0.5rem;
     border-radius: 0.5rem;
     border: 0;
+    font-family: var(--body-text-font-family);
+    font-size: 1rem;
+
+    &:hover {
+      cursor: pointer;
+      background: var(--accent-light);
+      transition: 0s;
+    }
 
     &:before {
       content: attr(data-content);

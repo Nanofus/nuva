@@ -26,6 +26,7 @@
 
 <style lang="scss">
   input {
+    font-family: var(--accent-font-family);
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 4px 8px;

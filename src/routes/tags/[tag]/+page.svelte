@@ -25,7 +25,7 @@
 
 <PageHead title={data.tag} />
 
-<h2>Tagi: {data.tag}</h2>
+<h1>Tagi: {data.tag}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
   <Button on:click={fetchMorePosts}>Lataa lisää</Button>

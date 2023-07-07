@@ -24,7 +24,7 @@
 
 <PageHead title={data.category} />
 
-<h2>Kategoria: {data.category}</h2>
+<h1>Kategoria: {data.category}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
   <Button on:click={fetchMorePosts}>Lataa lisää</Button>

@@ -4,6 +4,7 @@
   import Button from "$lib/components/reusable/Button.svelte";
   import PageHead from "$lib/components/reusable/PageHead.svelte";
   import List from "$lib/components/reusable/List.svelte";
+  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
 
   export let data: TagListResponse;
   let fetching = false;
@@ -22,12 +23,15 @@
 
 <PageHead title="Tagit" />
 
-<h2>Tagit</h2>
+<h1>Tagit</h1>
 <List>
   {#each data.tags as tag}
     <li><a href="/tags/{tag.slug}">{tag.name}</a></li>
   {/each}
 </List>
+<br />
 {#if data.hasNextPage && !fetching}
   <Button on:click={fetchMoreTags}>Lataa lisää</Button>
+{:else if fetching}
+  <LoadingSpinner />
 {/if}

@@ -8,7 +8,7 @@
 
 <PageHead title="Kategoriat" />
 
-<h2>Kategoriat</h2>
+<h1>Kategoriat</h1>
 <List>
   {#each data.categories as category}
     <li>

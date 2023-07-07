@@ -30,13 +30,13 @@ h4 {
 }
 
 a, a:link, a:visited {
-  color: var(--link-light);
-  text-decoration: underline;
+  color: var(--link);
+  text-decoration: none;
 }
 
 a:hover, a:active {
-  color: var(--hover-light);
-  text-decoration: none;
+  color: var(--link-hover);
+  text-decoration: underline;
 }
 
 hr {

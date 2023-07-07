@@ -4,24 +4,27 @@
 :root {
   --text-light: rgba(0, 0, 0, 0.75);
   --text-dark: rgba(255, 255, 255, 0.8);
-  --hover-light: #76AFCC;
-  --hover-dark: #3a3a3a;
-  --background-light: #fff;
+  --hover-light: rgba(255, 255, 255, 0.1);
+  --hover-dark: rgba(0, 0, 0, 0.1);
+  --background-light: #ffffff;
   --background-dark: #000000;
-  --link-light: #5a869d;
-  --link-dark: #81d4fa;
+  --accent-light: #252525;
+  --accent-dark: #0a0a0a;
+  --link: #5a869d;
+  --link-hover: #7fa8c3;
   --selection: #ffff00;
-  --main-nav-color: #FFFFFF;
+  --main-nav-color: #ffffff;
+  --main-nav-background: rgba(0, 0, 0, 0) linear-gradient(#252525, #0a0a0a) repeat scroll 0 0;
 }
 
 /* Typography */
 
 :root {
-  --header-font-family: "Trajan Pro", serif;
-  --header-secondary-font-family: "Optimus Princeps", "Trajan Pro", serif;
-  --accent-font-family: "Inconsolata", sans-serif;
-  --nav-font-family: "Voya Nui", sans-serif;
-  --body-text-font-family: "Noto Serif", serif;
+  --header-font-family: "Cinzel", serif;
+  --header-secondary-font-family: "Cinzel", serif;
+  --accent-font-family: "Inconsolata", monospace;
+  --nav-font-family: "Cinzel", sans-serif;
+  --body-text-font-family: "Source Serif 4", "Times New Roman", serif;
   --font-size-body: 1rem;
   --font-size-h1: 3rem;
   --font-size-h2: 2rem;

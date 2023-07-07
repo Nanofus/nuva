@@ -14,7 +14,6 @@
   .categories {
     list-style: none;
     padding: 0;
-    text-transform: uppercase;
 
     li {
       display: inline-block;

@@ -14,13 +14,17 @@
 
 <style lang="scss">
   div, a {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    padding: 0.25em;
+    line-height: 3rem;
+    padding: 0 0.5em;
+  }
+
+  a {
+    transition: 0.2s ease-in-out;
 
     &:active, &:hover {
       color: var(--text-light);
       background-color: var(--hover-light);
+      transition: 0s;
     }
 
     &:link, &:visited {

@@ -31,28 +31,15 @@
 <style lang="scss">
   .comment {
     margin: 1rem 0;
-    padding: 0.5rem;
-    border: 0.125em solid rgba(0, 0, 0, 0.5);
-    border-radius: 0.5rem;
+    padding: 1rem;
     background: rgba(0, 0, 0, 0.1);
   }
 
   .comment-header {
     display: flex;
     justify-content: space-between;
-    padding: 0 0.25rem 0.25rem;
     border-bottom: 0.125rem solid rgba(0, 0, 0, 0.5);
-    font-weight: bold;
-    text-transform: uppercase;
     font-family: var(--accent-font-family);
     font-size: 1.25em;
-  }
-
-  .comment-content {
-    margin: 0.5rem 0;
-  }
-
-  .child-comments {
-    margin-left: 1rem;
   }
 </style>

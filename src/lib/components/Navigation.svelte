@@ -15,7 +15,7 @@
 
 <style lang="scss">
   nav {
-    background: rgba(0, 0, 0, 0) linear-gradient(#252525, #0a0a0a) repeat scroll 0 0;
+    background: var(--main-nav-background);
     font-family: var(--nav-font-family);
     height: 3em;
     padding: 0;

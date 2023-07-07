@@ -38,7 +38,13 @@
       <Button on:click={handleLogin}>Kirjaudu sisään</Button>
     </Form>
   {:else if loggedIn}
-    <span>{loggedInUsername}</span>
+    <span class="username">{loggedInUsername}</span>
     <Button on:click={() => logout()}>Kirjaudu ulos</Button>
   {/if}
 </div>
+
+<style lang="scss">
+  span.username {
+    color: var(--main-nav-color);
+  }
+</style>

@@ -6,9 +6,11 @@
   let bannerUrl = `url("https://klaanon.fi/wp/wp-content/themes/klaanon/header-images/banner${(new Date().getMinutes() % BANNER_COUNT) + 1}.png")`;
 </script>
 
-<header bind:this={header} style="background-image: {bannerUrl}">
-  <h1>Klaanon Nuva</h1>
-</header>
+<a href="/">
+  <header bind:this={header} style="background-image: {bannerUrl}">
+    <h1>Klaanon Nuva</h1>
+  </header>
+</a>
 
 <style>
     header {
