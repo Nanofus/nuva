@@ -13,7 +13,7 @@
   };
 </script>
 
-<div id="post-comments">
+<div id="comments">
   <h2>{post.commentCount ? post.commentCount : 0} kommenttia</h2>
   {#each post.comments as comment}
     <Comment on:commentSent={refreshComments} postId={post._id} {comment} />
@@ -22,7 +22,7 @@
 </div>
 
 <style lang="scss">
-  #post-comments {
+  #comments {
     margin-top: 3rem;
   }
 </style>
