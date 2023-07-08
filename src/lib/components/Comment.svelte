@@ -48,9 +48,9 @@
     <a target="_blank" href="https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c={comment._id}">Muokkaa</a>
   {/if}
   {#if !replyFormOpen}
-    <a role="button" tabindex="0" on:click={() => (replyFormOpen = true)}>Kommentoi</a>
+    <a role="button" tabindex="0" on:click={() => (replyFormOpen = true)}>Vastaa</a>
   {:else}
-    <CommentForm on:commentSent={commentSent} parent={comment._id} postId={post._id} />
+    <CommentForm on:commentSent={commentSent} parent={comment._id} postId={post._id} isReply="true" />
   {/if}
 </div>
 

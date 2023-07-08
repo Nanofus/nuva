@@ -60,6 +60,7 @@ export const QUERIES = {
             scripts
             styles
             theme
+            music
         }
         categories {
             nodes {

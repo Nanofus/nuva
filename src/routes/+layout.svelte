@@ -7,8 +7,6 @@
   import PageHead from "$lib/components/reusable/PageHead.svelte";
   import "$lib/style/variables.scss";
   import "$lib/style/theme.scss";
-  import "$lib/style/fonts.scss";
-  import "$lib/style/custom.scss";
   import Navigation from "$lib/components/Navigation.svelte";
 
   let loggedIn: boolean;

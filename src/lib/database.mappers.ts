@@ -52,6 +52,7 @@ export const dataToPost = (data: any): Post | null => {
     scripts: data.additionalFields.scripts,
     styles: data.additionalFields.styles,
     theme: data.additionalFields.theme,
+    music: data.additionalFields.music ? data.additionalFields.music.split("\n") : [],
     content: data.content,
     categories: data.categories.nodes.map((category: any) => {
       return {

@@ -20,6 +20,7 @@ export interface Post extends PostMeta {
   scripts: string;
   styles: string;
   theme: string;
+  music: string[];
   content: string;
   tags: Tag[];
   comments: Comment[];

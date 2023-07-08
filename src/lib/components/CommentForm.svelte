@@ -11,13 +11,13 @@
 
   export let parent: number;
   export let postId: number;
+  export let isReply: boolean;
 
   let loggedIn: boolean | null = null;
   loginInfo.subscribe((loginInfo) => {
     loggedIn = !!loginInfo;
   });
 
-  let open: boolean = false;
   let sending: boolean = false;
   let content: string = "";
 
@@ -44,7 +44,7 @@
       </div>
     {:else}
       <Form>
-        <Input type="multiline" placeholder="Vastaa..." bind:value={content} />
+        <Input type="multiline" placeholder={isReply ? "Vastaa..." : "Kommentoi..."} bind:value={content} />
         <Button on:click={sendComment}>Lähetä</Button>
       </Form>
     {/if}

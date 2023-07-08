@@ -2,11 +2,12 @@
   import type { Post } from "$lib/types";
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
+  import MusicPlayer from "$lib/components/MusicPlayer.svelte";
 
   export let post: Post;
 
   const setInitialLetter = () => {
-    if (browser) {
+    if (browser && !navigator.userAgent.match(/firefox|fxios/i)) { // TODO: Remove this when Firefox supports initial-letter
       document.documentElement.style.setProperty("--initial-letter-size", "2");
       document.documentElement.style.setProperty("--initial-letter-padding", "0.5rem");
     }
@@ -36,6 +37,7 @@
 <section id="post-content">
   {@html post.content}
 </section>
+<MusicPlayer musicArray={post.music} />
 
 <style lang="scss">
   section {
@@ -44,6 +46,7 @@
 
   :global(section > p:first-child::first-letter) {
     initial-letter: var(--initial-letter-size);
+    -webkit-initial-letter: var(--initial-letter-size);
     margin-right: var(--initial-letter-padding);
   }
 </style>
