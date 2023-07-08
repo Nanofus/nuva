@@ -35,4 +35,8 @@
     width: 100%;
     max-width: var(--article-max-width);
   }
+
+  :global(article li) {
+    margin-bottom: 0.5rem;
+  }
 </style>

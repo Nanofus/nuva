@@ -4,6 +4,11 @@
 
   export let post: Post;
 
+  const setInitialLetter = () => {
+    document.documentElement.style.setProperty("--initial-letter-size", "2");
+    document.documentElement.style.setProperty("--initial-letter-padding", "0.5rem");
+  };
+
   onMount(() => {
     // Eval magic to run scripts in the post
     // (1, eval) is a trick to make eval run in the global scope
@@ -18,6 +23,8 @@
       (1, eval)(scriptTag.innerText);
     });
   });
+
+  $: post?.initialLetter ? setInitialLetter() : null;
 </script>
 
 {#if post.styles}
@@ -30,5 +37,10 @@
 <style lang="scss">
   section {
     margin: 2rem 0;
+  }
+
+  :global(section > p:first-child::first-letter) {
+    initial-letter: var(--initial-letter-size);
+    margin-right: var(--initial-letter-padding);
   }
 </style>
