@@ -7,7 +7,7 @@ export const dataToPostMeta = (data: any): PostMeta => {
     slug: data.slug,
     date: new Date(data.rawDate),
     authors: data.additionalFields.authorgroup
-      ? data.additionalFields.authorgroup.replace(" ", "").split(",")
+      ? data.additionalFields.authorgroup.map((author: any) => author.name)
       : [data.author.node.name],
     categories: data.categories.nodes.map((category: any) => {
       return {
@@ -44,7 +44,7 @@ export const dataToPost = (data: any): Post | null => {
     slug: data.slug,
     date: new Date(data.rawDate),
     authors: data.additionalFields.authorgroup
-      ? data.additionalFields.authorgroup.replace(" ", "").split(",")
+      ? data.additionalFields.authorgroup.map((author: any) => author.name)
       : [data.author.node.name],
     featuredImage: data.additionalFields.featuredimage,
     commentCount: data.commentCount,

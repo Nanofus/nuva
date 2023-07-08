@@ -41,6 +41,10 @@ h2 {
   }
 }
 
+h3 {
+  margin-top: 3.5rem;
+}
+
 h4 {
   font-family: var(--header-secondary-font-family);
   font-size: var(--font-size-h4);
@@ -61,6 +65,7 @@ a:hover, a:active {
 pre {
   background-color: var(--hover-dark);
   white-space: pre-wrap;
+  overflow-wrap: break-word;
   padding: 1rem;
 }
 

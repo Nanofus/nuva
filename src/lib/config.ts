@@ -29,7 +29,9 @@ export const QUERIES = {
             }
         }
         additionalFields {
-            authorgroup
+            authorgroup {
+                name
+            }
             featuredimage
         }
         categories {
@@ -50,7 +52,9 @@ export const QUERIES = {
             }
         }
         additionalFields {
-            authorgroup
+            authorgroup {
+                name
+            }
             featuredimage
             initialletter
             scripts
