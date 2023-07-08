@@ -33,25 +33,20 @@
     dispatch("commentSent");
     sending = false;
     content = "";
-    open = false;
   };
 </script>
 
 {#if loggedIn}
   <div class="comment-reply">
-    {#if open}
-      {#if sending}
-        <div class="sending-spinner">
-          <LoadingSpinner />
-        </div>
-      {:else}
-        <Form>
-          <Input type="multiline" placeholder="Vastaa..." bind:value={content} />
-          <Button on:click={sendComment}>Lähetä</Button>
-        </Form>
-      {/if}
+    {#if sending}
+      <div class="sending-spinner">
+        <LoadingSpinner />
+      </div>
     {:else}
-      <a role="button" tabindex="0" on:click={() => (open = true)}>Kommentoi</a>
+      <Form>
+        <Input type="multiline" placeholder="Vastaa..." bind:value={content} />
+        <Button on:click={sendComment}>Lähetä</Button>
+      </Form>
     {/if}
   </div>
 {/if}

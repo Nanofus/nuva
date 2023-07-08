@@ -79,15 +79,13 @@ hr {
   position: relative;
   left: calc(-50vw + 50%);
   width: 100vw;
-  max-width: var(--page-max-width);
+  max-width: 100vw;
   overflow: hidden;
 }
 
 @media screen and (min-width: 76rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
   .full-width {
     margin-left: calc((100vw - var(--page-max-width)) / 2);
-  }
-  .max-width {
-    max-width: 100vw;
+    max-width: calc(var(--page-max-width) + 0.5px);
   }
 }
