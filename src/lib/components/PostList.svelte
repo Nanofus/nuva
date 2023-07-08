@@ -25,7 +25,7 @@
         <span class="categories">{parseCategories(post.categories)}</span>
       </span>
       <span class="comment-count hide-mobile">{post.commentCount ? post.commentCount : ""}</span>
-      <span class="date">{post.date.toLocaleDateString(LOCALE)}</span>
+      <time class="date">{post.date.toLocaleDateString(LOCALE)}</time>
       <span class="authors hide-mobile">{post.authors.join(', ')}</span>
     </li>
   {/each}
@@ -37,6 +37,14 @@
     grid-template-columns: 3fr 0fr 1fr 2fr;
     gap: 1rem;
     padding-bottom: 0.2rem;
+  }
+
+  .date, .comment-count {
+    text-align: center;
+  }
+
+  .authors {
+    text-align: right;
   }
 
   @media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()

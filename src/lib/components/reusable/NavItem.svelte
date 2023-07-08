@@ -1,9 +1,12 @@
 <script lang="ts">
-  export let target = "";
+  export let href = "";
+  let openInNewTab = false;
+
+  $: href.indexOf("http") === 0 && (openInNewTab = true);
 </script>
 
-{#if target}
-  <a href={target}>
+{#if href}
+  <a {href} target={openInNewTab ? "_blank" : null}>
     <slot />
   </a>
 {:else}
@@ -19,7 +22,7 @@
   }
 
   a {
-    transition: var(--unfocus-speed)  ease-in-out;
+    transition: var(--unfocus-speed) ease-in-out;
 
     &:active, &:hover {
       color: var(--text-light);
