@@ -1,12 +1,15 @@
 <script lang="ts">
   import type { Post } from "$lib/types";
   import { onMount } from "svelte";
+  import { browser } from "$app/environment";
 
   export let post: Post;
 
   const setInitialLetter = () => {
-    document.documentElement.style.setProperty("--initial-letter-size", "2");
-    document.documentElement.style.setProperty("--initial-letter-padding", "0.5rem");
+    if (browser) {
+      document.documentElement.style.setProperty("--initial-letter-size", "2");
+      document.documentElement.style.setProperty("--initial-letter-padding", "0.5rem");
+    }
   };
 
   onMount(() => {
