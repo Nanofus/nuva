@@ -1,14 +1,15 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   export let icon: string | null = null;
 
   let button;
-
-  if (icon && button) {
-    button.setAttribute("data-content", icon);
-  }
 </script>
 
 <button bind:this={button} on:click>
+  {#if icon}
+    <span class="icon material-symbols-rounded">{icon}</span>
+  {/if}
   <slot />
 </button>
 
@@ -25,18 +26,17 @@
     font-family: var(--body-text-font-family);
     font-size: 1rem;
 
+    .icon {
+      display: inline-block;
+      font-size: 1rem;
+      position: relative;
+      top: 0.1rem;
+    }
+
     &:hover {
       cursor: pointer;
       background: var(--accent-light);
       transition: 0s;
-    }
-
-    &:before {
-      content: attr(data-content);
-      position: relative;
-      font: normal 1rem/1 "Genericons-Neue";
-      top: 0.1rem;
-      margin-right: 0.1rem;
     }
   }
 </style>

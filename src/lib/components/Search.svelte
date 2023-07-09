@@ -11,7 +11,7 @@
 <div class="search-area">
   <Form>
     <Input bind:value={searchTerm} placeholder="Hakusanat" />
-    <Button icon="\f400" on:click={search}>Etsi</Button>
+    <Button icon="search" on:click={search}>Etsi</Button>
   </Form>
 </div>
 

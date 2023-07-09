@@ -16,8 +16,10 @@
   onMount(() => {
     // Eval magic to run scripts in the post
     // (1, eval) is a trick to make eval run in the global scope
+    // TODO: Does not cleaning up the scope on navigation cause problems?
     if (post.content.indexOf("<script>") === -1) {
       (1, eval)(post.scripts);
+      console.log(window['postScriptContext']);
     }
 
     // Parse JS from post content and eval it
@@ -37,7 +39,7 @@
 <section id="post-content">
   {@html post.content}
 </section>
-<MusicPlayer musicArray={post.music} />
+<MusicPlayer musicUrlArray={post.music} />
 
 <style lang="scss">
   section {

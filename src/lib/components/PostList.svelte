@@ -15,18 +15,18 @@
 <List>
   <li class="list-header">
     <span class="link">Nimi</span>
-    <span class="comment-count hide-mobile"></span>
+    <span class="comment-count hidden-mobile"></span>
     <span class="date">Julkaisu</span>
-    <span class="authors hide-mobile">Kirjoittajat</span>
+    <span class="authors hidden-mobile">Kirjoittajat</span>
   </li>
   {#each posts as post}
     <li>
       <span class="link"><a href="/posts/{post.slug}">{post.title}</a>
         <span class="categories">{parseCategories(post.categories)}</span>
       </span>
-      <span class="comment-count hide-mobile">{post.commentCount ? post.commentCount : ""}</span>
+      <span class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ""}</span>
       <time class="date">{post.date.toLocaleDateString(LOCALE)}</time>
-      <span class="authors hide-mobile">{post.authors.join(', ')}</span>
+      <span class="authors hidden-mobile">{post.authors.join(', ')}</span>
     </li>
   {/each}
 </List>
@@ -62,7 +62,7 @@
     font-weight: bold;
 
     .comment-count:before {
-      font: normal 1rem "Genericons-Neue";
+      font: 1rem var(--icon-font);
       content: "\f300";
     }
   }

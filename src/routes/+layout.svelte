@@ -8,11 +8,15 @@
   import "$lib/style/variables.scss";
   import "$lib/style/theme.scss";
   import Navigation from "$lib/components/Navigation.svelte";
+  import { browser } from "$app/environment";
 
   let loggedIn: boolean;
 
   onMount(() => {
     loggedIn = isLoggedIn();
+    if (browser && !localStorage.getItem("settings")) {
+      localStorage.setItem("settings", JSON.stringify({ darkMode: false, volume: 0.1 }));
+    }
   });
 </script>
 
@@ -69,6 +73,17 @@
     background-color: var(--background-light);
   }
 
+  :global(.hidden) {
+    display: none;
+  }
+
+  :global(.center) {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   @media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
     :global(h1) {
       font-size: 2.5rem;
@@ -82,7 +97,7 @@
       padding-right: var(--mobile-horizontal-padding);
     }
 
-    :global(.hide-mobile) {
+    :global(.hidden-mobile) {
       display: none;
     }
   }

@@ -36,7 +36,7 @@
         margin-right: 0.3rem;
         position: relative;
         top: 0.1rem;
-        font: normal 1rem "Genericons-Neue";
+        font: 1rem var(--icon-font);
       }
     }
 
