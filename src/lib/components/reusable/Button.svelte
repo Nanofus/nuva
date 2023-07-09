@@ -8,7 +8,7 @@
 
 <button bind:this={button} on:click>
   {#if icon}
-    <span class="icon material-symbols-rounded">{icon}</span>
+    <span class="icon material-icons">{icon}</span>
   {/if}
   <slot />
 </button>

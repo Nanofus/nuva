@@ -110,7 +110,7 @@ Musicmancer 2023 Edition
     const audioButton = document.createElement("button");
     generatedElements.push(audioButton);
     audioButton.classList.add("audio-button", `index-${index}`);
-    audioButton.innerHTML = `<span class="material-symbols-rounded">music_note</span>`;
+    audioButton.innerHTML = `<span class="material-icons">music_note</span>`;
     audioButton.addEventListener("click", () => play(parseInt(audioButton.classList[1].slice(6))));
     audioElement.after(audioButton);
   };

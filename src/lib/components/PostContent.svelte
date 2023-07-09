@@ -19,7 +19,6 @@
     // TODO: Does not cleaning up the scope on navigation cause problems?
     if (post.content.indexOf("<script>") === -1) {
       (1, eval)(post.scripts);
-      console.log(window['postScriptContext']);
     }
 
     // Parse JS from post content and eval it

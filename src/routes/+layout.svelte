@@ -39,12 +39,13 @@
     margin: 0;
     padding: 0;
     font-family: var(--body-text-font-family);
+    color: var(--text-light);
     overflow-x: hidden;
   }
 
   :global(html) {
-    scrollbar-gutter: stable both-edges;
     overflow-x: hidden;
+    scrollbar-gutter: stable;
   }
 
   :global(img) {

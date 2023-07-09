@@ -15,7 +15,7 @@
 <List>
   <li class="list-header">
     <span class="link">Nimi</span>
-    <span class="comment-count hidden-mobile"></span>
+    <span class="comment-count hidden-mobile material-icons">forum</span>
     <span class="date">Julkaisu</span>
     <span class="authors hidden-mobile">Kirjoittajat</span>
   </li>
@@ -60,11 +60,6 @@
 
   .list-header {
     font-weight: bold;
-
-    .comment-count:before {
-      font: 1rem var(--icon-font);
-      content: "\f300";
-    }
   }
 
   .categories {
