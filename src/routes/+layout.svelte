@@ -75,7 +75,7 @@
   }
 
   :global(.hidden) {
-    display: none;
+    display: none !important;
   }
 
   :global(.center) {
@@ -99,7 +99,7 @@
     }
 
     :global(.hidden-mobile) {
-      display: none;
+      display: none !important;
     }
   }
 </style>
