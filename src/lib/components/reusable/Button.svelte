@@ -26,6 +26,10 @@
     font-family: var(--body-text-font-family);
     font-size: 1rem;
 
+    > * {
+      user-select: none;
+    }
+
     .icon {
       display: inline-block;
       font-size: 1rem;
