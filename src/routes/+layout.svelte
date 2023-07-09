@@ -45,7 +45,7 @@
 
   :global(html) {
     overflow-x: hidden;
-    scrollbar-gutter: stable;
+    scrollbar-gutter: auto; // TODO: Figure out if there should be something here
   }
 
   :global(img) {
