@@ -186,7 +186,7 @@ Musicmancer 2023 Edition
 
   .audio-player {
     display: grid;
-    grid-template-columns: 2rem 2rem 6fr 2rem 2rem 1fr;
+    grid-template-columns: 2rem 2rem 1fr 2rem 2rem 6rem;
     position: fixed;
     bottom: 0;
     left: 0;
