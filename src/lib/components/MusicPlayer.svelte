@@ -26,12 +26,14 @@ Musicmancer 2023 Edition
   onMount(() => {
     volume = loadVolume();
     initializeAudioElements();
+
   });
 
   onDestroy(() => {
     // Remove generated elements
     generatedElements.forEach((element) => element.remove());
     clearInterval(seekInterval);
+    clearInterval(fadeOutInterval);
   });
 
   let loadVolume = () => {
@@ -60,18 +62,13 @@ Musicmancer 2023 Edition
     if (newAudioData.isEffect) {
       newAudioData.audioElement.play();
     } else {
-      // Pause all other music files
-      audioDataArray.forEach((audioData) => {
-        if (audioData.isEffect || audioData == newAudioData) return;
-        audioData.audioElement.currentTime = 0;
-        audioData.audioElement.pause();
-      });
       // Play the selected audio file
       currentAudioElement = newAudioData.audioElement;
       currentAudioElement.currentTime = 0;
       currentAudioElement.volume = volume / 100;
       paused = false;
       currentAudioElement.play();
+      // Others are faded out by the fadeout interval
     }
   };
 
@@ -135,6 +132,20 @@ Musicmancer 2023 Edition
   // Pause and mute
   $: currentAudioElement && (paused ? currentAudioElement.pause() : currentAudioElement.play());
   $: currentAudioElement && (muted ? currentAudioElement.volume = 0 : currentAudioElement.volume = volume / 100);
+
+  let fadeOutInterval = setInterval(() => {
+    audioDataArray.map((audioData) => {
+      if (audioData.isEffect || audioData.audioElement === currentAudioElement) return;
+      if (audioData.audioElement.volume > 0) {
+        let newVolume = audioData.audioElement.volume - 0.01;
+        if (newVolume < 0) newVolume = 0;
+        audioData.audioElement.volume = newVolume;
+      } else {
+        audioData.audioElement.currentTime = 0;
+        audioData.audioElement.pause();
+      }
+    });
+  }, 100);
 </script>
 
 {#if currentAudioElement}

@@ -45,7 +45,7 @@
 
   :global(html) {
     overflow-x: hidden;
-    scrollbar-gutter: auto; // TODO: Figure out if there should be something here
+    scrollbar-gutter: stable; // TODO: fix gutter so that it doesn't break 100vw as the horizontal width
   }
 
   :global(img) {
@@ -72,6 +72,11 @@
     align-items: center;
     justify-content: center;
     background-color: var(--background-light);
+  }
+
+  :global(code) {
+    font-family: var(--code-font-family);
+    font-size: 0.9rem;
   }
 
   :global(.hidden) {
