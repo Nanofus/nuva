@@ -22,6 +22,8 @@
   <meta content={data.title} property="og:title" />
   <meta content="article" property="og:type" />
   <meta content={getPageUrl(`posts/${data.slug}`)} property="og:url" />
+  <meta content={data.authors.join(", ")} property="article:author" />
+  <meta content={data.date} property="article:published_time" />
 </svelte:head>
 
 {#if data.content}
