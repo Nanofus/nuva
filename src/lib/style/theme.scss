@@ -97,9 +97,17 @@ hr {
 }
 
 /* Warnings */
+
 .info-box {
   background-color: var(--info-background);
+
+  &.error {
+    background-color: var(--error-background);
+  }
+
   padding: 1rem;
+  margin: 1rem;
+  color: var(--text-dark);
 
   .small-icon {
     font-size: 1rem;

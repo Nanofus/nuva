@@ -89,6 +89,10 @@
     display: none !important;
   }
 
+  :global(.hidden-desktop) {
+    display: none !important;
+  }
+
   :global(.center) {
     text-align: center;
     display: block;
@@ -111,6 +115,10 @@
 
     :global(.hidden-mobile) {
       display: none !important;
+    }
+
+    :global(.hidden-desktop) {
+      display: inherit !important;
     }
   }
 

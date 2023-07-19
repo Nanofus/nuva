@@ -36,7 +36,7 @@
   <div id="post-style-container">{@html `<style>${post.styles}</style>`}</div>
 {/if}
 {#if !post.mobileFriendly}
-  <div class="info-box"><span class="material-icons small-icon">warning</span> Tämä postaus ei sovi mobiililla luettavaksi.
+  <div class="info-box error hidden-desktop"><span class="material-icons small-icon">warning</span> Tämä postaus ei sovi mobiililla luettavaksi.
   </div>
 {/if}
 <section id="post-content">

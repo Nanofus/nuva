@@ -20,7 +20,8 @@
   </tr>
   {#each posts as post}
     <tr>
-      <td class="link"><a href="/posts/{post.slug}">{post.title}</a>
+      <td class="link {post.mobileFriendly ? '' : 'mobile-unfriendly'}">
+        <a href="/posts/{post.slug}">{post.title}</a>
         <span class="categories">{parseCategories(post.categories)}</span>
       </td>
       <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ""}</td>
@@ -47,6 +48,16 @@
   @media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
     .date {
       text-align: right;
+    }
+
+    .mobile-unfriendly {
+      a {
+        color: var(--hover-dark);
+      }
+
+      .categories {
+        color: var(--hover-dark);
+      }
     }
 
     table {
