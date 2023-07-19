@@ -4,7 +4,7 @@
   import CommentForm from "$lib/components/CommentForm.svelte";
   import { createEventDispatcher } from "svelte";
   import { browser } from "$app/environment";
-  import { isLoggedIn } from "$lib/database";
+  import { getAuthInfo, isLoggedIn } from "$lib/database";
 
   export let comment: Comment;
   export let post: Post;
@@ -19,7 +19,7 @@
 
   const isCurrentUser = () => {
     if (browser) {
-      const user = JSON.parse(localStorage.getItem("auth"))?.displayName;
+      const user = getAuthInfo()?.displayName;
       if (!user) return false;
       return user === comment.author;
     }

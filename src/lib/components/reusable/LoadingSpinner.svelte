@@ -17,6 +17,8 @@
     position: relative;
     width: 80px;
     height: 80px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .lds-ellipsis div {
