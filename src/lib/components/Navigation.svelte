@@ -81,6 +81,7 @@
 
     background: var(--main-nav-background);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     font-family: var(--nav-font-family);
 
     display: flex;
