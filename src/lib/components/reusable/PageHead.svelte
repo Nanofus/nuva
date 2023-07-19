@@ -1,5 +1,5 @@
 <script>
-  import { SITE_NAME, SITE_NAME_DELIMITER, BASE_PATH, OG_LOCALE } from "$lib/config";
+  import { BASE_PATH, OG_LOCALE, SITE_NAME, SITE_NAME_DELIMITER } from "$lib/config";
 
   export let title = null;
   export let isPost = false;
@@ -9,10 +9,10 @@
 
 <svelte:head>
   <title>{title ? `${title} ${SITE_NAME_DELIMITER} ${SITE_NAME}` : SITE_NAME}</title>
-  <meta property="og:site_name" content={SITE_NAME} />
-  <meta property="og:title" content={title ? title : SITE_NAME} />
-  <meta property="og:locale" content={OG_LOCALE} />
-  <meta property="og:type" content={isPost ? "article " : "website"} />
+  <meta content={SITE_NAME} property="og:site_name" />
+  <meta content={title ? title : SITE_NAME} property="og:title" />
+  <meta content={OG_LOCALE} property="og:locale" />
+  <meta content={isPost ? "article " : "website"} property="og:type" />
   {#if image}
     <meta property="og:image" content={image} />
   {/if}

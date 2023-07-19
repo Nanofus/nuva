@@ -1,7 +1,6 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
   import type { Category, PostMeta } from "$lib/types";
-  import List from "$lib/components/reusable/List.svelte";
 
   export let posts: PostMeta[];
 

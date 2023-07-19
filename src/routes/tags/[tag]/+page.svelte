@@ -3,8 +3,8 @@
   import PostList from "$lib/components/PostList.svelte";
   import type { PostListByTagResponse } from "$lib/types";
   import Button from "$lib/components/reusable/Button.svelte";
-  import PageHead from "$lib/components/reusable/PageHead.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+  import { getPageTitle, getPageUrl } from "$lib/util";
 
   export let data: PostListByTagResponse;
   let fetching = false;
@@ -23,7 +23,11 @@
   };
 </script>
 
-<PageHead title={data.tag} url="/tags/{data.tagSlug}" />
+<svelte:head>
+  <title>{getPageTitle(data.tag)}</title>
+  <meta content={data.tag} property="og:title" />
+  <meta content={getPageUrl(`tags/${data.tagSlug}`)} property="og:url" />
+</svelte:head>
 
 <h1>Tagi: {data.tag}</h1>
 <PostList posts={data.posts} />

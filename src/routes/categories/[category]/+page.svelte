@@ -3,7 +3,7 @@
   import type { PostListByCategoryResponse } from "$lib/types";
   import PostList from "$lib/components/PostList.svelte";
   import Button from "$lib/components/reusable/Button.svelte";
-  import PageHead from "$lib/components/reusable/PageHead.svelte";
+  import { getPageTitle, getPageUrl } from "$lib/util";
 
   export let data: PostListByCategoryResponse;
   let fetching = false;
@@ -22,7 +22,11 @@
   };
 </script>
 
-<PageHead title={data.category} url="/categories/{data.categorySlug}" /> />
+<svelte:head>
+  <title>{getPageTitle(data.category)}</title>
+  <meta content={data.category} property="og:title" />
+  <meta content={getPageUrl(`categories/${data.categorySlug}`)} property="og:url" />
+</svelte:head>
 
 <h1>Kategoria: {data.category}</h1>
 <PostList posts={data.posts} />

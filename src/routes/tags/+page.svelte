@@ -2,9 +2,9 @@
   import { getTagList } from "$lib/database";
   import type { TagListResponse } from "$lib/types";
   import Button from "$lib/components/reusable/Button.svelte";
-  import PageHead from "$lib/components/reusable/PageHead.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import Pill from "$lib/components/reusable/Pill.svelte";
+  import { getPageTitle, getPageUrl } from "$lib/util";
 
   export let data: TagListResponse;
   let fetching = false;
@@ -21,7 +21,11 @@
   };
 </script>
 
-<PageHead title="Tagit" url="/tags" />
+<svelte:head>
+  <title>{getPageTitle("Tagit")}</title>
+  <meta content={"Tagit"} property="og:title" />
+  <meta content={getPageUrl(`tags`)} property="og:url" />
+</svelte:head>
 
 <h1>Tagit</h1>
 <div class="tags">

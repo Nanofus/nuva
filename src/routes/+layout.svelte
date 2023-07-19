@@ -4,11 +4,11 @@
   import { isLoggedIn } from "$lib/database";
   import Header from "$lib/components/Header.svelte";
   import Footer from "$lib/components/Footer.svelte";
-  import PageHead from "$lib/components/reusable/PageHead.svelte";
   import "$lib/style/variables.scss";
   import "$lib/style/theme.scss";
   import Navigation from "$lib/components/Navigation.svelte";
   import { browser } from "$app/environment";
+  import { OG_LOCALE, SITE_NAME } from "$lib/config";
 
   let loggedIn: boolean;
 
@@ -20,7 +20,12 @@
   });
 </script>
 
-<PageHead />
+<svelte:head>
+  <title>{SITE_NAME}</title>
+  <meta content={SITE_NAME} property="og:site_name" />
+  <meta content={OG_LOCALE} property="og:locale" />
+  <meta content="website" property="og:type" />
+</svelte:head>
 
 <Navigation />
 <div id="page">

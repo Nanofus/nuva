@@ -3,7 +3,7 @@
   import PostList from "$lib/components/PostList.svelte";
   import type { PostListBySearchResponse } from "$lib/types";
   import Button from "$lib/components/reusable/Button.svelte";
-  import PageHead from "$lib/components/reusable/PageHead.svelte";
+  import { getPageTitle, getPageUrl } from "$lib/util";
 
   export let data: PostListBySearchResponse;
   let fetching = false;
@@ -16,13 +16,17 @@
       searchTerm: data.searchTerm,
       endCursor: newData.endCursor,
       hasNextPage: newData.hasNextPage,
-      termSlug: data.termSlug,
+      termSlug: data.termSlug
     };
     fetching = false;
   };
 </script>
 
-<PageHead title={data.searchTerm} url="/categories/{data.termSlug}" />
+<svelte:head>
+  <title>{getPageTitle(data.searchTerm)}</title>
+  <meta content={data.searchTerm} property="og:title" />
+  <meta content={getPageUrl(`search/${data.termSlug}`)} property="og:url" />
+</svelte:head>
 
 <h1>Haku: {data.searchTerm}</h1>
 <PostList posts={data.posts} />

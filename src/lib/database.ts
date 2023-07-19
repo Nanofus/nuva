@@ -5,16 +5,16 @@ import { error } from "@sveltejs/kit";
 import { loginInfo } from "$lib/stores";
 import { dataToCategories, dataToComments, dataToPost, dataToPostMeta, dataToTags } from "$lib/database.mappers";
 import type {
-	AuthInfo,
-	CategoryListResponse,
-	Comment,
-	Post,
-	PostListByCategoryResponse,
-	PostListBySearchResponse,
-	PostListByTagResponse,
-	PostMeta,
-	Tag,
-	TagListResponse
+  AuthInfo,
+  CategoryListResponse,
+  Comment,
+  Post,
+  PostListByCategoryResponse,
+  PostListBySearchResponse,
+  PostListByTagResponse,
+  PostMeta,
+  Tag,
+  TagListResponse
 } from "$lib/types";
 import { toastThemes } from "$lib/util";
 

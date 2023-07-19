@@ -1,12 +1,16 @@
 <script lang="ts">
   import type { CategoryListResponse } from "$lib/types";
-  import PageHead from "$lib/components/reusable/PageHead.svelte";
   import List from "$lib/components/reusable/List.svelte";
+  import { getPageTitle, getPageUrl } from "$lib/util";
 
   export let data: CategoryListResponse;
 </script>
 
-<PageHead title="Kategoriat" url="/categories" />
+<svelte:head>
+  <title>{getPageTitle("Kategoriat")}</title>
+  <meta content={"Kategoriat"} property="og:title" />
+  <meta content={getPageUrl(`categories`)} property="og:url" />
+</svelte:head>
 
 <h1>Kategoriat</h1>
 <List>

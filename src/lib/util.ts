@@ -1,19 +1,20 @@
 import type { Hierarchical } from "$lib/types";
+import { BASE_PATH, SITE_NAME, SITE_NAME_DELIMITER } from "$lib/config";
 
 export const toastThemes = {
   error: {
     theme: {
-      "--toastBackground": "var(--error-background)",
+      "--toastBackground": "var(--error-background)"
     }
   },
   success: {
     theme: {
-      "--toastBackground": "var(--success-background)",
+      "--toastBackground": "var(--success-background)"
     }
   },
   info: {
     theme: {
-      "--toastBackground": "var(--info-background)",
+      "--toastBackground": "var(--info-background)"
     }
   }
 };
@@ -43,6 +44,13 @@ export const objectsToHierarchy = (arr: Hierarchical[]) => {
   }
 
   return tree;
+};
+
+export let getPageTitle = (title: string) => {
+  return `${title} ${SITE_NAME_DELIMITER} ${SITE_NAME}`;
+};
+export let getPageUrl = (slug: string) => {
+  return `${BASE_PATH}/${slug}`;
 };
 
 export let formatSecondsToMMSS = (seconds: number) => {

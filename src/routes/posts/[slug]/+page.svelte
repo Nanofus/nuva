@@ -1,11 +1,11 @@
 <script lang="ts">
   import type { Post } from "$lib/types";
-  import PageHead from "$lib/components/reusable/PageHead.svelte";
   import PostHeader from "$lib/components/PostHeader.svelte";
   import PostFooter from "$lib/components/PostFooter.svelte";
   import PostContent from "$lib/components/PostContent.svelte";
   import { onMount } from "svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+  import { getPageTitle, getPageUrl } from "$lib/util";
 
   export let data: Post;
   let noAccess = false;
@@ -17,7 +17,12 @@
   });
 </script>
 
-<PageHead title={data.title} isPost={true} url="/posts/{data.slug}" />
+<svelte:head>
+  <title>{getPageTitle(data.title)}</title>
+  <meta content={data.title} property="og:title" />
+  <meta content="article" property="og:type" />
+  <meta content={getPageUrl(`posts/${data.slug}`)} property="og:url" />
+</svelte:head>
 
 {#if data.content}
   <article>
