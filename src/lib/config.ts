@@ -78,7 +78,7 @@ export const QUERIES = {
         commentCount
         content`,
   postComments: `
-        comments {
+        comments(first: ${POSTS_PER_FETCH}) {
             nodes {
                 date
                 author {
@@ -90,5 +90,5 @@ export const QUERIES = {
                 databaseId
                 parentDatabaseId
             }
-        }`
+        }` // TODO: If >100 comments, fetch more
 };
