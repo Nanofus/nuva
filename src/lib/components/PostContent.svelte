@@ -8,7 +8,7 @@
 
   const setInitialLetter = () => {
     if (browser && !navigator.userAgent.match(/firefox|fxios/i)) { // TODO: Remove this when Firefox supports initial-letter
-      document.documentElement.style.setProperty("--initial-letter-size", "3");
+      document.documentElement.style.setProperty("--initial-letter-size", "3.0");
       document.documentElement.style.setProperty("--initial-letter-padding", "0.5rem");
     }
   };
@@ -34,6 +34,10 @@
 
 {#if post.styles}
   <div id="post-style-container">{@html `<style>${post.styles}</style>`}</div>
+{/if}
+{#if !post.mobileFriendly}
+  <div class="info-box"><span class="material-icons small-icon">warning</span> Tämä postaus ei sovi mobiililla luettavaksi.
+  </div>
 {/if}
 <section id="post-content">
   {@html post.content}

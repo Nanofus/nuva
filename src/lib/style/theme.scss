@@ -96,6 +96,18 @@ hr {
   }
 }
 
+/* Warnings */
+.info-box {
+  background-color: var(--info-background);
+  padding: 1rem;
+
+  .small-icon {
+    font-size: 1rem;
+    position: relative;
+    top: 0.1rem;
+  }
+}
+
 /* Toast */
 
 ._toastItem {
