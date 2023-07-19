@@ -17,8 +17,9 @@
   });
 </script>
 
+<PageHead title={data.title} isPost={true} url="/posts/{data.slug}" />
+
 {#if data.content}
-  <PageHead title={data.title} isPost={true} url="/posts/{data.slug}" />
   <article>
     <PostHeader post={data} />
     <PostContent post={data} />
