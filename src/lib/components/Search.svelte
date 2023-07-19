@@ -2,10 +2,18 @@
   import Button from "$lib/components/reusable/Button.svelte";
   import Input from "$lib/components/reusable/Input.svelte";
   import Form from "$lib/components/reusable/Form.svelte";
+  import { toast } from "@zerodevx/svelte-toast";
+  import { toastThemes } from "$lib/util";
 
   let searchTerm = "";
 
-  const search = () => window.location.href = `/search/${encodeURI(searchTerm)}`;
+  const search = () => {
+    if (searchTerm === "" || !searchTerm) {
+      toast.push("Laitapa hakukenttään edes jotain", toastThemes.error);
+      return;
+    }
+    window.location.href = `/search/${encodeURI(searchTerm)}`;
+  }
 </script>
 
 <div class="search-area">
