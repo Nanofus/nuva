@@ -32,7 +32,7 @@ export const QUERIES = {
             authorgroup {
                 name
             }
-            featuredimage
+            custombanner
         }
         categories {
             nodes {
@@ -55,7 +55,7 @@ export const QUERIES = {
             authorgroup {
                 name
             }
-            featuredimage
+            custombanner
             initialletter
             scripts
             styles
@@ -72,6 +72,7 @@ export const QUERIES = {
             nodes {
                 name
                 slug
+                count
             }
         }
         commentCount

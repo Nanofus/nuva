@@ -7,7 +7,7 @@
 
 <div id="tags">
   {#each tags as tag}
-    <Pill href="/tags/{tag.slug}">{tag.name}</Pill>
+    <Pill sizeByCount={false} href="/tags/{tag.slug}">{tag.name}</Pill>
   {/each}
 </div>
 

@@ -39,7 +39,7 @@
 
 <nav>
   <div class="section-logo-area">
-    <div class="section-logo" bind:this={smallLogo}>
+    <div bind:this={smallLogo} class="section-logo">
       <NavItem href="/"><h1>Klaanon</h1></NavItem>
     </div>
     <div class="section-menu">
@@ -54,7 +54,7 @@
       </NavItem>
     </div>
   </div>
-  <div class="section-menu-items {menuOpen ? 'menu-open' : ''}" bind:this={menuItems} on:click={menuClicked}>
+  <div bind:this={menuItems} class="section-menu-items {menuOpen ? 'menu-open' : ''}" on:click={menuClicked}>
     <NavItem href="/">Etusivu</NavItem>
     <NavItem href="/categories">Kategoriat</NavItem>
     <NavItem href="/tags">Tagit</NavItem>
@@ -95,6 +95,7 @@
     justify-content: space-between;
 
     .section-logo {
+      opacity: 0;
       transition: var(--unfocus-speed) ease-in-out;
     }
   }

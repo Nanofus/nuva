@@ -1,7 +1,6 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
   import type { Post } from "$lib/types";
-  import PostCategories from "$lib/components/PostCategories.svelte";
 
   export let post: Post;
 </script>
@@ -15,7 +14,8 @@
         <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a></span>
       {/each}
     </span>
-    <time class="post-date"><span class="material-icons">calendar_today</span> {post.date.toLocaleDateString(LOCALE)}</time>
+    <time class="post-date"><span class="material-icons">calendar_today</span> {post.date.toLocaleDateString(LOCALE)}
+    </time>
     <span class="post-authors"><span class="material-icons">person</span> {post.authors.join(', ')}</span>
     <span class="post-comments-link">
       <span class="material-icons">forum</span>

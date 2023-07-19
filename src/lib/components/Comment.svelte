@@ -4,6 +4,7 @@
   import CommentForm from "$lib/components/CommentForm.svelte";
   import { createEventDispatcher } from "svelte";
   import { browser } from "$app/environment";
+  import { isLoggedIn } from "$lib/database";
 
   export let comment: Comment;
   export let post: Post;
@@ -47,7 +48,7 @@
   {#if isCurrentUser()}
     <a target="_blank" href="https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c={comment._id}">Muokkaa</a>
   {/if}
-  {#if !replyFormOpen}
+  {#if !replyFormOpen && isLoggedIn()}
     <a role="button" tabindex="0" on:click={() => (replyFormOpen = true)}>Vastaa</a>
   {:else}
     <CommentForm on:commentSent={commentSent} parent={comment._id} postId={post._id} isReply={true} />

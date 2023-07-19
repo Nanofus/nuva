@@ -15,7 +15,7 @@ export const dataToPostMeta = (data: any): PostMeta => {
         name: category.name
       };
     }),
-    featuredImage: data.additionalFields.featuredimage,
+    customBanner: data.additionalFields.custombanner,
     commentCount: data.commentCount
   };
 };
@@ -46,7 +46,7 @@ export const dataToPost = (data: any): Post | null => {
     authors: data.additionalFields.authorgroup
       ? data.additionalFields.authorgroup.map((author: any) => author.name)
       : [data.author.node.name],
-    featuredImage: data.additionalFields.featuredimage,
+    customBanner: data.additionalFields.custombanner,
     commentCount: data.commentCount,
     initialLetter: data.additionalFields.initialletter,
     scripts: data.additionalFields.scripts,
@@ -88,7 +88,8 @@ export const dataToTags = (data: any): Tag[] => {
   return data.map((tag: any) => {
     return {
       slug: tag.slug,
-      name: tag.name
+      name: tag.name,
+      count: tag.count
     };
   });
 };

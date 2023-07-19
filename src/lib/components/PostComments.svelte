@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Post } from "$lib/types";
   import CommentForm from "$lib/components/CommentForm.svelte";
-  import { getCommentsForPostBySlug } from "$lib/database";
+  import { getCommentsForPostBySlug, isLoggedIn } from "$lib/database";
   import Comment from "$lib/components/Comment.svelte";
 
   export let post: Post;
@@ -20,7 +20,7 @@
   {#each post.comments as comment}
     <Comment on:commentSent={refreshComments} {post} {comment} />
   {/each}
-  {#if !replyFormOpen}
+  {#if !replyFormOpen && isLoggedIn()}
     <a role="button" tabindex="0" on:click={() => (replyFormOpen = true)}>Kommentoi</a>
   {:else}
     <CommentForm on:commentSent={refreshComments} parent={0} postId={post._id} isReply={false} />

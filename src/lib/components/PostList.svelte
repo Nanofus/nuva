@@ -12,47 +12,39 @@
   };
 </script>
 
-<List>
-  <li class="list-header">
-    <span class="link">Nimi</span>
-    <span class="comment-count hidden-mobile material-icons">forum</span>
-    <span class="date">Julkaisu</span>
-    <span class="authors hidden-mobile">Kirjoittajat</span>
-  </li>
+<table>
+  <tr class="list-header">
+    <td class="link">Nimi</td>
+    <td class="comment-count hidden-mobile material-icons">forum</td>
+    <td class="date">Julkaisu</td>
+    <td class="authors hidden-mobile">Postaaja</td>
+  </tr>
   {#each posts as post}
-    <li>
-      <span class="link"><a href="/posts/{post.slug}">{post.title}</a>
+    <tr>
+      <td class="link"><a href="/posts/{post.slug}">{post.title}</a>
         <span class="categories">{parseCategories(post.categories)}</span>
-      </span>
-      <span class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ""}</span>
-      <time class="date">{post.date.toLocaleDateString(LOCALE)}</time>
-      <span class="authors hidden-mobile">{post.authors.join(', ')}</span>
-    </li>
+      </td>
+      <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ""}</td>
+      <td class="date">{post.date.toLocaleDateString(LOCALE)}</td>
+      <td class="authors hidden-mobile">{post.authors[0]}</td>
+    </tr>
   {/each}
-</List>
+</table>
 
 <style lang="scss">
-  li {
-    display: grid;
-    grid-template-columns: 3fr 0fr 1fr 2fr;
-    gap: 1rem;
-    padding-bottom: 0.2rem;
+  table {
+    width: var(--article-max-width);
   }
 
-  .date, .comment-count {
+  td:not(:first-child) {
+    padding-left: 1rem;
+  }
+
+  .comment-count {
     text-align: center;
   }
 
-  .authors {
-    text-align: right;
-  }
-
   @media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
-    li {
-      display: flex;
-      justify-content: space-between;
-    }
-
     .date {
       text-align: right;
     }

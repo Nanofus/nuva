@@ -10,7 +10,7 @@ export interface PostMeta {
   date: Date;
   authors: string[];
   categories: Category[];
-  featuredImage: string;
+  customBanner: string;
   commentCount: number;
 }
 
@@ -34,6 +34,7 @@ export interface Category extends Hierarchical {
 export interface Tag {
   slug: string;
   name: string;
+  count: number;
 }
 
 export interface Comment extends Hierarchical {

@@ -1,8 +1,19 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   export let href = null;
+  export let sizeByCount: number | boolean = false;
+
+  let pill;
+
+  onMount(() => {
+    if (!sizeByCount) return;
+    // Base font size on sizeByCount logarithmically
+    pill.style.fontSize = `${sizeByCount as number * 0.01 + 0.8}em`;
+  });
 </script>
 
-<div class="pill">
+<div bind:this={pill} class="pill">
   {#if href}
     <a {href} class="tag">
       <slot />
