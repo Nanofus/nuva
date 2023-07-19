@@ -6,7 +6,7 @@ Musicmancer 2023 Edition
   import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
   import Button from "$lib/components/reusable/Button.svelte";
-  import { formatSecondsToMMSS } from "$lib/util";
+  import { formatSecondsToMMSS, loadVolume, saveVolume } from "$lib/util";
 
   interface AudioData {
     src: string;
@@ -35,23 +35,6 @@ Musicmancer 2023 Edition
     clearInterval(seekInterval);
     clearInterval(fadeOutInterval);
   });
-
-  let loadVolume = () => {
-    if (browser) {
-      if (localStorage.getItem("settings")) {
-        return JSON.parse(localStorage.getItem("settings")).volume;
-      }
-    }
-    return 0;
-  };
-
-  let saveVolume = (volume: number) => {
-    if (browser) {
-      const settings = JSON.parse(localStorage.getItem("settings"));
-      settings.volume = volume;
-      localStorage.setItem("settings", JSON.stringify(settings));
-    }
-  };
 
   let play = (index: number) => {
     const newAudioData = audioDataArray[index];

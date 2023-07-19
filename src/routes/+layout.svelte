@@ -7,16 +7,14 @@
   import "$lib/style/variables.scss";
   import "$lib/style/theme.scss";
   import Navigation from "$lib/components/Navigation.svelte";
-  import { browser } from "$app/environment";
   import { OG_LOCALE, SITE_NAME } from "$lib/config";
+  import { createBaseSettings } from "$lib/util";
 
   let loggedIn: boolean;
 
   onMount(() => {
     loggedIn = isLoggedIn();
-    if (browser && !localStorage.getItem("settings")) {
-      localStorage.setItem("settings", JSON.stringify({ volume: 0.1 }));
-    }
+    createBaseSettings();
   });
 </script>
 

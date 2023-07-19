@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { postComment } from "$lib/database";
-  import { loginInfo } from "$lib/stores";
+  import { isLoggedIn, postComment } from "$lib/database";
   import { toast } from "@zerodevx/svelte-toast";
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
   import Input from "$lib/components/reusable/Input.svelte";
   import Form from "$lib/components/reusable/Form.svelte";
@@ -13,9 +12,9 @@
   export let postId: number;
   export let isReply: boolean;
 
-  let loggedIn: boolean | null = null;
-  loginInfo.subscribe((loginInfo) => {
-    loggedIn = !!loginInfo;
+  let loggedIn: boolean;
+  onMount(() => {
+    loggedIn = isLoggedIn();
   });
 
   let sending: boolean = false;

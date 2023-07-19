@@ -1,5 +1,6 @@
 import type { Hierarchical } from "$lib/types";
 import { BASE_PATH, SITE_NAME, SITE_NAME_DELIMITER } from "$lib/config";
+import { browser } from "$app/environment";
 
 export const toastThemes = {
   error: {
@@ -57,4 +58,27 @@ export let formatSecondsToMMSS = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
   const secondsRemainder = Math.floor(seconds % 60);
   return `${minutes}:${secondsRemainder < 10 ? "0" : ""}${secondsRemainder}`;
+};
+
+export let createBaseSettings = () => {
+  if (browser && !localStorage.getItem("settings")) {
+    localStorage.setItem("settings", JSON.stringify({ volume: 0.1 }));
+  }
+};
+
+export let saveVolume = (volume: number) => {
+  if (browser) {
+    const settings = JSON.parse(<string>localStorage.getItem("settings"));
+    settings.volume = volume;
+    localStorage.setItem("settings", JSON.stringify(settings));
+  }
+};
+
+export let loadVolume = () => {
+  if (browser) {
+    if (localStorage.getItem("settings")) {
+      return JSON.parse(<string>localStorage.getItem("settings")).volume;
+    }
+  }
+  return 0;
 };
