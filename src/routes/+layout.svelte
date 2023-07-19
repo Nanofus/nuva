@@ -62,6 +62,7 @@
     min-width: var(--page-min-width);
     width: 100%;
     max-width: var(--page-max-width);
+    padding-top: var(--navigation-height);
   }
 
   main {

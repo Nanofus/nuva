@@ -6,19 +6,26 @@
 </script>
 
 {#if href}
-  <a {href} target={openInNewTab ? "_blank" : null}>
+  <a {href} target={openInNewTab ? "_blank" : null} on:click>
     <slot />
   </a>
 {:else}
-  <div>
+  <div on:click>
     <slot />
   </div>
 {/if}
 
 <style lang="scss">
   div, a {
+    display: block;
     line-height: var(--navigation-height);
+    height: var(--navigation-height);
     padding: 0 0.5em;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--hover-light);
+    }
   }
 
   a {
@@ -26,7 +33,6 @@
 
     &:active, &:hover {
       color: var(--text-light);
-      background-color: var(--hover-light);
       transition: 0s;
     }
 

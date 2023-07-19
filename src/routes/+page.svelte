@@ -23,7 +23,7 @@
 
 <PageHead />
 
-<h1>Kaikki ropeosat</h1>
+<h1>Kaikki julkaisut</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
   <Button on:click={fetchMorePosts}>Lataa lisää</Button>
