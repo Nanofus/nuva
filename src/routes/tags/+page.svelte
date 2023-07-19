@@ -21,7 +21,7 @@
   };
 </script>
 
-<PageHead title="Tagit" />
+<PageHead title="Tagit" url="/tags" />
 
 <h1>Tagit</h1>
 <div class="tags">

@@ -15,13 +15,14 @@
       posts: [...data.posts, ...newData.posts],
       searchTerm: data.searchTerm,
       endCursor: newData.endCursor,
-      hasNextPage: newData.hasNextPage
+      hasNextPage: newData.hasNextPage,
+      termSlug: data.termSlug,
     };
     fetching = false;
   };
 </script>
 
-<PageHead title={data.searchTerm} />
+<PageHead title={data.searchTerm} url="/categories/{data.termSlug}" />
 
 <h1>Haku: {data.searchTerm}</h1>
 <PostList posts={data.posts} />

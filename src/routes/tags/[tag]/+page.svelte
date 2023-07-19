@@ -23,7 +23,7 @@
   };
 </script>
 
-<PageHead title={data.tag} />
+<PageHead title={data.tag} url="/tags/{data.tagSlug}" />
 
 <h1>Tagi: {data.tag}</h1>
 <PostList posts={data.posts} />

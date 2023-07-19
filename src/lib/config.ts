@@ -1,15 +1,16 @@
 export const ISR_EXPIRATION = 60;
 export const API_PATH = "https://klaanon.fi/wp/graphql";
+export const BASE_PATH = "https://nuva.klaanon.fi";
 export const POSTS_PER_FETCH = 100;
 export const LOCALSTORAGE_AUTH_KEY = "auth";
 export const LOCALE = "fi-FI";
+export const OG_LOCALE = "fi_FI";
 
 export const SITE_NAME = "Klaanon Nuva";
 export const SITE_NAME_DELIMITER = "—";
 
 export const BANNER_COUNT = 1;
 
-export const FONT_PATH = "https://meri.klaanon.fi/fonts";
 
 export const QUERIES = {
   pageInfo: `

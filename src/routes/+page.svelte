@@ -21,7 +21,7 @@
   };
 </script>
 
-<PageHead />
+<PageHead url="/" />
 
 <h1>Kaikki julkaisut</h1>
 <PostList posts={data.posts} />

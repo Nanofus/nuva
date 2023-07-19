@@ -22,7 +22,7 @@
   };
 </script>
 
-<PageHead title={data.category} />
+<PageHead title={data.category} url="/categories/{data.categorySlug}" /> />
 
 <h1>Kategoria: {data.category}</h1>
 <PostList posts={data.posts} />

@@ -6,7 +6,7 @@
   export let data: CategoryListResponse;
 </script>
 
-<PageHead title="Kategoriat" />
+<PageHead title="Kategoriat" url="/categories" />
 
 <h1>Kategoriat</h1>
 <List>

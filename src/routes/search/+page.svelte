@@ -3,7 +3,7 @@
   import Search from "$lib/components/Search.svelte";
 </script>
 
-<PageHead title="Tagit" />
+<PageHead title="Haku" url="/search" />
 
 <h1>Haku</h1>
 <Search />
