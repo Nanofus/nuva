@@ -16,6 +16,7 @@ import type {
 	Tag,
 	TagListResponse
 } from "$lib/types";
+import { toastThemes } from "$lib/util";
 
 export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | null> => {
   const authToken = browser ? getAuthInfo()?.authToken : null;
@@ -279,6 +280,7 @@ export const isLoggedIn = (): boolean => {
 export const logout = (): void => {
   loginInfo.set(null);
   localStorage.removeItem(LOCALSTORAGE_AUTH_KEY);
+  toast.push("Kirjauduit ulos", toastThemes.success);
 };
 
 export const login = async (
@@ -312,7 +314,7 @@ export const login = async (
     })
   ).json();
   response.errors?.forEach((error: any) => {
-    toast.push(error.message);
+    toast.push(error.message, toastThemes.error);
   });
   if (response.data.login) {
     const loginData: AuthInfo = {
@@ -323,7 +325,7 @@ export const login = async (
     };
     localStorage.setItem("auth", JSON.stringify(loginData));
     loginInfo.set(loginData);
-    toast.push("Sisäänkirjautuminen onnistui!");
+    toast.push(`Tervetuloa, ${loginData.displayName}`, toastThemes.success);
     return true;
   }
   return false;
@@ -359,10 +361,10 @@ export const postComment = async (
     })
   ).json();
   response.errors?.forEach((error: any) => {
-    toast.push(error.message);
+    toast.push(error.message, toastThemes.error);
   });
   if (response.data.createComment.success) {
-    toast.push("Kommentti lähetetty!");
+    toast.push("Kommentti lähetetty", toastThemes.success);
     return true;
   }
   return false;

@@ -15,7 +15,7 @@
   onMount(() => {
     loggedIn = isLoggedIn();
     if (browser && !localStorage.getItem("settings")) {
-      localStorage.setItem("settings", JSON.stringify({ darkMode: false, volume: 0.1 }));
+      localStorage.setItem("settings", JSON.stringify({ volume: 0.1 }));
     }
   });
 </script>
@@ -29,7 +29,7 @@
     <slot />
   </main>
   <Footer />
-  <SvelteToast options={{ reversed: true, intro: { y: -20 } }} />
+  <SvelteToast options={{ reversed: true, duration: 3000, intro: { y: -20 } }} />
 </div>
 
 <style lang="scss">

@@ -44,7 +44,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@zerodevx/svelte-toast": "1.0.0-rc.1",
+    "@zerodevx/svelte-toast": "^0.9.5",
     "dotenv": "^16.0.3"
   }
 }

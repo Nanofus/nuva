@@ -80,8 +80,8 @@
     z-index: 1;
 
     background: var(--main-nav-background);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(var(--blur-intensity));
+    -webkit-backdrop-filter: blur(var(--blur-intensity));
     font-family: var(--nav-font-family);
 
     display: flex;

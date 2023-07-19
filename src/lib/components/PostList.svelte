@@ -42,11 +42,16 @@
 
   .comment-count {
     text-align: center;
+    font-size: 1rem;
   }
 
   @media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
     .date {
       text-align: right;
+    }
+
+    table {
+      width: 100%;
     }
   }
 

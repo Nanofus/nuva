@@ -7,6 +7,7 @@
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import Form from "$lib/components/reusable/Form.svelte";
   import { toast } from "@zerodevx/svelte-toast";
+  import { toastThemes } from "$lib/util";
 
   let loggedIn: boolean | null = null;
   let passwordInput = "";
@@ -21,7 +22,7 @@
 
   let handleLogin = async () => {
     if (!usernameInput || !passwordInput) {
-      toast.push("Täytä molemmat kentät.");
+      toast.push("Täytä molemmat kentät", toastThemes.error);
       return;
     }
     await login(fetch, usernameInput, passwordInput);
@@ -39,7 +40,6 @@
     </Form>
   {:else if loggedIn}
     <div class="user-info">
-      <h2 class="username">{userDisplayName}</h2>
       <Button on:click={() => logout()}>Kirjaudu ulos</Button>
     </div>
   {/if}

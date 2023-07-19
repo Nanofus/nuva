@@ -30,6 +30,7 @@
     color: var(--text-dark);
     user-select: none;
     margin: 0;
+    text-shadow: var(--banner-shadow);
   }
 
   h1 {
