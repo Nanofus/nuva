@@ -45,7 +45,11 @@
     <div class="section-menu">
       <NavItem on:click={toggleMenu}>
         <div class="hamburger-menu">
-          <span class="material-icons">menu</span>
+          {#if !menuOpen}
+            <span class="material-icons">menu</span>
+          {:else}
+            <span class="material-icons">close</span>
+          {/if}
         </div>
       </NavItem>
     </div>
