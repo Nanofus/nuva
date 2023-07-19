@@ -15,8 +15,7 @@
       posts: [...data.posts, ...newData.posts],
       searchTerm: data.searchTerm,
       endCursor: newData.endCursor,
-      hasNextPage: newData.hasNextPage,
-      termSlug: data.termSlug
+      hasNextPage: newData.hasNextPage
     };
     fetching = false;
   };
@@ -25,7 +24,7 @@
 <svelte:head>
   <title>{getPageTitle(data.searchTerm)}</title>
   <meta content={data.searchTerm} property="og:title" />
-  <meta content={getPageUrl(`search/${data.termSlug}`)} property="og:url" />
+  <meta content={getPageUrl(`search/${data.searchTerm}`)} property="og:url" />
 </svelte:head>
 
 <h1>Haku: {data.searchTerm}</h1>

@@ -11,6 +11,7 @@ export interface PostMeta {
   authors: string[];
   categories: Category[];
   customBanner: string;
+  mobileFriendly: boolean;
   commentCount: number;
 }
 
@@ -54,7 +55,6 @@ export interface PostListResponse extends Paginated {
 
 export interface PostListBySearchResponse extends PostListResponse {
   searchTerm: string;
-  termSlug: string;
 }
 
 export interface PostListByCategoryResponse extends PostListResponse {

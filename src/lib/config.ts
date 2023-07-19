@@ -34,6 +34,7 @@ export const QUERIES = {
                 name
             }
             custombanner
+            mobilefriendly
         }
         categories {
             nodes {
@@ -58,6 +59,7 @@ export const QUERIES = {
             }
             custombanner
             initialletter
+            mobilefriendly
             scripts
             styles
             theme
