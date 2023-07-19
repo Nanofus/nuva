@@ -18,7 +18,7 @@
     background: rgba(0, 0, 0, 0.1);
     margin: 0.25rem;
     position: relative;
-    border-radius: 0.25rem;
+    border-radius: var(--border-radius);
     font-size: 0.8em;
     font-weight: 700;
     line-height: 1.2727272727;

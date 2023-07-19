@@ -22,9 +22,9 @@
 
 <PageHead />
 
+<Navigation />
 <div id="page">
   <Header />
-  <Navigation />
   <main>
     <slot />
   </main>
@@ -40,11 +40,11 @@
     padding: 0;
     font-family: var(--body-text-font-family);
     color: var(--text-light);
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   :global(html) {
-    overflow-x: hidden;
+    overflow-x: clip;
     scrollbar-gutter: stable; // TODO: fix gutter so that it doesn't break 100vw as the horizontal width
   }
 
@@ -58,7 +58,6 @@
   }
 
   #page {
-    position: relative;
     margin: auto;
     min-width: var(--page-min-width);
     width: 100%;
@@ -72,6 +71,7 @@
     align-items: center;
     justify-content: center;
     background-color: var(--background-light);
+    border-radius: var(--border-radius);
   }
 
   :global(code) {
@@ -105,6 +105,12 @@
 
     :global(.hidden-mobile) {
       display: none !important;
+    }
+  }
+
+  @media screen and (max-width: 76rem) { // TODO: Fix hardcoded value
+    main {
+      border-radius: 0;
     }
   }
 </style>

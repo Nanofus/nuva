@@ -17,7 +17,7 @@
 
 <style lang="scss">
   div, a {
-    line-height: 3rem;
+    line-height: var(--navigation-height);
     padding: 0 0.5em;
   }
 

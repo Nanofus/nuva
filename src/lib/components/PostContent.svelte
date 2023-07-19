@@ -8,7 +8,7 @@
 
   const setInitialLetter = () => {
     if (browser && !navigator.userAgent.match(/firefox|fxios/i)) { // TODO: Remove this when Firefox supports initial-letter
-      document.documentElement.style.setProperty("--initial-letter-size", "2");
+      document.documentElement.style.setProperty("--initial-letter-size", "3");
       document.documentElement.style.setProperty("--initial-letter-padding", "0.5rem");
     }
   };

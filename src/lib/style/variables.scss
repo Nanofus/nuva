@@ -15,8 +15,8 @@
   --link-hover: #7fa8c3;
   --selection: #ffff0088;
   --main-nav-color: #ffffff;
-  --main-nav-background: rgba(0, 0, 0, 0) linear-gradient(#252525, #0a0a0a) repeat scroll 0 0;
-  --highlight-gradient: linear-gradient(135deg, #25252511 30%, #0a0a0a55 100%);
+  --main-nav-background: rgba(0, 0, 0, 0) linear-gradient(#252525, #0a0a0a0a) repeat scroll 0 0;
+  --highlight-gradient: linear-gradient(135deg, #25252511 30%, #0a0a0a33 100%);
 }
 
 /* Typography */
@@ -26,7 +26,7 @@
   --header-secondary-font-family: "Cinzel", serif;
   --accent-font-family: "Source Code Pro", monospace;
   --code-font-family: "Source Code Pro", monospace;
-  --nav-font-family: "Cinzel", sans-serif;
+  --nav-font-family: "Source Serif 4", "Times New Roman", serif;
   --body-text-font-family: "Source Serif 4", "Times New Roman", serif;
   --font-size-body: 1rem;
   --font-size-h1: 3rem;
@@ -52,7 +52,9 @@
   --page-max-width: 76rem;
   --page-min-width: 22rem;
   --article-max-width: 38rem;
+  --navigation-height: 3rem;
   --mobile-horizontal-padding: 1.5rem;
   --transition-speed: 0.5s;
   --unfocus-speed: 0.2s;
+  --border-radius: 0.25rem;
 }

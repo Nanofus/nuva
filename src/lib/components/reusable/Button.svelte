@@ -21,7 +21,7 @@
     background: var(--accent-dark);
     color: var(--main-nav-color);
     padding: 0.3rem 0.5rem;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     border: 0;
     font-family: var(--body-text-font-family);
     font-size: 1rem;

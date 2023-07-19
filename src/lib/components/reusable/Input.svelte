@@ -36,7 +36,7 @@
   input {
     font-family: var(--accent-font-family);
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     padding: 4px 8px;
     font-size: 1rem;
     line-height: 1.5rem;
@@ -44,7 +44,7 @@
 
   textarea {
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     padding: 4px 8px;
     font-size: 1rem;
     line-height: 1.5rem;

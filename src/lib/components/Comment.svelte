@@ -50,7 +50,7 @@
   {#if !replyFormOpen}
     <a role="button" tabindex="0" on:click={() => (replyFormOpen = true)}>Vastaa</a>
   {:else}
-    <CommentForm on:commentSent={commentSent} parent={comment._id} postId={post._id} isReply="true" />
+    <CommentForm on:commentSent={commentSent} parent={comment._id} postId={post._id} isReply={true} />
   {/if}
 </div>
 
@@ -59,6 +59,7 @@
     margin: 1rem 0;
     padding: 1rem;
     background: rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
 
     &.highlighted {
       background: var(--highlight-gradient);

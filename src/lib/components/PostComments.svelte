@@ -23,7 +23,7 @@
   {#if !replyFormOpen}
     <a role="button" tabindex="0" on:click={() => (replyFormOpen = true)}>Kommentoi</a>
   {:else}
-    <CommentForm on:commentSent={refreshComments} parent={0} postId={post._id} />
+    <CommentForm on:commentSent={refreshComments} parent={0} postId={post._id} isReply={false} />
   {/if}
 </div>
 
