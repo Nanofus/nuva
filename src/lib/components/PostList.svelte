@@ -19,8 +19,8 @@
     <td class="authors hidden-mobile">Postaaja</td>
   </tr>
   {#each posts as post}
-    <tr>
-      <td class="link {post.mobileFriendly ? '' : 'mobile-unfriendly'}">
+    <tr class={post.mobileFriendly ? "" : "mobile-unfriendly"}>
+      <td class="link">
         <a href="/posts/{post.slug}">{post.title}</a>
         <span class="categories">{parseCategories(post.categories)}</span>
       </td>
@@ -51,11 +51,9 @@
     }
 
     .mobile-unfriendly {
-      a {
-        color: var(--hover-dark);
-      }
+      color: var(--hover-dark);
 
-      .categories {
+      a, .categories {
         color: var(--hover-dark);
       }
     }
