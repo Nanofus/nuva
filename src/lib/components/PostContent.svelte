@@ -19,8 +19,8 @@
     const parser = new DOMParser();
     let doc = parser.parseFromString(`<div>${htmlString}</div>`, "application/xml");
     if (doc.querySelector("parsererror")) {
+      console.error(doc.querySelector("parsererror").querySelector("div").innerHTML);
       toast.push("Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.", toastThemes.error);
-      throw(doc.querySelector("parsererror").querySelector("div").innerHTML);
     }
   };
 
