@@ -10,7 +10,7 @@
     <h1><a href="/posts/{postMeta.slug}">{postMeta.title}</a></h1>
     <p class="authors">{postMeta.authors.join(', ')}</p>
   </div>
-  <p>{postMeta.description}</p>
+  <p>{postMeta.description ? postMeta.description : ""}</p>
 </div>
 
 <style lang="scss">

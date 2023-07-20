@@ -1,6 +1,8 @@
 # Klaanon Nuva
 
-This is a simple SvelteKit-based frontend for a WordPress backend.
+This is a SvelteKit-based frontend for a WordPress backend, with a bunch of features specialized for a Finnish fanfiction project.
+
+Might also be usable for other use cases.
 
 ## Developing
 
