@@ -15,6 +15,15 @@
     }
   };
 
+  const validateContent = (htmlString) => {
+    const parser = new DOMParser();
+    let doc = parser.parseFromString(`<div>${htmlString}</div>`, "application/xml");
+    if (doc.querySelector("parsererror")) {
+      toast.push("Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.", toastThemes.error);
+      throw(doc.querySelector("parsererror").querySelector("div").innerHTML);
+    }
+  };
+
   const evaluateScripts = (script) => {
     try {
       (1, eval)(script);
@@ -25,6 +34,8 @@
   };
 
   onMount(() => {
+    validateContent(post.content);
+
     // Eval magic to run scripts in the post
     // (1, eval) is a trick to make eval run in the global scope
     // TODO: Does not cleaning up the scope on navigation cause problems?
