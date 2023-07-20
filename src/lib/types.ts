@@ -11,6 +11,8 @@ export interface PostMeta {
   authors: string[];
   categories: Category[];
   customBanner: string;
+  featuredImage: string;
+  description: string;
   mobileFriendly: boolean;
   commentCount: number;
 }

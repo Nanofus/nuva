@@ -36,6 +36,8 @@ export const QUERIES = {
                 name
             }
             custombanner
+            featuredimage
+            description
             mobilefriendly
         }
         categories {
@@ -60,6 +62,8 @@ export const QUERIES = {
                 name
             }
             custombanner
+            featuredimage
+            description
             initialletter
             artists {
                 name

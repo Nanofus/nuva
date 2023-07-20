@@ -6,6 +6,7 @@
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { META_CATEGORY_SLUG } from "$lib/config";
   import { getPageTitle, getPageUrl } from "$lib/util";
+  import FeaturedPost from "$lib/components/FeaturedPost.svelte";
 
   export let data: PostListResponse;
   let fetching = false;
@@ -31,7 +32,8 @@
   <meta content={getPageUrl(`/`)} property="og:url" />
 </svelte:head>
 
-<h1>Kaikki julkaisut</h1>
+<FeaturedPost postMeta={data.posts[0]} />
+<h3>Kaikki julkaisut</h3>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
   <Button on:click={fetchMorePosts}>Lataa lisää</Button>

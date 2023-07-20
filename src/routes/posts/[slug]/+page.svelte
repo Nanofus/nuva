@@ -35,6 +35,7 @@
 <svelte:head>
   <title>{getPageTitle(data.title)}</title>
   <meta content={getPageTitle(data.title)} property="og:title" />
+  <meta content={data.description} name="og:description" />
   <meta content="article" property="og:type" />
   <meta content={getPageUrl(`posts/${data.slug}`)} property="og:url" />
   <meta content={data.authors?.join(", ")} property="article:author" />

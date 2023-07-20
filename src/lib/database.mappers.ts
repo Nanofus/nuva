@@ -16,6 +16,8 @@ export const dataToPostMeta = (data: any): PostMeta => {
       };
     }),
     customBanner: data.additionalFields.custombanner,
+    featuredImage: data.additionalFields.featuredimage,
+    description: data.additionalFields.description,
     mobileFriendly: data.additionalFields.mobilefriendly,
     commentCount: data.commentCount
   };
@@ -53,6 +55,8 @@ export const dataToPost = (data: any): Post | null => {
     bannerVisible: data.additionalFields.bannervisible,
     stickyMenu: data.additionalFields.stickymenu,
     customBanner: data.additionalFields.custombanner,
+    featuredImage: data.additionalFields.featuredimage,
+    description: data.additionalFields.description,
     commentCount: data.commentCount,
     initialLetter: data.additionalFields.initialletter,
     mobileFriendly: data.additionalFields.mobilefriendly,

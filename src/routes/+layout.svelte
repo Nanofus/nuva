@@ -43,14 +43,10 @@
     padding: 0;
     font-family: var(--body-text-font-family);
     color: var(--text-light);
-
-    &.horizontal-lock {
-      overflow-x: clip;
-    }
+    overflow-x: clip;
   }
 
   :global(html) {
-    overflow-x: clip;
     scrollbar-gutter: stable; // TODO: fix gutter so that it doesn't break 100vw as the horizontal width
   }
 
