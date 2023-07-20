@@ -43,7 +43,10 @@
     padding: 0;
     font-family: var(--body-text-font-family);
     color: var(--text-light);
-    overflow-x: clip;
+
+    &.horizontal-lock {
+      overflow-x: clip;
+    }
   }
 
   :global(html) {

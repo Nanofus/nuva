@@ -21,14 +21,14 @@
     <Comment on:commentSent={refreshComments} {post} {comment} />
   {/each}
   {#if !replyFormOpen && isLoggedIn()}
-    <a role="button" tabindex="0" on:click={() => (replyFormOpen = true)}>Kommentoi</a>
+    <a role="button" tabindex="0" on:click={() => replyFormOpen = true}>Kommentoi</a>
   {:else}
-    <CommentForm on:commentSent={refreshComments} parent={0} postId={post._id} isReply={false} />
+    <CommentForm on:commentSent={refreshComments} on:close={() => replyFormOpen = false} parent={0} postId={post._id} isReply={false} />
   {/if}
 </div>
 
 <style lang="scss">
   #comments {
-    margin-top: 3rem;
+    margin-top: var(--vertical-separation-margin);
   }
 </style>

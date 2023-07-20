@@ -13,7 +13,7 @@
 
 <style lang="scss">
   #tags {
-    margin-top: 3rem;
+    margin-top: var(--vertical-separation-margin);
     text-align: center;
   }
 </style>

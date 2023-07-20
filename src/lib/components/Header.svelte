@@ -29,6 +29,7 @@
   a {
     display: block;
     height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
+
     &:hover {
       text-decoration: none;
     }
@@ -55,6 +56,5 @@
   h2 {
     font-size: 1rem;
     text-transform: lowercase;
-    padding-top: -0.5rem;
   }
 </style>

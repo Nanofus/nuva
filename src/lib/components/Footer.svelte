@@ -1,5 +1,5 @@
 <footer>
-  © Klaanon | <a target="_blank" href="https://discord.com/channels/1043556208700833792/1131238873024966809">Palaute</a>
+  © Klaanon | <a href="https://discord.com/channels/1043556208700833792/1131238873024966809" target="_blank">Palaute</a>
 </footer>
 
 <style>

@@ -49,9 +49,9 @@
     <a target="_blank" href="https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c={comment._id}">Muokkaa</a>
   {/if}
   {#if !replyFormOpen && isLoggedIn()}
-    <a role="button" tabindex="0" on:click={() => (replyFormOpen = true)}>Vastaa</a>
+    <a role="button" tabindex="0" on:click={() => replyFormOpen = true}>Vastaa</a>
   {:else}
-    <CommentForm on:commentSent={commentSent} parent={comment._id} postId={post._id} isReply={true} />
+    <CommentForm on:commentSent={commentSent} on:close={() => (replyFormOpen = false)} parent={comment._id} postId={post._id} isReply={true} />
   {/if}
 </div>
 
@@ -59,7 +59,7 @@
   .comment {
     margin: 1rem 0;
     padding: 1rem;
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--comment-background);
     border-radius: var(--border-radius);
 
     &.highlighted {

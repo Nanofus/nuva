@@ -38,20 +38,27 @@
 {#if loggedIn}
   <div class="comment-reply">
     {#if sending}
-      <div class="sending-spinner">
-        <LoadingSpinner />
-      </div>
+      <LoadingSpinner />
     {:else}
       <Form>
         <Input type="multiline" placeholder={isReply ? "Vastaa..." : "Kommentoi..."} bind:value={content} />
-        <Button on:click={sendComment}>Lähetä</Button>
+        <div class="button-group">
+          <a role="button" tabindex="0" on:click={() => dispatch("close")}>Sulje</a>
+          <Button on:click={sendComment}>Lähetä</Button>
+        </div>
       </Form>
     {/if}
   </div>
 {/if}
 
 <style lang="scss">
-  .sending-spinner {
-    text-align: center;
+  .button-group {
+    a {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 </style>

@@ -36,7 +36,8 @@
   <div id="post-style-container">{@html `<style>${post.styles}</style>`}</div>
 {/if}
 {#if !post.mobileFriendly}
-  <div class="info-box error hidden-desktop"><span class="material-icons small-icon">warning</span> Tämä postaus ei sovi mobiililla luettavaksi.
+  <div class="info-box error hidden-desktop"><span class="material-icons inline-icon">warning</span> Tämä postaus ei
+    sovi mobiililla luettavaksi.
   </div>
 {/if}
 <section id="post-content">
@@ -46,7 +47,7 @@
 
 <style lang="scss">
   section {
-    margin: 2rem 0;
+    margin: var(--vertical-separation-margin) 0;
   }
 
   :global(section > p:first-child::first-letter) {

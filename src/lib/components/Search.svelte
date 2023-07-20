@@ -13,7 +13,7 @@
       return;
     }
     window.location.href = `/search/${encodeURI(searchTerm)}`;
-  }
+  };
 </script>
 
 <div class="search-area">

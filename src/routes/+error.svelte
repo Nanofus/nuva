@@ -1,8 +1,10 @@
 <script>
   import { page } from "$app/stores";
-  import PageHead from "$lib/components/reusable/PageHead.svelte";
+  import { getPageTitle } from "$lib/util";
 </script>
 
-<PageHead title={$page.status} />
+<svelte:head>
+  <title>{getPageTitle("Virhe")}</title>
+</svelte:head>
 
 <h1>Virhe {$page.status}</h1>

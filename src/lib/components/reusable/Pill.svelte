@@ -8,7 +8,6 @@
 
   onMount(() => {
     if (!sizeByCount) return;
-    // Base font size on sizeByCount logarithmically
     pill.style.fontSize = `${sizeByCount as number * 0.01 + 0.8}em`;
   });
 </script>

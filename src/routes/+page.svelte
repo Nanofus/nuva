@@ -3,9 +3,9 @@
   import PostList from "$lib/components/PostList.svelte";
   import type { PostListResponse } from "$lib/types";
   import Button from "$lib/components/reusable/Button.svelte";
-  import PageHead from "$lib/components/reusable/PageHead.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { META_CATEGORY_SLUG } from "$lib/config";
+  import { getPageTitle, getPageUrl } from "$lib/util";
 
   export let data: PostListResponse;
   let fetching = false;
@@ -25,7 +25,11 @@
   };
 </script>
 
-<PageHead url="/" />
+<svelte:head>
+  <title>{getPageTitle("Etusivu")}</title>
+  <meta content={"Etusivu"} property="og:title" />
+  <meta content={getPageUrl(`/`)} property="og:url" />
+</svelte:head>
 
 <h1>Kaikki julkaisut</h1>
 <PostList posts={data.posts} />

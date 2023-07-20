@@ -141,7 +141,7 @@
   }
 
   h1 {
-    font-size: 1.25rem;
+    font-size: var(--navigation-logo-size);
     margin: 0 0.5rem;
     color: var(--main-nav-color);
     text-align: left;

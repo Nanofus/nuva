@@ -30,14 +30,14 @@
   .input {
     display: flex;
     flex-direction: column;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 
   input {
     font-family: var(--accent-font-family);
     border: 1px solid #ccc;
     border-radius: var(--border-radius);
-    padding: 4px 8px;
+    padding: 0.25rem 0.5rem;
     font-size: 1rem;
     line-height: 1.5rem;
   }
@@ -45,7 +45,7 @@
   textarea {
     border: 1px solid #ccc;
     border-radius: var(--border-radius);
-    padding: 4px 8px;
+    padding: 0.25rem 0.5rem;
     font-size: 1rem;
     line-height: 1.5rem;
   }

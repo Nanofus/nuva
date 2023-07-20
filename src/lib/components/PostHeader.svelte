@@ -9,16 +9,17 @@
   <h1 id="post-title">{post.title}</h1>
   <div id="post-meta">
     <span class="post-categories">
-      <span class="material-icons">folder</span>
+      <span class="material-icons inline-icon">folder</span>
       {#each post.categories as category}
         <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a></span>
       {/each}
     </span>
-    <time class="post-date"><span class="material-icons">calendar_today</span> {post.date.toLocaleDateString(LOCALE)}
+    <time class="post-date"><span
+      class="material-icons inline-icon">calendar_today</span> {post.date.toLocaleDateString(LOCALE)}
     </time>
-    <span class="post-authors"><span class="material-icons">person</span> {post.authors.join(', ')}</span>
+    <span class="post-authors"><span class="material-icons inline-icon">person</span> {post.authors.join(', ')}</span>
     <span class="post-comments-link">
-      <span class="material-icons">forum</span>
+      <span class="material-icons inline-icon">forum</span>
 			<a href="#comments">{post.commentCount ? post.commentCount : 0} kommenttia</a>
 		</span>
   </div>
@@ -28,12 +29,6 @@
   #post-meta {
     font-family: var(--accent-font-family);
     text-align: center;
-
-    .material-icons {
-      font-size: 1rem;
-      position: relative;
-      top: 0.2rem;
-    }
 
     > * {
       display: inline-block;

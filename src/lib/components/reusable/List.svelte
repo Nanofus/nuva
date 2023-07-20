@@ -14,7 +14,7 @@
     margin: 0;
 
     &.stagger {
-      padding: 0 0 0 2em;
+      padding: 0 0 0 1.5rem;
     }
   }
 </style>

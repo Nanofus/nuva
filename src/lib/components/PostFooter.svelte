@@ -15,6 +15,6 @@
 
 <style lang="scss">
   footer {
-    margin-top: 6rem;
+    margin-top: calc(2 * var(--vertical-separation-margin));
   }
 </style>

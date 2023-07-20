@@ -25,6 +25,7 @@
   --success-background: #00ff00aa;
   --info: #5a869d;
   --info-background: #5a869daa;
+  --comment-background: rgba(0, 0, 0, 0.1);
 }
 
 /* Typography */
@@ -57,8 +58,10 @@
   --page-min-width: 22rem; // ~ 350px
   --article-max-width: 38rem;
   --navigation-height: 3rem;
+  --navigation-logo-size: 1.25rem;
   --mobile-horizontal-padding: 1rem;
   --mobile-icon-size: 2.5rem;
+  --vertical-separation-margin: 3rem;
   --transition-speed: 0.3s;
   --unfocus-speed: 0.15s;
   --border-radius: 0.25rem;
