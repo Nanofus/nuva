@@ -9,6 +9,11 @@
   import Navigation from "$lib/components/Navigation.svelte";
   import { OG_LOCALE, SITE_NAME } from "$lib/config";
   import { createBaseSettings } from "$lib/util";
+  import { navigating } from "$app/stores";
+  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+  import { fade } from "svelte/transition";
+
+  export let data;
 
   let loggedIn: boolean;
 
@@ -29,7 +34,20 @@
 <div id="page">
   <Header />
   <main>
-    <slot />
+    {#if $navigating}
+      <div class="full-page-loader">
+        <LoadingSpinner />
+      </div>
+    {/if}
+    {#key data.pathname}
+      <div class="transition"
+           in:fade={{ duration: 100, delay: 100 }}
+           out:fade={{ duration: 100 }}>
+        {#if !$navigating}
+          <slot />
+        {/if}
+      </div>
+    {/key}
   </main>
   <Footer />
   <SvelteToast options={{ reversed: true, duration: 3000, intro: { y: -20 } }} />
@@ -67,14 +85,18 @@
     padding-top: var(--navigation-height);
   }
 
-  main {
-    padding-bottom: 6rem;
+  .transition {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+  }
+
+  main {
+    padding-bottom: calc(2 * var(--vertical-separation-margin));
     background-color: var(--background-light);
     border-radius: var(--border-radius);
+    height: auto;
+    min-height: calc(100vh - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin)); // TODO: Cleanup this monstrosity
   }
 
   :global(code) {
@@ -123,5 +145,9 @@
     main {
       border-radius: 0;
     }
+  }
+
+  .full-page-loader {
+    padding-top: var(--vertical-separation-margin);
   }
 </style>

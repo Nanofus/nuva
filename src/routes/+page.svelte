@@ -34,8 +34,16 @@
 <FeaturedPost postMeta={data.posts[0]} />
 <h3>Kaikki julkaisut</h3>
 <PostList posts={data.posts} />
-{#if data.hasNextPage && !fetching}
-  <Button on:click={fetchMorePosts}>Lataa lisää</Button>
-{:else if fetching}
-  <LoadingSpinner />
-{/if}
+<div class="fetch-more">
+  {#if data.hasNextPage && !fetching}
+    <Button on:click={fetchMorePosts}>Lataa lisää</Button>
+  {:else if fetching}
+    <LoadingSpinner />
+  {/if}
+</div>
+
+<style lang="scss">
+  .fetch-more {
+    margin-top: var(--vertical-separation-margin);
+  }
+</style>
