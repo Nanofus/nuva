@@ -16,9 +16,7 @@
     const newData = await getPostList(fetch, data.endCursor);
     data = {
       posts: [...data.posts, ...newData.posts]
-        .filter(post => post.categories
-          .map(category => category.slug)
-          .indexOf(META_CATEGORY_SLUG) === -1),
+        .filter(post => !post.categories.map(cat => cat.slug).includes(META_CATEGORY_SLUG)),
       endCursor: newData.endCursor,
       hasNextPage: newData.hasNextPage
     };
@@ -32,6 +30,7 @@
   <meta content={getPageUrl(`/`)} property="og:url" />
 </svelte:head>
 
+<h3>Uusin julkaisu</h3>
 <FeaturedPost postMeta={data.posts[0]} />
 <h3>Kaikki julkaisut</h3>
 <PostList posts={data.posts} />

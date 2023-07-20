@@ -1,5 +1,5 @@
 import type { Hierarchical } from "$lib/types";
-import { BASE_PATH, LOCALSTORAGE_SETTINGS_KEY, SITE_NAME, SITE_NAME_DELIMITER } from "$lib/config";
+import { BANNER_COUNT, BASE_PATH, LOCALSTORAGE_SETTINGS_KEY, SITE_NAME, SITE_NAME_DELIMITER } from "$lib/config";
 import { browser } from "$app/environment";
 
 export const toastThemes = {
@@ -59,6 +59,10 @@ export let formatSecondsToMMSS = (seconds: number) => {
   const secondsRemainder = Math.floor(seconds % 60);
   return `${minutes}:${secondsRemainder < 10 ? "0" : ""}${secondsRemainder}`;
 };
+
+export let getRandomBannerUrl = (seed = 0) => {
+  return `url("/images/banner-${((new Date().getMinutes() + seed) % BANNER_COUNT) + 1}.png")`;
+}
 
 export let createBaseSettings = () => {
   if (browser && !localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)) {

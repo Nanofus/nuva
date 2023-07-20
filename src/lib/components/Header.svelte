@@ -2,9 +2,10 @@
   import { BANNER_COUNT } from "$lib/config";
   import { onMount } from "svelte";
   import { postOptions } from "$lib/stores";
+  import { getRandomBannerUrl } from "$lib/util";
 
   let header;
-  let bannerUrl = `url("/images/banner-${(new Date().getMinutes() % BANNER_COUNT) + 1}.png")`;
+  let bannerUrl = getRandomBannerUrl();
   let bannerVisible = true;
   let customBannerUrl = null;
 
