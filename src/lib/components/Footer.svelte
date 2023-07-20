@@ -5,7 +5,7 @@
 <style>
     footer {
         color: var(--text-dark);
-        padding: 20px;
+        padding: 2rem;
         text-align: center;
     }
 </style>
