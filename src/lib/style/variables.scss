@@ -14,7 +14,8 @@
   --link-hover: #7fa8c3;
   --selection: #ffff0088;
   --main-nav-color: #ffffff;
-  --main-nav-background: linear-gradient(#252322, #0a0a0a0a) repeat scroll 0 0;
+  --main-nav-background: linear-gradient(#252322, #0a0a0a22) repeat scroll 0 0;
+  --main-nav-background-mobile-expanded: linear-gradient(#ffffff00, #252322) repeat scroll 0 0;
   --highlight-gradient: linear-gradient(135deg, #25232211 30%, #0a0a0a33 100%);
   --header-shadow: 0 0 1rem rgba(0, 0, 0, 0.9);
   --banner-shadow: 0 0 0.1rem rgba(0, 0, 0, 1), 0 0 0.5rem rgba(0, 0, 0, 0.9), 0 0 1rem rgba(0, 0, 0, 0.9);
@@ -56,7 +57,8 @@
   --page-min-width: 22rem; // ~ 350px
   --article-max-width: 38rem;
   --navigation-height: 3rem;
-  --mobile-horizontal-padding: 1.5rem;
+  --mobile-horizontal-padding: 1rem;
+  --mobile-icon-size: 2.5rem;
   --transition-speed: 0.3s;
   --unfocus-speed: 0.15s;
   --border-radius: 0.25rem;
