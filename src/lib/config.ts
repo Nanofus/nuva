@@ -3,6 +3,7 @@ export const API_PATH = "https://klaanon.fi/wp/graphql";
 export const BASE_PATH = "https://nuva.klaanon.fi";
 export const POSTS_PER_FETCH = 100;
 export const LOCALSTORAGE_AUTH_KEY = "auth";
+export const LOCALSTORAGE_SETTINGS_KEY = "settings";
 export const LOCALE = "fi-FI";
 export const OG_LOCALE = "fi_FI";
 

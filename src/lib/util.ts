@@ -1,5 +1,5 @@
 import type { Hierarchical } from "$lib/types";
-import { BASE_PATH, SITE_NAME, SITE_NAME_DELIMITER } from "$lib/config";
+import { BASE_PATH, LOCALSTORAGE_SETTINGS_KEY, SITE_NAME, SITE_NAME_DELIMITER } from "$lib/config";
 import { browser } from "$app/environment";
 
 export const toastThemes = {
@@ -61,24 +61,25 @@ export let formatSecondsToMMSS = (seconds: number) => {
 };
 
 export let createBaseSettings = () => {
-  if (browser && !localStorage.getItem("settings")) {
-    localStorage.setItem("settings", JSON.stringify({ volume: 50 }));
+  if (browser && !localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)) {
+    localStorage.setItem(LOCALSTORAGE_SETTINGS_KEY, JSON.stringify({
+      volume: 50
+    }));
   }
 };
 
 export let saveVolume = (volume: number) => {
-  console.log("Saving volume", volume);
   if (browser) {
-    const settings = JSON.parse(<string>localStorage.getItem("settings"));
+    const settings = JSON.parse(<string>localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY));
     settings.volume = volume;
-    localStorage.setItem("settings", JSON.stringify(settings));
+    localStorage.setItem(LOCALSTORAGE_SETTINGS_KEY, JSON.stringify(settings));
   }
 };
 
 export let loadVolume = () => {
   if (browser) {
-    if (localStorage.getItem("settings")) {
-      return JSON.parse(<string>localStorage.getItem("settings")).volume;
+    if (localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)) {
+      return JSON.parse(<string>localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)).volume;
     }
   }
   return 0;
