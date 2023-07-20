@@ -26,7 +26,6 @@ export interface Post extends PostMeta {
   music: string[];
   artists: string[];
   bannerVisible: boolean;
-  stickyMenu: boolean;
   content: string;
   tags: Tag[];
   comments: Comment[];

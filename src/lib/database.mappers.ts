@@ -53,7 +53,6 @@ export const dataToPost = (data: any): Post | null => {
       ? data.additionalFields.artists.map((artist: any) => artist.name)
       : [],
     bannerVisible: data.additionalFields.bannervisible,
-    stickyMenu: data.additionalFields.stickymenu,
     customBanner: data.additionalFields.custombanner,
     featuredImage: data.additionalFields.featuredimage,
     description: data.additionalFields.description,

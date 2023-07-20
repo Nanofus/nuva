@@ -69,7 +69,6 @@ export const QUERIES = {
                 name
             }
             bannervisible
-            stickymenu
             mobilefriendly
             scripts
             styles
