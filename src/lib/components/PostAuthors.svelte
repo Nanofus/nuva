@@ -19,9 +19,9 @@
 
 <style lang="scss">
   #authors {
+    font-family: var(--accent-font-family);
     margin-top: 3rem;
     text-align: center;
-    font-style: italic;
   }
 
   .material-icons {
