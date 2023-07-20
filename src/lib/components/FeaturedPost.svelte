@@ -45,6 +45,6 @@
 
     padding: 2rem;
     border-radius: var(--border-radius);
-    width: var(--article-max-width);
+    max-width: var(--article-max-width);
   }
 </style>
