@@ -17,5 +17,5 @@ export const postOptions = writable<{
 }>({
   bannerVisible: true,
   customBannerUrl: null,
-  stickyMenu: false
+  stickyMenu: true
 });
