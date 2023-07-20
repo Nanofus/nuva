@@ -67,6 +67,7 @@ export let createBaseSettings = () => {
 };
 
 export let saveVolume = (volume: number) => {
+  console.log("Saving volume", volume);
   if (browser) {
     const settings = JSON.parse(<string>localStorage.getItem("settings"));
     settings.volume = volume;

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Login from "$lib/components/Login.svelte";
-  import { getPageTitle, getPageUrl, saveVolume } from "$lib/util";
+  import { getPageTitle, getPageUrl, loadVolume, saveVolume } from "$lib/util";
   import { onMount } from "svelte";
   import { getAuthInfo } from "$lib/database";
 
@@ -9,7 +9,7 @@
 
   onMount(() => {
     userInfo = getAuthInfo();
-    volume = userInfo.volume;
+    volume = loadVolume();
   });
 
   $: volume && saveVolume(volume);
