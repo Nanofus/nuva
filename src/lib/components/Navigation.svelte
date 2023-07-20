@@ -2,11 +2,14 @@
   import NavItem from "$lib/components/reusable/NavItem.svelte";
   import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
+  import { postOptions } from "$lib/stores";
 
   let interval;
   let smallLogo;
   let menuItems;
   let menuOpen = false;
+  let stickyMenu = true;
+  let bannerVisible = true;
 
   const getTotalNavigationHeight = () => {
     const nav = document.querySelector("nav");
@@ -22,15 +25,18 @@
   onMount(() => {
     if (browser) {
       interval = setInterval(() => {
-          if (document.documentElement.scrollTop > getTotalNavigationHeight() || isMobile()) {
-            smallLogo.style.opacity = "1";
-            smallLogo.style.pointerEvents = "auto";
-          } else {
-            smallLogo.style.opacity = "0";
-            smallLogo.style.pointerEvents = "none";
-          }
+        if (document.documentElement.scrollTop > getTotalNavigationHeight() || isMobile() || !bannerVisible) {
+          smallLogo.style.opacity = "1";
+          smallLogo.style.pointerEvents = "auto";
+        } else {
+          smallLogo.style.opacity = "0";
+          smallLogo.style.pointerEvents = "none";
         }
-        , 100);
+      }, 100);
+      postOptions.subscribe(options => {
+        stickyMenu = options.stickyMenu;
+        bannerVisible = options.bannerVisible;
+      });
     }
   });
 
@@ -42,7 +48,7 @@
   const menuClicked = () => menuOpen = false;
 </script>
 
-<nav>
+<nav class={stickyMenu ? "sticky" : ""}>
   <div class="nav-wrapper">
     <div class="section-logo-area">
       <div bind:this={smallLogo} class="section-logo">
@@ -76,7 +82,11 @@
 
 <style lang="scss">
   nav {
-    position: fixed;
+    position: absolute;
+    &.sticky {
+      position: fixed;
+    }
+
     top: 0;
     left: 50%;
     transform: translateX(-50%);

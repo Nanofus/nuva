@@ -3,10 +3,10 @@
   import PostHeader from "$lib/components/PostHeader.svelte";
   import PostFooter from "$lib/components/PostFooter.svelte";
   import PostContent from "$lib/components/PostContent.svelte";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";
-  import { browser } from "$app/environment";
+  import { postOptions } from "$lib/stores";
 
   export let data: Post;
   let noAccess = false;
@@ -14,7 +14,21 @@
   onMount(() => {
     if (!data.content) {
       noAccess = true;
+    } else {
+      postOptions.set({
+        bannerVisible: data.bannerVisible,
+        customBannerUrl: data.customBanner === "" ? null : data.customBanner,
+        stickyMenu: data.stickyMenu,
+      });
     }
+  });
+
+  onDestroy(() => {
+    postOptions.set({
+      bannerVisible: true,
+      customBannerUrl: null,
+      stickyMenu: true
+    });
   });
 </script>
 
@@ -36,11 +50,7 @@
 {:else if noAccess}
   <h2>Postausta ei löytynyt tai sinulla ei ole pääsyä siihen</h2>
 {:else}
-  {#if browser}
-    <LoadingSpinner />
-  {:else}
-    <p>Ei käytettävissä ilman JavaScriptia.</p>
-  {/if}
+  <LoadingSpinner />
 {/if}
 
 <style lang="scss">

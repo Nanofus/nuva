@@ -1,19 +1,34 @@
 <script>
   import { BANNER_COUNT } from "$lib/config";
+  import { onMount } from "svelte";
+  import { postOptions } from "$lib/stores";
 
   let header;
   let bannerUrl = `url("/images/banner-${(new Date().getMinutes() % BANNER_COUNT) + 1}.png")`;
+  let bannerVisible = true;
+  let customBannerUrl = null;
+
+  onMount(() => {
+    postOptions.subscribe(options => {
+      bannerVisible = options.bannerVisible;
+      customBannerUrl = options.customBannerUrl ? `url("${options.customBannerUrl}")` : null;
+    });
+  });
 </script>
 
-<a href="/">
-  <header bind:this={header} style="background-image: {bannerUrl}">
-    <h1>Klaanon</h1>
-    <h2>Bio-Klaanin yhteinen tarina</h2>
+{#if bannerVisible}
+  <header bind:this={header} style="background-image: {customBannerUrl ? customBannerUrl : bannerUrl}">
+    <a href="/">
+      <h1>Klaanon</h1>
+      <h2>Bio-Klaanin yhteinen tarina</h2>
+    </a>
   </header>
-</a>
+{/if}
 
 <style lang="scss">
   a {
+    display: block;
+    height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
     &:hover {
       text-decoration: none;
     }

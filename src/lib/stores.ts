@@ -9,3 +9,13 @@ export const loginInfo = writable(
       : null
     : null
 );
+
+export const postOptions = writable<{
+  bannerVisible: boolean;
+  customBannerUrl: string | null;
+  stickyMenu: boolean;
+}>({
+  bannerVisible: true,
+  customBannerUrl: null,
+  stickyMenu: true,
+});
