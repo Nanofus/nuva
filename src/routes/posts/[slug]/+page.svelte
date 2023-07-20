@@ -40,6 +40,9 @@
   <meta content={getPageUrl(`posts/${data.slug}`)} property="og:url" />
   <meta content={data.authors?.join(", ")} property="article:author" />
   <meta content={data.date} property="article:published_time" />
+  {#if data.featuredImage}
+    <meta content={data.featuredImage} property="og:image" />
+  {/if}
 </svelte:head>
 
 {#if data.content}
