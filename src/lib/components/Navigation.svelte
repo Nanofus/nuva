@@ -2,7 +2,7 @@
   import NavItem from "$lib/components/reusable/NavItem.svelte";
   import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
-  import { postOptions } from "$lib/stores";
+  import { loginInfo, postOptions } from "$lib/stores";
 
   let interval;
   let smallLogo;
@@ -10,6 +10,7 @@
   let menuOpen = false;
   let stickyMenu = true;
   let bannerVisible = true;
+  let userInfo = null;
 
   const getTotalNavigationHeight = () => {
     const nav = document.querySelector("nav");
@@ -37,6 +38,7 @@
         stickyMenu = options.stickyMenu;
         bannerVisible = options.bannerVisible;
       });
+      loginInfo.subscribe(info => (userInfo = info));
     }
   });
 
@@ -72,7 +74,10 @@
       <NavItem href="/tags">Tagit</NavItem>
       <NavItem href="/posts/muotoiluopas">Muotoiluopas</NavItem>
       <NavItem href="https://arkisto.klaanon.fi/soundtracks/">Soundtrackit</NavItem>
-      <NavItem href="/profile">Profiili</NavItem>
+      {#if userInfo}
+        <NavItem href="https://klaanon.fi/wp/wp-admin/edit.php">Kirjoita</NavItem>
+      {/if}
+      <NavItem href="/profile">{userInfo ? "Profiili" : "Kirjaudu"}</NavItem>
       <NavItem href="/search">Haku</NavItem>
     </div>
     <div class="section-filler">
@@ -83,6 +88,7 @@
 <style lang="scss">
   nav {
     position: absolute;
+
     &.sticky {
       position: fixed;
     }
