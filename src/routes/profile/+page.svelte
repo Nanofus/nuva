@@ -5,11 +5,10 @@
   import { getAuthInfo } from "$lib/database";
 
   let userInfo = null;
-  let volume;
+  let volume = loadVolume();
 
   onMount(() => {
     userInfo = getAuthInfo();
-    volume = loadVolume();
   });
 
   $: volume && saveVolume(volume);
