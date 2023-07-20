@@ -41,8 +41,7 @@
     {/if}
     {#key data.pathname}
       <div class="transition"
-           in:fade={{ duration: 100, delay: 100 }}
-           out:fade={{ duration: 100 }}>
+           in:fade={{ duration: 150, delay: 0 }}>
         {#if !$navigating}
           <slot />
         {/if}
@@ -148,6 +147,18 @@
   }
 
   .full-page-loader {
+    animation: fadeIn 1s forwards;
+    animation-delay: 0.5s;
     padding-top: var(--vertical-separation-margin);
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 </style>
