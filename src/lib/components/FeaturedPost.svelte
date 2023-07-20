@@ -19,6 +19,7 @@
     background-size: cover;
     filter: grayscale(80%);
     color: var(--main-nav-color);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
 
