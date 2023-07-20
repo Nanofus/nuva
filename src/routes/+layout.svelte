@@ -68,6 +68,8 @@
   }
 
   :global(img) {
+    display: block;
+    margin: auto;
     max-width: 100%;
     vertical-align: middle;
   }

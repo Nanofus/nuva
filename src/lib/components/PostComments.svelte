@@ -16,7 +16,7 @@
 </script>
 
 <div id="comments">
-  <h2>{post.commentCount ? post.commentCount : 0} kommenttia</h2>
+  <h2>{post.commentCount ? post.commentCount : 0} kommentti{post.commentCount === 1 ? "" : "a"}</h2>
   {#each post.comments as comment}
     <Comment on:commentSent={refreshComments} {post} {comment} />
   {/each}

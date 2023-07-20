@@ -3,6 +3,8 @@
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
   import MusicPlayer from "$lib/components/MusicPlayer.svelte";
+  import { toast } from "@zerodevx/svelte-toast";
+  import { toastThemes } from "$lib/util";
 
   export let post: Post;
 
@@ -13,19 +15,28 @@
     }
   };
 
+  const evaluateScripts = (script) => {
+    try {
+      (1, eval)(script);
+    } catch (e) {
+      console.error(e);
+      toast.push("Virhe postauksen skripteissä. Katso konsolista lisätietoja.", toastThemes.error);
+    }
+  };
+
   onMount(() => {
     // Eval magic to run scripts in the post
     // (1, eval) is a trick to make eval run in the global scope
     // TODO: Does not cleaning up the scope on navigation cause problems?
     if (post.content.indexOf("<script>") === -1) {
-      (1, eval)(post.scripts);
+      evaluateScripts(post.scripts);
     }
 
     // Parse JS from post content and eval it
     const doc = document.implementation.createHTMLDocument(); // Sandbox
     doc.body.innerHTML = post.content;
     [].map.call(doc.getElementsByTagName("script"), (scriptTag: HTMLScriptElement) => {
-      (1, eval)(scriptTag.innerText);
+      evaluateScripts(scriptTag.innerText);
     });
   });
 

@@ -5,7 +5,8 @@ Musicmancer 2023 Edition
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
-  import { formatSecondsToMMSS, loadVolume, saveVolume } from "$lib/util";
+  import { formatSecondsToMMSS, loadVolume, saveVolume, toastThemes } from "$lib/util";
+  import { toast } from "@zerodevx/svelte-toast";
 
   interface AudioData {
     src: string;
@@ -63,6 +64,7 @@ Musicmancer 2023 Edition
     audioElements.forEach((audioElement) => {
       // Get data from audio element
       let audioSrc = audioElement.getAttribute("src");
+      if (!audioSrc) return;
       if (audioSrc === "#auto") {
         audioSrc = musicUrlArray[autoIndex];
         autoIndex++;
