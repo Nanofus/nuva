@@ -6,6 +6,7 @@
   import { onMount } from "svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";
+  import { browser } from "$app/environment";
 
   export let data: Post;
   let noAccess = false;
@@ -35,7 +36,11 @@
 {:else if noAccess}
   <h2>Postausta ei löytynyt tai sinulla ei ole pääsyä siihen</h2>
 {:else}
-  <LoadingSpinner />
+  {#if browser}
+    <LoadingSpinner />
+  {:else}
+    <p>Ei käytettävissä ilman JavaScriptia.</p>
+  {/if}
 {/if}
 
 <style lang="scss">

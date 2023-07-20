@@ -8,6 +8,7 @@
   import Form from "$lib/components/reusable/Form.svelte";
   import { toast } from "@zerodevx/svelte-toast";
   import { toastThemes } from "$lib/util";
+  import { browser } from "$app/environment";
 
   let loggedIn: boolean | null = null;
   let passwordInput = "";
@@ -31,7 +32,11 @@
 
 <div class="login-area">
   {#if loggedIn === null}
-    <LoadingSpinner />
+    {#if browser}
+      <LoadingSpinner />
+    {:else}
+      <p>Ei käytettävissä ilman JavaScriptia.</p>
+    {/if}
   {:else if !loggedIn}
     <Form vertical="true">
       <Input label="Käyttäjätunnus" name="username" bind:value={usernameInput} />

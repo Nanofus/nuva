@@ -6,6 +6,9 @@
 </script>
 
 <div id="tags">
+  {#if tags.length > 0}
+    <h2>Tagit</h2>
+  {/if}
   {#each tags as tag}
     <Pill sizeByCount={false} href="/tags/{tag.slug}">{tag.name}</Pill>
   {/each}

@@ -6,8 +6,8 @@ export const dataToPostMeta = (data: any): PostMeta => {
     title: data.title,
     slug: data.slug,
     date: new Date(data.rawDate),
-    authors: data.additionalFields.authorgroup
-      ? data.additionalFields.authorgroup.map((author: any) => author.name)
+    authors: data.additionalFields.authors
+      ? data.additionalFields.authors.map((author: any) => author.name)
       : [data.author.node.name],
     categories: data.categories.nodes.map((category: any) => {
       return {
@@ -44,9 +44,14 @@ export const dataToPost = (data: any): Post | null => {
     title: data.title,
     slug: data.slug,
     date: new Date(data.rawDate),
-    authors: data.additionalFields.authorgroup
-      ? data.additionalFields.authorgroup.map((author: any) => author.name)
+    authors: data.additionalFields.authors
+      ? data.additionalFields.authors.map((author: any) => author.name)
       : [data.author.node.name],
+    artists: data.additionalFields.artists
+      ? data.additionalFields.artists.map((artist: any) => artist.name)
+      : [],
+    bannerVisible: data.additionalFields.bannervisible,
+    stickyMenu: data.additionalFields.stickymenu,
     customBanner: data.additionalFields.custombanner,
     commentCount: data.commentCount,
     initialLetter: data.additionalFields.initialletter,

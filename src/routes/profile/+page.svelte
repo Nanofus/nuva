@@ -2,13 +2,13 @@
   import Login from "$lib/components/Login.svelte";
   import { getPageTitle, getPageUrl, loadVolume, saveVolume } from "$lib/util";
   import { onMount } from "svelte";
-  import { getAuthInfo } from "$lib/database";
+  import { loginInfo } from "$lib/stores";
 
   let userInfo = null;
   let volume = loadVolume();
 
   onMount(() => {
-    userInfo = getAuthInfo();
+    loginInfo.subscribe(info => (userInfo = info));
   });
 
   $: volume && saveVolume(volume);
@@ -23,7 +23,7 @@
 <h1>Profiili</h1>
 {#if userInfo}
   <ul>
-    <li>Käyttäjä: {userInfo.displayName}</li>
+    <li>Käyttäjä: <b>{userInfo.displayName}</b></li>
     <li>Äänenvoimakkuus:
       <input class="volume-bar"
              type="range"

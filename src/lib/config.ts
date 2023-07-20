@@ -32,7 +32,7 @@ export const QUERIES = {
             }
         }
         additionalFields {
-            authorgroup {
+            authors {
                 name
             }
             custombanner
@@ -56,11 +56,16 @@ export const QUERIES = {
             }
         }
         additionalFields {
-            authorgroup {
+            authors {
                 name
             }
             custombanner
             initialletter
+            artists {
+                name
+            }
+            bannervisible
+            stickymenu
             mobilefriendly
             scripts
             styles
