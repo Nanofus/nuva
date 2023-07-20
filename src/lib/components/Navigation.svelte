@@ -17,7 +17,7 @@
   const isMobile = () => {
     const match = window.matchMedia("screen and (max-width: 50rem)");
     return match.matches;
-  }
+  };
 
   onMount(() => {
     if (browser) {
@@ -43,32 +43,34 @@
 </script>
 
 <nav>
-  <div class="section-logo-area">
-    <div bind:this={smallLogo} class="section-logo">
-      <NavItem href="/"><h1>Klaanon</h1></NavItem>
+  <div class="nav-wrapper">
+    <div class="section-logo-area">
+      <div bind:this={smallLogo} class="section-logo">
+        <NavItem href="/"><h1>Klaanon</h1></NavItem>
+      </div>
+      <div class="section-menu">
+        <NavItem on:click={toggleMenu}>
+          <div class="hamburger-menu">
+            {#if !menuOpen}
+              <span class="material-icons">menu</span>
+            {:else}
+              <span class="material-icons">close</span>
+            {/if}
+          </div>
+        </NavItem>
+      </div>
     </div>
-    <div class="section-menu">
-      <NavItem on:click={toggleMenu}>
-        <div class="hamburger-menu">
-          {#if !menuOpen}
-            <span class="material-icons">menu</span>
-          {:else}
-            <span class="material-icons">close</span>
-          {/if}
-        </div>
-      </NavItem>
+    <div bind:this={menuItems} class="section-menu-items {menuOpen ? 'menu-open' : ''}" on:click={menuClicked}>
+      <NavItem href="/">Etusivu</NavItem>
+      <NavItem href="/categories">Kategoriat</NavItem>
+      <NavItem href="/tags">Tagit</NavItem>
+      <NavItem href="/posts/muotoiluopas">Muotoiluopas</NavItem>
+      <NavItem href="https://arkisto.klaanon.fi/soundtracks/">Soundtrackit</NavItem>
+      <NavItem href="/profile">Profiili</NavItem>
+      <NavItem href="/search">Haku</NavItem>
     </div>
-  </div>
-  <div bind:this={menuItems} class="section-menu-items {menuOpen ? 'menu-open' : ''}" on:click={menuClicked}>
-    <NavItem href="/">Etusivu</NavItem>
-    <NavItem href="/categories">Kategoriat</NavItem>
-    <NavItem href="/tags">Tagit</NavItem>
-    <NavItem href="/posts/muotoiluopas">Muotoiluopas</NavItem>
-    <NavItem href="https://arkisto.klaanon.fi/soundtracks/">Soundtrackit</NavItem>
-    <NavItem href="/profile">Profiili</NavItem>
-    <NavItem href="/search">Haku</NavItem>
-  </div>
-  <div class="section-filler">
+    <div class="section-filler">
+    </div>
   </div>
 </nav>
 
@@ -81,17 +83,20 @@
     margin: auto;
     min-width: var(--page-min-width);
     width: 100%;
-    //max-width: var(--page-max-width);
     z-index: 1;
 
     background: var(--main-nav-background);
     backdrop-filter: blur(var(--blur-intensity));
     -webkit-backdrop-filter: blur(var(--blur-intensity));
     font-family: var(--nav-font-family);
+  }
 
+  .nav-wrapper {
+    margin: auto;
+    max-width: var(--page-max-width);
     display: flex;
     justify-content: center;
-    flex-wrap: wrap
+    flex-wrap: wrap;
   }
 
   .section-logo-area {
@@ -138,7 +143,7 @@
   }
 
   @media screen and (max-width: 50rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
-    nav {
+    .nav-wrapper {
       display: block;
     }
 
@@ -150,7 +155,7 @@
       display: block;
     }
 
-    nav > .section-menu-items.menu-open {
+    .nav-wrapper > .section-menu-items.menu-open {
       display: block;
       background: var(--main-nav-background-mobile-expanded);
 

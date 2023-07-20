@@ -9,6 +9,7 @@ export const OG_LOCALE = "fi_FI";
 
 export const SITE_NAME = "Klaanon Nuva";
 export const SITE_NAME_DELIMITER = "—";
+export const META_CATEGORY_SLUG = "meta";
 
 export const BANNER_COUNT = 1;
 

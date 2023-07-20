@@ -5,6 +5,7 @@
   import Button from "$lib/components/reusable/Button.svelte";
   import PageHead from "$lib/components/reusable/PageHead.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+  import { META_CATEGORY_SLUG } from "$lib/config";
 
   export let data: PostListResponse;
   let fetching = false;
@@ -13,7 +14,10 @@
     fetching = true;
     const newData = await getPostList(fetch, data.endCursor);
     data = {
-      posts: [...data.posts, ...newData.posts],
+      posts: [...data.posts, ...newData.posts]
+        .filter(post => post.categories
+          .map(category => category.slug)
+          .indexOf(META_CATEGORY_SLUG) === -1),
       endCursor: newData.endCursor,
       hasNextPage: newData.hasNextPage
     };
