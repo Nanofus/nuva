@@ -62,7 +62,7 @@ export let formatSecondsToMMSS = (seconds: number) => {
 
 export let createBaseSettings = () => {
   if (browser && !localStorage.getItem("settings")) {
-    localStorage.setItem("settings", JSON.stringify({ volume: 0.1 }));
+    localStorage.setItem("settings", JSON.stringify({ volume: 50 }));
   }
 };
 

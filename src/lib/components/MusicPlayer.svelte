@@ -110,6 +110,7 @@ Musicmancer 2023 Edition
   };
 
   // Update volume based on bar
+  $: volume && console.log(volume);
   $: (audioDataArray.map(data => data.audioElement).forEach(element => element.volume = volume / 100)) && saveVolume(volume);
 
   // Pause and mute
