@@ -84,7 +84,7 @@ hr {
   background-image: var(--hr-background-image);
 }
 
-.full-width, .max-width {
+@mixin full-width {
   position: relative;
   left: calc(-50vw + 50%);
   width: 100vw;
@@ -92,10 +92,57 @@ hr {
   overflow: hidden;
 }
 
+@mixin article-width {
+  max-width: var(--article-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+article {
+  @include article-width;
+  width: 100%;
+}
+
+.full-width, .max-width {
+  @include full-width;
+}
+
+.background {
+  @include full-width;
+
+  &:not(.max) {
+    max-width: var(--page-max-width);
+  }
+
+  background-repeat: no-repeat;
+
+  &.repeat {
+    background-repeat: repeat;
+  }
+
+  background-position: top center;
+  background-size: auto;
+
+  > * {
+    @include article-width;
+  }
+}
+
+@media screen and (max-width: 41rem) {
+  .background > * {
+    padding-left: var(--mobile-horizontal-padding);
+    padding-right: var(--mobile-horizontal-padding);
+  }
+}
+
 @media screen and (min-width: 76rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
-  .full-width {
+  .full-width, .background:not(.max) {
     margin-left: calc((100vw - var(--page-max-width)) / 2);
-    max-width: calc(var(--page-max-width) + 0.5px);
+    max-width: calc(var(--page-max-width) + 0.5px); // 0.5px fixes a 1px rounding error
+  }
+
+  .background.max:not(.repeat) {
+    background-size: cover;
   }
 }
 
