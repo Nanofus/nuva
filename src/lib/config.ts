@@ -69,6 +69,7 @@ export const QUERIES = {
                 name
             }
             bannervisible
+            fullwidth
             mobilefriendly
             scripts
             styles

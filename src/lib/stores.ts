@@ -1,6 +1,7 @@
 import { writable } from "svelte/store";
 import { LOCALSTORAGE_AUTH_KEY } from "$lib/config";
 import { browser } from "$app/environment";
+import type { PostOptions } from "$lib/types";
 
 export const loginInfo = writable(
   browser
@@ -10,12 +11,9 @@ export const loginInfo = writable(
     : null
 );
 
-export const postOptions = writable<{
-  bannerVisible: boolean;
-  customBannerUrl: string | null;
-  stickyMenu: boolean;
-}>({
+export const postOptions = writable<PostOptions>({
   bannerVisible: true,
   customBannerUrl: null,
-  stickyMenu: true
+  stickyMenu: true,
+  fullWidth: false
 });

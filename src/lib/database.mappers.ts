@@ -53,6 +53,7 @@ export const dataToPost = (data: any): Post | null => {
       ? data.additionalFields.artists.map((artist: any) => artist.name)
       : [],
     bannerVisible: data.additionalFields.bannervisible,
+    fullWidth: data.additionalFields.fullwidth ? data.additionalFields.fullwidth : false,
     customBanner: data.additionalFields.custombanner,
     featuredImage: data.additionalFields.featuredimage,
     description: data.additionalFields.description,
@@ -61,7 +62,6 @@ export const dataToPost = (data: any): Post | null => {
     mobileFriendly: data.additionalFields.mobilefriendly,
     scripts: data.additionalFields.scripts,
     styles: data.additionalFields.styles,
-    theme: data.additionalFields.theme,
     music: data.additionalFields.music ? data.additionalFields.music.split("\n") : [],
     content: data.content,
     categories: data.categories.nodes.map((category: any) => {

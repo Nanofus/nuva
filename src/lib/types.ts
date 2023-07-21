@@ -22,10 +22,10 @@ export interface Post extends PostMeta {
   initialLetter: boolean;
   scripts: string;
   styles: string;
-  theme: string;
   music: string[];
   artists: string[];
   bannerVisible: boolean;
+  fullWidth: boolean;
   content: string;
   tags: Tag[];
   comments: Comment[];
@@ -84,4 +84,11 @@ export interface AuthInfo {
   username: string;
   authToken: string;
   refreshToken: string;
+}
+
+export interface PostOptions {
+  bannerVisible: boolean;
+  customBannerUrl: string | null;
+  stickyMenu: boolean;
+  fullWidth: boolean;
 }

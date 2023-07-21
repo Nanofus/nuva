@@ -39,6 +39,7 @@ export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post
       })
     })
   ).json();
+  console.log(response);
   return dataToPost(response.data.post);
 };
 

@@ -12,13 +12,18 @@
   import { navigating } from "$app/stores";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { fade } from "svelte/transition";
+  import { postOptions } from "$lib/stores";
 
   export let data;
 
   let loggedIn: boolean;
+  let fullWidth: boolean = false;
 
   onMount(() => {
     loggedIn = isLoggedIn();
+    postOptions.subscribe(options => {
+      fullWidth = options.fullWidth;
+    });
     createBaseSettings();
   });
 </script>
@@ -31,7 +36,7 @@
 </svelte:head>
 
 <Navigation />
-<div id="page">
+<div id="page" class={fullWidth ? 'wide' : ''}>
   <Header />
   <main>
     {#if $navigating}
@@ -84,6 +89,14 @@
     width: 100%;
     max-width: var(--page-max-width);
     padding-top: var(--navigation-height);
+
+    &.wide {
+      max-width: 100%;
+
+      > main {
+        border-radius: 0;
+      }
+    }
   }
 
   .transition {

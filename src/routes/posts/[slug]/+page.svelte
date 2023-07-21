@@ -18,7 +18,8 @@
       postOptions.set({
         bannerVisible: data.bannerVisible,
         customBannerUrl: data.customBanner === "" ? null : data.customBanner,
-        stickyMenu: false
+        stickyMenu: false,
+        fullWidth: data.fullWidth
       });
     }
   });
@@ -27,7 +28,8 @@
     postOptions.set({
       bannerVisible: true,
       customBannerUrl: null,
-      stickyMenu: true
+      stickyMenu: true,
+      fullWidth: false
     });
   });
 </script>
