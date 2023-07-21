@@ -30,8 +30,9 @@
   <meta content={getPageUrl(`/`)} property="og:url" />
 </svelte:head>
 
-<h3>Uusin julkaisu</h3>
-<FeaturedPost postMeta={data.posts[0]} />
+<div class="featured">
+  <FeaturedPost postMeta={data.posts[0]} />
+</div>
 <h3>Kaikki julkaisut</h3>
 <PostList posts={data.posts} />
 <div class="fetch-more">
@@ -43,6 +44,10 @@
 </div>
 
 <style lang="scss">
+  .featured {
+    margin-top: var(--vertical-separation-margin);
+  }
+
   .fetch-more {
     margin-top: var(--vertical-separation-margin);
   }
