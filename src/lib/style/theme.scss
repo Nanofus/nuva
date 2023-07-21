@@ -4,7 +4,8 @@ html {
 
 body {
   font-family: var(--body-text-font-family);
-  background: var(--background-image-default) repeat top center;
+  background-color: var(--background-dark);
+  // background: var(--background-image-default) repeat top center; TODO: Default background maybe a bit too busy?
   min-width: var(--page-min-width);
 }
 
