@@ -14,6 +14,7 @@
   let passwordInput = "";
   let usernameInput = "";
   let userDisplayName;
+  let submitted = false;
 
   onMount(() => {
     loginInfo.subscribe((loginInfo) => loggedIn = !!loginInfo);
@@ -27,6 +28,7 @@
       return;
     }
     await login(fetch, usernameInput, passwordInput);
+    submitted = false;
   };
 </script>
 
@@ -38,10 +40,14 @@
       <p>Ei käytettävissä ilman JavaScriptia.</p>
     {/if}
   {:else if !loggedIn}
-    <Form vertical="true">
+    <Form vertical="true" on:submit={() => submitted = true}>
       <Input label="Käyttäjätunnus" name="username" bind:value={usernameInput} />
       <Input label="Salasana" name="password" type="password" bind:value={passwordInput} />
-      <Button on:click={handleLogin}>Kirjaudu sisään</Button>
+      {#if !submitted}
+        <Button on:click={handleLogin}>Kirjaudu sisään</Button>
+      {:else}
+        <LoadingSpinner />
+      {/if}
     </Form>
   {:else if loggedIn}
     <div class="user-info">

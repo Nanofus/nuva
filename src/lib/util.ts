@@ -61,7 +61,7 @@ export let formatSecondsToMMSS = (seconds: number) => {
 };
 
 export let getRandomBannerUrl = (seed = 0) => {
-  return `url("/images/banner-${((new Date().getMinutes() + seed) % BANNER_COUNT) + 1}.png")`;
+  return `url("/images/banners/banner-${((new Date().getMinutes() + seed) % BANNER_COUNT) + 1}.png")`;
 }
 
 export let createBaseSettings = () => {

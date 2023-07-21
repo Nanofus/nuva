@@ -3,6 +3,8 @@
   import { getPageTitle, getPageUrl, loadVolume, saveVolume } from "$lib/util";
   import { onMount } from "svelte";
   import { loginInfo } from "$lib/stores";
+  import SettingItem from "$lib/components/reusable/SettingItem.svelte";
+  import Settings from "$lib/components/Settings.svelte";
 
   let userInfo = null;
   let volume = loadVolume();
@@ -21,15 +23,22 @@
 </svelte:head>
 
 <h1>Profiili</h1>
-{#if userInfo}
-  <ul>
-    <li>Käyttäjä: <b>{userInfo.displayName}</b></li>
-    <li>Äänenvoimakkuus:
-      <input class="volume-bar"
-             type="range"
-             min="0"
-             max="100"
-             bind:value={volume}></li>
-  </ul>
-{/if}
-<Login />
+<Settings>
+  {#if userInfo}
+    <SettingItem label="Käyttäjä"><span>{userInfo.displayName}</span></SettingItem>
+    <SettingItem label="Äänenvoimakkuus"><input class="volume-bar"
+                                                type="range"
+                                                min="0"
+                                                max="100"
+                                                bind:value={volume}></SettingItem>
+  {/if}
+</Settings>
+<div class="login-area">
+  <Login />
+</div>
+
+<style lang="scss">
+  .login-area {
+    margin-top: var(--vertical-separation-margin);
+  }
+</style>

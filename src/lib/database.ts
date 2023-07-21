@@ -314,7 +314,7 @@ export const login = async (
     })
   ).json();
   response.errors?.forEach((error: any) => {
-    toast.push(error.message, toastThemes.error);
+    toast.push("Kirjautuminen epäonnistui.", toastThemes.error);
   });
   if (response.data.login) {
     const loginData: AuthInfo = {

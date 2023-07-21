@@ -32,7 +32,8 @@
 
 <div class="comment {isHighlighted() ? 'highlighted' : ''}">
   <header class="comment-header">
-    <span class="comment-author">{comment.author}</span>
+    <span class="comment-author">
+      {#if isHighlighted()}<span class="material-icons inline-icon">history_edu</span>{/if} {comment.author}</span>
     <span class="comment-date">{comment.date.toLocaleString(LOCALE, {
       year: 'numeric',
       month: 'numeric',
@@ -63,15 +64,14 @@
     border-radius: var(--border-radius);
 
     &.highlighted {
-      background: var(--highlight-gradient);
-      border: var(--accent-light) 0.125rem solid;
+      border: var(--hover-dark) 0.1rem solid;
     }
   }
 
   .comment-header {
     display: flex;
     justify-content: space-between;
-    border-bottom: 0.125rem solid var(--hover-dark);
+    border-bottom: var(--border);
     font-family: var(--accent-font-family);
   }
 </style>

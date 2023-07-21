@@ -4,8 +4,10 @@
   import Form from "$lib/components/reusable/Form.svelte";
   import { toast } from "@zerodevx/svelte-toast";
   import { toastThemes } from "$lib/util";
+  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
 
   let searchTerm = "";
+  let submitted = false;
 
   const search = () => {
     if (searchTerm === "" || !searchTerm) {
@@ -17,9 +19,13 @@
 </script>
 
 <div class="search-area">
-  <Form>
+  <Form on:submit={() => submitted = true}>
     <Input bind:value={searchTerm} placeholder="Hakusanat" />
-    <Button icon="search" on:click={search}>Etsi</Button>
+    {#if !submitted}
+      <Button icon="search" on:click={search} on:keyup={search}>Etsi</Button>
+    {:else}
+      <LoadingSpinner />
+    {/if}
   </Form>
 </div>
 

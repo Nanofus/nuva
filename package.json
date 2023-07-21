@@ -9,18 +9,9 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
-    "format": "prettier --plugin-search-dir . --write .",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "format": "prettier --plugin-search-dir . --write ."
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.0.26",
-    "@storybook/addon-interactions": "^7.0.26",
-    "@storybook/addon-links": "^7.0.26",
-    "@storybook/blocks": "^7.0.26",
-    "@storybook/svelte": "^7.0.26",
-    "@storybook/sveltekit": "^7.0.26",
-    "@storybook/testing-library": "^0.0.14-next.2",
     "@sveltejs/adapter-auto": "^2.1.0",
     "@sveltejs/adapter-vercel": "^3.0.1",
     "@sveltejs/kit": "^1.20.4",

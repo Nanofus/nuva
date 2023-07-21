@@ -1,13 +1,12 @@
-<!--
-@component
-This component simply enables submitting forms by pressing Enter.
-The form container should implement its own submission functionality.
--->
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
   export let vertical: boolean = false;
+
+  const dispatch = createEventDispatcher();
 </script>
 
-<form class="{vertical ? 'vertical' : null}" on:submit|preventDefault={() => {}}>
+<form class="{vertical ? 'vertical' : null}" on:submit|preventDefault={() => {dispatch("submit")}}>
   <slot />
 </form>
 
