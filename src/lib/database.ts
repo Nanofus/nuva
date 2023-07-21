@@ -8,7 +8,7 @@ import type {
   AuthInfo,
   CategoryListResponse,
   Comment,
-  Post,
+  Post, PostListByAuthorResponse,
   PostListByCategoryResponse,
   PostListBySearchResponse,
   PostListByTagResponse,
@@ -67,6 +67,45 @@ export const getCommentsForPostBySlug = async (
   ).json();
   return dataToComments(response.data.post.comments.nodes);
 };
+
+export const getPostListByAuthor = async (
+  fetch: Function,
+  author: string,
+  after: string | null = null
+): Promise<PostListByAuthorResponse> => {
+  const response = await (
+    await fetch(API_PATH, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        query: `
+            query PostsByAuthor {
+                posts(where: {authorName: "${decodeURI(author)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
+                    ${QUERIES.pageInfo}
+                    edges {
+                        cursor
+                        node {
+                            ${QUERIES.postMeta}
+                        }
+                    }
+                }
+            }
+            `
+      })
+    })
+  ).json();
+  if (response.data.posts.edges.length === 0) throw error(404, "Not found");
+  let pageInfo = response.data.posts.pageInfo;
+  let posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
+  return {
+    posts,
+    author,
+    endCursor: pageInfo.endCursor,
+    hasNextPage: pageInfo.hasNextPage
+  };
+}
 
 export const getPostListByTag = async (
   fetch: Function,

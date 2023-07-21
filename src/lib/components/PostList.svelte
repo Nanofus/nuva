@@ -26,7 +26,7 @@
       </td>
       <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ""}</td>
       <td class="date">{post.date.toLocaleDateString(LOCALE)}</td>
-      <td class="authors hidden-mobile">{post.author}</td>
+      <td class="authors hidden-mobile"><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td>
     </tr>
   {/each}
 </table>

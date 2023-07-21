@@ -70,6 +70,10 @@ export interface PostListBySearchResponse extends PostListResponse {
   searchTerm: string;
 }
 
+export interface PostListByAuthorResponse extends PostListResponse {
+  author: string;
+}
+
 export interface PostListByCategoryResponse extends PostListResponse {
   category: string;
   categorySlug: string;

@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { getPostList } from "$lib/database";
+  import { getPostListByCategory } from "$lib/database";
+  import type { PostListByAuthorResponse, PostListByCategoryResponse } from "$lib/types";
   import PostList from "$lib/components/PostList.svelte";
-  import type { PostListBySearchResponse } from "$lib/types";
   import Button from "$lib/components/reusable/Button.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";
 
-  export let data: PostListBySearchResponse;
+  export let data: PostListByAuthorResponse;
   let fetching = false;
 
-  const fetchMorePosts = async () => {
+  const fetchMorePosts = async ({ fetch }) => {
     fetching = true;
-    const newData = await getPostList(fetch, data.endCursor, data.searchTerm);
+    const newData = await getPostListByCategory(fetch, data.author, data.endCursor);
     data = {
       posts: [...data.posts, ...newData.posts],
-      searchTerm: data.searchTerm,
+      author: data.author,
       endCursor: newData.endCursor,
       hasNextPage: newData.hasNextPage
     };
@@ -22,12 +22,12 @@
 </script>
 
 <svelte:head>
-  <title>{getPageTitle(data.searchTerm)}</title>
-  <meta content={data.searchTerm} property="og:title" />
-  <meta content={getPageUrl(`search/${encodeURI(data.searchTerm)}`)} property="og:url" />
+  <title>{getPageTitle(data.author)}</title>
+  <meta content={data.author} property="og:title" />
+  <meta content={getPageUrl(`authors/${encodeURI(data.author)}`)} property="og:url" />
 </svelte:head>
 
-<h1>Haku: {data.searchTerm}</h1>
+<h1>Kirjoittaja: {data.author}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
   <Button on:click={fetchMorePosts}>Lataa lisää</Button>

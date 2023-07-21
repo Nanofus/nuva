@@ -7,7 +7,12 @@
 <div class="vertically-separated" id="authors">
   {#if post.coAuthors.length > 0}
     <div>
-      <span class="material-icons inline-icon">history_edu</span> {post.coAuthors.join(", ")}
+      <span class="material-icons inline-icon">history_edu</span>
+      <span class="author-list">
+        {#each post.coAuthors as author}
+          <a href="/authors/{encodeURI(author)}">{author}</a>
+        {/each}
+      </span>
     </div>
   {/if}
   {#if post.artists.length > 0}
