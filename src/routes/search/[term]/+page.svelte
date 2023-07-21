@@ -4,6 +4,7 @@
   import type { PostListBySearchResponse } from "$lib/types";
   import Button from "$lib/components/reusable/Button.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";
+  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
 
   export let data: PostListBySearchResponse;
   let fetching = false;
@@ -31,4 +32,6 @@
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
   <Button on:click={fetchMorePosts}>Lataa lisää</Button>
+{:else if fetching}
+  <LoadingSpinner />
 {/if}

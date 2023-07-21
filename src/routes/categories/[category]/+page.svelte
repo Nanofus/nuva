@@ -4,11 +4,12 @@
   import PostList from "$lib/components/PostList.svelte";
   import Button from "$lib/components/reusable/Button.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";
+  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
 
   export let data: PostListByCategoryResponse;
   let fetching = false;
 
-  const fetchMorePosts = async ({ fetch }) => {
+  const fetchMorePosts = async () => {
     fetching = true;
     const newData = await getPostListByCategory(fetch, data.categorySlug, data.endCursor);
     data = {
@@ -32,4 +33,6 @@
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
   <Button on:click={fetchMorePosts}>Lataa lisää</Button>
+{:else if fetching}
+  <LoadingSpinner />
 {/if}
