@@ -128,24 +128,32 @@ article {
     @include article-width;
   }
 
-  .fade:after, .fade:before, .fade-top:before, .fade-bottom:after {
+  &.fade, &.fade-top {
+    padding-top: calc(var(--vertical-separation-margin) * 2);
+  }
+
+  &.fade, &.fade-bottom {
+    padding-bottom: calc(var(--vertical-separation-margin) * 2);
+  }
+
+  &.fade:after, &.fade:before, &.fade-top:before, &.fade-bottom:after {
     content: "";
     position: absolute;
     z-index: 1;
     left: 0;
     pointer-events: none;
     width: 100%;
-    height: var(--vertical-separation-margin);
+    height: calc(var(--vertical-separation-margin) * 2);
   }
 
-  .fade:after, .fade-bottom:after {
+  &.fade:after, &.fade-bottom:after {
     bottom: 0;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
   }
 
-  .fade:before, .fade-top:after {
+  &.fade:before, &.fade-top:after {
     top: 0;
-    background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
   }
 }
 
