@@ -4,7 +4,7 @@ html {
 
 body {
   font-family: var(--body-text-font-family);
-  background-color: var(--background-dark);
+  background: var(--background-image-default) repeat top center;
   min-width: var(--page-min-width);
 }
 
