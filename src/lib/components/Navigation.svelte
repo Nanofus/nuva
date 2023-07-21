@@ -17,7 +17,7 @@
   };
 
   const isMobile = () => {
-    const match = window.matchMedia("screen and (max-width: 50rem)");
+    const match = window.matchMedia("screen and (max-width: 54rem)");
     return match.matches;
   };
 
@@ -75,6 +75,7 @@
     </div>
     <div bind:this={menuItems} class="section-menu-items {menuOpen ? 'menu-open' : ''}" on:click={menuClicked}>
       <NavItem href="/">Etusivu</NavItem>
+      <NavItem href="/posts">Julkaisut</NavItem>
       <NavItem href="/categories">Kategoriat</NavItem>
       <NavItem href="/tags">Tagit</NavItem>
       <NavItem href="/posts/muotoiluopas">Muotoiluopas</NavItem>
@@ -159,7 +160,7 @@
     }
   }
 
-  @media screen and (max-width: 50rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+  @media screen and (max-width: 54rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
     .nav-wrapper {
       display: block;
     }

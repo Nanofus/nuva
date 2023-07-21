@@ -12,7 +12,7 @@
 </script>
 
 <table>
-  <tr class="list-header">
+  <tr class="table-header">
     <td class="link">Nimi</td>
     <td class="comment-count hidden-mobile material-icons">forum</td>
     <td class="date">Julkaisu</td>
@@ -32,14 +32,6 @@
 </table>
 
 <style lang="scss">
-  table {
-    width: var(--article-max-width);
-  }
-
-  td:not(:first-child) {
-    padding-left: 1rem;
-  }
-
   .comment-count {
     text-align: center;
     font-size: 1rem;
@@ -57,14 +49,6 @@
         color: var(--hover-dark);
       }
     }
-
-    table {
-      width: 100%;
-    }
-  }
-
-  .list-header {
-    font-weight: bold;
   }
 
   .categories {

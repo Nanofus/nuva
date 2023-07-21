@@ -160,12 +160,38 @@ article {
   margin-top: var(--vertical-separation-margin);
   margin-bottom: var(--vertical-separation-margin);
 }
+.vertically-separated-top {
+    margin-top: var(--vertical-separation-margin);
+}
+.vertically-separated-bottom {
+    margin-bottom: var(--vertical-separation-margin);
+}
 
 .author-list > a:not(:last-child) {
   &::after, &:hover::after {
     content: ",";
     text-decoration: none;
     margin-right: 0.6rem;
+  }
+}
+
+/* Table */
+
+table {
+  width: var(--article-max-width);
+
+  .table-header {
+    font-weight: bold;
+  }
+}
+
+td:not(:first-child) {
+  padding-left: 1rem;
+}
+
+@media screen and (max-width: 41rem) {
+  table {
+    width: 100%;
   }
 }
 

@@ -1,7 +1,9 @@
 export const ISR_EXPIRATION = 60;
 export const API_PATH = "https://klaanon.fi/wp/graphql";
 export const BASE_PATH = "https://nuva.klaanon.fi";
-export const POSTS_PER_FETCH = 100;
+export const MAX_PER_FETCH = 100;
+export const LATEST_POSTS_PER_FETCH = 20;
+export const LATEST_COMMENTS_PER_FETCH = 10;
 export const LOCALSTORAGE_AUTH_KEY = "auth";
 export const LOCALSTORAGE_SETTINGS_KEY = "settings";
 export const LOCALE = "fi-FI";
@@ -93,7 +95,7 @@ export const QUERIES = {
                 name
             }
         }
-        tags(first: ${POSTS_PER_FETCH}) {
+        tags(first: ${MAX_PER_FETCH}) {
             nodes {
                 name
                 slug
@@ -103,7 +105,7 @@ export const QUERIES = {
         commentCount
         content`,
   postComments: `
-        comments(first: ${POSTS_PER_FETCH}) {
+        comments(first: ${MAX_PER_FETCH}) {
             nodes {
                 date
                 author {

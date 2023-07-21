@@ -1,13 +1,20 @@
-import { API_PATH, LOCALSTORAGE_AUTH_KEY, POSTS_PER_FETCH, QUERIES } from "$lib/config";
+import { API_PATH, LATEST_COMMENTS_PER_FETCH, LOCALSTORAGE_AUTH_KEY, MAX_PER_FETCH, QUERIES } from "$lib/config";
 import { toast } from "@zerodevx/svelte-toast";
 import { browser } from "$app/environment";
 import { error } from "@sveltejs/kit";
 import { loginInfo } from "$lib/stores";
-import { dataToCategories, dataToComments, dataToPost, dataToPostMeta, dataToTags } from "$lib/database.mappers";
+import {
+  dataToCategories,
+  dataToCommentMetas,
+  dataToComments,
+  dataToPost,
+  dataToPostMeta,
+  dataToTags
+} from "$lib/database.mappers";
 import type {
   AuthInfo,
   CategoryListResponse,
-  Comment,
+  Comment, CommentMeta,
   Post, PostListByAuthorResponse,
   PostListByCategoryResponse,
   PostListBySearchResponse,
@@ -17,6 +24,45 @@ import type {
   TagListResponse
 } from "$lib/types";
 import { toastThemes } from "$lib/util";
+
+export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]> => {
+  const authToken = browser ? getAuthInfo()?.authToken : null;
+  const response = await (
+    await fetch(API_PATH, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authToken ? `Bearer ${authToken}` : ""
+      },
+      body: JSON.stringify({
+        query: `
+            query LatestComments {
+                comments(first: ${LATEST_COMMENTS_PER_FETCH}) {
+                    nodes {
+                        databaseId
+                        author {
+                          node {
+                            name
+                          }
+                        }
+                        date
+                        commentedOn {
+                            node {
+                                slug
+                                ... on Post {
+                                    title
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            `
+      })
+    })
+  ).json();
+  return dataToCommentMetas(response.data.comments.nodes);
+}
 
 export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | null> => {
   const authToken = browser ? getAuthInfo()?.authToken : null;
@@ -82,7 +128,7 @@ export const getPostListByAuthor = async (
       body: JSON.stringify({
         query: `
             query PostsByAuthor {
-                posts(where: {authorName: "${decodeURI(author)}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
+                posts(where: {authorName: "${decodeURI(author)}"}, first: ${MAX_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -121,7 +167,7 @@ export const getPostListByTag = async (
       body: JSON.stringify({
         query: `
             query PostsByTag {
-                posts(where: {tagSlugIn: "${tag}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
+                posts(where: {tagSlugIn: "${tag}"}, first: ${MAX_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -167,7 +213,7 @@ export const getPostListByCategory = async (
             query PostsByCategory {
                 category(id: "${category}", idType: SLUG) {
                     name
-                    posts(first: ${POSTS_PER_FETCH}, after: "${after}") {
+                    posts(first: ${MAX_PER_FETCH}, after: "${after}") {
                         ${QUERIES.pageInfo}
                         edges {
                             cursor
@@ -200,7 +246,8 @@ export const getPostListByCategory = async (
 export const getPostList = async (
   fetch: Function,
   after: string | null = null,
-  searchTerm: string = ""
+  searchTerm: string = "",
+  count: number = MAX_PER_FETCH
 ): Promise<PostListBySearchResponse> => {
   const response = await (
     await fetch(API_PATH, {
@@ -213,7 +260,7 @@ export const getPostList = async (
             query AllPostsPaginated {
                 posts(where: {search: "${decodeURI(
           searchTerm
-        )}"}, first: ${POSTS_PER_FETCH}, after: "${after}") {
+        )}"}, first: ${count}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -250,7 +297,7 @@ export const getTagList = async (
       body: JSON.stringify({
         query: `
             query AllTagsPaginated {
-                tags(first: ${POSTS_PER_FETCH}, after: "${after}") {
+                tags(first: ${MAX_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor

@@ -1,4 +1,4 @@
-import type { Category, Comment, Post, PostMeta, Tag } from "$lib/types";
+import type { Category, Comment, CommentMeta, Post, PostMeta, Tag } from "$lib/types";
 import { objectsToHierarchy } from "$lib/util";
 
 export const dataToPostMeta = (data: any): PostMeta => {
@@ -29,7 +29,7 @@ export const dataToPostMeta = (data: any): PostMeta => {
 };
 
 export const dataToComments = (nodes: any): Comment[] => {
-  const comments = nodes.map((comment: any) => {
+  const comments = nodes.map((comment: any): Comment => {
     return {
       date: new Date(comment.date),
       author: comment.author.node.name,
@@ -43,6 +43,18 @@ export const dataToComments = (nodes: any): Comment[] => {
     return a.date.getTime() - b.date.getTime();
   });
 };
+
+export const dataToCommentMetas = (nodes: any): CommentMeta[] => {
+  return nodes.map((comment: any): CommentMeta => {
+    return {
+      date: new Date(comment.date),
+      author: comment.author.node.name,
+      postSlug: comment.commentedOn.node.slug,
+      postTitle: comment.commentedOn.node.title,
+      _id: comment.databaseId,
+    };
+  });
+}
 
 export const dataToPost = (data: any): Post | null => {
   if (!data) return null;

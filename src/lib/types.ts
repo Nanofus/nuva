@@ -57,6 +57,14 @@ export interface Comment extends Hierarchical {
   content: string;
 }
 
+export interface CommentMeta {
+  _id: number;
+  date: Date;
+  author: string;
+  postSlug: string;
+  postTitle: string;
+}
+
 export interface Paginated {
   endCursor: string;
   hasNextPage: boolean | null;
@@ -90,6 +98,11 @@ export interface TagListResponse extends Paginated {
 
 export interface CategoryListResponse {
   categories: Category[];
+}
+
+export interface PostsAndCommentsResponse {
+  posts: PostListResponse;
+  comments: CommentMeta[];
 }
 
 export interface AuthInfo {
