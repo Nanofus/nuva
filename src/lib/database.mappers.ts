@@ -6,9 +6,14 @@ export const dataToPostMeta = (data: any): PostMeta => {
     title: data.title,
     slug: data.slug,
     date: new Date(data.rawDate),
-    authors: data.additionalFields.authors
-      ? data.additionalFields.authors.map((author: any) => author.name)
-      : [data.author.node.name],
+    author: data.author.node.name,
+    coAuthors: data.coAuthors.nodes
+      .map((author: any) => author.displayName)
+      .sort((a: string, b: string) => {
+        if (a === data.author.node.name) return -1;
+        if (b === data.author.node.name) return 1;
+        return a.localeCompare(b);
+      }),
     categories: data.categories.nodes.map((category: any) => {
       return {
         slug: category.slug,
@@ -46,9 +51,14 @@ export const dataToPost = (data: any): Post | null => {
     title: data.title,
     slug: data.slug,
     date: new Date(data.rawDate),
-    authors: data.additionalFields.authors
-      ? data.additionalFields.authors.map((author: any) => author.name)
-      : [data.author.node.name],
+    author: data.author.node.name,
+    coAuthors: data.coAuthors.nodes
+      .map((author: any) => author.displayName)
+      .sort((a: string, b: string) => {
+        if (a === data.author.node.name) return -1;
+        if (b === data.author.node.name) return 1;
+        return a.localeCompare(b);
+      }),
     artists: data.additionalFields.artists
       ? data.additionalFields.artists.map((artist: any) => artist.name)
       : [],

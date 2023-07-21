@@ -8,7 +8,8 @@ export interface PostMeta {
   title: string;
   slug: string;
   date: Date;
-  authors: string[];
+  author: string;
+  coAuthors: string[];
   categories: Category[];
   customBanner: string;
   featuredImage: string;

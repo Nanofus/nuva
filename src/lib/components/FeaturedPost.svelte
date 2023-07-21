@@ -7,7 +7,7 @@
 
 <div id="featured-post"
      style="background-image: {postMeta.featuredImage ? `url(${postMeta.featuredImage})` : getRandomBannerUrl(1) }">
-  <p class="authors">{postMeta.authors.join(', ')}</p>
+  <p class="authors">{postMeta.coAuthors.join(', ')}</p>
   <h1><a href="/posts/{postMeta.slug}">{postMeta.title}</a></h1>
   <p>{postMeta.description ? postMeta.description : ""}</p>
 </div>

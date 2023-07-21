@@ -5,9 +5,9 @@
 </script>
 
 <div class="vertically-separated" id="authors">
-  {#if post.authors.length > 0}
+  {#if post.coAuthors.length > 0}
     <div>
-      <span class="material-icons inline-icon">history_edu</span> {post.authors.join(", ")}
+      <span class="material-icons inline-icon">history_edu</span> {post.coAuthors.join(", ")}
     </div>
   {/if}
   {#if post.artists.length > 0}

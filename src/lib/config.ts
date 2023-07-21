@@ -31,10 +31,12 @@ export const QUERIES = {
                 name
             }
         }
-        additionalFields {
-            authors {
-                name
+        coAuthors {
+            nodes {
+                displayName
             }
+        }
+        additionalFields {
             custombanner
             featuredimage
             description
@@ -57,6 +59,11 @@ export const QUERIES = {
                 name
             }
         }
+        coAuthors {
+            nodes {
+                displayName
+            }
+        }
         previous {
             slug
             title
@@ -66,9 +73,6 @@ export const QUERIES = {
             title
         }
         additionalFields {
-            authors {
-                name
-            }
             custombanner
             featuredimage
             description

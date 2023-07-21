@@ -26,7 +26,7 @@
   };
 
   const isHighlighted = () => {
-    return post.authors.indexOf(comment.author) > -1;
+    return post.coAuthors.indexOf(comment.author) > -1;
   };
 </script>
 
