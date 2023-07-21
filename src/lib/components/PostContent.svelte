@@ -17,7 +17,7 @@
 
   const validateContent = (htmlString) => {
     const parser = new DOMParser();
-    let doc = parser.parseFromString(`<div>${htmlString}</div>`, "application/xml");
+    let doc = parser.parseFromString(`<div>${htmlString}</div>`, "text/html");
     if (doc.querySelector("parsererror")) {
       console.error(doc.querySelector("parsererror").querySelector("div").innerHTML);
       toast.push("Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.", toastThemes.error);
