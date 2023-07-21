@@ -127,6 +127,26 @@ article {
   > * {
     @include article-width;
   }
+
+  .fade:after, .fade:before, .fade-top:before, .fade-bottom:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: var(--vertical-separation-margin);
+  }
+
+  .fade:after, .fade-bottom:after {
+    bottom: 0;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+  }
+
+  .fade:before, .fade-top:after {
+    top: 0;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+  }
 }
 
 @media screen and (max-width: 41rem) {
