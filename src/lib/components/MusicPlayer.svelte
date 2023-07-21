@@ -174,7 +174,7 @@ Musicmancer 2023 Edition
     height: 4rem;
     border: 2px solid var(--accent-dark);
     border-radius: 2rem;
-    background-color: var(--background-light);
+    background: var(--background-light);
     color: var(--text-light);
     margin: auto;
 

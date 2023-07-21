@@ -1,10 +1,6 @@
-html {
-  background-color: var(--background-dark);
-}
-
 body {
   font-family: var(--body-text-font-family);
-  background-color: var(--background-dark);
+  background: var(--background-dark);
   // background: var(--background-image-default) repeat top center; TODO: Default background maybe a bit too busy?
   min-width: var(--page-min-width);
 }

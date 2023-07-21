@@ -106,7 +106,7 @@
 
   main {
     padding-bottom: calc(2 * var(--vertical-separation-margin));
-    background-color: var(--background-light);
+    background: var(--background-light);
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
     height: auto;
