@@ -121,7 +121,7 @@ article {
   }
 
   background-position: top center;
-  background-size: auto;
+  background-size: var(--page-max-width) auto;
 
   > * {
     @include article-width;
