@@ -27,6 +27,14 @@ export interface Post extends PostMeta {
   bannerVisible: boolean;
   fullWidth: boolean;
   content: string;
+  previous: {
+    title: string;
+    slug: string;
+  } | null;
+  next: {
+    title: string;
+    slug: string;
+  } | null;
   tags: Tag[];
   comments: Comment[];
 }

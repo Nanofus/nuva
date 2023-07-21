@@ -64,6 +64,8 @@ export const dataToPost = (data: any): Post | null => {
     styles: data.additionalFields.styles,
     music: data.additionalFields.music ? data.additionalFields.music.split("\n") : [],
     content: data.content,
+    previous: data.previous ? { title: data.previous.title, slug: data.previous.slug } : null,
+    next: data.next ? { title: data.next.title, slug: data.next.slug } : null,
     categories: data.categories.nodes.map((category: any) => {
       return {
         slug: category.slug,

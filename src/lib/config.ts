@@ -57,6 +57,14 @@ export const QUERIES = {
                 name
             }
         }
+        previous {
+            slug
+            title
+        }
+        next {
+            slug
+            title
+        }
         additionalFields {
             authors {
                 name
