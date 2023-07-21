@@ -4,7 +4,6 @@
   import { browser } from "$app/environment";
   import { loginInfo, postOptions } from "$lib/stores";
 
-  let interval;
   let smallLogo;
   let menuItems;
   let menuOpen = false;
@@ -13,9 +12,8 @@
   let userInfo = null;
 
   const getTotalNavigationHeight = () => {
-    const nav = document.querySelector("nav");
     const header = document.querySelector("header");
-    return nav.offsetHeight + header.offsetHeight;
+    return header.offsetHeight;
   };
 
   const isMobile = () => {
@@ -23,17 +21,21 @@
     return match.matches;
   };
 
+  const handleStickyMenu = () => {
+    if (!browser) return;
+    if ((stickyMenu && document.documentElement.scrollTop > getTotalNavigationHeight()) || isMobile() || !bannerVisible) {
+      smallLogo.style.opacity = "1";
+      smallLogo.style.pointerEvents = "auto";
+    } else {
+      smallLogo.style.opacity = "0";
+      smallLogo.style.pointerEvents = "none";
+    }
+  };
+
   onMount(() => {
     if (browser) {
-      interval = setInterval(() => {
-        if ((stickyMenu && document.documentElement.scrollTop > getTotalNavigationHeight()) || isMobile() || !bannerVisible) {
-          smallLogo.style.opacity = "1";
-          smallLogo.style.pointerEvents = "auto";
-        } else {
-          smallLogo.style.opacity = "0";
-          smallLogo.style.pointerEvents = "none";
-        }
-      }, 100);
+      document.addEventListener("scroll", handleStickyMenu);
+      window.addEventListener("resize", handleStickyMenu);
       postOptions.subscribe(options => {
         stickyMenu = options.stickyMenu;
         bannerVisible = options.bannerVisible;
@@ -43,7 +45,10 @@
   });
 
   onDestroy(() => {
-    clearInterval(interval);
+    if (browser) {
+      document.removeEventListener("scroll", handleStickyMenu);
+      window.removeEventListener("resize", handleStickyMenu);
+    }
   });
 
   const toggleMenu = () => menuOpen = !menuOpen;
