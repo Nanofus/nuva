@@ -7,7 +7,7 @@
   export let post: Post;
 </script>
 
-<footer id="post-footer">
+<footer class="vertically-separated" id="post-footer">
   <PostAuthors {post} />
   <PostTags tags={post.tags} />
   <PostComments {post} />

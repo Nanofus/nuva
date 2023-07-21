@@ -73,7 +73,6 @@ export const QUERIES = {
             mobilefriendly
             scripts
             styles
-            theme
             music
         }
         categories {

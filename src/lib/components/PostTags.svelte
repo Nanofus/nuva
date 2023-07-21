@@ -5,7 +5,7 @@
   export let tags: Tag[];
 </script>
 
-<div id="tags">
+<div class="vertically-separated" id="tags">
   {#each tags as tag}
     <Pill sizeByCount={false} href="/tags/{tag.slug}">{tag.name}</Pill>
   {/each}
@@ -13,7 +13,6 @@
 
 <style lang="scss">
   #tags {
-    margin-top: var(--vertical-separation-margin);
     text-align: center;
   }
 </style>

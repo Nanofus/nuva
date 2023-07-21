@@ -30,25 +30,15 @@
   <meta content={getPageUrl(`/`)} property="og:url" />
 </svelte:head>
 
-<div class="featured">
+<div class="vertically-separated">
   <FeaturedPost postMeta={data.posts[0]} />
 </div>
 <h3>Kaikki julkaisut</h3>
 <PostList posts={data.posts} />
-<div class="fetch-more">
+<div class="vertically-separated">
   {#if data.hasNextPage && !fetching}
     <Button on:click={fetchMorePosts}>Lataa lisää</Button>
   {:else if fetching}
     <LoadingSpinner />
   {/if}
 </div>
-
-<style lang="scss">
-  .featured {
-    margin-top: var(--vertical-separation-margin);
-  }
-
-  .fetch-more {
-    margin-top: var(--vertical-separation-margin);
-  }
-</style>

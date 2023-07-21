@@ -17,7 +17,8 @@
     <time class="post-date"><span
       class="material-icons inline-icon">calendar_today</span> {post.date.toLocaleDateString(LOCALE)}
     </time>
-    <span class="post-authors"><span class="material-icons inline-icon">history_edu</span> {post.authors.join(', ')}</span>
+    <span class="post-authors"><span
+      class="material-icons inline-icon">history_edu</span> {post.authors.join(', ')}</span>
     <span class="post-comments-link">
       <span class="material-icons inline-icon">forum</span>
 			<a href="#comments">{post.commentCount ? post.commentCount : 0} kommentti{post.commentCount === 1 ? "" : "a"}</a>

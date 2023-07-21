@@ -35,9 +35,9 @@
   <meta content="website" property="og:type" />
 </svelte:head>
 
-<Navigation />
-<div id="page" class={fullWidth ? 'wide' : ''}>
+<div class={fullWidth ? 'wide' : ''} id="page">
   <Header />
+  <Navigation />
   <main>
     {#if $navigating}
       <div class="full-page-loader">
@@ -88,7 +88,6 @@
     min-width: var(--page-min-width);
     width: 100%;
     max-width: var(--page-max-width);
-    padding-top: var(--navigation-height);
 
     &.wide {
       max-width: 100%;
@@ -108,7 +107,8 @@
   main {
     padding-bottom: calc(2 * var(--vertical-separation-margin));
     background-color: var(--background-light);
-    border-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
     height: auto;
     min-height: calc(100vh - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin)); // TODO: Cleanup this monstrosity
   }

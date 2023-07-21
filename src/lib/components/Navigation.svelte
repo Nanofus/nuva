@@ -26,7 +26,7 @@
   onMount(() => {
     if (browser) {
       interval = setInterval(() => {
-        if (document.documentElement.scrollTop > getTotalNavigationHeight() || isMobile() || !bannerVisible) {
+        if ((stickyMenu && document.documentElement.scrollTop > getTotalNavigationHeight()) || isMobile() || !bannerVisible) {
           smallLogo.style.opacity = "1";
           smallLogo.style.pointerEvents = "auto";
         } else {
@@ -87,15 +87,11 @@
 
 <style lang="scss">
   nav {
-    position: absolute;
-
     &.sticky {
-      position: fixed;
+      position: sticky;
     }
 
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
     margin: auto;
     min-width: var(--page-min-width);
     width: 100%;
@@ -173,7 +169,6 @@
 
     .nav-wrapper > .section-menu-items.menu-open {
       display: block;
-      background: var(--main-nav-background-mobile-expanded);
 
       :global(> a) {
         padding-left: 1rem;

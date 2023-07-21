@@ -4,7 +4,7 @@
   export let post: Post;
 </script>
 
-<div id="authors">
+<div class="vertically-separated" id="authors">
   {#if post.authors.length > 0}
     <div>
       <span class="material-icons inline-icon">history_edu</span> {post.authors.join(", ")}
@@ -20,7 +20,6 @@
 <style lang="scss">
   #authors {
     font-family: var(--accent-font-family);
-    margin-top: var(--vertical-separation-margin);
     text-align: center;
   }
 </style>

@@ -14,6 +14,7 @@
     :global(> *) {
       border-top: var(--border);
     }
+
     :global(> *:last-child) {
       border-bottom: var(--border);
     }

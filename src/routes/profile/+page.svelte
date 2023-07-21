@@ -23,22 +23,16 @@
 </svelte:head>
 
 <h1>Profiili</h1>
-<Settings>
-  {#if userInfo}
+{#if userInfo}
+  <Settings>
     <SettingItem label="Käyttäjä"><span>{userInfo.displayName}</span></SettingItem>
     <SettingItem label="Äänenvoimakkuus"><input class="volume-bar"
                                                 type="range"
                                                 min="0"
                                                 max="100"
                                                 bind:value={volume}></SettingItem>
-  {/if}
-</Settings>
-<div class="login-area">
+  </Settings>
+{/if}
+<div class="vertically-separated">
   <Login />
 </div>
-
-<style lang="scss">
-  .login-area {
-    margin-top: var(--vertical-separation-margin);
-  }
-</style>

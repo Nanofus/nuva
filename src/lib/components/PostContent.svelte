@@ -19,7 +19,6 @@
     let doc = new DOMParser().parseFromString(`<div>${htmlString}</div>`, "text/html"); // TODO: Not strict enough, should use 3rd party library
     if (doc.querySelector("parsererror")) {
       console.error(doc.querySelector("parsererror").querySelector("div").innerHTML);
-      console.log("HTML string: ", htmlString);
       toast.push("Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.", toastThemes.error);
     }
   };
@@ -62,16 +61,12 @@
     sovi mobiililla luettavaksi.
   </div>
 {/if}
-<section id="post-content">
+<section class="vertically-separated" id="post-content">
   {@html post.content}
 </section>
 <MusicPlayer musicUrlArray={post.music} />
 
 <style lang="scss">
-  section {
-    margin: var(--vertical-separation-margin) 0;
-  }
-
   :global(section > p:first-child::first-letter) {
     initial-letter: var(--initial-letter-size);
     -webkit-initial-letter: var(--initial-letter-size);

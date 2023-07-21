@@ -99,6 +99,11 @@ hr {
   }
 }
 
+.vertically-separated {
+  margin-top: var(--vertical-separation-margin);
+  margin-bottom: var(--vertical-separation-margin);
+}
+
 /* Warnings */
 
 .info-box {

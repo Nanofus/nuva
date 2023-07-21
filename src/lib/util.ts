@@ -62,7 +62,7 @@ export let formatSecondsToMMSS = (seconds: number) => {
 
 export let getRandomBannerUrl = (seed = 0) => {
   return `url("/images/banners/banner-${((new Date().getMinutes() + seed) % BANNER_COUNT) + 1}.png")`;
-}
+};
 
 export let createBaseSettings = () => {
   if (browser && !localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)) {

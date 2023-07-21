@@ -1,5 +1,4 @@
 <script>
-  import { BANNER_COUNT } from "$lib/config";
   import { onMount } from "svelte";
   import { postOptions } from "$lib/stores";
   import { getRandomBannerUrl } from "$lib/util";

@@ -52,7 +52,8 @@
   {#if !replyFormOpen && isLoggedIn()}
     <a role="button" tabindex="0" on:click={() => replyFormOpen = true}>Vastaa</a>
   {:else}
-    <CommentForm on:commentSent={commentSent} on:close={() => (replyFormOpen = false)} parent={comment._id} postId={post._id} isReply={true} />
+    <CommentForm on:commentSent={commentSent} on:close={() => (replyFormOpen = false)} parent={comment._id}
+                 postId={post._id} isReply={true} />
   {/if}
 </div>
 

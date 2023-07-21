@@ -5,8 +5,7 @@ Musicmancer 2023 Edition
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
-  import { formatSecondsToMMSS, loadVolume, saveVolume, toastThemes } from "$lib/util";
-  import { toast } from "@zerodevx/svelte-toast";
+  import { formatSecondsToMMSS, loadVolume, saveVolume } from "$lib/util";
 
   interface AudioData {
     src: string;
