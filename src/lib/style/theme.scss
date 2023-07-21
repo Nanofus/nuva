@@ -148,12 +148,12 @@ article {
 
   &.fade:after, &.fade-bottom:after {
     bottom: 0;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--background-light) 100%);
   }
 
   &.fade:before, &.fade-top:after {
     top: 0;
-    background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0), var(--background-light) 100%);
   }
 }
 
