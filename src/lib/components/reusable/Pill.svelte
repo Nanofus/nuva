@@ -8,7 +8,7 @@
 
   onMount(() => {
     if (!sizeByCount) return;
-    pill.style.fontSize = `${sizeByCount as number * 0.01 + 0.8}em`;
+    pill.style.fontSize = `${sizeByCount as number * 0.01 + 0.8}rem`;
   });
 </script>
 
@@ -29,9 +29,9 @@
     margin: 0.25rem;
     position: relative;
     border-radius: var(--border-radius);
-    font-size: 0.8em;
-    font-weight: 700;
-    line-height: 1.2727272727;
+    font-size: 0.8rem;
+    font-weight: bold;
+    line-height: 1.2;
     font-family: var(--accent-font-family);
     text-transform: uppercase;
 

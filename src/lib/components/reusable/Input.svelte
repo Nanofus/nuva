@@ -8,6 +8,7 @@
   export let type: "text" | "password" | "multiline" = "text";
   export let placeholder: string | null = null;
   export let value: string = "";
+  export let rows = 5;
 
   let elementId = "input_" + counter++;
   const handleInput = e => value = e.target.value;
@@ -20,9 +21,9 @@
     </label>
   {/if}
   {#if type === "multiline"}
-    <textarea id={elementId} {name} {placeholder} {value} on:input={handleInput}></textarea>
+    <textarea class="editor" {rows} id={elementId} {name} {placeholder} {value} on:input={handleInput}></textarea>
   {:else}
-    <input id={elementId} {name} {placeholder} {value} {type} on:input={handleInput} />
+    <input class="editor" id={elementId} {name} {placeholder} {value} {type} on:input={handleInput} />
   {/if}
 </div>
 
@@ -31,22 +32,5 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
-  }
-
-  input {
-    font-family: var(--accent-font-family);
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius);
-    padding: 0.25rem 0.5rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
-  textarea {
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius);
-    padding: 0.25rem 0.5rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
   }
 </style>

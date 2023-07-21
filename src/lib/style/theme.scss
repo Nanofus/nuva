@@ -1,85 +1,62 @@
+/* Main CSS file */
+
+/* Page structure */
+
 body {
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  min-width: var(--page-min-width);
   font-family: var(--body-text-font-family);
+  color: var(--text-light);
   background: var(--background-dark);
   // background: var(--background-image-default) repeat top center; TODO: Default background maybe a bit too busy?
+}
+
+html {
+  scrollbar-gutter: stable; // TODO: fix gutter so that it doesn't break 100vw as the horizontal width
+}
+
+#page {
+  margin: auto;
   min-width: var(--page-min-width);
-}
+  width: 100%;
+  max-width: var(--page-max-width);
 
-::selection {
-  background-color: var(--selection);
-}
+  &.wide {
+    max-width: 100%;
 
-h1, h2, h3, h4 {
-  font-family: var(--header-font-family);
-  font-weight: normal;
-  text-shadow: var(--header-shadow);
-  overflow-wrap: break-word;
-  transition: font-size var(--transition-speed) ease-in-out;
-}
-
-h1 {
-  font-size: var(--font-size-h1);
-  text-align: center;
-}
-
-h2 {
-  font-size: var(--font-size-h2);
-  text-align: center;
-  margin: 4rem 0 2rem;
-  display: flex;
-  justify-content: center;
-
-  &:before {
-    content: "—";
-    font-weight: lighter;
-    margin-right: 1rem;
-  }
-
-  &:after {
-    content: "—";
-    font-weight: lighter;
-    margin-left: 1rem;
+    > main {
+      border-radius: 0;
+    }
   }
 }
 
-h3 {
-  margin-top: 3.5rem;
+main {
+  padding-bottom: calc(2 * var(--vertical-separation-margin));
+  background: var(--background-light);
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  height: auto;
+  min-height: calc(100vh - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin)); // TODO: Cleanup this monstrosity
 }
 
-h4 {
-  font-family: var(--header-secondary-font-family);
-  font-size: var(--font-size-h4);
-  margin: 0.625rem 0;
+// Mobile screen size
+@media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+  main {
+    padding-left: var(--mobile-horizontal-padding);
+    padding-right: var(--mobile-horizontal-padding);
+  }
 }
 
-a, a:link, a:visited {
-  color: var(--link);
-  text-decoration: none;
-  cursor: pointer;
+// Screen is narrower than white area
+@media screen and (max-width: 76rem) { // TODO: Fix hardcoded value
+  main {
+    border-radius: 0;
+  }
 }
 
-a:hover, a:active {
-  color: var(--link-hover);
-  text-decoration: underline;
-}
-
-pre {
-  background-color: var(--hover-dark);
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  padding: 1rem;
-}
-
-hr {
-  width: 100px;
-  height: 26px;
-  position: relative;
-  margin: 25px auto;
-  border: 0;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-image: var(--hr-background-image);
-}
+/* Full-width & background */
 
 @mixin full-width {
   position: relative;
@@ -153,6 +130,7 @@ article {
   }
 }
 
+// Mobile screen size
 @media screen and (max-width: 41rem) {
   .background > * {
     padding-left: var(--mobile-horizontal-padding);
@@ -160,6 +138,7 @@ article {
   }
 }
 
+// Screen is larger than white area
 @media screen and (min-width: 76rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
   .full-width, .background:not(.max) {
     margin-left: calc((100vw - var(--page-max-width)) / 2);
@@ -171,12 +150,106 @@ article {
   }
 }
 
+/* Misc */
+
+::selection {
+  background-color: var(--selection);
+}
+
 .vertically-separated {
   margin-top: var(--vertical-separation-margin);
   margin-bottom: var(--vertical-separation-margin);
 }
 
-/* Warnings */
+/* Content styles */
+
+h1, h2, h3, h4 {
+  font-family: var(--header-font-family);
+  font-weight: normal;
+  text-shadow: var(--header-shadow);
+  overflow-wrap: break-word;
+  transition: font-size var(--transition-speed) ease-in-out;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  text-align: center;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  text-align: center;
+  margin: 4rem 0 2rem;
+  display: flex;
+  justify-content: center;
+
+  &:before {
+    content: "—";
+    font-weight: lighter;
+    margin-right: 1rem;
+  }
+
+  &:after {
+    content: "—";
+    font-weight: lighter;
+    margin-left: 1rem;
+  }
+}
+
+h3 {
+  margin-top: 3.5rem;
+}
+
+h4 {
+  font-family: var(--header-secondary-font-family);
+  font-size: var(--font-size-h4);
+  margin: 0.625rem 0;
+}
+
+a, a:link, a:visited {
+  color: var(--link);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover, a:active {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+pre {
+  background-color: var(--hover-dark);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  padding: 1rem;
+}
+
+p {
+  text-align: justify;
+}
+
+code {
+  font-family: var(--code-font-family);
+  font-size: 0.9rem;
+}
+
+hr {
+  width: 100px;
+  height: 26px;
+  position: relative;
+  margin: 25px auto;
+  border: 0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: var(--hr-background-image);
+}
+
+img {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
 
 .info-box {
   background-color: var(--info-background);
@@ -195,6 +268,97 @@ article {
   font-size: 1rem;
   position: relative;
   top: 0.2rem;
+}
+
+.under-construction {
+  width: 100%;
+  height: 5rem;
+  background-image: linear-gradient(45deg, #000000 25%, #ffd900 25%, #ffd900 50%, #000000 50%, #000000 75%, #ffd900 75%, #ffd900 100%);
+  background-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: "Source Code Pro", monospace;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.hidden-desktop {
+  display: none !important;
+}
+
+.center {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Mobile mode
+@media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .hidden-mobile {
+    display: none !important;
+  }
+
+  .hidden-desktop {
+    display: inherit !important;
+  }
+}
+
+/* Page transitions */
+
+.full-page-loader {
+  animation: fadeIn 1s forwards;
+  animation-delay: 0.5s;
+  padding-top: var(--vertical-separation-margin);
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.transition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* User inputs */
+
+.editor, .editor-wrapper {
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+  border: var(--border);
+  font-family: var(--accent-font-family);
+}
+
+.editor-wrapper {
+  border-radius: calc(var(--border-radius) * 2);
+  padding: 0.5rem 0;
+}
+
+.editor {
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
 }
 
 /* Toast */

@@ -2,7 +2,7 @@
 
 </script>
 
-<div class="settings-wrapper">
+<div class="settings-wrapper editor-wrapper">
   <slot />
 </div>
 
