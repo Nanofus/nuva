@@ -256,7 +256,8 @@ h3 {
 h4 {
   font-family: var(--header-secondary-font-family);
   font-size: var(--font-size-h4);
-  margin: 0.625rem 0;
+  margin: 2.5rem 0 0.625rem;
+  text-align: left;
 }
 
 a, a:link, a:visited {
