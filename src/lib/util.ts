@@ -91,7 +91,7 @@ export const initGlobalScope = () => {
 };
 export const cleanGlobalScope = () => {
   if (!browser) return;
-  if (window[GLOBAL_OBJECT_NAME].onDestroy) window[GLOBAL_OBJECT_NAME].onDestroy();
+  if (window[GLOBAL_OBJECT_NAME].onPostDestroy) window[GLOBAL_OBJECT_NAME].onPostDestroy();
   delete window[GLOBAL_OBJECT_NAME];
 };
 

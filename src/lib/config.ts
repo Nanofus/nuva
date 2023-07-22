@@ -16,6 +16,7 @@ export const CATEGORIES_EXCLUDED_FROM_ALL_POSTS = ["meta", "muu-roska"];
 
 export const BANNER_COUNT = 1;
 export const DEFAULT_VOLUME = 50;
+export const MUSIC_FADE_SPEED = 1;
 
 export const QUERIES = {
   pageInfo: `

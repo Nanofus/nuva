@@ -6,7 +6,7 @@ Musicmancer 2023 Edition
   import { onDestroy, onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
   import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util";
-  import { DEFAULT_VOLUME } from "$lib/config";
+  import { DEFAULT_VOLUME, MUSIC_FADE_SPEED } from "$lib/config";
 
   interface AudioData {
     src: string;
@@ -17,9 +17,10 @@ Musicmancer 2023 Edition
   export let musicUrlArray: string[] = [];
 
   let currentAudioElement: HTMLAudioElement | null;
-  let generatedElements: HTMLElement[] = [];
+  let generatedElements: HTMLButtonElement[] = [];
   let paused = true;
   let muted = false;
+  let fadeInProgress = false;
   let volume = 0;
   let audioDataArray: AudioData[] = [];
 
@@ -49,9 +50,18 @@ Musicmancer 2023 Edition
       currentAudioElement = newAudioData.audioElement;
       currentAudioElement.currentTime = 0;
       currentAudioElement.volume = volume / 100;
-      paused = false;
-      currentAudioElement.play();
+      generatedElements.forEach(e => e.disabled = true);
       // Others are faded out by the fadeout interval
+      const waitUntilOthersFadedInterval = setInterval(() => {
+        fadeInProgress = true;
+        if (!othersStillPlaying()) {
+          paused = false;
+          fadeInProgress = false;
+          (<HTMLAudioElement>currentAudioElement).play();
+          generatedElements.forEach(e => e.disabled = false);
+          clearInterval(waitUntilOthersFadedInterval);
+        }
+      }, 10);
     }
   };
 
@@ -104,7 +114,7 @@ Musicmancer 2023 Edition
       seekBar.value = String(Math.floor(1000 * currentAudioElement.currentTime));
       currentTime.innerHTML = String(formatSecondsToMMSS(currentAudioElement.currentTime));
     }
-  }, 100);
+  }, 50);
   // Use the seek bar to seek the audio
   const handleSeek = (input) => {
     currentAudioElement && (currentAudioElement.currentTime = input.target.value / 1000);
@@ -117,14 +127,23 @@ Musicmancer 2023 Edition
   $: volume && saveSetting("volume", volume);
 
   // Pause and mute
-  $: currentAudioElement && (paused ? currentAudioElement.pause() : currentAudioElement.play());
   $: currentAudioElement && (muted ? currentAudioElement.volume = 0 : currentAudioElement.volume = volume / 100);
+
+  const unpause = () => {
+    paused = false;
+    currentAudioElement && currentAudioElement.play();
+  }
+
+  const pause = () => {
+    paused = true;
+    currentAudioElement && currentAudioElement.pause();
+  }
 
   const fadeOutInterval = setInterval(() => {
     audioDataArray.map((audioData) => {
       if (audioData.isEffect || audioData.audioElement === currentAudioElement) return;
       if (audioData.audioElement.volume > 0) {
-        let newVolume = audioData.audioElement.volume - 0.01;
+        let newVolume = audioData.audioElement.volume - (0.001 * MUSIC_FADE_SPEED);
         if (newVolume < 0) newVolume = 0;
         audioData.audioElement.volume = newVolume;
       } else {
@@ -132,20 +151,29 @@ Musicmancer 2023 Edition
         audioData.audioElement.pause();
       }
     });
-  }, 100);
+  }, 10);
+
+  const othersStillPlaying = () => {
+    return audioDataArray.filter((audioData) => {
+      return audioData.audioElement !== currentAudioElement
+        && !audioData.isEffect
+        && !audioData.audioElement.paused;
+    }).length > 0;
+  };
 </script>
 
 {#if currentAudioElement}
   <div class="audio-player">
     <div>
       {#if paused}
-        <Button icon="play_arrow" on:click={() => paused = !paused}></Button>
+        <Button icon="play_arrow" disabled={fadeInProgress} on:click={unpause}></Button>
       {:else}
-        <Button icon="pause" on:click={() => paused = !paused}></Button>
+        <Button icon="pause" disabled={fadeInProgress} on:click={pause}></Button>
       {/if}
     </div>
     <time class="current-time" bind:this={currentTime}></time>
     <input class="seek-bar"
+           disabled="{fadeInProgress}"
            type="range"
            bind:this={seekBar}
            min="0"
@@ -155,12 +183,13 @@ Musicmancer 2023 Edition
     <time class="duration">{formatSecondsToMMSS(currentAudioElement.duration)}</time>
     <div>
       {#if !muted}
-        <Button icon="volume_up" on:click={() => muted = !muted}></Button>
+        <Button icon="volume_up" disabled={fadeInProgress} on:click={() => muted = !muted}></Button>
       {:else}
-        <Button icon="volume_mute" on:click={() => muted = !muted}></Button>
+        <Button icon="volume_mute" disabled={fadeInProgress} on:click={() => muted = !muted}></Button>
       {/if}
     </div>
     <input class="volume-bar"
+           disabled="{fadeInProgress}"
            type="range"
            min="0"
            max="100"
@@ -186,9 +215,17 @@ Musicmancer 2023 Edition
       font-size: 2rem;
     }
 
+    &:disabled {
+      color: var(--text-light);
+      background-color: var(--hover-dark);
+    }
+
     &:hover {
       background-color: var(--hover-dark);
       cursor: pointer;
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
   }
 

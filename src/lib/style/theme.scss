@@ -504,6 +504,17 @@ button {
     background: var(--accent-light);
     transition: 0s;
   }
+
+  &[disabled], &:disabled {
+    color: var(--hover-light);
+    cursor: not-allowed;
+  }
+}
+
+input {
+  &[disabled], &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 .editor, .editor-wrapper {
