@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import { isLoggedIn } from "$lib/database";
   import Header from "$lib/components/Header.svelte";

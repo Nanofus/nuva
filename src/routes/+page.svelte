@@ -1,10 +1,6 @@
 <script lang="ts">
-  import { getPostList } from "$lib/database";
   import PostList from "$lib/components/PostList.svelte";
   import type { CommentMeta, PostListResponse } from "$lib/types";
-  import Button from "$lib/components/reusable/Button.svelte";
-  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { META_CATEGORY_SLUG } from "$lib/config";
   import { getPageTitle, getPageUrl } from "$lib/util";
   import FeaturedPost from "$lib/components/FeaturedPost.svelte";
   import CommentList from "$lib/components/CommentList.svelte";

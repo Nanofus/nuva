@@ -4,8 +4,8 @@
   import type { PostListResponse } from "$lib/types";
   import Button from "$lib/components/reusable/Button.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { META_CATEGORY_SLUG } from "$lib/config";
-  import { getPageTitle, getPageUrl } from "$lib/util";
+  import { filterExcludedCategories, getPageTitle, getPageUrl } from "$lib/util";
+  import { CATEGORIES_EXCLUDED_FROM_ALL_POSTS } from "$lib/config";
 
   export let data: PostListResponse;
   let fetching = false;
@@ -14,8 +14,7 @@
     fetching = true;
     const newData = await getPostList(fetch, data.endCursor);
     data = {
-      posts: [...data.posts, ...newData.posts]
-        .filter(post => !post.categories.map(cat => cat.slug).includes(META_CATEGORY_SLUG)),
+      posts: filterExcludedCategories([...data.posts, ...newData.posts]),
       endCursor: newData.endCursor,
       hasNextPage: newData.hasNextPage
     };

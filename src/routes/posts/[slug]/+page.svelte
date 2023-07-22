@@ -5,8 +5,10 @@
   import PostContent from "$lib/components/PostContent.svelte";
   import { onDestroy, onMount } from "svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util";
+  import { cleanGlobalScope, getPageTitle, getPageUrl, initGlobalScope } from "$lib/util";
   import { postOptions } from "$lib/stores";
+  import { browser } from "$app/environment";
+  import { GLOBAL_OBJECT_NAME } from "$lib/config";
 
   export let data: Post;
   let noAccess = false;

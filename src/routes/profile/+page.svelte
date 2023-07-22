@@ -1,19 +1,20 @@
 <script lang="ts">
   import Login from "$lib/components/Login.svelte";
-  import { getPageTitle, getPageUrl, loadVolume, saveVolume } from "$lib/util";
+  import { getPageTitle, getPageUrl, loadSetting, saveSetting } from "$lib/util";
   import { onMount } from "svelte";
   import { loginInfo } from "$lib/stores";
   import SettingItem from "$lib/components/reusable/SettingItem.svelte";
   import Settings from "$lib/components/Settings.svelte";
+  import { DEFAULT_VOLUME } from "$lib/config";
 
   let userInfo = null;
-  let volume = loadVolume();
+  let volume = loadSetting("volume") || DEFAULT_VOLUME;
 
   onMount(() => {
     loginInfo.subscribe(info => (userInfo = info));
   });
 
-  $: volume && saveVolume(volume);
+  $: volume && saveSetting("volume", volume);
 </script>
 
 <svelte:head>

@@ -5,7 +5,8 @@ Musicmancer 2023 Edition
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
-  import { formatSecondsToMMSS, loadVolume, saveVolume } from "$lib/util";
+  import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util";
+  import { DEFAULT_VOLUME } from "$lib/config";
 
   interface AudioData {
     src: string;
@@ -23,7 +24,7 @@ Musicmancer 2023 Edition
   let audioDataArray: AudioData[] = [];
 
   onMount(() => {
-    volume = loadVolume();
+    volume = loadSetting("volume") || DEFAULT_VOLUME;
     initializeAudioElements();
 
   });
@@ -113,7 +114,7 @@ Musicmancer 2023 Edition
   $: (audioDataArray.map(data => data.audioElement).forEach(element => element.volume = volume / 100));
 
   // Save volume
-  $: volume && saveVolume(volume);
+  $: volume && saveSetting("volume", volume);
 
   // Pause and mute
   $: currentAudioElement && (paused ? currentAudioElement.pause() : currentAudioElement.play());

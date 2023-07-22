@@ -1,10 +1,12 @@
 <script lang="ts">
   import type { Post } from "$lib/types";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
   import MusicPlayer from "$lib/components/MusicPlayer.svelte";
   import { toast } from "@zerodevx/svelte-toast";
-  import { toastThemes } from "$lib/util";
+  import { cleanGlobalScope, toastThemes } from "$lib/util";
+  import { initGlobalScope } from "$lib/util.js";
+  import { GLOBAL_OBJECT_NAME } from "$lib/config";
 
   export let post: Post;
 
@@ -33,6 +35,7 @@
   };
 
   onMount(() => {
+    initGlobalScope();
     validateContent(post.content);
 
     // Eval magic to run scripts in the post
@@ -48,6 +51,11 @@
     [].map.call(doc.getElementsByTagName("script"), (scriptTag: HTMLScriptElement) => {
       evaluateScripts(scriptTag.innerText);
     });
+  });
+
+  onDestroy(() => {
+    if (browser && window[GLOBAL_OBJECT_NAME].destroyPost) window[GLOBAL_OBJECT_NAME].destroyPost();
+    cleanGlobalScope();
   });
 
   $: post?.initialLetter ? setInitialLetter() : null;

@@ -1,7 +1,8 @@
 import { error, type Load } from "@sveltejs/kit";
 import { getLatestComments, getPostList } from "$lib/database";
 import type { PostsAndCommentsResponse } from "$lib/types";
-import { LATEST_POSTS_PER_FETCH, META_CATEGORY_SLUG } from "$lib/config";
+import { LATEST_POSTS_PER_FETCH } from "$lib/config";
+import { filterExcludedCategories } from "$lib/util";
 
 export const load: Load = async ({ fetch }): Promise<PostsAndCommentsResponse> => {
   const [postResponse, commentResponse] = await Promise.all([
@@ -9,8 +10,7 @@ export const load: Load = async ({ fetch }): Promise<PostsAndCommentsResponse> =
     getLatestComments(fetch)
   ]);
   if (postResponse && commentResponse) {
-    postResponse.posts = postResponse.posts
-      .filter(post => !post.categories.map(cat => cat.slug).includes(META_CATEGORY_SLUG));
+    postResponse.posts = filterExcludedCategories(postResponse.posts);
     return {
       posts: postResponse,
       comments: commentResponse
