@@ -19,9 +19,9 @@
 
   const isCurrentUser = () => {
     if (browser) {
-      const user = getAuthInfo()?.displayName;
-      if (!user) return false;
-      return user === comment.author;
+      const currentUserDisplayName = getAuthInfo()?.displayName;
+      if (!currentUserDisplayName) return false;
+      return currentUserDisplayName === comment.author.displayName;
     }
   };
 
@@ -33,7 +33,7 @@
 <div id="comment-{comment._id}" class="comment {isHighlighted() ? 'highlighted' : ''}">
   <header class="comment-header">
     <span class="comment-author">
-      {#if isHighlighted()}<span class="material-icons inline-icon">history_edu</span>{/if} {comment.author}</span>
+      {#if isHighlighted()}<span class="material-icons inline-icon">history_edu</span>{/if} {comment.author.displayName}</span>
     <span class="comment-date">{comment.date.toLocaleString(LOCALE, {
       year: 'numeric',
       month: 'numeric',

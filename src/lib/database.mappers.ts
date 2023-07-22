@@ -1,4 +1,4 @@
-import type { Category, Comment, CommentMeta, Post, PostMeta, Tag } from "$lib/types";
+import type { Author, Category, Comment, CommentMeta, Post, PostMeta, Tag } from "$lib/types";
 import { objectsToHierarchy } from "$lib/util";
 
 export const dataToPostMeta = (data: any): PostMeta => {
@@ -6,20 +6,26 @@ export const dataToPostMeta = (data: any): PostMeta => {
     title: data.title,
     slug: data.slug,
     date: new Date(data.rawDate),
-    author: data.author.node.name,
+    author: { displayName: data.author.node.name, username: data.author.node.nicename },
     coAuthors: data.coAuthors.nodes
-      .map((author: any) => author.displayName)
-      .sort((a: string, b: string) => {
-        if (a === data.author.node.name) return -1;
-        if (b === data.author.node.name) return 1;
-        return a.localeCompare(b);
+      .map((author: any) => {
+        return {
+          displayName: author.displayName,
+          username: author.name
+        };
+      })
+      .sort((a: Author, b: Author) => {
+        if (a.displayName === data.author.node.name) return -1;
+        if (b.displayName === data.author.node.name) return 1;
+        return a.displayName.localeCompare(b.displayName);
       }),
-    categories: data.categories.nodes.map((category: any) => {
-      return {
-        slug: category.slug,
-        name: category.name
-      };
-    }),
+    categories:
+      data.categories.nodes.map((category: any) => {
+        return {
+          slug: category.slug,
+          name: category.name
+        };
+      }),
     customBanner: data.additionalFields.custombanner,
     featuredImage: data.additionalFields.featuredimage,
     description: data.additionalFields.description,
@@ -32,7 +38,7 @@ export const dataToComments = (nodes: any): Comment[] => {
   const comments = nodes.map((comment: any): Comment => {
     return {
       date: new Date(comment.date),
-      author: comment.author.node.name,
+      author: { displayName: comment.author.node.name, username: comment.author.node.nicename },
       content: comment.content,
       children: [],
       _id: comment.databaseId,
@@ -48,13 +54,13 @@ export const dataToCommentMetas = (nodes: any): CommentMeta[] => {
   return nodes.map((comment: any): CommentMeta => {
     return {
       date: new Date(comment.date),
-      author: comment.author.node.name,
+      author: { displayName: comment.author.node.name, username: comment.author.node.nicename },
       postSlug: comment.commentedOn.node.slug,
       postTitle: comment.commentedOn.node.title,
-      _id: comment.databaseId,
+      _id: comment.databaseId
     };
   });
-}
+};
 
 export const dataToPost = (data: any): Post | null => {
   if (!data) return null;
@@ -63,13 +69,18 @@ export const dataToPost = (data: any): Post | null => {
     title: data.title,
     slug: data.slug,
     date: new Date(data.rawDate),
-    author: data.author.node.name,
+    author: { displayName: data.author.node.name, username: data.author.node.nicename },
     coAuthors: data.coAuthors.nodes
-      .map((author: any) => author.displayName)
-      .sort((a: string, b: string) => {
-        if (a === data.author.node.name) return -1;
-        if (b === data.author.node.name) return 1;
-        return a.localeCompare(b);
+      .map((author: any) => {
+        return {
+          displayName: author.displayName,
+          username: author.name
+        };
+      })
+      .sort((a: Author, b: Author) => {
+        if (a.displayName === data.author.node.name) return -1;
+        if (b.displayName === data.author.node.name) return 1;
+        return a.displayName.localeCompare(b.displayName);
       }),
     artists: data.additionalFields.artists
       ? data.additionalFields.artists.map((artist: any) => artist.name)

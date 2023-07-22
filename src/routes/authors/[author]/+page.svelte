@@ -11,7 +11,7 @@
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPostListByCategory(fetch, data.author, data.endCursor);
+    const newData = await getPostListByCategory(fetch, data.author.username, data.endCursor);
     data = {
       posts: [...data.posts, ...newData.posts],
       author: data.author,
@@ -23,12 +23,12 @@
 </script>
 
 <svelte:head>
-  <title>{getPageTitle(data.author)}</title>
-  <meta content={data.author} property="og:title" />
-  <meta content={getPageUrl(`authors/${encodeURI(data.author)}`)} property="og:url" />
+  <title>{getPageTitle(data.author.displayName)}</title>
+  <meta content={data.author.displayName} property="og:title" />
+  <meta content={getPageUrl(`authors/${encodeURI(data.author.username)}`)} property="og:url" />
 </svelte:head>
 
-<h1>Kirjoittaja: {data.author}</h1>
+<h1>Kirjoittaja: {data.author.displayName}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
   <Button on:click={fetchMorePosts}>Lataa lisää</Button>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
   import type { Category, PostMeta } from "$lib/types";
+  import { onMount } from "svelte";
 
   export let posts: PostMeta[];
 
@@ -26,7 +27,7 @@
       </td>
       <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ""}</td>
       <td class="date">{post.date.toLocaleDateString(LOCALE)}</td>
-      <td class="authors hidden-mobile"><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td>
+      <td class="authors hidden-mobile"><a href="/authors/{encodeURI(post.author.username)}">{post.author.displayName}</a></td>
     </tr>
   {/each}
 </table>

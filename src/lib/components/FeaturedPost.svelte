@@ -10,7 +10,7 @@
   <p class="authors">
     <span class="author-list">
       {#each postMeta.coAuthors as author}
-        <a href="/authors/{encodeURI(author)}">{author}</a>
+        <a href="/authors/{encodeURI(author.username)}">{author.displayName}</a>
       {/each}
     </span>
   </p>

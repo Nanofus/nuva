@@ -31,11 +31,13 @@ export const QUERIES = {
         author {
             node {
                 name
+                nicename
             }
         }
         coAuthors {
             nodes {
                 displayName
+                name
             }
         }
         additionalFields {
@@ -59,11 +61,13 @@ export const QUERIES = {
         author {
             node {
                 name
+                nicename
             }
         }
         coAuthors {
             nodes {
                 displayName
+                name
             }
         }
         previous {
@@ -111,6 +115,9 @@ export const QUERIES = {
                 author {
                     node {
                         name
+                        ... on User {
+                            nicename
+                        }
                     }
                 }
                 content

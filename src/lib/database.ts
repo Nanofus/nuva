@@ -41,9 +41,12 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
                     nodes {
                         databaseId
                         author {
-                          node {
-                            name
-                          }
+                            node {
+                                name
+                                ... on User {
+                                    nicename
+                                }
+                            }
                         }
                         date
                         commentedOn {
@@ -116,7 +119,7 @@ export const getCommentsForPostBySlug = async (
 
 export const getPostListByAuthor = async (
   fetch: Function,
-  author: string,
+  username: string,
   after: string | null = null
 ): Promise<PostListByAuthorResponse> => {
   const response = await (
@@ -128,7 +131,7 @@ export const getPostListByAuthor = async (
       body: JSON.stringify({
         query: `
             query PostsByAuthor {
-                posts(where: {authorName: "${decodeURI(author)}"}, first: ${MAX_PER_FETCH}, after: "${after}") {
+                posts(where: {authorName: "${decodeURI(username)}"}, first: ${MAX_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -137,17 +140,26 @@ export const getPostListByAuthor = async (
                         }
                     }
                 }
+                users(where: {nicename: "${decodeURI(username)}"}) {
+                    nodes {
+                        name
+                    }
+                }
             }
             `
       })
     })
   ).json();
   if (response.data.posts.edges.length === 0) throw error(404, "Not found");
+  let displayName = response.data.users.nodes[0].name;
   let pageInfo = response.data.posts.pageInfo;
   let posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
   return {
     posts,
-    author,
+    author: {
+      displayName,
+      username
+    },
     endCursor: pageInfo.endCursor,
     hasNextPage: pageInfo.hasNextPage
   };
@@ -392,6 +404,7 @@ export const login = async (
 					refreshToken
 					user {
 						name
+						nicename
 					}
                 }
               }
@@ -405,7 +418,7 @@ export const login = async (
   if (response.data.login) {
     const loginData: AuthInfo = {
       displayName: response.data.login.user.name,
-      username: response.data.login.user.username,
+      username: response.data.login.user.nicename,
       authToken: response.data.login.authToken,
       refreshToken: response.data.login.refreshToken
     };

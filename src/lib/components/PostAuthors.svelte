@@ -10,7 +10,7 @@
       <span class="material-icons inline-icon">history_edu</span>
       <span class="author-list">
         {#each post.coAuthors as author}
-          <a href="/authors/{encodeURI(author)}">{author}</a>
+          <a href="/authors/{encodeURI(author.username)}">{author.displayName}</a>
         {/each}
       </span>
     </div>

@@ -4,12 +4,17 @@ export interface Hierarchical {
   children: this[];
 }
 
+export interface Author {
+  displayName: string;
+  username: string;
+}
+
 export interface PostMeta {
   title: string;
   slug: string;
   date: Date;
-  author: string;
-  coAuthors: string[];
+  author: Author;
+  coAuthors: Author[];
   categories: Category[];
   customBanner: string;
   featuredImage: string;
@@ -53,14 +58,14 @@ export interface Tag {
 
 export interface Comment extends Hierarchical {
   date: Date;
-  author: string;
+  author: Author;
   content: string;
 }
 
 export interface CommentMeta {
   _id: number;
   date: Date;
-  author: string;
+  author: Author;
   postSlug: string;
   postTitle: string;
 }
@@ -79,7 +84,7 @@ export interface PostListBySearchResponse extends PostListResponse {
 }
 
 export interface PostListByAuthorResponse extends PostListResponse {
-  author: string;
+  author: Author;
 }
 
 export interface PostListByCategoryResponse extends PostListResponse {

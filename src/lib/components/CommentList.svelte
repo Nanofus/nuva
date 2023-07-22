@@ -17,33 +17,10 @@
         <a href="/posts/{comment.postSlug}#comment-{comment._id}">{comment.postTitle}</a>
       </td>
       <td class="date">{comment.date.toLocaleDateString(LOCALE)}</td>
-      <td class="authors"><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td>
+      <td class="authors"><a href="/authors/{encodeURI(comment.author.username)}">{comment.author.displayName}</a></td>
     </tr>
   {/each}
 </table>
 
 <style lang="scss">
-  .comment-count {
-    text-align: center;
-    font-size: 1rem;
-  }
-
-  @media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
-    .date {
-      text-align: right;
-    }
-
-    .mobile-unfriendly {
-      color: var(--hover-dark);
-
-      a, .categories {
-        color: var(--hover-dark);
-      }
-    }
-  }
-
-  .categories {
-    color: var(--text-light-secondary);
-    font-style: italic;
-  }
 </style>
