@@ -74,6 +74,7 @@ main {
 article {
   @include article-width;
   width: 100%;
+  text-align: justify;
 }
 
 .full-width, .max-width {
@@ -256,7 +257,8 @@ h3 {
 h4 {
   font-family: var(--header-secondary-font-family);
   font-size: var(--font-size-h4);
-  margin: 0.625rem 0;
+  margin: 2.5rem 0 0.625rem;
+  text-align: left;
 }
 
 a, a:link, a:visited {
@@ -279,7 +281,11 @@ pre {
 }
 
 p {
-  text-align: justify;
+  text-align: inherit;
+}
+
+em em, em i, i em, i i {
+  font-style: normal;
 }
 
 code {
