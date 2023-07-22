@@ -10,6 +10,7 @@ const config = {
 	kit: {
 		adapter: adapter({
 			runtime: 'edge',
+			regions: ['fra1'],
 		})
 	}
 };
