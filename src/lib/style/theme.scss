@@ -74,6 +74,7 @@ main {
 article {
   @include article-width;
   width: 100%;
+  text-align: justify;
 }
 
 .full-width, .max-width {
@@ -281,10 +282,6 @@ pre {
 
 p {
   text-align: inherit;
-}
-
-article {
-  text-align: justify;
 }
 
 em em, em i, i em, i i {
