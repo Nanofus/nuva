@@ -38,7 +38,6 @@ main {
   border-bottom-right-radius: var(--border-radius);
   height: auto;
   min-height: calc(100vh - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin));
-  overflow-x: hidden;
 }
 
 // Mobile screen size
