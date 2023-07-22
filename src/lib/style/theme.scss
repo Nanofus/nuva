@@ -38,6 +38,7 @@ main {
   border-bottom-right-radius: var(--border-radius);
   height: auto;
   min-height: calc(100vh - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin));
+  overflow-x: hidden;
 }
 
 // Mobile screen size
@@ -374,24 +375,60 @@ img {
 
 /* Columns */
 
-.columns {
+@mixin scroll-hint-shadow {
+  // The mighty scroll hinting shadow
+  background: /* Cover left */
+          linear-gradient(to right,
+                  var(--background-light) 30%,
+                  rgba(255, 255, 255, 0)
+          ) center left,
+            /* Cover right */
+          linear-gradient(to left,
+                  var(--background-light) 70%,
+                  rgba(255, 255, 255, 0)
+          ) center right,
+            /* Shadow left */
+          radial-gradient(farthest-side at 0 50%,
+                  var(--scroll-hinting-shadow-color),
+                  rgba(0, 0, 0, 0)
+          ) center left,
+            /* Shadow right */
+          radial-gradient(farthest-side at 100% 50%,
+                  var(--scroll-hinting-shadow-color),
+                  rgba(0, 0, 0, 0)
+          ) center right;
+
+  background-repeat: no-repeat;
+  background-size: 6rem 100%, 6rem 100%, 1.5rem 100%, 1.5rem 100%;
+  background-attachment: local, local, scroll, scroll;
+}
+
+.grid-layout {
   @include full-width;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: inline-grid;
+  grid-template-columns: auto auto;
 
-  .column {
-    flex: 1;
+  .grid-left, .grid-middle, .grid-right {
     max-width: var(--article-max-width);
     margin-left: var(--column-horizontal-margin);
     margin-right: var(--column-horizontal-margin);
+  }
+
+  .grid-left {
+    grid-column: 1;
+  }
+  .grid-middle {
+    grid-column: 2;
+  }
+  .grid-right {
+    grid-column: 3;
   }
 }
 
 // Page is wider than white area
 @media screen and (min-width: 76rem) { // var(--max-page-width)
-  .columns {
+  .grid-layout {
     margin-left: calc((100vw - var(--page-max-width)) / 2);
     max-width: calc(var(--page-max-width) + 0.5px); // 0.5px fixes a 1px rounding error
   }
@@ -399,36 +436,12 @@ img {
 
 // Mobile screen size
 @media screen and (max-width: 41rem) { // var(--mobile-threshold)
-  .columns {
+  .grid-layout, .mobile-overflow {
+    @include full-width;
     overflow-x: scroll;
+    @include scroll-hint-shadow;
 
-    // The mighty scroll hinting shadow
-    background: /* Cover left */
-            linear-gradient(to right,
-                    var(--background-light) 30%,
-                    rgba(255, 255, 255, 0)
-            ) center left,
-              /* Cover right */
-            linear-gradient(to left,
-                    var(--background-light) 70%,
-                    rgba(255, 255, 255, 0)
-            ) center right,
-              /* Shadow left */
-            radial-gradient(farthest-side at 0 50%,
-                    var(--scroll-hinting-shadow-color),
-                    rgba(0, 0, 0, 0)
-            ) center left,
-              /* Shadow right */
-            radial-gradient(farthest-side at 100% 50%,
-                    var(--scroll-hinting-shadow-color),
-                    rgba(0, 0, 0, 0)
-            ) center right;
-
-    background-repeat: no-repeat;
-    background-size: 6rem 100%, 6rem 100%, 1.5rem 100%, 1.5rem 100%;
-    background-attachment: local, local, scroll, scroll;
-
-    .column {
+    .grid-left, .grid-middle, .grid-right {
       min-width: calc(var(--article-max-width) / 2);
       margin-left: var(--mobile-horizontal-padding);
       margin-right: var(--mobile-horizontal-padding);
