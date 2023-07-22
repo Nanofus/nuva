@@ -160,11 +160,13 @@ article {
   margin-top: var(--vertical-separation-margin);
   margin-bottom: var(--vertical-separation-margin);
 }
+
 .vertically-separated-top {
-    margin-top: var(--vertical-separation-margin);
+  margin-top: var(--vertical-separation-margin);
 }
+
 .vertically-separated-bottom {
-    margin-bottom: var(--vertical-separation-margin);
+  margin-bottom: var(--vertical-separation-margin);
 }
 
 .author-list > a:not(:last-child) {
@@ -172,6 +174,21 @@ article {
     content: ",";
     text-decoration: none;
     margin-right: 0.6rem;
+  }
+}
+
+.anchor-highlight {
+  background-color: var(--info);
+  animation: anchor-fade-out ease-out 5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes anchor-fade-out {
+  0% {
+    background-color: var(--info);
+  }
+  100% {
+    background-color: var(--comment-background); // TODO: What of other anchor types?
   }
 }
 

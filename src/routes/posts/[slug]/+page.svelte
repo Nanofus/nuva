@@ -11,6 +11,15 @@
   export let data: Post;
   let noAccess = false;
 
+  const scrollToAnchor = () => {
+    const { hash } = document.location;
+    if (!hash) return;
+    const scrollTo = document.getElementById(hash.slice(1)) as HTMLElement;
+    scrollTo.classList.add("anchor-highlight");
+    if (scrollTo)
+      scrollTo.scrollIntoView();
+  };
+
   onMount(() => {
     if (!data.content) {
       noAccess = true;
@@ -22,6 +31,7 @@
         fullWidth: data.fullWidth
       });
     }
+    scrollToAnchor();
   });
 
   onDestroy(() => {
