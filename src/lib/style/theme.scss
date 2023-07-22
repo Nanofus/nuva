@@ -178,14 +178,14 @@ article {
 }
 
 .anchor-highlight {
-  background-color: var(--info);
+  background-color: var(--highlight);
   animation: anchor-fade-out ease-out 5s;
   animation-fill-mode: forwards;
 }
 
 @keyframes anchor-fade-out {
   0% {
-    background-color: var(--info);
+    background-color: var(--highlight);
   }
   100% {
     background-color: var(--comment-background); // TODO: What of other anchor types?
