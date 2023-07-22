@@ -401,12 +401,12 @@ img {
     // The mighty scroll hinting shadow
     background: /* Cover left */
             linear-gradient(to right,
-                    var(--background-light),
+                    var(--background-light) 30%,
                     rgba(255, 255, 255, 0)
             ) center left,
               /* Cover right */
             linear-gradient(to left,
-                    var(--background-light),
+                    var(--background-light) 70%,
                     rgba(255, 255, 255, 0)
             ) center right,
               /* Shadow left */
