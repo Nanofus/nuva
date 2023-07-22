@@ -239,7 +239,7 @@ Musicmancer 2023 Edition
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100vw;
+    width: var(--full-width);
     color: var(--text-dark);
     background-color: var(--accent-dark);
 

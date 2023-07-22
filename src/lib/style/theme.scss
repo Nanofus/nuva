@@ -37,7 +37,7 @@ main {
   border-bottom-left-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
   height: auto;
-  min-height: calc(100vh - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin));
+  min-height: calc(var(--full-height) - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin));
 }
 
 // Mobile screen size
@@ -60,8 +60,8 @@ main {
 @mixin full-width {
   position: relative;
   left: calc(-50vw + 50%);
-  width: 100vw;
-  max-width: 100vw;
+  width: var(--full-width);
+  max-width: var(--full-width);
   overflow: hidden;
 }
 
@@ -141,7 +141,7 @@ article {
 // Screen is larger than white area
 @media screen and (min-width: 76rem) { // var(--max-page-width)
   .full-width, .background:not(.max) {
-    margin-left: calc((100vw - var(--page-max-width)) / 2);
+    margin-left: calc((var(--full-width) - var(--page-max-width)) / 2);
     max-width: calc(var(--page-max-width) + 0.5px); // 0.5px fixes a 1px rounding error
   }
 
@@ -434,7 +434,7 @@ img {
 // Page is wider than white area
 @media screen and (min-width: 76rem) { // var(--max-page-width)
   .grid-layout {
-    margin-left: calc((100vw - var(--page-max-width)) / 2);
+    margin-left: calc((var(--full-width) - var(--page-max-width)) / 2);
     max-width: calc(var(--page-max-width) + 0.5px); // 0.5px fixes a 1px rounding error
   }
 }
