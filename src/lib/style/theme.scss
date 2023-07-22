@@ -439,7 +439,9 @@ img {
     @include full-width;
     overflow-x: scroll;
     @include scroll-hint-shadow;
+  }
 
+  .grid-layout {
     .grid-left, .grid-middle, .grid-right {
       min-width: calc(var(--article-max-width) / 2);
       margin-left: var(--mobile-horizontal-padding);
