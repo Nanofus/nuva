@@ -21,6 +21,7 @@ Musicmancer 2023 Edition
   let paused = true;
   let muted = false;
   let fadeInProgress = false;
+  let newPlayerAfterFade;
   let volume = 0;
   let audioDataArray: AudioData[] = [];
 
@@ -40,21 +41,23 @@ Musicmancer 2023 Edition
   const play = (index: number) => {
     const newAudioData = audioDataArray[index];
     if (currentAudioElement == newAudioData.audioElement) {
-      paused = !paused;
+      if (paused) unpause();
+      else pause();
       return;
     }
     if (newAudioData.isEffect) {
       newAudioData.audioElement.play();
     } else {
       // Play the selected audio file
-      currentAudioElement = newAudioData.audioElement;
-      currentAudioElement.currentTime = 0;
-      currentAudioElement.volume = volume / 100;
+      newAudioData.audioElement.currentTime = 0;
+      newAudioData.audioElement.volume = volume / 100;
+      newPlayerAfterFade = newAudioData.audioElement;
       generatedElements.forEach(e => e.disabled = true);
       // Others are faded out by the fadeout interval
       const waitUntilOthersFadedInterval = setInterval(() => {
         fadeInProgress = true;
         if (!othersStillPlaying()) {
+          currentAudioElement = newPlayerAfterFade;
           paused = false;
           fadeInProgress = false;
           (<HTMLAudioElement>currentAudioElement).play();
@@ -126,22 +129,22 @@ Musicmancer 2023 Edition
   // Save volume
   $: volume && saveSetting("volume", volume);
 
-  // Pause and mute
+  // Mute
   $: currentAudioElement && (muted ? currentAudioElement.volume = 0 : currentAudioElement.volume = volume / 100);
 
   const unpause = () => {
     paused = false;
     currentAudioElement && currentAudioElement.play();
-  }
+  };
 
   const pause = () => {
     paused = true;
     currentAudioElement && currentAudioElement.pause();
-  }
+  };
 
   const fadeOutInterval = setInterval(() => {
     audioDataArray.map((audioData) => {
-      if (audioData.isEffect || audioData.audioElement === currentAudioElement) return;
+      if (audioData.isEffect || audioData.audioElement === newPlayerAfterFade) return;
       if (audioData.audioElement.volume > 0) {
         let newVolume = audioData.audioElement.volume - (0.001 * MUSIC_FADE_SPEED);
         if (newVolume < 0) newVolume = 0;
@@ -155,7 +158,7 @@ Musicmancer 2023 Edition
 
   const othersStillPlaying = () => {
     return audioDataArray.filter((audioData) => {
-      return audioData.audioElement !== currentAudioElement
+      return audioData.audioElement !== newPlayerAfterFade
         && !audioData.isEffect
         && !audioData.audioElement.paused;
     }).length > 0;
@@ -223,6 +226,7 @@ Musicmancer 2023 Edition
     &:hover {
       background-color: var(--hover-dark);
       cursor: pointer;
+
       &:disabled {
         cursor: not-allowed;
       }
