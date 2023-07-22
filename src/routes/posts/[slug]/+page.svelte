@@ -15,7 +15,7 @@
     const { hash } = document.location;
     if (!hash) return;
     const scrollTo = document.getElementById(hash.slice(1)) as HTMLElement;
-    scrollTo.classList.add("anchor-highlight");
+    if (hash.indexOf("#comment-") === 0) scrollTo.classList.add("anchor-highlight");
     if (scrollTo)
       scrollTo.scrollIntoView();
   };
