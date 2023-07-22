@@ -24,6 +24,7 @@
     .previous, .next {
       display: flex;
       flex-direction: row;
+
       > * {
         margin: 0 0.2rem;
       }

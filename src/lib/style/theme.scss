@@ -368,6 +368,20 @@ img {
   }
 }
 
+/* Columns */
+
+.columns {
+  max-width: var(--page-max-width);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .column {
+    flex: 1;
+  }
+}
+
 /* Page transitions */
 
 .full-page-loader {

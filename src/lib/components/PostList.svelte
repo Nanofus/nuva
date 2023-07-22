@@ -4,7 +4,7 @@
 
   export let posts: PostMeta[];
 
-  let parseCategories = (categories: Category[]) => {
+  const parseCategories = (categories: Category[]) => {
     categories = categories.filter(c => c.slug !== "rope");
     if (categories.length === 0) return "";
     return `– ${categories.map(c => c.name).join(", ")}`;

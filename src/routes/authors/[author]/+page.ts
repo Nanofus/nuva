@@ -1,5 +1,5 @@
 import { error, type Load } from "@sveltejs/kit";
-import { getPostListByAuthor, getPostListByCategory } from "$lib/database";
+import { getPostListByAuthor } from "$lib/database";
 import type { PostListByAuthorResponse } from "$lib/types";
 
 export const load: Load = async ({ fetch, params }): Promise<PostListByAuthorResponse> => {

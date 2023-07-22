@@ -5,7 +5,6 @@
   import Button from "$lib/components/reusable/Button.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { filterExcludedCategories, getPageTitle, getPageUrl } from "$lib/util";
-  import { CATEGORIES_EXCLUDED_FROM_ALL_POSTS } from "$lib/config";
 
   export let data: PostListResponse;
   let fetching = false;

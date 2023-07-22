@@ -36,7 +36,7 @@ Musicmancer 2023 Edition
     clearInterval(fadeOutInterval);
   });
 
-  let play = (index: number) => {
+  const play = (index: number) => {
     const newAudioData = audioDataArray[index];
     if (currentAudioElement == newAudioData.audioElement) {
       paused = !paused;
@@ -55,7 +55,7 @@ Musicmancer 2023 Edition
     }
   };
 
-  let initializeAudioElements = () => {
+  const initializeAudioElements = () => {
     let autoIndex = 0;
     let totalIndex = 0;
     const postContent = document.querySelector("#post-content");
@@ -87,7 +87,7 @@ Musicmancer 2023 Edition
     });
   };
 
-  let createAudioButton = (audioElement: HTMLAudioElement, index: number) => {
+  const createAudioButton = (audioElement: HTMLAudioElement, index: number) => {
     const audioButton = document.createElement("button");
     generatedElements.push(audioButton);
     audioButton.classList.add("audio-button", `index-${index}`);
@@ -99,14 +99,14 @@ Musicmancer 2023 Edition
   // Update the seek bar and current time as the audio plays
   let currentTime: HTMLTimeElement;
   let seekBar: HTMLInputElement;
-  let seekInterval = setInterval(() => {
+  const seekInterval = setInterval(() => {
     if (currentAudioElement) {
       seekBar.value = String(Math.floor(1000 * currentAudioElement.currentTime));
       currentTime.innerHTML = String(formatSecondsToMMSS(currentAudioElement.currentTime));
     }
   }, 100);
   // Use the seek bar to seek the audio
-  let handleSeek = (input) => {
+  const handleSeek = (input) => {
     currentAudioElement && (currentAudioElement.currentTime = input.target.value / 1000);
   };
 
@@ -120,7 +120,7 @@ Musicmancer 2023 Edition
   $: currentAudioElement && (paused ? currentAudioElement.pause() : currentAudioElement.play());
   $: currentAudioElement && (muted ? currentAudioElement.volume = 0 : currentAudioElement.volume = volume / 100);
 
-  let fadeOutInterval = setInterval(() => {
+  const fadeOutInterval = setInterval(() => {
     audioDataArray.map((audioData) => {
       if (audioData.isEffect || audioData.audioElement === currentAudioElement) return;
       if (audioData.audioElement.volume > 0) {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getPostListByCategory } from "$lib/database";
-  import type { PostListByAuthorResponse, PostListByCategoryResponse } from "$lib/types";
+  import type { PostListByAuthorResponse } from "$lib/types";
   import PostList from "$lib/components/PostList.svelte";
   import Button from "$lib/components/reusable/Button.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";

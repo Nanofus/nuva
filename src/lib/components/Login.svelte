@@ -22,7 +22,7 @@
 
   $: loggedIn ? userDisplayName = <string>getAuthInfo()?.displayName : userDisplayName = "";
 
-  let handleLogin = async () => {
+  const handleLogin = async () => {
     if (!usernameInput || !passwordInput) {
       toast.push("Täytä molemmat kentät", toastThemes.error);
       return;

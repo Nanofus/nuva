@@ -3,7 +3,8 @@ import {
   BANNER_COUNT,
   BASE_PATH,
   CATEGORIES_EXCLUDED_FROM_ALL_POSTS,
-  DEFAULT_VOLUME, GLOBAL_OBJECT_NAME,
+  DEFAULT_VOLUME,
+  GLOBAL_OBJECT_NAME,
   LOCALSTORAGE_SETTINGS_KEY,
   SITE_NAME,
   SITE_NAME_DELIMITER
@@ -62,21 +63,21 @@ export const objectsToHierarchy = (arr: Hierarchical[]) => {
   return tree;
 };
 
-export let getPageTitle = (title: string) => {
+export const getPageTitle = (title: string) => {
   return title ? `${title} ${SITE_NAME_DELIMITER} ${SITE_NAME}` : SITE_NAME;
 };
 
-export let getPageUrl = (slug: string) => {
+export const getPageUrl = (slug: string) => {
   return `${BASE_PATH}/${slug}`;
 };
 
-export let formatSecondsToMMSS = (seconds: number) => {
+export const formatSecondsToMMSS = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
   const secondsRemainder = Math.floor(seconds % 60);
   return `${minutes}:${secondsRemainder < 10 ? "0" : ""}${secondsRemainder}`;
 };
 
-export let getRandomBannerUrl = (seed = 0) => {
+export const getRandomBannerUrl = (seed = 0) => {
   return `url("/images/banners/banner-${((new Date().getMinutes() + seed) % BANNER_COUNT) + 1}.png")`;
 };
 
@@ -93,7 +94,7 @@ export const cleanGlobalScope = () => {
   delete window[GLOBAL_OBJECT_NAME];
 };
 
-export let createBaseSettings = () => {
+export const createBaseSettings = () => {
   if (browser && !localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)) {
     localStorage.setItem(LOCALSTORAGE_SETTINGS_KEY, JSON.stringify({
       volume: DEFAULT_VOLUME
@@ -101,7 +102,7 @@ export let createBaseSettings = () => {
   }
 };
 
-export let saveSetting = (key: string, value: any) => {
+export const saveSetting = (key: string, value: any) => {
   if (browser) {
     const settings = JSON.parse(<string>localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY));
     settings[key] = value;
@@ -109,7 +110,7 @@ export let saveSetting = (key: string, value: any) => {
   }
 };
 
-export let loadSetting = (key: string) => {
+export const loadSetting = (key: string) => {
   if (browser) {
     if (localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)) {
       return JSON.parse(<string>localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY))[key];

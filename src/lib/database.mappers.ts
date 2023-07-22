@@ -51,10 +51,10 @@ export const dataToCommentMetas = (nodes: any): CommentMeta[] => {
       author: comment.author.node.name,
       postSlug: comment.commentedOn.node.slug,
       postTitle: comment.commentedOn.node.title,
-      _id: comment.databaseId,
+      _id: comment.databaseId
     };
   });
-}
+};
 
 export const dataToPost = (data: any): Post | null => {
   if (!data) return null;
@@ -105,7 +105,7 @@ export const dataToPost = (data: any): Post | null => {
 };
 
 export const dataToCategories = (data: any): Category[] => {
-  let categories = data.map((category: any) => {
+  const categories = data.map((category: any) => {
     return {
       slug: category.slug,
       name: category.name,
@@ -114,8 +114,7 @@ export const dataToCategories = (data: any): Category[] => {
       _parentId: category.parentDatabaseId
     };
   });
-  categories = objectsToHierarchy(categories) as Category[];
-  return categories;
+  return objectsToHierarchy(categories) as Category[];
 };
 
 export const dataToTags = (data: any): Tag[] => {

@@ -30,7 +30,7 @@
   };
 </script>
 
-<div id="comment-{comment._id}" class="comment {isHighlighted() ? 'highlighted' : ''}">
+<div class="comment {isHighlighted() ? 'highlighted' : ''}" id="comment-{comment._id}">
   <header class="comment-header">
     <span class="comment-author">
       {#if isHighlighted()}<span class="material-icons inline-icon">history_edu</span>{/if} {comment.author}</span>
