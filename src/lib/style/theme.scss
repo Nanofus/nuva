@@ -371,7 +371,7 @@ img {
 /* Columns */
 
 .columns {
-  max-width: var(--page-max-width);
+  @include full-width;
 
   display: flex;
   flex-direction: row;
@@ -379,6 +379,56 @@ img {
 
   .column {
     flex: 1;
+    max-width: var(--article-max-width);
+    margin-left: var(--column-horizontal-margin);
+    margin-right: var(--column-horizontal-margin);
+  }
+}
+
+// Page is wider than white area
+@media screen and (min-width: 76rem) { // var(--max-page-width)
+  .columns {
+    margin-left: calc((100vw - var(--page-max-width)) / 2);
+    max-width: calc(var(--page-max-width) + 0.5px); // 0.5px fixes a 1px rounding error
+  }
+}
+
+// Mobile screen size
+@media screen and (max-width: 41rem) { // var(--mobile-threshold)
+  .columns {
+    overflow-x: scroll;
+
+    // The mighty scroll hinting shadow
+    background: /* Cover left */
+            linear-gradient(to right,
+                    var(--background-light),
+                    rgba(255, 255, 255, 0)
+            ) center left,
+              /* Cover right */
+            linear-gradient(to left,
+                    var(--background-light),
+                    rgba(255, 255, 255, 0)
+            ) center right,
+              /* Shadow left */
+            radial-gradient(farthest-side at 0 50%,
+                            rgba(0, 0, 0, 0.3),
+                            rgba(0, 0, 0, 0)
+            ) center left,
+              /* Shadow right */
+            radial-gradient(farthest-side at 100% 50%,
+                            rgba(0, 0, 0, 0.3),
+                            rgba(0, 0, 0, 0)
+            ) center right;
+
+    background-repeat: no-repeat;
+    background-size: 6rem 100%, 6rem 100%, 1.5rem 100%, 1.5rem 100%;
+    background-attachment: local, local, scroll, scroll;
+
+    .column {
+      min-width: calc(var(--article-max-width) / 2);
+      margin-left: var(--mobile-horizontal-padding);
+      margin-right: var(--mobile-horizontal-padding);
+    }
   }
 }
 
