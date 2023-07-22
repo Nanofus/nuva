@@ -194,15 +194,18 @@ article {
 /* Table */
 
 table {
-  width: var(--article-max-width);
+  table-layout: auto;
+  text-align: left;
+  width: 100%;
+  max-width: var(--article-max-width);
+
+  td {
+    min-width: 2rem;
+  }
 
   .table-header {
     font-weight: bold;
   }
-}
-
-td:not(:first-child) {
-  padding-left: 1rem;
 }
 
 @media screen and (max-width: 41rem) { // var(--mobile-threshold)
@@ -268,6 +271,7 @@ a:hover, a:active {
 }
 
 pre {
+  font-family: var(--body-text-font-family);
   background-color: var(--hover-dark);
   white-space: pre-wrap;
   overflow-wrap: break-word;
@@ -411,13 +415,13 @@ img {
             ) center right,
               /* Shadow left */
             radial-gradient(farthest-side at 0 50%,
-                            rgba(0, 0, 0, 0.3),
-                            rgba(0, 0, 0, 0)
+                    var(--scroll-hinting-shadow-color),
+                    rgba(0, 0, 0, 0)
             ) center left,
               /* Shadow right */
             radial-gradient(farthest-side at 100% 50%,
-                            rgba(0, 0, 0, 0.3),
-                            rgba(0, 0, 0, 0)
+                    var(--scroll-hinting-shadow-color),
+                    rgba(0, 0, 0, 0)
             ) center right;
 
     background-repeat: no-repeat;
@@ -457,6 +461,36 @@ img {
 }
 
 /* User inputs */
+
+button {
+  align-self: center;
+  width: fit-content;
+  transition: var(--unfocus-speed) ease-in-out;
+  background: var(--accent-dark);
+  color: var(--main-nav-color);
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--border-radius);
+  border: 0;
+  font-family: var(--body-text-font-family);
+  font-size: 1rem;
+
+  > * {
+    user-select: none;
+  }
+
+  .icon {
+    display: inline-block;
+    font-size: 1rem;
+    position: relative;
+    top: 0.1rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: var(--accent-light);
+    transition: 0s;
+  }
+}
 
 .editor, .editor-wrapper {
   font-size: 0.9rem;

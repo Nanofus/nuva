@@ -8,7 +8,7 @@
 <table>
   <tr class="table-header">
     <td class="link">Postaus</td>
-    <td class="date">Kommentoitu</td>
+    <td class="date">Päiväys</td>
     <td class="authors">Kommentoija</td>
   </tr>
   {#each comments as comment}
