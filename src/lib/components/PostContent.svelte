@@ -54,7 +54,6 @@
   });
 
   onDestroy(() => {
-    if (browser && window[GLOBAL_OBJECT_NAME].destroyPost) window[GLOBAL_OBJECT_NAME].destroyPost();
     cleanGlobalScope();
   });
 
