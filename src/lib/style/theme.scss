@@ -287,6 +287,10 @@ article {
   text-align: justify;
 }
 
+em em, em i, i em, i i {
+  font-style: normal;
+}
+
 code {
   font-family: var(--code-font-family);
   font-size: 0.9rem;
