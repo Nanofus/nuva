@@ -37,7 +37,7 @@
     font-size: 1rem;
   }
 
-  @media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+  @media screen and (max-width: 41rem) { // var(--mobile-threshold)
     .date {
       text-align: right;
     }

@@ -49,7 +49,7 @@
 /* Images */
 
 :root {
-  --background-image-default: url("/images/bg.webp");
+  //--background-image-default: url("/images/bg.webp");
   --hr-background-image: url("/images/hrbg.png");
 }
 
@@ -60,6 +60,8 @@
   --page-max-width: 76rem; // ~ 1200px
   --page-min-width: 22rem; // ~ 350px
   --article-max-width: 38rem;
+  --mobile-threshold: 41rem;
+  --compact-navigation-threshold: 54rem;
   --navigation-height: 3rem;
   --navigation-logo-size: 1.25rem;
   --footer-height: 5rem;

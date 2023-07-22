@@ -50,6 +50,7 @@ export const objectsToHierarchy = (arr: Hierarchical[]) => {
 export let getPageTitle = (title: string) => {
   return title ? `${title} ${SITE_NAME_DELIMITER} ${SITE_NAME}` : SITE_NAME;
 };
+
 export let getPageUrl = (slug: string) => {
   return `${BASE_PATH}/${slug}`;
 };

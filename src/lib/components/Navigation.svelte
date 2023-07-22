@@ -160,7 +160,7 @@
     }
   }
 
-  @media screen and (max-width: 54rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+  @media screen and (max-width: 54rem) { // var(--compact-navigation-threshold)
     .nav-wrapper {
       display: block;
     }

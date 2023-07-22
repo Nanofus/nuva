@@ -10,7 +10,6 @@ body {
   font-family: var(--body-text-font-family);
   color: var(--text-light);
   background: var(--background-dark);
-  // background: var(--background-image-default) repeat top center; TODO: Default background maybe a bit too busy?
 }
 
 html {
@@ -38,11 +37,11 @@ main {
   border-bottom-left-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
   height: auto;
-  min-height: calc(100vh - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin)); // TODO: Cleanup this monstrosity
+  min-height: calc(100vh - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin));
 }
 
 // Mobile screen size
-@media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+@media screen and (max-width: 41rem) { // var(--mobile-threshold)
   main {
     padding-left: var(--mobile-horizontal-padding);
     padding-right: var(--mobile-horizontal-padding);
@@ -50,7 +49,7 @@ main {
 }
 
 // Screen is narrower than white area
-@media screen and (max-width: 76rem) { // TODO: Fix hardcoded value
+@media screen and (max-width: 76rem) { // var(--max-page-width)
   main {
     border-radius: 0;
   }
@@ -131,7 +130,7 @@ article {
 }
 
 // Mobile screen size
-@media screen and (max-width: 41rem) {
+@media screen and (max-width: 41rem) { // var(--mobile-threshold)
   .background > * {
     padding-left: var(--mobile-horizontal-padding);
     padding-right: var(--mobile-horizontal-padding);
@@ -139,7 +138,7 @@ article {
 }
 
 // Screen is larger than white area
-@media screen and (min-width: 76rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+@media screen and (min-width: 76rem) { // var(--max-page-width)
   .full-width, .background:not(.max) {
     margin-left: calc((100vw - var(--page-max-width)) / 2);
     max-width: calc(var(--page-max-width) + 0.5px); // 0.5px fixes a 1px rounding error
@@ -188,7 +187,7 @@ article {
     background-color: var(--highlight);
   }
   100% {
-    background-color: var(--comment-background); // TODO: What of other anchor types?
+    background-color: var(--comment-background); // Currently only used for comments, so using comment background
   }
 }
 
@@ -206,7 +205,7 @@ td:not(:first-child) {
   padding-left: 1rem;
 }
 
-@media screen and (max-width: 41rem) {
+@media screen and (max-width: 41rem) { // var(--mobile-threshold)
   table {
     width: 100%;
   }
@@ -352,7 +351,7 @@ img {
 }
 
 // Mobile mode
-@media screen and (max-width: 41rem) { // TODO: Fix hardcoded value, media queries don't support calc() or var()
+@media screen and (max-width: 41rem) { // var(--mobile-threshold)
   h1 {
     font-size: 2.5rem;
   }

@@ -117,5 +117,5 @@ export const QUERIES = {
                 databaseId
                 parentDatabaseId
             }
-        }` // TODO: If >100 comments, fetch more
+        }`
 };

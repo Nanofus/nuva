@@ -14,8 +14,10 @@ import {
 import type {
   AuthInfo,
   CategoryListResponse,
-  Comment, CommentMeta,
-  Post, PostListByAuthorResponse,
+  Comment,
+  CommentMeta,
+  Post,
+  PostListByAuthorResponse,
   PostListByCategoryResponse,
   PostListBySearchResponse,
   PostListByTagResponse,
@@ -62,7 +64,7 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
     })
   ).json();
   return dataToCommentMetas(response.data.comments.nodes);
-}
+};
 
 export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | null> => {
   const authToken = browser ? getAuthInfo()?.authToken : null;
@@ -151,7 +153,7 @@ export const getPostListByAuthor = async (
     endCursor: pageInfo.endCursor,
     hasNextPage: pageInfo.hasNextPage
   };
-}
+};
 
 export const getPostListByTag = async (
   fetch: Function,
@@ -382,26 +384,23 @@ export const login = async (
       },
       body: JSON.stringify({
         query: `
-            mutation LoginUser {
-                login(input: {
-						clientMutationId: "LoginUser"
-						username: "${username}"
-						password: "${password}"
-				}) {
-					authToken
-					refreshToken
-					user {
-						name
-					}
-                }
-              }
-            `
+        mutation LoginUser {
+            login(input: {
+						    clientMutationId: "LoginUser"
+						    username: "${username}"
+						    password: "${password}"
+				    }) {
+					      authToken
+					      refreshToken
+					      user {
+						        name
+					      }
+            }
+        }`
       })
     })
   ).json();
-  response.errors?.forEach((error: any) => {
-    toast.push("Kirjautuminen epäonnistui.", toastThemes.error);
-  });
+  if (response.errors?.length > 0) toast.push("Kirjautuminen epäonnistui.", toastThemes.error);
   if (response.data.login) {
     const loginData: AuthInfo = {
       displayName: response.data.login.user.name,
