@@ -11,7 +11,7 @@
   export let post: Post;
 
   const setInitialLetter = () => {
-    if (browser && !navigator.userAgent.match(/firefox|fxios/i)) { // TODO: Remove this when Firefox supports initial-letter
+    if (browser && !navigator.userAgent.match(/firefox|fxios/i) && post.initialLetter) { // TODO: Remove this when Firefox supports initial-letter
       document.documentElement.style.setProperty("--initial-letter-size", "3.0");
       document.documentElement.style.setProperty("--initial-letter-padding", "0.5rem");
     }
@@ -51,13 +51,13 @@
     [].map.call(doc.getElementsByTagName("script"), (scriptTag: HTMLScriptElement) => {
       evaluateScripts(scriptTag.innerText);
     });
+
+    setInitialLetter();
   });
 
   onDestroy(() => {
     cleanGlobalScope();
   });
-
-  $: post?.initialLetter ? setInitialLetter() : null;
 </script>
 
 {#if post.styles}
