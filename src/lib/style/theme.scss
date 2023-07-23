@@ -204,6 +204,19 @@ table {
     min-width: 2rem;
   }
 
+  td {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
   .table-header {
     font-weight: bold;
   }
