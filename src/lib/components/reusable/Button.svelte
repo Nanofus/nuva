@@ -1,6 +1,6 @@
 <script lang="ts">
   export let icon: string | null = null;
-  export let disabled : boolean = false;
+  export let disabled: boolean = false;
 
   let button;
 </script>

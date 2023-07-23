@@ -6,7 +6,6 @@
   import { toast } from "@zerodevx/svelte-toast";
   import { cleanGlobalScope, toastThemes } from "$lib/util";
   import { initGlobalScope } from "$lib/util.js";
-  import { GLOBAL_OBJECT_NAME } from "$lib/config";
 
   export let post: Post;
 

@@ -4,7 +4,7 @@
   export let post: Post;
 </script>
 
-<div id="post-next-previous">
+<div id="previous-next-post">
   {#if post.previous}
     <div class="previous"><span class="material-icons inline-icon">arrow_back</span><a
       href="/posts/{post.previous.slug}">{post.previous.title}</a></div>
@@ -16,7 +16,7 @@
 </div>
 
 <style lang="scss">
-  #post-next-previous {
+  #previous-next-post {
     display: flex;
     justify-content: space-between;
     margin: 2rem 0;
