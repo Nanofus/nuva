@@ -34,6 +34,7 @@
 
   onMount(() => {
     if (browser) {
+      handleStickyMenu();
       document.addEventListener("scroll", handleStickyMenu);
       window.addEventListener("resize", handleStickyMenu);
       postOptions.subscribe(options => {
