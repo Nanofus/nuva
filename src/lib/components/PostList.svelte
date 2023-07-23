@@ -43,10 +43,10 @@
     }
 
     .mobile-unfriendly {
-      color: var(--hover-dark);
+      color: var(--hover);
 
       a, .categories {
-        color: var(--hover-dark);
+        color: var(--hover);
       }
     }
   }

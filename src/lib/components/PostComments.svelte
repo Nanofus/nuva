@@ -21,7 +21,7 @@
     <Comment on:commentSent={refreshComments} {post} {comment} />
   {/each}
   {#if !replyFormOpen && isLoggedIn()}
-    <a role="button" tabindex="0" on:click={() => replyFormOpen = true}>Kommentoi</a>
+    <a href="#" role="button" tabindex="0" on:click={() => replyFormOpen = true}>Kommentoi</a>
   {:else}
     <CommentForm on:commentSent={refreshComments} on:close={() => replyFormOpen = false} parent={0} postId={post._id}
                  isReply={false} />

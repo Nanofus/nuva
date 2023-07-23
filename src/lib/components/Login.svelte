@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getAuthInfo, login, logout } from "$lib/database";
+  import { login, logout } from "$lib/database";
   import { loginInfo } from "$lib/stores";
   import { onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
@@ -13,14 +13,11 @@
   let loggedIn: boolean | null = null;
   let passwordInput = "";
   let usernameInput = "";
-  let userDisplayName;
   let submitted = false;
 
   onMount(() => {
-    loginInfo.subscribe((loginInfo) => loggedIn = !!loginInfo);
+    loginInfo.subscribe(loginInfo => loggedIn = !!loginInfo);
   });
-
-  $: loggedIn ? userDisplayName = <string>getAuthInfo()?.displayName : userDisplayName = "";
 
   const handleLogin = async () => {
     if (!usernameInput || !passwordInput) {
@@ -40,7 +37,7 @@
       <p>Ei käytettävissä ilman JavaScriptia.</p>
     {/if}
   {:else if !loggedIn}
-    <Form vertical="true" on:submit={() => submitted = true}>
+    <Form vertical={true} on:submit={() => submitted = true}>
       <Input label="Käyttäjätunnus" name="username" bind:value={usernameInput} />
       <Input label="Salasana" name="password" type="password" bind:value={passwordInput} />
       {#if !submitted}

@@ -23,7 +23,7 @@
     background-position: center;
     background-size: cover;
     filter: grayscale(80%);
-    color: var(--main-nav-color);
+    color: var(--text-dark);
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.4);
     text-shadow: var(--banner-shadow);
     display: flex;
@@ -38,7 +38,7 @@
 
     .authors {
       font-style: italic;
-      color: var(--main-nav-color);
+      color: var(--text-dark);
     }
 
     &:hover {
@@ -46,7 +46,7 @@
     }
 
     a {
-      color: var(--main-nav-color);
+      color: var(--text-dark);
     }
 
     padding: 2rem;

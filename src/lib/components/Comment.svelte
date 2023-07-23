@@ -50,7 +50,7 @@
     <a target="_blank" href="https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c={comment._id}">Muokkaa</a>
   {/if}
   {#if !replyFormOpen && isLoggedIn()}
-    <a role="button" tabindex="0" on:click={() => replyFormOpen = true}>Vastaa</a>
+    <a href="#" role="button" tabindex="0" on:click={() => replyFormOpen = true}>Vastaa</a>
   {:else}
     <CommentForm on:commentSent={commentSent} on:close={() => (replyFormOpen = false)} parent={comment._id}
                  postId={post._id} isReply={true} />
@@ -65,7 +65,7 @@
     border-radius: var(--border-radius);
 
     &.highlighted {
-      border: var(--hover-dark) 0.1rem solid;
+      border: var(--hover) 0.1rem solid;
     }
   }
 

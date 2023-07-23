@@ -7,6 +7,7 @@ Musicmancer 2023 Edition
   import Button from "$lib/components/reusable/Button.svelte";
   import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util";
   import { DEFAULT_VOLUME, MUSIC_FADE_SPEED } from "$lib/config";
+  import type { ChangeEvent } from "react";
 
   interface AudioData {
     src: string;
@@ -21,7 +22,7 @@ Musicmancer 2023 Edition
   let paused = true;
   let muted = false;
   let fadeInProgress = false;
-  let newPlayerAfterFade;
+  let newPlayerAfterFade: HTMLAudioElement;
   let volume = 0;
   let audioDataArray: AudioData[] = [];
 
@@ -72,6 +73,7 @@ Musicmancer 2023 Edition
     let autoIndex = 0;
     let totalIndex = 0;
     const postContent = document.querySelector("#post-content");
+    if (!postContent) return;
     const audioElements = postContent.querySelectorAll("audio");
     // Add a div.audio-button element next to the audio elements
     audioElements.forEach((audioElement) => {
@@ -82,7 +84,7 @@ Musicmancer 2023 Edition
         audioSrc = musicUrlArray[autoIndex];
         autoIndex++;
       } else if (audioSrc[0] === "#") {
-        audioSrc = musicUrlArray[audioSrc.slice(1)];
+        audioSrc = musicUrlArray[parseInt(audioSrc.slice(1))];
       }
       audioElement.src = audioSrc;
       audioElement.volume = volume / 100;
@@ -119,7 +121,7 @@ Musicmancer 2023 Edition
     }
   }, 50);
   // Use the seek bar to seek the audio
-  const handleSeek = (input) => {
+  const handleSeek = (input: ChangeEvent) => {
     currentAudioElement && (currentAudioElement.currentTime = input.target.value / 1000);
   };
 
@@ -205,9 +207,9 @@ Musicmancer 2023 Edition
     display: block;
     width: 4rem;
     height: 4rem;
-    border: 1px solid var(--accent-dark);
+    border: 1px solid var(--accent);
     border-radius: 2rem;
-    box-shadow: var(--button-shadow);
+    box-shadow: var(--music-button-shadow);
     background: var(--background-light);
     color: var(--text-light);
     margin: auto;
@@ -220,11 +222,11 @@ Musicmancer 2023 Edition
 
     &:disabled {
       color: var(--text-light);
-      background-color: var(--hover-dark);
+      background-color: var(--hover);
     }
 
     &:hover {
-      background-color: var(--hover-dark);
+      background-color: var(--hover);
       cursor: pointer;
 
       &:disabled {
@@ -241,7 +243,7 @@ Musicmancer 2023 Edition
     left: 0;
     width: var(--full-width);
     color: var(--text-dark);
-    background-color: var(--accent-dark);
+    background-color: var(--accent);
 
     * {
       transition: var(--unfocus-speed) all linear;

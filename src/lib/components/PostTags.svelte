@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Tag } from "$lib/types";
   import Pill from "$lib/components/reusable/Pill.svelte";
+  import type { Tag } from "$lib/types";
 
   export let tags: Tag[];
 </script>

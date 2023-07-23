@@ -287,7 +287,7 @@ a:hover, a:active {
 
 pre {
   font-family: var(--body-text-font-family);
-  background-color: var(--hover-dark);
+  background-color: var(--comment-background);
   white-space: pre-wrap;
   overflow-wrap: break-word;
   text-align: left;
@@ -335,7 +335,6 @@ img {
   padding: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  color: var(--text-dark);
 }
 
 .material-icons.inline-icon {
@@ -502,8 +501,8 @@ button {
   align-self: center;
   width: fit-content;
   transition: var(--unfocus-speed) ease-in-out;
-  background: var(--accent-dark);
-  color: var(--main-nav-color);
+  background: var(--accent);
+  color: var(--text-dark);
   padding: 0.3rem 0.5rem;
   border-radius: var(--border-radius);
   border: 0;
@@ -523,12 +522,12 @@ button {
 
   &:hover {
     cursor: pointer;
-    background: var(--accent-light);
+    background: var(--hover);
     transition: 0s;
   }
 
   &[disabled], &:disabled {
-    color: var(--hover-light);
+    color: var(--hover);
     cursor: not-allowed;
   }
 }

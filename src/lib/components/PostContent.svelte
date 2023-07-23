@@ -16,16 +16,17 @@
     }
   };
 
-  const validateContent = (htmlString) => {
+  const validateContent = (htmlString: string) => {
     let doc = new DOMParser().parseFromString(`<div>${htmlString}</div>`, "text/html"); // TODO: Not strict enough, should use 3rd party library
     if (doc.querySelector("parsererror")) {
-      console.error(doc.querySelector("parsererror").querySelector("div").innerHTML);
+      console.error(doc.querySelector("parsererror")?.querySelector("div")?.innerHTML);
       toast.push("Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.", toastThemes.error);
     }
   };
 
-  const evaluateScripts = (script) => {
+  const evaluateScripts = (script: string) => {
     try {
+      // @ts-ignore
       (1, eval)(script);
     } catch (e) {
       console.error(e);

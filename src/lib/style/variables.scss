@@ -1,95 +1,92 @@
 /* Colors and theming */
 
 :root {
-  --text-light: rgba(0, 0, 0, 0.75);
-  --text-dark: rgba(255, 255, 255, 0.8);
-  --text-light-secondary: rgba(0, 0, 0, 0.5);
-  --hover-light: rgba(255, 255, 255, 0.1);
-  --hover-dark: rgba(0, 0, 0, 0.1);
-  --background-light: #ffffff;
-  --background-dark: #000000;
-  --accent-light: #252322;
-  --accent-dark: #0a0a0a;
-  --link: #5a869d;
-  --link-hover: #7fa8c3;
-  --main-nav-color: #ffffff;
-  --main-nav-background: linear-gradient(#252322, #0a0a0a22) repeat scroll 0 0;
-  --main-nav-background-mobile-expanded: linear-gradient(#0a0a0a88, #25232288) repeat scroll 0 0;
-  --highlight-gradient: linear-gradient(135deg, #25232211 30%, #0a0a0a33 100%);
-  --featured-background: linear-gradient(135deg, #cccccc, #252322);
-  --header-shadow: 0 0 1rem rgba(0, 0, 0, 0.9);
-  --button-shadow: 0.1rem 0.2rem 0.5rem rgba(0, 0, 0, 0.6);
-  --banner-shadow: 0 0 0.1rem rgba(0, 0, 0, 1), 0 0 0.5rem rgba(0, 0, 0, 0.9), 0 0 1rem rgba(0, 0, 0, 0.9);
+  --text-light: rgba(0, 0, 0, 0.75); // Color for text on light backgrounds
+  --text-dark: rgba(255, 255, 255, 0.9); // Color for text on dark backgrounds
+  --text-light-secondary: rgba(0, 0, 0, 0.5); // Accent color for text on light backgrounds
+  --hover-transparent: rgba(255, 255, 255, 0.1); // Transparent hover color for overlays
+  --hover: #333333; // Lighter hover color
+  --background-light: #FFFFFF; // Background color for light backgrounds
+  --background-dark: #000000; // Background color for dark backgrounds
+  --accent: #252322; // Accent color for light backgrounds
+  --link: #5A869D; // Link color
+  --link-hover: #7FA8C3; // Link hover color
+  --main-nav-background: linear-gradient(#252322, #000000) repeat scroll 0 0; // Background for main navigation
+  --header-shadow: 0 0 1rem rgba(0, 0, 0, 0.9); // Shadow for headers
+  --music-button-shadow: 0.1rem 0.2rem 0.5rem rgba(0, 0, 0, 0.6); // Shadow for music buttons
+  --banner-shadow: 0 0 0.1rem rgba(0, 0, 0, 1), 0 0 0.5rem rgba(0, 0, 0, 0.9), 0 0 1rem rgba(0, 0, 0, 0.9); // Shadow for text in banner
   --scroll-hinting-shadow-color: rgba(0, 0, 0, 0.3);
-  --error: #ff0000;
-  --error-background: #ff0000aa;
-  --success: #00ff00;
-  --success-background: #00ff00aa;
-  --info: #5a869d;
-  --info-background: #5a869daa;
-  --highlight: #ffff00;
-  --selection: #ffff0088;
+  --error: #F09896;
+  --error-background: #F09896;
+  --warning: #F7DE50;
+  --warning-background: #F7DE50;
+  --success: #94EFAD;
+  --success-background: #94EFAD;
+  --info: #8EE3F5;
+  --info-background: #8EE3F5;
+  --highlight: #F9DD4F;
+  --selection: #F9DD4F;
   --comment-background: rgba(0, 0, 0, 0.1);
-  --border: 0.1rem solid var(--hover-dark);
+  --border: 0.1rem solid var(--accent);
 }
 
 /* Typography */
 
 :root {
-  --header-font-family: "Cinzel", serif;
-  --header-secondary-font-family: "Cinzel", serif;
-  --accent-font-family: "Source Code Pro", monospace;
-  --code-font-family: "Source Code Pro", monospace;
-  --nav-font-family: "Source Serif 4", "Times New Roman", serif;
-  --body-text-font-family: "Source Serif 4", "Times New Roman", serif;
-  --font-size-body: 1rem;
-  --font-size-h1: 3rem;
-  --font-size-h2: 1.8rem;
-  --font-size-h4: 1.5rem;
+  --body-text-font-family: "Source Serif 4", "Times New Roman", serif; // Font family for body text
+  --header-font-family: "Cinzel", serif; // Font family for headers
+  --header-secondary-font-family: "Cinzel", serif; // Font family for secondary headers
+  --accent-font-family: "Source Code Pro", monospace; // Font family for secondary text areas such as metadata
+  --code-font-family: "Source Code Pro", monospace; // Font family for code blocks
+  --nav-font-family: "Source Serif 4", "Times New Roman", serif; // Font family for navigation
+  --font-size-body: 1rem; // Font size for body text
+  --font-size-h1: 3rem; // Font size for h1
+  --font-size-h2: 1.8rem; // Font size for h2
+  --font-size-h4: 1.5rem; // Font size for h4
 }
 
 /* Images */
 
 :root {
-  //--background-image-default: url("/images/bg.webp");
-  --hr-background-image: url("/images/hrbg.png");
+  //--background-image-default: url("/images/bg.webp"); // Default background image
+  --hr-background-image: url("/images/hrbg.png"); // Background image for horizontal rules
 }
 
 /* Sizing */
 
 :root {
-  --header-banner-dimensions-ratio: 6; // width divided by height
-  --page-max-width: 76rem; // ~ 1200px
-  --page-min-width: 22rem; // ~ 350px
-  --article-max-width: 38rem;
-  --full-width: 100vw;
-  --full-height: 100vh;
-  --mobile-threshold: 41rem;
-  --compact-navigation-threshold: 54rem;
-  --navigation-height: 3rem;
-  --navigation-logo-size: 1.25rem;
-  --footer-height: 5rem;
-  --mobile-horizontal-padding: 1rem;
-  --mobile-icon-size: 2.5rem;
-  --vertical-separation-margin: 3rem;
-  --transition-speed: 0.3s;
-  --unfocus-speed: 0.15s;
-  --border-radius: 0.25rem;
-  --blur-intensity: 0.5rem;
-  --column-horizontal-margin: 1.5rem;
+  --header-banner-dimensions-ratio: 6; // Dimensions of banner, width divided by height
+  --page-max-width: 76rem; // ~ 1200px, max width of "white area"
+  --page-min-width: 22rem; // ~ 350px, min width of "white area"
+  --article-max-width: 38rem; // Max width of article content
+  --full-width: 100vw; // Full width of page
+  --full-height: 100vh; // Full height of page
+  --mobile-threshold: 41rem; // Width at which mobile styles are applied
+  --compact-navigation-threshold: 54rem; // Width at which compact navigation is enabled
+  --navigation-height: 3rem; // Height of navigation bar
+  --navigation-logo-size: 1.25rem; // Size of small logo in navigation
+  --footer-height: 5rem; // Height of footer
+  --mobile-horizontal-padding: 1rem; // Horizontal padding on mobile around the edges of the screen
+  --mobile-icon-size: 2.5rem; // Hamburger menu icon size
+  --vertical-separation-margin: 3rem; // Vertical margin between sections
+  --transition-speed: 0.3s; // Speed of transitions
+  --unfocus-speed: 0.15s; // Speed of unfocus effect on buttons
+  --border-radius: 0.25rem; // Border radius of elements
+  --blur-intensity: 0.5rem; // Intensity of blur effect on navbar
+  --column-horizontal-margin: 1.5rem; // Horizontal margin between columns
 }
 
 /* Toast */
 
 :root {
   --toastContainerBottom: auto;
-  --toastContainerRight: auto;
-  --toastContainerTop: 4rem;
-  --toastContainerLeft: calc(50vw - 10rem);
+  --toastContainerTop: 1rem;
+  --toastContainerRight: 1rem;
+  --toastContainerLeft: auto;
   --toastContainerZIndex: 2;
-  --toastWidth: 20rem;
+  --toastWidth: 16rem;
   --toastBorderRadius: var(--border-radius);
   --toastBoxShadow: var(--header-shadow);
-  --toastColor: var(--main-nav-color);
-  --toastProgressBackground: var(--main-nav-color);
+  --toastColor: var(--text-light);
+  --toastProgressBackground: var(--text-light);
 }

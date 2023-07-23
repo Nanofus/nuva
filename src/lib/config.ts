@@ -4,6 +4,7 @@ export const BASE_PATH = "https://nuva.klaanon.fi";
 export const MAX_PER_FETCH = 100;
 export const LATEST_POSTS_PER_FETCH = 20;
 export const LATEST_COMMENTS_PER_FETCH = 10;
+export const BOTTOM_SCROLL_THRESHOLD = 100;
 export const LOCALSTORAGE_AUTH_KEY = "auth";
 export const LOCALSTORAGE_SETTINGS_KEY = "settings";
 export const GLOBAL_OBJECT_NAME = "globals" as keyof typeof window;

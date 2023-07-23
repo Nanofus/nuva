@@ -5,6 +5,8 @@
   import Button from "$lib/components/reusable/Button.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+  import { onMount } from "svelte";
+  import { scrolledToBottom } from "$lib/stores";
 
   export let data: PostListBySearchResponse;
   let fetching = false;
@@ -20,6 +22,10 @@
     };
     fetching = false;
   };
+
+  onMount(() => {
+    scrolledToBottom.subscribe(scrolled => scrolled && data.hasNextPage && !fetching && fetchMorePosts());
+  });
 </script>
 
 <svelte:head>

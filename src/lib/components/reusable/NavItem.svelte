@@ -24,7 +24,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: var(--hover-light);
+      background-color: var(--hover-transparent);
     }
   }
 
@@ -37,7 +37,7 @@
     }
 
     &:link, &:visited {
-      color: var(--main-nav-color);
+      color: var(--text-dark);
       text-decoration: none;
     }
   }

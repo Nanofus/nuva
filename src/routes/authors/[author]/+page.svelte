@@ -1,17 +1,19 @@
 <script lang="ts">
-  import { getPostListByCategory } from "$lib/database";
+  import { getPostListByAuthor, getPostListByCategory } from "$lib/database";
   import type { PostListByAuthorResponse } from "$lib/types";
   import PostList from "$lib/components/PostList.svelte";
   import Button from "$lib/components/reusable/Button.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+  import { onMount } from "svelte";
+  import { scrolledToBottom } from "$lib/stores";
 
   export let data: PostListByAuthorResponse;
   let fetching = false;
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPostListByCategory(fetch, data.author, data.endCursor);
+    const newData = await getPostListByAuthor(fetch, data.author, data.endCursor);
     data = {
       posts: [...data.posts, ...newData.posts],
       author: data.author,
@@ -20,6 +22,10 @@
     };
     fetching = false;
   };
+
+  onMount(() => {
+    scrolledToBottom.subscribe(scrolled => scrolled && data.hasNextPage && !fetching && fetchMorePosts());
+  });
 </script>
 
 <svelte:head>

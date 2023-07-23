@@ -1,12 +1,11 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import { postOptions } from "$lib/stores";
   import { getRandomBannerUrl } from "$lib/util";
 
-  let header;
   let bannerUrl = getRandomBannerUrl();
   let bannerVisible = true;
-  let customBannerUrl = null;
+  let customBannerUrl: string | null = null;
 
   onMount(() => {
     postOptions.subscribe(options => {
@@ -17,7 +16,7 @@
 </script>
 
 {#if bannerVisible}
-  <header bind:this={header} style="background-image: {customBannerUrl ? customBannerUrl : bannerUrl}">
+  <header style="background-image: {customBannerUrl ? customBannerUrl : bannerUrl}">
     <a href="/">
       <h1>Klaanon</h1>
       <h2>Bio-Klaanin yhteinen tarina</h2>

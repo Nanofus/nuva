@@ -23,27 +23,9 @@
 </table>
 
 <style lang="scss">
-  .comment-count {
-    text-align: center;
-    font-size: 1rem;
-  }
-
   @media screen and (max-width: 41rem) { // var(--mobile-threshold)
     .date {
       text-align: right;
     }
-
-    .mobile-unfriendly {
-      color: var(--hover-dark);
-
-      a, .categories {
-        color: var(--hover-dark);
-      }
-    }
-  }
-
-  .categories {
-    color: var(--text-light-secondary);
-    font-style: italic;
   }
 </style>

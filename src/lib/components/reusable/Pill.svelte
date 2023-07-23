@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  export let href = null;
+  export let href: string | null = null;
   export let sizeByCount: number | boolean = false;
 
-  let pill;
+  let pill: HTMLElement;
 
   onMount(() => {
     if (!sizeByCount) return;
@@ -14,7 +14,7 @@
 
 <div bind:this={pill} class="pill">
   {#if href}
-    <a {href} class="tag">
+    <a {href}>
       <slot />
     </a>
   {:else}

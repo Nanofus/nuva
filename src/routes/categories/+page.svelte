@@ -18,7 +18,7 @@
     <li>
       <a href="/categories/{category.slug}">{category.name}</a>
       {#if category.children.length > 0}
-        <List stagger="true">
+        <List stagger={true}>
           {#each category.children as child}
             <li>
               <a href="/categories/{child.slug}">{child.name}</a>

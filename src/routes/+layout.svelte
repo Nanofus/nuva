@@ -1,30 +1,33 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { SvelteToast } from "@zerodevx/svelte-toast";
-  import { isLoggedIn } from "$lib/database";
   import Header from "$lib/components/Header.svelte";
   import Footer from "$lib/components/Footer.svelte";
   import "$lib/style/variables.scss";
   import "$lib/style/theme.scss";
   import Navigation from "$lib/components/Navigation.svelte";
   import { OG_LOCALE, SITE_NAME } from "$lib/config";
-  import { createBaseSettings } from "$lib/util";
+  import { createBaseSettings, handleScrolledToBottom } from "$lib/util";
   import { navigating } from "$app/stores";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { fade } from "svelte/transition";
   import { postOptions } from "$lib/stores";
+  import { browser } from "$app/environment";
 
   export let data;
 
-  let loggedIn: boolean;
   let fullWidth: boolean = false;
 
   onMount(() => {
-    loggedIn = isLoggedIn();
     postOptions.subscribe(options => {
       fullWidth = options.fullWidth;
     });
     createBaseSettings();
+    browser && document.addEventListener("scroll", handleScrolledToBottom);
+  });
+
+  onDestroy(() => {
+    browser && document.removeEventListener("scroll", handleScrolledToBottom);
   });
 </script>
 

@@ -1,7 +1,7 @@
 import type { Hierarchical, PostMeta } from "$lib/types";
 import {
   BANNER_COUNT,
-  BASE_PATH,
+  BASE_PATH, BOTTOM_SCROLL_THRESHOLD,
   CATEGORIES_EXCLUDED_FROM_ALL_POSTS,
   DEFAULT_VOLUME,
   GLOBAL_OBJECT_NAME,
@@ -10,6 +10,7 @@ import {
   SITE_NAME_DELIMITER
 } from "$lib/config";
 import { browser } from "$app/environment";
+import { scrolledToBottom } from "$lib/stores";
 
 export const toastThemes = {
   error: {
@@ -62,6 +63,13 @@ export const objectsToHierarchy = (arr: Hierarchical[]) => {
 
   return tree;
 };
+
+export const handleScrolledToBottom = () => {
+  if (!browser) return;
+  let documentHeight = document.body.scrollHeight;
+  let currentScroll = window.scrollY + window.innerHeight;
+  scrolledToBottom.set(currentScroll + BOTTOM_SCROLL_THRESHOLD > documentHeight);
+}
 
 export const getPageTitle = (title: string) => {
   return title ? `${title} ${SITE_NAME_DELIMITER} ${SITE_NAME}` : SITE_NAME;

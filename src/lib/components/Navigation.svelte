@@ -3,17 +3,16 @@
   import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
   import { loginInfo, postOptions } from "$lib/stores";
+  import type { AuthInfo } from "$lib/types";
 
-  let smallLogo;
-  let menuItems;
+  let smallLogo: HTMLElement;
   let menuOpen = false;
   let stickyMenu = true;
   let bannerVisible = true;
-  let userInfo = null;
+  let userInfo: AuthInfo | null = null;
 
   const getTotalNavigationHeight = () => {
-    const header = document.querySelector("header");
-    return header.offsetHeight;
+    return document.querySelector("header")?.offsetHeight || 0;
   };
 
   const isMobile = () => {
@@ -74,7 +73,8 @@
         </NavItem>
       </div>
     </div>
-    <div bind:this={menuItems} class="section-menu-items {menuOpen ? 'menu-open' : ''}" on:click={menuClicked}>
+    <div class="section-menu-items {menuOpen ? 'menu-open' : ''}" on:click={menuClicked} on:keypress={menuClicked} role="button"
+         tabindex="0">
       <NavItem href="/">Etusivu</NavItem>
       <NavItem href="/posts">Julkaisut</NavItem>
       <NavItem href="/categories">Kategoriat</NavItem>
@@ -146,7 +146,7 @@
   h1 {
     font-size: var(--navigation-logo-size);
     margin: 0 0.5rem;
-    color: var(--main-nav-color);
+    color: var(--text-dark);
     text-align: left;
   }
 

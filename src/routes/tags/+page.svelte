@@ -5,6 +5,8 @@
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import Pill from "$lib/components/reusable/Pill.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";
+  import { onMount } from "svelte";
+  import { scrolledToBottom } from "$lib/stores";
 
   export let data: TagListResponse;
   let fetching = false;
@@ -19,6 +21,10 @@
     };
     fetching = false;
   };
+
+  onMount(() => {
+    scrolledToBottom.subscribe(scrolled => scrolled && data.hasNextPage && !fetching && fetchMoreTags());
+  });
 </script>
 
 <svelte:head>
