@@ -37,7 +37,7 @@
 <h1>Kirjoittaja: {data.author}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
-  <Button on:click={fetchMorePosts}>Lataa lisää</Button>
+  <Button link on:click={fetchMorePosts}>Lataa lisää</Button>
 {:else if fetching}
   <LoadingSpinner />
 {/if}

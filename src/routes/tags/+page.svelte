@@ -41,7 +41,7 @@
 </div>
 <br />
 {#if data.hasNextPage && !fetching}
-  <Button on:click={fetchMoreTags}>Lataa lisää</Button>
+  <Button link on:click={fetchMoreTags}>Lataa lisää</Button>
 {:else if fetching}
   <LoadingSpinner />
 {/if}

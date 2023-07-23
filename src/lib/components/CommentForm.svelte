@@ -43,7 +43,7 @@
       <Form>
         <Input type="multiline" placeholder={isReply ? "Vastaa..." : "Kommentoi..."} bind:value={content} />
         <div class="button-group">
-          <a href="#" role="button" tabindex="0" on:click={() => dispatch("close")}>Sulje</a>
+          <Button link on:click={() => dispatch("close")}>Sulje</Button>
           <Button on:click={sendComment}>Lähetä</Button>
         </div>
       </Form>

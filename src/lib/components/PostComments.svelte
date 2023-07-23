@@ -3,6 +3,7 @@
   import CommentForm from "$lib/components/CommentForm.svelte";
   import { getCommentsForPostBySlug, isLoggedIn } from "$lib/database";
   import Comment from "$lib/components/Comment.svelte";
+  import Button from "$lib/components/reusable/Button.svelte";
 
   export let post: Post;
   let replyFormOpen = false;
@@ -21,7 +22,7 @@
     <Comment on:commentSent={refreshComments} {post} {comment} />
   {/each}
   {#if !replyFormOpen && isLoggedIn()}
-    <a href="#" role="button" tabindex="0" on:click={() => replyFormOpen = true}>Kommentoi</a>
+    <Button link on:click={() => replyFormOpen = true}>Kommentoi</Button>
   {:else}
     <CommentForm on:commentSent={refreshComments} on:close={() => replyFormOpen = false} parent={0} postId={post._id}
                  isReply={false} />

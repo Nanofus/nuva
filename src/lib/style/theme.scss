@@ -278,11 +278,13 @@ a, a:link, a:visited {
   color: var(--link);
   text-decoration: none;
   cursor: pointer;
+  transition: var(--unfocus-speed) ease-in-out;
 }
 
 a:hover, a:active {
   color: var(--link-hover);
   text-decoration: underline;
+  transition: 0s;
 }
 
 pre {
@@ -508,6 +510,20 @@ button {
   border: 0;
   font-family: var(--body-text-font-family);
   font-size: 1rem;
+
+  &.link-button {
+    background: none;
+    color: var(--link);
+    border-radius: 0;
+    border: none;
+    font-size: inherit;
+
+    &:hover {
+      background: none;
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+  }
 
   > * {
     user-select: none;

@@ -38,7 +38,7 @@
 <h1>Kategoria: {data.category}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
-  <Button on:click={fetchMorePosts}>Lataa lisää</Button>
+  <Button link on:click={fetchMorePosts}>Lataa lisää</Button>
 {:else if fetching}
   <LoadingSpinner />
 {/if}

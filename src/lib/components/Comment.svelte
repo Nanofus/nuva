@@ -5,6 +5,7 @@
   import { createEventDispatcher } from "svelte";
   import { browser } from "$app/environment";
   import { getAuthInfo, isLoggedIn } from "$lib/database";
+  import Button from "$lib/components/reusable/Button.svelte";
 
   export let comment: Comment;
   export let post: Post;
@@ -50,7 +51,7 @@
     <a target="_blank" href="https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c={comment._id}">Muokkaa</a>
   {/if}
   {#if !replyFormOpen && isLoggedIn()}
-    <a href="#" role="button" tabindex="0" on:click={() => replyFormOpen = true}>Vastaa</a>
+    <Button link on:click={() => replyFormOpen = true}>Vastaa</Button>
   {:else}
     <CommentForm on:commentSent={commentSent} on:close={() => (replyFormOpen = false)} parent={comment._id}
                  postId={post._id} isReply={true} />
