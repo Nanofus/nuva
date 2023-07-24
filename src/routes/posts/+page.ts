@@ -4,10 +4,20 @@ import type { PostListResponse } from "$lib/types";
 import { filterExcludedCategories } from "$lib/util";
 
 export const load: Load = async ({ fetch }): Promise<PostListResponse> => {
-  const response = await getPostList(fetch);
-  if (response) {
-    response.posts = filterExcludedCategories(response.posts);
-    return response;
+  let allLoaded = false;
+  let endCursor = null;
+  let finalResponse: PostListResponse = {
+    posts: [],
+    endCursor: "",
+    hasNextPage: false
+  };
+  while (!allLoaded) {
+    const response = await getPostList(fetch, endCursor);
+    if (!response) throw error(404, "Not found");
+    if (!response.hasNextPage) allLoaded = true;
+    endCursor = response.endCursor;
+    finalResponse.posts = [...finalResponse.posts, ...response.posts];
   }
-  throw error(404, "Not found");
+  finalResponse.posts = filterExcludedCategories(finalResponse.posts);
+  return finalResponse;
 };
