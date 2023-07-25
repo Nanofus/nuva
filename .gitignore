@@ -19,3 +19,4 @@ vite.config.js.timestamp-*
 .vercel
 .test-tmp
 symlink-from
+.env.development.local
