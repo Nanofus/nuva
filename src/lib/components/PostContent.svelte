@@ -8,7 +8,6 @@
   import { initGlobalScope } from "$lib/util.js";
 
   export let post: Post;
-
   let scriptElements = [];
 
   const setInitialLetter = () => {
@@ -19,45 +18,40 @@
   };
 
   const validateContent = (htmlString: string) => {
-    let doc = new DOMParser().parseFromString(`<div>${htmlString}</div>`, "text/html"); // TODO: Not strict enough, should use 3rd party library
+    const doc = new DOMParser().parseFromString(`<div>${htmlString}</div>`, "text/html"); // TODO: Not strict enough, should use 3rd party library
     if (doc.querySelector("parsererror")) {
       console.error(doc.querySelector("parsererror")?.querySelector("div")?.innerHTML);
       toast.push("Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.", toastThemes.error);
     }
   };
 
-  // Sorcery to run scripts in the post
-  // (1, eval) is a trick to make eval run in the global scope
+  const runUserScript = (script, isFile = false) => {
+    const scriptElement = document.createElement("script");
+    if (isFile) {
+      scriptElement.setAttribute("src", script);
+      scriptElement.setAttribute("async", "false");
+    } else {
+      scriptElement.innerHTML = script;
+    }
+    document.head.insertBefore(scriptElement, document.head.firstChild);
+    scriptElements.push(scriptElement);
+  };
+
   const runScripts = (post: Post) => {
-    console.log(post.scriptFiles);
-    post.scriptFiles.forEach((scriptFile) => {
-      var script = document.createElement("script");
-      script.setAttribute("src", scriptFile);
-      script.setAttribute("async", "false");
-      document.head.insertBefore(script, document.head.firstChild);
-      scriptElements.push(script);
+    post.scriptFiles.forEach((scriptFile ) => {
+      runUserScript(scriptFile, true);
     });
 
     if (post.content.indexOf("<script>") === -1) {
-      evaluateScript(post.scripts);
+      runUserScript(post.scripts);
     }
 
-    // Parse JS from post content and eval it
+    // Run JS in post content
     const doc = document.implementation.createHTMLDocument(); // Sandbox
     doc.body.innerHTML = post.content;
     [].map.call(doc.getElementsByTagName("script"), (scriptTag: HTMLScriptElement) => {
-      evaluateScript(scriptTag.innerText);
+      runUserScript(scriptTag.innerText);
     });
-  }
-
-  const evaluateScript = (script: string) => {
-    try {
-      // @ts-ignore
-      (1, eval)(script);
-    } catch (e) {
-      console.error(e);
-      toast.push("Virhe postauksen skripteissä. Katso konsolista lisätietoja.", toastThemes.error);
-    }
   };
 
   onMount(() => {
@@ -67,7 +61,14 @@
     setInitialLetter();
   });
 
+  const cleanScripts = () => {
+    scriptElements.forEach((scriptElement) => {
+      scriptElement.remove();
+    });
+  };
+
   onDestroy(() => {
+    cleanScripts();
     cleanGlobalScope();
   });
 </script>
