@@ -23,6 +23,7 @@ export interface Post extends PostMeta {
   initialLetter: boolean;
   scripts: string;
   styles: string;
+  scriptFiles: string[];
   music: string[];
   artists: string[];
   bannerVisible: boolean;
