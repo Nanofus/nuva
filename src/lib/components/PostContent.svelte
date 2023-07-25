@@ -9,6 +9,8 @@
 
   export let post: Post;
 
+  let scriptElements = [];
+
   const setInitialLetter = () => {
     if (browser && !navigator.userAgent.match(/firefox|fxios/i) && post.initialLetter) { // TODO: Remove this when Firefox supports initial-letter
       document.documentElement.style.setProperty("--initial-letter-size", "3.0");
@@ -26,9 +28,14 @@
 
   // Sorcery to run scripts in the post
   // (1, eval) is a trick to make eval run in the global scope
-  const evaluateScripts = (post: Post) => {
+  const runScripts = (post: Post) => {
+    console.log(post.scriptFiles);
     post.scriptFiles.forEach((scriptFile) => {
-      evaluateScript(`<script src="${scriptFile}">`);
+      var script = document.createElement("script");
+      script.setAttribute("src", scriptFile);
+      script.setAttribute("async", "false");
+      document.head.insertBefore(script, document.head.firstChild);
+      scriptElements.push(script);
     });
 
     if (post.content.indexOf("<script>") === -1) {
@@ -56,7 +63,7 @@
   onMount(() => {
     initGlobalScope();
     validateContent(post.content);
-    evaluateScripts(post);
+    runScripts(post);
     setInitialLetter();
   });
 

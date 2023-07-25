@@ -89,6 +89,7 @@ export const QUERIES = {
             fullwidth
             mobilefriendly
             scripts
+            scriptfiles
             styles
             music
         }
