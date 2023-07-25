@@ -14,8 +14,8 @@
       {/each}
     </span>
   </p>
-  <h1><a href="/posts/{postMeta.slug}">{@html postMeta.title}</a></h1>
-  <p>{@html postMeta.description ? postMeta.description : ""}</p>
+  <h1><a href="/posts/{postMeta.slug}">{postMeta.title}</a></h1>
+  <p>{postMeta.description ? postMeta.description : ""}</p>
 </div>
 
 <style lang="scss">

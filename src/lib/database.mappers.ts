@@ -84,7 +84,6 @@ export const dataToPost = (data: any): Post | null => {
     mobileFriendly: data.additionalFields.mobilefriendly,
     scripts: data.additionalFields.scripts,
     styles: data.additionalFields.styles,
-    scriptFiles: data.additionalFields.scriptfiles ? data.additionalFields.scriptfiles.split("\n") : [],
     music: data.additionalFields.music ? data.additionalFields.music.split("\n") : [],
     content: data.content,
     previous: data.previous ? { title: data.previous.title, slug: data.previous.slug } : null,

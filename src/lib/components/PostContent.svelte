@@ -24,26 +24,7 @@
     }
   };
 
-  // Sorcery to run scripts in the post
-  // (1, eval) is a trick to make eval run in the global scope
-  const evaluateScripts = (post: Post) => {
-    post.scriptFiles.forEach((scriptFile) => {
-      evaluateScript(`<script src="${scriptFile}">`);
-    });
-
-    if (post.content.indexOf("<script>") === -1) {
-      evaluateScript(post.scripts);
-    }
-
-    // Parse JS from post content and eval it
-    const doc = document.implementation.createHTMLDocument(); // Sandbox
-    doc.body.innerHTML = post.content;
-    [].map.call(doc.getElementsByTagName("script"), (scriptTag: HTMLScriptElement) => {
-      evaluateScript(scriptTag.innerText);
-    });
-  }
-
-  const evaluateScript = (script: string) => {
+  const evaluateScripts = (script: string) => {
     try {
       // @ts-ignore
       (1, eval)(script);
@@ -56,7 +37,21 @@
   onMount(() => {
     initGlobalScope();
     validateContent(post.content);
-    evaluateScripts(post);
+
+    // Eval magic to run scripts in the post
+    // (1, eval) is a trick to make eval run in the global scope
+    // TODO: Does not cleaning up the scope on navigation cause problems?
+    if (post.content.indexOf("<script>") === -1) {
+      evaluateScripts(post.scripts);
+    }
+
+    // Parse JS from post content and eval it
+    const doc = document.implementation.createHTMLDocument(); // Sandbox
+    doc.body.innerHTML = post.content;
+    [].map.call(doc.getElementsByTagName("script"), (scriptTag: HTMLScriptElement) => {
+      evaluateScripts(scriptTag.innerText);
+    });
+
     setInitialLetter();
   });
 
