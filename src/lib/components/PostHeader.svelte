@@ -28,7 +28,8 @@
     </span>
     <span class="post-comments-link">
       <span class="material-icons inline-icon">forum</span>
-			<a href="#comments">{post.commentCount ? post.commentCount : 0} {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a>
+			<a
+        href="#comments">{post.commentCount ? post.commentCount : 0} {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a>
 		</span>
   </div>
 </header>

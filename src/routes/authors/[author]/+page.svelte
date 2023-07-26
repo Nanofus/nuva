@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getPostListByAuthor, getPostListByCategory } from "$lib/database";
+  import { getPostListByAuthor } from "$lib/database";
   import type { PostListByAuthorResponse } from "$lib/types";
   import PostList from "$lib/components/PostList.svelte";
   import Button from "$lib/components/reusable/Button.svelte";

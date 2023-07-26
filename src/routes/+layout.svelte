@@ -13,7 +13,7 @@
   import { fade } from "svelte/transition";
   import { postOptions } from "$lib/stores";
   import { browser } from "$app/environment";
-  
+
   export let data;
 
   let fullWidth: boolean = false;

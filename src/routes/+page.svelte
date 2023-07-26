@@ -4,7 +4,7 @@
   import { getPageTitle, getPageUrl } from "$lib/util";
   import FeaturedPost from "$lib/components/FeaturedPost.svelte";
   import CommentList from "$lib/components/CommentList.svelte";
-  import { t } from '$lib/translations';
+  import { t } from "$lib/translations";
 
   export let data: { posts: PostListResponse, comments: CommentMeta[] };
 </script>

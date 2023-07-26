@@ -1,7 +1,8 @@
 import type { Hierarchical, PostMeta } from "$lib/types";
 import {
   BANNER_COUNT,
-  BASE_PATH, BOTTOM_SCROLL_THRESHOLD,
+  BASE_PATH,
+  BOTTOM_SCROLL_THRESHOLD,
   CATEGORIES_EXCLUDED_FROM_ALL_POSTS,
   DEFAULT_VOLUME,
   GLOBAL_OBJECT_NAME,
@@ -69,7 +70,7 @@ export const handleScrolledToBottom = () => {
   let documentHeight = document.body.scrollHeight;
   let currentScroll = window.scrollY + window.innerHeight;
   scrolledToBottom.set(currentScroll + BOTTOM_SCROLL_THRESHOLD > documentHeight);
-}
+};
 
 export const getPageTitle = (title: string) => {
   return title ? `${title} ${SITE_NAME_DELIMITER} ${SITE_NAME}` : SITE_NAME;

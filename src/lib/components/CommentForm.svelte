@@ -42,7 +42,8 @@
       <LoadingSpinner />
     {:else}
       <Form>
-        <Input type="multiline" placeholder={isReply ? `${t.common.reply}...` : `${t.common.comment}...`} bind:value={content} />
+        <Input type="multiline" placeholder={isReply ? `${t.common.reply}...` : `${t.common.comment}...`}
+               bind:value={content} />
         <div class="button-group">
           <Button link on:click={() => dispatch("close")}>{t.common.close}</Button>
           <Button on:click={sendComment}>{t.common.send}</Button>

@@ -49,7 +49,8 @@
     {/each}
   </div>
   {#if isCurrentUser()}
-    <a target="_blank" href="https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c={comment._id}">{t.common.edit}</a>
+    <a target="_blank"
+       href="{t.components.comment.editUrl}{comment._id}">{t.common.edit}</a>
   {/if}
   {#if !replyFormOpen && isLoggedIn()}
     <Button link on:click={() => replyFormOpen = true}>{t.common.reply}</Button>

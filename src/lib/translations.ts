@@ -19,6 +19,9 @@ const TRANSLATIONS_FI = {
       date: "Päiväys",
       commenter: "Kommentoija"
     },
+    comment: {
+      editUrl: "https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c=",
+    },
     footer: {
       copyright: "© Klaanon",
       feedback: "Palaute",
@@ -42,7 +45,7 @@ const TRANSLATIONS_FI = {
     postList: {
       title: "Otsikko",
       date: "Päiväys",
-      author: "Postaaja",
+      author: "Postaaja"
     },
     search: {
       emptyField: "Laitapa hakukenttään edes jotain",
@@ -62,7 +65,7 @@ const TRANSLATIONS_FI = {
       write: "Kirjoita",
       writeUrl: "https://klaanon.fi/wp/wp-admin/edit.php",
       login: "Kirjaudu",
-      profile: "Profiili",
+      profile: "Profiili"
     }
   },
   settings: {

@@ -39,7 +39,7 @@
   };
 
   const runScripts = (post: Post) => {
-    post.scriptFiles.forEach((scriptFile ) => {
+    post.scriptFiles.forEach((scriptFile) => {
       runUserScript(scriptFile, true);
     });
 
@@ -78,7 +78,8 @@
   <div id="post-style-container">{@html `<style>${post.styles}</style>`}</div>
 {/if}
 {#if !post.mobileFriendly}
-  <div class="info-box error hidden-desktop"><span class="material-icons inline-icon">warning</span> {t.components.postContent.notMobileFriendly}
+  <div class="info-box error hidden-desktop"><span
+    class="material-icons inline-icon">warning</span> {t.components.postContent.notMobileFriendly}
   </div>
 {/if}
 <section class="vertically-separated" id="post-content">

@@ -1,4 +1,3 @@
-import { createKysely } from '@vercel/postgres-kysely';
 import { API_PATH, LATEST_COMMENTS_PER_FETCH, LOCALSTORAGE_AUTH_KEY, MAX_PER_FETCH, QUERIES } from "$lib/config";
 import { toast } from "@zerodevx/svelte-toast";
 import { browser } from "$app/environment";
@@ -27,7 +26,6 @@ import type {
   TagListResponse
 } from "$lib/types";
 import { toastThemes } from "$lib/util";
-import type { Database } from "$lib/database.schema";
 
 // New Postgres queries
 

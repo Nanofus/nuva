@@ -29,10 +29,10 @@
   <Settings>
     <SettingItem label={t.settings.user}><span>{userInfo.displayName}</span></SettingItem>
     <SettingItem label={t.settings.volume}><input class="volume-bar"
-                                                             type="range"
-                                                             min="0"
-                                                             max="100"
-                                                             bind:value={volume}></SettingItem>
+                                                  type="range"
+                                                  min="0"
+                                                  max="100"
+                                                  bind:value={volume}></SettingItem>
   </Settings>
 {/if}
 <div class="vertically-separated">

@@ -74,7 +74,8 @@
         </NavItem>
       </div>
     </div>
-    <div class="section-menu-items {menuOpen ? 'menu-open' : ''}" on:click={menuClicked} on:keypress={menuClicked} role="button"
+    <div class="section-menu-items {menuOpen ? 'menu-open' : ''}" on:click={menuClicked} on:keypress={menuClicked}
+         role="button"
          tabindex="0">
       <NavItem href="/">{t.components.navigation.frontPage}</NavItem>
       <NavItem href="/posts">{t.components.navigation.posts}</NavItem>
