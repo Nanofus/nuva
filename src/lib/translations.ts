@@ -40,6 +40,7 @@ const TRANSLATIONS_FI = {
     },
     postContent: {
       validationError: "Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.",
+      noValidationError: "Postauksen HTML:ssä ei virheitä!",
       scriptError: "Virhe postauksen skripteissä. Katso konsolista lisätietoja.",
       errorsCountSingular: "virhe",
       errorsCountPlural: "virhettä",

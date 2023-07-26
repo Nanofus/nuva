@@ -18,9 +18,12 @@
   };
 
   const reportValidation = () => {
-    if (post.validationResult && !post.validationResult.valid) {
+    if (!post.validationResult) return;
+    if (!post.validationResult.valid) {
       console.error(`${post.validationResult.errorCount} ${post.validationResult.errorCount > 0 ? t.components.postContent.errorsCountPlural : t.components.postContent.errorsCountSingular}`, post.validationResult.results[0].messages);
       toast.push(t.components.postContent.validationError, toastSettings.error);
+    } else {
+      toast.push(t.components.postContent.noValidationError, toastSettings.success);
     }
   };
 
@@ -29,10 +32,12 @@
   };
 
   const createErrorReporter = () => {
+    if (!browser) return;
     window.addEventListener("error", reportError);
   };
 
   const cleanErrorReporter = () => {
+    if (!browser) return;
     window.removeEventListener("error", reportError);
   };
 
