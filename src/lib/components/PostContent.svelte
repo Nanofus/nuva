@@ -6,6 +6,7 @@
   import { toast } from "@zerodevx/svelte-toast";
   import { cleanGlobalScope, initGlobalScope, toastSettings } from "$lib/util/util";
   import { t } from "$lib/translations";
+  import { GLOBAL_OBJECT_NAME } from "$lib/config";
 
   export let post: Post;
   let scriptElements = [];
@@ -52,7 +53,7 @@
       finalScript += loadedScript;
     });
     finalScript += script;
-    scriptElement.innerHTML = `(() => {${finalScript}})();`;
+    scriptElement.innerHTML = `window["${GLOBAL_OBJECT_NAME}"].postScripts = () => {${finalScript}}; window["${GLOBAL_OBJECT_NAME}"].postScripts();`;
     document.head.insertBefore(scriptElement, document.head.firstChild);
     scriptElements.push(scriptElement);
   };
