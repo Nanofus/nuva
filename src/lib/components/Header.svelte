@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { postOptions } from "$lib/stores";
   import { getRandomBannerUrl } from "$lib/util";
+  import { t } from "$lib/translations";
 
   let bannerUrl = getRandomBannerUrl();
   let bannerVisible = true;
@@ -18,8 +19,8 @@
 {#if bannerVisible}
   <header style="background-image: {customBannerUrl ? customBannerUrl : bannerUrl}">
     <a href="/">
-      <h1>Klaanon</h1>
-      <h2>Bio-Klaanin yhteinen tarina</h2>
+      <h1>{t.siteName}</h1>
+      <h2>{t.components.header.subheader}</h2>
     </a>
   </header>
 {/if}

@@ -7,6 +7,7 @@
   import { getPageTitle, getPageUrl } from "$lib/util";
   import { onMount } from "svelte";
   import { scrolledToBottom } from "$lib/stores";
+  import { t } from "$lib/translations";
 
   export let data: TagListResponse;
   let fetching = false;
@@ -28,12 +29,12 @@
 </script>
 
 <svelte:head>
-  <title>{getPageTitle("Tagit")}</title>
-  <meta content={"Tagit"} property="og:title" />
+  <title>{getPageTitle(t.pages.tags.title)}</title>
+  <meta content={t.pages.tags.title} property="og:title" />
   <meta content={getPageUrl(`tags`)} property="og:url" />
 </svelte:head>
 
-<h1>Tagit</h1>
+<h1>{t.pages.tags.title}</h1>
 <div class="tags">
   {#each data.tags as tag}
     <Pill sizeByCount={tag.count} href="/tags/{tag.slug}">{tag.name}</Pill>
@@ -41,7 +42,7 @@
 </div>
 <br />
 {#if data.hasNextPage && !fetching}
-  <Button link on:click={fetchMoreTags}>Lataa lisää</Button>
+  <Button link on:click={fetchMoreTags}>{t.common.loadMore}</Button>
 {:else if fetching}
   <LoadingSpinner />
 {/if}

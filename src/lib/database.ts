@@ -31,7 +31,7 @@ import type { Database } from "$lib/database.schema";
 
 // New Postgres queries
 
-const db = createKysely<Database>();
+// const db = createKysely<Database>();
 
 // Legacy WPGraphQL queries
 

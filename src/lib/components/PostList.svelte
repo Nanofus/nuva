@@ -1,6 +1,7 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
   import type { Category, PostMeta } from "$lib/types";
+  import { t } from "$lib/translations";
 
   export let posts: PostMeta[];
 
@@ -13,10 +14,10 @@
 
 <table>
   <tr class="table-header">
-    <td class="link">Nimi</td>
+    <td class="link">{t.components.postList.title}</td>
     <td class="comment-count hidden-mobile material-icons">forum</td>
-    <td class="date">Julkaisu</td>
-    <td class="authors hidden-mobile">Postaaja</td>
+    <td class="date">{t.components.postList.date}</td>
+    <td class="authors hidden-mobile">{t.components.postList.author}</td>
   </tr>
   {#each posts as post}
     <tr class={post.mobileFriendly ? "" : "mobile-unfriendly"}>

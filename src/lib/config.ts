@@ -11,7 +11,7 @@ export const GLOBAL_OBJECT_NAME = "globals" as keyof typeof window;
 export const LOCALE = "fi-FI";
 export const OG_LOCALE = "fi_FI";
 
-export const SITE_NAME = "Klaanon Nuva";
+export const SITE_NAME = "Klaanon";
 export const SITE_NAME_DELIMITER = "—";
 export const CATEGORIES_EXCLUDED_FROM_ALL_POSTS = ["meta", "muu-roska"];
 

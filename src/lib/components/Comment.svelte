@@ -6,6 +6,7 @@
   import { browser } from "$app/environment";
   import { getAuthInfo, isLoggedIn } from "$lib/database";
   import Button from "$lib/components/reusable/Button.svelte";
+  import { t } from "$lib/translations";
 
   export let comment: Comment;
   export let post: Post;
@@ -48,10 +49,10 @@
     {/each}
   </div>
   {#if isCurrentUser()}
-    <a target="_blank" href="https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c={comment._id}">Muokkaa</a>
+    <a target="_blank" href="https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c={comment._id}">{t.common.edit}</a>
   {/if}
   {#if !replyFormOpen && isLoggedIn()}
-    <Button link on:click={() => replyFormOpen = true}>Vastaa</Button>
+    <Button link on:click={() => replyFormOpen = true}>{t.common.reply}</Button>
   {:else}
     <CommentForm on:commentSent={commentSent} on:close={() => (replyFormOpen = false)} parent={comment._id}
                  postId={post._id} isReply={true} />

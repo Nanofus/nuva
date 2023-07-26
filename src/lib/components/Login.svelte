@@ -9,6 +9,7 @@
   import { toast } from "@zerodevx/svelte-toast";
   import { toastThemes } from "$lib/util";
   import { browser } from "$app/environment";
+  import { t } from "$lib/translations";
 
   let loggedIn: boolean | null = null;
   let passwordInput = "";
@@ -21,7 +22,7 @@
 
   const handleLogin = async () => {
     if (!usernameInput || !passwordInput) {
-      toast.push("Täytä molemmat kentät", toastThemes.error);
+      toast.push(t.components.login.fillBothFields, toastThemes.error);
       return;
     }
     await login(fetch, usernameInput, passwordInput);
@@ -34,21 +35,21 @@
     {#if browser}
       <LoadingSpinner />
     {:else}
-      <p>Ei käytettävissä ilman JavaScriptia.</p>
+      <p>{t.components.login.cantUseWithoutJs}</p>
     {/if}
   {:else if !loggedIn}
     <Form vertical={true} on:submit={() => submitted = true}>
-      <Input label="Käyttäjätunnus" name="username" bind:value={usernameInput} />
-      <Input label="Salasana" name="password" type="password" bind:value={passwordInput} />
+      <Input label={t.components.login.username} name="username" bind:value={usernameInput} />
+      <Input label={t.components.login.password} name="password" type="password" bind:value={passwordInput} />
       {#if !submitted}
-        <Button on:click={handleLogin}>Kirjaudu sisään</Button>
+        <Button on:click={handleLogin}>{t.components.login.login}</Button>
       {:else}
         <LoadingSpinner />
       {/if}
     </Form>
   {:else if loggedIn}
     <div class="user-info">
-      <Button on:click={() => logout()}>Kirjaudu ulos</Button>
+      <Button on:click={() => logout()}>{t.components.login.logout}</Button>
     </div>
   {/if}
 </div>

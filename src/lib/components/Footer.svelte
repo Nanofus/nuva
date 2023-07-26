@@ -1,9 +1,13 @@
+<script lang="ts">
+  import { t } from "$lib/translations";
+</script>
+
 <footer>
   <div class="footer-content">
-    <span>© Klaanon</span>
+    <span>{t.components.footer.copyright}</span>
     <span class="separator"></span>
-    <span><a href="https://discord.com/channels/1043556208700833792/1131238873024966809"
-             target="_blank">Palaute</a></span>
+    <span><a href={t.components.footer.feedbackLink}
+             target="_blank">{t.components.footer.feedback}</a></span>
   </div>
 </footer>
 

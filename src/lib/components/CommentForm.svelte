@@ -7,6 +7,7 @@
   import Form from "$lib/components/reusable/Form.svelte";
   import { toastThemes } from "$lib/util";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+  import { t } from "$lib/translations";
 
   export let parent: number;
   export let postId: number;
@@ -24,7 +25,7 @@
 
   const sendComment = async () => {
     if (!content || content === "") {
-      toast.push("Kommentti ei voi olla tyhjä", toastThemes.error);
+      toast.push(t.components.commentForm.emptyComment, toastThemes.error);
       return;
     }
     sending = true;
@@ -41,10 +42,10 @@
       <LoadingSpinner />
     {:else}
       <Form>
-        <Input type="multiline" placeholder={isReply ? "Vastaa..." : "Kommentoi..."} bind:value={content} />
+        <Input type="multiline" placeholder={isReply ? `${t.common.reply}...` : `${t.common.comment}...`} bind:value={content} />
         <div class="button-group">
-          <Button link on:click={() => dispatch("close")}>Sulje</Button>
-          <Button on:click={sendComment}>Lähetä</Button>
+          <Button link on:click={() => dispatch("close")}>{t.common.close}</Button>
+          <Button on:click={sendComment}>{t.common.send}</Button>
         </div>
       </Form>
     {/if}

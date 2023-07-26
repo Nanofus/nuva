@@ -1,15 +1,16 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
   import type { CommentMeta } from "$lib/types";
+  import { t } from "$lib/translations";
 
   export let comments: CommentMeta[];
 </script>
 
 <table>
   <tr class="table-header">
-    <td class="link">Postaus</td>
-    <td class="date">Päiväys</td>
-    <td class="authors">Kommentoija</td>
+    <td class="link">{t.components.commentList.post}</td>
+    <td class="date">{t.components.commentList.date}</td>
+    <td class="commenter">{t.components.commentList.commenter}</td>
   </tr>
   {#each comments as comment}
     <tr>
@@ -17,7 +18,7 @@
         <a href="/posts/{comment.postSlug}#comment-{comment._id}">{comment.postTitle}</a>
       </td>
       <td class="date">{comment.date.toLocaleDateString(LOCALE)}</td>
-      <td class="authors"><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td>
+      <td class="commenter"><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td>
     </tr>
   {/each}
 </table>

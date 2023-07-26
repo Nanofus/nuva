@@ -1,6 +1,7 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
   import type { Post } from "$lib/types";
+  import { t } from "$lib/translations";
 
   export let post: Post;
 </script>
@@ -27,7 +28,7 @@
     </span>
     <span class="post-comments-link">
       <span class="material-icons inline-icon">forum</span>
-			<a href="#comments">{post.commentCount ? post.commentCount : 0} kommentti{post.commentCount === 1 ? "" : "a"}</a>
+			<a href="#comments">{post.commentCount ? post.commentCount : 0} {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a>
 		</span>
   </div>
 </header>

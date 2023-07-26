@@ -7,6 +7,7 @@
   import { filterExcludedCategories, getPageTitle, getPageUrl } from "$lib/util";
   import { onMount } from "svelte";
   import { scrolledToBottom } from "$lib/stores";
+  import { t } from "$lib/translations";
 
   export let data: PostListResponse;
   let fetching = false;
@@ -28,16 +29,16 @@
 </script>
 
 <svelte:head>
-  <title>{getPageTitle("Julkaisut")}</title>
-  <meta content={"Julkaisut"} property="og:title" />
+  <title>{getPageTitle(t.pages.posts.title)}</title>
+  <meta content={t.pages.posts.title} property="og:title" />
   <meta content={getPageUrl(`/posts`)} property="og:url" />
 </svelte:head>
 
-<h1>Kaikki julkaisut</h1>
+<h1>{t.pages.posts.title}</h1>
 <PostList posts={data.posts} />
 <div class="vertically-separated">
   {#if data.hasNextPage && !fetching}
-    <Button link on:click={fetchMorePosts}>Lataa lisää</Button>
+    <Button link on:click={fetchMorePosts}>{t.common.loadMore}</Button>
   {:else if fetching}
     <LoadingSpinner />
   {/if}

@@ -5,13 +5,14 @@
   import { toast } from "@zerodevx/svelte-toast";
   import { toastThemes } from "$lib/util";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+  import { t } from "$lib/translations";
 
   let searchTerm = "";
   let submitted = false;
 
   const search = () => {
     if (searchTerm === "" || !searchTerm) {
-      toast.push("Laitapa hakukenttään edes jotain", toastThemes.error);
+      toast.push(t.components.search.emptyField, toastThemes.error);
       return;
     }
     window.location.href = `/search/${encodeURI(searchTerm)}`;
@@ -20,9 +21,9 @@
 
 <div class="search-area">
   <Form on:submit={() => submitted = true}>
-    <Input bind:value={searchTerm} placeholder="Hakusanat" />
+    <Input bind:value={searchTerm} placeholder={t.components.search.searchTerms} />
     {#if !submitted}
-      <Button icon="search" on:click={search} on:keyup={search}>Etsi</Button>
+      <Button icon="search" on:click={search} on:keyup={search}>{t.components.search.search}</Button>
     {:else}
       <LoadingSpinner />
     {/if}

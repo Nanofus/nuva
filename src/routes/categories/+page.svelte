@@ -2,17 +2,18 @@
   import type { CategoryListResponse } from "$lib/types";
   import List from "$lib/components/reusable/List.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";
+  import { t } from "$lib/translations";
 
   export let data: CategoryListResponse;
 </script>
 
 <svelte:head>
-  <title>{getPageTitle("Kategoriat")}</title>
-  <meta content={"Kategoriat"} property="og:title" />
+  <title>{getPageTitle(t.pages.categories.title)}</title>
+  <meta content={t.pages.categories.title} property="og:title" />
   <meta content={getPageUrl(`categories`)} property="og:url" />
 </svelte:head>
 
-<h1>Kategoriat</h1>
+<h1>{t.pages.categories.title}</h1>
 <List>
   {#each data.categories as category}
     <li>

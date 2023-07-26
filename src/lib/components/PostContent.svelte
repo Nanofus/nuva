@@ -6,6 +6,7 @@
   import { toast } from "@zerodevx/svelte-toast";
   import { cleanGlobalScope, toastThemes } from "$lib/util";
   import { initGlobalScope } from "$lib/util.js";
+  import { t } from "$lib/translations";
 
   export let post: Post;
   let scriptElements = [];
@@ -21,7 +22,7 @@
     const doc = new DOMParser().parseFromString(`<div>${htmlString}</div>`, "text/html"); // TODO: Not strict enough, should use 3rd party library
     if (doc.querySelector("parsererror")) {
       console.error(doc.querySelector("parsererror")?.querySelector("div")?.innerHTML);
-      toast.push("Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.", toastThemes.error);
+      toast.push(t.components.postContent.htmlError, toastThemes.error);
     }
   };
 
@@ -77,8 +78,7 @@
   <div id="post-style-container">{@html `<style>${post.styles}</style>`}</div>
 {/if}
 {#if !post.mobileFriendly}
-  <div class="info-box error hidden-desktop"><span class="material-icons inline-icon">warning</span> Tämä postaus ei
-    sovi mobiililla luettavaksi.
+  <div class="info-box error hidden-desktop"><span class="material-icons inline-icon">warning</span> {t.components.postContent.notMobileFriendly}
   </div>
 {/if}
 <section class="vertically-separated" id="post-content">

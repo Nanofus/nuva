@@ -4,6 +4,7 @@
   import { browser } from "$app/environment";
   import { loginInfo, postOptions } from "$lib/stores";
   import type { AuthInfo } from "$lib/types";
+  import { t } from "$lib/translations";
 
   let smallLogo: HTMLElement;
   let menuOpen = false;
@@ -59,7 +60,7 @@
   <div class="nav-wrapper">
     <div class="section-logo-area">
       <div bind:this={smallLogo} class="section-logo">
-        <NavItem href="/"><h1>Klaanon</h1></NavItem>
+        <NavItem href="/"><h1>{t.siteName}</h1></NavItem>
       </div>
       <div class="section-menu">
         <NavItem on:click={toggleMenu}>
@@ -75,17 +76,17 @@
     </div>
     <div class="section-menu-items {menuOpen ? 'menu-open' : ''}" on:click={menuClicked} on:keypress={menuClicked} role="button"
          tabindex="0">
-      <NavItem href="/">Etusivu</NavItem>
-      <NavItem href="/posts">Julkaisut</NavItem>
-      <NavItem href="/categories">Kategoriat</NavItem>
-      <NavItem href="/tags">Tagit</NavItem>
-      <NavItem href="/posts/muotoiluopas">Muotoiluopas</NavItem>
-      <NavItem href="https://arkisto.klaanon.fi/soundtracks/">Soundtrackit</NavItem>
+      <NavItem href="/">{t.components.navigation.frontPage}</NavItem>
+      <NavItem href="/posts">{t.components.navigation.posts}</NavItem>
+      <NavItem href="/categories">{t.components.navigation.categories}</NavItem>
+      <NavItem href="/tags">{t.components.navigation.tags}</NavItem>
+      <NavItem href={t.components.navigation.guideUrl}>{t.components.navigation.guide}</NavItem>
+      <NavItem href={t.components.navigation.soundtracksUrl}>{t.components.navigation.soundtracks}</NavItem>
       {#if userInfo}
-        <NavItem href="https://klaanon.fi/wp/wp-admin/edit.php">Kirjoita</NavItem>
+        <NavItem href={t.components.navigation.writeUrl}>{t.components.navigation.write}</NavItem>
       {/if}
-      <NavItem href="/profile">{userInfo ? "Profiili" : "Kirjaudu"}</NavItem>
-      <NavItem href="/search">Haku</NavItem>
+      <NavItem href="/profile">{userInfo ? t.components.navigation.profile : t.components.navigation.login}</NavItem>
+      <NavItem href="/search">{t.components.navigation.search}</NavItem>
     </div>
     <div class="section-filler">
     </div>

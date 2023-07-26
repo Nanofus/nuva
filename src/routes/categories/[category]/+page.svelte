@@ -7,6 +7,7 @@
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { onMount } from "svelte";
   import { scrolledToBottom } from "$lib/stores";
+  import { t } from "$lib/translations";
 
   export let data: PostListByCategoryResponse;
   let fetching = false;
@@ -35,10 +36,10 @@
   <meta content={getPageUrl(`categories/${data.categorySlug}`)} property="og:url" />
 </svelte:head>
 
-<h1>Kategoria: {data.category}</h1>
+<h1>{t.pages.category.title}: {data.category}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
-  <Button link on:click={fetchMorePosts}>Lataa lisää</Button>
+  <Button link on:click={fetchMorePosts}>{t.common.loadMore}</Button>
 {:else if fetching}
   <LoadingSpinner />
 {/if}

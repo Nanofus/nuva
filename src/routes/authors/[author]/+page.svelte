@@ -7,6 +7,7 @@
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { onMount } from "svelte";
   import { scrolledToBottom } from "$lib/stores";
+  import { t } from "$lib/translations";
 
   export let data: PostListByAuthorResponse;
   let fetching = false;
@@ -34,10 +35,10 @@
   <meta content={getPageUrl(`authors/${encodeURI(data.author)}`)} property="og:url" />
 </svelte:head>
 
-<h1>Kirjoittaja: {data.author}</h1>
+<h1>{t.pages.author.title}: {data.author}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
-  <Button link on:click={fetchMorePosts}>Lataa lisää</Button>
+  <Button link on:click={fetchMorePosts}>{t.common.loadMore}</Button>
 {:else if fetching}
   <LoadingSpinner />
 {/if}

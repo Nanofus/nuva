@@ -7,6 +7,7 @@
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { onMount } from "svelte";
   import { scrolledToBottom } from "$lib/stores";
+  import { t } from "$lib/translations";
 
   export let data: PostListBySearchResponse;
   let fetching = false;
@@ -34,10 +35,10 @@
   <meta content={getPageUrl(`search/${encodeURI(data.searchTerm)}`)} property="og:url" />
 </svelte:head>
 
-<h1>Haku: {data.searchTerm}</h1>
+<h1>{t.pages.searchResults.title}: {data.searchTerm}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
-  <Button link on:click={fetchMorePosts}>Lataa lisää</Button>
+  <Button link on:click={fetchMorePosts}>{t.common.loadMore}</Button>
 {:else if fetching}
   <LoadingSpinner />
 {/if}

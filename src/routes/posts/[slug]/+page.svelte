@@ -7,6 +7,7 @@
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util";
   import { postOptions } from "$lib/stores";
+  import { t } from "$lib/translations";
 
   export let data: Post;
   let noAccess = false;
@@ -64,7 +65,7 @@
     <PostFooter post={data} />
   </article>
 {:else if noAccess}
-  <h2>Postausta ei löytynyt tai sinulla ei ole pääsyä siihen</h2>
+  <h2>{t.pages.post.noAccess}</h2>
 {:else}
   <LoadingSpinner />
 {/if}

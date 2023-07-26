@@ -4,6 +4,7 @@
   import { getCommentsForPostBySlug, isLoggedIn } from "$lib/database";
   import Comment from "$lib/components/Comment.svelte";
   import Button from "$lib/components/reusable/Button.svelte";
+  import { t } from "$lib/translations";
 
   export let post: Post;
   let replyFormOpen = false;
@@ -17,12 +18,12 @@
 </script>
 
 <div class="vertically-separated" id="comments">
-  <h2>{post.commentCount ? post.commentCount : 0} kommentti{post.commentCount === 1 ? "" : "a"}</h2>
+  <h2>{post.commentCount ? post.commentCount : 0} {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</h2>
   {#each post.comments as comment}
     <Comment on:commentSent={refreshComments} {post} {comment} />
   {/each}
   {#if !replyFormOpen && isLoggedIn()}
-    <Button link on:click={() => replyFormOpen = true}>Kommentoi</Button>
+    <Button link on:click={() => replyFormOpen = true}>{t.common.comment}</Button>
   {:else}
     <CommentForm on:commentSent={refreshComments} on:close={() => replyFormOpen = false} parent={0} postId={post._id}
                  isReply={false} />

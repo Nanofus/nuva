@@ -7,6 +7,7 @@
   import { getPageTitle, getPageUrl } from "$lib/util";
   import { onMount } from "svelte";
   import { scrolledToBottom } from "$lib/stores";
+  import { t } from "$lib/translations";
 
   export let data: PostListByTagResponse;
   let fetching = false;
@@ -35,10 +36,10 @@
   <meta content={getPageUrl(`tags/${data.tagSlug}`)} property="og:url" />
 </svelte:head>
 
-<h1>Tagi: {data.tag}</h1>
+<h1>{t.pages.tag.title}: {data.tag}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
-  <Button link on:click={fetchMorePosts}>Lataa lisää</Button>
+  <Button link on:click={fetchMorePosts}>{t.common.loadMore}</Button>
 {:else if fetching}
   <LoadingSpinner />
 {/if}
