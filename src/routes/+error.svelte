@@ -1,6 +1,6 @@
 <script>
   import { page } from "$app/stores";
-  import { getPageTitle } from "$lib/util";
+  import { getPageTitle } from "$lib/util/util";
   import { t } from "$lib/translations";
 </script>
 

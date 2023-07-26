@@ -39,6 +39,7 @@
     "@vercel/postgres-kysely": "^0.4.1",
     "@zerodevx/svelte-toast": "^0.9.5",
     "dotenv": "^16.0.3",
+    "html-validate": "^8.1.0",
     "kysely": "^0.26.1"
   }
 }

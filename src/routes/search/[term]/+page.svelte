@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { getPostList } from "$lib/database";
+  import { getPostList } from "$lib/util/database";
   import PostList from "$lib/components/PostList.svelte";
-  import type { PostListBySearchResponse } from "$lib/types";
+  import type { PostListBySearchResponse } from "$lib/util/types";
   import Button from "$lib/components/reusable/Button.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util";
+  import { getPageTitle, getPageUrl } from "$lib/util/util";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { onMount } from "svelte";
-  import { scrolledToBottom } from "$lib/stores";
+  import { scrolledToBottom } from "$lib/util/stores";
   import { t } from "$lib/translations";
 
   export let data: PostListBySearchResponse;

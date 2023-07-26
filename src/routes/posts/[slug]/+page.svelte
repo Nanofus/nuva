@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { Post } from "$lib/types";
+  import type { Post } from "$lib/util/types";
   import PostHeader from "$lib/components/PostHeader.svelte";
   import PostFooter from "$lib/components/PostFooter.svelte";
   import PostContent from "$lib/components/PostContent.svelte";
   import { onDestroy, onMount } from "svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util";
-  import { postOptions } from "$lib/stores";
+  import { getPageTitle, getPageUrl } from "$lib/util/util";
+  import { postOptions } from "$lib/util/stores";
   import { t } from "$lib/translations";
 
   export let data: Post;

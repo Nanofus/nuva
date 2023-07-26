@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Post } from "$lib/types";
+  import type { Post } from "$lib/util/types";
   import PostTags from "$lib/components/PostTags.svelte";
   import PostComments from "$lib/components/PostComments.svelte";
   import PostAuthors from "$lib/components/PostAuthors.svelte";

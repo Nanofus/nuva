@@ -1,4 +1,4 @@
-import type { Hierarchical, PostMeta } from "$lib/types";
+import type { Hierarchical, PostMeta } from "$lib/util/types";
 import {
   BANNER_COUNT,
   BASE_PATH,
@@ -11,23 +11,27 @@ import {
   SITE_NAME_DELIMITER
 } from "$lib/config";
 import { browser } from "$app/environment";
-import { scrolledToBottom } from "$lib/stores";
+import { scrolledToBottom } from "$lib/util/stores";
 
-export const toastThemes = {
+export const toastSettings = {
   error: {
     theme: {
       "--toastBackground": "var(--error-background)"
-    }
+    },
+    initial: 0,
+    dismissable: true
   },
   success: {
     theme: {
       "--toastBackground": "var(--success-background)"
-    }
+    },
+    dismissable: false
   },
   info: {
     theme: {
       "--toastBackground": "var(--info-background)"
-    }
+    },
+    dismissable: false
   }
 };
 

@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { isLoggedIn, postComment } from "$lib/database";
+  import { isLoggedIn, postComment } from "$lib/util/database";
   import { toast } from "@zerodevx/svelte-toast";
   import { createEventDispatcher, onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
   import Input from "$lib/components/reusable/Input.svelte";
   import Form from "$lib/components/reusable/Form.svelte";
-  import { toastThemes } from "$lib/util";
+  import { toastSettings } from "$lib/util/util";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { t } from "$lib/translations";
 
@@ -25,7 +25,7 @@
 
   const sendComment = async () => {
     if (!content || content === "") {
-      toast.push(t.components.commentForm.emptyComment, toastThemes.error);
+      toast.push(t.components.commentForm.emptyComment, toastSettings.error);
       return;
     }
     sending = true;

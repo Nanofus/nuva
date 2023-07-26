@@ -2,7 +2,7 @@ import { API_PATH, LATEST_COMMENTS_PER_FETCH, LOCALSTORAGE_AUTH_KEY, MAX_PER_FET
 import { toast } from "@zerodevx/svelte-toast";
 import { browser } from "$app/environment";
 import { error } from "@sveltejs/kit";
-import { loginInfo } from "$lib/stores";
+import { loginInfo } from "$lib/util/stores";
 import {
   dataToCategories,
   dataToCommentMetas,
@@ -10,7 +10,7 @@ import {
   dataToPost,
   dataToPostMeta,
   dataToTags
-} from "$lib/database.mappers";
+} from "$lib/util/database.mappers";
 import type {
   AuthInfo,
   CategoryListResponse,
@@ -24,8 +24,8 @@ import type {
   PostMeta,
   Tag,
   TagListResponse
-} from "$lib/types";
-import { toastThemes } from "$lib/util";
+} from "$lib/util/types";
+import { toastSettings } from "$lib/util/util";
 
 // New Postgres queries
 
@@ -374,7 +374,7 @@ export const isLoggedIn = (): boolean => {
 export const logout = (): void => {
   loginInfo.set(null);
   localStorage.removeItem(LOCALSTORAGE_AUTH_KEY);
-  toast.push("Kirjauduit ulos", toastThemes.success);
+  toast.push("Kirjauduit ulos", toastSettings.success);
 };
 
 export const login = async (
@@ -406,7 +406,7 @@ export const login = async (
       })
     })
   ).json();
-  if (response.errors?.length > 0) toast.push("Kirjautuminen epäonnistui.", toastThemes.error);
+  if (response.errors?.length > 0) toast.push("Kirjautuminen epäonnistui.", toastSettings.error);
   if (response.data.login) {
     const loginData: AuthInfo = {
       displayName: response.data.login.user.name,
@@ -416,7 +416,7 @@ export const login = async (
     };
     localStorage.setItem("auth", JSON.stringify(loginData));
     loginInfo.set(loginData);
-    toast.push(`Tervetuloa, ${loginData.displayName}`, toastThemes.success);
+    toast.push(`Tervetuloa, ${loginData.displayName}`, toastSettings.success);
     return true;
   }
   return false;
@@ -452,10 +452,10 @@ export const postComment = async (
     })
   ).json();
   response.errors?.forEach((error: any) => {
-    toast.push(error.message, toastThemes.error);
+    toast.push(error.message, toastSettings.error);
   });
   if (response.data.createComment.success) {
-    toast.push("Kommentti lähetetty", toastThemes.success);
+    toast.push("Kommentti lähetetty", toastSettings.success);
     return true;
   }
   return false;

@@ -1,8 +1,8 @@
 import { error, type Load } from "@sveltejs/kit";
-import { getLatestComments, getPostList } from "$lib/database";
-import type { PostsAndCommentsResponse } from "$lib/types";
+import { getLatestComments, getPostList } from "$lib/util/database";
+import type { PostsAndCommentsResponse } from "$lib/util/types";
 import { LATEST_POSTS_PER_FETCH } from "$lib/config";
-import { filterExcludedCategories } from "$lib/util";
+import { filterExcludedCategories } from "$lib/util/util";
 import { t } from "$lib/translations";
 
 export const load: Load = async ({ fetch }): Promise<PostsAndCommentsResponse> => {

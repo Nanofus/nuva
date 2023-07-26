@@ -1,6 +1,6 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
-  import type { Post } from "$lib/types";
+  import type { Post } from "$lib/util/types";
   import { t } from "$lib/translations";
 
   export let post: Post;

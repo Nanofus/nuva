@@ -2,8 +2,8 @@
   import NavItem from "$lib/components/reusable/NavItem.svelte";
   import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
-  import { loginInfo, postOptions } from "$lib/stores";
-  import type { AuthInfo } from "$lib/types";
+  import { loginInfo, postOptions } from "$lib/util/stores";
+  import type { AuthInfo } from "$lib/util/types";
   import { t } from "$lib/translations";
 
   let smallLogo: HTMLElement;

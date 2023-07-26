@@ -5,7 +5,7 @@ Musicmancer 2023 Edition
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
-  import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util";
+  import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
   import { DEFAULT_VOLUME, MUSIC_FADE_SPEED } from "$lib/config";
   import type { ChangeEvent } from "react";
 

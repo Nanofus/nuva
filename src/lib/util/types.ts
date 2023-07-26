@@ -39,6 +39,8 @@ export interface Post extends PostMeta {
   } | null;
   tags: Tag[];
   comments: Comment[];
+  validationResult: any;
+  isPreview: boolean | undefined;
 }
 
 export interface Category extends Hierarchical {

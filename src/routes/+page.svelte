@@ -1,7 +1,7 @@
 <script lang="ts">
   import PostList from "$lib/components/PostList.svelte";
-  import type { CommentMeta, PostListResponse } from "$lib/types";
-  import { getPageTitle, getPageUrl } from "$lib/util";
+  import type { CommentMeta, PostListResponse } from "$lib/util/types";
+  import { getPageTitle, getPageUrl } from "$lib/util/util";
   import FeaturedPost from "$lib/components/FeaturedPost.svelte";
   import CommentList from "$lib/components/CommentList.svelte";
   import { t } from "$lib/translations";

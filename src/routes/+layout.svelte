@@ -7,11 +7,11 @@
   import "$lib/style/theme.scss";
   import Navigation from "$lib/components/Navigation.svelte";
   import { OG_LOCALE, SITE_NAME } from "$lib/config";
-  import { createBaseSettings, handleScrolledToBottom } from "$lib/util";
+  import { createBaseSettings, handleScrolledToBottom } from "$lib/util/util";
   import { navigating } from "$app/stores";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { fade } from "svelte/transition";
-  import { postOptions } from "$lib/stores";
+  import { postOptions } from "$lib/util/stores";
   import { browser } from "$app/environment";
 
   export let data;

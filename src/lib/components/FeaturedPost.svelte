@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { PostMeta } from "$lib/types";
-  import { getRandomBannerUrl } from "$lib/util";
+  import type { PostMeta } from "$lib/util/types";
+  import { getRandomBannerUrl } from "$lib/util/util";
 
   export let postMeta: PostMeta;
 </script>

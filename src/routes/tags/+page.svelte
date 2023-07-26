@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { getTagList } from "$lib/database";
-  import type { TagListResponse } from "$lib/types";
+  import { getTagList } from "$lib/util/database";
+  import type { TagListResponse } from "$lib/util/types";
   import Button from "$lib/components/reusable/Button.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import Pill from "$lib/components/reusable/Pill.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util";
+  import { getPageTitle, getPageUrl } from "$lib/util/util";
   import { onMount } from "svelte";
-  import { scrolledToBottom } from "$lib/stores";
+  import { scrolledToBottom } from "$lib/util/stores";
   import { t } from "$lib/translations";
 
   export let data: TagListResponse;

@@ -31,7 +31,7 @@ const TRANSLATIONS_FI = {
       subheader: "Bio-Klaanin yhteinen tarina"
     },
     login: {
-      fillBothFields: "Täytä molemmat kentät",
+      fillBothFields: "Täytä molemmat kentät.",
       cantUseWithoutJs: "Ei käytettävissä ilman JavaScriptia.",
       login: "Kirjaudu sisään",
       logout: "Kirjaudu ulos",
@@ -39,7 +39,10 @@ const TRANSLATIONS_FI = {
       password: "Salasana"
     },
     postContent: {
-      htmlError: "Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.",
+      validationError: "Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.",
+      scriptError: "Virhe postauksen skripteissä. Katso konsolista lisätietoja.",
+      errorsCountSingular: "virhe",
+      errorsCountPlural: "virhettä",
       notMobileFriendly: "Tämä postaus ei sovi mobiililla luettavaksi."
     },
     postList: {
@@ -48,7 +51,7 @@ const TRANSLATIONS_FI = {
       author: "Postaaja"
     },
     search: {
-      emptyField: "Laitapa hakukenttään edes jotain",
+      emptyField: "Laitapa hakukenttään edes jotain.",
       search: "Hae",
       searchTerms: "Hakusanat"
     },

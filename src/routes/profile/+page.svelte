@@ -1,8 +1,8 @@
 <script lang="ts">
   import Login from "$lib/components/Login.svelte";
-  import { getPageTitle, getPageUrl, loadSetting, saveSetting } from "$lib/util";
+  import { getPageTitle, getPageUrl, loadSetting, saveSetting } from "$lib/util/util";
   import { onMount } from "svelte";
-  import { loginInfo } from "$lib/stores";
+  import { loginInfo } from "$lib/util/stores";
   import SettingItem from "$lib/components/reusable/SettingItem.svelte";
   import Settings from "$lib/components/Settings.svelte";
   import { DEFAULT_VOLUME } from "$lib/config";
@@ -24,7 +24,7 @@
   <meta content={getPageUrl(`profile`)} property="og:url" />
 </svelte:head>
 
-<h1>{t.pages.profile}</h1>
+<h1>{t.pages.profile.title}</h1>
 {#if userInfo}
   <Settings>
     <SettingItem label={t.settings.user}><span>{userInfo.displayName}</span></SettingItem>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
-  import type { Category, PostMeta } from "$lib/types";
+  import type { Category, PostMeta } from "$lib/util/types";
   import { t } from "$lib/translations";
 
   export let posts: PostMeta[];

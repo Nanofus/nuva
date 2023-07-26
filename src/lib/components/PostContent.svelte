@@ -1,11 +1,10 @@
 <script lang="ts">
-  import type { Post } from "$lib/types";
+  import type { Post } from "$lib/util/types";
   import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
   import MusicPlayer from "$lib/components/MusicPlayer.svelte";
   import { toast } from "@zerodevx/svelte-toast";
-  import { cleanGlobalScope, toastThemes } from "$lib/util";
-  import { initGlobalScope } from "$lib/util.js";
+  import { cleanGlobalScope, initGlobalScope, toastSettings } from "$lib/util/util";
   import { t } from "$lib/translations";
 
   export let post: Post;
@@ -18,12 +17,23 @@
     }
   };
 
-  const validateContent = (htmlString: string) => {
-    const doc = new DOMParser().parseFromString(`<div>${htmlString}</div>`, "text/html"); // TODO: Not strict enough, should use 3rd party library
-    if (doc.querySelector("parsererror")) {
-      console.error(doc.querySelector("parsererror")?.querySelector("div")?.innerHTML);
-      toast.push(t.components.postContent.htmlError, toastThemes.error);
+  const reportValidation = () => {
+    if (post.validationResult && !post.validationResult.valid) {
+      console.error(`${post.validationResult.errorCount} ${post.validationResult.errorCount > 0 ? t.components.postContent.errorsCountPlural : t.components.postContent.errorsCountSingular}`, post.validationResult.results[0].messages);
+      toast.push(t.components.postContent.validationError, toastSettings.error);
     }
+  };
+
+  const reportError = () => {
+    toast.push(t.components.postContent.scriptError, toastSettings.error);
+  };
+
+  const createErrorReporter = () => {
+    window.addEventListener("error", reportError);
+  };
+
+  const cleanErrorReporter = () => {
+    window.removeEventListener("error", reportError);
   };
 
   const runUserScript = (script, isFile = false) => {
@@ -38,7 +48,7 @@
     scriptElements.push(scriptElement);
   };
 
-  const runScripts = (post: Post) => {
+  const runScripts = () => {
     post.scriptFiles.forEach((scriptFile) => {
       runUserScript(scriptFile, true);
     });
@@ -57,7 +67,8 @@
 
   onMount(() => {
     initGlobalScope();
-    validateContent(post.content);
+    reportValidation();
+    createErrorReporter();
     runScripts(post);
     setInitialLetter();
   });
@@ -70,6 +81,7 @@
 
   onDestroy(() => {
     cleanScripts();
+    cleanErrorReporter();
     cleanGlobalScope();
   });
 </script>

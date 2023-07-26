@@ -1,10 +1,10 @@
 <script lang="ts">
   import { LOCALE } from "$lib/config";
-  import type { Comment, Post } from "$lib/types";
+  import type { Comment, Post } from "$lib/util/types";
   import CommentForm from "$lib/components/CommentForm.svelte";
   import { createEventDispatcher } from "svelte";
   import { browser } from "$app/environment";
-  import { getAuthInfo, isLoggedIn } from "$lib/database";
+  import { getAuthInfo, isLoggedIn } from "$lib/util/database";
   import Button from "$lib/components/reusable/Button.svelte";
   import { t } from "$lib/translations";
 

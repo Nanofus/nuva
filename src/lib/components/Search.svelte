@@ -3,7 +3,7 @@
   import Input from "$lib/components/reusable/Input.svelte";
   import Form from "$lib/components/reusable/Form.svelte";
   import { toast } from "@zerodevx/svelte-toast";
-  import { toastThemes } from "$lib/util";
+  import { toastSettings } from "$lib/util/util";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { t } from "$lib/translations";
 
@@ -12,7 +12,7 @@
 
   const search = () => {
     if (searchTerm === "" || !searchTerm) {
-      toast.push(t.components.search.emptyField, toastThemes.error);
+      toast.push(t.components.search.emptyField, toastSettings.error);
       return;
     }
     window.location.href = `/search/${encodeURI(searchTerm)}`;

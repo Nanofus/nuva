@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { login, logout } from "$lib/database";
-  import { loginInfo } from "$lib/stores";
+  import { login, logout } from "$lib/util/database";
+  import { loginInfo } from "$lib/util/stores";
   import { onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
   import Input from "$lib/components/reusable/Input.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import Form from "$lib/components/reusable/Form.svelte";
   import { toast } from "@zerodevx/svelte-toast";
-  import { toastThemes } from "$lib/util";
+  import { toastSettings } from "$lib/util/util";
   import { browser } from "$app/environment";
   import { t } from "$lib/translations";
 
@@ -22,7 +22,7 @@
 
   const handleLogin = async () => {
     if (!usernameInput || !passwordInput) {
-      toast.push(t.components.login.fillBothFields, toastThemes.error);
+      toast.push(t.components.login.fillBothFields, toastSettings.error);
       return;
     }
     await login(fetch, usernameInput, passwordInput);

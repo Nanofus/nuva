@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { postOptions } from "$lib/stores";
-  import { getRandomBannerUrl } from "$lib/util";
+  import { postOptions } from "$lib/util/stores";
+  import { getRandomBannerUrl } from "$lib/util/util";
   import { t } from "$lib/translations";
 
   let bannerUrl = getRandomBannerUrl();
