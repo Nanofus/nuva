@@ -41,40 +41,40 @@
     window.removeEventListener("error", reportError);
   };
 
-  const runUserScript = (script, isFile = false) => {
+  const runUserScripts = async (script, scriptFiles = []) => {
+    let finalScript = "";
     const scriptElement = document.createElement("script");
-    if (isFile) {
-      scriptElement.setAttribute("src", script);
-      scriptElement.setAttribute("async", "false");
-    } else {
-      scriptElement.innerHTML = script;
-    }
+    const loadedScripts = await Promise.all(scriptFiles.map(async (fileUrl) => {
+      const response = await fetch(fileUrl);
+      return await response.text();
+    }));
+    loadedScripts.forEach((loadedScript) => {
+      finalScript += loadedScript;
+    });
+    finalScript += script;
+    scriptElement.innerHTML = `(() => {${finalScript}})();`;
     document.head.insertBefore(scriptElement, document.head.firstChild);
     scriptElements.push(scriptElement);
   };
 
-  const runScripts = () => {
-    post.scriptFiles.forEach((scriptFile) => {
-      runUserScript(scriptFile, true);
-    });
-
+  const runScripts = async () => {
     if (post.content.indexOf("<script>") === -1) {
-      runUserScript(post.scripts);
+      await runUserScripts(post.scripts, post.scriptFiles);
     }
 
     // Run JS in post content
     const doc = document.implementation.createHTMLDocument(); // Sandbox
     doc.body.innerHTML = post.content;
-    [].map.call(doc.getElementsByTagName("script"), (scriptTag: HTMLScriptElement) => {
-      runUserScript(scriptTag.innerText);
+    [].map.call(doc.getElementsByTagName("script"), async (scriptTag: HTMLScriptElement) => {
+      await runUserScripts(scriptTag.innerText);
     });
   };
 
-  onMount(() => {
+  onMount(async () => {
     initGlobalScope();
     reportValidation();
     createErrorReporter();
-    runScripts(post);
+    await runScripts(post);
     setInitialLetter();
   });
 

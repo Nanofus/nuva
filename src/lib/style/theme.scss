@@ -37,7 +37,7 @@ main {
   border-bottom-left-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
   height: auto;
-  min-height: calc(var(--full-height) - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin));
+  min-height: calc(var(--viewport-height) - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin));
 }
 
 // Mobile screen size
@@ -60,8 +60,8 @@ main {
 @mixin full-width {
   position: relative;
   left: calc(-50vw + 50%);
-  width: var(--full-width);
-  max-width: var(--full-width);
+  width: var(--viewport-width);
+  max-width: var(--viewport-width);
   overflow: hidden;
 }
 
@@ -141,7 +141,7 @@ article {
 // Screen is larger than white area
 @media screen and (min-width: 76rem) { // var(--max-page-width)
   .full-width, .background:not(.max) {
-    margin-left: calc((var(--full-width) - var(--page-max-width)) / 2);
+    margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
     max-width: calc(var(--page-max-width) + 0.5px); // 0.5px fixes a 1px rounding error
   }
 
@@ -236,6 +236,12 @@ h1, h2, h3, h4 {
   text-shadow: var(--header-shadow);
   overflow-wrap: break-word;
   transition: font-size var(--transition-speed) ease-in-out;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  > a, a:link, a:visited {
+    color: var(--text-light);
+  }
 }
 
 h1 {
@@ -452,7 +458,7 @@ img {
 // Page is wider than white area
 @media screen and (min-width: 76rem) { // var(--max-page-width)
   .grid-layout {
-    margin-left: calc((var(--full-width) - var(--page-max-width)) / 2);
+    margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
     max-width: calc(var(--page-max-width) + 0.5px); // 0.5px fixes a 1px rounding error
   }
 }
