@@ -39,11 +39,11 @@
 			{comment.author}</span
 		>
 		<span class="comment-date"
-			>{comment.date.toLocaleString(LOCALE, {
-				year: "numeric",
-				month: "numeric",
-				day: "numeric",
-			})}</span
+		>{comment.date.toLocaleString(LOCALE, {
+			year: "numeric",
+			month: "numeric",
+			day: "numeric",
+		})}</span
 		>
 	</header>
 	<div class="comment-content">{@html comment.content}</div>
@@ -76,14 +76,14 @@
 		border-radius: var(--border-radius);
 
 		&.highlighted {
-			border: var(--hover) 0.1rem solid;
+			border: var(--highlight-border);
 		}
 	}
 
 	.comment-header {
 		display: flex;
 		justify-content: space-between;
-		border-bottom: var(--border);
+		border-bottom: var(--highlight-border);
 		font-family: var(--accent-font-family);
 	}
 </style>

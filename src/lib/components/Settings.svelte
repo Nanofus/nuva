@@ -11,11 +11,11 @@
 		max-width: var(--article-max-width);
 
 		:global(> *) {
-			border-top: var(--border);
+			border-top: var(--subtle-border);
 		}
 
 		:global(> *:last-child) {
-			border-bottom: var(--border);
+			border-bottom: var(--subtle-border);
 		}
 	}
 </style>

@@ -29,7 +29,8 @@
 	--highlight: #f9dd4f;
 	--selection: #f9dd4f;
 	--comment-background: rgba(0, 0, 0, 0.1);
-	--border: 0.1rem solid var(--accent);
+	--highlight-border: 0.1rem solid var(--accent);
+	--subtle-border: 0.1rem solid var(--hover-light);
 }
 
 /* Typography */
