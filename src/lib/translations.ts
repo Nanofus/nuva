@@ -10,9 +10,15 @@ const TRANSLATIONS_FI = {
 		commentSingular: "kommentti",
 		commentPlural: "kommenttia",
 	},
+	toasts: {
+		welcome: "Tervetuloa",
+		commentSent: "Kommentti lähetetty.",
+		loginFailed: "Kirjautuminen epäonnistui.",
+		loggedOut: "Kirjauduit ulos.",
+	},
 	components: {
 		commentForm: {
-			emptyComment: "Kommentti ei voi olla tyhjä",
+			emptyComment: "Kommentti ei voi olla tyhjä.",
 		},
 		commentList: {
 			post: "Postaus",

@@ -26,6 +26,7 @@ import type {
 	TagListResponse
 } from "$lib/util/types";
 import { toastSettings } from "$lib/util/util";
+import { t } from "$lib/translations";
 
 // New Postgres queries
 
@@ -72,7 +73,7 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
 	return dataToCommentMetas(response.data.comments.nodes);
 };
 
-export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | undefined> => {
+export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | null> => {
 	const authToken = browser ? getAuthInfo()?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
@@ -153,7 +154,7 @@ export const getPostListByAuthor = async (
 		})
 	).json();
 	if (response.data.posts.edges.length === 0) {
-		throw error(404, "Not found");
+		throw error(404, t.errors.e404);
 	}
 
 	const { pageInfo } = response.data.posts;
@@ -198,7 +199,7 @@ export const getPostListByTag = async (
 		})
 	).json();
 	if (!response.data.tag) {
-		throw error(404, "Not found");
+		throw error(404, t.errors.e404);
 	}
 
 	const { pageInfo } = response.data.posts;
@@ -245,7 +246,7 @@ export const getPostListByCategory = async (
 		})
 	).json();
 	if (!response.data.category) {
-		throw error(404, "Not found");
+		throw error(404, t.errors.e404);
 	}
 
 	const { pageInfo } = response.data.category.posts;
@@ -390,7 +391,7 @@ export const isLoggedIn = (): boolean => {
 export const logout = (): void => {
 	loginInfo.set(null);
 	localStorage.removeItem(LOCALSTORAGE_AUTH_KEY);
-	toast.push("Kirjauduit ulos", toastSettings.success);
+	toast.push(t.toasts.loggedOut, toastSettings.success);
 };
 
 export const login = async (
@@ -423,7 +424,7 @@ export const login = async (
 		})
 	).json();
 	if (response.errors?.length > 0) {
-		toast.push("Kirjautuminen epäonnistui.", toastSettings.error);
+		toast.push(t.toasts.loginFailed, toastSettings.error);
 	}
 
 	if (response.data.login) {
@@ -435,7 +436,7 @@ export const login = async (
 		};
 		localStorage.setItem("auth", JSON.stringify(loginData));
 		loginInfo.set(loginData);
-		toast.push(`Tervetuloa, ${loginData.displayName}`, toastSettings.success);
+		toast.push(`${t.toasts.welcome}, ${loginData.displayName}`, toastSettings.success);
 		return true;
 	}
 
@@ -478,7 +479,7 @@ export const postComment = async (
 		toast.push(error.message, toastSettings.error);
 	});
 	if (response.data.createComment.success) {
-		toast.push("Kommentti lähetetty", toastSettings.success);
+		toast.push(t.toasts.commentSent, toastSettings.success);
 		return true;
 	}
 

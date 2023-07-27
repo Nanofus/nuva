@@ -3,7 +3,7 @@ import { LOCALSTORAGE_AUTH_KEY } from "$lib/config";
 import { browser } from "$app/environment";
 import type { AuthInfo, PostOptions } from "$lib/util/types";
 
-export const loginInfo: Writable<AuthInfo | undefined> = writable(
+export const loginInfo: Writable<AuthInfo | null> = writable(
 	browser
 		? localStorage.getItem(LOCALSTORAGE_AUTH_KEY)
 			? JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY)!)
