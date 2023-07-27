@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Comment, Post } from "$lib/util/types";
 	import CommentForm from "$lib/components/CommentForm.svelte";
-	import { getCommentsForPostBySlug, isLoggedIn } from "$lib/db/database";
+	import { getAllCommentsForPostBySlug, isLoggedIn } from "$lib/db/database";
 	import Button from "$lib/components/reusable/Button.svelte";
 	import { t } from "$lib/translations";
 	import Comment from "$lib/components/Comment.svelte";
@@ -11,7 +11,7 @@
 
 	const refreshComments = () => {
 		replyFormOpen = false;
-		getCommentsForPostBySlug(fetch, post.slug).then((comments: Comment[]) => {
+		getAllCommentsForPostBySlug(fetch, post.slug).then((comments: Comment[]) => {
 			post.comments = comments;
 		});
 	};

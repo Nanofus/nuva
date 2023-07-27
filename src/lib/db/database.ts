@@ -1,4 +1,4 @@
-import { API_PATH, LATEST_COMMENTS_PER_FETCH, LOCALSTORAGE_AUTH_KEY, MAX_PER_FETCH, QUERIES } from "$lib/config";
+import { API_PATH, LATEST_COMMENTS_PER_FETCH, LOCALSTORAGE_AUTH_KEY, MAX_PER_FETCH } from "$lib/config";
 import { toast } from "@zerodevx/svelte-toast";
 import { browser } from "$app/environment";
 import { error } from "@sveltejs/kit";
@@ -11,11 +11,13 @@ import {
 	dataToPostMeta,
 	dataToTags
 } from "$lib/db/database.mappers";
+import { QUERIES } from "$lib/db/database.queries";
 import type {
 	AuthInfo,
 	CategoryListResponse,
 	Comment,
 	CommentMeta,
+	CommentResponse,
 	Post,
 	PostListByAuthorResponse,
 	PostListByCategoryResponse,
@@ -25,7 +27,7 @@ import type {
 	Tag,
 	TagListResponse
 } from "$lib/util/types";
-import { toastSettings } from "$lib/util/util";
+import { objectsToHierarchy, toastSettings } from "$lib/util/util";
 import { t } from "$lib/translations";
 
 // New Postgres queries
@@ -87,20 +89,38 @@ export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post
             query PostBySlug {
                 post(idType: SLUG, id: "${slug}") {
                     ${QUERIES.postContent}
-					${QUERIES.postComments}
                 }
             }
             `,
 			}),
 		})
 	).json();
-	return dataToPost(response.data.post);
+	const post = dataToPost(response.data.post);
+	if (post) post.comments = await getAllCommentsForPostBySlug(fetch, slug);
+	return post;
+};
+
+export const getAllCommentsForPostBySlug = async (
+	fetch: Function,
+	slug: string
+): Promise<Comment[]> => {
+	let allCommentsFetched = false;
+	let allComments: Comment[] = [];
+	while (!allCommentsFetched) {
+		const commentResponse = await getCommentsForPostBySlug(fetch, slug);
+		allComments = [...allComments, ...commentResponse.comments];
+		if (!commentResponse.hasNextPage) allCommentsFetched = true;
+	}
+	return (objectsToHierarchy(allComments) as Comment[]).sort(
+		(a, b) => a.date.getTime() - b.date.getTime()
+	);
 };
 
 export const getCommentsForPostBySlug = async (
 	fetch: Function,
-	slug: string
-): Promise<Comment[]> => {
+	slug: string,
+	after: string | null = null
+): Promise<CommentResponse> => {
 	const authToken = browser ? getAuthInfo()?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
@@ -113,14 +133,28 @@ export const getCommentsForPostBySlug = async (
 				query: `
             query CommentsForPostBySlug {
                 post(idType: SLUG, id: "${slug}") {
-					${QUERIES.postComments}
-                }
+		                comments(first: ${MAX_PER_FETCH}, after: "${after}") {
+		                    ${QUERIES.pageInfo}
+		                    edges {
+		                        cursor
+		                        node {
+																${QUERIES.postComment}
+		                        }
+		                    }
+		                }
+		            }
             }
             `,
 			}),
 		})
 	).json();
-	return dataToComments(response.data.post.comments.nodes);
+	const { pageInfo } = response.data.post.comments;
+	const comments = dataToComments(response.data.post.comments.edges.map((e: any) => e.node));
+	return {
+		comments,
+		endCursor: pageInfo.endCursor,
+		hasNextPage: pageInfo.hasNextPage,
+	};
 };
 
 export const getPostListByAuthor = async (

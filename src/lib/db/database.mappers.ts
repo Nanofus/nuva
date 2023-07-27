@@ -31,7 +31,7 @@ export const dataToPostMeta = (data: any): PostMeta => ({
 });
 
 export const dataToComments = (nodes: any): Comment[] => {
-	const comments = nodes.map(
+	return nodes.map(
 		(comment: any): Comment => ({
 			date: new Date(comment.date),
 			author: comment.author.node.name,
@@ -40,9 +40,6 @@ export const dataToComments = (nodes: any): Comment[] => {
 			_id: comment.databaseId,
 			_parentId: comment.parentDatabaseId,
 		})
-	);
-	return (objectsToHierarchy(comments) as Comment[]).sort(
-		(a, b) => a.date.getTime() - b.date.getTime()
 	);
 };
 
@@ -109,8 +106,8 @@ export const dataToPost = (data: any): Post | null => {
 			slug: tag.slug,
 			name: tag.name,
 		})),
-		comments: dataToComments(data.comments.nodes),
-		validationResult: undefined,
+		comments: null,
+		validationResult: null,
 	};
 };
 

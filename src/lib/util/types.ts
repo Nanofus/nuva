@@ -38,7 +38,7 @@ export type Post = {
 		slug: string;
 	} | null;
 	tags: Tag[];
-	comments: Comment[];
+	comments: Comment[] | null;
 	validationResult: any;
 } & PostMeta;
 
@@ -71,6 +71,10 @@ export type Paginated = {
 	endCursor: string;
 	hasNextPage: boolean | null;
 };
+
+export type CommentResponse = {
+	comments: Comment[];
+} & Paginated;
 
 export type PostListResponse = {
 	posts: PostMeta[];
