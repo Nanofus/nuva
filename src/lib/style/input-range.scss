@@ -2,17 +2,17 @@
 	--track-color: var(--text-dark);
 	--thumb-color: var(--link);
 	--thumb-hover-color: var(--link-hover);
+	--thumb-border-color: var(--track-color);
+	--track-border-color: var(--hover-light);
 
 	--thumb-radius: 1rem;
 	--thumb-height: 1.2rem;
 	--thumb-width: 1.2rem;
 	--thumb-border-width: 0.1rem;
-	--thumb-border-color: var(--track-color);
 
 	--track-width: 100%;
 	--track-height: 0.5rem;
-	--track-border-width: 0.2rem;
-	--track-border-color: var(--track-color);
+	--track-border-width: 0.1rem;
 
 	--track-radius: 0.5rem;
 }
@@ -52,14 +52,6 @@
 		&::-webkit-slider-runnable-track {
 			background: var(--track-color);
 		}
-
-		&::-ms-fill-lower {
-			background: var(--track-color);
-		}
-
-		&::-ms-fill-upper {
-			background: var(--track-color);
-		}
 	}
 
 	&::-webkit-slider-runnable-track {
@@ -87,38 +79,10 @@
 		@include thumb;
 	}
 
-	&::-ms-track {
-		@include track;
-		background: transparent;
-		border-color: transparent;
-		border-width: calc(var(--thumb-height) / 2) 0;
-		color: transparent;
-	}
-
-	&::-ms-fill-lower {
-		background: var(--track-color);
-		border: var(--track-border-width) solid var(--track-border-color);
-		border-radius: calc(var(--track-radius) * 2);
-	}
-
-	&::-ms-fill-upper {
-		background: var(--track-color);
-		border: var(--track-border-width) solid var(--track-border-color);
-		border-radius: calc(var(--track-radius) * 2);
-	}
-
-	&::-ms-thumb {
-		@include thumb;
-		margin-top: calc(var(--track-height) / 4);
-	}
-
 	&:disabled {
 		&::-webkit-slider-thumb,
 		&::-moz-range-thumb,
-		&::-ms-thumb,
-		&::-webkit-slider-runnable-track,
-		&::-ms-fill-lower,
-		&::-ms-fill-upper {
+		&::-webkit-slider-runnable-track {
 			cursor: not-allowed;
 		}
 	}

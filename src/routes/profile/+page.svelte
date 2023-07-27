@@ -28,11 +28,20 @@
 {#if userInfo}
 	<Settings>
 		<SettingItem label={t.settings.user}><span>{userInfo.displayName}</span></SettingItem>
-		<SettingItem label={t.settings.volume}
-			><input class="volume-bar" type="range" min="0" max="100" bind:value={volume} /></SettingItem
+		<SettingItem label={t.settings.volume}>
+			<div class="input-wrapper">
+				<input class="volume-bar" type="range" min="0" max="100" bind:value={volume} />
+			</div>
+		</SettingItem
 		>
 	</Settings>
 {/if}
 <div class="vertically-separated">
 	<Login />
 </div>
+
+<style lang="scss">
+	.input-wrapper {
+		width: 12rem;
+	}
+</style>
