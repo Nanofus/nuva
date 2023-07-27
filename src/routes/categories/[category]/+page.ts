@@ -1,5 +1,5 @@
 import { error, type Load } from "@sveltejs/kit";
-import { getPostListByCategory } from "$lib/util/database";
+import { getPostListByCategory } from "$lib/db/database";
 import type { PostListByCategoryResponse } from "$lib/util/types";
 import { t } from "$lib/translations";
 

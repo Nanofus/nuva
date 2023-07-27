@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getTagList } from "$lib/util/database";
+	import { getTagList } from "$lib/db/database";
 	import type { TagListResponse } from "$lib/util/types";
 	import Button from "$lib/components/reusable/Button.svelte";
 	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";

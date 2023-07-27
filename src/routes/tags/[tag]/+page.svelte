@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getPostListByTag } from "$lib/util/database";
+	import { getPostListByTag } from "$lib/db/database";
 	import PostList from "$lib/components/PostList.svelte";
 	import type { PostListByTagResponse } from "$lib/util/types";
 	import Button from "$lib/components/reusable/Button.svelte";

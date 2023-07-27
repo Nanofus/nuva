@@ -1,5 +1,5 @@
 import { error, type Load } from "@sveltejs/kit";
-import { getPostBySlug } from "$lib/util/database";
+import { getPostBySlug } from "$lib/db/database";
 import type { Post } from "$lib/util/types";
 import { t } from "$lib/translations";
 import { validateHTML } from "$lib/util/html-validator";

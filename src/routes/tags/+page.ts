@@ -1,5 +1,5 @@
 import { error, type Load } from "@sveltejs/kit";
-import { getTagList } from "$lib/util/database";
+import { getTagList } from "$lib/db/database";
 import type { TagListResponse } from "$lib/util/types";
 import { t } from "$lib/translations";
 

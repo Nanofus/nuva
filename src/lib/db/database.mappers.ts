@@ -111,7 +111,6 @@ export const dataToPost = (data: any): Post | null => {
 		})),
 		comments: dataToComments(data.comments.nodes),
 		validationResult: undefined,
-		isPreview: null,
 	};
 };
 

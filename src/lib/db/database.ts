@@ -10,7 +10,7 @@ import {
 	dataToPost,
 	dataToPostMeta,
 	dataToTags
-} from "$lib/util/database.mappers";
+} from "$lib/db/database.mappers";
 import type {
 	AuthInfo,
 	CategoryListResponse,
