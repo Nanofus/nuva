@@ -9,7 +9,7 @@
   import { GLOBAL_OBJECT_NAME } from "$lib/config";
 
   export let post: Post;
-  let scriptElements = [];
+  let scriptElements: HTMLScriptElement[] = [];
 
   const setInitialLetter = () => {
     if (browser && !navigator.userAgent.match(/firefox|fxios/i) && post.initialLetter) { // TODO: Remove this when Firefox supports initial-letter
@@ -42,7 +42,7 @@
     window.removeEventListener("error", reportError);
   };
 
-  const runUserScripts = async (script, scriptFiles = []) => {
+  const runUserScripts = async (script: string, scriptFiles: string[] = []) => {
     let finalScript = "";
     const scriptElement = document.createElement("script");
     const loadedScripts = await Promise.all(scriptFiles.map(async (fileUrl) => {
@@ -75,7 +75,7 @@
     initGlobalScope();
     reportValidation();
     createErrorReporter();
-    await runScripts(post);
+    await runScripts();
     setInitialLetter();
   });
 
