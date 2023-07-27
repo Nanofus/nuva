@@ -4,6 +4,7 @@ import type { Post } from "$lib/util/types";
 import { t } from "$lib/translations";
 import { validateHTML } from "$lib/util/html-validator";
 
+// Vercel should run this path in Node instead of edge, since html-validate uses `eval` for some reason
 export const config = {
 	runtime: "nodejs18.x",
 };
