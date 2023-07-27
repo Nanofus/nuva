@@ -5,7 +5,8 @@
 	--text-dark: rgba(255, 255, 255, 0.9); // Color for text on dark backgrounds
 	--text-light-secondary: rgba(0, 0, 0, 0.5); // Accent color for text on light backgrounds
 	--hover-transparent: rgba(255, 255, 255, 0.1); // Transparent hover color for overlays
-	--hover: #333333; // Lighter hover color
+	--hover: #333333; // Dark hover color
+	--hover-light: #cccccc; // Light hover color
 	--background-light: #ffffff; // Background color for light backgrounds
 	--background-dark: #000000; // Background color for dark backgrounds
 	--accent: #252322; // Accent color for light backgrounds
@@ -15,7 +16,7 @@
 	--header-shadow: 0 0 1rem rgba(0, 0, 0, 0.9); // Shadow for headers
 	--music-button-shadow: 0.1rem 0.2rem 0.5rem rgba(0, 0, 0, 0.6); // Shadow for music buttons
 	--banner-shadow: 0 0 0.1rem rgba(0, 0, 0, 1), 0 0 0.5rem rgba(0, 0, 0, 0.9),
-		0 0 1rem rgba(0, 0, 0, 0.9); // Shadow for text in banner
+	0 0 1rem rgba(0, 0, 0, 0.9); // Shadow for text in banner
 	--scroll-hinting-shadow-color: rgba(0, 0, 0, 0.3);
 	--error: #f09896;
 	--error-background: #f09896;

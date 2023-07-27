@@ -37,7 +37,10 @@ Musicmancer 2023 Edition
 		clearInterval(fadeOutInterval);
 	});
 
-	const pauseOnEnded = () => (currentAudioElement?.pause());
+	const pauseOnEnded = () => {
+		paused = true;
+		currentAudioElement?.pause();
+	};
 
 	const play = (index: number) => {
 		const newAudioData = audioDataArray[index];
@@ -237,11 +240,11 @@ Musicmancer 2023 Edition
 
 		&:disabled {
 			color: var(--text-light);
-			background-color: var(--hover);
+			background-color: var(--hover-light);
 		}
 
 		&:hover {
-			background-color: var(--hover);
+			background-color: var(--hover-light);
 			cursor: pointer;
 
 			&:disabled {

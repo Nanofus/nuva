@@ -1,18 +1,21 @@
 <script lang="ts">
 	import { onDestroy, onMount } from "svelte";
+	import { fade } from "svelte/transition";
 	import { SvelteToast } from "@zerodevx/svelte-toast";
-	import Header from "$lib/components/Header.svelte";
-	import Footer from "$lib/components/Footer.svelte";
-	import "$lib/style/variables.scss";
-	import "$lib/style/theme.scss";
-	import Navigation from "$lib/components/Navigation.svelte";
+	import { browser } from "$app/environment";
+	import { navigating } from "$app/stores";
 	import { OG_LOCALE, SITE_NAME } from "$lib/config";
 	import { createBaseSettings, handleScrolledToBottom } from "$lib/util/util";
-	import { navigating } from "$app/stores";
-	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-	import { fade } from "svelte/transition";
 	import { postOptions } from "$lib/util/stores";
-	import { browser } from "$app/environment";
+	import Header from "$lib/components/Header.svelte";
+	import Footer from "$lib/components/Footer.svelte";
+	import Navigation from "$lib/components/Navigation.svelte";
+	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+
+	// Styles
+	import "$lib/style/variables.scss";
+	import "$lib/style/input-range.scss";
+	import "$lib/style/theme.scss";
 
 	export let data;
 
