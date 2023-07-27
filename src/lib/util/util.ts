@@ -112,7 +112,7 @@ export const initGlobalScope = () => {
 		return;
 	}
 
-	// @ts-expect-error
+	// @ts-expect-error Let's assign to window anyway
 	window[GLOBAL_OBJECT_NAME] = {};
 	window[GLOBAL_OBJECT_NAME].saveSetting = saveSetting;
 	window[GLOBAL_OBJECT_NAME].loadSetting = loadSetting;

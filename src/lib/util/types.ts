@@ -29,22 +29,18 @@ export type Post = {
 	bannerVisible: boolean;
 	fullWidth: boolean;
 	content: string;
-	previous:
-		| {
-				title: string;
-				slug: string;
-		  }
-		| undefined;
-	next:
-		| {
-				title: string;
-				slug: string;
-		  }
-		| undefined;
+	previous: {
+		title: string;
+		slug: string;
+	} | null;
+	next: {
+		title: string;
+		slug: string;
+	} | null;
 	tags: Tag[];
 	comments: Comment[];
 	validationResult: any;
-	isPreview: boolean | undefined;
+	isPreview: boolean | null;
 } & PostMeta;
 
 export type Category = {
@@ -74,7 +70,7 @@ export type CommentMeta = {
 
 export type Paginated = {
 	endCursor: string;
-	hasNextPage: boolean | undefined;
+	hasNextPage: boolean | null;
 };
 
 export type PostListResponse = {
@@ -121,7 +117,7 @@ export type AuthInfo = {
 
 export type PostOptions = {
 	bannerVisible: boolean;
-	customBannerUrl: string | undefined;
+	customBannerUrl: string | null;
 	stickyMenu: boolean;
 	fullWidth: boolean;
 };

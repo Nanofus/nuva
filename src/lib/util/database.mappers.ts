@@ -57,7 +57,7 @@ export const dataToCommentMetas = (nodes: any): CommentMeta[] =>
 		})
 	);
 
-export const dataToPost = (data: any): Post | undefined => {
+export const dataToPost = (data: any): Post | null => {
 	if (!data) {
 		return null;
 	}
@@ -111,7 +111,7 @@ export const dataToPost = (data: any): Post | undefined => {
 		})),
 		comments: dataToComments(data.comments.nodes),
 		validationResult: undefined,
-		isPreview: undefined,
+		isPreview: null,
 	};
 };
 

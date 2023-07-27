@@ -1,10 +1,4 @@
-import {
-	API_PATH,
-	LATEST_COMMENTS_PER_FETCH,
-	LOCALSTORAGE_AUTH_KEY,
-	MAX_PER_FETCH,
-	QUERIES,
-} from "$lib/config";
+import { API_PATH, LATEST_COMMENTS_PER_FETCH, LOCALSTORAGE_AUTH_KEY, MAX_PER_FETCH, QUERIES } from "$lib/config";
 import { toast } from "@zerodevx/svelte-toast";
 import { browser } from "$app/environment";
 import { error } from "@sveltejs/kit";
@@ -15,7 +9,7 @@ import {
 	dataToComments,
 	dataToPost,
 	dataToPostMeta,
-	dataToTags,
+	dataToTags
 } from "$lib/util/database.mappers";
 import type {
 	AuthInfo,
@@ -29,7 +23,7 @@ import type {
 	PostListByTagResponse,
 	PostMeta,
 	Tag,
-	TagListResponse,
+	TagListResponse
 } from "$lib/util/types";
 import { toastSettings } from "$lib/util/util";
 
@@ -131,7 +125,7 @@ export const getCommentsForPostBySlug = async (
 export const getPostListByAuthor = async (
 	fetch: Function,
 	author: string,
-	after: string | undefined = null
+	after: string | null = null
 ): Promise<PostListByAuthorResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -175,7 +169,7 @@ export const getPostListByAuthor = async (
 export const getPostListByTag = async (
 	fetch: Function,
 	tag: string,
-	after: string | undefined = null
+	after: string | null = null
 ): Promise<PostListByTagResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -222,7 +216,7 @@ export const getPostListByTag = async (
 export const getPostListByCategory = async (
 	fetch: Function,
 	category: string,
-	after: string | undefined = null
+	after: string | null = null
 ): Promise<PostListByCategoryResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -270,7 +264,7 @@ export const getPostListByCategory = async (
 
 export const getPostList = async (
 	fetch: Function,
-	after: string | undefined = null,
+	after: string | null = null,
 	searchTerm = "",
 	count: number = MAX_PER_FETCH
 ): Promise<PostListBySearchResponse> => {
@@ -311,7 +305,7 @@ export const getPostList = async (
 
 export const getTagList = async (
 	fetch: Function,
-	after: string | undefined = null
+	after: string | null = null
 ): Promise<TagListResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -376,13 +370,12 @@ export const getCategoryList = async (fetch: Function): Promise<CategoryListResp
 	return { categories };
 };
 
-export const getAuthInfo = (): AuthInfo | undefined => {
+export const getAuthInfo = (): AuthInfo | null => {
 	if (localStorage !== undefined) {
 		return localStorage.getItem(LOCALSTORAGE_AUTH_KEY)
 			? JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY)!)
 			: null;
 	}
-
 	return null;
 };
 
