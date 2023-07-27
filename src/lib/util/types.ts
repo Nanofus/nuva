@@ -40,7 +40,6 @@ export type Post = {
 	tags: Tag[];
 	comments: Comment[];
 	validationResult: any;
-	isPreview: boolean | null;
 } & PostMeta;
 
 export type Category = {

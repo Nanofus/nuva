@@ -9,7 +9,6 @@ export const load: Load = async ({ fetch, params, url }): Promise<Post | null> =
 		const isPreview = url.searchParams.get("preview") != null;
 		const post = await getPostBySlug(fetch, params.slug);
 		if (isPreview && post) {
-			post.isPreview = true;
 			post.validationResult = await validateHTML(post.content);
 		}
 
