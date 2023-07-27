@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { LOCALE } from '$lib/config';
-	import type { CommentMeta } from '$lib/util/types';
-	import { t } from '$lib/translations';
+	import { LOCALE } from "$lib/config";
+	import type { CommentMeta } from "$lib/util/types";
+	import { t } from "$lib/translations";
 
 	export let comments: CommentMeta[];
 </script>

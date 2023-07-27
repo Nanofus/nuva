@@ -121,7 +121,7 @@ article {
 	&.fade:before,
 	&.fade-top:before,
 	&.fade-bottom:after {
-		content: '';
+		content: "";
 		position: absolute;
 		z-index: 1;
 		left: 0;
@@ -192,7 +192,7 @@ article {
 .author-list > a:not(:last-child) {
 	&::after,
 	&:hover::after {
-		content: ',';
+		content: ",";
 		text-decoration: none;
 		margin-right: 0.6rem;
 	}
@@ -291,13 +291,13 @@ h2 {
 	justify-content: center;
 
 	&:before {
-		content: '—';
+		content: "—";
 		font-weight: lighter;
 		margin-right: 1rem;
 	}
 
 	&:after {
-		content: '—';
+		content: "—";
 		font-weight: lighter;
 		margin-left: 1rem;
 	}
@@ -413,7 +413,7 @@ img {
 	color: white;
 	font-size: 2rem;
 	font-weight: bold;
-	font-family: 'Source Code Pro', monospace;
+	font-family: "Source Code Pro", monospace;
 }
 
 .hidden {

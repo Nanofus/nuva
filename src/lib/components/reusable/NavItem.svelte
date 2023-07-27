@@ -1,12 +1,12 @@
 <script lang="ts">
-	export let href = '';
+	export let href = "";
 	let openInNewTab = false;
 
-	$: href.indexOf('http') === 0 && (openInNewTab = true);
+	$: href.indexOf("http") === 0 && (openInNewTab = true);
 </script>
 
 {#if href}
-	<a {href} target={openInNewTab ? '_blank' : null} on:click>
+	<a {href} target={openInNewTab ? "_blank" : null} on:click>
 		<slot />
 	</a>
 {:else}

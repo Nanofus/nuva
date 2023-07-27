@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { LOCALE } from '$lib/config';
-	import type { Comment, Post } from '$lib/util/types';
-	import CommentForm from '$lib/components/CommentForm.svelte';
-	import { createEventDispatcher } from 'svelte';
-	import { browser } from '$app/environment';
-	import { getAuthInfo, isLoggedIn } from '$lib/util/database';
-	import Button from '$lib/components/reusable/Button.svelte';
-	import { t } from '$lib/translations';
+	import { LOCALE } from "$lib/config";
+	import type { Comment, Post } from "$lib/util/types";
+	import CommentForm from "$lib/components/CommentForm.svelte";
+	import { createEventDispatcher } from "svelte";
+	import { browser } from "$app/environment";
+	import { getAuthInfo, isLoggedIn } from "$lib/util/database";
+	import Button from "$lib/components/reusable/Button.svelte";
+	import { t } from "$lib/translations";
 
 	export let comment: Comment;
 	export let post: Post;
@@ -16,7 +16,7 @@
 
 	const commentSent = () => {
 		replyFormOpen = false;
-		dispatch('commentSent');
+		dispatch("commentSent");
 	};
 
 	const isCurrentUser = () => {
@@ -40,9 +40,9 @@
 		>
 		<span class="comment-date"
 			>{comment.date.toLocaleString(LOCALE, {
-				year: 'numeric',
-				month: 'numeric',
-				day: 'numeric'
+				year: "numeric",
+				month: "numeric",
+				day: "numeric",
 			})}</span
 		>
 	</header>

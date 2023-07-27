@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
-	import { SvelteToast } from '@zerodevx/svelte-toast';
-	import Header from '$lib/components/Header.svelte';
-	import Footer from '$lib/components/Footer.svelte';
-	import '$lib/style/variables.scss';
-	import '$lib/style/theme.scss';
-	import Navigation from '$lib/components/Navigation.svelte';
-	import { OG_LOCALE, SITE_NAME } from '$lib/config';
-	import { createBaseSettings, handleScrolledToBottom } from '$lib/util/util';
-	import { navigating } from '$app/stores';
-	import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-	import { fade } from 'svelte/transition';
-	import { postOptions } from '$lib/util/stores';
-	import { browser } from '$app/environment';
+	import { onDestroy, onMount } from "svelte";
+	import { SvelteToast } from "@zerodevx/svelte-toast";
+	import Header from "$lib/components/Header.svelte";
+	import Footer from "$lib/components/Footer.svelte";
+	import "$lib/style/variables.scss";
+	import "$lib/style/theme.scss";
+	import Navigation from "$lib/components/Navigation.svelte";
+	import { OG_LOCALE, SITE_NAME } from "$lib/config";
+	import { createBaseSettings, handleScrolledToBottom } from "$lib/util/util";
+	import { navigating } from "$app/stores";
+	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+	import { fade } from "svelte/transition";
+	import { postOptions } from "$lib/util/stores";
+	import { browser } from "$app/environment";
 
 	export let data;
 
@@ -23,11 +23,11 @@
 			fullWidth = options.fullWidth;
 		});
 		createBaseSettings();
-		browser && document.addEventListener('scroll', handleScrolledToBottom);
+		browser && document.addEventListener("scroll", handleScrolledToBottom);
 	});
 
 	onDestroy(() => {
-		browser && document.removeEventListener('scroll', handleScrolledToBottom);
+		browser && document.removeEventListener("scroll", handleScrolledToBottom);
 	});
 </script>
 
@@ -38,7 +38,7 @@
 	<meta content="website" property="og:type" />
 </svelte:head>
 
-<div class={fullWidth ? 'wide' : ''} id="page">
+<div class={fullWidth ? "wide" : ""} id="page">
 	<Header />
 	<Navigation />
 	<main>

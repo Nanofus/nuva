@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { PostMeta } from '$lib/util/types';
-	import { getRandomBannerUrl } from '$lib/util/util';
+	import type { PostMeta } from "$lib/util/types";
+	import { getRandomBannerUrl } from "$lib/util/util";
 
 	export let postMeta: PostMeta;
 </script>
@@ -19,7 +19,7 @@
 		</span>
 	</p>
 	<h1><a href="/posts/{postMeta.slug}">{@html postMeta.title}</a></h1>
-	<p>{@html postMeta.description ? postMeta.description : ''}</p>
+	<p>{@html postMeta.description ? postMeta.description : ""}</p>
 </div>
 
 <style lang="scss">

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { Post } from '$lib/util/types';
-	import CommentForm from '$lib/components/CommentForm.svelte';
-	import { getCommentsForPostBySlug, isLoggedIn } from '$lib/util/database';
-	import Comment from '$lib/components/Comment.svelte';
-	import Button from '$lib/components/reusable/Button.svelte';
-	import { t } from '$lib/translations';
+	import type { Post } from "$lib/util/types";
+	import CommentForm from "$lib/components/CommentForm.svelte";
+	import { getCommentsForPostBySlug, isLoggedIn } from "$lib/util/database";
+	import Comment from "$lib/components/Comment.svelte";
+	import Button from "$lib/components/reusable/Button.svelte";
+	import { t } from "$lib/translations";
 
 	export let post: Post;
 	let replyFormOpen = false;

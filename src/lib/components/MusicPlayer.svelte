@@ -3,11 +3,11 @@
 Musicmancer 2023 Edition
 -->
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
-	import Button from '$lib/components/reusable/Button.svelte';
-	import { formatSecondsToMMSS, loadSetting, saveSetting } from '$lib/util/util';
-	import { DEFAULT_VOLUME, MUSIC_FADE_SPEED } from '$lib/config';
-	import type { ChangeEvent } from 'react';
+	import { onDestroy, onMount } from "svelte";
+	import Button from "$lib/components/reusable/Button.svelte";
+	import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
+	import { DEFAULT_VOLUME, MUSIC_FADE_SPEED } from "$lib/config";
+	import type { ChangeEvent } from "react";
 
 	interface AudioData {
 		src: string;
@@ -27,7 +27,7 @@ Musicmancer 2023 Edition
 	let audioDataArray: AudioData[] = [];
 
 	onMount(() => {
-		volume = loadSetting('volume') || DEFAULT_VOLUME;
+		volume = loadSetting("volume") || DEFAULT_VOLUME;
 		initializeAudioElements();
 	});
 
@@ -71,18 +71,18 @@ Musicmancer 2023 Edition
 	const initializeAudioElements = () => {
 		let autoIndex = 0;
 		let totalIndex = 0;
-		const postContent = document.querySelector('#post-content');
+		const postContent = document.querySelector("#post-content");
 		if (!postContent) return;
-		const audioElements = postContent.querySelectorAll('audio');
+		const audioElements = postContent.querySelectorAll("audio");
 		// Add a div.audio-button element next to the audio elements
 		audioElements.forEach((audioElement) => {
 			// Get data from audio element
-			let audioSrc = audioElement.getAttribute('src');
+			let audioSrc = audioElement.getAttribute("src");
 			if (!audioSrc) return;
-			if (audioSrc === '#auto') {
+			if (audioSrc === "#auto") {
 				audioSrc = musicUrlArray[autoIndex];
 				autoIndex++;
-			} else if (audioSrc[0] === '#') {
+			} else if (audioSrc[0] === "#") {
 				audioSrc = musicUrlArray[parseInt(audioSrc.slice(1))];
 			}
 			audioElement.src = audioSrc;
@@ -92,22 +92,22 @@ Musicmancer 2023 Edition
 			audioDataArray.push({
 				src: audioSrc,
 				audioElement: audioElement,
-				isEffect: audioElement.classList.contains('effect')
+				isEffect: audioElement.classList.contains("effect"),
 			});
 
 			// Create audio play button
-			if (!audioElement.classList.contains('hidden') && !audioElement.hasAttribute('controls'))
+			if (!audioElement.classList.contains("hidden") && !audioElement.hasAttribute("controls"))
 				createAudioButton(audioElement, totalIndex);
 			totalIndex++;
 		});
 	};
 
 	const createAudioButton = (audioElement: HTMLAudioElement, index: number) => {
-		const audioButton = document.createElement('button');
+		const audioButton = document.createElement("button");
 		generatedElements.push(audioButton);
-		audioButton.classList.add('audio-button', `index-${index}`);
+		audioButton.classList.add("audio-button", `index-${index}`);
 		audioButton.innerHTML = `<span class="material-icons">music_note</span>`;
-		audioButton.addEventListener('click', () => play(parseInt(audioButton.classList[1].slice(6))));
+		audioButton.addEventListener("click", () => play(parseInt(audioButton.classList[1].slice(6))));
 		audioElement.after(audioButton);
 	};
 
@@ -131,7 +131,7 @@ Musicmancer 2023 Edition
 		.forEach((element) => (element.volume = volume / 100));
 
 	// Save volume
-	$: volume && saveSetting('volume', volume);
+	$: volume && saveSetting("volume", volume);
 
 	// Mute
 	$: currentAudioElement &&

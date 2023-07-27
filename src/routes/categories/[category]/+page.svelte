@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { getPostListByCategory } from '$lib/util/database';
-	import type { PostListByCategoryResponse } from '$lib/util/types';
-	import PostList from '$lib/components/PostList.svelte';
-	import Button from '$lib/components/reusable/Button.svelte';
-	import { getPageTitle, getPageUrl } from '$lib/util/util';
-	import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-	import { onMount } from 'svelte';
-	import { scrolledToBottom } from '$lib/util/stores';
-	import { t } from '$lib/translations';
+	import { getPostListByCategory } from "$lib/util/database";
+	import type { PostListByCategoryResponse } from "$lib/util/types";
+	import PostList from "$lib/components/PostList.svelte";
+	import Button from "$lib/components/reusable/Button.svelte";
+	import { getPageTitle, getPageUrl } from "$lib/util/util";
+	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+	import { onMount } from "svelte";
+	import { scrolledToBottom } from "$lib/util/stores";
+	import { t } from "$lib/translations";
 
 	export let data: PostListByCategoryResponse;
 	let fetching = false;
@@ -20,7 +20,7 @@
 			categorySlug: data.categorySlug,
 			category: data.category,
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage
+			hasNextPage: newData.hasNextPage,
 		};
 		fetching = false;
 	};

@@ -1,19 +1,19 @@
 <script lang="ts">
-	import { login, logout } from '$lib/util/database';
-	import { loginInfo } from '$lib/util/stores';
-	import { onMount } from 'svelte';
-	import Button from '$lib/components/reusable/Button.svelte';
-	import Input from '$lib/components/reusable/Input.svelte';
-	import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-	import Form from '$lib/components/reusable/Form.svelte';
-	import { toast } from '@zerodevx/svelte-toast';
-	import { toastSettings } from '$lib/util/util';
-	import { browser } from '$app/environment';
-	import { t } from '$lib/translations';
+	import { login, logout } from "$lib/util/database";
+	import { loginInfo } from "$lib/util/stores";
+	import { onMount } from "svelte";
+	import Button from "$lib/components/reusable/Button.svelte";
+	import Input from "$lib/components/reusable/Input.svelte";
+	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+	import Form from "$lib/components/reusable/Form.svelte";
+	import { toast } from "@zerodevx/svelte-toast";
+	import { toastSettings } from "$lib/util/util";
+	import { browser } from "$app/environment";
+	import { t } from "$lib/translations";
 
 	let loggedIn: boolean | null = null;
-	let passwordInput = '';
-	let usernameInput = '';
+	let passwordInput = "";
+	let usernameInput = "";
 	let submitted = false;
 
 	onMount(() => {

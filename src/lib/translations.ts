@@ -1,125 +1,125 @@
 const TRANSLATIONS_FI = {
-	siteName: 'Klaanon',
+	siteName: "Klaanon",
 	common: {
-		loadMore: 'Lataa lisää',
-		edit: 'Muokkaa',
-		reply: 'Vastaa',
-		comment: 'Kommentoi',
-		send: 'Lähetä',
-		close: 'Sulje',
-		commentSingular: 'kommentti',
-		commentPlural: 'kommenttia'
+		loadMore: "Lataa lisää",
+		edit: "Muokkaa",
+		reply: "Vastaa",
+		comment: "Kommentoi",
+		send: "Lähetä",
+		close: "Sulje",
+		commentSingular: "kommentti",
+		commentPlural: "kommenttia",
 	},
 	components: {
 		commentForm: {
-			emptyComment: 'Kommentti ei voi olla tyhjä'
+			emptyComment: "Kommentti ei voi olla tyhjä",
 		},
 		commentList: {
-			post: 'Postaus',
-			date: 'Päiväys',
-			commenter: 'Kommentoija'
+			post: "Postaus",
+			date: "Päiväys",
+			commenter: "Kommentoija",
 		},
 		comment: {
-			editUrl: 'https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c='
+			editUrl: "https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c=",
 		},
 		footer: {
-			copyright: '© Klaanon',
-			feedback: 'Palaute',
-			feedbackLink: 'https://discord.com/channels/1043556208700833792/1131238873024966809'
+			copyright: "© Klaanon",
+			feedback: "Palaute",
+			feedbackLink: "https://discord.com/channels/1043556208700833792/1131238873024966809",
 		},
 		header: {
-			subheader: 'Bio-Klaanin yhteinen tarina'
+			subheader: "Bio-Klaanin yhteinen tarina",
 		},
 		login: {
-			fillBothFields: 'Täytä molemmat kentät.',
-			cantUseWithoutJs: 'Ei käytettävissä ilman JavaScriptia.',
-			login: 'Kirjaudu sisään',
-			logout: 'Kirjaudu ulos',
-			username: 'Käyttäjätunnus',
-			password: 'Salasana'
+			fillBothFields: "Täytä molemmat kentät.",
+			cantUseWithoutJs: "Ei käytettävissä ilman JavaScriptia.",
+			login: "Kirjaudu sisään",
+			logout: "Kirjaudu ulos",
+			username: "Käyttäjätunnus",
+			password: "Salasana",
 		},
 		postContent: {
-			validationError: 'Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.',
-			noValidationError: 'Postauksen HTML:ssä ei virheitä!',
-			scriptError: 'Virhe postauksen skripteissä. Katso konsolista lisätietoja.',
-			errorsCountSingular: 'virhe',
-			errorsCountPlural: 'virhettä',
-			notMobileFriendly: 'Tämä postaus ei sovi mobiililla luettavaksi.'
+			validationError: "Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.",
+			noValidationError: "Postauksen HTML:ssä ei virheitä!",
+			scriptError: "Virhe postauksen skripteissä. Katso konsolista lisätietoja.",
+			errorsCountSingular: "virhe",
+			errorsCountPlural: "virhettä",
+			notMobileFriendly: "Tämä postaus ei sovi mobiililla luettavaksi.",
 		},
 		postList: {
-			title: 'Otsikko',
-			date: 'Päiväys',
-			author: 'Postaaja'
+			title: "Otsikko",
+			date: "Päiväys",
+			author: "Postaaja",
 		},
 		search: {
-			emptyField: 'Laitapa hakukenttään edes jotain.',
-			search: 'Hae',
-			searchTerms: 'Hakusanat'
+			emptyField: "Laitapa hakukenttään edes jotain.",
+			search: "Hae",
+			searchTerms: "Hakusanat",
 		},
 		navigation: {
-			frontPage: 'Etusivu',
-			posts: 'Julkaisut',
-			tags: 'Tagit',
-			categories: 'Kategoriat',
-			search: 'Haku',
-			guide: 'Muotoiluopas',
-			guideUrl: '/posts/muotoiluopas',
-			soundtracks: 'Soundtrackit',
-			soundtracksUrl: 'https://arkisto.klaanon.fi/soundtracks/',
-			write: 'Kirjoita',
-			writeUrl: 'https://klaanon.fi/wp/wp-admin/edit.php',
-			login: 'Kirjaudu',
-			profile: 'Profiili'
-		}
+			frontPage: "Etusivu",
+			posts: "Julkaisut",
+			tags: "Tagit",
+			categories: "Kategoriat",
+			search: "Haku",
+			guide: "Muotoiluopas",
+			guideUrl: "/posts/muotoiluopas",
+			soundtracks: "Soundtrackit",
+			soundtracksUrl: "https://arkisto.klaanon.fi/soundtracks/",
+			write: "Kirjoita",
+			writeUrl: "https://klaanon.fi/wp/wp-admin/edit.php",
+			login: "Kirjaudu",
+			profile: "Profiili",
+		},
 	},
 	settings: {
-		user: 'Käyttäjä',
-		volume: 'Äänenvoimakkuus'
+		user: "Käyttäjä",
+		volume: "Äänenvoimakkuus",
 	},
 	errors: {
-		e404: 'Sivua ei löytynyt',
-		e500: 'Jotain meni pieleen'
+		e404: "Sivua ei löytynyt",
+		e500: "Jotain meni pieleen",
 	},
 	pages: {
 		index: {
-			title: 'Etusivu',
-			newestReleases: 'Uusimmat julkaisut',
-			newestComments: 'Uusimmat kommentit'
+			title: "Etusivu",
+			newestReleases: "Uusimmat julkaisut",
+			newestComments: "Uusimmat kommentit",
 		},
 		error: {
-			title: 'Virhe'
+			title: "Virhe",
 		},
 		posts: {
-			title: 'Kaikki julkaisut'
+			title: "Kaikki julkaisut",
 		},
 		post: {
-			noAccess: 'Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.'
+			noAccess: "Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.",
 		},
 		tags: {
-			title: 'Tagit'
+			title: "Tagit",
 		},
 		tag: {
-			title: 'Tagi'
+			title: "Tagi",
 		},
 		search: {
-			title: 'Haku'
+			title: "Haku",
 		},
 		searchResults: {
-			title: 'Haku'
+			title: "Haku",
 		},
 		categories: {
-			title: 'Kategoriat'
+			title: "Kategoriat",
 		},
 		category: {
-			title: 'Kategoria'
+			title: "Kategoria",
 		},
 		author: {
-			title: 'Kirjoittaja'
+			title: "Kirjoittaja",
 		},
 		profile: {
-			title: 'Profiili'
-		}
-	}
+			title: "Profiili",
+		},
+	},
 };
 
 export const t = TRANSLATIONS_FI;

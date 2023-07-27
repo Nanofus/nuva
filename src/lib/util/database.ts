@@ -3,20 +3,20 @@ import {
 	LATEST_COMMENTS_PER_FETCH,
 	LOCALSTORAGE_AUTH_KEY,
 	MAX_PER_FETCH,
-	QUERIES
-} from '$lib/config';
-import { toast } from '@zerodevx/svelte-toast';
-import { browser } from '$app/environment';
-import { error } from '@sveltejs/kit';
-import { loginInfo } from '$lib/util/stores';
+	QUERIES,
+} from "$lib/config";
+import { toast } from "@zerodevx/svelte-toast";
+import { browser } from "$app/environment";
+import { error } from "@sveltejs/kit";
+import { loginInfo } from "$lib/util/stores";
 import {
 	dataToCategories,
 	dataToCommentMetas,
 	dataToComments,
 	dataToPost,
 	dataToPostMeta,
-	dataToTags
-} from '$lib/util/database.mappers';
+	dataToTags,
+} from "$lib/util/database.mappers";
 import type {
 	AuthInfo,
 	CategoryListResponse,
@@ -29,9 +29,9 @@ import type {
 	PostListByTagResponse,
 	PostMeta,
 	Tag,
-	TagListResponse
-} from '$lib/util/types';
-import { toastSettings } from '$lib/util/util';
+	TagListResponse,
+} from "$lib/util/types";
+import { toastSettings } from "$lib/util/util";
 
 // New Postgres queries
 
@@ -43,10 +43,10 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
 	const authToken = browser ? getAuthInfo()?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authToken ? `Bearer ${authToken}` : ''
+				"Content-Type": "application/json",
+				Authorization: authToken ? `Bearer ${authToken}` : "",
 			},
 			body: JSON.stringify({
 				query: `
@@ -71,21 +71,21 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
                     }
                 }
             }
-            `
-			})
+            `,
+			}),
 		})
 	).json();
 	return dataToCommentMetas(response.data.comments.nodes);
 };
 
-export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | null> => {
+export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | undefined> => {
 	const authToken = browser ? getAuthInfo()?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authToken ? `Bearer ${authToken}` : ''
+				"Content-Type": "application/json",
+				Authorization: authToken ? `Bearer ${authToken}` : "",
 			},
 			body: JSON.stringify({
 				query: `
@@ -95,8 +95,8 @@ export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post
 					${QUERIES.postComments}
                 }
             }
-            `
-			})
+            `,
+			}),
 		})
 	).json();
 	return dataToPost(response.data.post);
@@ -109,10 +109,10 @@ export const getCommentsForPostBySlug = async (
 	const authToken = browser ? getAuthInfo()?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authToken ? `Bearer ${authToken}` : ''
+				"Content-Type": "application/json",
+				Authorization: authToken ? `Bearer ${authToken}` : "",
 			},
 			body: JSON.stringify({
 				query: `
@@ -121,8 +121,8 @@ export const getCommentsForPostBySlug = async (
 					${QUERIES.postComments}
                 }
             }
-            `
-			})
+            `,
+			}),
 		})
 	).json();
 	return dataToComments(response.data.post.comments.nodes);
@@ -131,13 +131,13 @@ export const getCommentsForPostBySlug = async (
 export const getPostListByAuthor = async (
 	fetch: Function,
 	author: string,
-	after: string | null = null
+	after: string | undefined = null
 ): Promise<PostListByAuthorResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				query: `
@@ -154,31 +154,34 @@ export const getPostListByAuthor = async (
                     }
                 }
             }
-            `
-			})
+            `,
+			}),
 		})
 	).json();
-	if (response.data.posts.edges.length === 0) throw error(404, 'Not found');
-	let pageInfo = response.data.posts.pageInfo;
-	let posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
+	if (response.data.posts.edges.length === 0) {
+		throw error(404, "Not found");
+	}
+
+	const { pageInfo } = response.data.posts;
+	const posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
 	return {
 		posts,
 		author,
 		endCursor: pageInfo.endCursor,
-		hasNextPage: pageInfo.hasNextPage
+		hasNextPage: pageInfo.hasNextPage,
 	};
 };
 
 export const getPostListByTag = async (
 	fetch: Function,
 	tag: string,
-	after: string | null = null
+	after: string | undefined = null
 ): Promise<PostListByTagResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				query: `
@@ -196,33 +199,36 @@ export const getPostListByTag = async (
                     name
                 }
             }
-            `
-			})
+            `,
+			}),
 		})
 	).json();
-	if (!response.data.tag) throw error(404, 'Not found');
-	let pageInfo = response.data.posts.pageInfo;
-	let tagName = response.data.tag.name;
-	let posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
+	if (!response.data.tag) {
+		throw error(404, "Not found");
+	}
+
+	const { pageInfo } = response.data.posts;
+	const tagName = response.data.tag.name;
+	const posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
 	return {
 		posts,
 		tag: tagName,
 		tagSlug: tag,
 		endCursor: pageInfo.endCursor,
-		hasNextPage: pageInfo.hasNextPage
+		hasNextPage: pageInfo.hasNextPage,
 	};
 };
 
 export const getPostListByCategory = async (
 	fetch: Function,
 	category: string,
-	after: string | null = null
+	after: string | undefined = null
 ): Promise<PostListByCategoryResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				query: `
@@ -240,14 +246,17 @@ export const getPostListByCategory = async (
                     }
                 }
             }
-            `
-			})
+            `,
+			}),
 		})
 	).json();
-	if (!response.data.category) throw error(404, 'Not found');
-	let pageInfo = response.data.category.posts.pageInfo;
-	let categoryName = response.data.category.name;
-	let posts: PostMeta[] = response.data.category.posts.edges.map((edge: any) =>
+	if (!response.data.category) {
+		throw error(404, "Not found");
+	}
+
+	const { pageInfo } = response.data.category.posts;
+	const categoryName = response.data.category.name;
+	const posts: PostMeta[] = response.data.category.posts.edges.map((edge: any) =>
 		dataToPostMeta(edge.node)
 	);
 	return {
@@ -255,21 +264,21 @@ export const getPostListByCategory = async (
 		category: categoryName,
 		categorySlug: category,
 		endCursor: pageInfo.endCursor,
-		hasNextPage: pageInfo.hasNextPage
+		hasNextPage: pageInfo.hasNextPage,
 	};
 };
 
 export const getPostList = async (
 	fetch: Function,
-	after: string | null = null,
-	searchTerm: string = '',
+	after: string | undefined = null,
+	searchTerm = "",
 	count: number = MAX_PER_FETCH
 ): Promise<PostListBySearchResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				query: `
@@ -286,29 +295,29 @@ export const getPostList = async (
                     }
                 }
               }
-            `
-			})
+            `,
+			}),
 		})
 	).json();
-	let pageInfo = response.data.posts.pageInfo;
-	let posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
+	const { pageInfo } = response.data.posts;
+	const posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
 	return {
 		posts,
 		searchTerm,
 		endCursor: pageInfo.endCursor,
-		hasNextPage: pageInfo.hasNextPage
+		hasNextPage: pageInfo.hasNextPage,
 	};
 };
 
 export const getTagList = async (
 	fetch: Function,
-	after: string | null = null
+	after: string | undefined = null
 ): Promise<TagListResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				query: `
@@ -325,27 +334,27 @@ export const getTagList = async (
                     }
                 }
               }
-            `
-			})
+            `,
+			}),
 		})
 	).json();
-	let pageInfo = response.data.tags.pageInfo;
-	let tags: Tag[] = dataToTags(response.data.tags.edges.map((edge: any) => edge.node)).filter(
+	const { pageInfo } = response.data.tags;
+	const tags: Tag[] = dataToTags(response.data.tags.edges.map((edge: any) => edge.node)).filter(
 		(tag) => tag.count > 0
 	);
 	return {
 		tags,
 		endCursor: pageInfo.endCursor,
-		hasNextPage: pageInfo.hasNextPage
+		hasNextPage: pageInfo.hasNextPage,
 	};
 };
 
 export const getCategoryList = async (fetch: Function): Promise<CategoryListResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				query: `
@@ -359,32 +368,36 @@ export const getCategoryList = async (fetch: Function): Promise<CategoryListResp
                     }
                   }
               }
-            `
-			})
+            `,
+			}),
 		})
 	).json();
 	const categories = dataToCategories(response.data.categories.nodes);
 	return { categories };
 };
 
-export const getAuthInfo = (): AuthInfo | null => {
+export const getAuthInfo = (): AuthInfo | undefined => {
 	if (localStorage !== undefined) {
 		return localStorage.getItem(LOCALSTORAGE_AUTH_KEY)
-			? JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY) as string)
+			? JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY)!)
 			: null;
 	}
+
 	return null;
 };
 
 export const isLoggedIn = (): boolean => {
-	if (!browser) return false;
-	return !!getAuthInfo();
+	if (!browser) {
+		return false;
+	}
+
+	return Boolean(getAuthInfo());
 };
 
 export const logout = (): void => {
 	loginInfo.set(null);
 	localStorage.removeItem(LOCALSTORAGE_AUTH_KEY);
-	toast.push('Kirjauduit ulos', toastSettings.success);
+	toast.push("Kirjauduit ulos", toastSettings.success);
 };
 
 export const login = async (
@@ -394,9 +407,9 @@ export const login = async (
 ): Promise<boolean> => {
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				query: `
@@ -412,23 +425,27 @@ export const login = async (
 						        name
 					      }
             }
-        }`
-			})
+        }`,
+			}),
 		})
 	).json();
-	if (response.errors?.length > 0) toast.push('Kirjautuminen epäonnistui.', toastSettings.error);
+	if (response.errors?.length > 0) {
+		toast.push("Kirjautuminen epäonnistui.", toastSettings.error);
+	}
+
 	if (response.data.login) {
 		const loginData: AuthInfo = {
 			displayName: response.data.login.user.name,
 			username: response.data.login.user.username,
 			authToken: response.data.login.authToken,
-			refreshToken: response.data.login.refreshToken
+			refreshToken: response.data.login.refreshToken,
 		};
-		localStorage.setItem('auth', JSON.stringify(loginData));
+		localStorage.setItem("auth", JSON.stringify(loginData));
 		loginInfo.set(loginData);
 		toast.push(`Tervetuloa, ${loginData.displayName}`, toastSettings.success);
 		return true;
 	}
+
 	return false;
 };
 
@@ -438,14 +455,17 @@ export const postComment = async (
 	parent: number,
 	content: string
 ): Promise<boolean> => {
-	if (!isLoggedIn()) return false;
+	if (!isLoggedIn()) {
+		return false;
+	}
+
 	const authToken = browser ? getAuthInfo()?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authToken ? `Bearer ${authToken}` : ''
+				"Content-Type": "application/json",
+				Authorization: authToken ? `Bearer ${authToken}` : "",
 			},
 			body: JSON.stringify({
 				query: `
@@ -457,16 +477,17 @@ export const postComment = async (
 						}) {
 							success
 						}
-					}`
-			})
+					}`,
+			}),
 		})
 	).json();
 	response.errors?.forEach((error: any) => {
 		toast.push(error.message, toastSettings.error);
 	});
 	if (response.data.createComment.success) {
-		toast.push('Kommentti lähetetty', toastSettings.success);
+		toast.push("Kommentti lähetetty", toastSettings.success);
 		return true;
 	}
+
 	return false;
 };

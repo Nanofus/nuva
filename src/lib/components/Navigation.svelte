@@ -1,10 +1,10 @@
 <script lang="ts">
-	import NavItem from '$lib/components/reusable/NavItem.svelte';
-	import { onDestroy, onMount } from 'svelte';
-	import { browser } from '$app/environment';
-	import { loginInfo, postOptions } from '$lib/util/stores';
-	import type { AuthInfo } from '$lib/util/types';
-	import { t } from '$lib/translations';
+	import NavItem from "$lib/components/reusable/NavItem.svelte";
+	import { onDestroy, onMount } from "svelte";
+	import { browser } from "$app/environment";
+	import { loginInfo, postOptions } from "$lib/util/stores";
+	import type { AuthInfo } from "$lib/util/types";
+	import { t } from "$lib/translations";
 
 	let smallLogo: HTMLElement;
 	let menuOpen = false;
@@ -13,11 +13,11 @@
 	let userInfo: AuthInfo | null = null;
 
 	const getTotalNavigationHeight = () => {
-		return document.querySelector('header')?.offsetHeight || 0;
+		return document.querySelector("header")?.offsetHeight || 0;
 	};
 
 	const isMobile = () => {
-		const match = window.matchMedia('screen and (max-width: 54rem)');
+		const match = window.matchMedia("screen and (max-width: 54rem)");
 		return match.matches;
 	};
 
@@ -28,19 +28,19 @@
 			isMobile() ||
 			!bannerVisible
 		) {
-			smallLogo.style.opacity = '1';
-			smallLogo.style.pointerEvents = 'auto';
+			smallLogo.style.opacity = "1";
+			smallLogo.style.pointerEvents = "auto";
 		} else {
-			smallLogo.style.opacity = '0';
-			smallLogo.style.pointerEvents = 'none';
+			smallLogo.style.opacity = "0";
+			smallLogo.style.pointerEvents = "none";
 		}
 	};
 
 	onMount(() => {
 		if (browser) {
 			handleStickyMenu();
-			document.addEventListener('scroll', handleStickyMenu);
-			window.addEventListener('resize', handleStickyMenu);
+			document.addEventListener("scroll", handleStickyMenu);
+			window.addEventListener("resize", handleStickyMenu);
 			postOptions.subscribe((options) => {
 				stickyMenu = options.stickyMenu;
 				bannerVisible = options.bannerVisible;
@@ -51,8 +51,8 @@
 
 	onDestroy(() => {
 		if (browser) {
-			document.removeEventListener('scroll', handleStickyMenu);
-			window.removeEventListener('resize', handleStickyMenu);
+			document.removeEventListener("scroll", handleStickyMenu);
+			window.removeEventListener("resize", handleStickyMenu);
 		}
 	});
 
@@ -60,7 +60,7 @@
 	const menuClicked = () => (menuOpen = false);
 </script>
 
-<nav class={stickyMenu ? 'sticky' : ''}>
+<nav class={stickyMenu ? "sticky" : ""}>
 	<div class="nav-wrapper">
 		<div class="section-logo-area">
 			<div bind:this={smallLogo} class="section-logo">

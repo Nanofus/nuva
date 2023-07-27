@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '$lib/translations';
+	import { t } from "$lib/translations";
 </script>
 
 <footer>
@@ -24,7 +24,7 @@
 			margin-right: 1rem;
 
 			&:before {
-				content: '|';
+				content: "|";
 			}
 		}
 

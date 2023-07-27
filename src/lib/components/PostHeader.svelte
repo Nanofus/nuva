@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { LOCALE } from '$lib/config';
-	import type { Post } from '$lib/util/types';
-	import { t } from '$lib/translations';
+	import { LOCALE } from "$lib/config";
+	import type { Post } from "$lib/util/types";
+	import { t } from "$lib/translations";
 
 	export let post: Post;
 </script>
@@ -56,7 +56,7 @@
 		}
 
 		.post-category:not(:last-child):after {
-			content: ', ';
+			content: ", ";
 		}
 	}
 </style>

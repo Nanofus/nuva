@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { Post } from '$lib/util/types';
-	import { onDestroy, onMount } from 'svelte';
-	import { browser } from '$app/environment';
-	import MusicPlayer from '$lib/components/MusicPlayer.svelte';
-	import { toast } from '@zerodevx/svelte-toast';
-	import { cleanGlobalScope, initGlobalScope, toastSettings } from '$lib/util/util';
-	import { t } from '$lib/translations';
-	import { GLOBAL_OBJECT_NAME } from '$lib/config';
+	import type { Post } from "$lib/util/types";
+	import { onDestroy, onMount } from "svelte";
+	import { browser } from "$app/environment";
+	import MusicPlayer from "$lib/components/MusicPlayer.svelte";
+	import { toast } from "@zerodevx/svelte-toast";
+	import { cleanGlobalScope, initGlobalScope, toastSettings } from "$lib/util/util";
+	import { t } from "$lib/translations";
+	import { GLOBAL_OBJECT_NAME } from "$lib/config";
 
 	export let post: Post;
 	let scriptElements: HTMLScriptElement[] = [];
@@ -14,8 +14,8 @@
 	const setInitialLetter = () => {
 		if (browser && !navigator.userAgent.match(/firefox|fxios/i) && post.initialLetter) {
 			// TODO: Remove this when Firefox supports initial-letter
-			document.documentElement.style.setProperty('--initial-letter-size', '3.0');
-			document.documentElement.style.setProperty('--initial-letter-padding', '0.5rem');
+			document.documentElement.style.setProperty("--initial-letter-size", "3.0");
+			document.documentElement.style.setProperty("--initial-letter-padding", "0.5rem");
 		}
 	};
 
@@ -42,17 +42,17 @@
 
 	const createErrorReporter = () => {
 		if (!browser) return;
-		window.addEventListener('error', reportError);
+		window.addEventListener("error", reportError);
 	};
 
 	const cleanErrorReporter = () => {
 		if (!browser) return;
-		window.removeEventListener('error', reportError);
+		window.removeEventListener("error", reportError);
 	};
 
 	const runUserScripts = async (script: string, scriptFiles: string[] = []) => {
-		let finalScript = '';
-		const scriptElement = document.createElement('script');
+		let finalScript = "";
+		const scriptElement = document.createElement("script");
 		const loadedScripts = await Promise.all(
 			scriptFiles.map(async (fileUrl) => {
 				const response = await fetch(fileUrl);
@@ -69,14 +69,14 @@
 	};
 
 	const runScripts = async () => {
-		if (post.content.indexOf('<script>') === -1) {
+		if (post.content.indexOf("<script>") === -1) {
 			await runUserScripts(post.scripts, post.scriptFiles);
 		}
 
 		// Run JS in post content
 		const doc = document.implementation.createHTMLDocument(); // Sandbox
 		doc.body.innerHTML = post.content;
-		[].map.call(doc.getElementsByTagName('script'), async (scriptTag: HTMLScriptElement) => {
+		[].map.call(doc.getElementsByTagName("script"), async (scriptTag: HTMLScriptElement) => {
 			await runUserScripts(scriptTag.innerText);
 		});
 	};

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher } from "svelte";
 
 	export let vertical: boolean = false;
 
@@ -7,9 +7,9 @@
 </script>
 
 <form
-	class={vertical ? 'vertical' : null}
+	class={vertical ? "vertical" : null}
 	on:submit|preventDefault={() => {
-		dispatch('submit');
+		dispatch("submit");
 	}}
 >
 	<slot />

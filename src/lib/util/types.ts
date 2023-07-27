@@ -1,10 +1,10 @@
-export interface Hierarchical {
+export type Hierarchical = {
 	_id: number;
 	_parentId: number;
-	children: this[];
-}
+	children: Hierarchical[];
+};
 
-export interface PostMeta {
+export type PostMeta = {
 	title: string;
 	slug: string;
 	date: Date;
@@ -16,9 +16,9 @@ export interface PostMeta {
 	description: string;
 	mobileFriendly: boolean;
 	commentCount: number;
-}
+};
 
-export interface Post extends PostMeta {
+export type Post = {
 	_id: number;
 	initialLetter: boolean;
 	scripts: string;
@@ -29,95 +29,99 @@ export interface Post extends PostMeta {
 	bannerVisible: boolean;
 	fullWidth: boolean;
 	content: string;
-	previous: {
-		title: string;
-		slug: string;
-	} | null;
-	next: {
-		title: string;
-		slug: string;
-	} | null;
+	previous:
+		| {
+				title: string;
+				slug: string;
+		  }
+		| undefined;
+	next:
+		| {
+				title: string;
+				slug: string;
+		  }
+		| undefined;
 	tags: Tag[];
 	comments: Comment[];
 	validationResult: any;
 	isPreview: boolean | undefined;
-}
+} & PostMeta;
 
-export interface Category extends Hierarchical {
+export type Category = {
 	slug: string;
 	name: string;
-}
+} & Hierarchical;
 
-export interface Tag {
+export type Tag = {
 	slug: string;
 	name: string;
 	count: number;
-}
+};
 
-export interface Comment extends Hierarchical {
+export type Comment = {
 	date: Date;
 	author: string;
 	content: string;
-}
+} & Hierarchical;
 
-export interface CommentMeta {
+export type CommentMeta = {
 	_id: number;
 	date: Date;
 	author: string;
 	postSlug: string;
 	postTitle: string;
-}
+};
 
-export interface Paginated {
+export type Paginated = {
 	endCursor: string;
-	hasNextPage: boolean | null;
-}
+	hasNextPage: boolean | undefined;
+};
 
-export interface PostListResponse extends Paginated {
+export type PostListResponse = {
 	posts: PostMeta[];
-}
+} & Paginated;
 
-export interface PostListBySearchResponse extends PostListResponse {
+export type PostListBySearchResponse = {
 	searchTerm: string;
-}
+} & PostListResponse;
 
-export interface PostListByAuthorResponse extends PostListResponse {
+export type PostListByAuthorResponse = {
 	author: string;
-}
+} & PostListResponse;
 
-export interface PostListByCategoryResponse extends PostListResponse {
+export type PostListByCategoryResponse = {
 	category: string;
 	categorySlug: string;
-}
+} & PostListResponse;
 
-export interface PostListByTagResponse extends PostListResponse {
+export type PostListByTagResponse = {
 	tag: string;
 	tagSlug: string;
-}
+} & PostListResponse;
 
-export interface TagListResponse extends Paginated {
+export type TagListResponse = {
 	tags: Tag[];
-}
+} & Paginated;
 
-export interface CategoryListResponse {
+export type CategoryListResponse = {
 	categories: Category[];
-}
+};
 
-export interface PostsAndCommentsResponse {
+export type PostsAndCommentsResponse = {
 	posts: PostListResponse;
 	comments: CommentMeta[];
-}
+};
 
-export interface AuthInfo {
+export type AuthInfo = {
 	displayName: string;
 	username: string;
 	authToken: string;
 	refreshToken: string;
-}
+};
 
-export interface PostOptions {
+export type PostOptions = {
 	bannerVisible: boolean;
-	customBannerUrl: string | null;
+	customBannerUrl: string | undefined;
 	stickyMenu: boolean;
 	fullWidth: boolean;
-}
+};

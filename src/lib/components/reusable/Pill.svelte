@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount } from "svelte";
 
 	export let href: string | null = null;
 	export let sizeByCount: number | boolean = false;

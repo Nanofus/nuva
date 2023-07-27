@@ -1,17 +1,17 @@
 <script lang="ts">
-	import Button from '$lib/components/reusable/Button.svelte';
-	import Input from '$lib/components/reusable/Input.svelte';
-	import Form from '$lib/components/reusable/Form.svelte';
-	import { toast } from '@zerodevx/svelte-toast';
-	import { toastSettings } from '$lib/util/util';
-	import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-	import { t } from '$lib/translations';
+	import Button from "$lib/components/reusable/Button.svelte";
+	import Input from "$lib/components/reusable/Input.svelte";
+	import Form from "$lib/components/reusable/Form.svelte";
+	import { toast } from "@zerodevx/svelte-toast";
+	import { toastSettings } from "$lib/util/util";
+	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+	import { t } from "$lib/translations";
 
-	let searchTerm = '';
+	let searchTerm = "";
 	let submitted = false;
 
 	const search = () => {
-		if (searchTerm === '' || !searchTerm) {
+		if (searchTerm === "" || !searchTerm) {
 			toast.push(t.components.search.emptyField, toastSettings.error);
 			return;
 		}

@@ -1,63 +1,67 @@
-import type { Category, Comment, CommentMeta, Post, PostMeta, Tag } from '$lib/util/types';
-import { objectsToHierarchy } from '$lib/util/util';
+import type { Category, Comment, CommentMeta, Post, PostMeta, Tag } from "$lib/util/types";
+import { objectsToHierarchy } from "$lib/util/util";
 
-export const dataToPostMeta = (data: any): PostMeta => {
-	return {
-		title: data.title,
-		slug: data.slug,
-		date: new Date(data.rawDate),
-		author: data.author.node.name,
-		coAuthors: data.coAuthors.nodes
-			.map((author: any) => author.displayName)
-			.sort((a: string, b: string) => {
-				if (a === data.author.node.name) return -1;
-				if (b === data.author.node.name) return 1;
-				return a.localeCompare(b);
-			}),
-		categories: data.categories.nodes.map((category: any) => {
-			return {
-				slug: category.slug,
-				name: category.name
-			};
+export const dataToPostMeta = (data: any): PostMeta => ({
+	title: data.title,
+	slug: data.slug,
+	date: new Date(data.rawDate),
+	author: data.author.node.name,
+	coAuthors: data.coAuthors.nodes
+		.map((author: any) => author.displayName)
+		.sort((a: string, b: string) => {
+			if (a === data.author.node.name) {
+				return -1;
+			}
+
+			if (b === data.author.node.name) {
+				return 1;
+			}
+
+			return a.localeCompare(b);
 		}),
-		customBanner: data.additionalFields.custombanner,
-		featuredImage: data.additionalFields.featuredimage,
-		description: data.additionalFields.description,
-		mobileFriendly: data.additionalFields.mobilefriendly,
-		commentCount: data.commentCount
-	};
-};
+	categories: data.categories.nodes.map((category: any) => ({
+		slug: category.slug,
+		name: category.name,
+	})),
+	customBanner: data.additionalFields.custombanner,
+	featuredImage: data.additionalFields.featuredimage,
+	description: data.additionalFields.description,
+	mobileFriendly: data.additionalFields.mobilefriendly,
+	commentCount: data.commentCount,
+});
 
 export const dataToComments = (nodes: any): Comment[] => {
-	const comments = nodes.map((comment: any): Comment => {
-		return {
+	const comments = nodes.map(
+		(comment: any): Comment => ({
 			date: new Date(comment.date),
 			author: comment.author.node.name,
 			content: comment.content,
 			children: [],
 			_id: comment.databaseId,
-			_parentId: comment.parentDatabaseId
-		};
-	});
-	return (objectsToHierarchy(comments) as Comment[]).sort((a, b) => {
-		return a.date.getTime() - b.date.getTime();
-	});
+			_parentId: comment.parentDatabaseId,
+		})
+	);
+	return (objectsToHierarchy(comments) as Comment[]).sort(
+		(a, b) => a.date.getTime() - b.date.getTime()
+	);
 };
 
-export const dataToCommentMetas = (nodes: any): CommentMeta[] => {
-	return nodes.map((comment: any): CommentMeta => {
-		return {
+export const dataToCommentMetas = (nodes: any): CommentMeta[] =>
+	nodes.map(
+		(comment: any): CommentMeta => ({
 			date: new Date(comment.date),
 			author: comment.author.node.name,
 			postSlug: comment.commentedOn.node.slug,
 			postTitle: comment.commentedOn.node.title,
-			_id: comment.databaseId
-		};
-	});
-};
+			_id: comment.databaseId,
+		})
+	);
 
-export const dataToPost = (data: any): Post | null => {
-	if (!data) return null;
+export const dataToPost = (data: any): Post | undefined => {
+	if (!data) {
+		return null;
+	}
+
 	return {
 		_id: data.databaseId,
 		title: data.title,
@@ -67,8 +71,14 @@ export const dataToPost = (data: any): Post | null => {
 		coAuthors: data.coAuthors.nodes
 			.map((author: any) => author.displayName)
 			.sort((a: string, b: string) => {
-				if (a === data.author.node.name) return -1;
-				if (b === data.author.node.name) return 1;
+				if (a === data.author.node.name) {
+					return -1;
+				}
+
+				if (b === data.author.node.name) {
+					return 1;
+				}
+
 				return a.localeCompare(b);
 			}),
 		artists: data.additionalFields.artists
@@ -85,49 +95,40 @@ export const dataToPost = (data: any): Post | null => {
 		scripts: data.additionalFields.scripts,
 		styles: data.additionalFields.styles,
 		scriptFiles: data.additionalFields.scriptfiles
-			? data.additionalFields.scriptfiles.split('\n')
+			? data.additionalFields.scriptfiles.split("\n")
 			: [],
-		music: data.additionalFields.music ? data.additionalFields.music.split('\n') : [],
+		music: data.additionalFields.music ? data.additionalFields.music.split("\n") : [],
 		content: data.content,
 		previous: data.previous ? { title: data.previous.title, slug: data.previous.slug } : null,
 		next: data.next ? { title: data.next.title, slug: data.next.slug } : null,
-		categories: data.categories.nodes.map((category: any) => {
-			return {
-				slug: category.slug,
-				name: category.name
-			};
-		}),
-		tags: data.tags.nodes.map((tag: any) => {
-			return {
-				slug: tag.slug,
-				name: tag.name
-			};
-		}),
+		categories: data.categories.nodes.map((category: any) => ({
+			slug: category.slug,
+			name: category.name,
+		})),
+		tags: data.tags.nodes.map((tag: any) => ({
+			slug: tag.slug,
+			name: tag.name,
+		})),
 		comments: dataToComments(data.comments.nodes),
 		validationResult: undefined,
-		isPreview: undefined
+		isPreview: undefined,
 	};
 };
 
 export const dataToCategories = (data: any): Category[] => {
-	const categories = data.map((category: any) => {
-		return {
-			slug: category.slug,
-			name: category.name,
-			children: [],
-			_id: category.databaseId,
-			_parentId: category.parentDatabaseId
-		};
-	});
+	const categories = data.map((category: any) => ({
+		slug: category.slug,
+		name: category.name,
+		children: [],
+		_id: category.databaseId,
+		_parentId: category.parentDatabaseId,
+	}));
 	return objectsToHierarchy(categories) as Category[];
 };
 
-export const dataToTags = (data: any): Tag[] => {
-	return data.map((tag: any) => {
-		return {
-			slug: tag.slug,
-			name: tag.name,
-			count: tag.count
-		};
-	});
-};
+export const dataToTags = (data: any): Tag[] =>
+	data.map((tag: any) => ({
+		slug: tag.slug,
+		name: tag.name,
+		count: tag.count,
+	}));

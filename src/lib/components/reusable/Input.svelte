@@ -5,12 +5,12 @@
 <script lang="ts">
 	export let name: string | null = null;
 	export let label: string | null = null;
-	export let type: 'text' | 'password' | 'multiline' = 'text';
+	export let type: "text" | "password" | "multiline" = "text";
 	export let placeholder: string | null = null;
-	export let value: string = '';
+	export let value: string = "";
 	export let rows = 5;
 
-	let elementId = 'input_' + counter++;
+	let elementId = "input_" + counter++;
 	const handleInput = (e) => (value = e.target.value);
 </script>
 
@@ -20,7 +20,7 @@
 			{label}
 		</label>
 	{/if}
-	{#if type === 'multiline'}
+	{#if type === "multiline"}
 		<textarea
 			class="editor"
 			{rows}

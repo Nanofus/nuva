@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Post } from '$lib/util/types';
+	import type { Post } from "$lib/util/types";
 
 	export let post: Post;
 </script>
@@ -18,7 +18,7 @@
 	{#if post.artists.length > 0}
 		<div>
 			<span class="material-icons inline-icon">palette</span>
-			{post.artists.join(', ')}
+			{post.artists.join(", ")}
 		</div>
 	{/if}
 </div>

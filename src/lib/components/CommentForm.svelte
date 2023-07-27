@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { isLoggedIn, postComment } from '$lib/util/database';
-	import { toast } from '@zerodevx/svelte-toast';
-	import { createEventDispatcher, onMount } from 'svelte';
-	import Button from '$lib/components/reusable/Button.svelte';
-	import Input from '$lib/components/reusable/Input.svelte';
-	import Form from '$lib/components/reusable/Form.svelte';
-	import { toastSettings } from '$lib/util/util';
-	import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-	import { t } from '$lib/translations';
+	import { isLoggedIn, postComment } from "$lib/util/database";
+	import { toast } from "@zerodevx/svelte-toast";
+	import { createEventDispatcher, onMount } from "svelte";
+	import Button from "$lib/components/reusable/Button.svelte";
+	import Input from "$lib/components/reusable/Input.svelte";
+	import Form from "$lib/components/reusable/Form.svelte";
+	import { toastSettings } from "$lib/util/util";
+	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+	import { t } from "$lib/translations";
 
 	export let parent: number;
 	export let postId: number;
@@ -19,20 +19,20 @@
 	});
 
 	let sending: boolean = false;
-	let content: string = '';
+	let content: string = "";
 
 	const dispatch = createEventDispatcher();
 
 	const sendComment = async () => {
-		if (!content || content === '') {
+		if (!content || content === "") {
 			toast.push(t.components.commentForm.emptyComment, toastSettings.error);
 			return;
 		}
 		sending = true;
 		await postComment(fetch, postId, parent, content);
-		dispatch('commentSent');
+		dispatch("commentSent");
 		sending = false;
-		content = '';
+		content = "";
 	};
 </script>
 
@@ -48,7 +48,7 @@
 					bind:value={content}
 				/>
 				<div class="button-group">
-					<Button link on:click={() => dispatch('close')}>{t.common.close}</Button>
+					<Button link on:click={() => dispatch("close")}>{t.common.close}</Button>
 					<Button on:click={sendComment}>{t.common.send}</Button>
 				</div>
 			</Form>
