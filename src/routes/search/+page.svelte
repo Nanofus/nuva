@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Search from "$lib/components/Search.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util/util";
-  import { t } from "$lib/translations";
+	import Search from '$lib/components/Search.svelte';
+	import { getPageTitle, getPageUrl } from '$lib/util/util';
+	import { t } from '$lib/translations';
 </script>
 
 <svelte:head>
-  <title>{getPageTitle(t.pages.search.title)}</title>
-  <meta content={t.pages.search.title} property="og:title" />
-  <meta content={getPageUrl(`search`)} property="og:url" />
+	<title>{getPageTitle(t.pages.search.title)}</title>
+	<meta content={t.pages.search.title} property="og:title" />
+	<meta content={getPageUrl(`search`)} property="og:url" />
 </svelte:head>
 
 <h1>{t.pages.search.title}</h1>
@@ -15,4 +15,3 @@
 
 <style lang="scss">
 </style>
-

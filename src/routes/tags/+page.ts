@@ -1,10 +1,10 @@
-import { error, type Load } from "@sveltejs/kit";
-import { getTagList } from "$lib/util/database";
-import type { TagListResponse } from "$lib/util/types";
-import { t } from "$lib/translations";
+import { error, type Load } from '@sveltejs/kit';
+import { getTagList } from '$lib/util/database';
+import type { TagListResponse } from '$lib/util/types';
+import { t } from '$lib/translations';
 
 export const load: Load = async ({ fetch }): Promise<TagListResponse> => {
-  const response = await getTagList(fetch);
-  if (response) return response;
-  throw error(404, t.errors.e404);
+	const response = await getTagList(fetch);
+	if (response) return response;
+	throw error(404, t.errors.e404);
 };

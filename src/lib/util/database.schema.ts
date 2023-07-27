@@ -1,11 +1,11 @@
-import type { Generated } from "kysely";
+import type { Generated } from 'kysely';
 
 export interface Database {
-  users: UserTable;
+	users: UserTable;
 }
 
 export interface UserTable {
-  id: Generated<number>;
-  name: string;
-  settings_json: string | null;
+	id: Generated<number>;
+	name: string;
+	settings_json: string | null;
 }
