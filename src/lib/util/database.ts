@@ -153,12 +153,14 @@ export const getPostListByAuthor = async (
 			}),
 		})
 	).json();
-	if (response.data.posts.edges.length === 0) {
+	if (response.data.posts["edges"].length === 0) {
 		throw error(404, t.errors.e404);
 	}
 
 	const { pageInfo } = response.data.posts;
-	const posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
+	const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) =>
+		dataToPostMeta(edge.node)
+	);
 	return {
 		posts,
 		author,
@@ -204,7 +206,9 @@ export const getPostListByTag = async (
 
 	const { pageInfo } = response.data.posts;
 	const tagName = response.data.tag.name;
-	const posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
+	const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) =>
+		dataToPostMeta(edge.node)
+	);
 	return {
 		posts,
 		tag: tagName,
@@ -251,7 +255,7 @@ export const getPostListByCategory = async (
 
 	const { pageInfo } = response.data.category.posts;
 	const categoryName = response.data.category.name;
-	const posts: PostMeta[] = response.data.category.posts.edges.map((edge: any) =>
+	const posts: PostMeta[] = response.data.category.posts["edges"].map((edge: any) =>
 		dataToPostMeta(edge.node)
 	);
 	return {
@@ -295,7 +299,9 @@ export const getPostList = async (
 		})
 	).json();
 	const { pageInfo } = response.data.posts;
-	const posts: PostMeta[] = response.data.posts.edges.map((edge: any) => dataToPostMeta(edge.node));
+	const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) =>
+		dataToPostMeta(edge.node)
+	);
 	return {
 		posts,
 		searchTerm,
@@ -334,7 +340,7 @@ export const getTagList = async (
 		})
 	).json();
 	const { pageInfo } = response.data.tags;
-	const tags: Tag[] = dataToTags(response.data.tags.edges.map((edge: any) => edge.node)).filter(
+	const tags: Tag[] = dataToTags(response.data.tags["edges"].map((edge: any) => edge.node)).filter(
 		(tag) => tag.count > 0
 	);
 	return {
