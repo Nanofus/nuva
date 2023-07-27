@@ -4,6 +4,10 @@ import type { Post } from "$lib/util/types";
 import { t } from "$lib/translations";
 import { validateHTML } from "$lib/util/html-validator";
 
+export const config = {
+	runtime: "nodejs18.x",
+};
+
 export const load: Load = async ({ fetch, params, url }): Promise<Post | null> => {
 	if (params.slug) {
 		const isPreview = url.searchParams.get("preview") != null;
