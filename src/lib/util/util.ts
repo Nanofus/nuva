@@ -13,15 +13,6 @@ import {
 import { browser } from "$app/environment";
 import { scrolledToBottom } from "$lib/util/stores";
 
-export class CodeError extends Error {
-	private readonly code: number;
-
-	constructor(message: string, code: number) {
-		super(message);
-		this.code = code;
-	}
-}
-
 export const toastSettings = {
 	error: {
 		theme: {
@@ -123,8 +114,8 @@ export const cleanGlobalScope = () => {
 		return;
 	}
 
-	if (window[GLOBAL_OBJECT_NAME].onPostDestroy) {
-		window[GLOBAL_OBJECT_NAME].onPostDestroy();
+	if (window[GLOBAL_OBJECT_NAME]["onPostDestroy"]) {
+		window[GLOBAL_OBJECT_NAME]["onPostDestroy"]();
 	}
 
 	delete window[GLOBAL_OBJECT_NAME];
