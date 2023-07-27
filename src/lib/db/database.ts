@@ -106,10 +106,12 @@ export const getAllCommentsForPostBySlug = async (
 ): Promise<Comment[]> => {
 	let allCommentsFetched = false;
 	let allComments: Comment[] = [];
+	let latestAfter = null;
 	while (!allCommentsFetched) {
-		const commentResponse = await getCommentsForPostBySlug(fetch, slug);
+		const commentResponse = await getCommentsForPostBySlug(fetch, slug, latestAfter);
 		allComments = [...allComments, ...commentResponse.comments];
 		if (!commentResponse.hasNextPage) allCommentsFetched = true;
+		else latestAfter = commentResponse.endCursor;
 	}
 	return (objectsToHierarchy(allComments) as Comment[]).sort(
 		(a, b) => a.date.getTime() - b.date.getTime()
