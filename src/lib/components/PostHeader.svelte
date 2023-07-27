@@ -16,11 +16,11 @@
 			{/each}
 		</span>
 		<time class="post-date"
-			><span class="material-icons inline-icon">calendar_today</span>
+		><span class="material-icons inline-icon">calendar_today</span>
 			{post.date.toLocaleDateString(LOCALE)}
 		</time>
 		<span class="post-authors"
-			><span class="material-icons inline-icon">history_edu</span>
+		><span class="material-icons inline-icon">history_edu</span>
 			<span class="author-list">
 				{#each post.coAuthors as author}
 					<a href="/authors/{encodeURI(author)}">{author}</a>
@@ -30,7 +30,7 @@
 		<span class="post-comments-link">
 			<span class="material-icons inline-icon">forum</span>
 			<a href="#comments"
-				>{post.commentCount ? post.commentCount : 0}
+			>{post.commentCount ? post.commentCount : 0}
 				{post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a
 			>
 		</span>

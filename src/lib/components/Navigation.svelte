@@ -91,13 +91,13 @@
 			<NavItem href="/tags">{t.components.navigation.tags}</NavItem>
 			<NavItem href={t.components.navigation.guideUrl}>{t.components.navigation.guide}</NavItem>
 			<NavItem href={t.components.navigation.soundtracksUrl}
-				>{t.components.navigation.soundtracks}</NavItem
+			>{t.components.navigation.soundtracks}</NavItem
 			>
 			{#if userInfo}
 				<NavItem href={t.components.navigation.writeUrl}>{t.components.navigation.write}</NavItem>
 			{/if}
 			<NavItem href="/profile"
-				>{userInfo ? t.components.navigation.profile : t.components.navigation.login}</NavItem
+			>{userInfo ? t.components.navigation.profile : t.components.navigation.login}</NavItem
 			>
 			<NavItem href="/search">{t.components.navigation.search}</NavItem>
 		</div>

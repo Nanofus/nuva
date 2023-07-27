@@ -18,7 +18,7 @@
 		data = {
 			posts: filterExcludedCategories([...data.posts, ...newData.posts]),
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage,
+			hasNextPage: newData.hasNextPage
 		};
 		fetching = false;
 	};

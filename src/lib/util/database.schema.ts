@@ -6,6 +6,7 @@ export type Database = {
 
 export type UserTable = {
 	id: Generated<number>;
+	username: string;
 	name: string;
-	settings_json: string | undefined;
+	settings_json: string | null;
 };

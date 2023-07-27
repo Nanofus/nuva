@@ -20,7 +20,7 @@
 			tagSlug: data.tagSlug,
 			tag: data.tag,
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage,
+			hasNextPage: newData.hasNextPage
 		};
 		fetching = false;
 	};

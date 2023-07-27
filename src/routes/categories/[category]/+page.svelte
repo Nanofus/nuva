@@ -20,7 +20,7 @@
 			categorySlug: data.categorySlug,
 			category: data.category,
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage,
+			hasNextPage: newData.hasNextPage
 		};
 		fetching = false;
 	};

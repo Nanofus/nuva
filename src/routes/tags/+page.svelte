@@ -18,7 +18,7 @@
 		data = {
 			tags: [...data.tags, ...newData.tags],
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage,
+			hasNextPage: newData.hasNextPage
 		};
 		fetching = false;
 	};

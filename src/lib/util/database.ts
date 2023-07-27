@@ -1,10 +1,4 @@
-import {
-	API_PATH,
-	LATEST_COMMENTS_PER_FETCH,
-	LOCALSTORAGE_AUTH_KEY,
-	MAX_PER_FETCH,
-	QUERIES,
-} from "$lib/config";
+import { API_PATH, LATEST_COMMENTS_PER_FETCH, LOCALSTORAGE_AUTH_KEY, MAX_PER_FETCH, QUERIES } from "$lib/config";
 import { toast } from "@zerodevx/svelte-toast";
 import { browser } from "$app/environment";
 import { error } from "@sveltejs/kit";
@@ -15,7 +9,7 @@ import {
 	dataToComments,
 	dataToPost,
 	dataToPostMeta,
-	dataToTags,
+	dataToTags
 } from "$lib/util/database.mappers";
 import type {
 	AuthInfo,
@@ -29,7 +23,7 @@ import type {
 	PostListByTagResponse,
 	PostMeta,
 	Tag,
-	TagListResponse,
+	TagListResponse
 } from "$lib/util/types";
 import { toastSettings } from "$lib/util/util";
 import { t } from "$lib/translations";

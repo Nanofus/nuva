@@ -19,7 +19,7 @@
 			posts: [...data.posts, ...newData.posts],
 			searchTerm: data.searchTerm,
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage,
+			hasNextPage: newData.hasNextPage
 		};
 		fetching = false;
 	};
