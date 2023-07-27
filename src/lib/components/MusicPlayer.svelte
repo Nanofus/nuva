@@ -7,7 +7,6 @@ Musicmancer 2023 Edition
 	import Button from "$lib/components/reusable/Button.svelte";
 	import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
 	import { DEFAULT_VOLUME, MUSIC_FADE_SPEED } from "$lib/config";
-	import type { ChangeEvent } from "react";
 
 	interface AudioData {
 		src: string;
@@ -38,6 +37,8 @@ Musicmancer 2023 Edition
 		clearInterval(fadeOutInterval);
 	});
 
+	const pauseOnEnded = () => (currentAudioElement?.pause());
+
 	const play = (index: number) => {
 		const newAudioData = audioDataArray[index];
 		if (currentAudioElement == newAudioData.audioElement) {
@@ -57,7 +58,9 @@ Musicmancer 2023 Edition
 			const waitUntilOthersFadedInterval = setInterval(() => {
 				fadeInProgress = true;
 				if (!othersStillPlaying()) {
+					currentAudioElement?.removeEventListener("ended", pauseOnEnded);
 					currentAudioElement = newPlayerAfterFade;
+					currentAudioElement.addEventListener("ended", pauseOnEnded);
 					paused = false;
 					fadeInProgress = false;
 					(<HTMLAudioElement>currentAudioElement).play();
@@ -92,7 +95,7 @@ Musicmancer 2023 Edition
 			audioDataArray.push({
 				src: audioSrc,
 				audioElement: audioElement,
-				isEffect: audioElement.classList.contains("effect"),
+				isEffect: audioElement.classList.contains("effect")
 			});
 
 			// Create audio play button
@@ -109,6 +112,7 @@ Musicmancer 2023 Edition
 		audioButton.innerHTML = `<span class="material-icons">music_note</span>`;
 		audioButton.addEventListener("click", () => play(parseInt(audioButton.classList[1].slice(6))));
 		audioElement.after(audioButton);
+		audioButton.appendChild(audioElement);
 	};
 
 	// Update the seek bar and current time as the audio plays
@@ -121,8 +125,9 @@ Musicmancer 2023 Edition
 		}
 	}, 50);
 	// Use the seek bar to seek the audio
-	const handleSeek = (input: ChangeEvent) => {
-		currentAudioElement && (currentAudioElement.currentTime = input.target.value / 1000);
+	const handleSeek = (input: Event) => {
+		const target = input.target as HTMLInputElement;
+		currentAudioElement && (currentAudioElement.currentTime = parseInt(target.value) / 1000);
 	};
 
 	// Update volume based on bar
@@ -135,7 +140,7 @@ Musicmancer 2023 Edition
 
 	// Mute
 	$: currentAudioElement &&
-		(muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
+	(muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
 
 	const unpause = () => {
 		paused = false;
@@ -151,7 +156,7 @@ Musicmancer 2023 Edition
 		audioDataArray.map((audioData) => {
 			if (audioData.isEffect || audioData.audioElement === newPlayerAfterFade) return;
 			if (audioData.audioElement.volume > 0) {
-				let newVolume = audioData.audioElement.volume - 0.001 * MUSIC_FADE_SPEED;
+				let newVolume = audioData.audioElement.volume - 0.001 * MUSIC_FADE_SPEED * (volume / 100);
 				if (newVolume < 0) newVolume = 0;
 				audioData.audioElement.volume = newVolume;
 			} else {
