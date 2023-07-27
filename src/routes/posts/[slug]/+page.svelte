@@ -8,6 +8,7 @@
 	import { getPageTitle, getPageUrl } from "$lib/util/util";
 	import { postOptions } from "$lib/util/stores";
 	import { t } from "$lib/translations";
+	import { toast } from "@zerodevx/svelte-toast";
 
 	export let data: Post;
 	let noAccess = false;
@@ -35,6 +36,7 @@
 	});
 
 	onDestroy(() => {
+		toast.pop(0); // Destroy all toasts
 		postOptions.set({
 			bannerVisible: true,
 			customBannerUrl: null,

@@ -478,7 +478,7 @@ export const login = async (
 		};
 		localStorage.setItem("auth", JSON.stringify(loginData));
 		loginInfo.set(loginData);
-		toast.push(`${t.toasts.welcome}, ${loginData.displayName}`, toastSettings.success);
+		toast.push(`${t.toasts.welcome}, ${loginData.displayName}!`, toastSettings.success);
 		return true;
 	}
 
