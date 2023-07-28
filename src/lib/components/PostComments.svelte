@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Comment, Post } from "$lib/util/types";
 	import CommentForm from "$lib/components/CommentForm.svelte";
-	import { getAllCommentsForPostBySlug, isLoggedIn } from "$lib/db/database";
+	import { getAllCommentsForPostBySlug, isLoggedIn } from "$lib/db/graphql";
 	import Button from "$lib/components/reusable/Button.svelte";
 	import { t } from "$lib/translations";
 	import Comment from "$lib/components/Comment.svelte";

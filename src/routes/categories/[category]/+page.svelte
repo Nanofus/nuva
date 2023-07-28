@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getPostListByCategory } from "$lib/db/database";
+	import { getPostListByCategory } from "$lib/db/graphql";
 	import type { PostListByCategoryResponse } from "$lib/util/types";
 	import PostList from "$lib/components/PostList.svelte";
 	import Button from "$lib/components/reusable/Button.svelte";
@@ -20,7 +20,7 @@
 			categorySlug: data.categorySlug,
 			category: data.category,
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage
+			hasNextPage: newData.hasNextPage,
 		};
 		fetching = false;
 	};

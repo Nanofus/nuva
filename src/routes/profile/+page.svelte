@@ -32,8 +32,7 @@
 			<div class="input-wrapper">
 				<input class="volume-bar" type="range" min="0" max="100" bind:value={volume} />
 			</div>
-		</SettingItem
-		>
+		</SettingItem>
 	</Settings>
 {/if}
 <div class="vertically-separated">

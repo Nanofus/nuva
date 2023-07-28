@@ -4,7 +4,7 @@
 	import CommentForm from "$lib/components/CommentForm.svelte";
 	import { createEventDispatcher } from "svelte";
 	import { browser } from "$app/environment";
-	import { getAuthInfo, isLoggedIn } from "$lib/db/database";
+	import { getAuthInfo, isLoggedIn } from "$lib/db/graphql";
 	import Button from "$lib/components/reusable/Button.svelte";
 	import { t } from "$lib/translations";
 
@@ -36,9 +36,9 @@
 	<header class="comment-header">
 		<span class="comment-author">
 			{#if isHighlighted()}<span class="material-icons inline-icon">history_edu</span>{/if}
-			{comment.author}</span>
-		<span class="comment-date">{comment.date.toLocaleDateString(LOCALE)}</span
+			{comment.author}</span
 		>
+		<span class="comment-date">{comment.date.toLocaleDateString(LOCALE)}</span>
 	</header>
 	<div class="comment-content">{@html comment.content}</div>
 	<div class="child-comments">

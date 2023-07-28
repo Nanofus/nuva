@@ -7,8 +7,8 @@
 		<span>{t.components.footer.copyright}</span>
 		<span class="separator" />
 		<span
-		><a href={t.components.footer.feedbackLink} target="_blank">{t.components.footer.feedback}</a
-		></span
+			><a href={t.components.footer.feedbackLink} target="_blank">{t.components.footer.feedback}</a
+			></span
 		>
 	</div>
 </footer>

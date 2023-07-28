@@ -20,7 +20,7 @@
 @mixin track {
 	cursor: default;
 	height: var(--track-height);
-	transition: all .2s ease;
+	transition: all 0.2s ease;
 	width: var(--track-width);
 }
 
@@ -34,7 +34,7 @@
 	width: var(--thumb-width);
 }
 
-[type='range'] {
+[type="range"] {
 	-webkit-appearance: none;
 	background: transparent;
 	margin: calc(var(--thumb-height) / 2) 0;
@@ -64,7 +64,10 @@
 	&::-webkit-slider-thumb {
 		@include thumb;
 		-webkit-appearance: none;
-		margin-top: calc(calc(calc(-1 * var(--track-border-width) * 2 + var(--track-height)) / 2) - calc(var(--thumb-height) / 2));
+		margin-top: calc(
+			calc(calc(-1 * var(--track-border-width) * 2 + var(--track-height)) / 2) -
+				calc(var(--thumb-height) / 2)
+		);
 	}
 
 	&::-moz-range-track {

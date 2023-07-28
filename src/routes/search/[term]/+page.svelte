@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getPostList } from "$lib/db/database";
+	import { getPostList } from "$lib/db/graphql";
 	import PostList from "$lib/components/PostList.svelte";
 	import type { PostListBySearchResponse } from "$lib/util/types";
 	import Button from "$lib/components/reusable/Button.svelte";
@@ -19,7 +19,7 @@
 			posts: [...data.posts, ...newData.posts],
 			searchTerm: data.searchTerm,
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage
+			hasNextPage: newData.hasNextPage,
 		};
 		fetching = false;
 	};

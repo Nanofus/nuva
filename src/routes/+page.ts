@@ -1,5 +1,5 @@
 import { error, type Load } from "@sveltejs/kit";
-import { getLatestComments, getPostList } from "$lib/db/database";
+import { getLatestComments, getPostList } from "$lib/db/graphql";
 import type { PostsAndCommentsResponse } from "$lib/util/types";
 import { LATEST_POSTS_PER_FETCH } from "$lib/config";
 import { filterExcludedCategories } from "$lib/util/util";

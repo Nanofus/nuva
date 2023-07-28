@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getPostList } from "$lib/db/database";
+	import { getPostList } from "$lib/db/graphql";
 	import PostList from "$lib/components/PostList.svelte";
 	import type { PostListResponse } from "$lib/util/types";
 	import Button from "$lib/components/reusable/Button.svelte";
@@ -18,7 +18,7 @@
 		data = {
 			posts: filterExcludedCategories([...data.posts, ...newData.posts]),
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage
+			hasNextPage: newData.hasNextPage,
 		};
 		fetching = false;
 	};

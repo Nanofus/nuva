@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isLoggedIn, postComment } from "$lib/db/database";
+	import { isLoggedIn, postComment } from "$lib/db/graphql";
 	import { toast } from "@zerodevx/svelte-toast";
 	import { createEventDispatcher, onMount } from "svelte";
 	import Button from "$lib/components/reusable/Button.svelte";

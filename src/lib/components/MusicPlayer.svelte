@@ -98,7 +98,7 @@ Musicmancer 2023 Edition
 			audioDataArray.push({
 				src: audioSrc,
 				audioElement: audioElement,
-				isEffect: audioElement.classList.contains("effect")
+				isEffect: audioElement.classList.contains("effect"),
 			});
 
 			// Create audio play button
@@ -143,7 +143,7 @@ Musicmancer 2023 Edition
 
 	// Mute
 	$: currentAudioElement &&
-	(muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
+		(muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
 
 	const unpause = () => {
 		paused = false;

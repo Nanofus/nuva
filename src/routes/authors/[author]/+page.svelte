@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getPostListByAuthor } from "$lib/db/database";
+	import { getPostListByAuthor } from "$lib/db/graphql";
 	import type { PostListByAuthorResponse } from "$lib/util/types";
 	import PostList from "$lib/components/PostList.svelte";
 	import Button from "$lib/components/reusable/Button.svelte";
@@ -19,7 +19,7 @@
 			posts: [...data.posts, ...newData.posts],
 			author: data.author,
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage
+			hasNextPage: newData.hasNextPage,
 		};
 		fetching = false;
 	};

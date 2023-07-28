@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getTagList } from "$lib/db/database";
+	import { getTagList } from "$lib/db/graphql";
 	import type { TagListResponse } from "$lib/util/types";
 	import Button from "$lib/components/reusable/Button.svelte";
 	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
@@ -18,7 +18,7 @@
 		data = {
 			tags: [...data.tags, ...newData.tags],
 			endCursor: newData.endCursor,
-			hasNextPage: newData.hasNextPage
+			hasNextPage: newData.hasNextPage,
 		};
 		fetching = false;
 	};

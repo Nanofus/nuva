@@ -29,7 +29,7 @@
 				bannerVisible: data.bannerVisible,
 				customBannerUrl: data.customBanner === "" ? null : data.customBanner,
 				stickyMenu: false,
-				fullWidth: data.fullWidth
+				fullWidth: data.fullWidth,
 			});
 		}
 		scrollToAnchor();
@@ -41,7 +41,7 @@
 			bannerVisible: true,
 			customBannerUrl: null,
 			stickyMenu: true,
-			fullWidth: false
+			fullWidth: false,
 		});
 	});
 </script>

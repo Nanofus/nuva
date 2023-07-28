@@ -1,5 +1,5 @@
 import { error, type Load } from "@sveltejs/kit";
-import { getPostListByAuthor } from "$lib/db/database";
+import { getPostListByAuthor } from "$lib/db/graphql";
 import type { PostListByAuthorResponse } from "$lib/util/types";
 import { t } from "$lib/translations";
 
