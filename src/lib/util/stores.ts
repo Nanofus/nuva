@@ -8,7 +8,7 @@ export const loginInfo: Writable<AuthInfo | null> = writable(
 		? localStorage.getItem(LOCALSTORAGE_AUTH_KEY)
 			? JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY)!)
 			: null
-		: null
+		: null,
 );
 
 export const scrolledToBottom: Writable<boolean> = writable(false);

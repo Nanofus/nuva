@@ -39,7 +39,7 @@ export const dataToComments = (nodes: any): Comment[] => {
 			children: [],
 			_id: comment.databaseId,
 			_parentId: comment.parentDatabaseId,
-		})
+		}),
 	);
 };
 
@@ -51,7 +51,7 @@ export const dataToCommentMetas = (nodes: any): CommentMeta[] =>
 			postSlug: comment.commentedOn.node.slug,
 			postTitle: comment.commentedOn.node.title,
 			_id: comment.databaseId,
-		})
+		}),
 	);
 
 export const dataToPost = (data: any): Post | null => {
@@ -96,8 +96,18 @@ export const dataToPost = (data: any): Post | null => {
 			: [],
 		music: data.additionalFields.music ? data.additionalFields.music.split("\n") : [],
 		content: data.content,
-		previous: data.previous ? { title: data.previous.title, slug: data.previous.slug } : null,
-		next: data.next ? { title: data.next.title, slug: data.next.slug } : null,
+		previous: data.previous
+			? {
+					title: data.previous.title,
+					slug: data.previous.slug,
+			  }
+			: null,
+		next: data.next
+			? {
+					title: data.next.title,
+					slug: data.next.slug,
+			  }
+			: null,
 		categories: data.categories.nodes.map((category: any) => ({
 			slug: category.slug,
 			name: category.name,

@@ -454,12 +454,8 @@ img {
 
 @mixin scroll-hint-shadow {
 	// The mighty scroll hinting shadow
-	background: /* Cover left */ linear-gradient(
-				to right,
-				var(--background-light) 30%,
-				rgba(255, 255, 255, 0)
-			)
-			center left,
+	background: /* Cover left */
+		linear-gradient(to right, var(--background-light) 30%, rgba(255, 255, 255, 0)) center left,
 		/* Cover right */ linear-gradient(to left, var(--background-light) 70%, rgba(255, 255, 255, 0))
 			center right,
 		/* Shadow left */
@@ -474,7 +470,11 @@ img {
 			center right;
 
 	background-repeat: no-repeat;
-	background-size: 6rem 100%, 6rem 100%, 1.5rem 100%, 1.5rem 100%;
+	background-size:
+		6rem 100%,
+		6rem 100%,
+		1.5rem 100%,
+		1.5rem 100%;
 	background-attachment: local, local, scroll, scroll;
 }
 

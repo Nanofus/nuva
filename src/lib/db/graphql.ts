@@ -103,7 +103,7 @@ export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post
 
 export const getAllCommentsForPostBySlug = async (
 	fetch: Function,
-	slug: string
+	slug: string,
 ): Promise<Comment[]> => {
 	let allCommentsFetched = false;
 	let allComments: Comment[] = [];
@@ -115,14 +115,14 @@ export const getAllCommentsForPostBySlug = async (
 		else latestAfter = commentResponse.endCursor;
 	}
 	return (objectsToHierarchy(allComments) as Comment[]).sort(
-		(a, b) => a.date.getTime() - b.date.getTime()
+		(a, b) => a.date.getTime() - b.date.getTime(),
 	);
 };
 
 export const getCommentsForPostBySlug = async (
 	fetch: Function,
 	slug: string,
-	after: string | null = null
+	after: string | null = null,
 ): Promise<CommentResponse> => {
 	const authToken = browser ? getAuthInfo()?.authToken : null;
 	const response = await (
@@ -163,7 +163,7 @@ export const getCommentsForPostBySlug = async (
 export const getPostListByAuthor = async (
 	fetch: Function,
 	author: string,
-	after: string | null = null
+	after: string | null = null,
 ): Promise<PostListByAuthorResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -175,7 +175,7 @@ export const getPostListByAuthor = async (
 				query: `
             query PostsByAuthor {
                 posts(where: {authorName: "${decodeURI(
-									author
+									author,
 								)}"}, first: ${MAX_PER_FETCH}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
@@ -196,7 +196,7 @@ export const getPostListByAuthor = async (
 
 	const { pageInfo } = response.data.posts;
 	const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) =>
-		dataToPostMeta(edge.node)
+		dataToPostMeta(edge.node),
 	);
 	return {
 		posts,
@@ -209,7 +209,7 @@ export const getPostListByAuthor = async (
 export const getPostListByTag = async (
 	fetch: Function,
 	tag: string,
-	after: string | null = null
+	after: string | null = null,
 ): Promise<PostListByTagResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -244,7 +244,7 @@ export const getPostListByTag = async (
 	const { pageInfo } = response.data.posts;
 	const tagName = response.data.tag.name;
 	const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) =>
-		dataToPostMeta(edge.node)
+		dataToPostMeta(edge.node),
 	);
 	return {
 		posts,
@@ -258,7 +258,7 @@ export const getPostListByTag = async (
 export const getPostListByCategory = async (
 	fetch: Function,
 	category: string,
-	after: string | null = null
+	after: string | null = null,
 ): Promise<PostListByCategoryResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -293,7 +293,7 @@ export const getPostListByCategory = async (
 	const { pageInfo } = response.data.category.posts;
 	const categoryName = response.data.category.name;
 	const posts: PostMeta[] = response.data.category.posts["edges"].map((edge: any) =>
-		dataToPostMeta(edge.node)
+		dataToPostMeta(edge.node),
 	);
 	return {
 		posts,
@@ -308,7 +308,7 @@ export const getPostList = async (
 	fetch: Function,
 	after: string | null = null,
 	searchTerm = "",
-	count: number = MAX_PER_FETCH
+	count: number = MAX_PER_FETCH,
 ): Promise<PostListBySearchResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -320,7 +320,7 @@ export const getPostList = async (
 				query: `
             query AllPostsPaginated {
                 posts(where: {search: "${decodeURI(
-									searchTerm
+									searchTerm,
 								)}"}, first: ${count}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
@@ -337,7 +337,7 @@ export const getPostList = async (
 	).json();
 	const { pageInfo } = response.data.posts;
 	const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) =>
-		dataToPostMeta(edge.node)
+		dataToPostMeta(edge.node),
 	);
 	return {
 		posts,
@@ -349,7 +349,7 @@ export const getPostList = async (
 
 export const getTagList = async (
 	fetch: Function,
-	after: string | null = null
+	after: string | null = null,
 ): Promise<TagListResponse> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -378,7 +378,7 @@ export const getTagList = async (
 	).json();
 	const { pageInfo } = response.data.tags;
 	const tags: Tag[] = dataToTags(response.data.tags["edges"].map((edge: any) => edge.node)).filter(
-		(tag) => tag.count > 0
+		(tag) => tag.count > 0,
 	);
 	return {
 		tags,
@@ -411,7 +411,9 @@ export const getCategoryList = async (fetch: Function): Promise<CategoryListResp
 		})
 	).json();
 	const categories = dataToCategories(response.data.categories.nodes);
-	return { categories };
+	return {
+		categories,
+	};
 };
 
 export const getAuthInfo = (): AuthInfo | null => {
@@ -440,7 +442,7 @@ export const logout = (): void => {
 export const login = async (
 	fetch: Function,
 	username: string,
-	password: string
+	password: string,
 ): Promise<boolean> => {
 	const response = await (
 		await fetch(API_PATH, {
@@ -490,7 +492,7 @@ export const postComment = async (
 	fetch: Function,
 	postId: number,
 	parent: number,
-	content: string
+	content: string,
 ): Promise<boolean> => {
 	if (!isLoggedIn()) {
 		return false;

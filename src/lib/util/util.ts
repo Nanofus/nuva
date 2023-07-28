@@ -40,7 +40,7 @@ export const filterExcludedCategories = (posts: PostMeta[]) =>
 		(post) =>
 			!post.categories
 				.map((cat) => cat.slug)
-				.some((slug) => CATEGORIES_EXCLUDED_FROM_ALL_POSTS.includes(slug))
+				.some((slug) => CATEGORIES_EXCLUDED_FROM_ALL_POSTS.includes(slug)),
 	);
 
 export const objectsToHierarchy = (arr: Hierarchical[]) => {
@@ -127,7 +127,7 @@ export const createBaseSettings = () => {
 			LOCALSTORAGE_SETTINGS_KEY,
 			JSON.stringify({
 				volume: DEFAULT_VOLUME,
-			})
+			}),
 		);
 	}
 };

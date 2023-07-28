@@ -25,6 +25,7 @@ Musicmancer 2023 Edition
 	let volume = 0;
 	let audioDataArray: AudioData[] = [];
 
+	// This runs before parent onMount, so the audio elements exist when user scripts run
 	onMount(() => {
 		volume = loadSetting("volume") || DEFAULT_VOLUME;
 		initializeAudioElements();
@@ -98,7 +99,7 @@ Musicmancer 2023 Edition
 			audioDataArray.push({
 				src: audioSrc,
 				audioElement: audioElement,
-				isEffect: audioElement.classList.contains("effect"),
+				isEffect: audioElement.classList.contains("effect")
 			});
 
 			// Create audio play button
@@ -143,7 +144,7 @@ Musicmancer 2023 Edition
 
 	// Mute
 	$: currentAudioElement &&
-		(muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
+	(muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
 
 	const unpause = () => {
 		paused = false;
@@ -159,7 +160,8 @@ Musicmancer 2023 Edition
 		audioDataArray.map((audioData) => {
 			if (audioData.isEffect || audioData.audioElement === newPlayerAfterFade) return;
 			if (audioData.audioElement.volume > 0) {
-				let newVolume = audioData.audioElement.volume - 0.001 * MUSIC_FADE_SPEED * (volume / 100);
+				let customModifier = audioData.audioElement.dataset.fadeOutTime ? parseFloat(audioData.audioElement.dataset.fadeOutTime) : 1;
+				let newVolume = audioData.audioElement.volume - 0.01 * MUSIC_FADE_SPEED * (volume / 100) / customModifier;
 				if (newVolume < 0) newVolume = 0;
 				audioData.audioElement.volume = newVolume;
 			} else {
