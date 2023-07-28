@@ -1,5 +1,5 @@
 import { createKysely } from "@vercel/postgres-kysely";
-import type { Database } from "$lib/db/database.schema";
+import type { Database } from "$lib/server/database.schema";
 
 // New Postgres queries
 

@@ -39,6 +39,7 @@
 		"vite": "^4.4.7"
 	},
 	"dependencies": {
+		"@sindresorhus/slugify": "^2.2.1",
 		"@vercel/postgres-kysely": "^0.4.1",
 		"@zerodevx/svelte-toast": "^0.9.5",
 		"html-validate": "^8.1.0",
