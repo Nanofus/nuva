@@ -167,7 +167,9 @@ article {
 
 // Screen is absurdly wide (wider than 21:9)
 @media screen and (min-width: 234vh) {
+  :root {
 	--viewport-width: 234vh;
+  }
 }
 
 /* Misc */
