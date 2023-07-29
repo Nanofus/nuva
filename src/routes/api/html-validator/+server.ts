@@ -1,7 +1,7 @@
-// Vercel should run this path in Node instead of edge, since html-validate uses `eval` for some reason
 import { validateHTML } from "$lib/util/html-validator";
 import { json } from "@sveltejs/kit";
 
+// Vercel should run this path in Node instead of edge, since html-validate uses `eval` for some reason
 export const config = {
   runtime: "nodejs18.x",
 };

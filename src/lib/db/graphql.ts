@@ -1,13 +1,11 @@
 import {
 	API_PATH,
 	LATEST_COMMENTS_PER_FETCH,
-	LOCALSTORAGE_AUTH_KEY,
 	MAX_PER_FETCH,
 } from "$lib/config";
 import { toast } from "@zerodevx/svelte-toast";
 import { browser } from "$app/environment";
 import { error } from "@sveltejs/kit";
-import { loginInfo } from "$lib/util/stores";
 import {
 	dataToCategories,
 	dataToCommentMetas,
@@ -18,7 +16,6 @@ import {
 } from "$lib/db/graphql.mappers";
 import { QUERIES } from "$lib/db/graphql.queries";
 import type {
-	AuthInfo,
 	CategoryListResponse,
 	Comment,
 	CommentMeta,
@@ -34,6 +31,7 @@ import type {
 } from "$lib/util/types";
 import { objectsToHierarchy, toastSettings } from "$lib/util/util";
 import { t } from "$lib/translations";
+import { getAuthInfo, isLoggedIn } from "$lib/db/auth";
 
 // Legacy WPGraphQL queries
 
@@ -414,78 +412,6 @@ export const getCategoryList = async (fetch: Function): Promise<CategoryListResp
 	return {
 		categories,
 	};
-};
-
-export const getAuthInfo = (): AuthInfo | null => {
-	if (localStorage !== undefined) {
-		return localStorage.getItem(LOCALSTORAGE_AUTH_KEY)
-			? JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY)!)
-			: null;
-	}
-	return null;
-};
-
-export const isLoggedIn = (): boolean => {
-	if (!browser) {
-		return false;
-	}
-
-	return Boolean(getAuthInfo());
-};
-
-export const logout = (): void => {
-	loginInfo.set(null);
-	localStorage.removeItem(LOCALSTORAGE_AUTH_KEY);
-	toast.push(t.toasts.loggedOut, toastSettings.success);
-};
-
-export const login = async (
-	fetch: Function,
-	username: string,
-	password: string,
-): Promise<boolean> => {
-	const response = await (
-		await fetch(API_PATH, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				query: `
-        mutation LoginUser {
-            login(input: {
-						    clientMutationId: "LoginUser"
-						    username: "${username}"
-						    password: "${password}"
-				    }) {
-					      authToken
-					      refreshToken
-					      user {
-						        name
-					      }
-            }
-        }`,
-			}),
-		})
-	).json();
-	if (response.errors?.length > 0) {
-		toast.push(t.toasts.loginFailed, toastSettings.error);
-	}
-
-	if (response.data.login) {
-		const loginData: AuthInfo = {
-			displayName: response.data.login.user.name,
-			username: response.data.login.user.username,
-			authToken: response.data.login.authToken,
-			refreshToken: response.data.login.refreshToken,
-		};
-		localStorage.setItem("auth", JSON.stringify(loginData));
-		loginInfo.set(loginData);
-		toast.push(`${t.toasts.welcome}, ${loginData.displayName}!`, toastSettings.success);
-		return true;
-	}
-
-	return false;
 };
 
 export const postComment = async (
