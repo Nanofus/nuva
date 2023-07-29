@@ -38,13 +38,14 @@ export type Post = {
 		slug: string;
 	} | null;
 	tags: Tag[];
-	comments: Comment[] | null;
+	comments: Comment[];
 	validationResult: any;
 } & PostMeta;
 
 export type Category = {
 	slug: string;
 	name: string;
+	children: Category[];
 } & Hierarchical;
 
 export type Tag = {

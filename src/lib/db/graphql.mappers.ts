@@ -116,7 +116,7 @@ export const dataToPost = (data: any): Post | null => {
 			slug: tag.slug,
 			name: tag.name,
 		})),
-		comments: null,
+		comments: [],
 		validationResult: null,
 	};
 };

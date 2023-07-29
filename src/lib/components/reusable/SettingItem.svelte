@@ -1,10 +1,8 @@
 <script lang="ts">
-	export let label: string;
 </script>
 
 <div class="padding-wrapper">
 	<div class="setting-item">
-		<label>{label}</label>
 		<slot />
 	</div>
 </div>

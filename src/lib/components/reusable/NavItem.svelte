@@ -10,7 +10,7 @@
 		<slot />
 	</a>
 {:else}
-	<div on:click>
+	<div role="button" on:click on:keypress tabindex="0">
 		<slot />
 	</div>
 {/if}

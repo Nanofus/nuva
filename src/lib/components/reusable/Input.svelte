@@ -10,17 +10,21 @@
 	export let value: string = "";
 	export let rows = 5;
 
-	let elementId = "input_" + counter++;
-	const handleInput = (e) => (value = e.target.value);
+	const elementId = "input_" + counter++;
+	const elementIdSecondary = elementId;
+	const handleInput = (event: Event) => {
+		const target = event.target as HTMLInputElement;
+		value = target.value;
+	};
 </script>
 
 <div class="input">
-	{#if label}
-		<label for={elementId}>
-			{label}
-		</label>
-	{/if}
 	{#if type === "multiline"}
+		{#if label}
+			<label for={elementId}>
+				{label}
+			</label>
+		{/if}
 		<textarea
 			class="editor"
 			{rows}
@@ -31,9 +35,14 @@
 			on:input={handleInput}
 		/>
 	{:else}
+		{#if label}
+			<label for={elementIdSecondary}>
+				{label}
+			</label>
+		{/if}
 		<input
 			class="editor"
-			id={elementId}
+			id={elementIdSecondary}
 			{name}
 			{placeholder}
 			{value}

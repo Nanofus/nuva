@@ -1,8 +1,4 @@
-import {
-	API_PATH,
-	LATEST_COMMENTS_PER_FETCH,
-	MAX_PER_FETCH,
-} from "$lib/config";
+import { API_PATH, LATEST_COMMENTS_PER_FETCH, MAX_PER_FETCH } from "$lib/config";
 import { toast } from "@zerodevx/svelte-toast";
 import { browser } from "$app/environment";
 import { error } from "@sveltejs/kit";

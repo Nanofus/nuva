@@ -67,7 +67,7 @@
 				<NavItem href="/"><h1>{t.siteName}</h1></NavItem>
 			</div>
 			<div class="section-menu">
-				<NavItem on:click={toggleMenu}>
+				<NavItem on:click={toggleMenu} on:keypress={toggleMenu}>
 					<div class="hamburger-menu">
 						{#if !menuOpen}
 							<span class="material-icons">menu</span>

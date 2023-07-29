@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { Comment, Post } from "$lib/util/types";
+	import type { Post } from "$lib/util/types";
 	import CommentForm from "$lib/components/CommentForm.svelte";
 	import { getAllCommentsForPostBySlug } from "$lib/db/graphql";
 	import Button from "$lib/components/reusable/Button.svelte";
 	import { t } from "$lib/translations";
-	import Comment from "$lib/components/Comment.svelte";
+	import CommentView from "$lib/components/CommentView.svelte";
 	import { isLoggedIn } from "$lib/db/auth";
 
 	export let post: Post;
@@ -12,7 +12,7 @@
 
 	const refreshComments = () => {
 		replyFormOpen = false;
-		getAllCommentsForPostBySlug(fetch, post.slug).then((comments: Comment[]) => {
+		getAllCommentsForPostBySlug(fetch, post.slug).then((comments) => {
 			post.comments = comments;
 		});
 	};
@@ -24,7 +24,7 @@
 		{post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}
 	</h2>
 	{#each post.comments as comment}
-		<Comment on:commentSent={refreshComments} {post} {comment} />
+		<CommentView on:commentSent={refreshComments} {post} {comment} />
 	{/each}
 	{#if !replyFormOpen && isLoggedIn()}
 		<Button link on:click={() => (replyFormOpen = true)}>{t.common.comment}</Button>

@@ -506,7 +506,9 @@ img {
 	// var(--max-page-width)
 	.grid-layout {
 		margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
-		max-width: calc(var(--page-max-width) + var(--bleed-buffer)); // 0.5px fixes a 1px rounding error
+		max-width: calc(
+			var(--page-max-width) + var(--bleed-buffer)
+		); // 0.5px fixes a 1px rounding error
 	}
 }
 

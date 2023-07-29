@@ -59,11 +59,6 @@
 
 <style lang="scss">
 	.button-group {
-		a {
-			margin-left: 1rem;
-			margin-right: 1rem;
-		}
-
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
