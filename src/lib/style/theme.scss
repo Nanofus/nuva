@@ -154,7 +154,6 @@ article {
 
 // Screen is larger than white area
 @media screen and (min-width: 76rem) {
-	// var(--max-page-width)
 	.full-width,
 	.background:not(.max) {
 		margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2 + var(--bleed-buffer));
@@ -164,6 +163,11 @@ article {
 	.background.max:not(.repeat) {
 		background-size: cover;
 	}
+}
+
+// Screen is absurdly wide (wider than 21:9)
+@media screen and (min-width: 234vh) {
+	--viewport-width: 234vh;
 }
 
 /* Misc */
