@@ -4,7 +4,7 @@
 	import CommentForm from "$lib/components/CommentForm.svelte";
 	import { createEventDispatcher } from "svelte";
 	import { browser } from "$app/environment";
-	import { getAuthInfo, isLoggedIn } from "$lib/db/graphql";
+	import { getAuthInfo, isLoggedIn } from "$lib/db/auth";
 	import Button from "$lib/components/reusable/Button.svelte";
 	import { t } from "$lib/translations";
 

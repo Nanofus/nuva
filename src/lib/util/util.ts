@@ -91,7 +91,7 @@ export const handleScrolledToBottom = () => {
 export const getPageTitle = (title: string) =>
 	title ? `${title} ${SITE_NAME_DELIMITER} ${SITE_NAME}` : SITE_NAME;
 
-export const getPageUrl = (slug: string) => `${BASE_PATH}/${slug}`;
+export const getPageUrl = (route: string) => `${BASE_PATH}/${route}`;
 
 export const formatSecondsToMMSS = (seconds: number) => {
 	const minutes = Math.floor(seconds / 60);

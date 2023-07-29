@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isLoggedIn, postComment } from "$lib/db/graphql";
+	import { postComment } from "$lib/db/graphql";
 	import { toast } from "@zerodevx/svelte-toast";
 	import { createEventDispatcher, onMount } from "svelte";
 	import Button from "$lib/components/reusable/Button.svelte";
@@ -8,6 +8,7 @@
 	import { toastSettings } from "$lib/util/util";
 	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
 	import { t } from "$lib/translations";
+	import { isLoggedIn } from "$lib/db/auth";
 
 	export let parent: number;
 	export let postId: number;

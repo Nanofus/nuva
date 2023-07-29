@@ -477,7 +477,7 @@ img {
 .grid-layout {
 	@include full-width;
 
-	display: inline-grid;
+	display: grid;
 	grid-template-columns: auto auto;
 
 	.grid-left,
