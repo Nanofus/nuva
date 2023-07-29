@@ -157,7 +157,7 @@ article {
 	// var(--max-page-width)
 	.full-width,
 	.background:not(.max) {
-		margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
+		margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2 + var(--bleed-buffer));
 		max-width: calc(var(--page-max-width) + var(--bleed-buffer));
 	}
 
@@ -505,8 +505,8 @@ img {
 @media screen and (min-width: 76rem) {
 	// var(--max-page-width)
 	.grid-layout {
-		margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
-		max-width: calc(var(--page-max-width) + var(--bleed-buffer)); // 0.5px fixes a 1px rounding error
+		margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2 + var(--bleed-buffer));
+		max-width: calc(var(--page-max-width) + var(--bleed-buffer)); // bleed buffer fixes a 1px rounding error
 	}
 }
 
