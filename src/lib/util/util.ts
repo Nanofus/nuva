@@ -71,7 +71,7 @@ export const objectsToHierarchy = (arr: Hierarchical[]) => {
 };
 
 export const handleViewportResize = () => {
-	if (!browser || !window.visualViewport) return;
+	if (!browser) return;
 	const scroller = document.scrollingElement as HTMLElement;
 	document
 		.querySelector<HTMLElement>(":root")
