@@ -5,7 +5,7 @@
 	import { browser } from "$app/environment";
 	import { navigating } from "$app/stores";
 	import { OG_LOCALE, SITE_NAME } from "$lib/config";
-	import { createBaseSettings, handleScrolledToBottom } from "$lib/util/util";
+	import { createBaseSettings, handleScrolledToBottom, handleViewportResize } from "$lib/util/util";
 	import { postOptions } from "$lib/util/stores";
 	import Header from "$lib/components/Header.svelte";
 	import Footer from "$lib/components/Footer.svelte";
@@ -26,11 +26,14 @@
 			fullWidth = options.fullWidth;
 		});
 		createBaseSettings();
+		browser &&
 		browser && document.addEventListener("scroll", handleScrolledToBottom);
+		browser && window.addEventListener("resize", handleViewportResize);
 	});
 
 	onDestroy(() => {
 		browser && document.removeEventListener("scroll", handleScrolledToBottom);
+		browser && window.removeEventListener("resize", handleViewportResize);
 	});
 </script>
 

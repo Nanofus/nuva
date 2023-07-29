@@ -70,6 +70,14 @@ export const objectsToHierarchy = (arr: Hierarchical[]) => {
 	return tree;
 };
 
+export const handleViewportResize = () => {
+	if (!browser || !window.visualViewport) return;
+
+	document
+		.querySelector<HTMLElement>(":root")
+		?.style.setProperty("--viewport-width", `${Math.round(window.visualViewport.width)}px`);
+};
+
 export const handleScrolledToBottom = () => {
 	if (!browser) {
 		return;
