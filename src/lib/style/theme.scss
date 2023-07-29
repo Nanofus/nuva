@@ -12,10 +12,6 @@ body {
 	background: var(--background-dark);
 }
 
-html {
-	scrollbar-gutter: stable; // TODO: fix gutter so that it doesn't break 100vw as the horizontal width
-}
-
 #page {
 	margin: auto;
 	min-width: var(--page-min-width);
@@ -38,8 +34,8 @@ main {
 	border-bottom-right-radius: var(--border-radius);
 	height: auto;
 	min-height: calc(
-					var(--viewport-height) - var(--page-max-width) / var(--header-banner-dimensions-ratio) -
-					var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin)
+		var(--viewport-height) - var(--page-max-width) / var(--header-banner-dimensions-ratio) -
+			var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin)
 	);
 }
 
@@ -134,9 +130,9 @@ article {
 	&.fade-bottom:after {
 		bottom: 0;
 		background-image: linear-gradient(
-										to bottom,
-										rgba(255, 255, 255, 0),
-										var(--background-light) 100%
+			to bottom,
+			rgba(255, 255, 255, 0),
+			var(--background-light) 100%
 		);
 	}
 
@@ -162,7 +158,7 @@ article {
 	.full-width,
 	.background:not(.max) {
 		margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
-		max-width: calc(var(--page-max-width) + 0.5px); // 0.5px fixes a 1px rounding error
+		max-width: calc(var(--page-max-width) + var(--bleed-buffer));
 	}
 
 	.background.max:not(.repeat) {
@@ -210,7 +206,7 @@ article {
 	}
 	100% {
 		background-color: var(
-										--comment-background
+			--comment-background
 		); // Currently only used for comments, so using comment background
 	}
 }
@@ -396,14 +392,14 @@ img {
 	width: 100%;
 	height: 5rem;
 	background-image: linear-gradient(
-									45deg,
-									#000000 25%,
-									#ffd900 25%,
-									#ffd900 50%,
-									#000000 50%,
-									#000000 75%,
-									#ffd900 75%,
-									#ffd900 100%
+		45deg,
+		#000000 25%,
+		#ffd900 25%,
+		#ffd900 50%,
+		#000000 50%,
+		#000000 75%,
+		#ffd900 75%,
+		#ffd900 100%
 	);
 	background-size: 5rem;
 	display: flex;
@@ -455,23 +451,26 @@ img {
 @mixin scroll-hint-shadow {
 	// The mighty scroll hinting shadow
 	background: /* Cover left */
-					linear-gradient(to right, var(--background-light) 30%, rgba(255, 255, 255, 0)) center left,
-						/* Cover right */
-					linear-gradient(to left, var(--background-light) 70%, rgba(255, 255, 255, 0)) center right,
-						/* Shadow left */
-					radial-gradient(farthest-side at 0 50%, var(--scroll-hinting-shadow-color), rgba(0, 0, 0, 0)) center left,
-						/* Shadow right */
-					radial-gradient(
-													farthest-side at 100% 50%,
-													var(--scroll-hinting-shadow-color),
-													rgba(0, 0, 0, 0)
-					) center right;
+		linear-gradient(to right, var(--background-light) 30%, rgba(255, 255, 255, 0)) center left,
+		/* Cover right */ linear-gradient(to left, var(--background-light) 70%, rgba(255, 255, 255, 0))
+			center right,
+		/* Shadow left */
+			radial-gradient(farthest-side at 0 50%, var(--scroll-hinting-shadow-color), rgba(0, 0, 0, 0))
+			center left,
+		/* Shadow right */
+			radial-gradient(
+				farthest-side at 100% 50%,
+				var(--scroll-hinting-shadow-color),
+				rgba(0, 0, 0, 0)
+			)
+			center right;
 
 	background-repeat: no-repeat;
-	background-size: 6rem 100%,
-	6rem 100%,
-	1.5rem 100%,
-	1.5rem 100%;
+	background-size:
+		6rem 100%,
+		6rem 100%,
+		1.5rem 100%,
+		1.5rem 100%;
 	background-attachment: local, local, scroll, scroll;
 }
 
@@ -507,7 +506,7 @@ img {
 	// var(--max-page-width)
 	.grid-layout {
 		margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
-		max-width: calc(var(--page-max-width) + 0.5px); // 0.5px fixes a 1px rounding error
+		max-width: calc(var(--page-max-width) + var(--bleed-buffer)); // 0.5px fixes a 1px rounding error
 	}
 }
 

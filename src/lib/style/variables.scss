@@ -64,6 +64,7 @@
 	--article-max-width: 38rem; // Max width of article content
 	--scrollbar-width: 0px;
 	--viewport-width: calc(100vw - var(--scrollbar-width)); // Full width of page
+	--bleed-buffer: 0.5px;
 	--viewport-height: 100vh; // Full height of page
 	--mobile-threshold: 41rem; // Width at which mobile styles are applied
 	--compact-navigation-threshold: 54rem; // Width at which compact navigation is enabled
