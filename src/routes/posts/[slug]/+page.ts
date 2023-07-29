@@ -8,7 +8,7 @@ export const load: Load = async ({ fetch, params, url }): Promise<Post | null> =
 		const isPreview = url.searchParams.get("preview") != null;
 		const post = await getPostBySlug(fetch, params.slug);
 		if (isPreview && post) {
-			const { body } = await fetch("/api/html-validator", {
+			post.validationResult = await fetch("/api/html-validator", {
 				method: "POST",
 				body: JSON.stringify({
 					html: post.content,
@@ -16,8 +16,7 @@ export const load: Load = async ({ fetch, params, url }): Promise<Post | null> =
 				headers: {
 					"Content-Type": "application/json",
 				},
-			}).then((res) => res.json());
-			post.validationResult = body;
+			}).then((res: Response) => res.json());
 		}
 		return post;
 	}

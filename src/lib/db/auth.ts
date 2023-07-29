@@ -1,5 +1,5 @@
 import type { AuthInfo } from "$lib/util/types";
-import { API_PATH, LOCALSTORAGE_AUTH_KEY } from "$lib/config";
+import { LOCALSTORAGE_AUTH_KEY } from "$lib/config";
 import { browser } from "$app/environment";
 import { loginInfo } from "$lib/util/stores";
 import { toast } from "@zerodevx/svelte-toast";
@@ -29,51 +29,17 @@ export const logout = (): void => {
 	toast.push(t.toasts.loggedOut, toastSettings.success);
 };
 
-export const login = async (
-	fetch: Function,
-	username: string,
-	password: string,
-): Promise<boolean> => {
-	const response = await (
-		await fetch(API_PATH, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				query: `
-        mutation LoginUser {
-            login(input: {
-						    clientMutationId: "LoginUser"
-						    username: "${username}"
-						    password: "${password}"
-				    }) {
-					      authToken
-					      refreshToken
-					      user {
-						        name
-					      }
-            }
-        }`,
-			}),
-		})
-	).json();
-	if (response.errors?.length > 0) {
+export const login = async (username: string, password: string) => {
+	const loginResult = await fetch("/api/auth", {
+		method: "POST",
+		body: JSON.stringify({ username, password }),
+	});
+	const authInfo = await loginResult.json();
+	if (!loginResult.ok || !authInfo) {
 		toast.push(t.toasts.loginFailed, toastSettings.error);
+		return;
 	}
-
-	if (response.data.login) {
-		const loginData: AuthInfo = {
-			displayName: response.data.login.user.name,
-			username: response.data.login.user.username,
-			authToken: response.data.login.authToken,
-			refreshToken: response.data.login.refreshToken,
-		};
-		localStorage.setItem("auth", JSON.stringify(loginData));
-		loginInfo.set(loginData);
-		toast.push(`${t.toasts.welcome}, ${loginData.displayName}!`, toastSettings.success);
-		return true;
-	}
-
-	return false;
+	localStorage.setItem("userData", JSON.stringify(authInfo));
+	loginInfo.set(authInfo);
+	toast.push(`${t.toasts.welcome}, ${authInfo.displayName}!`, toastSettings.success);
 };

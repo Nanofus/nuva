@@ -9,7 +9,5 @@ export const config = {
 export const POST = async ({ request }: { request: any }) => {
 	const { html } = await request.json();
 	const validationResult = await validateHTML(html);
-	return json({
-		body: validationResult,
-	});
+	return json(validationResult);
 };

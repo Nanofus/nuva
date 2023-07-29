@@ -25,7 +25,7 @@
 			toast.push(t.components.login.fillBothFields, toastSettings.error);
 			return;
 		}
-		await login(fetch, usernameInput, passwordInput);
+		await login(usernameInput, passwordInput);
 		submitted = false;
 	};
 </script>
