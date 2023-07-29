@@ -78,7 +78,7 @@ export const handleViewportResize = () => {
 		?.style.setProperty("--scrollbar-width", `${window.innerWidth - scroller.clientWidth}px`);
 	document
 		.querySelector<HTMLElement>(":root")
-		?.style.setProperty("--bleed-buffer", `${window.visualViewport.width - scroller.clientWidth}px`);
+		?.style.setProperty("--bleed-buffer", `${100 * Math.round(window.visualViewport.width / 100) - scroller.clientWidth}px`);
 };
 
 export const handleScrolledToBottom = () => {
