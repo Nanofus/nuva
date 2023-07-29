@@ -76,7 +76,8 @@ export const handleViewportResize = () => {
 	document
 		.querySelector<HTMLElement>(":root")
 		?.style.setProperty("--scrollbar-width", `${window.innerWidth - scroller.clientWidth}px`);
-	if (window.visualViewport) document
+	if (!window.visualViewport) return;
+	document
 		.querySelector<HTMLElement>(":root")
 		?.style.setProperty("--bleed-buffer", `${Math.round((window.visualViewport.width + Number.EPSILON) * 100) / 100 - scroller.clientWidth}px`);
 };
