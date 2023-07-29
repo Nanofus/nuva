@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { login, logout } from "$lib/db/graphql";
+	import { login, logout } from "$lib/db/auth";
 	import { loginInfo } from "$lib/util/stores";
 	import { onMount } from "svelte";
 	import Button from "$lib/components/reusable/Button.svelte";
