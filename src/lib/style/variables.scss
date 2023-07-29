@@ -62,7 +62,8 @@
 	--page-max-width: 76rem; // ~ 1200px, max width of "white area"
 	--page-min-width: 22rem; // ~ 350px, min width of "white area"
 	--article-max-width: 38rem; // Max width of article content
-	--viewport-width: 100vw; // Full width of page
+	--scrollbar-width: 0px;
+	--viewport-width: calc(100vw - var(--scrollbar-width)); // Full width of page
 	--viewport-height: 100vh; // Full height of page
 	--mobile-threshold: 41rem; // Width at which mobile styles are applied
 	--compact-navigation-threshold: 54rem; // Width at which compact navigation is enabled

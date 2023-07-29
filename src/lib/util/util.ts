@@ -72,10 +72,10 @@ export const objectsToHierarchy = (arr: Hierarchical[]) => {
 
 export const handleViewportResize = () => {
 	if (!browser || !window.visualViewport) return;
-
+	const scroller = document.scrollingElement as HTMLElement;
 	document
 		.querySelector<HTMLElement>(":root")
-		?.style.setProperty("--viewport-width", `${Math.round(window.visualViewport.width)}px`);
+		?.style.setProperty("--scrollbar-width", `${window.innerWidth - scroller.clientWidth}px`);
 };
 
 export const handleScrolledToBottom = () => {

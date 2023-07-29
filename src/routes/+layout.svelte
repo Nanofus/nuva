@@ -26,9 +26,9 @@
 			fullWidth = options.fullWidth;
 		});
 		createBaseSettings();
-		browser &&
-		browser && document.addEventListener("scroll", handleScrolledToBottom);
-		browser && window.addEventListener("resize", handleViewportResize);
+		handleViewportResize();
+		document.addEventListener("scroll", handleScrolledToBottom);
+		window.addEventListener("resize", handleViewportResize);
 	});
 
 	onDestroy(() => {

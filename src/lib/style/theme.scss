@@ -64,7 +64,7 @@ main {
 
 @mixin full-width {
 	position: relative;
-	left: calc(-50vw + 50%);
+	left: calc(-1 * var(--viewport-width) / 2 + 50%);
 	width: var(--viewport-width);
 	max-width: var(--viewport-width);
 	overflow: hidden;
