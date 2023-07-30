@@ -12,8 +12,8 @@
   let scriptElements: HTMLScriptElement[] = [];
 
   const setInitialLetter = () => {
+    // Remove the userAgent check when Firefox supports initial-letter
     if (browser && !navigator.userAgent.match(/firefox|fxios/i) && post.initialLetter) {
-      // TODO: Remove this when Firefox supports initial-letter
       document.documentElement.style.setProperty("--initial-letter-size", "3.0");
       document.documentElement.style.setProperty("--initial-letter-padding", "0.5rem");
     }
