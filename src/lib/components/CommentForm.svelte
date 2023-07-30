@@ -8,16 +8,11 @@
 	import { toastSettings } from "$lib/util/util";
 	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
 	import { t } from "$lib/translations";
-	import { isLoggedIn } from "$lib/db/auth";
+	import {auth} from "$lib/util/stores";
 
 	export let parent: number;
 	export let postId: number;
 	export let isReply: boolean;
-
-	let loggedIn: boolean;
-	onMount(() => {
-		loggedIn = isLoggedIn();
-	});
 
 	let sending: boolean = false;
 	let content: string = "";
@@ -37,7 +32,7 @@
 	};
 </script>
 
-{#if loggedIn}
+{#if $auth}
 	<div class="comment-reply">
 		{#if sending}
 			<LoadingSpinner />

@@ -4,9 +4,9 @@
 	import CommentForm from "$lib/components/CommentForm.svelte";
 	import { createEventDispatcher } from "svelte";
 	import { browser } from "$app/environment";
-	import { getAuthInfo, isLoggedIn } from "$lib/db/auth";
 	import Button from "$lib/components/reusable/Button.svelte";
 	import { t } from "$lib/translations";
+	import {auth} from "$lib/util/stores";
 
 	export let comment: Comment;
 	export let post: Post;
@@ -21,7 +21,7 @@
 
 	const isCurrentUser = () => {
 		if (browser) {
-			const user = getAuthInfo()?.displayName;
+			const user = $auth?.displayName;
 			if (!user) return false;
 			return user === comment.author;
 		}
@@ -49,7 +49,7 @@
 	{#if isCurrentUser()}
 		<a target="_blank" href="{t.components.comment.editUrl}{comment._id}">{t.common.edit}</a>
 	{/if}
-	{#if !replyFormOpen && isLoggedIn()}
+	{#if !replyFormOpen && $auth}
 		<Button link on:click={() => (replyFormOpen = true)}>{t.common.reply}</Button>
 	{:else}
 		<CommentForm

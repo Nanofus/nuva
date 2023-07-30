@@ -27,12 +27,13 @@ import type {
 } from "$lib/util/types";
 import { objectsToHierarchy, toastSettings } from "$lib/util/util";
 import { t } from "$lib/translations";
-import { getAuthInfo, isLoggedIn } from "$lib/db/auth";
+import { auth } from "$lib/util/stores";
+import { get } from 'svelte/store';
 
 // Legacy WPGraphQL queries
 
 export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]> => {
-	const authToken = browser ? getAuthInfo()?.authToken : null;
+	const authToken = browser ? get(auth)?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
 			method: "POST",
@@ -71,7 +72,7 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
 };
 
 export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | null> => {
-	const authToken = browser ? getAuthInfo()?.authToken : null;
+	const authToken = browser ? get(auth)?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
 			method: "POST",
@@ -118,7 +119,7 @@ export const getCommentsForPostBySlug = async (
 	slug: string,
 	after: string | null = null,
 ): Promise<CommentResponse> => {
-	const authToken = browser ? getAuthInfo()?.authToken : null;
+	const authToken = browser ? get(auth)?.authToken : null;
 	const response = await (
 		await fetch(API_PATH, {
 			method: "POST",
@@ -416,11 +417,8 @@ export const postComment = async (
 	parent: number,
 	content: string,
 ): Promise<boolean> => {
-	if (!isLoggedIn()) {
-		return false;
-	}
-
-	const authToken = browser ? getAuthInfo()?.authToken : null;
+	const authToken = browser ? get(auth)?.authToken : null;
+	if (!authToken) return false;
 	const response = await (
 		await fetch(API_PATH, {
 			method: "POST",

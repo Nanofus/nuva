@@ -6,7 +6,7 @@
 	import { navigating } from "$app/stores";
 	import { OG_LOCALE, SITE_NAME } from "$lib/config";
 	import { createBaseSettings, handleScrolledToBottom, handleViewportResize } from "$lib/util/util";
-	import { postOptions } from "$lib/util/stores";
+	import {auth, postOptions} from "$lib/util/stores";
 	import Header from "$lib/components/Header.svelte";
 	import Footer from "$lib/components/Footer.svelte";
 	import Navigation from "$lib/components/Navigation.svelte";
@@ -16,19 +16,21 @@
 	import "$lib/style/variables.scss";
 	import "$lib/style/input-range.scss";
 	import "$lib/style/theme.scss";
+	import {loadAuthFromLocalStorage} from "$lib/db/auth";
 
 	export let data;
 
 	let fullWidth: boolean = false;
 
 	onMount(() => {
-		postOptions.subscribe((options) => {
-			fullWidth = options.fullWidth;
-		});
 		createBaseSettings();
 		handleViewportResize();
 		document.addEventListener("scroll", handleScrolledToBottom);
 		window.addEventListener("resize", handleViewportResize);
+		if (!$auth) loadAuthFromLocalStorage();
+		postOptions.subscribe((options) => {
+			fullWidth = options.fullWidth;
+		});
 	});
 
 	onDestroy(() => {

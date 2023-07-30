@@ -2,19 +2,15 @@
 	import Login from "$lib/components/Login.svelte";
 	import { getPageTitle, getPageUrl, loadSetting, saveSetting } from "$lib/util/util";
 	import { onMount } from "svelte";
-	import { loginInfo } from "$lib/util/stores";
+	import { auth } from "$lib/util/stores";
 	import SettingItem from "$lib/components/reusable/SettingItem.svelte";
 	import Settings from "$lib/components/Settings.svelte";
 	import { DEFAULT_VOLUME } from "$lib/config";
 	import { t } from "$lib/translations";
-	import type { AuthInfo } from "$lib/util/types";
+	import type { AuthData } from "$lib/util/types";
 
-	let userInfo: AuthInfo | null = null;
+	let userInfo: AuthData = null;
 	let volume = loadSetting("volume") || DEFAULT_VOLUME;
-
-	onMount(() => {
-		loginInfo.subscribe((info) => (userInfo = info));
-	});
 
 	$: volume && saveSetting("volume", volume);
 </script>
@@ -26,11 +22,11 @@
 </svelte:head>
 
 <h1>{t.pages.profile.title}</h1>
-{#if userInfo}
+{#if $auth}
 	<Settings>
 		<SettingItem>
 			<label for="displayName">{t.settings.user}</label>
-			<span id="displayName">{userInfo.displayName}</span>
+			<span id="displayName">{$auth.displayName}</span>
 		</SettingItem>
 		<SettingItem>
 			<div class="input-wrapper">

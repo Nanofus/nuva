@@ -1,30 +1,18 @@
-import type { AuthInfo } from "$lib/util/types";
 import { LOCALSTORAGE_AUTH_KEY } from "$lib/config";
-import { browser } from "$app/environment";
-import { loginInfo } from "$lib/util/stores";
+import { auth } from "$lib/util/stores";
 import { toast } from "@zerodevx/svelte-toast";
 import { t } from "$lib/translations";
 import { toastSettings } from "$lib/util/util";
 
-export const getAuthInfo = (): AuthInfo | null => {
+export const loadAuthFromLocalStorage = () => {
 	if (localStorage !== undefined) {
-		return localStorage.getItem(LOCALSTORAGE_AUTH_KEY)
-			? JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY)!)
-			: null;
+		if (localStorage.getItem(LOCALSTORAGE_AUTH_KEY)) auth.set(JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY)!));
 	}
-	return null;
-};
-
-export const isLoggedIn = (): boolean => {
-	if (!browser) {
-		return false;
-	}
-
-	return Boolean(getAuthInfo());
+	auth.set(null);
 };
 
 export const logout = (): void => {
-	loginInfo.set(null);
+	auth.set(null);
 	localStorage.removeItem(LOCALSTORAGE_AUTH_KEY);
 	toast.push(t.toasts.loggedOut, toastSettings.success);
 };
@@ -39,7 +27,7 @@ export const login = async (username: string, password: string) => {
 		toast.push(t.toasts.loginFailed, toastSettings.error);
 		return;
 	}
-	localStorage.setItem("userData", JSON.stringify(authInfo));
-	loginInfo.set(authInfo);
+	localStorage.setItem(LOCALSTORAGE_AUTH_KEY, JSON.stringify(authInfo));
+	auth.set(authInfo);
 	toast.push(`${t.toasts.welcome}, ${authInfo.displayName}!`, toastSettings.success);
 };

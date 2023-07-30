@@ -1,13 +1,10 @@
 import { API_PATH } from "$lib/config";
-import { toast } from "@zerodevx/svelte-toast";
-import { t } from "$lib/translations";
-import { toastSettings } from "$lib/util/util";
-import type { AuthInfo } from "$lib/util/types";
+import type { AuthData } from "$lib/util/types";
 
 export const handleLogin = async (
   username: string,
   password: string,
-): Promise<AuthInfo | null> => {
+): Promise<AuthData> => {
   const response = await (
     await fetch(API_PATH, {
       method: "POST",
@@ -26,6 +23,7 @@ export const handleLogin = async (
 					      refreshToken
 					      user {
 						        name
+						        username
 					      }
             }
         }`,

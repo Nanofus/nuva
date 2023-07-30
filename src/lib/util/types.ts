@@ -112,12 +112,12 @@ export type PostsAndCommentsResponse = {
 	comments: CommentMeta[];
 };
 
-export type AuthInfo = {
+export type AuthData = {
 	displayName: string;
 	username: string;
 	authToken: string;
 	refreshToken: string;
-};
+} | null;
 
 export type PostOptions = {
 	bannerVisible: boolean;

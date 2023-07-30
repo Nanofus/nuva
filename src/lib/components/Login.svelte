@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { login, logout } from "$lib/db/auth";
-	import { loginInfo } from "$lib/util/stores";
+	import { auth } from "$lib/util/stores";
 	import { onMount } from "svelte";
 	import Button from "$lib/components/reusable/Button.svelte";
 	import Input from "$lib/components/reusable/Input.svelte";
@@ -11,14 +11,9 @@
 	import { browser } from "$app/environment";
 	import { t } from "$lib/translations";
 
-	let loggedIn: boolean | null = null;
 	let passwordInput = "";
 	let usernameInput = "";
 	let submitted = false;
-
-	onMount(() => {
-		loginInfo.subscribe((loginInfo) => (loggedIn = !!loginInfo));
-	});
 
 	const handleLogin = async () => {
 		if (!usernameInput || !passwordInput) {
@@ -31,13 +26,7 @@
 </script>
 
 <div class="login-area">
-	{#if loggedIn === null}
-		{#if browser}
-			<LoadingSpinner />
-		{:else}
-			<p>{t.components.login.cantUseWithoutJs}</p>
-		{/if}
-	{:else if !loggedIn}
+	{#if !$auth}
 		<Form vertical={true} on:submit={() => (submitted = true)}>
 			<Input label={t.components.login.username} name="username" bind:value={usernameInput} />
 			<Input
@@ -52,7 +41,7 @@
 				<LoadingSpinner />
 			{/if}
 		</Form>
-	{:else if loggedIn}
+	{:else}
 		<div class="user-info">
 			<Button on:click={() => logout()}>{t.components.login.logout}</Button>
 		</div>

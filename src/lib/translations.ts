@@ -83,6 +83,8 @@ const TRANSLATIONS_FI = {
 		volume: "Äänenvoimakkuus",
 	},
 	errors: {
+		e401: "Autentikaatio epäonnistui.",
+		e403: "Pääsy estetty.",
 		e404: "Sivua ei löytynyt",
 		e500: "Jotain meni pieleen",
 	},

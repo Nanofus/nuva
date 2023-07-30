@@ -2,15 +2,14 @@
 	import NavItem from "$lib/components/reusable/NavItem.svelte";
 	import { onDestroy, onMount } from "svelte";
 	import { browser } from "$app/environment";
-	import { loginInfo, postOptions } from "$lib/util/stores";
-	import type { AuthInfo } from "$lib/util/types";
+	import { auth, postOptions } from "$lib/util/stores";
+	import type { AuthData } from "$lib/util/types";
 	import { t } from "$lib/translations";
 
 	let smallLogo: HTMLElement;
 	let menuOpen = false;
 	let stickyMenu = true;
 	let bannerVisible = true;
-	let userInfo: AuthInfo | null = null;
 
 	const getTotalNavigationHeight = () => {
 		return document.querySelector("header")?.offsetHeight || 0;
@@ -45,7 +44,6 @@
 				stickyMenu = options.stickyMenu;
 				bannerVisible = options.bannerVisible;
 			});
-			loginInfo.subscribe((info) => (userInfo = info));
 		}
 	});
 
@@ -93,11 +91,11 @@
 			<NavItem href={t.components.navigation.soundtracksUrl}
 				>{t.components.navigation.soundtracks}</NavItem
 			>
-			{#if userInfo}
+			{#if $auth}
 				<NavItem href={t.components.navigation.writeUrl}>{t.components.navigation.write}</NavItem>
 			{/if}
 			<NavItem href="/profile"
-				>{userInfo ? t.components.navigation.profile : t.components.navigation.login}</NavItem
+				>{$auth ? t.components.navigation.profile : t.components.navigation.login}</NavItem
 			>
 			<NavItem href="/search">{t.components.navigation.search}</NavItem>
 		</div>

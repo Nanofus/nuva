@@ -5,7 +5,7 @@
 	import Button from "$lib/components/reusable/Button.svelte";
 	import { t } from "$lib/translations";
 	import CommentView from "$lib/components/CommentView.svelte";
-	import { isLoggedIn } from "$lib/db/auth";
+	import { auth } from "$lib/util/stores";
 
 	export let post: Post;
 	let replyFormOpen = false;
@@ -26,7 +26,7 @@
 	{#each post.comments as comment}
 		<CommentView on:commentSent={refreshComments} {post} {comment} />
 	{/each}
-	{#if !replyFormOpen && isLoggedIn()}
+	{#if !replyFormOpen && $auth}
 		<Button link on:click={() => (replyFormOpen = true)}>{t.common.comment}</Button>
 	{:else}
 		<CommentForm

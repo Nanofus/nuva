@@ -5,7 +5,6 @@ import { t } from "$lib/translations";
 export const POST = async ({ request }: { request: any }) => {
 	const { username, password } = await request.json();
 	const loginResult = await handleLogin(username, password);
-	console.log(loginResult);
-	if (!loginResult) throw error(404, t.errors.e404);
+	if (!loginResult) throw error(401, t.errors.e401);
 	return json(loginResult);
 }
