@@ -4,7 +4,14 @@ import { vitePreprocess } from "@sveltejs/kit/vite";
 /** @type {import("@sveltejs/kit").Config} */
 const config = {
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+      runtime: "edge",
+      functions: {
+        "api/html-validator/*.ts": {
+          runtime: "nodejs18.x",
+        },
+      },
+    }),
   },
   preprocess: vitePreprocess(),
 };

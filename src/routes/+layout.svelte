@@ -4,7 +4,7 @@
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import { browser } from "$app/environment";
   import { navigating } from "$app/stores";
-  import { OG_LOCALE, SITE_NAME } from "$lib/config";
+  import { LOCALE, SITE_NAME } from "$lib/config";
   import { createBaseSettings, handleScrolledToBottom, handleViewportResize } from "$lib/util/util";
   import { auth, postOptions } from "$lib/util/stores";
   import Header from "$lib/components/Header.svelte";
@@ -16,7 +16,7 @@
   import "$lib/style/variables.scss";
   import "$lib/style/input-range.scss";
   import "$lib/style/theme.scss";
-  import { loadAuthFromLocalStorage } from "$lib/db/auth";
+  import { loadLoginStatus } from "$lib/db/auth";
 
   export let data;
 
@@ -27,7 +27,7 @@
     handleViewportResize();
     document.addEventListener("scroll", handleScrolledToBottom);
     window.addEventListener("resize", handleViewportResize);
-    if (!$auth) loadAuthFromLocalStorage();
+    if (!$auth) loadLoginStatus();
     postOptions.subscribe((options) => {
       fullWidth = options.fullWidth;
     });
@@ -42,7 +42,7 @@
 <svelte:head>
   <title>{SITE_NAME}</title>
   <meta content={SITE_NAME} property="og:site_name" />
-  <meta content={OG_LOCALE} property="og:locale" />
+  <meta content={LOCALE.replace("-", "_")} property="og:locale" />
   <meta content="website" property="og:type" />
 </svelte:head>
 

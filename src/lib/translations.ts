@@ -11,7 +11,7 @@ const TRANSLATIONS_FI = {
     commentPlural: "kommenttia",
   },
   toasts: {
-    welcome: "Tervetuloa",
+    welcome: "Tervetuloa,",
     commentSent: "Kommentti lähetetty.",
     loginFailed: "Kirjautuminen epäonnistui.",
     loggedOut: "Kirjauduit ulos.",

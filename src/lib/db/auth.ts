@@ -4,7 +4,7 @@ import { toast } from "@zerodevx/svelte-toast";
 import { t } from "$lib/translations";
 import { toastSettings } from "$lib/util/util";
 
-export const loadAuthFromLocalStorage = () => {
+export const loadLoginStatus = () => {
   if (localStorage !== undefined) {
     if (localStorage.getItem(LOCALSTORAGE_AUTH_KEY))
       auth.set(JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY)!));
@@ -30,5 +30,5 @@ export const login = async (username: string, password: string) => {
   const authInfo = await loginResult.json();
   localStorage.setItem(LOCALSTORAGE_AUTH_KEY, JSON.stringify(authInfo));
   auth.set(authInfo);
-  toast.push(`${t.toasts.welcome}, ${authInfo.displayName}!`, toastSettings.success);
+  toast.push(`${t.toasts.welcome} ${authInfo.displayName}!`, toastSettings.success);
 };
