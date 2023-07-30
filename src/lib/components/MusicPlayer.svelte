@@ -263,11 +263,12 @@ Musicmancer 2023 Edition
     display: grid;
     grid-template-columns: 2rem 2rem 1fr 2rem 2rem 6rem;
     position: fixed;
-    bottom: 0;
+    bottom: -2rem;
     left: 0;
     width: var(--viewport-width);
     color: var(--text-dark);
     background-color: var(--accent);
+    animation: audioPlayerSlideIn 500ms ease-out 10ms 1 normal forwards;
 
     * {
       transition: var(--unfocus-speed) all linear;
@@ -283,4 +284,11 @@ Musicmancer 2023 Edition
       display: inline-block;
     }
   }
+
+  @keyframes audioPlayerSlideIn {
+    from {bottom: -2rem;}
+    to   {bottom: 0;}
+  }
+
+
 </style>
