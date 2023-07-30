@@ -2,8 +2,8 @@
 // for information about these interfaces
 // and what to do when importing types
 declare namespace App {
-	// Interface Error {}
-	// interface Locals {}
-	// interface PageData {}
-	// interface Platform {}
+  // Interface Error {}
+  // interface Locals {}
+  // interface PageData {}
+  // interface Platform {}
 }

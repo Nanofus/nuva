@@ -1,14 +1,14 @@
 import { MAX_PER_FETCH } from "$lib/config";
 
 export const QUERIES = {
-	pageInfo: `
+  pageInfo: `
         pageInfo {
             hasNextPage
             hasPreviousPage
             startCursor
             endCursor
         }`,
-	postMeta: `
+  postMeta: `
         title
         slug
         rawDate: date
@@ -35,7 +35,7 @@ export const QUERIES = {
             }
         }
         commentCount`,
-	postContent: `
+  postContent: `
         title
         slug
         rawDate: date
@@ -89,7 +89,7 @@ export const QUERIES = {
         }
         commentCount
         content`,
-	postComment: `
+  postComment: `
         date
         author {
             node {

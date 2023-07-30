@@ -1,30 +1,30 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from "svelte";
 
-	export let vertical: boolean = false;
+  export let vertical: boolean = false;
 
-	const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 </script>
 
 <form
-	class={vertical ? "vertical" : null}
-	on:submit|preventDefault={() => {
-		dispatch("submit");
-	}}
+  class={vertical ? "vertical" : null}
+  on:submit|preventDefault={() => {
+    dispatch("submit");
+  }}
 >
-	<slot />
+  <slot />
 </form>
 
 <style lang="scss">
-	form {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 
-		&.vertical {
-			> :not(:last-child) {
-				margin-bottom: 1rem;
-			}
-		}
-	}
+    &.vertical {
+      > :not(:last-child) {
+        margin-bottom: 1rem;
+      }
+    }
+  }
 </style>

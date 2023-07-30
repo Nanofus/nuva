@@ -5,11 +5,11 @@ import { filterExcludedCategories } from "$lib/util/util";
 import { t } from "$lib/translations";
 
 export const load: Load = async ({ fetch }): Promise<PostListResponse> => {
-	const response = await getPostList(fetch);
-	if (response) {
-		response.posts = filterExcludedCategories(response.posts);
-		return response;
-	}
+  const response = await getPostList(fetch);
+  if (response) {
+    response.posts = filterExcludedCategories(response.posts);
+    return response;
+  }
 
-	throw error(404, t.errors.e404);
+  throw error(404, t.errors.e404);
 };

@@ -4,12 +4,12 @@ import type { PostListByCategoryResponse } from "$lib/util/types";
 import { t } from "$lib/translations";
 
 export const load: Load = async ({ fetch, params }): Promise<PostListByCategoryResponse> => {
-	if (params.category) {
-		const response = await getPostListByCategory(fetch, params.category);
-		if (response) {
-			return response;
-		}
-	}
+  if (params.category) {
+    const response = await getPostListByCategory(fetch, params.category);
+    if (response) {
+      return response;
+    }
+  }
 
-	throw error(404, t.errors.e404);
+  throw error(404, t.errors.e404);
 };

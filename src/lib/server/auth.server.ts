@@ -1,10 +1,7 @@
 import { API_PATH } from "$lib/config";
 import type { AuthData } from "$lib/util/types";
 
-export const handleLogin = async (
-  username: string,
-  password: string,
-): Promise<AuthData> => {
+export const handleLogin = async (username: string, password: string): Promise<AuthData> => {
   const response = await (
     await fetch(API_PATH, {
       method: "POST",
