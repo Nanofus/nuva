@@ -22,11 +22,11 @@ export const login = async (username: string, password: string) => {
 		method: "POST",
 		body: JSON.stringify({ username, password }),
 	});
-	const authInfo = await loginResult.json();
-	if (!loginResult.ok || !authInfo) {
+	if (!loginResult.ok) {
 		toast.push(t.toasts.loginFailed, toastSettings.error);
 		return;
 	}
+	const authInfo = await loginResult.json();
 	localStorage.setItem(LOCALSTORAGE_AUTH_KEY, JSON.stringify(authInfo));
 	auth.set(authInfo);
 	toast.push(`${t.toasts.welcome}, ${authInfo.displayName}!`, toastSettings.success);
