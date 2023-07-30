@@ -6,11 +6,6 @@ const config = {
   kit: {
     adapter: adapter({
       runtime: "edge",
-      functions: {
-        "api/html-validator/*.ts": {
-          runtime: "nodejs18.x",
-        },
-      },
     }),
   },
   preprocess: vitePreprocess(),
