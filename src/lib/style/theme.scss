@@ -37,6 +37,10 @@ main {
     var(--viewport-height) - var(--page-max-width) / var(--header-banner-dimensions-ratio) -
       var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin)
   );
+
+  border-color: transparent; // Transparent 1px border to fix an obscure
+  border-style: solid;       // bug probably caused by a floating point
+  border-width: 0 1px;       // rounding error
 }
 
 // Mobile screen size
