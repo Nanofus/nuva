@@ -8,7 +8,7 @@
     <span>{globalConfig.copyright}</span>
     <span class="separator" />
     <span
-      ><a href={globalConfig.feedbackUrl} target="_blank">{t.components.footer.feedback}</a
+      ><a href={globalConfig.urls.feedback} target="_blank">{t.components.footer.feedback}</a
       ></span
     >
   </div>

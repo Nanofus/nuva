@@ -1,5 +1,7 @@
+import { globalConfig } from "$lib/util/config";
+
 export const GET = async () => {
-  const response = fetch(import.meta.env.VITE_WEBHOOK_NEW_POST, {
+  const response = fetch(globalConfig.webhooks.newPost, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

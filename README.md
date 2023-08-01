@@ -9,8 +9,7 @@ Tech stack: SvelteKit, TypeScript, SASS, Kysely/Prisma, Postgres, AWS S3.
 
 The production environment runs on Vercel. There's a couple of Vercel-specific things in the repo, which you should replace if not hosting in Vercel. These are:
 - `src/lib/server/database.ts` connects to Postgres using `@vercel/postgres`
-- `src/routes/+layout.server.ts` reads configuration using `@vercel/edge-config`
-- `src/routes/api/html-validator` exports a Vercel-specific configuration file.
+- `src/routes/api/html-validator` exports a Vercel-specific configuration object.
 
 ## Development
 

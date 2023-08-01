@@ -47,7 +47,7 @@
     {/each}
   </div>
   {#if isCurrentUser()}
-    <a target="_blank" href="{globalConfig.commentEditUrl}{comment._id}">{t.common.edit}</a>
+    <a target="_blank" href="{globalConfig.urls.commentEdit}{comment._id}">{t.common.edit}</a>
   {/if}
   {#if !replyFormOpen && $auth}
     <Button link on:click={() => (replyFormOpen = true)}>{t.common.reply}</Button>

@@ -3,7 +3,7 @@ import { globalConfig } from "$lib/util/config";
 
 export const handleLogin = async (username: string, password: string): Promise<AuthData> => {
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

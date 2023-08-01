@@ -1,4 +1,6 @@
 import type { Config, LocalConfig } from "$lib/util/types";
+import { browser } from "$app/environment";
+import { createClient } from "@vercel/edge-config";
 
 export const localConfig: LocalConfig = {
   bottomScrollThreshold: 100,
@@ -9,20 +11,10 @@ export const localConfig: LocalConfig = {
   musicFadeSpeed: 1,
 };
 
-export const globalConfig: Config = {
-  apiPath: "https://klaanon.fi/wp/graphql",
-  maxPerFetch: 100,
-  latestPostsPerFetch: 20,
-  latestCommentsPerFetch: 10,
-  locale: "fi-FI",
-  siteName: "Klaanon",
-  subHeader: "Bio-Klaanin yhteinen tarina",
-  copyright: "© Klaanon",
-  categoriesExcludedFromAllPosts: ["meta", "muu-roska"],
-  bannerCount: 1,
-  soundtracksUrl: "https://arkisto.klaanon.fi/soundtracks/",
-  writingGuideUrl: "/posts/muotoiluopas",
-  commentEditUrl: "https://klaanon.fi/wp/wp-admin/comment.php?action=editcomment&c=",
-  writingUrl: "https://klaanon.fi/wp/wp-admin/edit.php",
-  feedbackUrl: "https://discord.com/channels/1043556208700833792/1131238873024966809",
+export const getConfig = async () => {
+  const edgeConfigClient = createClient(import.meta.env.VITE_EDGE_CONFIG);
+  return (await edgeConfigClient.getAll()) as Config;
 };
+export const globalConfig: Config = browser
+  ? await (await fetch("/api/config")).json()
+  : await getConfig();

@@ -8,7 +8,7 @@ export type LocalConfig = {
 };
 
 export type Config = {
-  apiPath: string; // Path to WordPress GraphQL API
+  graphqlApi: string; // Path to WordPress GraphQL API
   maxPerFetch: number; // Max posts to get per fetch (WP GraphQL API has a limit of 100)
   latestPostsPerFetch: number; // Max posts to get per fetch on front page
   latestCommentsPerFetch: number; // Max comments to get per fetch on front page
@@ -18,11 +18,17 @@ export type Config = {
   copyright: string; // Copyright notice
   categoriesExcludedFromAllPosts: string[]; // Categories to exclude from all posts page
   bannerCount: number; // Number of banners
-  soundtracksUrl: string; // URL for soundtracks
-  writingGuideUrl: string; // URL for writing guide
-  commentEditUrl: string; // URL for comment edit page
-  writingUrl: string; // URL for writing page
-  feedbackUrl: string; // URL for feedback page
+  urls: {
+    soundtracks: string; // URL for soundtracks page
+    writingGuide: string; // URL for writing guide
+    commentEdit: string; // URL for comment edit page
+    writing: string; // URL for writing page
+    feedback: string; // URL for feedback page
+  };
+  webhooks: {
+    newPost: string; // URL for new post webhook
+    newComment: string; // URL for new comment webhook
+  };
 };
 
 export type Localization = {

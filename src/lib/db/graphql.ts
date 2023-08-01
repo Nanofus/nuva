@@ -35,7 +35,7 @@ import { globalConfig } from "$lib/util/config";
 export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]> => {
   const authToken = browser ? get(auth)?.authToken : null;
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
 export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | null> => {
   const authToken = browser ? get(auth)?.authToken : null;
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -121,7 +121,7 @@ export const getCommentsForPostBySlug = async (
 ): Promise<CommentResponse> => {
   const authToken = browser ? get(auth)?.authToken : null;
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -161,7 +161,7 @@ export const getPostListByAuthor = async (
   after: string | null = null,
 ): Promise<PostListByAuthorResponse> => {
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -207,7 +207,7 @@ export const getPostListByTag = async (
   after: string | null = null,
 ): Promise<PostListByTagResponse> => {
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -256,7 +256,7 @@ export const getPostListByCategory = async (
   after: string | null = null,
 ): Promise<PostListByCategoryResponse> => {
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -306,7 +306,7 @@ export const getPostList = async (
   count: number = globalConfig.maxPerFetch,
 ): Promise<PostListBySearchResponse> => {
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -347,7 +347,7 @@ export const getTagList = async (
   after: string | null = null,
 ): Promise<TagListResponse> => {
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -384,7 +384,7 @@ export const getTagList = async (
 
 export const getCategoryList = async (fetch: Function): Promise<CategoryListResponse> => {
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -420,7 +420,7 @@ export const postComment = async (
   const authToken = browser ? get(auth)?.authToken : null;
   if (!authToken) return false;
   const response = await (
-    await fetch(globalConfig.apiPath, {
+    await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
