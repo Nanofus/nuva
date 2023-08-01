@@ -8,6 +8,9 @@ const config = {
       runtime: "edge",
     }),
   },
+  build: {
+    target: "esnext",
+  },
   preprocess: vitePreprocess(),
 };
 
