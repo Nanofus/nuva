@@ -1,5 +1,5 @@
-export const API_PATH = "https://klaanon.fi/wp/graphql";
-export const BASE_PATH = "https://nuva.klaanon.fi";
+export const API_PATH = import.meta.env.VITE_WPGRAPHQL_API_URL;
+export const BASE_PATH = import.meta.env.BASE_URL;
 export const MAX_PER_FETCH = 100;
 export const LATEST_POSTS_PER_FETCH = 20;
 export const LATEST_COMMENTS_PER_FETCH = 10;

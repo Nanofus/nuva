@@ -9,7 +9,6 @@ vite.config.js.timestamp-*
 /packages/package/test/**/package
 /documentation/types.js
 .idea
-.env.local
 .vercel_build_output
 .svelte-kit
 .cloudflare
@@ -19,3 +18,4 @@ vite.config.js.timestamp-*
 .vercel
 .test-tmp
 symlink-from
+.env*.local
