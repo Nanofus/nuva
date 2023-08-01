@@ -28,10 +28,6 @@ export type Post = {
   title: string;
   published: Generated<boolean>;
 };
-export type PostToUser = {
-  A: number;
-  B: number;
-};
 export type Tag = {
   id: Generated<number>;
   name: string;
@@ -40,11 +36,10 @@ export type User = {
   id: Generated<number>;
   email: string;
   username: string;
-  displayname: string;
+  displayName: string;
   role: Generated<Role>;
 };
 export type DB = {
-  _PostToUser: PostToUser;
   Category: Category;
   Comment: Comment;
   Post: Post;

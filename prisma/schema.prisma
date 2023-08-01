@@ -1,25 +1,22 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-kysely"
 }
 
 datasource db {
   provider          = "postgresql"
-  url               = env("VITE_POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl         = env("VITE_POSTGRES_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("VITE_POSTGRES_URL_NON_POOLING") // used for migrations
+  url               = env("VITE_POSTGRES_PRISMA_URL")
+  directUrl         = env("VITE_POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("VITE_POSTGRES_URL_NON_POOLING")
 }
 
 model User {
   id          Int       @id @default(autoincrement())
   email       String    @unique
   username    String
-  displayname String
+  displayName String
   role        Role      @default(READER)
-  posts       Post[]
   comments    Comment[]
+  posts       Post[]    @relation("PostToUser")
 }
 
 model Post {
@@ -28,34 +25,34 @@ model Post {
   updatedAt  DateTime   @updatedAt
   title      String
   published  Boolean    @default(false)
-  authors    User[]
-  categories Category[]
-  tags       Tag[]
   comments   Comment[]
+  categories Category[] @relation("CategoryToPost")
+  tags       Tag[]      @relation("PostToTag")
+  authors    User[]     @relation("PostToUser")
 }
 
 model Comment {
   id              Int       @id @default(autoincrement())
   content         String
-  post            Post      @relation(fields: [postId], references: [id])
   postId          Int
-  author          User      @relation(fields: [authorId], references: [id])
   authorId        Int
-  parentComment   Comment?  @relation("ChildComments", fields: [parentCommentId], references: [id])
   parentCommentId Int?
+  author          User      @relation(fields: [authorId], references: [id])
+  parentComment   Comment?  @relation("ChildComments", fields: [parentCommentId], references: [id])
   childComments   Comment[] @relation("ChildComments")
+  post            Post      @relation(fields: [postId], references: [id])
 }
 
 model Category {
   id    Int    @id @default(autoincrement())
   name  String
-  posts Post[]
+  posts Post[] @relation("CategoryToPost")
 }
 
 model Tag {
   id    Int    @id @default(autoincrement())
   name  String
-  posts Post[]
+  posts Post[] @relation("PostToTag")
 }
 
 enum Role {
