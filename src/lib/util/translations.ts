@@ -1,6 +1,126 @@
 import type { Localization } from "$lib/util/types";
+import { globalConfig } from "$lib/util/config";
 
 const translations: { [key: string]: Localization } = {
+  "en-US": {
+    common: {
+      loadMore: "Load more",
+      edit: "Edit",
+      reply: "Reply",
+      comment: "Comment",
+      send: "Send",
+      close: "Close",
+      commentSingular: "comment",
+      commentPlural: "comments",
+    },
+    toasts: {
+      welcome: "Welcome,",
+      commentSent: "Comment sent.",
+      loginFailed: "Login failed.",
+      loggedOut: "You logged out.",
+    },
+    components: {
+      commentForm: {
+        emptyComment: "Comment cannot be empty.",
+      },
+      commentList: {
+        post: "Post",
+        date: "Date",
+        commenter: "Commenter",
+      },
+      footer: {
+        feedback: "Feedback",
+      },
+      login: {
+        fillBothFields: "Fill both fields.",
+        cantUseWithoutJs: "Not usable without JavaScript.",
+        login: "Login",
+        logout: "Logout",
+        username: "Username",
+        password: "Password",
+      },
+      postContent: {
+        validationError: "Error in post HTML. See console for details.",
+        noValidationError: "Post HTML is valid.",
+        scriptError: "Error in post scripts. See console for details.",
+        errorsCountSingular: "error",
+        errorsCountPlural: "errors",
+        notMobileFriendly: "This post is not suitable for mobile reading.",
+      },
+      postList: {
+        title: "Title",
+        date: "Date",
+        author: "Poster",
+      },
+      search: {
+        emptyField: "Search field cannot be empty.",
+        search: "Search",
+        searchTerms: "Search terms",
+      },
+      navigation: {
+        frontPage: "Front Page",
+        posts: "Releases",
+        tags: "Tags",
+        categories: "Categories",
+        search: "Search",
+        guide: "Formatting Guide",
+        soundtracks: "Soundtracks",
+        write: "Write",
+        login: "Login",
+        profile: "Profile",
+      },
+    },
+    settings: {
+      user: "User",
+      volume: "Audio Volume",
+    },
+    errors: {
+      e401: "Authentication failed.",
+      e403: "No access.",
+      e404: "Page not found.",
+      e500: "Something went wrong.",
+    },
+    pages: {
+      index: {
+        title: "Front Page",
+        newestReleases: "Newest Releases",
+        newestComments: "Newest Comments",
+      },
+      error: {
+        title: "Error",
+      },
+      posts: {
+        title: "All Releases",
+      },
+      post: {
+        noAccess: "Post not found or you don't have access to it.",
+      },
+      tags: {
+        title: "Tags",
+      },
+      tag: {
+        title: "Tag",
+      },
+      search: {
+        title: "Search",
+      },
+      searchResults: {
+        title: "Search",
+      },
+      categories: {
+        title: "Categories",
+      },
+      category: {
+        title: "Category",
+      },
+      author: {
+        title: "Author",
+      },
+      profile: {
+        title: "Profile",
+      },
+    },
+  },
   "fi-FI": {
     common: {
       loadMore: "Lataa lisää",
@@ -40,7 +160,7 @@ const translations: { [key: string]: Localization } = {
       },
       postContent: {
         validationError: "Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.",
-        noValidationError: "Postauksen HTML:ssä ei virheitä!",
+        noValidationError: "Postauksen HTML on kunnossa!",
         scriptError: "Virhe postauksen skripteissä. Katso konsolista lisätietoja.",
         errorsCountSingular: "virhe",
         errorsCountPlural: "virhettä",
@@ -52,7 +172,7 @@ const translations: { [key: string]: Localization } = {
         author: "Postaaja",
       },
       search: {
-        emptyField: "Laitapa hakukenttään edes jotain.",
+        emptyField: "Hakukenttä ei voi olla tyhjä.",
         search: "Hae",
         searchTerms: "Hakusanat",
       },
@@ -122,4 +242,4 @@ const translations: { [key: string]: Localization } = {
   },
 };
 
-export const t = translations["fi-FI"];
+export const t = translations[globalConfig.locale];
