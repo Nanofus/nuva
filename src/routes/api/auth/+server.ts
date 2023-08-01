@@ -1,4 +1,4 @@
-import { handleLogin } from "$lib/server/auth.server";
+import { handleLogin } from "$lib/server/auth";
 import { error, json } from "@sveltejs/kit";
 import { t } from "$lib/translations";
 

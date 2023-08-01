@@ -1,5 +1,7 @@
 generator client {
   provider = "prisma-kysely"
+  output   = "../src/lib/server"
+  fileName = "database.types.ts"
 }
 
 datasource db {
