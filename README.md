@@ -16,7 +16,14 @@ The production environment runs on Vercel. There's a couple of Vercel-specific t
 
 First, install dependencies with `pnpm install` (or other package manager).
 
-If you're using Vercel, create a Postgres database and Edge Config store there, then add the credentials to `.env`. Otherwise, host Postgres elsewhere (and update `.env`) and replace Edge Config with a config object in `src/lib/util/config.ts` (see schema in `src/lib/util/types`).
+If you're using Vercel, create a Postgres database and Edge Config store there, then add the credentials to `.env`. Note that the env variables need to have the `VITE_` prefix.
+
+Otherwise, host Postgres elsewhere (and update `.env` like above) and replace Edge Config with a config object in `src/lib/util/config.ts` (see schema in `src/lib/util/types`).
+
+Populate the Postgres database with Prisma:
+```
+prisma db push
+```
 
 When this is done, start the development server:
 
