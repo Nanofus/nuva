@@ -1,11 +1,12 @@
 {
-  "name": "klaanon-nuva",
-  "repository": "https://github.com/Nanofus/klaanon-nuva.git",
+  "name": "nuva",
+  "repository": "https://github.com/Nanofus/nuva.git",
+  "license": "MIT",
   "author": {
     "name": "Ville Talonpoika",
     "url": "https://talonpoika.com"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "dev": "vite dev",
     "build": "svelte-kit sync && vite build",
