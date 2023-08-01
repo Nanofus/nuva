@@ -21,7 +21,7 @@ If you're using Vercel, create a Postgres database and Edge Config store there, 
 Otherwise, host Postgres elsewhere (and update `.env` like above) and replace Edge Config with a config object in `src/lib/util/config.ts` (see schema in `src/lib/util/types`).
 
 Populate the Postgres database with Prisma:
-```
+```bash
 prisma db push
 ```
 
