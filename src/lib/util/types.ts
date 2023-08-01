@@ -29,6 +29,7 @@ export type Config = {
     newPost: string; // URL for new post webhook
     newComment: string; // URL for new comment webhook
   };
+  externalStylesheets: string[]; // External stylesheets to load
 };
 
 export type Localization = {

@@ -44,6 +44,9 @@
   <meta content={globalConfig.siteName} property="og:site_name" />
   <meta content={globalConfig.locale.replace("-", "_")} property="og:locale" />
   <meta content="website" property="og:type" />
+  {#each globalConfig.externalStylesheets as stylesheet}
+    <link href={stylesheet} rel="stylesheet" />
+  {/each}
 </svelte:head>
 
 <div class={fullWidth ? "wide" : ""} id="page">
