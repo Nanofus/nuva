@@ -5,11 +5,5 @@ export default defineConfig({
   build: {
     target: "esnext",
   },
-  plugins: [
-    sveltekit({
-      build: {
-        target: "esnext",
-      },
-    }),
-  ],
+  plugins: [sveltekit()],
 });
