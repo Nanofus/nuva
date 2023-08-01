@@ -40,7 +40,6 @@
 </script>
 
 <svelte:head>
-  <title>{globalConfig.siteName}</title>
   <meta content={globalConfig.siteName} property="og:site_name" />
   <meta content={globalConfig.locale.replace("-", "_")} property="og:locale" />
   <meta content="website" property="og:type" />
