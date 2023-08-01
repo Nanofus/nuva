@@ -1,4 +1,3 @@
-import { API_PATH, LATEST_COMMENTS_PER_FETCH, MAX_PER_FETCH } from "$lib/config";
 import { toast } from "@zerodevx/svelte-toast";
 import { browser } from "$app/environment";
 import { error } from "@sveltejs/kit";
@@ -26,16 +25,17 @@ import type {
   TagListResponse,
 } from "$lib/util/types";
 import { objectsToHierarchy, toastSettings } from "$lib/util/util";
-import { t } from "$lib/translations";
+import { t } from "$lib/util/translations";
 import { auth } from "$lib/util/stores";
 import { get } from "svelte/store";
+import { globalConfig } from "$lib/util/config";
 
 // Legacy WPGraphQL queries
 
 export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]> => {
   const authToken = browser ? get(auth)?.authToken : null;
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
       body: JSON.stringify({
         query: `
             query LatestComments {
-                comments(first: ${LATEST_COMMENTS_PER_FETCH}) {
+                comments(first: ${globalConfig.latestCommentsPerFetch}) {
                     nodes {
                         databaseId
                         author {
@@ -74,7 +74,7 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
 export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | null> => {
   const authToken = browser ? get(auth)?.authToken : null;
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -121,7 +121,7 @@ export const getCommentsForPostBySlug = async (
 ): Promise<CommentResponse> => {
   const authToken = browser ? get(auth)?.authToken : null;
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -131,7 +131,7 @@ export const getCommentsForPostBySlug = async (
         query: `
             query CommentsForPostBySlug {
                 post(idType: SLUG, id: "${slug}") {
-		                comments(first: ${MAX_PER_FETCH}, after: "${after}") {
+		                comments(first: ${globalConfig.maxPerFetch}, after: "${after}") {
 		                    ${QUERIES.pageInfo}
 		                    edges {
 		                        cursor
@@ -161,7 +161,7 @@ export const getPostListByAuthor = async (
   after: string | null = null,
 ): Promise<PostListByAuthorResponse> => {
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -169,9 +169,9 @@ export const getPostListByAuthor = async (
       body: JSON.stringify({
         query: `
             query PostsByAuthor {
-                posts(where: {authorName: "${decodeURI(
-                  author,
-                )}"}, first: ${MAX_PER_FETCH}, after: "${after}") {
+                posts(where: {authorName: "${decodeURI(author)}"}, first: ${
+                  globalConfig.maxPerFetch
+                }, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -207,7 +207,7 @@ export const getPostListByTag = async (
   after: string | null = null,
 ): Promise<PostListByTagResponse> => {
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -215,7 +215,7 @@ export const getPostListByTag = async (
       body: JSON.stringify({
         query: `
             query PostsByTag {
-                posts(where: {tagSlugIn: "${tag}"}, first: ${MAX_PER_FETCH}, after: "${after}") {
+                posts(where: {tagSlugIn: "${tag}"}, first: ${globalConfig.maxPerFetch}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -256,7 +256,7 @@ export const getPostListByCategory = async (
   after: string | null = null,
 ): Promise<PostListByCategoryResponse> => {
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -266,7 +266,7 @@ export const getPostListByCategory = async (
             query PostsByCategory {
                 category(id: "${category}", idType: SLUG) {
                     name
-                    posts(first: ${MAX_PER_FETCH}, after: "${after}") {
+                    posts(first: ${globalConfig.maxPerFetch}, after: "${after}") {
                         ${QUERIES.pageInfo}
                         edges {
                             cursor
@@ -303,10 +303,10 @@ export const getPostList = async (
   fetch: Function,
   after: string | null = null,
   searchTerm = "",
-  count: number = MAX_PER_FETCH,
+  count: number = globalConfig.maxPerFetch,
 ): Promise<PostListBySearchResponse> => {
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -347,7 +347,7 @@ export const getTagList = async (
   after: string | null = null,
 ): Promise<TagListResponse> => {
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -355,7 +355,7 @@ export const getTagList = async (
       body: JSON.stringify({
         query: `
             query AllTagsPaginated {
-                tags(first: ${MAX_PER_FETCH}, after: "${after}") {
+                tags(first: ${globalConfig.maxPerFetch}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -384,7 +384,7 @@ export const getTagList = async (
 
 export const getCategoryList = async (fetch: Function): Promise<CategoryListResponse> => {
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -420,7 +420,7 @@ export const postComment = async (
   const authToken = browser ? get(auth)?.authToken : null;
   if (!authToken) return false;
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

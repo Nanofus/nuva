@@ -1,13 +1,14 @@
 <script lang="ts">
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
+  import { globalConfig } from "$lib/util/config";
 </script>
 
 <footer>
   <div class="footer-content">
-    <span>{t.components.footer.copyright}</span>
+    <span>{globalConfig.copyright}</span>
     <span class="separator" />
     <span
-      ><a href={t.components.footer.feedbackLink} target="_blank">{t.components.footer.feedback}</a
+      ><a href={globalConfig.feedbackUrl} target="_blank">{t.components.footer.feedback}</a
       ></span
     >
   </div>

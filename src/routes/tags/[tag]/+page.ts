@@ -1,7 +1,7 @@
 import { error, type Load } from "@sveltejs/kit";
 import { getPostListByTag } from "$lib/db/graphql";
 import type { PostListByTagResponse } from "$lib/util/types";
-import { t } from "$lib/translations";
+import { t } from "$lib/util/translations";
 
 export const load: Load = async ({ fetch, params }): Promise<PostListByTagResponse> => {
   if (params.tag) {

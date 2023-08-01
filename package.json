@@ -44,6 +44,7 @@
     "@auth/sveltekit": "^0.3.6",
     "@aws-sdk/client-s3": "^3.379.1",
     "@sindresorhus/slugify": "^2.2.1",
+    "@vercel/edge-config": "^0.2.1",
     "@vercel/postgres-kysely": "^0.4.1",
     "@zerodevx/svelte-toast": "^0.9.5",
     "html-validate": "^8.1.0",

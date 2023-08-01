@@ -1,7 +1,7 @@
 import { error, type Load } from "@sveltejs/kit";
 import { getCategoryList } from "$lib/db/graphql";
 import type { CategoryListResponse } from "$lib/util/types";
-import { t } from "$lib/translations";
+import { t } from "$lib/util/translations";
 
 export const load: Load = async ({ fetch }): Promise<CategoryListResponse> => {
   const response = await getCategoryList(fetch);

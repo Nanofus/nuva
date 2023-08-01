@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { LOCALE } from "$lib/config";
+  import { globalConfig } from "$lib/util/config";
   import type { CommentMeta } from "$lib/util/types";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
 
   export let comments: CommentMeta[];
 </script>
@@ -17,7 +17,7 @@
       <td class="link">
         <a href="/posts/{comment.postSlug}#comment-{comment._id}">{comment.postTitle}</a>
       </td>
-      <td class="date">{comment.date.toLocaleDateString(LOCALE)}</td>
+      <td class="date">{comment.date.toLocaleDateString(globalConfig.locale)}</td>
       <td class="commenter"><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td>
     </tr>
   {/each}

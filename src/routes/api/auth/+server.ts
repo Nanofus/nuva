@@ -1,6 +1,6 @@
 import { handleLogin } from "$lib/server/auth";
 import { error, json } from "@sveltejs/kit";
-import { t } from "$lib/translations";
+import { t } from "$lib/util/translations";
 
 export const POST = async ({ request }: { request: any }) => {
   const { username, password } = await request.json();

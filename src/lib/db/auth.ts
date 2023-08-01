@@ -1,20 +1,20 @@
-import { LOCALSTORAGE_AUTH_KEY } from "$lib/config";
 import { auth } from "$lib/util/stores";
 import { toast } from "@zerodevx/svelte-toast";
-import { t } from "$lib/translations";
+import { t } from "$lib/util/translations";
 import { toastSettings } from "$lib/util/util";
+import { localConfig } from "$lib/util/config";
 
 export const loadLoginStatus = () => {
   if (localStorage !== undefined) {
-    if (localStorage.getItem(LOCALSTORAGE_AUTH_KEY))
-      auth.set(JSON.parse(localStorage.getItem(LOCALSTORAGE_AUTH_KEY)!));
+    if (localStorage.getItem(localConfig.localStorageAuthKey))
+      auth.set(JSON.parse(localStorage.getItem(localConfig.localStorageAuthKey)!));
   }
   auth.set(null);
 };
 
 export const logout = (): void => {
   auth.set(null);
-  localStorage.removeItem(LOCALSTORAGE_AUTH_KEY);
+  localStorage.removeItem(localConfig.localStorageAuthKey);
   toast.push(t.toasts.loggedOut, toastSettings.success);
 };
 
@@ -28,7 +28,7 @@ export const login = async (username: string, password: string) => {
     return;
   }
   const authInfo = await loginResult.json();
-  localStorage.setItem(LOCALSTORAGE_AUTH_KEY, JSON.stringify(authInfo));
+  localStorage.setItem(localConfig.localStorageAuthKey, JSON.stringify(authInfo));
   auth.set(authInfo);
   toast.push(`${t.toasts.welcome} ${authInfo.displayName}!`, toastSettings.success);
 };

@@ -1,15 +1,5 @@
 import type { Hierarchical, PostMeta } from "$lib/util/types";
-import {
-  BANNER_COUNT,
-  BASE_PATH,
-  BOTTOM_SCROLL_THRESHOLD,
-  CATEGORIES_EXCLUDED_FROM_ALL_POSTS,
-  DEFAULT_VOLUME,
-  GLOBAL_OBJECT_NAME,
-  LOCALSTORAGE_SETTINGS_KEY,
-  SITE_NAME,
-  SITE_NAME_DELIMITER,
-} from "$lib/config";
+import { globalConfig, localConfig } from "$lib/util/config";
 import { browser } from "$app/environment";
 import { scrolledToBottom } from "$lib/util/stores";
 
@@ -40,7 +30,7 @@ export const filterExcludedCategories = (posts: PostMeta[]) =>
     (post) =>
       !post.categories
         .map((cat) => cat.slug)
-        .some((slug) => CATEGORIES_EXCLUDED_FROM_ALL_POSTS.includes(slug)),
+        .some((slug) => globalConfig.categoriesExcludedFromAllPosts.includes(slug)),
   );
 
 export const objectsToHierarchy = (arr: Hierarchical[]) => {
@@ -95,13 +85,13 @@ export const handleScrolledToBottom = () => {
 
   const documentHeight = document.body.scrollHeight;
   const currentScroll = window.scrollY + window.innerHeight;
-  scrolledToBottom.set(currentScroll + BOTTOM_SCROLL_THRESHOLD > documentHeight);
+  scrolledToBottom.set(currentScroll + localConfig.bottomScrollThreshold > documentHeight);
 };
 
 export const getPageTitle = (title: string) =>
-  title ? `${title} ${SITE_NAME_DELIMITER} ${SITE_NAME}` : SITE_NAME;
+  title ? `${title} – ${globalConfig.siteName}` : globalConfig.siteName;
 
-export const getPageUrl = (route: string) => `${BASE_PATH}/${route}`;
+export const getPageUrl = (route: string) => `${import.meta.env.BASE_URL}/${route}`;
 
 export const formatSecondsToMMSS = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
@@ -110,21 +100,20 @@ export const formatSecondsToMMSS = (seconds: number) => {
 };
 
 export const getRandomBannerUrl = (seed = 0) =>
-  `url("/images/banners/banner-${((new Date().getMinutes() + seed) % BANNER_COUNT) + 1}.png")`;
+  `url("/images/banners/banner-${
+    ((new Date().getMinutes() + seed) % globalConfig.bannerCount) + 1
+  }.png")`;
+
+const globalObjectName = <keyof Window>localConfig.globalObjectName;
 
 export const initGlobalScope = () => {
-  if (!browser) {
+  if (!browser || window[globalObjectName]) {
     return;
   }
 
-  if (window[GLOBAL_OBJECT_NAME]) {
-    return;
-  }
-
-  // @ts-expect-error Let's assign to window anyway
-  window[GLOBAL_OBJECT_NAME] = {};
-  window[GLOBAL_OBJECT_NAME].saveSetting = saveSetting;
-  window[GLOBAL_OBJECT_NAME].loadSetting = loadSetting;
+  window[globalObjectName] = <never>{};
+  window[globalObjectName].saveSetting = saveSetting;
+  window[globalObjectName].loadSetting = loadSetting;
 };
 
 export const cleanGlobalScope = () => {
@@ -132,19 +121,19 @@ export const cleanGlobalScope = () => {
     return;
   }
 
-  if (window[GLOBAL_OBJECT_NAME]["onPostDestroy"]) {
-    window[GLOBAL_OBJECT_NAME]["onPostDestroy"]();
+  if (window[globalObjectName]["onPostDestroy"]) {
+    window[globalObjectName]["onPostDestroy"]();
   }
 
-  delete window[GLOBAL_OBJECT_NAME];
+  delete window[globalObjectName];
 };
 
 export const createBaseSettings = () => {
-  if (browser && !localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)) {
+  if (browser && !localStorage.getItem(localConfig.localStorageSettingsKey)) {
     localStorage.setItem(
-      LOCALSTORAGE_SETTINGS_KEY,
+      localConfig.localStorageSettingsKey,
       JSON.stringify({
-        volume: DEFAULT_VOLUME,
+        volume: localConfig.defaultVolume,
       }),
     );
   }
@@ -152,16 +141,16 @@ export const createBaseSettings = () => {
 
 export const saveSetting = (key: string, value: any) => {
   if (browser) {
-    const settings = JSON.parse(localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)!);
+    const settings = JSON.parse(localStorage.getItem(localConfig.localStorageSettingsKey)!);
     settings[key] = value;
-    localStorage.setItem(LOCALSTORAGE_SETTINGS_KEY, JSON.stringify(settings));
+    localStorage.setItem(localConfig.localStorageSettingsKey, JSON.stringify(settings));
   }
 };
 
 export const loadSetting = (key: string) => {
   if (browser) {
-    if (localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)) {
-      return JSON.parse(localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)!)[key];
+    if (localStorage.getItem(localConfig.localStorageSettingsKey)) {
+      return JSON.parse(localStorage.getItem(localConfig.localStorageSettingsKey)!)[key];
     }
   }
 

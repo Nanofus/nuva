@@ -1,16 +1,15 @@
 <script lang="ts">
   import Login from "$lib/components/Login.svelte";
   import { getPageTitle, getPageUrl, loadSetting, saveSetting } from "$lib/util/util";
-  import { onMount } from "svelte";
   import { auth } from "$lib/util/stores";
   import SettingItem from "$lib/components/reusable/SettingItem.svelte";
   import Settings from "$lib/components/Settings.svelte";
-  import { DEFAULT_VOLUME } from "$lib/config";
-  import { t } from "$lib/translations";
+  import { localConfig } from "$lib/util/config";
+  import { t } from "$lib/util/translations";
   import type { AuthData } from "$lib/util/types";
 
   let userInfo: AuthData = null;
-  let volume = loadSetting("volume") || DEFAULT_VOLUME;
+  let volume = loadSetting("volume") || localConfig.defaultVolume;
 
   $: volume && saveSetting("volume", volume);
 </script>

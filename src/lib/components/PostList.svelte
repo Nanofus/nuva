@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { LOCALE } from "$lib/config";
   import type { Category, PostMeta } from "$lib/util/types";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
+  import { globalConfig } from "$lib/util/config";
 
   export let posts: PostMeta[];
 
@@ -26,7 +26,7 @@
         <span class="categories">{parseCategories(post.categories)}</span>
       </td>
       <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ""}</td>
-      <td class="date">{post.date.toLocaleDateString(LOCALE)}</td>
+      <td class="date">{post.date.toLocaleDateString(globalConfig.locale)}</td>
       <td class="authors hidden-mobile"
         ><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td
       >

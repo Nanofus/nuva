@@ -7,7 +7,7 @@
   import { getPageTitle, getPageUrl } from "$lib/util/util";
   import { onMount } from "svelte";
   import { scrolledToBottom } from "$lib/util/stores";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
 
   export let data: TagListResponse;
   let fetching = false;

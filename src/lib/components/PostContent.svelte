@@ -5,8 +5,8 @@
   import MusicPlayer from "$lib/components/MusicPlayer.svelte";
   import { toast } from "@zerodevx/svelte-toast";
   import { cleanGlobalScope, initGlobalScope, toastSettings } from "$lib/util/util";
-  import { t } from "$lib/translations";
-  import { GLOBAL_OBJECT_NAME } from "$lib/config";
+  import { t } from "$lib/util/translations";
+  import { localConfig } from "$lib/util/config";
 
   export let post: Post;
   let scriptElements: HTMLScriptElement[] = [];
@@ -63,7 +63,7 @@
       finalScript += loadedScript;
     });
     finalScript += script;
-    scriptElement.innerHTML = `window["${GLOBAL_OBJECT_NAME}"].postScripts = () => {${finalScript}}; window["${GLOBAL_OBJECT_NAME}"].postScripts();`;
+    scriptElement.innerHTML = `window["${localConfig.globalObjectName}"].postScripts = () => {${finalScript}}; window["${localConfig.globalObjectName}"].postScripts();`;
     document.head.insertBefore(scriptElement, document.head.firstChild);
     scriptElements.push(scriptElement);
   };

@@ -1,7 +1,7 @@
 import { error, type Load } from "@sveltejs/kit";
 import { getPostBySlug } from "$lib/db/graphql";
 import type { Post } from "$lib/util/types";
-import { t } from "$lib/translations";
+import { t } from "$lib/util/translations";
 
 export const load: Load = async ({ fetch, params, url }): Promise<Post | null> => {
   if (params.slug) {

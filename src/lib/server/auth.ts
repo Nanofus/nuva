@@ -1,9 +1,9 @@
-import { API_PATH } from "$lib/config";
 import type { AuthData } from "$lib/util/types";
+import { globalConfig } from "$lib/util/config";
 
 export const handleLogin = async (username: string, password: string): Promise<AuthData> => {
   const response = await (
-    await fetch(API_PATH, {
+    await fetch(globalConfig.apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -7,7 +7,7 @@
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { onMount } from "svelte";
   import { scrolledToBottom } from "$lib/util/stores";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
 
   export let data: PostListByCategoryResponse;
   let fetching = false;

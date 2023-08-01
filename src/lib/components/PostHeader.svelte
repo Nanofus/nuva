@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { LOCALE } from "$lib/config";
+  import { globalConfig } from "$lib/util/config";
   import type { Post } from "$lib/util/types";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
 
   export let post: Post;
 </script>
@@ -17,7 +17,7 @@
     </span>
     <time class="post-date"
       ><span class="material-icons inline-icon">calendar_today</span>
-      {post.date.toLocaleDateString(LOCALE)}
+      {post.date.toLocaleDateString(globalConfig.locale)}
     </time>
     <span class="post-authors"
       ><span class="material-icons inline-icon">history_edu</span>

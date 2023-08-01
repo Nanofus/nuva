@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { LOCALE } from "$lib/config";
   import type { Comment, Post } from "$lib/util/types";
   import CommentForm from "$lib/components/CommentForm.svelte";
   import { createEventDispatcher } from "svelte";
   import { browser } from "$app/environment";
   import Button from "$lib/components/reusable/Button.svelte";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
   import { auth } from "$lib/util/stores";
+  import { globalConfig } from "$lib/util/config";
 
   export let comment: Comment;
   export let post: Post;
@@ -38,7 +38,7 @@
       {#if isHighlighted()}<span class="material-icons inline-icon">history_edu</span>{/if}
       {comment.author}</span
     >
-    <span class="comment-date">{comment.date.toLocaleDateString(LOCALE)}</span>
+    <span class="comment-date">{comment.date.toLocaleDateString(globalConfig.locale)}</span>
   </header>
   <div class="comment-content">{@html comment.content}</div>
   <div class="child-comments">
@@ -47,7 +47,7 @@
     {/each}
   </div>
   {#if isCurrentUser()}
-    <a target="_blank" href="{t.components.comment.editUrl}{comment._id}">{t.common.edit}</a>
+    <a target="_blank" href="{globalConfig.commentEditUrl}{comment._id}">{t.common.edit}</a>
   {/if}
   {#if !replyFormOpen && $auth}
     <Button link on:click={() => (replyFormOpen = true)}>{t.common.reply}</Button>

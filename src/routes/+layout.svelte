@@ -3,8 +3,7 @@
   import { fade } from "svelte/transition";
   import { SvelteToast } from "@zerodevx/svelte-toast";
   import { browser } from "$app/environment";
-  import { navigating } from "$app/stores";
-  import { LOCALE, SITE_NAME } from "$lib/config";
+  import { navigating, page } from "$app/stores";
   import { createBaseSettings, handleScrolledToBottom, handleViewportResize } from "$lib/util/util";
   import { auth, postOptions } from "$lib/util/stores";
   import Header from "$lib/components/Header.svelte";
@@ -20,7 +19,7 @@
 
   export let data;
 
-  let fullWidth: boolean = false;
+  let fullWidth: boolean = $page.data.fullWidth ? $page.data.fullWidth : false;
 
   onMount(() => {
     createBaseSettings();
@@ -40,9 +39,9 @@
 </script>
 
 <svelte:head>
-  <title>{SITE_NAME}</title>
-  <meta content={SITE_NAME} property="og:site_name" />
-  <meta content={LOCALE.replace("-", "_")} property="og:locale" />
+  <title>{data.config.siteName}</title>
+  <meta content={data.config.siteName} property="og:site_name" />
+  <meta content={data.config.locale.replace("-", "_")} property="og:locale" />
   <meta content="website" property="og:type" />
 </svelte:head>
 

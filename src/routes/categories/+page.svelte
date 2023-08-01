@@ -2,7 +2,7 @@
   import type { CategoryListResponse } from "$lib/util/types";
   import List from "$lib/components/reusable/List.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util/util";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
 
   export let data: CategoryListResponse;
 </script>

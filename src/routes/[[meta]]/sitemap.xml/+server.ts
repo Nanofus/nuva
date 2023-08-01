@@ -1,4 +1,3 @@
-import { BASE_PATH } from "$lib/config";
 import type { Category, Post, Tag } from "$lib/util/types";
 
 export const GET = async () => {
@@ -20,12 +19,12 @@ const sitemap = (posts: Post[], categories: Category[], tags: Tag[]) =>
   xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
 >
   <url>
-    <loc>${BASE_PATH}</loc>
+    <loc>${import.meta.env.BASE_URL}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>${BASE_PATH}/posts</loc>
+    <loc>${import.meta.env.BASE_URL}/posts</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -33,7 +32,7 @@ const sitemap = (posts: Post[], categories: Category[], tags: Tag[]) =>
     .map(
       (category) => `
   <url>
-    <loc>${BASE_PATH}/categories/${category}</loc>
+    <loc>${import.meta.env.BASE_URL}/categories/${category}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -44,7 +43,7 @@ const sitemap = (posts: Post[], categories: Category[], tags: Tag[]) =>
       .map(
         (tag) => `
   <url>
-    <loc>${BASE_PATH}/tags/${tag}</loc>
+    <loc>${import.meta.env.BASE_URL}/tags/${tag}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -55,7 +54,7 @@ const sitemap = (posts: Post[], categories: Category[], tags: Tag[]) =>
     .map(
       (post) => `
   <url>
-    <loc>${BASE_PATH}/posts/${post.slug}</loc>
+    <loc>${import.meta.env.BASE_URL}/posts/${post.slug}</loc>
     <changefreq>weekly</changefreq>
     <lastmod>${post.date}</lastmod>
     <priority>0.3</priority>

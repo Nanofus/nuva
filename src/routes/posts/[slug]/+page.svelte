@@ -7,7 +7,7 @@
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util/util";
   import { postOptions } from "$lib/util/stores";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
   import { toast } from "@zerodevx/svelte-toast";
 
   export let data: Post;

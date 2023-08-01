@@ -6,7 +6,7 @@ Musicmancer 2023 Edition
   import { onDestroy, onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
   import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
-  import { DEFAULT_VOLUME, MUSIC_FADE_SPEED } from "$lib/config";
+  import { localConfig } from "$lib/util/config";
 
   interface AudioData {
     src: string;
@@ -27,7 +27,7 @@ Musicmancer 2023 Edition
 
   // This runs before parent onMount, so the audio elements exist when user scripts run
   onMount(() => {
-    volume = loadSetting("volume") || DEFAULT_VOLUME;
+    volume = loadSetting("volume") || localConfig.defaultVolume;
     initializeAudioElements();
   });
 
@@ -165,7 +165,7 @@ Musicmancer 2023 Edition
           : 1;
         let newVolume =
           audioData.audioElement.volume -
-          (0.01 * MUSIC_FADE_SPEED * (volume / 100)) / customModifier;
+          (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
         if (newVolume < 0) newVolume = 0;
         audioData.audioElement.volume = newVolume;
       } else {

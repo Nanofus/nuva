@@ -3,7 +3,7 @@
   import CommentForm from "$lib/components/CommentForm.svelte";
   import { getAllCommentsForPostBySlug } from "$lib/db/graphql";
   import Button from "$lib/components/reusable/Button.svelte";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
   import CommentView from "$lib/components/CommentView.svelte";
   import { auth } from "$lib/util/stores";
 

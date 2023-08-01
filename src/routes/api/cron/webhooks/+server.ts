@@ -16,7 +16,7 @@ export const GET = async () => {
           },
         },
       ],
-      username: "Klaanon Nuva",
+      username: "Klaanon",
       attachments: [],
     }),
   });

@@ -3,13 +3,14 @@
   import { onDestroy, onMount } from "svelte";
   import { browser } from "$app/environment";
   import { auth, postOptions } from "$lib/util/stores";
-  import type { AuthData } from "$lib/util/types";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
+  import { globalConfig } from "$lib/util/config";
+  import { page } from "$app/stores";
 
   let smallLogo: HTMLElement;
   let menuOpen = false;
   let stickyMenu = true;
-  let bannerVisible = true;
+  let bannerVisible = $page.data.bannerVisible ? $page.data.bannerVisible : true;
 
   const getTotalNavigationHeight = () => {
     return document.querySelector("header")?.offsetHeight || 0;
@@ -62,7 +63,7 @@
   <div class="nav-wrapper">
     <div class="section-logo-area">
       <div bind:this={smallLogo} class="section-logo">
-        <NavItem href="/"><h1>{t.siteName}</h1></NavItem>
+        <NavItem href="/"><h1>{globalConfig.siteName}</h1></NavItem>
       </div>
       <div class="section-menu">
         <NavItem on:click={toggleMenu} on:keypress={toggleMenu}>
@@ -87,12 +88,12 @@
       <NavItem href="/posts">{t.components.navigation.posts}</NavItem>
       <NavItem href="/categories">{t.components.navigation.categories}</NavItem>
       <NavItem href="/tags">{t.components.navigation.tags}</NavItem>
-      <NavItem href={t.components.navigation.guideUrl}>{t.components.navigation.guide}</NavItem>
-      <NavItem href={t.components.navigation.soundtracksUrl}
+      <NavItem href={globalConfig.writingGuideUrl}>{t.components.navigation.guide}</NavItem>
+      <NavItem href={globalConfig.soundtracksUrl}
         >{t.components.navigation.soundtracks}</NavItem
       >
       {#if $auth}
-        <NavItem href={t.components.navigation.writeUrl}>{t.components.navigation.write}</NavItem>
+        <NavItem href={globalConfig.writingUrl}>{t.components.navigation.write}</NavItem>
       {/if}
       <NavItem href="/profile"
         >{$auth ? t.components.navigation.profile : t.components.navigation.login}</NavItem

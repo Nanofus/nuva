@@ -5,7 +5,7 @@
   import { toast } from "@zerodevx/svelte-toast";
   import { toastSettings } from "$lib/util/util";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { t } from "$lib/translations";
+  import { t } from "$lib/util/translations";
 
   let searchTerm = "";
   let submitted = false;

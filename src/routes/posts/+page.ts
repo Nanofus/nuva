@@ -2,7 +2,7 @@ import { error, type Load } from "@sveltejs/kit";
 import { getPostList } from "$lib/db/graphql";
 import type { PostListResponse } from "$lib/util/types";
 import { filterExcludedCategories } from "$lib/util/util";
-import { t } from "$lib/translations";
+import { t } from "$lib/util/translations";
 
 export const load: Load = async ({ fetch }): Promise<PostListResponse> => {
   const response = await getPostList(fetch);
