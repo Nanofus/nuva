@@ -1,4 +1,10 @@
 {
   "buildCommand": "pnpm turbo build",
-  "ignoreCommand": "pnpm dlx turbo-ignore"
+  "ignoreCommand": "pnpm dlx turbo-ignore",
+  "crons": [
+    {
+      "path": "/api/cron/webhooks",
+      "schedule": "* * * * *"
+    }
+  ]
 }
