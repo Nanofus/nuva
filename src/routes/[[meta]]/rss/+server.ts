@@ -18,15 +18,21 @@ const rss = (posts: PostMeta[]) => `<?xml version="1.0" encoding="UTF-8" ?>
 <link>${globalConfig.baseUrl}</link>
 <description>${globalConfig.subHeader}</description>
 ${posts
-  .map(
-    (post) => `<item>
+  .map((post) => {
+    return `<item>
 <guid>${globalConfig.baseUrl}/posts/${post.slug}</guid>
 <title>${post.title}</title>
 <link>${globalConfig.baseUrl}/posts/${post.slug}</link>
+${post.coAuthors
+  .map((author) => {
+    return `<author><name>${author}</name></author>`;
+  })
+  .join("")}
+<language>${globalConfig.locale}</language>
 <description>${post.description || ""}</description>
 <pubDate>${new Date(post.date).toUTCString()}</pubDate>
-</item>`,
-  )
+</item>`;
+  })
   .join("")}
 </channel>
 </rss>
