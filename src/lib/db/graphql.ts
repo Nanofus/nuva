@@ -71,6 +71,9 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
   return dataToCommentMetas(response.data.comments.nodes);
 };
 
+export const getLatestPosts = async (fetch: Function) =>
+  (await getPostsPaginated(fetch, null, "", globalConfig.latestPostsPerFetch)).posts;
+
 export const getPost = async (fetch: Function, slug: string): Promise<Post | null> => {
   const authToken = browser ? get(auth)?.authToken : null;
   const response = await (

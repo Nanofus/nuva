@@ -7,10 +7,11 @@
   <div class="footer-content">
     <span>{globalConfig.copyright}</span>
     <span class="separator" />
-    <span
-      ><a href={globalConfig.urls.feedback} target="_blank">{t.components.footer.feedback}</a
-      ></span
-    >
+    <span><a href="{globalConfig.baseUrl}/rss" target="_blank">RSS</a></span>
+    <span class="separator" />
+    <span>
+      <a href={globalConfig.urls.feedback} target="_blank">{t.components.footer.feedback}</a>
+    </span>
   </div>
 </footer>
 

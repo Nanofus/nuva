@@ -9,11 +9,12 @@ export const GET = async () => {
     (await getTagsPaginated(fetch)).tags,
   );
   const response = new Response(body);
-  response.headers.set("Cache-Control", "max-age=0, s-maxage=3600");
+  response.headers.set("Cache-Control", `max-age=${0}, s-maxage=${3600}`);
   response.headers.set("Content-Type", "application/xml");
   return response;
 };
 
+// TODO: Authors
 const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
   `<?xml version="1.0" encoding="UTF-8" ?>
 <urlset

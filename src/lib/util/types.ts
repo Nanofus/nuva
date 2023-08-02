@@ -263,7 +263,7 @@ export type CategoryListResponse = {
 };
 
 export type PostsAndCommentsResponse = {
-  posts: PostListResponse;
+  posts: PostMeta[];
   comments: CommentMeta[];
 };
 

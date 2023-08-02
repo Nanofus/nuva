@@ -1,12 +1,12 @@
 <script lang="ts">
   import PostList from "$lib/components/PostList.svelte";
-  import type { CommentMeta, PostListResponse } from "$lib/util/types";
+  import type { CommentMeta, PostMeta } from "$lib/util/types";
   import { getPageTitle, getPageUrl } from "$lib/util/util";
   import FeaturedPost from "$lib/components/FeaturedPost.svelte";
   import CommentList from "$lib/components/CommentList.svelte";
   import { t } from "$lib/util/translations";
 
-  export let data: { posts: PostListResponse; comments: CommentMeta[] };
+  export let data: { posts: PostMeta[]; comments: CommentMeta[] };
 </script>
 
 <svelte:head>
@@ -16,9 +16,9 @@
 </svelte:head>
 
 <div class="vertically-separated-top">
-  <FeaturedPost postMeta={data.posts.posts[0]} />
+  <FeaturedPost postMeta={data.posts[0]} />
 </div>
 <h3>{t.pages.index.newestReleases}</h3>
-<PostList posts={data.posts.posts} />
+<PostList posts={data.posts} />
 <h3>{t.pages.index.newestComments}</h3>
 <CommentList comments={data.comments} />
