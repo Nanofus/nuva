@@ -23,11 +23,7 @@ ${posts
 <guid>${globalConfig.baseUrl}/posts/${post.slug}</guid>
 <title>${post.title}</title>
 <link>${globalConfig.baseUrl}/posts/${post.slug}</link>
-${post.coAuthors
-  .map((author) => {
-    return `<author><name>${author}</name></author>`;
-  })
-  .join("")}
+<author>${post.author}</author>
 <language>${globalConfig.locale}</language>
 <description>${post.description || ""}</description>
 <pubDate>${new Date(post.date).toUTCString()}</pubDate>
