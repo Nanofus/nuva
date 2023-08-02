@@ -48,8 +48,8 @@ export const fireCommentHook = async (meta: WebhookMeta, post: PostMeta, comment
             url: globalConfig.baseUrl + "/posts/" + post.slug + "#comment-" + comment._id,
             color: meta.color,
             author: {
-              name: post.author,
-              url: globalConfig.baseUrl + "/authors/" + post.author,
+              name: comment.author,
+              url: globalConfig.baseUrl + "/authors/" + comment.author,
               icon_url: meta.icon,
             },
           },
