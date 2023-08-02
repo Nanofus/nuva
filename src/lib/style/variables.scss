@@ -17,20 +17,20 @@
   --music-button-shadow: 0.1rem 0.2rem 0.5rem rgba(0, 0, 0, 0.6); // Shadow for music buttons
   --banner-shadow: 0 0 0.1rem rgba(0, 0, 0, 1), 0 0 0.5rem rgba(0, 0, 0, 0.9),
     0 0 1rem rgba(0, 0, 0, 0.9); // Shadow for text in banner
-  --scroll-hinting-shadow-color: rgba(0, 0, 0, 0.3);
-  --error: #f09896;
-  --error-background: #f09896;
-  --warning: #f7de50;
-  --warning-background: #f7de50;
-  --success: #94efad;
-  --success-background: #94efad;
-  --info: #8ee3f5;
-  --info-background: #8ee3f5;
-  --highlight: #f9dd4f;
-  --selection: #f9dd4f;
-  --comment-background: rgba(0, 0, 0, 0.1);
-  --highlight-border: 0.1rem solid var(--accent);
-  --subtle-border: 0.1rem solid var(--hover-light);
+  --scroll-hinting-shadow-color: rgba(0, 0, 0, 0.3); // Shadow color for the shadow that hints horizontal scrolling is possible on mobile
+  --error: #f09896; // Error text color
+  --error-background: #f09896; // Error background color
+  --warning: #f7de50; // Warning text color
+  --warning-background: #f7de50; // Warning background color
+  --success: #94efad; // Success text color
+  --success-background: #94efad; // Success background color
+  --info: #8ee3f5; // Info text color
+  --info-background: #8ee3f5; // Info background color
+  --highlight: #f9dd4f; // Highlight color
+  --selection: #f9dd4f; // Selection color
+  --comment-background: rgba(0, 0, 0, 0.1); // Background color for comments
+  --highlight-border: 0.1rem solid var(--accent); // Border for highlighted elements
+  --subtle-border: 0.1rem solid var(--hover-light); // Subtle border for elements
 }
 
 /* Typography */
@@ -79,9 +79,9 @@
   --border-radius: 0.25rem; // Border radius of elements
   --blur-intensity: 0.5rem; // Intensity of blur effect on navbar
   --column-horizontal-margin: 1.5rem; // Horizontal margin between columns
-  --initial-letter-size: 5rem;
-  --initial-letter-line-height: 4rem;
-  --initial-letter-padding: 0.5rem;
+  --initial-letter-size: 5rem; // Size of initial letter
+  --initial-letter-line-height: 4rem; // Line height for initial letter, should be a bit less than size
+  --initial-letter-margin: 0.5rem; // Right margin of initial letter
 }
 
 /* Toast */

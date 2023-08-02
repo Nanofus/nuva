@@ -112,6 +112,6 @@
     float: left;
     font-size: var(--initial-letter-size);
     line-height: var(--initial-letter-line-height);
-    margin-right: var(--initial-letter-padding);
+    margin-right: var(--initial-letter-margin);
   }
 </style>
