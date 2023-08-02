@@ -34,6 +34,7 @@ export type Config = {
     feedback: string; // URL for feedback page
   };
   webhooks: {
+    password: string;
     newPost: WebhookMeta[]; // URLs for new post webhooks
     newComment: WebhookMeta[]; // URLs for new comment webhooks
   };
