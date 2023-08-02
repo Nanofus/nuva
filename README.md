@@ -10,7 +10,7 @@ Tech stack: SvelteKit, TypeScript, SASS, Kysely, Prisma, Postgres, AWS S3.
 The production environment runs on Vercel. There's a couple of Vercel-specific things in the repo, which you should replace if not hosting in Vercel. These are:
 - `svelte.config.js` uses `@sveltejs/adapter-vercel`. Replace with `@sveltejs/adapter-node` or other adapter.
 - `src/lib/server/database.ts` connects to Postgres using `@vercel/postgres`, and can be directly replaced with `node-postgres`.
-- `src/lib/util/config` provides the main configuration through `@vercel/edge-config`, and can be replaced with a simple object.
+- `src/lib/util/config` provides the main configuration through `@vercel/edge-config`, and can be replaced with a simple object. You can see the schema in `src/lib/util/types`.
 
 ## Development
 

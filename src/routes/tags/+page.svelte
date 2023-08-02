@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getTagList } from "$lib/db/graphql";
+  import { getTagsPaginated } from "$lib/db/graphql";
   import type { TagListResponse } from "$lib/util/types";
   import Button from "$lib/components/reusable/Button.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
@@ -14,7 +14,7 @@
 
   const fetchMoreTags = async () => {
     fetching = true;
-    const newData = await getTagList(fetch, data.endCursor);
+    const newData = await getTagsPaginated(fetch, data.endCursor);
     data = {
       tags: [...data.tags, ...newData.tags],
       endCursor: newData.endCursor,

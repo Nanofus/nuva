@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { CategoryListResponse } from "$lib/util/types";
   import List from "$lib/components/reusable/List.svelte";
   import { getPageTitle, getPageUrl } from "$lib/util/util";
   import { t } from "$lib/util/translations";
+  import type { Category } from "$lib/util/types";
 
-  export let data: CategoryListResponse;
+  export let data: Category[];
 </script>
 
 <svelte:head>
@@ -15,7 +15,7 @@
 
 <h1>{t.pages.categories.title}</h1>
 <List>
-  {#each data.categories as category}
+  {#each data as category}
     <li>
       <a href="/categories/{category.slug}">{category.name}</a>
       {#if category.children.length > 0}

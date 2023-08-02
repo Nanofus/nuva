@@ -91,7 +91,7 @@ export const handleScrolledToBottom = () => {
 export const getPageTitle = (title: string) =>
   title ? `${title} – ${globalConfig.siteName}` : globalConfig.siteName;
 
-export const getPageUrl = (route: string) => `${import.meta.env.BASE_URL}/${route}`;
+export const getPageUrl = (route: string) => `${globalConfig.baseUrl}/${route}`;
 
 export const formatSecondsToMMSS = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);

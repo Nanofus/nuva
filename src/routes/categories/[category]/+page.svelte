@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getPostListByCategory } from "$lib/db/graphql";
+  import { getPostsForCategoryPaginated } from "$lib/db/graphql";
   import type { PostListByCategoryResponse } from "$lib/util/types";
   import PostList from "$lib/components/PostList.svelte";
   import Button from "$lib/components/reusable/Button.svelte";
@@ -14,7 +14,7 @@
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPostListByCategory(fetch, data.categorySlug, data.endCursor);
+    const newData = await getPostsForCategoryPaginated(fetch, data.categorySlug, data.endCursor);
     data = {
       posts: [...data.posts, ...newData.posts],
       categorySlug: data.categorySlug,

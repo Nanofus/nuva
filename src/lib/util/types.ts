@@ -8,11 +8,12 @@ export type LocalConfig = {
 };
 
 export type Config = {
+  baseUrl: string; // Domain for the app, used by sitemap and RSS
   graphqlApi: string; // Path to WordPress GraphQL API
   maxPerFetch: number; // Max posts to get per fetch (WP GraphQL API has a limit of 100)
   latestPostsPerFetch: number; // Max posts to get per fetch on front page
   latestCommentsPerFetch: number; // Max comments to get per fetch on front page
-  locale: string; // Locale for language
+  locale: string; // Locale for language, "en-US"/"fi-FI"
   siteName: string; // Name of site
   subHeader: string; // Subheader for site
   copyright: string; // Copyright notice
@@ -26,8 +27,8 @@ export type Config = {
     feedback: string; // URL for feedback page
   };
   webhooks: {
-    newPost: string; // URL for new post webhook
-    newComment: string; // URL for new comment webhook
+    newPost: string[]; // URLs for new post webhooks
+    newComment: string[]; // URLs for new comment webhooks
   };
   externalStylesheets: string[]; // External stylesheets to load
 };

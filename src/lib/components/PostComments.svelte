@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Post } from "$lib/util/types";
   import CommentForm from "$lib/components/CommentForm.svelte";
-  import { getAllCommentsForPostBySlug } from "$lib/db/graphql";
+  import { getCommentsForPost } from "$lib/db/graphql";
   import Button from "$lib/components/reusable/Button.svelte";
   import { t } from "$lib/util/translations";
   import CommentView from "$lib/components/CommentView.svelte";
@@ -12,7 +12,7 @@
 
   const refreshComments = () => {
     replyFormOpen = false;
-    getAllCommentsForPostBySlug(fetch, post.slug).then((comments) => {
+    getCommentsForPost(fetch, post.slug).then((comments) => {
       post.comments = comments;
     });
   };

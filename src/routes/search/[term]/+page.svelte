@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getPostList } from "$lib/db/graphql";
+  import { getPostsPaginated } from "$lib/db/graphql";
   import PostList from "$lib/components/PostList.svelte";
   import type { PostListBySearchResponse } from "$lib/util/types";
   import Button from "$lib/components/reusable/Button.svelte";
@@ -14,7 +14,7 @@
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPostList(fetch, data.endCursor, data.searchTerm);
+    const newData = await getPostsPaginated(fetch, data.endCursor, data.searchTerm);
     data = {
       posts: [...data.posts, ...newData.posts],
       searchTerm: data.searchTerm,

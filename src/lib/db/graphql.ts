@@ -11,7 +11,7 @@ import {
 } from "$lib/db/graphql.mappers";
 import { QUERIES } from "$lib/db/graphql.queries";
 import type {
-  CategoryListResponse,
+  Category,
   Comment,
   CommentMeta,
   CommentResponse,
@@ -71,7 +71,7 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
   return dataToCommentMetas(response.data.comments.nodes);
 };
 
-export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post | null> => {
+export const getPost = async (fetch: Function, slug: string): Promise<Post | null> => {
   const authToken = browser ? get(auth)?.authToken : null;
   const response = await (
     await fetch(globalConfig.graphqlApi, {
@@ -92,19 +92,16 @@ export const getPostBySlug = async (fetch: Function, slug: string): Promise<Post
     })
   ).json();
   const post = dataToPost(response.data.post);
-  if (post) post.comments = await getAllCommentsForPostBySlug(fetch, slug);
+  if (post) post.comments = await getCommentsForPost(fetch, slug);
   return post;
 };
 
-export const getAllCommentsForPostBySlug = async (
-  fetch: Function,
-  slug: string,
-): Promise<Comment[]> => {
+export const getCommentsForPost = async (fetch: Function, slug: string): Promise<Comment[]> => {
   let allCommentsFetched = false;
   let allComments: Comment[] = [];
   let latestAfter = null;
   while (!allCommentsFetched) {
-    const commentResponse = await getCommentsForPostBySlug(fetch, slug, latestAfter);
+    const commentResponse = await getCommentsForPostPaginated(fetch, slug, latestAfter);
     allComments = [...allComments, ...commentResponse.comments];
     if (!commentResponse.hasNextPage) allCommentsFetched = true;
     else latestAfter = commentResponse.endCursor;
@@ -114,7 +111,7 @@ export const getAllCommentsForPostBySlug = async (
   );
 };
 
-export const getCommentsForPostBySlug = async (
+const getCommentsForPostPaginated = async (
   fetch: Function,
   slug: string,
   after: string | null = null,
@@ -155,7 +152,7 @@ export const getCommentsForPostBySlug = async (
   };
 };
 
-export const getPostListByAuthor = async (
+export const getPostsForAuthorPaginated = async (
   fetch: Function,
   author: string,
   after: string | null = null,
@@ -201,7 +198,7 @@ export const getPostListByAuthor = async (
   };
 };
 
-export const getPostListByTag = async (
+export const getPostsForTagPaginated = async (
   fetch: Function,
   tag: string,
   after: string | null = null,
@@ -250,7 +247,7 @@ export const getPostListByTag = async (
   };
 };
 
-export const getPostListByCategory = async (
+export const getPostsForCategoryPaginated = async (
   fetch: Function,
   category: string,
   after: string | null = null,
@@ -299,7 +296,20 @@ export const getPostListByCategory = async (
   };
 };
 
-export const getPostList = async (
+export const getPosts = async (fetch: Function): Promise<PostMeta[]> => {
+  let allPostsFetched = false;
+  let allPosts: PostMeta[] = [];
+  let latestAfter = null;
+  while (!allPostsFetched) {
+    const response = await getPostsPaginated(fetch, latestAfter);
+    allPosts = [...allPosts, ...response.posts];
+    if (!response.hasNextPage) allPostsFetched = true;
+    else latestAfter = response.endCursor;
+  }
+  return allPosts.sort((a, b) => a.date.getTime() - b.date.getTime());
+};
+
+export const getPostsPaginated = async (
   fetch: Function,
   after: string | null = null,
   searchTerm = "",
@@ -342,7 +352,7 @@ export const getPostList = async (
   };
 };
 
-export const getTagList = async (
+export const getTagsPaginated = async (
   fetch: Function,
   after: string | null = null,
 ): Promise<TagListResponse> => {
@@ -382,7 +392,7 @@ export const getTagList = async (
   };
 };
 
-export const getCategoryList = async (fetch: Function): Promise<CategoryListResponse> => {
+export const getCategoriesPaginated = async (fetch: Function): Promise<Category[]> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
       method: "POST",
@@ -405,10 +415,7 @@ export const getCategoryList = async (fetch: Function): Promise<CategoryListResp
       }),
     })
   ).json();
-  const categories = dataToCategories(response.data.categories.nodes);
-  return {
-    categories,
-  };
+  return dataToCategories(response.data.categories.nodes);
 };
 
 export const postComment = async (

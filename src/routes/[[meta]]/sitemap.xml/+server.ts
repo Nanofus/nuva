@@ -1,14 +1,20 @@
-import type { Category, Post, Tag } from "$lib/util/types";
+import type { Category, PostMeta, Tag } from "$lib/util/types";
+import { getCategoriesPaginated, getPosts, getTagsPaginated } from "$lib/db/graphql";
+import { globalConfig } from "$lib/util/config";
 
 export const GET = async () => {
-  const body = sitemap([], [], []);
+  const body = sitemap(
+    await getPosts(fetch),
+    await getCategoriesPaginated(fetch),
+    (await getTagsPaginated(fetch)).tags,
+  );
   const response = new Response(body);
   response.headers.set("Cache-Control", "max-age=0, s-maxage=3600");
   response.headers.set("Content-Type", "application/xml");
   return response;
 };
 
-const sitemap = (posts: Post[], categories: Category[], tags: Tag[]) =>
+const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
   `<?xml version="1.0" encoding="UTF-8" ?>
 <urlset
   xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
@@ -19,20 +25,30 @@ const sitemap = (posts: Post[], categories: Category[], tags: Tag[]) =>
   xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
 >
   <url>
-    <loc>${import.meta.env.BASE_URL}</loc>
+    <loc>${globalConfig.baseUrl}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>${import.meta.env.BASE_URL}/posts</loc>
+    <loc>${globalConfig.baseUrl}/posts</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>${globalConfig.baseUrl}/categories</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>${globalConfig.baseUrl}/tags</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.4</priority>
   </url>
   ${categories
     .map(
       (category) => `
   <url>
-    <loc>${import.meta.env.BASE_URL}/categories/${category}</loc>
+    <loc>${globalConfig.baseUrl}/categories/${category.slug}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -43,7 +59,7 @@ const sitemap = (posts: Post[], categories: Category[], tags: Tag[]) =>
       .map(
         (tag) => `
   <url>
-    <loc>${import.meta.env.BASE_URL}/tags/${tag}</loc>
+    <loc>${globalConfig.baseUrl}/tags/${tag.slug}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -54,7 +70,7 @@ const sitemap = (posts: Post[], categories: Category[], tags: Tag[]) =>
     .map(
       (post) => `
   <url>
-    <loc>${import.meta.env.BASE_URL}/posts/${post.slug}</loc>
+    <loc>${globalConfig.baseUrl}/posts/${post.slug}</loc>
     <changefreq>weekly</changefreq>
     <lastmod>${post.date}</lastmod>
     <priority>0.3</priority>
