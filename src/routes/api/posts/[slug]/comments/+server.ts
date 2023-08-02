@@ -13,7 +13,7 @@ export const POST: RequestHandler = async ({ params, request }) => {
   if (!authToken) throw error(403, t.errors.e403);
   const body = await request.json();
   if (!params.slug) throw error(404, t.errors.e404);
-  const result = await postComment(authToken, body.postId, body.parent, body.content);
+  const result = await postComment(authToken, body.post, body.parent, body.content);
   if (result) {
     return new Response();
   } else {

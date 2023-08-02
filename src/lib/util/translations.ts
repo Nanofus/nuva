@@ -16,6 +16,7 @@ const translations: { [key: string]: Localization } = {
     toasts: {
       welcome: "Welcome,",
       commentSent: "Comment sent.",
+      commentFailed: "Sending comment failed.",
       loginFailed: "Login failed.",
       loggedOut: "You logged out.",
     },
@@ -138,6 +139,7 @@ const translations: { [key: string]: Localization } = {
     toasts: {
       welcome: "Tervetuloa,",
       commentSent: "Kommentti lähetetty.",
+      commentFailed: "Kommentin lähetys epäonnistui.",
       loginFailed: "Kirjautuminen epäonnistui.",
       loggedOut: "Kirjauduit ulos.",
     },

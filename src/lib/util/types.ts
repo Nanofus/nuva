@@ -54,6 +54,7 @@ export type Localization = {
   toasts: {
     welcome: string;
     commentSent: string;
+    commentFailed: string;
     loginFailed: string;
     loggedOut: string;
   };

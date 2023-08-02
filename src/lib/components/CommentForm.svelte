@@ -26,7 +26,12 @@
 			return;
 		}
 		sending = true;
-		await postComment(postId, postSlug, parent, content);
+		const result = await postComment(postId, postSlug, parent, content);
+		if (!result) {
+			toast.push(t.toasts.commentFailed, toastSettings.error);
+		} else {
+			toast.push(t.toasts.commentSent, toastSettings.success);
+		}
 		dispatch("commentSent");
 		sending = false;
 		content = "";

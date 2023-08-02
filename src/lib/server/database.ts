@@ -24,10 +24,9 @@ import {
   dataToTags,
 } from "$lib/server/legacy.graphql.mappers";
 import { QUERIES } from "$lib/server/legacy.graphql.queries";
-import { objectsToHierarchy, toastSettings } from "$lib/util/util";
+import { objectsToHierarchy } from "$lib/util/util";
 import { error } from "@sveltejs/kit";
 import { t } from "$lib/util/translations";
-import { toast } from "@zerodevx/svelte-toast";
 
 const db = createKysely<DB>({
   connectionString: import.meta.env.VITE_POSTGRES_URL,
@@ -530,13 +529,5 @@ export const postComment = async (
       }),
     })
   ).json();
-  response.errors?.forEach((error: any) => {
-    toast.push(error.message, toastSettings.error);
-  });
-  if (response.data.createComment.success) {
-    toast.push(t.toasts.commentSent, toastSettings.success);
-    return true;
-  }
-
-  return false;
+  return !!response.data.createComment.success;
 };
