@@ -1,17 +1,18 @@
 <script lang="ts">
-  import { postComment } from "$lib/db/graphql";
-  import { toast } from "@zerodevx/svelte-toast";
-  import { createEventDispatcher } from "svelte";
-  import Button from "$lib/components/reusable/Button.svelte";
-  import Input from "$lib/components/reusable/Input.svelte";
-  import Form from "$lib/components/reusable/Form.svelte";
-  import { toastSettings } from "$lib/util/util";
-  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { t } from "$lib/util/translations";
-  import { auth } from "$lib/util/stores";
+	import { postComment } from "$lib/client/api";
+	import { toast } from "@zerodevx/svelte-toast";
+	import { createEventDispatcher } from "svelte";
+	import Button from "$lib/components/reusable/Button.svelte";
+	import Input from "$lib/components/reusable/Input.svelte";
+	import Form from "$lib/components/reusable/Form.svelte";
+	import { toastSettings } from "$lib/util/util";
+	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+	import { t } from "$lib/util/translations";
+	import { auth } from "$lib/util/stores";
 
-  export let parent: number;
+	export let parent: number;
 	export let postId: number;
+	export let postSlug: string;
 	export let isReply: boolean;
 
 	let sending: boolean = false;
@@ -25,7 +26,7 @@
 			return;
 		}
 		sending = true;
-		await postComment(fetch, postId, parent, content);
+		await postComment(postId, postSlug, parent, content);
 		dispatch("commentSent");
 		sending = false;
 		content = "";

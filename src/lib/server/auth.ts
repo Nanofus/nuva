@@ -1,5 +1,12 @@
 import type { AuthData } from "$lib/util/types";
 import { globalConfig } from "$lib/util/config";
+import { isAuthTokenValid } from "$lib/server/database";
+
+export const authenticated = async (request: Request): Promise<boolean> => {
+  const authToken = request.headers.get("Authorization")?.split(" ")[1];
+  if (!authToken) return false;
+  return await isAuthTokenValid(authToken);
+};
 
 export const handleLogin = async (username: string, password: string): Promise<AuthData> => {
   const response = await (

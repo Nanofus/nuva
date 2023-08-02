@@ -57,6 +57,7 @@
       on:close={() => (replyFormOpen = false)}
       parent={comment._id}
       postId={post._id}
+      postSlug={post.slug}
       isReply={true}
     />
   {/if}

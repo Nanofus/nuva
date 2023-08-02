@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { login, logout } from "$lib/db/auth";
-  import { auth } from "$lib/util/stores";
-  import Button from "$lib/components/reusable/Button.svelte";
-  import Input from "$lib/components/reusable/Input.svelte";
-  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import Form from "$lib/components/reusable/Form.svelte";
-  import { toast } from "@zerodevx/svelte-toast";
-  import { toastSettings } from "$lib/util/util";
-  import { t } from "$lib/util/translations";
+	import { login, logout } from "$lib/client/auth";
+	import { auth } from "$lib/util/stores";
+	import Button from "$lib/components/reusable/Button.svelte";
+	import Input from "$lib/components/reusable/Input.svelte";
+	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+	import Form from "$lib/components/reusable/Form.svelte";
+	import { toast } from "@zerodevx/svelte-toast";
+	import { toastSettings } from "$lib/util/util";
+	import { t } from "$lib/util/translations";
 
-  let passwordInput = "";
+	let passwordInput = "";
 	let usernameInput = "";
 	let submitted = false;
 

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { getPostsForAuthorPaginated } from "$lib/db/graphql";
   import type { PostListByAuthorResponse } from "$lib/util/types";
   import PostList from "$lib/components/PostList.svelte";
   import Button from "$lib/components/reusable/Button.svelte";
@@ -8,13 +7,14 @@
   import { onMount } from "svelte";
   import { scrolledToBottom } from "$lib/util/stores";
   import { t } from "$lib/util/translations";
+  import { getPosts } from "$lib/client/api";
 
   export let data: PostListByAuthorResponse;
   let fetching = false;
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPostsForAuthorPaginated(fetch, data.author, data.endCursor);
+    const newData = await getPosts("author", data.author, data.endCursor, null);
     data = {
       posts: [...data.posts, ...newData.posts],
       author: data.author,

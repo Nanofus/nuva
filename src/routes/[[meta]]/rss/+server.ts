@@ -1,9 +1,10 @@
-import { getLatestPosts } from "$lib/db/graphql";
+import { getLatestPosts } from "$lib/server/database";
 import type { PostMeta } from "$lib/util/types";
 import { globalConfig } from "$lib/util/config";
+import type { RequestHandler } from "@sveltejs/kit";
 
-export const GET = async () => {
-  const body = rss(await getLatestPosts(fetch));
+export const GET: RequestHandler = async () => {
+  const body = rss(await getLatestPosts());
   const response = new Response(body);
   response.headers.set("Cache-Control", `max-age=${0}, s-maxage=${600}`);
   response.headers.set("Content-Type", "application/xml");

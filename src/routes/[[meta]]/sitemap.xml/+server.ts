@@ -1,13 +1,10 @@
 import type { Category, PostMeta, Tag } from "$lib/util/types";
-import { getCategoriesPaginated, getPosts, getTagsPaginated } from "$lib/db/graphql";
+import { getAllPosts, getCategories, getTags } from "$lib/server/database";
 import { globalConfig } from "$lib/util/config";
+import type { RequestHandler } from "@sveltejs/kit";
 
-export const GET = async () => {
-  const body = sitemap(
-    await getPosts(fetch),
-    await getCategoriesPaginated(fetch),
-    (await getTagsPaginated(fetch)).tags,
-  );
+export const GET: RequestHandler = async () => {
+  const body = sitemap(await getAllPosts(), await getCategories(), (await getTags()).tags);
   const response = new Response(body);
   response.headers.set("Cache-Control", `max-age=${0}, s-maxage=${3600}`);
   response.headers.set("Content-Type", "application/xml");

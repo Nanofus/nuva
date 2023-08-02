@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { getPostsPaginated } from "$lib/db/graphql";
   import PostList from "$lib/components/PostList.svelte";
   import type { PostListBySearchResponse } from "$lib/util/types";
   import Button from "$lib/components/reusable/Button.svelte";
@@ -8,13 +7,14 @@
   import { onMount } from "svelte";
   import { scrolledToBottom } from "$lib/util/stores";
   import { t } from "$lib/util/translations";
+  import { getPosts } from "$lib/client/api";
 
   export let data: PostListBySearchResponse;
   let fetching = false;
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPostsPaginated(fetch, data.endCursor, data.searchTerm);
+    const newData = await getPosts(null, null, data.endCursor, data.searchTerm);
     data = {
       posts: [...data.posts, ...newData.posts],
       searchTerm: data.searchTerm,

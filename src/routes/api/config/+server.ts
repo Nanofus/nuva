@@ -1,6 +1,6 @@
-import { json } from "@sveltejs/kit";
+import { json, type RequestHandler } from "@sveltejs/kit";
 import { getConfig } from "$lib/util/config";
 
-export const GET = async () => {
+export const GET: RequestHandler = async () => {
   return json(await getConfig());
 };

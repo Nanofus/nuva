@@ -15,7 +15,7 @@
   import "$lib/style/variables.scss";
   import "$lib/style/input-range.scss";
   import "$lib/style/theme.scss";
-  import { loadLoginStatus } from "$lib/db/auth";
+  import { loadLoginStatus } from "$lib/client/auth";
   import { globalConfig } from "$lib/util/config";
 
   export let data;
