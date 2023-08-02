@@ -9,7 +9,7 @@ import {
 } from "$lib/server/database";
 import { globalConfig } from "$lib/util/config";
 import { fireCommentHook, firePostHook } from "$lib/server/webhooks.discord";
-import type { PostMeta } from "$lib/util/types";
+import type { CommentMeta, PostMeta } from "$lib/util/types";
 
 export const latestPostHook = async () => {
   const latestPostSlug = await getLatestPostSlug();
@@ -30,16 +30,21 @@ export const latestPostHook = async () => {
 };
 
 export const latestCommentHook = async () => {
-  const latestCommentId = await getLatestCommentId();
+  let latestCommentId = await getLatestCommentId();
   if (!latestCommentId) return;
+  console.log("latestCommentId", latestCommentId);
   const latestComments = (await getLatestComments()).sort(
     (a, b) => a.date.getTime() - b.date.getTime(),
   );
-  const latestComment = latestComments.find((comment) => comment._id === latestCommentId);
-  if (!latestComment) return;
+  let latestComment: CommentMeta | undefined;
+  while (!latestComment) {
+    latestComment = latestComments.find((comment) => comment._id === latestCommentId);
+    console.log("latestComment", latestComment, latestCommentId);
+    latestCommentId = latestCommentId - 1;
+  }
   const announcedComments = await Promise.all(
     latestComments
-      .filter((comment) => comment.date.getTime() > latestComment.date.getTime())
+      .filter((comment) => comment.date.getTime() > (<CommentMeta>latestComment).date.getTime())
       .map(async (comment) => {
         return {
           comment: comment,
@@ -49,6 +54,7 @@ export const latestCommentHook = async () => {
   );
   for (const announcedComment of announcedComments) {
     for (const hook of globalConfig.webhooks.newComment) {
+      console.log("announcedComment", announcedComment);
       if (!(await fireCommentHook(hook, announcedComment.post, announcedComment.comment)))
         console.error("Failed to fire webhook", hook.url);
     }
