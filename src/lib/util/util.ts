@@ -160,3 +160,18 @@ export const loadSetting = (key: string) => {
 
   return null;
 };
+
+type HierarchicalWithDate = {
+  date: Date;
+} & Hierarchical;
+export const recursivelyConvertDates = (arr: HierarchicalWithDate[]) => {
+  return arr.map((item) => {
+    if (item.date) {
+      item.date = new Date(item.date);
+    }
+    if (item.children) {
+      item.children = recursivelyConvertDates(<HierarchicalWithDate[]>item.children);
+    }
+    return item;
+  });
+};

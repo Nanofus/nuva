@@ -7,6 +7,7 @@ import type {
   PostMeta,
   TagListResponse,
 } from "$lib/util/types";
+import { recursivelyConvertDates } from "$lib/util/util";
 
 export type RequestParams = {
   [key: string]: any;
@@ -64,7 +65,9 @@ export const getCategories = async (): Promise<Category[]> => {
 };
 
 export const getCommentsByPost = async (postSlug: string): Promise<Comment[]> => {
-  return await (await getRequest(`/api/posts/${postSlug}/comments`)).json();
+  const comments: Comment[] = await (await getRequest(`/api/posts/${postSlug}/comments`)).json();
+  recursivelyConvertDates(comments);
+  return comments;
 };
 
 export const postComment = async (
