@@ -57,7 +57,7 @@ const isAuthTokenValid = async (authToken: string): Promise<boolean> => {
       }),
     })
   ).json();
-  return !!response.errors;
+  return !(response.errors && response.errors.length > 0);
 };
 
 export const authenticated = async (request: Request): Promise<boolean> => {
