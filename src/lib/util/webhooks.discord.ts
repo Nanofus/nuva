@@ -4,7 +4,6 @@ import { stripHtml } from "$lib/util/util";
 import { t } from "$lib/util/translations";
 
 export const firePostHook = async (meta: WebhookMeta, post: PostMeta) => {
-  console.log(meta, post);
   return (
     await fetch(meta.url, {
       method: "POST",
@@ -35,7 +34,6 @@ export const firePostHook = async (meta: WebhookMeta, post: PostMeta) => {
 };
 
 export const fireCommentHook = async (meta: WebhookMeta, post: PostMeta, comment: CommentMeta) => {
-  console.log(meta, post, comment);
   return (
     await fetch(meta.url, {
       method: "POST",
