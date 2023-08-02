@@ -32,14 +32,12 @@ export const latestPostHook = async () => {
 export const latestCommentHook = async () => {
   let latestCommentId = await getLatestCommentId();
   if (!latestCommentId) return;
-  console.log("latestCommentId", latestCommentId);
   const latestComments = (await getLatestComments()).sort(
     (a, b) => a.date.getTime() - b.date.getTime(),
   );
   let latestComment: CommentMeta | undefined;
   while (!latestComment) {
     latestComment = latestComments.find((comment) => comment._id === latestCommentId);
-    console.log("latestComment", latestComment, latestCommentId);
     latestCommentId = latestCommentId - 1;
   }
   const announcedComments = await Promise.all(
@@ -54,7 +52,6 @@ export const latestCommentHook = async () => {
   );
   for (const announcedComment of announcedComments) {
     for (const hook of globalConfig.webhooks.newComment) {
-      console.log("announcedComment", announcedComment);
       if (!(await fireCommentHook(hook, announcedComment.post, announcedComment.comment)))
         console.error("Failed to fire webhook", hook.url);
     }
