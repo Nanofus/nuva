@@ -11,14 +11,6 @@
   export let post: Post;
   let scriptElements: HTMLScriptElement[] = [];
 
-  const setInitialLetter = () => {
-    // Remove the userAgent check when Firefox supports initial-letter
-    if (browser && !navigator.userAgent.match(/firefox|fxios/i) && post.initialLetter) {
-      document.documentElement.style.setProperty("--initial-letter-size", "3.0");
-      document.documentElement.style.setProperty("--initial-letter-padding", "0.5rem");
-    }
-  };
-
   const reportValidation = () => {
     if (!post.validationResult) return;
     if (!post.validationResult.valid) {
@@ -86,7 +78,6 @@
     reportValidation();
     createErrorReporter();
     await runScripts();
-    setInitialLetter();
   });
 
   const cleanScripts = () => {
@@ -111,15 +102,16 @@
     {t.components.postContent.notMobileFriendly}
   </div>
 {/if}
-<section class="vertically-separated" id="post-content">
+<section class="vertically-separated {post.initialLetter ? 'large-initial-letter' : null}" id="post-content">
   {@html post.content}
 </section>
 <MusicPlayer musicUrlArray={post.music} />
 
 <style lang="scss">
-  :global(section > p:first-child::first-letter) {
-    initial-letter: var(--initial-letter-size);
-    -webkit-initial-letter: var(--initial-letter-size);
+  :global(section.large-initial-letter > p:first-child::first-letter) {
+    float: left;
+    font-size: var(--initial-letter-size);
+    line-height: var(--initial-letter-line-height);
     margin-right: var(--initial-letter-padding);
   }
 </style>
