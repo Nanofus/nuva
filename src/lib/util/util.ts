@@ -99,6 +99,10 @@ export const formatSecondsToMMSS = (seconds: number) => {
   return `${minutes}:${secondsRemainder < 10 ? "0" : ""}${secondsRemainder}`;
 };
 
+export const stripHtml = (html: string) => {
+  return html.replace(/<(.|\n)*?>/g, "");
+};
+
 export const getRandomBannerUrl = (seed = 0) =>
   `url("/images/banners/banner-${
     ((new Date().getMinutes() + seed) % globalConfig.bannerCount) + 1

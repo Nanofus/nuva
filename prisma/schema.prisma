@@ -11,6 +11,11 @@ datasource db {
   shadowDatabaseUrl = env("VITE_POSTGRES_URL_NON_POOLING")
 }
 
+model Meta {
+  key   String  @id
+  value String?
+}
+
 model User {
   id          Int       @id @default(autoincrement())
   email       String    @unique

@@ -93,7 +93,7 @@
         >{t.components.navigation.soundtracks}</NavItem
       >
       {#if $auth}
-        <NavItem href={globalConfig.urls.writingGuide}>{t.components.navigation.write}</NavItem>
+        <NavItem href={globalConfig.urls.writing}>{t.components.navigation.write}</NavItem>
       {/if}
       <NavItem href="/profile"
         >{$auth ? t.components.navigation.profile : t.components.navigation.login}</NavItem

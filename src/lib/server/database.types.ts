@@ -21,6 +21,10 @@ export type Comment = {
   authorId: number;
   parentCommentId: number | null;
 };
+export type Meta = {
+  key: string;
+  value: string | null;
+};
 export type Post = {
   id: Generated<number>;
   createdAt: Generated<Timestamp>;
@@ -42,6 +46,7 @@ export type User = {
 export type DB = {
   Category: Category;
   Comment: Comment;
+  Meta: Meta;
   Post: Post;
   Tag: Tag;
   User: User;

@@ -74,6 +74,27 @@ export const getLatestComments = async (fetch: Function): Promise<CommentMeta[]>
 export const getLatestPosts = async (fetch: Function) =>
   (await getPostsPaginated(fetch, null, "", globalConfig.latestPostsPerFetch)).posts;
 
+export const getPostMeta = async (fetch: Function, slug: string): Promise<PostMeta | null> => {
+  const response = await (
+    await fetch(globalConfig.graphqlApi, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+            query PostBySlug {
+                post(idType: SLUG, id: "${slug}") {
+                    ${QUERIES.postMeta}
+                }
+            }
+            `,
+      }),
+    })
+  ).json();
+  return dataToPostMeta(response.data.post);
+};
+
 export const getPost = async (fetch: Function, slug: string): Promise<Post | null> => {
   const authToken = browser ? get(auth)?.authToken : null;
   const response = await (

@@ -7,6 +7,13 @@ export type LocalConfig = {
   musicFadeSpeed: number;
 };
 
+export type WebhookMeta = {
+  url: string;
+  contentText: string;
+  icon: string;
+  color: number;
+};
+
 export type Config = {
   baseUrl: string; // Domain for the app, used by sitemap and RSS
   graphqlApi: string; // Path to WordPress GraphQL API
@@ -27,8 +34,8 @@ export type Config = {
     feedback: string; // URL for feedback page
   };
   webhooks: {
-    newPost: string[]; // URLs for new post webhooks
-    newComment: string[]; // URLs for new comment webhooks
+    newPost: WebhookMeta[]; // URLs for new post webhooks
+    newComment: WebhookMeta[]; // URLs for new comment webhooks
   };
   externalStylesheets: string[]; // External stylesheets to load
 };
@@ -110,6 +117,9 @@ export type Localization = {
     e403: string;
     e404: string;
     e500: string;
+  };
+  webhooks: {
+    newComment: string;
   };
   pages: {
     index: {

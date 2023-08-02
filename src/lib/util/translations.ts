@@ -80,6 +80,9 @@ const translations: { [key: string]: Localization } = {
       e404: "Page not found.",
       e500: "Something went wrong.",
     },
+    webhooks: {
+      newComment: "New comment: ",
+    },
     pages: {
       index: {
         title: "Front Page",
@@ -198,6 +201,9 @@ const translations: { [key: string]: Localization } = {
       e403: "Pääsy estetty.",
       e404: "Sivua ei löytynyt",
       e500: "Jotain meni pieleen",
+    },
+    webhooks: {
+      newComment: "Uusi kommentti: ",
     },
     pages: {
       index: {
