@@ -483,24 +483,6 @@ export const getCategories = async (): Promise<Category[]> => {
   return dataToCategories(response.data.categories.nodes);
 };
 
-export const isAuthTokenValid = async (authToken: string): Promise<boolean> => {
-  const response = await (
-    await fetch(globalConfig.graphqlApi, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
-      },
-      body: JSON.stringify({
-        query: `
-                query CheckAuthenticated {}
-                `,
-      }),
-    })
-  ).json();
-  return !!response;
-};
-
 export const postComment = async (
   authToken: string,
   postId: number,
