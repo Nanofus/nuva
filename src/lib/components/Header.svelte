@@ -30,6 +30,7 @@
 	a {
 		display: block;
 		height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
+		padding-top: 3.5em;
 
 		&:hover {
 			text-decoration: none;
@@ -49,10 +50,6 @@
 		user-select: none;
 		margin: 0;
 		text-shadow: var(--banner-shadow);
-	}
-
-	h1 {
-		padding-top: 3.5rem;
 	}
 
 	h2 {

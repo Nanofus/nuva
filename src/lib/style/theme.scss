@@ -454,6 +454,16 @@ img {
   .hidden-desktop {
     display: inherit !important;
   }
+
+  #page > header {
+    height: calc(var(--viewport-width)/3);
+    font-size: 0.5rem;
+  }
+
+  // Don't show feature carousel on mobile
+  #feature-carousel {
+    display: none;
+  }
 }
 
 /* Columns */
