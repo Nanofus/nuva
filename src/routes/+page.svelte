@@ -30,5 +30,6 @@
     height: 16rem;
     overflow: clip;
     position: relative;
+    border-radius: var(--border-radius);
   }
 </style>

@@ -92,6 +92,7 @@
     display: inline-block;
     transition: background-color 200ms ease-in-out;
     cursor: pointer;
+    box-shadow: var(--header-shadow);
   }
 
   .dot.active {
@@ -103,24 +104,29 @@
     position: absolute;
     top: 50%;
     width: auto;
-    padding: 1rem;
-    margin-top: -22px;
-    color: white;
-    font-weight: bold;
+    padding: 1.5rem 0.5rem;
+    margin-top: -2rem;
     transition: 200ms ease-in-out;
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
     user-select: none;
     background-color: transparent;
     color: rgba(255,255,255,0.75);
+    font-size: 2rem;
+    height: 4rem;
+    line-height: 1rem;
+    text-shadow: var(--header-shadow);
+    text-align: center;
+  }
+
+  .next {
+    right: 0;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
   }
 
   .prev:hover, .next:hover {
     background-color: rgba(255,255,255,0.33);
     color: rgba(255,255,255,1);
-  }
-
-  .next {
-    right: 0;
+    box-shadow: var(--header-shadow);
   }
 
 </style>
