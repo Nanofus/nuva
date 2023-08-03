@@ -56,8 +56,8 @@
         <FeaturedPost postMeta={post} />
     {/each}
 </div>
-<button class="prev" on:click={prevSlide}>❮</button>
-<button class="next" on:click={nextSlide}>❯</button>
+<button class="prev material-icons" on:click={prevSlide}>chevron_left</button>
+<button class="next material-icons" on:click={nextSlide}>chevron_right</button>
 <div class="dots">
     {#each Array(globalConfig.featuredPostsCount) as _, index (index)}
         <div class="{index <= 0 ? 'dot active' : 'dot'}" on:click={() => {
@@ -95,7 +95,7 @@
   }
 
   .dot.active {
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.75);
   }
 
   .prev, .next {
@@ -111,10 +111,12 @@
     border-radius: 0 3px 3px 0;
     user-select: none;
     background-color: transparent;
+    color: rgba(255,255,255,0.75);
   }
 
   .prev:hover, .next:hover {
     background-color: rgba(255,255,255,0.33);
+    color: rgba(255,255,255,1);
   }
 
   .next {
