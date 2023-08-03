@@ -43,15 +43,15 @@ Musicmancer 2023 Edition
     currentAudioElement?.pause();
   };
 
-  const play = (index: number) => {
+  const play = async (index: number) => {
     const newAudioData = audioDataArray[index];
     if (currentAudioElement == newAudioData.audioElement) {
-      if (paused) unpause();
+      if (paused) await unpause();
       else pause();
       return;
     }
     if (newAudioData.isEffect) {
-      newAudioData.audioElement.play();
+      await newAudioData.audioElement.play();
     } else {
       // Play the selected audio file
       newAudioData.audioElement.currentTime = 0;
@@ -59,15 +59,15 @@ Musicmancer 2023 Edition
       newPlayerAfterFade = newAudioData.audioElement;
       generatedElements.forEach((e) => (e.disabled = true));
       // Others are faded out by the fadeout interval
-      const waitUntilOthersFadedInterval = setInterval(() => {
+      const waitUntilOthersFadedInterval = setInterval(async () => {
         fadeInProgress = true;
         if (!othersStillPlaying()) {
+          await (<HTMLAudioElement>currentAudioElement).play();
           currentAudioElement?.removeEventListener("ended", pauseOnEnded);
           currentAudioElement = newPlayerAfterFade;
           currentAudioElement.addEventListener("ended", pauseOnEnded);
           paused = false;
           fadeInProgress = false;
-          (<HTMLAudioElement>currentAudioElement).play();
           generatedElements.forEach((e) => (e.disabled = false));
           clearInterval(waitUntilOthersFadedInterval);
         }
@@ -83,6 +83,8 @@ Musicmancer 2023 Edition
     const audioElements = postContent.querySelectorAll("audio");
     // Add a div.audio-button element next to the audio elements
     audioElements.forEach((audioElement) => {
+      // Start preloading the audio
+      audioElement.preload = "auto";
       // Get data from audio element
       let audioSrc = audioElement.getAttribute("src");
       if (!audioSrc) return;
@@ -146,9 +148,11 @@ Musicmancer 2023 Edition
   $: currentAudioElement &&
     (muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
 
-  const unpause = () => {
-    paused = false;
-    currentAudioElement && currentAudioElement.play();
+  const unpause = async () => {
+    if (currentAudioElement) {
+      await currentAudioElement.play();
+      paused = false;
+    }
   };
 
   const pause = () => {
