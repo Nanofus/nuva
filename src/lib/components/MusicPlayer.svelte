@@ -62,10 +62,10 @@ Musicmancer 2023 Edition
       const waitUntilOthersFadedInterval = setInterval(async () => {
         fadeInProgress = true;
         if (!othersStillPlaying()) {
-          await (<HTMLAudioElement>currentAudioElement).play();
           currentAudioElement?.removeEventListener("ended", pauseOnEnded);
           currentAudioElement = newPlayerAfterFade;
           currentAudioElement.addEventListener("ended", pauseOnEnded);
+          await (<HTMLAudioElement>currentAudioElement).play();
           paused = false;
           fadeInProgress = false;
           generatedElements.forEach((e) => (e.disabled = false));
