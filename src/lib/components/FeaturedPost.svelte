@@ -6,7 +6,7 @@
 </script>
 
 <div
-  id="featured-post"
+  class="featured-post"
   style="background-image: {postMeta.featuredImage
     ? `url(${postMeta.featuredImage})`
     : getRandomBannerUrl(1)}"
@@ -23,7 +23,7 @@
 </div>
 
 <style lang="scss">
-  #featured-post {
+  .featured-post {
     background-position: center;
     background-size: cover;
     filter: grayscale(80%);
@@ -32,12 +32,18 @@
     text-shadow: var(--banner-shadow);
     display: flex;
     flex-direction: column;
+    height: 12rem;
+    flex: 1;
 
     h1 {
       margin-top: 0;
       margin-bottom: 0;
       text-align: left;
       text-shadow: var(--banner-shadow);
+
+      a {
+        font-size: 0.75em;
+      }
     }
 
     .authors {
@@ -53,7 +59,7 @@
       color: var(--text-dark);
     }
 
-    padding: 2rem;
+    padding: 1.5rem 4rem 2.5rem;
     border-radius: var(--border-radius);
     max-width: var(--article-max-width);
   }
