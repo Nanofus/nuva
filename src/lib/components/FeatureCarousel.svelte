@@ -19,7 +19,9 @@
 
     function showSlide(n) {
         if (!browser) return;
-        let newSlide = n % globalConfig.featuredPostsCount
+        let newSlide = n < 0
+            ? globalConfig.featuredPostsCount + (n % globalConfig.featuredPostsCount)
+            : n % globalConfig.featuredPostsCount;
         document.querySelector<HTMLElement>(".featured-posts-wrapper")
             ?.style.setProperty("margin-left",
                 newSlide * -100 + "%"
