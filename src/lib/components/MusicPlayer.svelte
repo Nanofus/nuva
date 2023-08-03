@@ -7,11 +7,19 @@ Musicmancer 2023 Edition
   import Button from "$lib/components/reusable/Button.svelte";
   import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
   import { localConfig } from "$lib/util/config";
+  import { Reader } from "jsmediatags";
 
+  interface AudioMetadata {
+    ready: boolean;
+    title: string;
+    artist: string;
+    album: string;
+  }
   interface AudioData {
     src: string;
     audioElement: HTMLAudioElement;
     isEffect: boolean;
+    metadata: AudioMetadata;
   }
 
   export let musicUrlArray: string[] = [];
@@ -24,6 +32,7 @@ Musicmancer 2023 Edition
   let newPlayerAfterFade: HTMLAudioElement;
   let volume = 0;
   let audioDataArray: AudioData[] = [];
+  let infoboxVisible = false;
 
   // This runs before parent onMount, so the audio elements exist when user scripts run
   onMount(() => {
@@ -75,6 +84,47 @@ Musicmancer 2023 Edition
     }
   };
 
+  const updateInfoBox = (metadata: AudioMetadata) {
+    // To be implemented
+  }
+
+  const processMetadata = async () => {
+    const postContent = document.querySelector("#post-content");
+    if (!postContent) return;
+    const audioElements = postContent.querySelectorAll("audio");
+    for (const audioElement of audioElements) {
+      let audioSrc = audioElement.src;
+      let metadata = new Reader(audioSrc);
+      metadata.setTagsToRead([
+        "title",
+        "artist",
+        "album"
+      ]);
+      metadata.read({
+        onSuccess: (tag) => {
+          for (const data of audioDataArray) {
+            if (data.src === audioSrc) {
+              data.metadata = {
+                ready: true,
+                title: tag.tags.title,
+                artist: tag.tags.artist,
+                album: tag.tags.album
+              };
+              if (!currentAudioElement) return;
+              if (infoboxVisible && currentAudioElement?.src === audioSrc) {
+                updateInfoBox(data.metadata);
+              }
+            }
+          }
+        },
+        onError: (error) => {
+          // To be implemented
+          console.log(":(");
+        }
+      });
+    }
+  }
+
   const initializeAudioElements = () => {
     let autoIndex = 0;
     let totalIndex = 0;
@@ -102,7 +152,15 @@ Musicmancer 2023 Edition
         src: audioSrc,
         audioElement: audioElement,
         isEffect: audioElement.classList.contains("effect"),
+        metadata: {
+          ready: false,
+          title: "",
+          artist: "",
+          album: ""
+        }
       });
+
+      processMetadata();
 
       // Create audio play button
       if (!audioElement.classList.contains("hidden") && !audioElement.hasAttribute("controls"))
@@ -190,6 +248,10 @@ Musicmancer 2023 Edition
       }).length > 0
     );
   };
+
+  const toggleMetadataInfo = () => {
+
+  };
 </script>
 
 {#if currentAudioElement}
@@ -227,6 +289,7 @@ Musicmancer 2023 Edition
       max="100"
       bind:value={volume}
     />
+    <Button icon="info" disabled={fadeInProgress} on:click={toggleMetadataInfo} />
   </div>
 {/if}
 
@@ -265,7 +328,7 @@ Musicmancer 2023 Edition
 
   .audio-player {
     display: grid;
-    grid-template-columns: 2rem 2rem 1fr 2rem 2rem 6rem;
+    grid-template-columns: 2rem 2rem 1fr 2rem 2rem 6rem 2rem;
     position: fixed;
     bottom: -2rem;
     left: 0;

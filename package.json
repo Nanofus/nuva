@@ -24,6 +24,7 @@
   "devDependencies": {
     "@sveltejs/adapter-vercel": "^3.0.2",
     "@sveltejs/kit": "^1.22.3",
+    "@types/jsmediatags": "^3.9.3",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "@vercel/postgres": "^0.4.1",
@@ -49,6 +50,7 @@
     "@vercel/postgres-kysely": "^0.4.1",
     "@zerodevx/svelte-toast": "^0.9.5",
     "html-validate": "^8.1.0",
+    "jsmediatags": "^3.9.7",
     "kysely": "^0.26.1",
     "mdsvex": "^0.11.0",
     "prisma-kysely": "^1.5.0"
