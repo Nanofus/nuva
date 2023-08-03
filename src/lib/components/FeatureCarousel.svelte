@@ -3,6 +3,7 @@
     import type { PostMeta } from "$lib/util/types";
     import FeaturedPost from "$lib/components/FeaturedPost.svelte";
     import {browser} from "$app/environment";
+    import {onDestroy, onMount} from "svelte";
 
     export let postList: PostMeta[];
 
@@ -35,14 +36,18 @@
         currentSlide = newSlide;
     }
 
-    setInterval(function(){
-        if (!hasUserInteracted) {
-            nextSlide();
-            hasUserInteracted = false;
-        } else {
-            hasUserInteracted = false;
-        }
-    }, 6000);
+    let interval;
+    onMount(() => {
+        interval = setInterval(function(){
+            if (!hasUserInteracted) {
+                nextSlide();
+                hasUserInteracted = false;
+            } else {
+                hasUserInteracted = false;
+            }
+        }, 6000);
+    });
+    onDestroy(() => clearInterval(interval));
 
 </script>
 
