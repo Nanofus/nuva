@@ -7,7 +7,8 @@ Musicmancer 2023 Edition
   import Button from "$lib/components/reusable/Button.svelte";
   import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
   import { localConfig } from "$lib/util/config";
-  import { Reader } from "jsmediatags";
+  import { fetchFromUrl } from "music-metadata-browser";
+
 
   interface AudioMetadata {
     ready: boolean;
@@ -102,31 +103,25 @@ Musicmancer 2023 Edition
 
   const processMetadata = async () => {
     for (const audioData of audioDataArray) {
-      let metadata = new Reader(audioData.src);
-      metadata.setTagsToRead([
-        "title",
-        "artist",
-        "album"
-      ]);
-      metadata.read({
-        onSuccess: (tag) => {
-          audioData.metadata.ready = true;
-          audioData.metadata.title = tag.tags.title;
-          audioData.metadata.artist = tag.tags.artist;
-          audioData.metadata.album = tag.tags.album;
-          if (!currentAudioElement) return;
-          if (infoboxVisible && currentAudioElement?.src === audioData.src) {
-            updateInfoBox(audioData.src);
-          }
-        },
-        onError: (error) => {
-          console.log(error);
-          audioData.metadata.ready = true;
-          audioData.metadata.title = "N/A";
-          audioData.metadata.artist = "N/A";
-          audioData.metadata.album = "N/A";
+
+      try {
+        const metadata = await fetchFromUrl(audioData.src);
+        audioData.metadata.ready = true;
+        audioData.metadata.title = metadata.common.title ? metadata.common.title : "N/A";
+        audioData.metadata.artist = metadata.common.artist ? metadata.common.artist : "N/A";
+        audioData.metadata.album = metadata.common.album ? metadata.common.album : "N/A";
+        if (!currentAudioElement) continue;
+        if (infoboxVisible && currentAudioElement?.src === audioData.src) {
+          updateInfoBox(audioData.src);
         }
-      });
+      } catch(error) {
+        console.error(error.message);
+        audioData.metadata.ready = true;
+        audioData.metadata.title = "N/A";
+        audioData.metadata.artist = "N/A";
+        audioData.metadata.album = "N/A";
+      }
+
     }
   }
 
@@ -165,13 +160,13 @@ Musicmancer 2023 Edition
         }
       });
 
-      processMetadata();
-
       // Create audio play button
       if (!audioElement.classList.contains("hidden") && !audioElement.hasAttribute("controls"))
         createAudioButton(audioElement, totalIndex);
       totalIndex++;
     });
+
+    processMetadata();
   };
 
   const createAudioButton = (audioElement: HTMLAudioElement, index: number) => {
@@ -352,6 +347,7 @@ Musicmancer 2023 Edition
     color: var(--text-dark);
     background-color: var(--accent);
     animation: audioPlayerSlideIn 500ms ease-out 10ms 1 normal forwards;
+    z-index: 9999;
 
     * {
       transition: var(--unfocus-speed) all linear;
@@ -380,7 +376,7 @@ Musicmancer 2023 Edition
     right: 1rem;
     bottom: 4rem;
     color: var(--text-dark);
-    padding: 0.25rem;
+    padding: 0.5rem;
     box-shadow: var(--header-shadow);
     border-radius: var(--border-radius);
   }

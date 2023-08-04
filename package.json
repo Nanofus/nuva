@@ -45,14 +45,18 @@
     "@auth/core": "^0.10.0",
     "@auth/sveltekit": "^0.3.6",
     "@aws-sdk/client-s3": "^3.379.1",
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@sindresorhus/slugify": "^2.2.1",
     "@vercel/edge-config": "^0.2.1",
     "@vercel/postgres-kysely": "^0.4.1",
     "@zerodevx/svelte-toast": "^0.9.5",
+    "buffer": "^6.0.3",
     "html-validate": "^8.1.0",
-    "jsmediatags": "^3.9.7",
     "kysely": "^0.26.1",
     "mdsvex": "^0.11.0",
-    "prisma-kysely": "^1.5.0"
+    "music-metadata-browser": "^2.5.10",
+    "prisma-kysely": "^1.5.0",
+    "vite-plugin-ngmi-polyfill": "^0.0.2"
   }
 }
