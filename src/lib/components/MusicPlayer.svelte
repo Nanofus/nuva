@@ -89,6 +89,12 @@ Musicmancer 2023 Edition
   const updateInfoBox = (audioSrc: string) => {
     const audioMetadata = ((src) => {
       for (const data of audioDataArray) if (data.src === src) return data.metadata;
+      return {
+        ready: false,
+        title: "",
+        artist: "",
+        album: ""
+      };
     })(audioSrc);
     const infoBox = document.querySelector("#music-info-box");
 
@@ -144,12 +150,14 @@ Musicmancer 2023 Edition
       } else if (audioSrc[0] === "#") {
         audioSrc = musicUrlArray[parseInt(audioSrc.slice(1))];
       }
+      audioSrc = audioSrc.includes("\r") || audioSrc.includes("\n")
+              ? audioSrc.slice(0, audioSrc.length - 1) : audioSrc;
       audioElement.src = audioSrc;
       audioElement.volume = volume / 100;
       audioElement.currentTime = 0;
       audioElement.load();
       audioDataArray.push({
-        src: encodeURI(audioSrc),
+        src: audioSrc,
         audioElement: audioElement,
         isEffect: audioElement.classList.contains("effect"),
         metadata: {
@@ -296,10 +304,12 @@ Musicmancer 2023 Edition
       max="100"
       bind:value={volume}
     />
-    <Button icon="info" disabled={fadeInProgress} on:click={() => {
-      if (currentAudioElement) updateInfoBox(currentAudioElement.src);
-      toggleInfobox();
-    }} />
+    <div>
+      <Button icon="info" disabled={fadeInProgress} on:click={() => {
+        if (currentAudioElement) updateInfoBox(currentAudioElement.src);
+        toggleInfobox();
+      }} />
+    </div>
   </div>
   <table id="music-info-box" class="hidden"></table>
 {/if}
@@ -371,6 +381,7 @@ Musicmancer 2023 Edition
 
   table#music-info-box {
     width: auto;
+    max-width: calc(var(--viewport-width - 2rem));
     background-color: var(--accent);
     position: fixed;
     right: 1rem;
