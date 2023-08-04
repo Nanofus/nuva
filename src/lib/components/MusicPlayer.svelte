@@ -68,6 +68,7 @@ Musicmancer 2023 Edition
       newPlayerAfterFade = newAudioData.audioElement;
       generatedElements.forEach((e) => (e.disabled = true));
       // Others are faded out by the fadeout interval
+      if (infoboxVisible) toggleInfobox();
       const waitUntilOthersFadedInterval = setInterval(async () => {
         fadeInProgress = true;
         if (!othersStillPlaying()) {
@@ -84,17 +85,24 @@ Musicmancer 2023 Edition
     }
   };
 
-  const updateInfoBox = (metadata: AudioMetadata) {
-    // To be implemented
+  const updateInfoBox = (audioSrc: string) => {
+    const audioMetadata = ((src) => {
+      for (const data of audioDataArray) if (data.src === src) return data.metadata;
+    })(audioSrc);
+    const infoBox = document.querySelector("#music-info-box");
+
+    infoBox.innerHTML = '<tr><th colspan="3">Song metadata</th></tr>'
+            + '<tr><td class="material-icons">music_note</td><td>Song title:</td><td>'
+            + audioMetadata.title + "</td></tr>"
+            + '<tr><td class="material-icons">person</td><td>Artist:</td><td>'
+            + audioMetadata.artist + "</td></tr>"
+            + '<tr><td class="material-icons">album</td><td>Album:</td><td>'
+            + audioMetadata.album + "</td></tr>";
   }
 
   const processMetadata = async () => {
-    const postContent = document.querySelector("#post-content");
-    if (!postContent) return;
-    const audioElements = postContent.querySelectorAll("audio");
-    for (const audioElement of audioElements) {
-      let audioSrc = audioElement.src;
-      let metadata = new Reader(audioSrc);
+    for (const audioData of audioDataArray) {
+      let metadata = new Reader(audioData.src);
       metadata.setTagsToRead([
         "title",
         "artist",
@@ -102,24 +110,21 @@ Musicmancer 2023 Edition
       ]);
       metadata.read({
         onSuccess: (tag) => {
-          for (const data of audioDataArray) {
-            if (data.src === audioSrc) {
-              data.metadata = {
-                ready: true,
-                title: tag.tags.title,
-                artist: tag.tags.artist,
-                album: tag.tags.album
-              };
-              if (!currentAudioElement) return;
-              if (infoboxVisible && currentAudioElement?.src === audioSrc) {
-                updateInfoBox(data.metadata);
-              }
-            }
+          audioData.metadata.ready = true;
+          audioData.metadata.title = tag.tags.title;
+          audioData.metadata.artist = tag.tags.artist;
+          audioData.metadata.album = tag.tags.album;
+          if (!currentAudioElement) return;
+          if (infoboxVisible && currentAudioElement?.src === audioData.src) {
+            updateInfoBox(audioData.src);
           }
         },
         onError: (error) => {
-          // To be implemented
-          console.log(":(");
+          console.log(error);
+          audioData.metadata.ready = true;
+          audioData.metadata.title = "N/A";
+          audioData.metadata.artist = "N/A";
+          audioData.metadata.album = "N/A";
         }
       });
     }
@@ -149,7 +154,7 @@ Musicmancer 2023 Edition
       audioElement.currentTime = 0;
       audioElement.load();
       audioDataArray.push({
-        src: audioSrc,
+        src: encodeURI(audioSrc),
         audioElement: audioElement,
         isEffect: audioElement.classList.contains("effect"),
         metadata: {
@@ -249,9 +254,16 @@ Musicmancer 2023 Edition
     );
   };
 
-  const toggleMetadataInfo = () => {
+  const toggleInfobox = () => {
+    if (infoboxVisible) {
+      document.querySelector("#music-info-box")?.classList.add("hidden");
+      infoboxVisible = false;
+    } else {
+      document.querySelector("#music-info-box")?.classList.remove("hidden");
+      infoboxVisible = true;
+    }
+  }
 
-  };
 </script>
 
 {#if currentAudioElement}
@@ -289,8 +301,12 @@ Musicmancer 2023 Edition
       max="100"
       bind:value={volume}
     />
-    <Button icon="info" disabled={fadeInProgress} on:click={toggleMetadataInfo} />
+    <Button icon="info" disabled={fadeInProgress} on:click={() => {
+      if (currentAudioElement) updateInfoBox(currentAudioElement.src);
+      toggleInfobox();
+    }} />
   </div>
+  <table id="music-info-box" class="hidden"></table>
 {/if}
 
 <style lang="scss">
@@ -357,5 +373,37 @@ Musicmancer 2023 Edition
     to   {bottom: 0;}
   }
 
+  table#music-info-box {
+    width: auto;
+    background-color: var(--accent);
+    position: fixed;
+    right: 1rem;
+    bottom: 4rem;
+    color: var(--text-dark);
+    padding: 0.25rem;
+    box-shadow: var(--header-shadow);
+    border-radius: var(--border-radius);
+  }
+
+  :global(#music-info-box td.material-icons) {
+    font-size: 1rem;
+    min-width: 0.5rem;
+    padding-right: 0;
+  }
+
+  :global(#music-info-box tr:nth-child(2)) {
+    height: 2rem;
+    vertical-align: bottom;
+  }
+
+  :global(#music-info-box tr:nth-child(2) td.material-icons) {
+    padding-top: 0.75rem;
+  }
+
+  :global(#music-info-box th) {
+    text-align: center;
+    border-bottom: 0.06rem solid var(--text-dark);
+    padding-bottom: 0.25rem;
+  }
 
 </style>
