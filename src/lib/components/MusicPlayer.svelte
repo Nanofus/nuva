@@ -11,6 +11,7 @@ Musicmancer 2023 Edition
 
 
   interface AudioMetadata {
+    ready: boolean;
     title: string;
     artist: string;
     album: string;
@@ -69,7 +70,7 @@ Musicmancer 2023 Edition
       newPlayerAfterFade = newAudioData.audioElement;
       generatedElements.forEach((e) => (e.disabled = true));
       // Others are faded out by the fadeout interval
-      if (infoboxVisible) toggleInfobox();
+      infoboxVisible = infoboxVisible ? !infoboxVisible : infoboxVisible;
       const waitUntilOthersFadedInterval = setInterval(async () => {
         fadeInProgress = true;
         if (!othersStillPlaying()) {
@@ -92,6 +93,7 @@ Musicmancer 2023 Edition
         return;
       }
       displayedMetadata = {
+        ready: false,
         title: "N/A",
         artist: "N/A",
         album: "N/A"
@@ -150,6 +152,7 @@ Musicmancer 2023 Edition
         audioElement: audioElement,
         isEffect: audioElement.classList.contains("effect"),
         metadata: {
+          ready: false,
           title: "",
           artist: "",
           album: ""
