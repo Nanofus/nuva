@@ -11,7 +11,6 @@ Musicmancer 2023 Edition
 
 
   interface AudioMetadata {
-    ready: boolean;
     title: string;
     artist: string;
     album: string;
@@ -34,6 +33,7 @@ Musicmancer 2023 Edition
   let volume = 0;
   let audioDataArray: AudioData[] = [];
   let infoboxVisible = false;
+  let displayedMetadata: AudioMetadata;
 
   // This runs before parent onMount, so the audio elements exist when user scripts run
   onMount(() => {
@@ -87,24 +87,15 @@ Musicmancer 2023 Edition
   };
 
   const updateInfoBox = (audioSrc: string) => {
-    const audioMetadata = ((src) => {
-      for (const data of audioDataArray) if (data.src === src) return data.metadata;
-      return {
-        ready: false,
-        title: "",
-        artist: "",
-        album: ""
+      for (const data of audioDataArray) if (data.src === audioSrc) {
+        displayedMetadata = data.metadata;
+        return;
+      }
+      displayedMetadata = {
+        title: "N/A",
+        artist: "N/A",
+        album: "N/A"
       };
-    })(audioSrc);
-    const infoBox = document.querySelector("#music-info-box");
-
-    infoBox.innerHTML = '<tr><th colspan="3">Song metadata</th></tr>'
-            + '<tr><td class="material-icons">music_note</td><td>Song title:</td><td>'
-            + audioMetadata.title + "</td></tr>"
-            + '<tr><td class="material-icons">person</td><td>Artist:</td><td>'
-            + audioMetadata.artist + "</td></tr>"
-            + '<tr><td class="material-icons">album</td><td>Album:</td><td>'
-            + audioMetadata.album + "</td></tr>";
   }
 
   const processMetadata = async () => {
@@ -112,7 +103,6 @@ Musicmancer 2023 Edition
 
       try {
         const metadata = await fetchFromUrl(audioData.src);
-        audioData.metadata.ready = true;
         audioData.metadata.title = metadata.common.title ? metadata.common.title : "N/A";
         audioData.metadata.artist = metadata.common.artist ? metadata.common.artist : "N/A";
         audioData.metadata.album = metadata.common.album ? metadata.common.album : "N/A";
@@ -122,7 +112,6 @@ Musicmancer 2023 Edition
         }
       } catch(error) {
         console.error(error.message);
-        audioData.metadata.ready = true;
         audioData.metadata.title = "N/A";
         audioData.metadata.artist = "N/A";
         audioData.metadata.album = "N/A";
@@ -161,7 +150,6 @@ Musicmancer 2023 Edition
         audioElement: audioElement,
         isEffect: audioElement.classList.contains("effect"),
         metadata: {
-          ready: false,
           title: "",
           artist: "",
           album: ""
@@ -257,16 +245,6 @@ Musicmancer 2023 Edition
     );
   };
 
-  const toggleInfobox = () => {
-    if (infoboxVisible) {
-      document.querySelector("#music-info-box")?.classList.add("hidden");
-      infoboxVisible = false;
-    } else {
-      document.querySelector("#music-info-box")?.classList.remove("hidden");
-      infoboxVisible = true;
-    }
-  }
-
 </script>
 
 {#if currentAudioElement}
@@ -307,11 +285,32 @@ Musicmancer 2023 Edition
     <div>
       <Button icon="info" disabled={fadeInProgress} on:click={() => {
         if (currentAudioElement) updateInfoBox(currentAudioElement.src);
-        toggleInfobox();
+        infoboxVisible = !infoboxVisible;
       }} />
     </div>
   </div>
-  <table id="music-info-box" class="hidden"></table>
+  <table id="music-info-box" class={ infoboxVisible ? "" : "hidden" }>
+    <tr>
+      <th colspan="3">Song metadata</th>
+    </tr>
+    {#if displayedMetadata}
+      <tr>
+        <td class="material-icons">music_note</td>
+        <td>Song title:</td>
+        <td>{displayedMetadata.title}</td>
+      </tr>
+      <tr>
+        <td class="material-icons">person</td>
+        <td>Artist:</td>
+        <td>{displayedMetadata.artist}</td>
+      </tr>
+      <tr>
+        <td class="material-icons">album</td>
+        <td>Album:</td>
+        <td>{displayedMetadata.album}</td>
+      </tr>
+    {/if}
+  </table>
 {/if}
 
 <style lang="scss">
