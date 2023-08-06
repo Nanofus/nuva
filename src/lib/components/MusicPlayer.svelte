@@ -11,7 +11,6 @@ Musicmancer 2023 Edition
 
 
   interface AudioMetadata {
-    ready: boolean;
     title: string;
     artist: string;
     album: string;
@@ -93,7 +92,6 @@ Musicmancer 2023 Edition
         return;
       }
       displayedMetadata = {
-        ready: false,
         title: "N/A",
         artist: "N/A",
         album: "N/A"
@@ -152,7 +150,6 @@ Musicmancer 2023 Edition
         audioElement: audioElement,
         isEffect: audioElement.classList.contains("effect"),
         metadata: {
-          ready: false,
           title: "",
           artist: "",
           album: ""
