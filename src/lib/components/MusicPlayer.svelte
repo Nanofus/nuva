@@ -389,6 +389,7 @@ Musicmancer 2023 Edition
     padding: 0.5rem;
     box-shadow: var(--header-shadow);
     border-radius: var(--border-radius);
+    z-index: 9999;
   }
 
   :global(#music-info-box td.material-icons) {
