@@ -9,16 +9,16 @@
 
     let currentSlide = 0;
     let hasUserInteracted = false;
-    function prevSlide() {
+    const prevSlide = () => {
         showSlide(currentSlide - 1);
         hasUserInteracted = true;
     }
-    function nextSlide() {
+    const nextSlide = () => {
         showSlide(currentSlide + 1);
         hasUserInteracted = true;
     }
 
-    function showSlide(n) {
+    const showSlide = (n) => {
         if (!browser) return;
         let newSlide = n < 0
             ? globalConfig.featuredPostsCount + (n % globalConfig.featuredPostsCount)
@@ -41,10 +41,8 @@
         interval = setInterval(function(){
             if (!hasUserInteracted) {
                 nextSlide();
-                hasUserInteracted = false;
-            } else {
-                hasUserInteracted = false;
             }
+            hasUserInteracted = false;
         }, 6000);
     });
     onDestroy(() => clearInterval(interval));
@@ -60,10 +58,10 @@
 <button class="next material-icons" on:click={nextSlide}>chevron_right</button>
 <div class="dots">
     {#each Array(globalConfig.featuredPostsCount) as _, index (index)}
-        <div class="{index <= 0 ? 'dot active' : 'dot'}" on:click={() => {
+        <button class="{index <= 0 ? 'dot active' : 'dot'}" on:click={() => {
             showSlide(index);
             hasUserInteracted = true;
-        }}></div>
+        }}></button>
     {/each}
 </div>
 
@@ -86,6 +84,7 @@
   .dot {
     height: 0.75rem;
     width: 0.75rem;
+    padding: 0;
     margin: 0 0.25rem;
     background-color: rgba(255,255,255,0.33);
     border-radius: 50%;

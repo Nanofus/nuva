@@ -15,7 +15,7 @@
   <meta content={getPageUrl(`/`)} property="og:url" />
 </svelte:head>
 
-<div id="feature-carousel" class="vertically-separated-top">
+<div id="feature-carousel-wrapper" class="vertically-separated-top">
   <FeatureCarousel postList={data.posts} />
 </div>
 <h3>{t.pages.index.newestReleases}</h3>
@@ -24,7 +24,7 @@
 <CommentList comments={data.comments} />
 
 <style>
-  #feature-carousel {
+  #feature-carousel-wrapper {
     max-width: calc(var(--article-max-width) + 4rem);
     width: 100%;
     height: 16rem;
