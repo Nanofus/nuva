@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {globalConfig, localConfig} from "$lib/util/config";
+  import { globalConfig, localConfig } from "$lib/util/config";
   import type { PostMeta } from "$lib/util/types";
   import FeaturedPost from "$lib/components/FeaturedPost.svelte";
   import { browser } from "$app/environment";
@@ -9,8 +9,8 @@
 
   let currentSlide = 0;
   let hasUserInteracted = false;
-	let wrapper: HTMLDivElement;
-	let dots: HTMLButtonElement[] = Array(globalConfig.featuredPostsCount);
+  let wrapper: HTMLDivElement;
+  let dots: HTMLButtonElement[] = Array(globalConfig.featuredPostsCount);
 
   const prevSlide = () => {
     showSlide(currentSlide - 1);
@@ -32,6 +32,7 @@
     dots[currentSlide]?.classList.remove("active");
     dots[newSlide]?.classList.add("active");
     currentSlide = newSlide;
+    currentSlide != null && console.log("showSlide", n, newSlide, currentSlide);
   };
 
   let interval: NodeJS.Timer;
@@ -48,7 +49,11 @@
   onDestroy(() => clearInterval(interval));
 </script>
 
-<div class="featured-posts-wrapper" bind:this={wrapper} style="width: {globalConfig.featuredPostsCount * 100}%">
+<div
+  class="featured-posts-wrapper"
+  bind:this={wrapper}
+  style="width: {globalConfig.featuredPostsCount * 100}%"
+>
   {#each postList.slice(0, globalConfig.featuredPostsCount) as post}
     <FeaturedPost postMeta={post} />
   {/each}
@@ -93,7 +98,7 @@
       background-color: var(--semi-transparent-light);
       border-radius: 50%;
       display: inline-block;
-      transition: background-color var(--feature-carousel-animation-duration) ease-in-out;
+      transition: background-color var(--transition-speed) ease-in-out;
       cursor: pointer;
       box-shadow: var(--subtle-shadow);
 
@@ -111,7 +116,7 @@
     width: auto;
     padding: 1.5rem 0.5rem;
     margin-top: -2rem;
-    transition: var(--feature-carousel-animation-duration) ease-in-out;
+    transition: var(--transition-speed) ease-in-out;
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
     user-select: none;
     background-color: transparent;

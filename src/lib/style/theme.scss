@@ -43,8 +43,8 @@ main {
   );
 
   border-color: transparent; // Transparent 1px border to fix an obscure
-  border-style: solid;       // bug probably caused by a floating point
-  border-width: 0 1px;       // rounding error
+  border-style: solid; // bug probably caused by a floating point
+  border-width: 0 1px; // rounding error
 }
 
 // Mobile screen size

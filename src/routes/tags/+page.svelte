@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { TagListResponse } from "$lib/util/types";
-	import Button from "$lib/components/reusable/Button.svelte";
-	import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-	import Pill from "$lib/components/reusable/Pill.svelte";
-	import { getPageTitle, getPageUrl } from "$lib/util/util";
-	import { onMount } from "svelte";
-	import { scrolledToBottom } from "$lib/util/stores";
-	import { t } from "$lib/util/translations";
-	import { getTags } from "$lib/client/api";
+  import type { TagListResponse } from "$lib/util/types";
+  import Button from "$lib/components/reusable/Button.svelte";
+  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
+  import Pill from "$lib/components/reusable/Pill.svelte";
+  import { getPageTitle, getPageUrl } from "$lib/util/util";
+  import { onMount } from "svelte";
+  import { scrolledToBottom } from "$lib/util/stores";
+  import { t } from "$lib/util/translations";
+  import { getTags } from "$lib/client/api";
 
-	export let data: TagListResponse;
+  export let data: TagListResponse;
   let fetching = false;
 
   const fetchMoreTags = async () => {

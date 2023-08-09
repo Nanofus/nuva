@@ -89,9 +89,7 @@
       <NavItem href="/categories">{t.components.navigation.categories}</NavItem>
       <NavItem href="/tags">{t.components.navigation.tags}</NavItem>
       <NavItem href={globalConfig.urls.writingGuide}>{t.components.navigation.guide}</NavItem>
-      <NavItem href={globalConfig.urls.soundtracks}
-        >{t.components.navigation.soundtracks}</NavItem
-      >
+      <NavItem href={globalConfig.urls.soundtracks}>{t.components.navigation.soundtracks}</NavItem>
       {#if $auth}
         <NavItem href={globalConfig.urls.writing}>{t.components.navigation.write}</NavItem>
       {/if}

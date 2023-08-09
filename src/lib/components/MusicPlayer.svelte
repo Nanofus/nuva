@@ -290,9 +290,11 @@ Musicmancer 2023 Edition
   }
 
   @keyframes audioPlayerSlideIn {
-    from {bottom: -2rem;}
-    to   {bottom: 0;}
+    from {
+      bottom: -2rem;
+    }
+    to {
+      bottom: 0;
+    }
   }
-
-
 </style>
