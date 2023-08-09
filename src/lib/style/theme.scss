@@ -2,6 +2,10 @@
 
 /* Page structure */
 
+:root {
+  scrollbar-gutter: stable;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -34,13 +38,13 @@ main {
   border-bottom-right-radius: var(--border-radius);
   height: auto;
   min-height: calc(
-    var(--viewport-height) - var(--page-max-width) / var(--header-banner-dimensions-ratio) -
-      var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin)
+    var(--viewport-height) - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) -
+      var(--footer-height) - 2 * var(--vertical-separation-margin)
   );
 
   border-color: transparent; // Transparent 1px border to fix an obscure
-  border-style: solid;       // bug probably caused by a floating point
-  border-width: 0 1px;       // rounding error
+  border-style: solid; // bug probably caused by a floating point
+  border-width: 0 1px; // rounding error
 }
 
 // Mobile screen size
@@ -133,11 +137,7 @@ article {
   &.fade:after,
   &.fade-bottom:after {
     bottom: 0;
-    background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0),
-      var(--background-light) 100%
-    );
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--background-light) 100%);
   }
 
   &.fade:before,
@@ -215,9 +215,7 @@ article {
     background-color: var(--highlight);
   }
   100% {
-    background-color: var(
-      --comment-background
-    ); // Currently only used for comments, so using comment background
+    background-color: var(--comment-background); // Currently only used for comments, so using comment background
   }
 }
 
@@ -454,6 +452,11 @@ img {
   .hidden-desktop {
     display: inherit !important;
   }
+
+  #page > header {
+    height: calc(var(--viewport-width) / 3);
+    font-size: 0.5rem;
+  }
 }
 
 /* Columns */
@@ -462,17 +465,10 @@ img {
   // The mighty scroll hinting shadow
   background: /* Cover left */
     linear-gradient(to right, var(--background-light) 30%, rgba(255, 255, 255, 0)) center left,
-    /* Cover right */ linear-gradient(to left, var(--background-light) 70%, rgba(255, 255, 255, 0))
-      center right,
-    /* Shadow left */
-      radial-gradient(farthest-side at 0 50%, var(--scroll-hinting-shadow-color), rgba(0, 0, 0, 0))
+    /* Cover right */ linear-gradient(to left, var(--background-light) 70%, rgba(255, 255, 255, 0)) center right,
+    /* Shadow left */ radial-gradient(farthest-side at 0 50%, var(--scroll-hinting-shadow-color), rgba(0, 0, 0, 0))
       center left,
-    /* Shadow right */
-      radial-gradient(
-        farthest-side at 100% 50%,
-        var(--scroll-hinting-shadow-color),
-        rgba(0, 0, 0, 0)
-      )
+    /* Shadow right */ radial-gradient(farthest-side at 100% 50%, var(--scroll-hinting-shadow-color), rgba(0, 0, 0, 0))
       center right;
 
   background-repeat: no-repeat;
