@@ -40,6 +40,7 @@
       margin-bottom: 0;
       text-align: left;
       text-shadow: var(--banner-shadow);
+      line-height: 2.8rem;
 
       a {
         font-size: 0.75em;

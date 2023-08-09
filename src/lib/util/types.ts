@@ -5,6 +5,7 @@ export type LocalConfig = {
   globalObjectName: string;
   defaultVolume: number;
   musicFadeSpeed: number;
+  featuredPostRotationInterval: number;
 };
 
 export type WebhookMeta = {

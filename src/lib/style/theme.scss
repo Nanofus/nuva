@@ -2,6 +2,10 @@
 
 /* Page structure */
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -456,13 +460,8 @@ img {
   }
 
   #page > header {
-    height: calc(var(--viewport-width)/3);
+    height: calc(var(--viewport-width) / 3);
     font-size: 0.5rem;
-  }
-
-  // Don't show feature carousel on mobile
-  #feature-carousel {
-    display: none;
   }
 }
 

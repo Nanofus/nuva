@@ -9,6 +9,7 @@ export const localConfig: LocalConfig = {
   globalObjectName: "globals",
   defaultVolume: 50,
   musicFadeSpeed: 1,
+  featuredPostRotationInterval: 10000,
 };
 
 export const getConfig = async () => {
