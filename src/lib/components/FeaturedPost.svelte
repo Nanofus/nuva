@@ -7,9 +7,7 @@
 
 <div
   class="featured-post"
-  style="background-image: {postMeta.featuredImage
-    ? `url(${postMeta.featuredImage})`
-    : getRandomBannerUrl(1)}"
+  style="background-image: {postMeta.featuredImage ? `url(${postMeta.featuredImage})` : getRandomBannerUrl(1)}"
 >
   <p class="authors">
     <span class="author-list">

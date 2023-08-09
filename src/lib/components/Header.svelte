@@ -7,9 +7,7 @@
 
   let bannerUrl = getRandomBannerUrl();
   let bannerVisible = $page.data.bannerVisible ? $page.data.bannerVisible : true;
-  let customBannerUrl: string | null = $page.data.customBanner
-    ? `url("${$page.data.customBanner}")`
-    : null;
+  let customBannerUrl: string | null = $page.data.customBanner ? `url("${$page.data.customBanner}")` : null;
 
   onMount(() => {
     postOptions.subscribe((options) => {

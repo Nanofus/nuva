@@ -27,12 +27,7 @@
   {#if !$auth}
     <Form vertical={true} on:submit={() => (submitted = true)}>
       <Input label={t.components.login.username} name="username" bind:value={usernameInput} />
-      <Input
-        label={t.components.login.password}
-        name="password"
-        type="password"
-        bind:value={passwordInput}
-      />
+      <Input label={t.components.login.password} name="password" type="password" bind:value={passwordInput} />
       {#if !submitted}
         <Button on:click={handleLogin}>{t.components.login.login}</Button>
       {:else}

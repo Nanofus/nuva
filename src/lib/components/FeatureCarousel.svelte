@@ -49,11 +49,7 @@
   onDestroy(() => clearInterval(interval));
 </script>
 
-<div
-  class="featured-posts-wrapper"
-  bind:this={wrapper}
-  style="width: {globalConfig.featuredPostsCount * 100}%"
->
+<div class="featured-posts-wrapper" bind:this={wrapper} style="width: {globalConfig.featuredPostsCount * 100}%">
   {#each postList.slice(0, globalConfig.featuredPostsCount) as post}
     <FeaturedPost postMeta={post} />
   {/each}

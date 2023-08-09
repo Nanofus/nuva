@@ -102,10 +102,7 @@
     {t.components.postContent.notMobileFriendly}
   </div>
 {/if}
-<section
-  class="vertically-separated {post.initialLetter ? 'large-initial-letter' : null}"
-  id="post-content"
->
+<section class="vertically-separated {post.initialLetter ? 'large-initial-letter' : null}" id="post-content">
   {@html post.content}
 </section>
 <MusicPlayer musicUrlArray={post.music} />

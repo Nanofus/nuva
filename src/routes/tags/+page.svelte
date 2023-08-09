@@ -24,9 +24,7 @@
   };
 
   onMount(() => {
-    scrolledToBottom.subscribe(
-      (scrolled) => scrolled && data.hasNextPage && !fetching && fetchMoreTags(),
-    );
+    scrolledToBottom.subscribe((scrolled) => scrolled && data.hasNextPage && !fetching && fetchMoreTags());
   });
 </script>
 

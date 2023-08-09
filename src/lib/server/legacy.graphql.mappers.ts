@@ -78,9 +78,7 @@ export const dataToPost = (data: any): Post | null => {
 
         return a.localeCompare(b);
       }),
-    artists: data.additionalFields.artists
-      ? data.additionalFields.artists.map((artist: any) => artist.name)
-      : [],
+    artists: data.additionalFields.artists ? data.additionalFields.artists.map((artist: any) => artist.name) : [],
     bannerVisible: data.additionalFields.bannervisible,
     fullWidth: data.additionalFields.fullwidth ? data.additionalFields.fullwidth : false,
     customBanner: data.additionalFields.custombanner,
@@ -91,9 +89,7 @@ export const dataToPost = (data: any): Post | null => {
     mobileFriendly: data.additionalFields.mobilefriendly,
     scripts: data.additionalFields.scripts,
     styles: data.additionalFields.styles,
-    scriptFiles: data.additionalFields.scriptfiles
-      ? data.additionalFields.scriptfiles.split("\n")
-      : [],
+    scriptFiles: data.additionalFields.scriptfiles ? data.additionalFields.scriptfiles.split("\n") : [],
     music: data.additionalFields.music ? data.additionalFields.music.split("\n") : [],
     content: data.content,
     previous: data.previous

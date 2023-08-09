@@ -71,10 +71,7 @@ export const handleViewportResize = () => {
     .querySelector<HTMLElement>(":root")
     ?.style.setProperty(
       "--bleed-buffer",
-      `${
-        Math.round((window.visualViewport.width + Number.EPSILON) * 100) / 100 -
-        scroller.clientWidth
-      }px`,
+      `${Math.round((window.visualViewport.width + Number.EPSILON) * 100) / 100 - scroller.clientWidth}px`,
     );
 };
 
@@ -88,8 +85,7 @@ export const handleScrolledToBottom = () => {
   scrolledToBottom.set(currentScroll + localConfig.bottomScrollThreshold > documentHeight);
 };
 
-export const getPageTitle = (title: string) =>
-  title ? `${title} – ${globalConfig.siteName}` : globalConfig.siteName;
+export const getPageTitle = (title: string) => (title ? `${title} – ${globalConfig.siteName}` : globalConfig.siteName);
 
 export const getPageUrl = (route: string) => `${globalConfig.baseUrl}/${route}`;
 
@@ -104,9 +100,7 @@ export const stripHtml = (html: string) => {
 };
 
 export const getRandomBannerUrl = (seed = 0) =>
-  `url("/images/banners/banner-${
-    ((new Date().getMinutes() + seed) % globalConfig.bannerCount) + 1
-  }.png")`;
+  `url("/images/banners/banner-${((new Date().getMinutes() + seed) % globalConfig.bannerCount) + 1}.png")`;
 
 const globalObjectName = <keyof Window>localConfig.globalObjectName;
 

@@ -93,9 +93,7 @@
       {#if $auth}
         <NavItem href={globalConfig.urls.writing}>{t.components.navigation.write}</NavItem>
       {/if}
-      <NavItem href="/profile"
-        >{$auth ? t.components.navigation.profile : t.components.navigation.login}</NavItem
-      >
+      <NavItem href="/profile">{$auth ? t.components.navigation.profile : t.components.navigation.login}</NavItem>
       <NavItem href="/search">{t.components.navigation.search}</NavItem>
     </div>
     <div class="section-filler" />

@@ -5,10 +5,7 @@ import { filterExcludedCategories } from "$lib/util/util";
 import { t } from "$lib/util/translations";
 
 export const load: Load = async (): Promise<PostsAndCommentsResponse> => {
-  const [postResponse, commentResponse] = await Promise.all([
-    getLatestPosts(),
-    getLatestComments(),
-  ]);
+  const [postResponse, commentResponse] = await Promise.all([getLatestPosts(), getLatestComments()]);
   if (postResponse && commentResponse) {
     const posts = filterExcludedCategories(postResponse);
     return {

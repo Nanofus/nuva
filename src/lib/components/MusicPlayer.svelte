@@ -137,16 +137,13 @@ Musicmancer 2023 Edition
   };
 
   // Update volume based on bar
-  $: audioDataArray
-    .map((data) => data.audioElement)
-    .forEach((element) => (element.volume = volume / 100));
+  $: audioDataArray.map((data) => data.audioElement).forEach((element) => (element.volume = volume / 100));
 
   // Save volume
   $: volume && saveSetting("volume", volume);
 
   // Mute
-  $: currentAudioElement &&
-    (muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
+  $: currentAudioElement && (muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
 
   const unpause = async () => {
     if (currentAudioElement) {
@@ -168,8 +165,7 @@ Musicmancer 2023 Edition
           ? parseFloat(audioData.audioElement.dataset.fadeOutTime)
           : 1;
         let newVolume =
-          audioData.audioElement.volume -
-          (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
+          audioData.audioElement.volume - (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
         if (newVolume < 0) newVolume = 0;
         audioData.audioElement.volume = newVolume;
       } else {
@@ -182,11 +178,7 @@ Musicmancer 2023 Edition
   const othersStillPlaying = () => {
     return (
       audioDataArray.filter((audioData) => {
-        return (
-          audioData.audioElement !== newPlayerAfterFade &&
-          !audioData.isEffect &&
-          !audioData.audioElement.paused
-        );
+        return audioData.audioElement !== newPlayerAfterFade && !audioData.isEffect && !audioData.audioElement.paused;
       }).length > 0
     );
   };
@@ -219,14 +211,7 @@ Musicmancer 2023 Edition
         <Button icon="volume_mute" disabled={fadeInProgress} on:click={() => (muted = !muted)} />
       {/if}
     </div>
-    <input
-      class="volume-bar"
-      disabled={fadeInProgress}
-      type="range"
-      min="0"
-      max="100"
-      bind:value={volume}
-    />
+    <input class="volume-bar" disabled={fadeInProgress} type="range" min="0" max="100" bind:value={volume} />
   </div>
 {/if}
 

@@ -17,6 +17,4 @@ export const getConfig = async () => {
   return (await edgeConfigClient.getAll()) as Config;
 };
 
-export const globalConfig: Config = browser
-  ? await (await fetch("/api/config")).json()
-  : await getConfig();
+export const globalConfig: Config = browser ? await (await fetch("/api/config")).json() : await getConfig();
