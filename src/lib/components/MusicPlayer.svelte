@@ -179,7 +179,7 @@ Musicmancer 2023 Edition
         }
       }
     });
-  }, 50);
+  }, 10);
 
   const othersStillPlaying = () => {
     return (
