@@ -71,7 +71,7 @@ Musicmancer 2023 Edition
           generatedElements.forEach((e) => (e.disabled = false));
           clearInterval(waitUntilOthersFadedInterval);
         }
-      }, 10);
+      }, 100);
     }
   };
 
@@ -173,11 +173,13 @@ Musicmancer 2023 Edition
         if (newVolume < 0) newVolume = 0;
         audioData.audioElement.volume = newVolume;
       } else {
-        audioData.audioElement.currentTime = 0;
-        audioData.audioElement.pause();
+        if (audioData.audioElement.currentTime > 0) {
+          audioData.audioElement.currentTime = 0;
+          audioData.audioElement.pause();
+        }
       }
     });
-  }, 10);
+  }, 50);
 
   const othersStillPlaying = () => {
     return (
@@ -290,9 +292,11 @@ Musicmancer 2023 Edition
   }
 
   @keyframes audioPlayerSlideIn {
-    from {bottom: -2rem;}
-    to   {bottom: 0;}
+    from {
+      bottom: -2rem;
+    }
+    to {
+      bottom: 0;
+    }
   }
-
-
 </style>
