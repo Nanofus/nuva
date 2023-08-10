@@ -108,28 +108,25 @@ export const getRandomBannerUrl = (seed = 0) =>
     ((new Date().getMinutes() + seed) % globalConfig.bannerCount) + 1
   }.png")`;
 
-const globalObjectName = <keyof Window>localConfig.globalObjectName;
-
 export const initGlobalScope = () => {
-  if (!browser || window[globalObjectName]) {
+  if (!browser || window.nuvaGlobal) {
     return;
   }
-
-  window[globalObjectName] = <never>{};
-  window[globalObjectName].saveSetting = saveSetting;
-  window[globalObjectName].loadSetting = loadSetting;
+  window.nuvaGlobal = {
+    onPostDestroy: undefined,
+    saveSetting: saveSetting,
+    loadSetting: loadSetting,
+  };
 };
 
 export const cleanGlobalScope = () => {
   if (!browser) {
     return;
   }
-
-  if (window[globalObjectName]["onPostDestroy"]) {
-    window[globalObjectName]["onPostDestroy"]();
+  if (window.nuvaGlobal && window.nuvaGlobal.onPostDestroy) {
+    window.nuvaGlobal.onPostDestroy();
   }
-
-  delete window[globalObjectName];
+  delete window.nuvaGlobal;
 };
 
 export const createBaseSettings = () => {

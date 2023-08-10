@@ -1,6 +1,6 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
-import { NgmiPolyfill } from "vite-plugin-ngmi-polyfill";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
   build: {
@@ -8,6 +8,14 @@ export default defineConfig({
   },
   plugins: [
     sveltekit(),
-    NgmiPolyfill()
+    nodePolyfills({
+      exclude: ["fs"],
+      globals: {
+        Buffer: true,
+        global: true,
+        process: true,
+      },
+      protocolImports: true,
+    }),
   ],
 });

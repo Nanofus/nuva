@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type { Post } from "$lib/util/types";
-  import { onDestroy, onMount } from "svelte";
-  import { browser } from "$app/environment";
-  import MusicPlayer from "$lib/components/MusicPlayer.svelte";
-  import { toast } from "@zerodevx/svelte-toast";
-  import { cleanGlobalScope, initGlobalScope, toastSettings } from "$lib/util/util";
-  import { t } from "$lib/util/translations";
-  import { localConfig } from "$lib/util/config";
+	import type {Post} from "$lib/util/types";
+	import {onDestroy, onMount} from "svelte";
+	import {browser} from "$app/environment";
+	import MusicPlayer from "$lib/components/MusicPlayer.svelte";
+	import {toast} from "@zerodevx/svelte-toast";
+	import {cleanGlobalScope, initGlobalScope, toastSettings} from "$lib/util/util";
+	import {t} from "$lib/util/translations";
+	import {localConfig} from "$lib/util/config";
 
-  export let post: Post;
+	export let post: Post;
   let scriptElements: HTMLScriptElement[] = [];
 
   const reportValidation = () => {
@@ -55,7 +55,7 @@
       finalScript += loadedScript;
     });
     finalScript += script;
-    scriptElement.innerHTML = `window["${localConfig.globalObjectName}"].postScripts = () => {${finalScript}}; window["${localConfig.globalObjectName}"].postScripts();`;
+    scriptElement.innerHTML = `globalThis["${localConfig.globalObjectName}"].postScripts = () => {${finalScript}}; window["${localConfig.globalObjectName}"].postScripts();`;
     document.head.insertBefore(scriptElement, document.head.firstChild);
     scriptElements.push(scriptElement);
   };

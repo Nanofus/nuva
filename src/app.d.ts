@@ -7,3 +7,13 @@ declare namespace App {
   // interface PageData {}
   // interface Platform {}
 }
+
+declare interface Window {
+  nuvaGlobal:
+    | {
+        onPostDestroy: (() => void) | undefined;
+        saveSetting: (key: string, value: any) => void;
+        loadSetting: (key: string) => any;
+      }
+    | undefined;
+}
