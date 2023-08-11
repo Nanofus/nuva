@@ -246,6 +246,11 @@ export type CommentResponse = {
   comments: Comment[];
 } & Paginated;
 
+export type PostResponse = {
+  post: Post | null;
+  slug: string;
+};
+
 export type PostListResponse = {
   posts: PostMeta[];
 } & Paginated;

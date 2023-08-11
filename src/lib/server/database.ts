@@ -204,6 +204,7 @@ const getCommentsForPostPaginated = async (slug: string, after: string | null = 
       }),
     })
   ).json();
+  if (!response.data.post) return { comments: [], endCursor: "", hasNextPage: false };
   const { pageInfo } = response.data.post.comments;
   const comments = dataToComments(response.data.post.comments["edges"].map((e: any) => e.node));
   return {

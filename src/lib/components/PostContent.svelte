@@ -1,18 +1,19 @@
 <script lang="ts">
-  import type { Post } from "$lib/util/types";
-  import { onDestroy, onMount } from "svelte";
-  import { browser } from "$app/environment";
+  import type {Post} from "$lib/util/types";
+  import {onDestroy, onMount} from "svelte";
+  import {browser} from "$app/environment";
   import MusicPlayer from "$lib/components/MusicPlayer.svelte";
-  import { toast } from "@zerodevx/svelte-toast";
-  import { cleanGlobalScope, initGlobalScope, toastSettings } from "$lib/util/util";
-  import { t } from "$lib/util/translations";
-  import { localConfig } from "$lib/util/config";
+  import {toast} from "@zerodevx/svelte-toast";
+  import {cleanGlobalScope, initGlobalScope, toastSettings} from "$lib/util/util";
+  import {t} from "$lib/util/translations";
+  import {localConfig} from "$lib/util/config";
 
   export let post: Post;
   let scriptElements: HTMLScriptElement[] = [];
 
   const reportValidation = () => {
     if (!post.validationResult) return;
+    if (!Object.keys(post.validationResult).length) return;
     if (!post.validationResult.valid) {
       console.error(
         `${post.validationResult.errorCount} ${

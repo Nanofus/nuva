@@ -32,7 +32,6 @@
     dots[currentSlide]?.classList.remove("active");
     dots[newSlide]?.classList.add("active");
     currentSlide = newSlide;
-    currentSlide != null && console.log("showSlide", n, newSlide, currentSlide);
   };
 
   let interval: NodeJS.Timer;
