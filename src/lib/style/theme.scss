@@ -47,24 +47,7 @@ main {
   border-width: 0 1px; // rounding error
 }
 
-// Mobile screen size
-@media screen and (max-width: 41rem) {
-  // var(--mobile-threshold)
-  main {
-    padding-left: var(--mobile-horizontal-padding);
-    padding-right: var(--mobile-horizontal-padding);
-  }
-}
-
-// Screen is narrower than white area
-@media screen and (max-width: 76rem) {
-  // var(--max-page-width)
-  main {
-    border-radius: 0;
-  }
-}
-
-/* Full-width & background */
+/* Full-width */
 
 @mixin full-width {
   position: relative;
@@ -93,9 +76,17 @@ article {
 
 .background {
   @include full-width;
+  min-width: var(--page-min-width);
+  width: 100%;
+  max-width: var(--page-max-width);
 
   &:not(.max) {
-    max-width: var(--page-max-width);
+    padding-left: calc(var(--article-max-width) / 2);
+    padding-right: calc(var(--article-max-width) / 2);
+  }
+  &.max {
+    padding-left: calc((var(--viewport-width) - var(--article-max-width)) / 2);
+    padding-right: calc((var(--viewport-width) - var(--article-max-width)) / 2);
   }
 
   background-repeat: no-repeat;
@@ -105,10 +96,6 @@ article {
   &.repeat {
     background-repeat: repeat;
     background-size: auto;
-  }
-
-  > * {
-    @include article-width;
   }
 
   &.fade,
@@ -150,9 +137,25 @@ article {
 // Mobile screen size
 @media screen and (max-width: 41rem) {
   // var(--mobile-threshold)
-  .background > * {
+  main, .background:not(.max), .background.max {
     padding-left: var(--mobile-horizontal-padding);
     padding-right: var(--mobile-horizontal-padding);
+  }
+}
+
+// Screen is narrower than white area (incl. mobile)
+@media screen and (max-width: 76rem) {
+  // var(--max-page-width)
+  main {
+    border-radius: 0;
+  }
+}
+
+// Screen is narrower than white area but wider than mobile
+@media screen and (max-width: 76rem) and (min-width: 41rem) {
+  .background:not(.max) {
+    padding-left: calc((var(--viewport-width) - var(--article-max-width)) / 2);
+    padding-right: calc((var(--viewport-width) - var(--article-max-width)) / 2);
   }
 }
 

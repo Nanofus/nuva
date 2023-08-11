@@ -3,10 +3,10 @@
 Musicmancer 2023 Edition
 -->
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
+  import {onDestroy, onMount} from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
-  import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
-  import { localConfig } from "$lib/util/config";
+  import {formatSecondsToMMSS, loadSetting, saveSetting} from "$lib/util/util";
+  import {localConfig} from "$lib/util/config";
 
   interface AudioData {
     src: string;
@@ -220,8 +220,8 @@ Musicmancer 2023 Edition
 <style lang="scss">
   :global(.audio-button) {
     display: block;
-    width: 4rem;
-    height: 4rem;
+    width: 4em;
+    height: 4em;
     border: 1px solid var(--accent);
     border-radius: 2rem;
     box-shadow: var(--music-button-shadow);
@@ -232,7 +232,7 @@ Musicmancer 2023 Edition
     :global(> span) {
       position: relative;
       top: 0.1rem;
-      font-size: 2rem;
+      font-size: 2em;
     }
 
     &:disabled {
