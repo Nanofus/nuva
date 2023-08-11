@@ -7,7 +7,7 @@
 </script>
 
 <form
-  class={vertical ? "vertical" : null}
+  class={vertical ? "vertical" : ""}
   on:submit|preventDefault={() => {
     dispatch("submit");
   }}

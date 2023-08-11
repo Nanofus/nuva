@@ -58,7 +58,7 @@
 <div class="dots">
   {#each dots as _, index (index)}
     <button
-      class="dot {index <= 0 ? 'active' : null}"
+      class="dot {index <= 0 ? 'active' : ''}"
       bind:this={dots[index]}
       on:click={() => {
         showSlide(index);

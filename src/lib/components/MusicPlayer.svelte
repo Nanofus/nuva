@@ -3,10 +3,10 @@
 Musicmancer 2023 Edition
 -->
 <script lang="ts">
-  import {onDestroy, onMount} from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
-  import {formatSecondsToMMSS, loadSetting, saveSetting} from "$lib/util/util";
-  import {localConfig} from "$lib/util/config";
+  import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
+  import { localConfig } from "$lib/util/config";
 
   interface AudioData {
     src: string;

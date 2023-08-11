@@ -137,7 +137,9 @@ article {
 // Mobile screen size
 @media screen and (max-width: 41rem) {
   // var(--mobile-threshold)
-  main, .background:not(.max), .background.max {
+  main,
+  .background:not(.max),
+  .background.max {
     padding-left: var(--mobile-horizontal-padding);
     padding-right: var(--mobile-horizontal-padding);
   }
