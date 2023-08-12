@@ -15,6 +15,7 @@ Musicmancer 2023 Edition
   }
 
   export let musicUrlArray: string[] = [];
+  export let resetMusicButtonStyles: boolean;
 
   let currentAudioElement: HTMLAudioElement | null;
   let generatedElements: HTMLButtonElement[] = [];
@@ -115,6 +116,7 @@ Musicmancer 2023 Edition
     const audioButton = document.createElement("button");
     generatedElements.push(audioButton);
     audioButton.classList.add("audio-button", `index-${index}`);
+    resetMusicButtonStyles && audioButton.classList.add("minimal");
     audioButton.innerHTML = `<span class="material-icons">music_note</span>`;
     audioButton.addEventListener("click", () => play(parseInt(audioButton.classList[1].slice(6))));
     audioElement.after(audioButton);
@@ -228,6 +230,7 @@ Musicmancer 2023 Edition
     background: var(--background-light);
     color: var(--text-light);
     margin: 2rem auto;
+    font-size: inherit;
 
     :global(> span) {
       position: relative;
@@ -247,6 +250,20 @@ Musicmancer 2023 Edition
       &:disabled {
         cursor: not-allowed;
       }
+    }
+  }
+
+  :global(.audio-button.minimal) {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+    color: initial;
+    transition: none;
+
+    &:hover {
+      color: initial;
+      background: none;
     }
   }
 
