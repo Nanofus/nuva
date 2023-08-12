@@ -197,6 +197,7 @@ export type Post = {
   artists: string[];
   bannerVisible: boolean;
   fullWidth: boolean;
+  resetMusicButtons: boolean;
   content: string;
   previous: {
     title: string;

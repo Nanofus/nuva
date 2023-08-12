@@ -91,6 +91,7 @@ export const dataToPost = (data: any): Post | null => {
     styles: data.additionalFields.styles,
     scriptFiles: data.additionalFields.scriptfiles ? data.additionalFields.scriptfiles.split("\n") : [],
     music: data.additionalFields.music ? data.additionalFields.music.split("\n") : [],
+    resetMusicButtons: data.additionalFields.resetmusicbuttons,
     content: data.content,
     previous: data.previous
       ? {
