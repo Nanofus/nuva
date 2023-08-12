@@ -227,7 +227,7 @@ Musicmancer 2023 Edition
     box-shadow: var(--music-button-shadow);
     background: var(--background-light);
     color: var(--text-light);
-    margin: auto;
+    margin: 2rem auto;
 
     :global(> span) {
       position: relative;
