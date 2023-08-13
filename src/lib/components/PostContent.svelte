@@ -106,7 +106,7 @@
 <section class="vertically-separated {post.initialLetter ? 'large-initial-letter' : ''}" id="post-content">
   {@html post.content}
 </section>
-<MusicPlayer musicUrlArray={post.music} />
+<MusicPlayer musicUrlArray={post.music} resetMusicButtonStyles={post.resetMusicButtons} />
 
 <style lang="scss">
   :global(section.large-initial-letter > p:first-child::first-letter) {

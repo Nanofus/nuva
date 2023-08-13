@@ -73,6 +73,7 @@ export const QUERIES = {
             scriptfiles
             styles
             music
+            resetmusicbuttons
         }
         categories {
             nodes {
