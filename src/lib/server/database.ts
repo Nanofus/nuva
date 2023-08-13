@@ -78,13 +78,12 @@ export const setLatestCommentId = async (id: number) => {
 
 /* Latest posts and comments */
 
-export const getLatestComments = async (authToken: string | null = null): Promise<CommentMeta[]> => {
+export const getLatestComments = async (): Promise<CommentMeta[]> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: authToken ? `Bearer ${authToken}` : "",
       },
       body: JSON.stringify({
         query: `
@@ -142,12 +141,13 @@ export const getPostMeta = async (slug: string): Promise<PostMeta | null> => {
 };
 
 export const getPost = async (slug: string, authToken: string | null = null): Promise<Post | null> => {
+  console.log(authToken, import.meta.env.VITE_WPGRAPHQL_AUTH_TOKEN);
   const response = await (
     await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: authToken ? `Bearer ${authToken}` : "",
+        Authorization: authToken ? `Bearer ${authToken}` : `Bearer ${import.meta.env.VITE_WPGRAPHQL_AUTH_TOKEN}`,
       },
       body: JSON.stringify({
         query: `
@@ -160,6 +160,7 @@ export const getPost = async (slug: string, authToken: string | null = null): Pr
       }),
     })
   ).json();
+  console.log(response.data.post);
   const post = dataToPost(response.data.post);
   if (post) post.comments = await getCommentsForPost(slug);
   return post;
