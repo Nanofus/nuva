@@ -2,9 +2,9 @@
   import PostList from "$lib/components/PostList.svelte";
   import type { CommentMeta, PostMeta } from "$lib/util/types";
   import { getPageTitle, getPageUrl } from "$lib/util/util";
-  import FeaturedPost from "$lib/components/FeaturedPost.svelte";
   import CommentList from "$lib/components/CommentList.svelte";
   import { t } from "$lib/util/translations";
+  import FeatureCarousel from "$lib/components/FeatureCarousel.svelte";
 
   export let data: { posts: PostMeta[]; comments: CommentMeta[] };
 </script>
@@ -15,10 +15,19 @@
   <meta content={getPageUrl(`/`)} property="og:url" />
 </svelte:head>
 
-<div class="vertically-separated-top">
-  <FeaturedPost postMeta={data.posts[0]} />
+<div id="feature-carousel-wrapper" class="vertically-separated-top hidden-mobile">
+  <FeatureCarousel postList={data.posts} />
 </div>
 <h3>{t.pages.index.newestReleases}</h3>
 <PostList posts={data.posts} />
 <h3>{t.pages.index.newestComments}</h3>
 <CommentList comments={data.comments} />
+
+<style>
+  #feature-carousel-wrapper {
+    max-width: calc(var(--article-max-width) + var(--feature-carousel-leeway));
+    width: 100%;
+    overflow: clip;
+    position: relative;
+  }
+</style>

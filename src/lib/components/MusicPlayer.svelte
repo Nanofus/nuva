@@ -23,6 +23,7 @@ Musicmancer 2023 Edition
   }
 
   export let musicUrlArray: string[] = [];
+  export let resetMusicButtonStyles: boolean;
 
   let currentAudioElement: HTMLAudioElement | null;
   let generatedElements: HTMLButtonElement[] = [];
@@ -82,7 +83,7 @@ Musicmancer 2023 Edition
           generatedElements.forEach((e) => (e.disabled = false));
           clearInterval(waitUntilOthersFadedInterval);
         }
-      }, 10);
+      }, 100);
     }
   };
 
@@ -169,7 +170,15 @@ Musicmancer 2023 Edition
     const audioButton = document.createElement("button");
     generatedElements.push(audioButton);
     audioButton.classList.add("audio-button", `index-${index}`);
-    audioButton.innerHTML = `<span class="material-icons">music_note</span>`;
+    resetMusicButtonStyles && audioButton.classList.add("minimal");
+
+    // Button content
+    let buttonContent = audioElement.dataset.content;
+    audioButton.innerHTML = buttonContent
+            ? `<span>${buttonContent}</span>`
+            : `<span class="material-icons">music_note</span>`;
+    audioElement.removeAttribute("data-content");
+
     audioButton.addEventListener("click", () => play(parseInt(audioButton.classList[1].slice(6))));
     audioElement.after(audioButton);
     audioButton.appendChild(audioElement);
@@ -191,16 +200,13 @@ Musicmancer 2023 Edition
   };
 
   // Update volume based on bar
-  $: audioDataArray
-    .map((data) => data.audioElement)
-    .forEach((element) => (element.volume = volume / 100));
+  $: audioDataArray.map((data) => data.audioElement).forEach((element) => (element.volume = volume / 100));
 
   // Save volume
   $: volume && saveSetting("volume", volume);
 
   // Mute
-  $: currentAudioElement &&
-    (muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
+  $: currentAudioElement && (muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
 
   const unpause = async () => {
     if (currentAudioElement) {
@@ -222,13 +228,14 @@ Musicmancer 2023 Edition
           ? parseFloat(audioData.audioElement.dataset.fadeOutTime)
           : 1;
         let newVolume =
-          audioData.audioElement.volume -
-          (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
+          audioData.audioElement.volume - (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
         if (newVolume < 0) newVolume = 0;
         audioData.audioElement.volume = newVolume;
       } else {
-        audioData.audioElement.currentTime = 0;
-        audioData.audioElement.pause();
+        if (audioData.audioElement.currentTime > 0) {
+          audioData.audioElement.currentTime = 0;
+          audioData.audioElement.pause();
+        }
       }
     });
   }, 10);
@@ -236,11 +243,7 @@ Musicmancer 2023 Edition
   const othersStillPlaying = () => {
     return (
       audioDataArray.filter((audioData) => {
-        return (
-          audioData.audioElement !== newPlayerAfterFade &&
-          !audioData.isEffect &&
-          !audioData.audioElement.paused
-        );
+        return audioData.audioElement !== newPlayerAfterFade && !audioData.isEffect && !audioData.audioElement.paused;
       }).length > 0
     );
   };
@@ -274,14 +277,7 @@ Musicmancer 2023 Edition
         <Button icon="volume_mute" disabled={fadeInProgress} on:click={() => (muted = !muted)} />
       {/if}
     </div>
-    <input
-      class="volume-bar"
-      disabled={fadeInProgress}
-      type="range"
-      min="0"
-      max="100"
-      bind:value={volume}
-    />
+    <input class="volume-bar" disabled={fadeInProgress} type="range" min="0" max="100" bind:value={volume} />
     <div>
       <Button icon="info" disabled={fadeInProgress} on:click={() => {
         if (currentAudioElement) updateInfoBox(currentAudioElement.src);
@@ -316,19 +312,20 @@ Musicmancer 2023 Edition
 <style lang="scss">
   :global(.audio-button) {
     display: block;
-    width: 4rem;
-    height: 4rem;
+    width: 4em;
+    height: 4em;
     border: 1px solid var(--accent);
-    border-radius: 2rem;
+    border-radius: 2em;
     box-shadow: var(--music-button-shadow);
     background: var(--background-light);
     color: var(--text-light);
-    margin: auto;
+    margin: 2rem auto;
+    font-size: inherit;
 
     :global(> span) {
       position: relative;
       top: 0.1rem;
-      font-size: 2rem;
+      font-size: 2em;
     }
 
     &:disabled {
@@ -343,6 +340,20 @@ Musicmancer 2023 Edition
       &:disabled {
         cursor: not-allowed;
       }
+    }
+  }
+
+  :global(.audio-button.minimal) {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+    color: initial;
+    transition: none;
+
+    &:hover {
+      color: initial;
+      background: none;
     }
   }
 
@@ -374,8 +385,12 @@ Musicmancer 2023 Edition
   }
 
   @keyframes audioPlayerSlideIn {
-    from {bottom: -2rem;}
-    to   {bottom: 0;}
+    from {
+      bottom: -2rem;
+    }
+    to {
+      bottom: 0;
+    }
   }
 
   table#music-info-box {

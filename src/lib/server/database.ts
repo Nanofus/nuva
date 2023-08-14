@@ -78,15 +78,12 @@ export const setLatestCommentId = async (id: number) => {
 
 /* Latest posts and comments */
 
-export const getLatestComments = async (
-  authToken: string | null = null,
-): Promise<CommentMeta[]> => {
+export const getLatestComments = async (): Promise<CommentMeta[]> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: authToken ? `Bearer ${authToken}` : "",
       },
       body: JSON.stringify({
         query: `
@@ -118,8 +115,7 @@ export const getLatestComments = async (
   return dataToCommentMetas(response.data.comments.nodes);
 };
 
-export const getLatestPosts = async () =>
-  (await getPosts(null, null, globalConfig.latestPostsPerFetch)).posts;
+export const getLatestPosts = async () => (await getPosts(null, null, globalConfig.latestPostsPerFetch)).posts;
 
 /* General queries */
 
@@ -144,16 +140,14 @@ export const getPostMeta = async (slug: string): Promise<PostMeta | null> => {
   return dataToPostMeta(response.data.post);
 };
 
-export const getPost = async (
-  slug: string,
-  authToken: string | null = null,
-): Promise<Post | null> => {
+export const getPost = async (slug: string, authToken: string | null = null): Promise<Post | null> => {
+  console.log(authToken, import.meta.env.VITE_WPGRAPHQL_AUTH_TOKEN);
   const response = await (
     await fetch(globalConfig.graphqlApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: authToken ? `Bearer ${authToken}` : "",
+        Authorization: authToken ? `Bearer ${authToken}` : `Bearer ${import.meta.env.VITE_WPGRAPHQL_AUTH_TOKEN}`,
       },
       body: JSON.stringify({
         query: `
@@ -166,6 +160,7 @@ export const getPost = async (
       }),
     })
   ).json();
+  console.log(response.data.post);
   const post = dataToPost(response.data.post);
   if (post) post.comments = await getCommentsForPost(slug);
   return post;
@@ -181,15 +176,10 @@ export const getCommentsForPost = async (slug: string): Promise<Comment[]> => {
     if (!commentResponse.hasNextPage) allCommentsFetched = true;
     else latestAfter = commentResponse.endCursor;
   }
-  return (objectsToHierarchy(allComments) as Comment[]).sort(
-    (a, b) => a.date.getTime() - b.date.getTime(),
-  );
+  return (objectsToHierarchy(allComments) as Comment[]).sort((a, b) => a.date.getTime() - b.date.getTime());
 };
 
-const getCommentsForPostPaginated = async (
-  slug: string,
-  after: string | null = null,
-): Promise<CommentResponse> => {
+const getCommentsForPostPaginated = async (slug: string, after: string | null = null): Promise<CommentResponse> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
       method: "POST",
@@ -215,6 +205,7 @@ const getCommentsForPostPaginated = async (
       }),
     })
   ).json();
+  if (!response.data.post) return { comments: [], endCursor: "", hasNextPage: false };
   const { pageInfo } = response.data.post.comments;
   const comments = dataToComments(response.data.post.comments["edges"].map((e: any) => e.node));
   return {
@@ -258,9 +249,7 @@ export const getPostsByAuthor = async (
   }
 
   const { pageInfo } = response.data.posts;
-  const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) =>
-    dataToPostMeta(edge.node),
-  );
+  const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) => dataToPostMeta(edge.node));
   return {
     posts,
     author,
@@ -269,10 +258,7 @@ export const getPostsByAuthor = async (
   };
 };
 
-export const getPostsByTag = async (
-  tag: string,
-  after: string | null = null,
-): Promise<PostListByTagResponse> => {
+export const getPostsByTag = async (tag: string, after: string | null = null): Promise<PostListByTagResponse> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
       method: "POST",
@@ -305,9 +291,7 @@ export const getPostsByTag = async (
 
   const { pageInfo } = response.data.posts;
   const tagName = response.data.tag.name;
-  const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) =>
-    dataToPostMeta(edge.node),
-  );
+  const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) => dataToPostMeta(edge.node));
   return {
     posts,
     tag: tagName,
@@ -353,9 +337,7 @@ export const getPostsByCategory = async (
 
   const { pageInfo } = response.data.category.posts;
   const categoryName = response.data.category.name;
-  const posts: PostMeta[] = response.data.category.posts["edges"].map((edge: any) =>
-    dataToPostMeta(edge.node),
-  );
+  const posts: PostMeta[] = response.data.category.posts["edges"].map((edge: any) => dataToPostMeta(edge.node));
   return {
     posts,
     category: categoryName,
@@ -409,9 +391,7 @@ export const getPosts = async (
     })
   ).json();
   const { pageInfo } = response.data.posts;
-  const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) =>
-    dataToPostMeta(edge.node),
-  );
+  const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) => dataToPostMeta(edge.node));
   return {
     posts,
     searchTerm: searchTerm ? searchTerm : ``,

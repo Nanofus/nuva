@@ -24,9 +24,7 @@
   };
 
   onMount(() => {
-    scrolledToBottom.subscribe(
-      (scrolled) => scrolled && data.hasNextPage && !fetching && fetchMorePosts(),
-    );
+    scrolledToBottom.subscribe((scrolled) => scrolled && data.hasNextPage && !fetching && fetchMorePosts());
   });
 </script>
 

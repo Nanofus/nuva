@@ -25,30 +25,14 @@
         {label}
       </label>
     {/if}
-    <textarea
-      class="editor"
-      {rows}
-      id={elementId}
-      {name}
-      {placeholder}
-      {value}
-      on:input={handleInput}
-    />
+    <textarea class="editor" {rows} id={elementId} {name} {placeholder} {value} on:input={handleInput} />
   {:else}
     {#if label}
       <label for={elementIdSecondary}>
         {label}
       </label>
     {/if}
-    <input
-      class="editor"
-      id={elementIdSecondary}
-      {name}
-      {placeholder}
-      {value}
-      {type}
-      on:input={handleInput}
-    />
+    <input class="editor" id={elementIdSecondary} {name} {placeholder} {value} {type} on:input={handleInput} />
   {/if}
 </div>
 

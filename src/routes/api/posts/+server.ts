@@ -1,9 +1,4 @@
-import {
-  getPosts,
-  getPostsByAuthor,
-  getPostsByCategory,
-  getPostsByTag,
-} from "$lib/server/database";
+import { getPosts, getPostsByAuthor, getPostsByCategory, getPostsByTag } from "$lib/server/database";
 import type { RequestHandler } from "@sveltejs/kit";
 import { json } from "@sveltejs/kit";
 
