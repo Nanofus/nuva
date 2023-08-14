@@ -30,8 +30,10 @@
     text-shadow: var(--banner-shadow);
     display: flex;
     flex-direction: column;
-    height: 12rem;
     flex: 1;
+    box-sizing: border-box;
+    padding: 1.5rem 4rem 2.5rem;
+    border-radius: var(--border-radius);
 
     h1 {
       margin-top: 0;
@@ -57,9 +59,5 @@
     a {
       color: var(--text-dark);
     }
-
-    padding: 1.5rem 4rem 2.5rem;
-    border-radius: var(--border-radius);
-    max-width: var(--article-max-width);
   }
 </style>
