@@ -3,11 +3,11 @@
 Musicmancer 2023 Edition
 -->
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
+  import {onDestroy, onMount} from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
-  import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
-  import { localConfig } from "$lib/util/config";
-  import { fetchFromUrl } from "music-metadata-browser";
+  import {formatSecondsToMMSS, loadSetting, saveSetting} from "$lib/util/util";
+  import {localConfig} from "$lib/util/config";
+  import {fetchFromUrl} from "music-metadata-browser";
 
 
   interface AudioMetadata {
@@ -287,7 +287,7 @@ Musicmancer 2023 Edition
   </div>
   <table id="music-info-box" class={ infoboxVisible ? "" : "hidden" }>
     <tr>
-      <th colspan="3">Song metadata</th>
+      <th colspan="3">Song Metadata</th>
     </tr>
     {#if displayedMetadata}
       <tr>
@@ -364,6 +364,7 @@ Musicmancer 2023 Edition
     bottom: -2rem;
     left: 0;
     width: var(--viewport-width);
+    height: 2rem;
     color: var(--text-dark);
     background-color: var(--accent);
     animation: audioPlayerSlideIn 500ms ease-out 10ms 1 normal forwards;
@@ -399,11 +400,13 @@ Musicmancer 2023 Edition
     background-color: var(--accent);
     position: fixed;
     right: 1rem;
-    bottom: 4rem;
+    bottom: 2rem;
     color: var(--text-dark);
     padding: 0.5rem;
-    box-shadow: var(--header-shadow);
+    box-shadow: var(--subtle-shadow);
     border-radius: var(--border-radius);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     z-index: 9999;
   }
 

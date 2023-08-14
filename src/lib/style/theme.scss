@@ -16,7 +16,7 @@ body {
   background: var(--background-dark);
 }
 
-#page {
+#layout {
   margin: auto;
   min-width: var(--page-min-width);
   width: 100%;
@@ -451,7 +451,7 @@ img {
     display: inherit !important;
   }
 
-  #page > header {
+  #layout > header {
     height: calc(var(--viewport-width) / 3);
     font-size: 0.5rem;
   }
