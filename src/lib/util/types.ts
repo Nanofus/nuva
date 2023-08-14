@@ -2,7 +2,6 @@ export type LocalConfig = {
   bottomScrollThreshold: number;
   localStorageAuthKey: string;
   localStorageSettingsKey: string;
-  globalObjectName: string;
   defaultVolume: number;
   musicFadeSpeed: number;
   featuredPostRotationInterval: number;

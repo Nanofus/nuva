@@ -51,6 +51,8 @@
     "html-validate": "^8.1.0",
     "kysely": "^0.26.1",
     "mdsvex": "^0.11.0",
-    "prisma-kysely": "^1.5.0"
+    "music-metadata-browser": "^2.5.10",
+    "prisma-kysely": "^1.5.0",
+    "vite-plugin-ngmi-polyfill": "^0.0.2"
   }
 }

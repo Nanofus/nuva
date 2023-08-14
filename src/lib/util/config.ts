@@ -6,7 +6,6 @@ export const localConfig: LocalConfig = {
   bottomScrollThreshold: 100,
   localStorageAuthKey: "auth",
   localStorageSettingsKey: "settings",
-  globalObjectName: "globals",
   defaultVolume: 50,
   musicFadeSpeed: 1,
   featuredPostRotationInterval: 10000,

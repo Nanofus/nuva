@@ -141,7 +141,6 @@ export const getPostMeta = async (slug: string): Promise<PostMeta | null> => {
 };
 
 export const getPost = async (slug: string, authToken: string | null = null): Promise<Post | null> => {
-  console.log(authToken, import.meta.env.VITE_WPGRAPHQL_AUTH_TOKEN);
   const response = await (
     await fetch(globalConfig.graphqlApi, {
       method: "POST",
@@ -160,7 +159,6 @@ export const getPost = async (slug: string, authToken: string | null = null): Pr
       }),
     })
   ).json();
-  console.log(response.data.post);
   const post = dataToPost(response.data.post);
   if (post) post.comments = await getCommentsForPost(slug);
   return post;

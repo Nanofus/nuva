@@ -1,12 +1,11 @@
 <script lang="ts">
-  import type { Post } from "$lib/util/types";
-  import { onDestroy, onMount } from "svelte";
-  import { browser } from "$app/environment";
+  import type {Post} from "$lib/util/types";
+  import {onDestroy, onMount} from "svelte";
+  import {browser} from "$app/environment";
   import MusicPlayer from "$lib/components/MusicPlayer.svelte";
-  import { toast } from "@zerodevx/svelte-toast";
-  import { cleanGlobalScope, initGlobalScope, toastSettings } from "$lib/util/util";
-  import { t } from "$lib/util/translations";
-  import { localConfig } from "$lib/util/config";
+  import {toast} from "@zerodevx/svelte-toast";
+  import {cleanGlobalScope, initGlobalScope, toastSettings} from "$lib/util/util";
+  import {t} from "$lib/util/translations";
 
   export let post: Post;
   let scriptElements: HTMLScriptElement[] = [];
@@ -56,7 +55,7 @@
       finalScript += loadedScript;
     });
     finalScript += script;
-    scriptElement.innerHTML = `window["${localConfig.globalObjectName}"].postScripts = () => {${finalScript}}; window["${localConfig.globalObjectName}"].postScripts();`;
+    scriptElement.innerHTML = `window.nuvaGlobal.postScripts = () => {${finalScript}}; window.nuvaGlobal.postScripts();`;
     document.head.insertBefore(scriptElement, document.head.firstChild);
     scriptElements.push(scriptElement);
   };
