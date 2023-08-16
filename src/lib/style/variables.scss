@@ -90,6 +90,7 @@
   --initial-letter-line-height: 4rem; // Line height for initial letter, should be a bit less than size
   --initial-letter-margin: 0.5rem; // Right margin of initial letter
   --feature-carousel-leeway: 4rem; // How much wider can the feature carousel be compared to article width
+  --max-z-index: 9999;
 }
 
 /* Toast */

@@ -3,12 +3,11 @@
 Musicmancer 2023 Edition
 -->
 <script lang="ts">
-  import {onDestroy, onMount} from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import Button from "$lib/components/reusable/Button.svelte";
-  import {formatSecondsToMMSS, loadSetting, saveSetting} from "$lib/util/util";
-  import {localConfig} from "$lib/util/config";
-  import {fetchFromUrl} from "music-metadata-browser";
-
+  import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
+  import { localConfig } from "$lib/util/config";
+  import { fetchFromUrl } from "music-metadata-browser";
 
   interface AudioMetadata {
     title: string;
@@ -88,20 +87,20 @@ Musicmancer 2023 Edition
   };
 
   const updateInfoBox = (audioSrc: string) => {
-      for (const data of audioDataArray) if (data.src === audioSrc) {
+    for (const data of audioDataArray)
+      if (data.src === audioSrc) {
         displayedMetadata = data.metadata;
         return;
       }
-      displayedMetadata = {
-        title: "N/A",
-        artist: "N/A",
-        album: "N/A"
-      };
-  }
+    displayedMetadata = {
+      title: "N/A",
+      artist: "N/A",
+      album: "N/A",
+    };
+  };
 
   const processMetadata = async () => {
     for (const audioData of audioDataArray) {
-
       try {
         const metadata = await fetchFromUrl(audioData.src);
         audioData.metadata.title = metadata.common.title ? metadata.common.title : "N/A";
@@ -111,15 +110,14 @@ Musicmancer 2023 Edition
         if (infoboxVisible && currentAudioElement?.src === audioData.src) {
           updateInfoBox(audioData.src);
         }
-      } catch(error) {
+      } catch (error) {
         console.error(error.message);
         audioData.metadata.title = "N/A";
         audioData.metadata.artist = "N/A";
         audioData.metadata.album = "N/A";
       }
-
     }
-  }
+  };
 
   const initializeAudioElements = () => {
     let autoIndex = 0;
@@ -140,8 +138,7 @@ Musicmancer 2023 Edition
       } else if (audioSrc[0] === "#") {
         audioSrc = musicUrlArray[parseInt(audioSrc.slice(1))];
       }
-      audioSrc = audioSrc.includes("\r") || audioSrc.includes("\n")
-              ? audioSrc.slice(0, audioSrc.length - 1) : audioSrc;
+      audioSrc = audioSrc.includes("\r") || audioSrc.includes("\n") ? audioSrc.slice(0, audioSrc.length - 1) : audioSrc;
       audioElement.src = audioSrc;
       audioElement.volume = volume / 100;
       audioElement.currentTime = 0;
@@ -153,8 +150,8 @@ Musicmancer 2023 Edition
         metadata: {
           title: "",
           artist: "",
-          album: ""
-        }
+          album: "",
+        },
       });
 
       // Create audio play button
@@ -175,8 +172,8 @@ Musicmancer 2023 Edition
     // Button content
     let buttonContent = audioElement.dataset.content;
     audioButton.innerHTML = buttonContent
-            ? `<span>${buttonContent}</span>`
-            : `<span class="material-icons">music_note</span>`;
+      ? `<span>${buttonContent}</span>`
+      : `<span class="material-icons">music_note</span>`;
     audioElement.removeAttribute("data-content");
 
     audioButton.addEventListener("click", () => play(parseInt(audioButton.classList[1].slice(6))));
@@ -247,7 +244,6 @@ Musicmancer 2023 Edition
       }).length > 0
     );
   };
-
 </script>
 
 {#if currentAudioElement}
@@ -279,13 +275,17 @@ Musicmancer 2023 Edition
     </div>
     <input class="volume-bar" disabled={fadeInProgress} type="range" min="0" max="100" bind:value={volume} />
     <div>
-      <Button icon="info" disabled={fadeInProgress} on:click={() => {
-        if (currentAudioElement) updateInfoBox(currentAudioElement.src);
-        infoboxVisible = !infoboxVisible;
-      }} />
+      <Button
+        icon="info"
+        disabled={fadeInProgress}
+        on:click={() => {
+          if (currentAudioElement) updateInfoBox(currentAudioElement.src);
+          infoboxVisible = !infoboxVisible;
+        }}
+      />
     </div>
   </div>
-  <table id="music-info-box" class={ infoboxVisible ? "" : "hidden" }>
+  <table id="music-info-box" class={infoboxVisible ? "" : "hidden"}>
     <tr>
       <th colspan="3">Song Metadata</th>
     </tr>
@@ -368,7 +368,7 @@ Musicmancer 2023 Edition
     color: var(--text-dark);
     background-color: var(--accent);
     animation: audioPlayerSlideIn 500ms ease-out 10ms 1 normal forwards;
-    z-index: 9999;
+    z-index: var(--max-z-index);
 
     * {
       transition: var(--unfocus-speed) all linear;
@@ -407,7 +407,7 @@ Musicmancer 2023 Edition
     border-radius: var(--border-radius);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    z-index: 9999;
+    z-index: var(--max-z-index);
   }
 
   :global(#music-info-box td.material-icons) {
@@ -430,5 +430,4 @@ Musicmancer 2023 Edition
     border-bottom: 0.06rem solid var(--text-dark);
     padding-bottom: 0.25rem;
   }
-
 </style>

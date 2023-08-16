@@ -1,7 +1,6 @@
 <script lang="ts">
   import PostList from "$lib/components/PostList.svelte";
   import type { PostListResponse } from "$lib/util/types";
-  import Button from "$lib/components/reusable/Button.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
   import { filterExcludedCategories, getPageTitle, getPageUrl } from "$lib/util/util";
   import { onMount } from "svelte";
@@ -21,6 +20,7 @@
       hasNextPage: newData.hasNextPage,
     };
     fetching = false;
+    if (data.hasNextPage) fetchMorePosts();
   };
 
   onMount(() => {
@@ -37,9 +37,7 @@
 <h1>{t.pages.posts.title}</h1>
 <PostList posts={data.posts} />
 <div class="vertically-separated">
-  {#if data.hasNextPage && !fetching}
-    <Button link on:click={fetchMorePosts}>{t.common.loadMore}</Button>
-  {:else if fetching}
+  {#if fetching}
     <LoadingSpinner />
   {/if}
 </div>
