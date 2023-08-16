@@ -15,7 +15,7 @@
         <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a></span>
       {/each}
     </span>
-    <time class="post-date"
+    <time class="post-date" datetime={post.date.toISOString()}
       ><span class="material-icons inline-icon">calendar_today</span>
       {post.date.toLocaleDateString(globalConfig.locale)}
     </time>
