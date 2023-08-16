@@ -352,6 +352,10 @@ i i {
   font-style: normal;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 code {
   font-family: var(--code-font-family);
   font-size: 0.9rem;
