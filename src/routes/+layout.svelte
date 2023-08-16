@@ -10,13 +10,13 @@
   import Footer from "$lib/components/Footer.svelte";
   import Navigation from "$lib/components/Navigation.svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { loadLoginStatus } from "$lib/client/auth";
-  import { globalConfig } from "$lib/util/config";
 
   // Styles
   import "$lib/style/variables.scss";
   import "$lib/style/input-range.scss";
   import "$lib/style/theme.scss";
+  import { loadLoginStatus } from "$lib/client/auth";
+  import { globalConfig } from "$lib/util/config";
 
   export let data;
 

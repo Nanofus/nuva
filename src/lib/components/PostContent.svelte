@@ -6,6 +6,7 @@
   import { toast } from "@zerodevx/svelte-toast";
   import { cleanGlobalScope, initGlobalScope, toastSettings } from "$lib/util/util";
   import { t } from "$lib/util/translations";
+  import { localConfig } from "$lib/util/config";
 
   export let post: Post;
   let scriptElements: HTMLScriptElement[] = [];

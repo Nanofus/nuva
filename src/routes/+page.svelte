@@ -25,8 +25,10 @@
 
 <style>
   #feature-carousel-wrapper {
-    max-width: calc(var(--article-max-width) + var(--feature-carousel-leeway));
-    width: 100%;
+    --featured-post-width: calc( var(--article-max-width) + var(--feature-carousel-leeway) );
+    width: var(--featured-post-width);
+    max-width: 100%;
+    height: calc(9 * var(--featured-post-width) / 21);
     overflow: clip;
     position: relative;
   }
