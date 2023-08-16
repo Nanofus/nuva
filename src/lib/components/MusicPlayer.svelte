@@ -8,6 +8,7 @@ Musicmancer 2023 Edition
   import {formatSecondsToMMSS, loadSetting, saveSetting} from "$lib/util/util";
   import {localConfig} from "$lib/util/config";
   import {fetchFromUrl} from "music-metadata-browser";
+  import {browser} from "$app/environment";
 
 
   interface AudioMetadata {
@@ -47,7 +48,7 @@ Musicmancer 2023 Edition
     generatedElements.forEach((element) => element.remove());
     clearInterval(seekInterval);
     clearInterval(fadeOutInterval);
-    document.querySelector("#layout").classList.remove("bottom-padded");
+    if (browser) document.querySelector("#layout")?.classList.remove("bottom-padded");
   });
 
   const pauseOnEnded = () => {
@@ -56,7 +57,7 @@ Musicmancer 2023 Edition
   };
 
   const play = async (index: number) => {
-    if (!currentAudioElement) document.querySelector("#layout").classList.add("bottom-padded");
+    if (!currentAudioElement) document.querySelector("#layout")?.classList.add("bottom-padded");
 
     const newAudioData = audioDataArray[index];
     if (currentAudioElement == newAudioData.audioElement) {
@@ -114,7 +115,7 @@ Musicmancer 2023 Edition
         if (infoboxVisible && currentAudioElement?.src === audioData.src) {
           updateInfoBox(audioData.src);
         }
-      } catch(error) {
+      } catch(error: any) {
         console.error(error.message);
         audioData.metadata.title = "N/A";
         audioData.metadata.artist = "N/A";
