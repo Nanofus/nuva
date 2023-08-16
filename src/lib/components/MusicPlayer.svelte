@@ -47,6 +47,7 @@ Musicmancer 2023 Edition
     generatedElements.forEach((element) => element.remove());
     clearInterval(seekInterval);
     clearInterval(fadeOutInterval);
+    document.querySelector("#layout").classList.remove("bottom-padded");
   });
 
   const pauseOnEnded = () => {
@@ -55,6 +56,8 @@ Musicmancer 2023 Edition
   };
 
   const play = async (index: number) => {
+    if (!currentAudioElement) document.querySelector("#layout").classList.add("bottom-padded");
+
     const newAudioData = audioDataArray[index];
     if (currentAudioElement == newAudioData.audioElement) {
       if (paused) await unpause();
@@ -394,6 +397,13 @@ Musicmancer 2023 Edition
     }
   }
 
+  :global(#layout) {
+    transition: padding-bottom 500ms ease-out;
+  }
+  :global(#layout.bottom-padded) {
+    padding-bottom: 2rem;
+  }
+
   table#music-info-box {
     width: auto;
     max-width: calc(var(--viewport-width - 2rem));
@@ -407,7 +417,7 @@ Musicmancer 2023 Edition
     border-radius: var(--border-radius);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    z-index: 9999;
+    z-index: 9998;
   }
 
   :global(#music-info-box td.material-icons) {
