@@ -8,6 +8,7 @@ Musicmancer 2023 Edition
   import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
   import { localConfig } from "$lib/util/config";
   import { fetchFromUrl } from "music-metadata-browser";
+  import { browser } from "$app/environment";
 
   interface AudioMetadata {
     title: string;
@@ -46,6 +47,7 @@ Musicmancer 2023 Edition
     generatedElements.forEach((element) => element.remove());
     clearInterval(seekInterval);
     clearInterval(fadeOutInterval);
+    if (browser) document.querySelector("#layout")?.classList.remove("bottom-padded");
   });
 
   const pauseOnEnded = () => {
@@ -54,6 +56,8 @@ Musicmancer 2023 Edition
   };
 
   const play = async (index: number) => {
+    if (!currentAudioElement) document.querySelector("#layout")?.classList.add("bottom-padded");
+
     const newAudioData = audioDataArray[index];
     if (currentAudioElement == newAudioData.audioElement) {
       if (paused) await unpause();
@@ -110,7 +114,7 @@ Musicmancer 2023 Edition
         if (infoboxVisible && currentAudioElement?.src === audioData.src) {
           updateInfoBox(audioData.src);
         }
-      } catch (error) {
+      } catch(error: any) {
         console.error(error.message);
         audioData.metadata.title = "N/A";
         audioData.metadata.artist = "N/A";
@@ -394,6 +398,13 @@ Musicmancer 2023 Edition
     }
   }
 
+  :global(#layout) {
+    transition: padding-bottom 500ms ease-out;
+  }
+  :global(#layout.bottom-padded) {
+    padding-bottom: 2rem;
+  }
+
   table#music-info-box {
     width: auto;
     max-width: calc(var(--viewport-width - 2rem));
@@ -407,7 +418,7 @@ Musicmancer 2023 Edition
     border-radius: var(--border-radius);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    z-index: var(--max-z-index);
+    z-index: calc(var(--max-z-index) - 1);
   }
 
   :global(#music-info-box td.material-icons) {

@@ -10,17 +10,14 @@
   <h1 id="post-title">{post.title}</h1>
   <div id="post-meta">
     <span class="post-categories">
-      <span class="material-icons inline-icon">folder</span>
       {#each post.categories as category}
         <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a></span>
       {/each}
     </span>
-    <time class="post-date"
-      ><span class="material-icons inline-icon">calendar_today</span>
+    <time class="post-date" datetime={post.date.toISOString()}>
       {post.date.toLocaleDateString(globalConfig.locale)}
     </time>
-    <span class="post-authors"
-      ><span class="material-icons inline-icon">history_edu</span>
+    <span class="post-authors">
       <span class="author-list">
         {#each post.coAuthors as author}
           <a href="/authors/{encodeURI(author)}">{author}</a>
@@ -28,7 +25,6 @@
       </span>
     </span>
     <span class="post-comments-link">
-      <span class="material-icons inline-icon">forum</span>
       <a href="#comments"
         >{post.commentCount ? post.commentCount : 0}
         {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a
@@ -47,12 +43,25 @@
       margin-left: 0.2rem;
       margin-right: 0.2rem;
 
-      &:before {
+      &::before {
         margin-right: 0.3rem;
         position: relative;
-        top: 0.1rem;
+        top: 0.2rem;
         font: 1rem var(--icon-font);
       }
+    }
+
+    .post-categories::before {
+      content: "folder";
+    }
+    .post-date::before {
+      content: "calendar_today";
+    }
+    .post-authors::before {
+      content: "history_edu";
+    }
+    .post-comments-link::before {
+      content: "forum";
     }
 
     .post-category:not(:last-child):after {
