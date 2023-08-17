@@ -35,7 +35,6 @@
 <div class="comment {isHighlighted() ? 'highlighted' : ''}" id="comment-{comment._id}">
   <header class="comment-header">
     <span class="comment-author">
-      {#if isHighlighted()}<span class="material-icons inline-icon">history_edu</span>{/if}
       {comment.author}</span
     >
     <span class="comment-date">{comment.date.toLocaleDateString(globalConfig.locale)}</span>
@@ -72,6 +71,14 @@
 
     &.highlighted {
       border: var(--highlight-border);
+
+      .comment-author::before {
+        font-family: var(--icon-font);
+        content: "history_edu";
+        position: relative;
+        top: 0.2rem;
+        margin-right: 0.3rem;
+      }
     }
   }
 
