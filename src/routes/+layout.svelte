@@ -1,11 +1,11 @@
 <script lang="ts">
-  import {onDestroy, onMount} from "svelte";
-  import {fade} from "svelte/transition";
-  import {SvelteToast} from "@zerodevx/svelte-toast";
-  import {browser} from "$app/environment";
-  import {navigating, page} from "$app/stores";
-  import {createBaseSettings, handleScrolledToBottom, handleViewportResize} from "$lib/util/util";
-  import {auth, postOptions} from "$lib/util/stores";
+  import { onDestroy, onMount } from "svelte";
+  import { fade } from "svelte/transition";
+  import { SvelteToast } from "@zerodevx/svelte-toast";
+  import { browser } from "$app/environment";
+  import { navigating, page } from "$app/stores";
+  import { createBaseSettings, handleScrolledToBottom, handleViewportResize } from "$lib/util/util";
+  import { auth, postOptions } from "$lib/util/stores";
   import Header from "$lib/components/Header.svelte";
   import Footer from "$lib/components/Footer.svelte";
   import Navigation from "$lib/components/Navigation.svelte";
@@ -15,8 +15,8 @@
   import "$lib/style/variables.scss";
   import "$lib/style/input-range.scss";
   import "$lib/style/theme.scss";
-  import {loadLoginStatus} from "$lib/client/auth";
-  import {globalConfig} from "$lib/util/config";
+  import { loadLoginStatus } from "$lib/client/auth";
+  import { globalConfig } from "$lib/util/config";
 
   export let data;
 
