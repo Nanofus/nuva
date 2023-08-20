@@ -13,6 +13,7 @@
 
   const reportValidation = () => {
     if (!post.validationResult) return;
+    if (!Object.keys(post.validationResult).length) return;
     if (!post.validationResult.valid) {
       console.error(
         `${post.validationResult.errorCount} ${
@@ -55,7 +56,7 @@
       finalScript += loadedScript;
     });
     finalScript += script;
-    scriptElement.innerHTML = `window["${localConfig.globalObjectName}"].postScripts = () => {${finalScript}}; window["${localConfig.globalObjectName}"].postScripts();`;
+    scriptElement.innerHTML = `window.nuvaGlobal.postScripts = () => {${finalScript}}; window.nuvaGlobal.postScripts();`;
     document.head.insertBefore(scriptElement, document.head.firstChild);
     scriptElements.push(scriptElement);
   };
@@ -102,10 +103,10 @@
     {t.components.postContent.notMobileFriendly}
   </div>
 {/if}
-<section class="vertically-separated {post.initialLetter ? 'large-initial-letter' : null}" id="post-content">
+<section class="vertically-separated {post.initialLetter ? 'large-initial-letter' : ''}" id="post-content">
   {@html post.content}
 </section>
-<MusicPlayer musicUrlArray={post.music} />
+<MusicPlayer musicUrlArray={post.music} resetMusicButtonStyles={post.resetMusicButtons} />
 
 <style lang="scss">
   :global(section.large-initial-letter > p:first-child::first-letter) {

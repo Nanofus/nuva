@@ -6,7 +6,7 @@
 </script>
 
 {#if href}
-  <a {href} target={openInNewTab ? "_blank" : null} on:click>
+  <a {href} target={openInNewTab ? "_blank" : ""} on:click>
     <slot />
   </a>
 {:else}

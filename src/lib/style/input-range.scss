@@ -65,8 +65,7 @@
     @include thumb;
     -webkit-appearance: none;
     margin-top: calc(
-      calc(calc(-1 * var(--track-border-width) * 2 + var(--track-height)) / 2) -
-        calc(var(--thumb-height) / 2)
+      calc(calc(-1 * var(--track-border-width) * 2 + var(--track-height)) / 2) - calc(var(--thumb-height) / 2)
     );
   }
 

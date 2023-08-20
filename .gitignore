@@ -21,3 +21,4 @@ symlink-from
 .env*
 .env*.local
 !.env.example
+.env*.local

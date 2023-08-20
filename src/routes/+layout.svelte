@@ -48,7 +48,7 @@
   {/each}
 </svelte:head>
 
-<div class={fullWidth ? "wide" : ""} id="page">
+<div class={fullWidth ? "wide" : ""} id="layout">
   <Header />
   <Navigation />
   <main>

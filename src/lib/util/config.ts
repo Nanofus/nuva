@@ -6,9 +6,9 @@ export const localConfig: LocalConfig = {
   bottomScrollThreshold: 100,
   localStorageAuthKey: "auth",
   localStorageSettingsKey: "settings",
-  globalObjectName: "globals",
   defaultVolume: 50,
   musicFadeSpeed: 1,
+  featuredPostRotationInterval: 10000,
 };
 
 export const getConfig = async () => {
@@ -16,6 +16,4 @@ export const getConfig = async () => {
   return (await edgeConfigClient.getAll()) as Config;
 };
 
-export const globalConfig: Config = browser
-  ? await (await fetch("/api/config")).json()
-  : await getConfig();
+export const globalConfig: Config = browser ? await (await fetch("/api/config")).json() : await getConfig();

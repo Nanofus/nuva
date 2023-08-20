@@ -7,14 +7,23 @@ Musicmancer 2023 Edition
   import Button from "$lib/components/reusable/Button.svelte";
   import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
   import { localConfig } from "$lib/util/config";
+  import { fetchFromUrl } from "music-metadata-browser";
+  import { browser } from "$app/environment";
 
+  interface AudioMetadata {
+    title: string;
+    artist: string;
+    album: string;
+  }
   interface AudioData {
     src: string;
     audioElement: HTMLAudioElement;
     isEffect: boolean;
+    metadata: AudioMetadata;
   }
 
   export let musicUrlArray: string[] = [];
+  export let resetMusicButtonStyles: boolean;
 
   let currentAudioElement: HTMLAudioElement | null;
   let generatedElements: HTMLButtonElement[] = [];
@@ -24,6 +33,8 @@ Musicmancer 2023 Edition
   let newPlayerAfterFade: HTMLAudioElement;
   let volume = 0;
   let audioDataArray: AudioData[] = [];
+  let infoboxVisible = false;
+  let displayedMetadata: AudioMetadata;
 
   // This runs before parent onMount, so the audio elements exist when user scripts run
   onMount(() => {
@@ -36,6 +47,7 @@ Musicmancer 2023 Edition
     generatedElements.forEach((element) => element.remove());
     clearInterval(seekInterval);
     clearInterval(fadeOutInterval);
+    if (browser) document.querySelector("#layout")?.classList.remove("bottom-padded");
   });
 
   const pauseOnEnded = () => {
@@ -44,6 +56,8 @@ Musicmancer 2023 Edition
   };
 
   const play = async (index: number) => {
+    if (!currentAudioElement) document.querySelector("#layout")?.classList.add("bottom-padded");
+
     const newAudioData = audioDataArray[index];
     if (currentAudioElement == newAudioData.audioElement) {
       if (paused) await unpause();
@@ -59,6 +73,7 @@ Musicmancer 2023 Edition
       newPlayerAfterFade = newAudioData.audioElement;
       generatedElements.forEach((e) => (e.disabled = true));
       // Others are faded out by the fadeout interval
+      infoboxVisible = infoboxVisible ? !infoboxVisible : infoboxVisible;
       const waitUntilOthersFadedInterval = setInterval(async () => {
         fadeInProgress = true;
         if (!othersStillPlaying()) {
@@ -71,7 +86,40 @@ Musicmancer 2023 Edition
           generatedElements.forEach((e) => (e.disabled = false));
           clearInterval(waitUntilOthersFadedInterval);
         }
-      }, 10);
+      }, 100);
+    }
+  };
+
+  const updateInfoBox = (audioSrc: string) => {
+    for (const data of audioDataArray)
+      if (data.src === audioSrc) {
+        displayedMetadata = data.metadata;
+        return;
+      }
+    displayedMetadata = {
+      title: "N/A",
+      artist: "N/A",
+      album: "N/A",
+    };
+  };
+
+  const processMetadata = async () => {
+    for (const audioData of audioDataArray) {
+      try {
+        const metadata = await fetchFromUrl(audioData.src);
+        audioData.metadata.title = metadata.common.title ? metadata.common.title : "N/A";
+        audioData.metadata.artist = metadata.common.artist ? metadata.common.artist : "N/A";
+        audioData.metadata.album = metadata.common.album ? metadata.common.album : "N/A";
+        if (!currentAudioElement) continue;
+        if (infoboxVisible && currentAudioElement?.src === audioData.src) {
+          updateInfoBox(audioData.src);
+        }
+      } catch(error: any) {
+        console.error(error.message);
+        audioData.metadata.title = "N/A";
+        audioData.metadata.artist = "N/A";
+        audioData.metadata.album = "N/A";
+      }
     }
   };
 
@@ -94,6 +142,7 @@ Musicmancer 2023 Edition
       } else if (audioSrc[0] === "#") {
         audioSrc = musicUrlArray[parseInt(audioSrc.slice(1))];
       }
+      audioSrc = audioSrc.includes("\r") || audioSrc.includes("\n") ? audioSrc.slice(0, audioSrc.length - 1) : audioSrc;
       audioElement.src = audioSrc;
       audioElement.volume = volume / 100;
       audioElement.currentTime = 0;
@@ -102,6 +151,11 @@ Musicmancer 2023 Edition
         src: audioSrc,
         audioElement: audioElement,
         isEffect: audioElement.classList.contains("effect"),
+        metadata: {
+          title: "",
+          artist: "",
+          album: "",
+        },
       });
 
       // Create audio play button
@@ -109,13 +163,23 @@ Musicmancer 2023 Edition
         createAudioButton(audioElement, totalIndex);
       totalIndex++;
     });
+
+    processMetadata();
   };
 
   const createAudioButton = (audioElement: HTMLAudioElement, index: number) => {
     const audioButton = document.createElement("button");
     generatedElements.push(audioButton);
     audioButton.classList.add("audio-button", `index-${index}`);
-    audioButton.innerHTML = `<span class="material-icons">music_note</span>`;
+    resetMusicButtonStyles && audioButton.classList.add("minimal");
+
+    // Button content
+    let buttonContent = audioElement.dataset.content;
+    audioButton.innerHTML = buttonContent
+      ? `<span>${buttonContent}</span>`
+      : `<span class="material-icons">music_note</span>`;
+    audioElement.removeAttribute("data-content");
+
     audioButton.addEventListener("click", () => play(parseInt(audioButton.classList[1].slice(6))));
     audioElement.after(audioButton);
     audioButton.appendChild(audioElement);
@@ -137,16 +201,13 @@ Musicmancer 2023 Edition
   };
 
   // Update volume based on bar
-  $: audioDataArray
-    .map((data) => data.audioElement)
-    .forEach((element) => (element.volume = volume / 100));
+  $: audioDataArray.map((data) => data.audioElement).forEach((element) => (element.volume = volume / 100));
 
   // Save volume
   $: volume && saveSetting("volume", volume);
 
   // Mute
-  $: currentAudioElement &&
-    (muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
+  $: currentAudioElement && (muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
 
   const unpause = async () => {
     if (currentAudioElement) {
@@ -168,13 +229,14 @@ Musicmancer 2023 Edition
           ? parseFloat(audioData.audioElement.dataset.fadeOutTime)
           : 1;
         let newVolume =
-          audioData.audioElement.volume -
-          (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
+          audioData.audioElement.volume - (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
         if (newVolume < 0) newVolume = 0;
         audioData.audioElement.volume = newVolume;
       } else {
-        audioData.audioElement.currentTime = 0;
-        audioData.audioElement.pause();
+        if (audioData.audioElement.currentTime > 0) {
+          audioData.audioElement.currentTime = 0;
+          audioData.audioElement.pause();
+        }
       }
     });
   }, 10);
@@ -182,11 +244,7 @@ Musicmancer 2023 Edition
   const othersStillPlaying = () => {
     return (
       audioDataArray.filter((audioData) => {
-        return (
-          audioData.audioElement !== newPlayerAfterFade &&
-          !audioData.isEffect &&
-          !audioData.audioElement.paused
-        );
+        return audioData.audioElement !== newPlayerAfterFade && !audioData.isEffect && !audioData.audioElement.paused;
       }).length > 0
     );
   };
@@ -219,33 +277,59 @@ Musicmancer 2023 Edition
         <Button icon="volume_mute" disabled={fadeInProgress} on:click={() => (muted = !muted)} />
       {/if}
     </div>
-    <input
-      class="volume-bar"
-      disabled={fadeInProgress}
-      type="range"
-      min="0"
-      max="100"
-      bind:value={volume}
-    />
+    <input class="volume-bar" disabled={fadeInProgress} type="range" min="0" max="100" bind:value={volume} />
+    <div>
+      <Button
+        icon="info"
+        disabled={fadeInProgress}
+        on:click={() => {
+          if (currentAudioElement) updateInfoBox(currentAudioElement.src);
+          infoboxVisible = !infoboxVisible;
+        }}
+      />
+    </div>
   </div>
+  <table id="music-info-box" class={infoboxVisible ? "" : "hidden"}>
+    <tr>
+      <th colspan="3">Song Metadata</th>
+    </tr>
+    {#if displayedMetadata}
+      <tr>
+        <td class="material-icons">music_note</td>
+        <td>Song title:</td>
+        <td>{displayedMetadata.title}</td>
+      </tr>
+      <tr>
+        <td class="material-icons">person</td>
+        <td>Artist:</td>
+        <td>{displayedMetadata.artist}</td>
+      </tr>
+      <tr>
+        <td class="material-icons">album</td>
+        <td>Album:</td>
+        <td>{displayedMetadata.album}</td>
+      </tr>
+    {/if}
+  </table>
 {/if}
 
 <style lang="scss">
   :global(.audio-button) {
     display: block;
-    width: 4rem;
-    height: 4rem;
+    width: 4em;
+    height: 4em;
     border: 1px solid var(--accent);
-    border-radius: 2rem;
+    border-radius: 2em;
     box-shadow: var(--music-button-shadow);
     background: var(--background-light);
     color: var(--text-light);
-    margin: auto;
+    margin: 2rem auto;
+    font-size: inherit;
 
     :global(> span) {
       position: relative;
       top: 0.1rem;
-      font-size: 2rem;
+      font-size: 2em;
     }
 
     &:disabled {
@@ -263,16 +347,32 @@ Musicmancer 2023 Edition
     }
   }
 
+  :global(.audio-button.minimal) {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+    color: initial;
+    transition: none;
+
+    &:hover {
+      color: initial;
+      background: none;
+    }
+  }
+
   .audio-player {
     display: grid;
-    grid-template-columns: 2rem 2rem 1fr 2rem 2rem 6rem;
+    grid-template-columns: 2rem 2rem 1fr 2rem 2rem 6rem 2rem;
     position: fixed;
     bottom: -2rem;
     left: 0;
     width: var(--viewport-width);
+    height: 2rem;
     color: var(--text-dark);
     background-color: var(--accent);
     animation: audioPlayerSlideIn 500ms ease-out 10ms 1 normal forwards;
+    z-index: var(--max-z-index);
 
     * {
       transition: var(--unfocus-speed) all linear;
@@ -290,9 +390,55 @@ Musicmancer 2023 Edition
   }
 
   @keyframes audioPlayerSlideIn {
-    from {bottom: -2rem;}
-    to   {bottom: 0;}
+    from {
+      bottom: -2rem;
+    }
+    to {
+      bottom: 0;
+    }
   }
 
+  :global(#layout) {
+    transition: padding-bottom 500ms ease-out;
+  }
+  :global(#layout.bottom-padded) {
+    padding-bottom: 2rem;
+  }
 
+  table#music-info-box {
+    width: auto;
+    max-width: calc(var(--viewport-width - 2rem));
+    background-color: var(--accent);
+    position: fixed;
+    right: 1rem;
+    bottom: 2rem;
+    color: var(--text-dark);
+    padding: 0.5rem;
+    box-shadow: var(--subtle-shadow);
+    border-radius: var(--border-radius);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    z-index: calc(var(--max-z-index) - 1);
+  }
+
+  :global(#music-info-box td.material-icons) {
+    font-size: 1rem;
+    min-width: 0.5rem;
+    padding-right: 0;
+  }
+
+  :global(#music-info-box tr:nth-child(2)) {
+    height: 2rem;
+    vertical-align: bottom;
+  }
+
+  :global(#music-info-box tr:nth-child(2) td.material-icons) {
+    padding-top: 0.75rem;
+  }
+
+  :global(#music-info-box th) {
+    text-align: center;
+    border-bottom: 0.06rem solid var(--text-dark);
+    padding-bottom: 0.25rem;
+  }
 </style>

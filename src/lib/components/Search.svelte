@@ -23,8 +23,7 @@
   <Form on:submit={() => (submitted = true)}>
     <Input bind:value={searchTerm} placeholder={t.components.search.searchTerms} />
     {#if !submitted}
-      <Button icon="search" on:click={search} on:keyup={search}>{t.components.search.search}</Button
-      >
+      <Button icon="search" on:click={search} on:keyup={search}>{t.components.search.search}</Button>
     {:else}
       <LoadingSpinner />
     {/if}

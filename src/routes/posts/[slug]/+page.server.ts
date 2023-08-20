@@ -1,17 +1,20 @@
 import { error, type Load } from "@sveltejs/kit";
 import { getPost } from "$lib/server/database";
-import type { Post } from "$lib/util/types";
+import type { PostResponse } from "$lib/util/types";
 import { t } from "$lib/util/translations";
 import { validateHTML } from "$lib/server/html-validator";
 
-export const load: Load = async ({ params, url }): Promise<Post | null> => {
+export const load: Load = async ({ params, url }): Promise<PostResponse> => {
   if (params.slug) {
     const isPreview = url.searchParams.get("preview") != null;
     const post = await getPost(params.slug);
     if (isPreview && post) {
-      post.validationResult = validateHTML(post.content);
+      post.validationResult = await validateHTML(post.content);
     }
-    return post;
+    return {
+      slug: params.slug,
+      post,
+    };
   }
 
   throw error(404, t.errors.e404);

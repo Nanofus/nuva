@@ -71,10 +71,7 @@ export const handleViewportResize = () => {
     .querySelector<HTMLElement>(":root")
     ?.style.setProperty(
       "--bleed-buffer",
-      `${
-        Math.round((window.visualViewport.width + Number.EPSILON) * 100) / 100 -
-        scroller.clientWidth
-      }px`,
+      `${Math.round((window.visualViewport.width + Number.EPSILON) * 100) / 100 - scroller.clientWidth}px`,
     );
 };
 
@@ -88,8 +85,7 @@ export const handleScrolledToBottom = () => {
   scrolledToBottom.set(currentScroll + localConfig.bottomScrollThreshold > documentHeight);
 };
 
-export const getPageTitle = (title: string) =>
-  title ? `${title} – ${globalConfig.siteName}` : globalConfig.siteName;
+export const getPageTitle = (title: string) => (title ? `${title} – ${globalConfig.siteName}` : globalConfig.siteName);
 
 export const getPageUrl = (route: string) => `${globalConfig.baseUrl}/${route}`;
 
@@ -104,32 +100,27 @@ export const stripHtml = (html: string) => {
 };
 
 export const getRandomBannerUrl = (seed = 0) =>
-  `url("/images/banners/banner-${
-    ((new Date().getMinutes() + seed) % globalConfig.bannerCount) + 1
-  }.png")`;
-
-const globalObjectName = <keyof Window>localConfig.globalObjectName;
+  `url("/images/banners/banner-${((new Date().getMinutes() + seed) % globalConfig.bannerCount) + 1}.png")`;
 
 export const initGlobalScope = () => {
-  if (!browser || window[globalObjectName]) {
+  if (!browser || window.nuvaGlobal) {
     return;
   }
-
-  window[globalObjectName] = <never>{};
-  window[globalObjectName].saveSetting = saveSetting;
-  window[globalObjectName].loadSetting = loadSetting;
+  window.nuvaGlobal = {
+    onPostDestroy: undefined,
+    saveSetting: saveSetting,
+    loadSetting: loadSetting,
+  };
 };
 
 export const cleanGlobalScope = () => {
   if (!browser) {
     return;
   }
-
-  if (window[globalObjectName]["onPostDestroy"]) {
-    window[globalObjectName]["onPostDestroy"]();
+  if (window.nuvaGlobal && window.nuvaGlobal.onPostDestroy) {
+    window.nuvaGlobal.onPostDestroy();
   }
-
-  delete window[globalObjectName];
+  delete window.nuvaGlobal;
 };
 
 export const createBaseSettings = () => {
