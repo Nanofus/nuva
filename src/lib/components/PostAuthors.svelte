@@ -29,8 +29,8 @@
     margin-top: 0.5rem;
   }
 
-  .author-list::before, .artist-list::before {
-    margin-right: 0.3rem;
+  #authors > div::before {
+    margin-right: 0.5rem;
     position: relative;
     top: 0.2rem;
     font: 1rem var(--icon-font);
