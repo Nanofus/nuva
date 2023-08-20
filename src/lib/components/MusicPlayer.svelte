@@ -114,7 +114,7 @@ Musicmancer 2023 Edition
         if (infoboxVisible && currentAudioElement?.src === audioData.src) {
           updateInfoBox(audioData.src);
         }
-      } catch(error: any) {
+      } catch (error: any) {
         console.error(error.message);
         audioData.metadata.title = "N/A";
         audioData.metadata.artist = "N/A";

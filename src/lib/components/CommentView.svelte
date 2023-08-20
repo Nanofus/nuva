@@ -34,9 +34,7 @@
 
 <div class="comment {isHighlighted() ? 'highlighted' : ''}" id="comment-{comment._id}">
   <header class="comment-header">
-    <span class="comment-author">
-      {comment.author}</span
-    >
+    <span class="comment-author"> {comment.author}</span>
     <span class="comment-date">{comment.date.toLocaleDateString(globalConfig.locale)}</span>
   </header>
   <div class="comment-content">{@html comment.content}</div>

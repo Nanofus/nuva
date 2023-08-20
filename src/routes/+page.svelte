@@ -25,7 +25,7 @@
 
 <style>
   #feature-carousel-wrapper {
-    --featured-post-width: calc( var(--article-max-width) + var(--feature-carousel-leeway) );
+    --featured-post-width: calc(var(--article-max-width) + var(--feature-carousel-leeway));
     width: var(--featured-post-width);
     max-width: 100%;
     height: calc(9 * var(--featured-post-width) / 21);
