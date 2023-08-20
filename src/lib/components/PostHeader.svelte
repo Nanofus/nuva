@@ -19,8 +19,9 @@
     </time>
     <span class="post-authors">
       <span class="author-list">
-        {#each post.coAuthors as author}
+        {#each post.coAuthors as author, i}
           <a href="/authors/{encodeURI(author)}">{author}</a>
+          {#if i !== post.coAuthors.length}<span>, </span>{/if}
         {/each}
       </span>
     </span>
@@ -62,10 +63,6 @@
     }
     .post-comments-link::before {
       content: "forum";
-    }
-
-    .post-category:not(:last-child):after {
-      content: ", ";
     }
   }
 </style>
