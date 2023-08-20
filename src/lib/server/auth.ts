@@ -1,5 +1,6 @@
 import type { AuthData } from "$lib/util/types";
 import { globalConfig } from "$lib/util/config";
+import { verify } from "jsonwebtoken";
 
 export const login = async (username: string, password: string): Promise<AuthData> => {
   const response = await (
@@ -36,6 +37,15 @@ export const login = async (username: string, password: string): Promise<AuthDat
     };
   }
   return null;
+};
+
+export const decodeToken = (authToken: string) => {
+  console.log(authToken);
+  console.log(import.meta.env.VITE_JWT_AUTH_SECRET);
+  const result = verify(authToken, import.meta.env.VITE_JWT_AUTH_SECRET, {
+    algorithms: ["HS256", "HS384", "HS512"],
+  });
+  console.log(result);
 };
 
 const isAuthTokenValid = async (authToken: string): Promise<boolean> => {
