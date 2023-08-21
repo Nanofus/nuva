@@ -48,11 +48,12 @@
     const scriptElement = document.createElement("script");
     const loadedScripts = await Promise.all(
       scriptFiles.map(async (fileUrl) => {
+        if (!fileUrl.startsWith("https")) return "";
         const response = await fetch(fileUrl);
         return await response.text();
       }),
     );
-    loadedScripts.forEach((loadedScript) => {
+    loadedScripts.filter(loadedScript => loadedScript != "").forEach((loadedScript) => {
       finalScript += loadedScript;
     });
     finalScript += script;
@@ -63,7 +64,6 @@
 
   const runScripts = async () => {
     if (post.content.indexOf("<script>") === -1) {
-      console.log(post.scriptFiles);
       await runUserScripts(post.scripts, post.scriptFiles);
     }
 
