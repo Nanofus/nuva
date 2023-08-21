@@ -49,7 +49,9 @@
     const loadedScripts = await Promise.all(
       scriptFiles.map(async (fileUrl) => {
         const response = await fetch(fileUrl);
-        return await response.text();
+        const script = await response.text();
+        console.log(fileUrl + ", " + script);
+        return script;
       }),
     );
     loadedScripts.forEach((loadedScript) => {
