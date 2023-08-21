@@ -44,7 +44,7 @@
       margin-right: 0.2rem;
 
       &::before {
-        margin-right: 0.3rem;
+        margin-right: 0.5rem;
         position: relative;
         top: 0.2rem;
         font: 1rem var(--icon-font);
