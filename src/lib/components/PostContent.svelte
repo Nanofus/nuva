@@ -49,9 +49,7 @@
     const loadedScripts = await Promise.all(
       scriptFiles.map(async (fileUrl) => {
         const response = await fetch(fileUrl);
-        const script = await response.text();
-        console.log(fileUrl + ", " + script);
-        return script;
+        return await response.text();
       }),
     );
     loadedScripts.forEach((loadedScript) => {
@@ -59,13 +57,13 @@
     });
     finalScript += script;
     scriptElement.innerHTML = `window.nuvaGlobal.postScripts = () => {${finalScript}}; window.nuvaGlobal.postScripts();`;
-    console.log(finalScript);
     document.head.insertBefore(scriptElement, document.head.firstChild);
     scriptElements.push(scriptElement);
   };
 
   const runScripts = async () => {
     if (post.content.indexOf("<script>") === -1) {
+      console.log(post.scriptFiles);
       await runUserScripts(post.scripts, post.scriptFiles);
     }
 
