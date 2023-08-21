@@ -17,7 +17,7 @@ export const QUERIES = {
                 name
             }
         }
-        coAuthors {
+        coAuthors(first: 20) {
             nodes {
                 displayName
             }
@@ -45,7 +45,7 @@ export const QUERIES = {
                 name
             }
         }
-        coAuthors {
+        coAuthors(first: 20) {
             nodes {
                 displayName
             }
