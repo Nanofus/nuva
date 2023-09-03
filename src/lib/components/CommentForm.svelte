@@ -31,10 +31,10 @@
       toast.push(t.toasts.commentFailed, toastSettings.error);
     } else {
       toast.push(t.toasts.commentSent, toastSettings.success);
+      content = "";
     }
     dispatch("commentSent");
     sending = false;
-    content = "";
   };
 </script>
 
