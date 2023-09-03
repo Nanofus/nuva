@@ -468,6 +468,15 @@ export const postComment = async (
   content: string,
 ): Promise<boolean> => {
   if (!authToken) return false;
+  const query = `
+    mutation PostComment {
+        createComment(input: {
+            commentOn: ${postId}, 
+            parent: ${parent},
+            content: "${content.replace('"', '\\"')}"}) {
+            success
+        }
+    }`;
   const response = await (
     await fetch(globalConfig.graphqlApi, {
       method: "POST",
@@ -476,16 +485,7 @@ export const postComment = async (
         Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({
-        query: `
-					mutation PostComment {
-						createComment(input: {
-							commentOn: ${postId}, 
-							parent: ${parent},
-							content: "${content}"
-						}) {
-							success
-						}
-					}`,
+        query,
       }),
     })
   ).json();

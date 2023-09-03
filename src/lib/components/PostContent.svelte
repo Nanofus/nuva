@@ -52,9 +52,11 @@
         return await response.text();
       }),
     );
-    loadedScripts.filter(loadedScript => loadedScript != "").forEach((loadedScript) => {
-      finalScript += loadedScript;
-    });
+    loadedScripts
+      .filter((loadedScript) => loadedScript != "")
+      .forEach((loadedScript) => {
+        finalScript += loadedScript;
+      });
     finalScript += script;
     scriptElement.innerHTML = `window.nuvaGlobal.postScripts = () => {${finalScript}}; window.nuvaGlobal.postScripts();`;
     document.head.insertBefore(scriptElement, document.head.firstChild);

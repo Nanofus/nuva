@@ -43,5 +43,4 @@
   .artist-list::before {
     content: "palette";
   }
-
 </style>
