@@ -469,11 +469,11 @@ export const postComment = async (
 ): Promise<boolean> => {
   if (!authToken) return false;
   const query = `
-    mutation PostComment {
+    mutation PostComment($content: String!) {
         createComment(input: {
             commentOn: ${postId}, 
             parent: ${parent},
-            content: "${content.replace('"', '\\"')}"}) {
+            content:$content}) {
             success
         }
     }`;
@@ -486,6 +486,9 @@ export const postComment = async (
       },
       body: JSON.stringify({
         query,
+        variables: {
+          content
+        }
       }),
     })
   ).json();
