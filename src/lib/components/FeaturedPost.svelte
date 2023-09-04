@@ -11,9 +11,9 @@
 >
   <p class="authors">
     <span class="author-list">
-      {#each postMeta.coAuthors as author}
-        <a href="/authors/{encodeURI(author)}">{author}</a>
-      {/each}
+        {#each postMeta.coAuthors as author, i}
+          <a href="/authors/{encodeURI(author)}">{author}</a>{#if i !== postMeta.coAuthors.length - 1}<span>, </span>{/if}
+        {/each}
     </span>
   </p>
   <h1><a href="/posts/{postMeta.slug}">{@html postMeta.title}</a></h1>
