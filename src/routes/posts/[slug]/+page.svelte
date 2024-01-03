@@ -5,7 +5,7 @@
   import PostContent from "$lib/components/PostContent.svelte";
   import { onDestroy, onMount } from "svelte";
   import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util/util";
+  import {getPageTitle, getPageUrl, recursivelyConvertDates} from "$lib/util/util";
   import { auth, postOptions } from "$lib/util/stores";
   import { t } from "$lib/util/translations";
   import { toast } from "@zerodevx/svelte-toast";
@@ -46,6 +46,7 @@
       }
     }
     if (data.post.content) {
+      recursivelyConvertDates(data.post.comments);
       postOptions.set({
         bannerVisible: data.post.bannerVisible,
         customBannerUrl: data.post.customBanner === "" ? null : data.post.customBanner,
