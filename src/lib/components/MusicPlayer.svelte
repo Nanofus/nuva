@@ -7,7 +7,7 @@ Musicmancer 2023 Edition
   import Button from "$lib/components/reusable/Button.svelte";
   import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
   import { localConfig } from "$lib/util/config";
-  import { fetchFromUrl } from "music-metadata-browser";
+  import { parseBlob } from "music-metadata";
   import { browser } from "$app/environment";
 
   interface AudioMetadata {
@@ -102,6 +102,15 @@ Musicmancer 2023 Edition
       album: "N/A",
     };
   };
+
+  const fetchFromUrl = async (audioTrackUrl: string): Promise<any> => {
+    const response = await fetch(audioTrackUrl);
+    if (response.ok) {
+      return parseBlob(await response.blob());
+    } else {
+      throw new Error(`HTTP error status=${response.status}: ${response.statusText}`);
+    }
+  }
 
   const processMetadata = async () => {
     for (const audioData of audioDataArray) {

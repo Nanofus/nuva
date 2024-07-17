@@ -97,7 +97,7 @@
 </script>
 
 {#if post.styles}
-  <div id="post-style-container">{@html `<style>${post.styles}</style>`}</div>
+  <div id="post-style-container">{@html `<${''}style>${post.styles}</${''}style>`}</div>
 {/if}
 {#if !post.mobileFriendly}
   <div class="info-box error hidden-desktop">
