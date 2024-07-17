@@ -1,12 +1,12 @@
-import type { AuthData } from "$lib/util/types";
-import { globalConfig } from "$lib/util/config";
+import type { AuthData } from '$lib/util/types';
+import { globalConfig } from '$lib/util/config';
 
 export const login = async (username: string, password: string): Promise<AuthData> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `
@@ -23,8 +23,8 @@ export const login = async (username: string, password: string): Promise<AuthDat
 						        username
 					      }
             }
-        }`,
-      }),
+        }`
+      })
     })
   ).json();
   if (response.data.login) {
@@ -32,7 +32,7 @@ export const login = async (username: string, password: string): Promise<AuthDat
       displayName: response.data.login.user.name,
       username: response.data.login.user.username,
       authToken: response.data.login.authToken,
-      refreshToken: response.data.login.refreshToken,
+      refreshToken: response.data.login.refreshToken
     };
   }
   return null;
@@ -41,10 +41,10 @@ export const login = async (username: string, password: string): Promise<AuthDat
 const isAuthTokenValid = async (authToken: string): Promise<boolean> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`
       },
       body: JSON.stringify({
         query: `
@@ -53,15 +53,15 @@ const isAuthTokenValid = async (authToken: string): Promise<boolean> => {
                     email
                   }
                 }
-                `,
-      }),
+                `
+      })
     })
   ).json();
   return !(response.errors && response.errors.length > 0);
 };
 
 export const authenticated = async (request: Request): Promise<boolean> => {
-  const authToken = request.headers.get("Authorization")?.split(" ")[1];
+  const authToken = request.headers.get('Authorization')?.split(' ')[1];
   if (!authToken) return false;
   return await isAuthTokenValid(authToken);
 };

@@ -1,253 +1,253 @@
-import type { Localization } from "$lib/util/types";
-import { globalConfig } from "$lib/util/config";
+import type { Localization } from '$lib/util/types';
+import { globalConfig } from '$lib/util/config';
 
 const translations: { [key: string]: Localization } = {
-  "en-US": {
+  'en-US': {
     common: {
-      loadMore: "Load more",
-      edit: "Edit",
-      reply: "Reply",
-      comment: "Comment",
-      send: "Send",
-      close: "Close",
-      commentSingular: "comment",
-      commentPlural: "comments",
+      loadMore: 'Load more',
+      edit: 'Edit',
+      reply: 'Reply',
+      comment: 'Comment',
+      send: 'Send',
+      close: 'Close',
+      commentSingular: 'comment',
+      commentPlural: 'comments'
     },
     toasts: {
-      welcome: "Welcome,",
-      commentSent: "Comment sent.",
-      commentFailed: "Sending comment failed.",
-      loginFailed: "Login failed.",
-      loggedOut: "You logged out.",
+      welcome: 'Welcome,',
+      commentSent: 'Comment sent.',
+      commentFailed: 'Sending comment failed.',
+      loginFailed: 'Login failed.',
+      loggedOut: 'You logged out.'
     },
     components: {
       commentForm: {
-        emptyComment: "Comment cannot be empty.",
+        emptyComment: 'Comment cannot be empty.'
       },
       commentList: {
-        post: "Post",
-        date: "Date",
-        commenter: "Commenter",
+        post: 'Post',
+        date: 'Date',
+        commenter: 'Commenter'
       },
       footer: {
-        feedback: "Feedback",
+        feedback: 'Feedback'
       },
       login: {
-        fillBothFields: "Fill both fields.",
-        cantUseWithoutJs: "Not usable without JavaScript.",
-        login: "Login",
-        logout: "Logout",
-        username: "Username",
-        password: "Password",
+        fillBothFields: 'Fill both fields.',
+        cantUseWithoutJs: 'Not usable without JavaScript.',
+        login: 'Login',
+        logout: 'Logout',
+        username: 'Username',
+        password: 'Password'
       },
       postContent: {
-        validationError: "Error in post HTML. See console for details.",
-        noValidationError: "Post HTML is valid.",
-        scriptError: "Error in post scripts. See console for details.",
-        errorsCountSingular: "error",
-        errorsCountPlural: "errors",
-        notMobileFriendly: "This post is not suitable for mobile reading.",
+        validationError: 'Error in post HTML. See console for details.',
+        noValidationError: 'Post HTML is valid.',
+        scriptError: 'Error in post scripts. See console for details.',
+        errorsCountSingular: 'error',
+        errorsCountPlural: 'errors',
+        notMobileFriendly: 'This post is not suitable for mobile reading.'
       },
       postList: {
-        title: "Title",
-        date: "Date",
-        author: "Poster",
+        title: 'Title',
+        date: 'Date',
+        author: 'Poster'
       },
       search: {
-        emptyField: "Search field cannot be empty.",
-        search: "Search",
-        searchTerms: "Search terms",
+        emptyField: 'Search field cannot be empty.',
+        search: 'Search',
+        searchTerms: 'Search terms'
       },
       navigation: {
-        frontPage: "Front Page",
-        posts: "Releases",
-        tags: "Tags",
-        categories: "Categories",
-        search: "Search",
-        guide: "Formatting Guide",
-        soundtracks: "Soundtracks",
-        write: "Write",
-        login: "Login",
-        profile: "Profile",
-      },
+        frontPage: 'Front Page',
+        posts: 'Releases',
+        tags: 'Tags',
+        categories: 'Categories',
+        search: 'Search',
+        guide: 'Formatting Guide',
+        soundtracks: 'Soundtracks',
+        write: 'Write',
+        login: 'Login',
+        profile: 'Profile'
+      }
     },
     settings: {
-      user: "User",
-      volume: "Audio Volume",
+      user: 'User',
+      volume: 'Audio Volume'
     },
     errors: {
-      e401: "Authentication failed.",
-      e403: "No access.",
-      e404: "Page not found.",
-      e500: "Something went wrong.",
+      e401: 'Authentication failed.',
+      e403: 'No access.',
+      e404: 'Page not found.',
+      e500: 'Something went wrong.'
     },
     webhooks: {
-      newComment: "New comment: ",
+      newComment: 'New comment: '
     },
     pages: {
       index: {
-        title: "Front Page",
-        newestReleases: "Newest Releases",
-        newestComments: "Newest Comments",
+        title: 'Front Page',
+        newestReleases: 'Newest Releases',
+        newestComments: 'Newest Comments'
       },
       error: {
-        title: "Error",
+        title: 'Error'
       },
       posts: {
-        title: "All Releases",
+        title: 'All Releases'
       },
       post: {
-        noAccess: "Post not found or you don't have access to it.",
+        noAccess: "Post not found or you don't have access to it."
       },
       tags: {
-        title: "Tags",
+        title: 'Tags'
       },
       tag: {
-        title: "Tag",
+        title: 'Tag'
       },
       search: {
-        title: "Search",
+        title: 'Search'
       },
       searchResults: {
-        title: "Search",
+        title: 'Search'
       },
       categories: {
-        title: "Categories",
+        title: 'Categories'
       },
       category: {
-        title: "Category",
+        title: 'Category'
       },
       author: {
-        title: "Author",
+        title: 'Author'
       },
       profile: {
-        title: "Profile",
-      },
-    },
+        title: 'Profile'
+      }
+    }
   },
-  "fi-FI": {
+  'fi-FI': {
     common: {
-      loadMore: "Lataa lisää",
-      edit: "Muokkaa",
-      reply: "Vastaa",
-      comment: "Kommentoi",
-      send: "Lähetä",
-      close: "Sulje",
-      commentSingular: "kommentti",
-      commentPlural: "kommenttia",
+      loadMore: 'Lataa lisää',
+      edit: 'Muokkaa',
+      reply: 'Vastaa',
+      comment: 'Kommentoi',
+      send: 'Lähetä',
+      close: 'Sulje',
+      commentSingular: 'kommentti',
+      commentPlural: 'kommenttia'
     },
     toasts: {
-      welcome: "Tervetuloa,",
-      commentSent: "Kommentti lähetetty.",
-      commentFailed: "Kommentin lähetys epäonnistui.",
-      loginFailed: "Kirjautuminen epäonnistui.",
-      loggedOut: "Kirjauduit ulos.",
+      welcome: 'Tervetuloa,',
+      commentSent: 'Kommentti lähetetty.',
+      commentFailed: 'Kommentin lähetys epäonnistui.',
+      loginFailed: 'Kirjautuminen epäonnistui.',
+      loggedOut: 'Kirjauduit ulos.'
     },
     components: {
       commentForm: {
-        emptyComment: "Kommentti ei voi olla tyhjä.",
+        emptyComment: 'Kommentti ei voi olla tyhjä.'
       },
       commentList: {
-        post: "Postaus",
-        date: "Päiväys",
-        commenter: "Kommentoija",
+        post: 'Postaus',
+        date: 'Päiväys',
+        commenter: 'Kommentoija'
       },
       footer: {
-        feedback: "Palaute",
+        feedback: 'Palaute'
       },
       login: {
-        fillBothFields: "Täytä molemmat kentät.",
-        cantUseWithoutJs: "Ei käytettävissä ilman JavaScriptia.",
-        login: "Kirjaudu sisään",
-        logout: "Kirjaudu ulos",
-        username: "Käyttäjätunnus",
-        password: "Salasana",
+        fillBothFields: 'Täytä molemmat kentät.',
+        cantUseWithoutJs: 'Ei käytettävissä ilman JavaScriptia.',
+        login: 'Kirjaudu sisään',
+        logout: 'Kirjaudu ulos',
+        username: 'Käyttäjätunnus',
+        password: 'Salasana'
       },
       postContent: {
-        validationError: "Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.",
-        noValidationError: "Postauksen HTML on kunnossa!",
-        scriptError: "Virhe postauksen skripteissä. Katso konsolista lisätietoja.",
-        errorsCountSingular: "virhe",
-        errorsCountPlural: "virhettä",
-        notMobileFriendly: "Tämä postaus ei sovi mobiililla luettavaksi.",
+        validationError: 'Virhe postauksen HTML:ssä. Katso konsolista lisätietoja.',
+        noValidationError: 'Postauksen HTML on kunnossa!',
+        scriptError: 'Virhe postauksen skripteissä. Katso konsolista lisätietoja.',
+        errorsCountSingular: 'virhe',
+        errorsCountPlural: 'virhettä',
+        notMobileFriendly: 'Tämä postaus ei sovi mobiililla luettavaksi.'
       },
       postList: {
-        title: "Otsikko",
-        date: "Päiväys",
-        author: "Postaaja",
+        title: 'Otsikko',
+        date: 'Päiväys',
+        author: 'Postaaja'
       },
       search: {
-        emptyField: "Hakukenttä ei voi olla tyhjä.",
-        search: "Hae",
-        searchTerms: "Hakusanat",
+        emptyField: 'Hakukenttä ei voi olla tyhjä.',
+        search: 'Hae',
+        searchTerms: 'Hakusanat'
       },
       navigation: {
-        frontPage: "Etusivu",
-        posts: "Julkaisut",
-        tags: "Tagit",
-        categories: "Kategoriat",
-        search: "Haku",
-        guide: "Muotoiluopas",
-        soundtracks: "Soundtrackit",
-        write: "Kirjoita",
-        login: "Kirjaudu",
-        profile: "Profiili",
-      },
+        frontPage: 'Etusivu',
+        posts: 'Julkaisut',
+        tags: 'Tagit',
+        categories: 'Kategoriat',
+        search: 'Haku',
+        guide: 'Muotoiluopas',
+        soundtracks: 'Soundtrackit',
+        write: 'Kirjoita',
+        login: 'Kirjaudu',
+        profile: 'Profiili'
+      }
     },
     settings: {
-      user: "Käyttäjä",
-      volume: "Äänenvoimakkuus",
+      user: 'Käyttäjä',
+      volume: 'Äänenvoimakkuus'
     },
     errors: {
-      e401: "Autentikaatio epäonnistui.",
-      e403: "Pääsy estetty.",
-      e404: "Sivua ei löytynyt",
-      e500: "Jotain meni pieleen",
+      e401: 'Autentikaatio epäonnistui.',
+      e403: 'Pääsy estetty.',
+      e404: 'Sivua ei löytynyt',
+      e500: 'Jotain meni pieleen'
     },
     webhooks: {
-      newComment: "Uusi kommentti: ",
+      newComment: 'Uusi kommentti: '
     },
     pages: {
       index: {
-        title: "Etusivu",
-        newestReleases: "Uusimmat julkaisut",
-        newestComments: "Uusimmat kommentit",
+        title: 'Etusivu',
+        newestReleases: 'Uusimmat julkaisut',
+        newestComments: 'Uusimmat kommentit'
       },
       error: {
-        title: "Virhe",
+        title: 'Virhe'
       },
       posts: {
-        title: "Kaikki julkaisut",
+        title: 'Kaikki julkaisut'
       },
       post: {
-        noAccess: "Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.",
+        noAccess: 'Postausta ei löytynyt tai sinulla ei ole pääsyä siihen.'
       },
       tags: {
-        title: "Tagit",
+        title: 'Tagit'
       },
       tag: {
-        title: "Tagi",
+        title: 'Tagi'
       },
       search: {
-        title: "Haku",
+        title: 'Haku'
       },
       searchResults: {
-        title: "Haku",
+        title: 'Haku'
       },
       categories: {
-        title: "Kategoriat",
+        title: 'Kategoriat'
       },
       category: {
-        title: "Kategoria",
+        title: 'Kategoria'
       },
       author: {
-        title: "Kirjoittaja",
+        title: 'Kirjoittaja'
       },
       profile: {
-        title: "Profiili",
-      },
-    },
-  },
+        title: 'Profiili'
+      }
+    }
+  }
 };
 
 export const t = translations[globalConfig.locale];

@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type { Post, PostResponse } from "$lib/util/types";
-  import PostHeader from "$lib/components/PostHeader.svelte";
-  import PostFooter from "$lib/components/PostFooter.svelte";
-  import PostContent from "$lib/components/PostContent.svelte";
-  import { onDestroy, onMount } from "svelte";
-  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import {getPageTitle, getPageUrl, recursivelyConvertDates} from "$lib/util/util";
-  import { auth, postOptions } from "$lib/util/stores";
-  import { t } from "$lib/util/translations";
-  import { toast } from "@zerodevx/svelte-toast";
+  import type { Post, PostResponse } from '$lib/util/types';
+  import PostHeader from '$lib/components/PostHeader.svelte';
+  import PostFooter from '$lib/components/PostFooter.svelte';
+  import PostContent from '$lib/components/PostContent.svelte';
+  import { onDestroy, onMount } from 'svelte';
+  import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
+  import { getPageTitle, getPageUrl, recursivelyConvertDates } from '$lib/util/util';
+  import { auth, postOptions } from '$lib/util/stores';
+  import { t } from '$lib/util/translations';
+  import { toast } from '@zerodevx/svelte-toast';
 
   export let data: PostResponse;
   let noAccess = false;
@@ -17,19 +17,19 @@
     const { hash } = document.location;
     if (!hash) return;
     const scrollTo = document.getElementById(hash.slice(1)) as HTMLElement;
-    if (hash.indexOf("#comment-") === 0) scrollTo.classList.add("anchor-highlight");
+    if (hash.indexOf('#comment-') === 0) scrollTo.classList.add('anchor-highlight');
     if (scrollTo) scrollTo.scrollIntoView();
   };
 
   const tryFetchPreview = async (): Promise<Post | null> => {
-    const isPreview = new URLSearchParams(window.location.search).get("preview") != null;
+    const isPreview = new URLSearchParams(window.location.search).get('preview') != null;
     const authToken = $auth?.authToken;
     const result = (await (
-      await fetch(`/api/posts/${data.slug}${isPreview ? "?preview" : ""}`, {
+      await fetch(`/api/posts/${data.slug}${isPreview ? '?preview' : ''}`, {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: authToken ? `Bearer ${authToken}` : "",
-        },
+          'Content-Type': 'application/json',
+          Authorization: authToken ? `Bearer ${authToken}` : ''
+        }
       })
     ).json()) as Post;
     if (!result.content) return null;
@@ -49,9 +49,9 @@
       recursivelyConvertDates(data.post.comments);
       postOptions.set({
         bannerVisible: data.post.bannerVisible,
-        customBannerUrl: data.post.customBanner === "" ? null : data.post.customBanner,
+        customBannerUrl: data.post.customBanner === '' ? null : data.post.customBanner,
         stickyMenu: false,
-        fullWidth: data.post.fullWidth,
+        fullWidth: data.post.fullWidth
       });
     }
     scrollToAnchor();
@@ -63,7 +63,7 @@
       bannerVisible: true,
       customBannerUrl: null,
       stickyMenu: true,
-      fullWidth: false,
+      fullWidth: false
     });
   });
 </script>
@@ -75,7 +75,7 @@
     <meta content={data.post.description} name="og:description" />
     <meta content="article" property="og:type" />
     <meta content={getPageUrl(`posts/${data.slug}`)} property="og:url" />
-    <meta content={data.post.coAuthors?.join(", ")} property="article:author" />
+    <meta content={data.post.coAuthors?.join(', ')} property="article:author" />
     {#if data.post.date}
       <meta content={data.post.date?.toDateString()} property="article:published_time" />
     {/if}

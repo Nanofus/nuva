@@ -1,11 +1,11 @@
 <script lang="ts">
-  import NavItem from "$lib/components/reusable/NavItem.svelte";
-  import { onDestroy, onMount } from "svelte";
-  import { browser } from "$app/environment";
-  import { auth, postOptions } from "$lib/util/stores";
-  import { t } from "$lib/util/translations";
-  import { globalConfig } from "$lib/util/config";
-  import { page } from "$app/stores";
+  import NavItem from '$lib/components/reusable/NavItem.svelte';
+  import { onDestroy, onMount } from 'svelte';
+  import { browser } from '$app/environment';
+  import { auth, postOptions } from '$lib/util/stores';
+  import { t } from '$lib/util/translations';
+  import { globalConfig } from '$lib/util/config';
+  import { page } from '$app/stores';
 
   let smallLogo: HTMLElement;
   let menuOpen = false;
@@ -13,11 +13,11 @@
   let bannerVisible = $page.data.bannerVisible ? $page.data.bannerVisible : true;
 
   const getTotalNavigationHeight = () => {
-    return document.querySelector("header")?.offsetHeight || 0;
+    return document.querySelector('header')?.offsetHeight || 0;
   };
 
   const isMobile = () => {
-    const match = window.matchMedia("screen and (max-width: 54rem)");
+    const match = window.matchMedia('screen and (max-width: 54rem)');
     return match.matches;
   };
 
@@ -28,19 +28,19 @@
       isMobile() ||
       !bannerVisible
     ) {
-      smallLogo.style.opacity = "1";
-      smallLogo.style.pointerEvents = "auto";
+      smallLogo.style.opacity = '1';
+      smallLogo.style.pointerEvents = 'auto';
     } else {
-      smallLogo.style.opacity = "0";
-      smallLogo.style.pointerEvents = "none";
+      smallLogo.style.opacity = '0';
+      smallLogo.style.pointerEvents = 'none';
     }
   };
 
   onMount(() => {
     if (browser) {
       handleStickyMenu();
-      document.addEventListener("scroll", handleStickyMenu);
-      window.addEventListener("resize", handleStickyMenu);
+      document.addEventListener('scroll', handleStickyMenu);
+      window.addEventListener('resize', handleStickyMenu);
       postOptions.subscribe((options) => {
         stickyMenu = options.stickyMenu;
         bannerVisible = options.bannerVisible;
@@ -50,8 +50,8 @@
 
   onDestroy(() => {
     if (browser) {
-      document.removeEventListener("scroll", handleStickyMenu);
-      window.removeEventListener("resize", handleStickyMenu);
+      document.removeEventListener('scroll', handleStickyMenu);
+      window.removeEventListener('resize', handleStickyMenu);
     }
   });
 
@@ -59,7 +59,7 @@
   const menuClicked = () => (menuOpen = false);
 </script>
 
-<nav class={stickyMenu ? "sticky" : ""}>
+<nav class={stickyMenu ? 'sticky' : ''}>
   <div class="nav-wrapper">
     <div class="section-logo-area">
       <div bind:this={smallLogo} class="section-logo">
@@ -93,7 +93,9 @@
       {#if $auth}
         <NavItem href={globalConfig.urls.writing}>{t.components.navigation.write}</NavItem>
       {/if}
-      <NavItem href="/profile">{$auth ? t.components.navigation.profile : t.components.navigation.login}</NavItem>
+      <NavItem href="/profile"
+        >{$auth ? t.components.navigation.profile : t.components.navigation.login}</NavItem
+      >
       <NavItem href="/search">{t.components.navigation.search}</NavItem>
     </div>
     <div class="section-filler" />
@@ -102,10 +104,6 @@
 
 <style lang="scss">
   nav {
-    &.sticky {
-      position: sticky;
-    }
-
     top: 0;
     margin: auto;
     min-width: var(--page-min-width);
@@ -115,7 +113,11 @@
     background: var(--main-nav-background);
     backdrop-filter: blur(var(--blur-intensity));
     -webkit-backdrop-filter: blur(var(--blur-intensity));
-    font-family: var(--nav-font-family);
+    font-family: var(--nav-font-family), serif;
+
+    &.sticky {
+      position: sticky;
+    }
   }
 
   .nav-wrapper {

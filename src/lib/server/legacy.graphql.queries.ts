@@ -1,4 +1,4 @@
-import { globalConfig } from "$lib/util/config";
+import { globalConfig } from '$lib/util/config';
 
 export const QUERIES = {
   pageInfo: `
@@ -99,5 +99,5 @@ export const QUERIES = {
         }
         content
         databaseId
-        parentDatabaseId`,
+        parentDatabaseId`
 };

@@ -1,13 +1,13 @@
-import type { Category, PostMeta, Tag } from "$lib/util/types";
-import { getAllPosts, getCategories, getTags } from "$lib/server/database";
-import { globalConfig } from "$lib/util/config";
-import type { RequestHandler } from "@sveltejs/kit";
+import type { Category, PostMeta, Tag } from '$lib/util/types';
+import { getAllPosts, getCategories, getTags } from '$lib/server/database';
+import { globalConfig } from '$lib/util/config';
+import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async () => {
   const body = sitemap(await getAllPosts(), await getCategories(), (await getTags()).tags);
   const response = new Response(body);
-  response.headers.set("Cache-Control", `max-age=${0}, s-maxage=${3600}`);
-  response.headers.set("Content-Type", "application/xml");
+  response.headers.set('Cache-Control', `max-age=${0}, s-maxage=${3600}`);
+  response.headers.set('Content-Type', 'application/xml');
   return response;
 };
 
@@ -50,9 +50,9 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
-  `,
+  `
     )
-    .join("")}
+    .join('')}
     ${tags
       .map(
         (tag) => `
@@ -61,9 +61,9 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
-  `,
+  `
       )
-      .join("")}
+      .join('')}
   ${posts
     .map(
       (post) => `
@@ -73,7 +73,7 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     <lastmod>${post.date}</lastmod>
     <priority>0.3</priority>
   </url>
-  `,
+  `
     )
-    .join("")}
+    .join('')}
 </urlset>`.trim();

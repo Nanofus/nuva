@@ -1,7 +1,7 @@
-import { error, type Load } from "@sveltejs/kit";
-import { getPostsByTag } from "$lib/server/database";
-import type { PostListByTagResponse } from "$lib/util/types";
-import { t } from "$lib/util/translations";
+import { error, type Load } from '@sveltejs/kit';
+import { getPostsByTag } from '$lib/server/database';
+import type { PostListByTagResponse } from '$lib/util/types';
+import { t } from '$lib/util/translations';
 
 export const load: Load = async ({ params }): Promise<PostListByTagResponse> => {
   if (params.tag) {

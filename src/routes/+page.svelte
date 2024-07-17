@@ -1,10 +1,10 @@
 <script lang="ts">
-  import PostList from "$lib/components/PostList.svelte";
-  import type { CommentMeta, PostMeta } from "$lib/util/types";
-  import { getPageTitle, getPageUrl } from "$lib/util/util";
-  import CommentList from "$lib/components/CommentList.svelte";
-  import { t } from "$lib/util/translations";
-  import FeatureCarousel from "$lib/components/FeatureCarousel.svelte";
+  import PostList from '$lib/components/PostList.svelte';
+  import type { CommentMeta, PostMeta } from '$lib/util/types';
+  import { getPageTitle, getPageUrl } from '$lib/util/util';
+  import CommentList from '$lib/components/CommentList.svelte';
+  import { t } from '$lib/util/translations';
+  import FeatureCarousel from '$lib/components/FeatureCarousel.svelte';
 
   export let data: { posts: PostMeta[]; comments: CommentMeta[] };
 </script>

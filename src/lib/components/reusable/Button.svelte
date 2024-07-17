@@ -4,7 +4,7 @@
   export let link: boolean = false;
 </script>
 
-<button class={link ? "link-button" : ""} {disabled} on:click>
+<button class={link ? 'link-button' : ''} {disabled} on:click>
   {#if icon}
     <span class="icon material-icons">{icon}</span>
   {/if}

@@ -1,32 +1,34 @@
 <script lang="ts">
-  import PostList from "$lib/components/PostList.svelte";
-  import type { PostListByTagResponse } from "$lib/util/types";
-  import Button from "$lib/components/reusable/Button.svelte";
-  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util/util";
-  import { onMount } from "svelte";
-  import { scrolledToBottom } from "$lib/util/stores";
-  import { t } from "$lib/util/translations";
-  import { getPosts } from "$lib/client/api";
+  import PostList from '$lib/components/PostList.svelte';
+  import type { PostListByTagResponse } from '$lib/util/types';
+  import Button from '$lib/components/reusable/Button.svelte';
+  import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
+  import { getPageTitle, getPageUrl } from '$lib/util/util';
+  import { onMount } from 'svelte';
+  import { scrolledToBottom } from '$lib/util/stores';
+  import { t } from '$lib/util/translations';
+  import { getPosts } from '$lib/client/api';
 
   export let data: PostListByTagResponse;
   let fetching = false;
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPosts("tag", data.tagSlug, data.endCursor, null);
+    const newData = await getPosts('tag', data.tagSlug, data.endCursor, null);
     data = {
       posts: [...data.posts, ...newData.posts],
       tagSlug: data.tagSlug,
       tag: data.tag,
       endCursor: newData.endCursor,
-      hasNextPage: newData.hasNextPage,
+      hasNextPage: newData.hasNextPage
     };
     fetching = false;
   };
 
   onMount(() => {
-    scrolledToBottom.subscribe((scrolled) => scrolled && data.hasNextPage && !fetching && fetchMorePosts());
+    scrolledToBottom.subscribe(
+      (scrolled) => scrolled && data.hasNextPage && !fetching && fetchMorePosts()
+    );
   });
 </script>
 

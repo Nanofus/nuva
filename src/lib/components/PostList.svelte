@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type { Category, PostMeta } from "$lib/util/types";
-  import { t } from "$lib/util/translations";
-  import { globalConfig } from "$lib/util/config";
+  import type { Category, PostMeta } from '$lib/util/types';
+  import { t } from '$lib/util/translations';
+  import { globalConfig } from '$lib/util/config';
 
   export let posts: PostMeta[];
 
   const parseCategories = (categories: Category[]) => {
-    categories = categories.filter((c) => c.slug !== "rope");
-    if (categories.length === 0) return "";
-    return `– ${categories.map((c) => c.name).join(", ")}`;
+    categories = categories.filter((c) => c.slug !== 'rope');
+    if (categories.length === 0) return '';
+    return `– ${categories.map((c) => c.name).join(', ')}`;
   };
 </script>
 
@@ -20,14 +20,16 @@
     <td class="authors hidden-mobile">{t.components.postList.author}</td>
   </tr>
   {#each posts as post}
-    <tr class={post.mobileFriendly ? "" : "mobile-unfriendly"}>
+    <tr class={post.mobileFriendly ? '' : 'mobile-unfriendly'}>
       <td class="link">
         <a href="/posts/{post.slug}">{post.title}</a>
         <span class="categories">{parseCategories(post.categories)}</span>
       </td>
-      <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ""}</td>
+      <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ''}</td>
       <td class="date">{post.date.toLocaleDateString(globalConfig.locale)}</td>
-      <td class="authors hidden-mobile"><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td>
+      <td class="authors hidden-mobile"
+        ><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td
+      >
     </tr>
   {/each}
 </table>

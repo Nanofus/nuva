@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Post } from "$lib/util/types";
+  import type { Post } from '$lib/util/types';
 
   export let post: Post;
 </script>
@@ -7,15 +7,15 @@
 <div id="previous-next-post">
   {#if post.previous}
     <div class="previous">
-      <span class="material-icons inline-icon">arrow_back</span><a href="/posts/{post.previous.slug}"
-        >{post.previous.title}</a
+      <span class="material-icons inline-icon">arrow_back</span><a
+        href="/posts/{post.previous.slug}">{post.previous.title}</a
       >
     </div>
   {/if}
   {#if post.next}
     <div class="next">
-      <a href="/posts/{post.next.slug}">{post.next.title}</a><span class="material-icons inline-icon"
-        >arrow_forward</span
+      <a href="/posts/{post.next.slug}">{post.next.title}</a><span
+        class="material-icons inline-icon">arrow_forward</span
       >
     </div>
   {/if}

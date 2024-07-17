@@ -1,6 +1,6 @@
-import { error, json } from "@sveltejs/kit";
-import { t } from "$lib/util/translations";
-import { authenticated } from "$lib/server/auth";
+import { error, json } from '@sveltejs/kit';
+import { t } from '$lib/util/translations';
+import { authenticated } from '$lib/server/auth';
 
 export const GET = async ({ request }: { request: any }) => {
   const authResult = await authenticated(request);

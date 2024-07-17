@@ -1,16 +1,19 @@
-import { error, type Load } from "@sveltejs/kit";
-import { getLatestComments, getLatestPosts } from "$lib/server/database";
-import type { PostsAndCommentsResponse } from "$lib/util/types";
-import { filterExcludedCategories } from "$lib/util/util";
-import { t } from "$lib/util/translations";
+import { error, type Load } from '@sveltejs/kit';
+import { getLatestComments, getLatestPosts } from '$lib/server/database';
+import type { PostsAndCommentsResponse } from '$lib/util/types';
+import { filterExcludedCategories } from '$lib/util/util';
+import { t } from '$lib/util/translations';
 
 export const load: Load = async (): Promise<PostsAndCommentsResponse> => {
-  const [postResponse, commentResponse] = await Promise.all([getLatestPosts(), getLatestComments()]);
+  const [postResponse, commentResponse] = await Promise.all([
+    getLatestPosts(),
+    getLatestComments()
+  ]);
   if (postResponse && commentResponse) {
     const posts = filterExcludedCategories(postResponse);
     return {
       posts,
-      comments: commentResponse,
+      comments: commentResponse
     };
   }
 

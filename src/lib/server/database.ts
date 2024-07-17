@@ -1,5 +1,5 @@
-import { createKysely } from "@vercel/postgres-kysely";
-import type { DB, Meta } from "$lib/server/database.types";
+import { createKysely } from '@vercel/postgres-kysely';
+import type { DB, Meta } from '$lib/server/database.types';
 import type {
   Category,
   Comment,
@@ -12,32 +12,32 @@ import type {
   PostListByTagResponse,
   PostMeta,
   Tag,
-  TagListResponse,
-} from "$lib/util/types";
-import { globalConfig } from "$lib/util/config";
+  TagListResponse
+} from '$lib/util/types';
+import { globalConfig } from '$lib/util/config';
 import {
   dataToCategories,
   dataToCommentMetas,
   dataToComments,
   dataToPost,
   dataToPostMeta,
-  dataToTags,
-} from "$lib/server/legacy.graphql.mappers";
-import { QUERIES } from "$lib/server/legacy.graphql.queries";
-import { objectsToHierarchy } from "$lib/util/util";
-import { error } from "@sveltejs/kit";
-import { t } from "$lib/util/translations";
+  dataToTags
+} from '$lib/server/legacy.graphql.mappers';
+import { QUERIES } from '$lib/server/legacy.graphql.queries';
+import { objectsToHierarchy } from '$lib/util/util';
+import { error } from '@sveltejs/kit';
+import { t } from '$lib/util/translations';
 
 const db = createKysely<DB>({
-  connectionString: import.meta.env.VITE_POSTGRES_URL,
+  connectionString: import.meta.env.VITE_POSTGRES_URL
 });
 
 /* Webhook checks */
 
 export const getLatestPostSlug = async () => {
   const result: Meta | undefined = await db
-    .selectFrom("Meta")
-    .where("key", "=", "latestPost")
+    .selectFrom('Meta')
+    .where('key', '=', 'latestPost')
     .selectAll()
     .executeTakeFirst();
   if (!result) return null;
@@ -46,10 +46,10 @@ export const getLatestPostSlug = async () => {
 
 export const setLatestPostSlug = async (slug: string) => {
   const result = await db
-    .updateTable("Meta")
-    .where("key", "=", "latestPost")
+    .updateTable('Meta')
+    .where('key', '=', 'latestPost')
     .set({
-      value: slug,
+      value: slug
     })
     .executeTakeFirst();
   return BigInt(1) === result.numUpdatedRows;
@@ -57,8 +57,8 @@ export const setLatestPostSlug = async (slug: string) => {
 
 export const getLatestCommentId = async () => {
   const result: Meta | undefined = await db
-    .selectFrom("Meta")
-    .where("key", "=", "latestComment")
+    .selectFrom('Meta')
+    .where('key', '=', 'latestComment')
     .selectAll()
     .executeTakeFirst();
   if (!result || !result.value) return null;
@@ -67,10 +67,10 @@ export const getLatestCommentId = async () => {
 
 export const setLatestCommentId = async (id: number) => {
   const result = await db
-    .updateTable("Meta")
-    .where("key", "=", "latestComment")
+    .updateTable('Meta')
+    .where('key', '=', 'latestComment')
     .set({
-      value: String(id),
+      value: String(id)
     })
     .executeTakeFirst();
   return BigInt(1) === result.numUpdatedRows;
@@ -81,9 +81,9 @@ export const setLatestCommentId = async (id: number) => {
 export const getLatestComments = async (): Promise<CommentMeta[]> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `
@@ -108,23 +108,24 @@ export const getLatestComments = async (): Promise<CommentMeta[]> => {
                     }
                 }
             }
-            `,
-      }),
+            `
+      })
     })
   ).json();
   return dataToCommentMetas(response.data.comments.nodes);
 };
 
-export const getLatestPosts = async () => (await getPosts(null, null, globalConfig.latestPostsPerFetch)).posts;
+export const getLatestPosts = async () =>
+  (await getPosts(null, null, globalConfig.latestPostsPerFetch)).posts;
 
 /* General queries */
 
 export const getPostMeta = async (slug: string): Promise<PostMeta | null> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `
@@ -133,20 +134,25 @@ export const getPostMeta = async (slug: string): Promise<PostMeta | null> => {
                     ${QUERIES.postMeta}
                 }
             }
-            `,
-      }),
+            `
+      })
     })
   ).json();
   return dataToPostMeta(response.data.post);
 };
 
-export const getPost = async (slug: string, authToken: string | null = null): Promise<Post | null> => {
+export const getPost = async (
+  slug: string,
+  authToken: string | null = null
+): Promise<Post | null> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: authToken ? `Bearer ${authToken}` : `Bearer ${import.meta.env.VITE_WPGRAPHQL_AUTH_TOKEN}`,
+        'Content-Type': 'application/json',
+        Authorization: authToken
+          ? `Bearer ${authToken}`
+          : `Bearer ${import.meta.env.VITE_WPGRAPHQL_AUTH_TOKEN}`
       },
       body: JSON.stringify({
         query: `
@@ -155,8 +161,8 @@ export const getPost = async (slug: string, authToken: string | null = null): Pr
                     ${QUERIES.postContent}
                 }
             }
-            `,
-      }),
+            `
+      })
     })
   ).json();
   const post = dataToPost(response.data.post);
@@ -174,15 +180,20 @@ export const getCommentsForPost = async (slug: string): Promise<Comment[]> => {
     if (!commentResponse.hasNextPage) allCommentsFetched = true;
     else latestAfter = commentResponse.endCursor;
   }
-  return (objectsToHierarchy(allComments) as Comment[]).sort((a, b) => a.date.getTime() - b.date.getTime());
+  return (objectsToHierarchy(allComments) as Comment[]).sort(
+    (a, b) => a.date.getTime() - b.date.getTime()
+  );
 };
 
-const getCommentsForPostPaginated = async (slug: string, after: string | null = null): Promise<CommentResponse> => {
+const getCommentsForPostPaginated = async (
+  slug: string,
+  after: string | null = null
+): Promise<CommentResponse> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `
@@ -199,29 +210,29 @@ const getCommentsForPostPaginated = async (slug: string, after: string | null = 
 		                }
 		            }
             }
-            `,
-      }),
+            `
+      })
     })
   ).json();
-  if (!response.data.post) return { comments: [], endCursor: "", hasNextPage: false };
+  if (!response.data.post) return { comments: [], endCursor: '', hasNextPage: false };
   const { pageInfo } = response.data.post.comments;
-  const comments = dataToComments(response.data.post.comments["edges"].map((e: any) => e.node));
+  const comments = dataToComments(response.data.post.comments['edges'].map((e: any) => e.node));
   return {
     comments,
     endCursor: pageInfo.endCursor,
-    hasNextPage: pageInfo.hasNextPage,
+    hasNextPage: pageInfo.hasNextPage
   };
 };
 
 export const getPostsByAuthor = async (
   author: string,
-  after: string | null = null,
+  after: string | null = null
 ): Promise<PostListByAuthorResponse> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `
@@ -238,30 +249,35 @@ export const getPostsByAuthor = async (
                     }
                 }
             }
-            `,
-      }),
+            `
+      })
     })
   ).json();
-  if (response.data.posts["edges"].length === 0) {
+  if (response.data.posts['edges'].length === 0) {
     throw error(404, t.errors.e404);
   }
 
   const { pageInfo } = response.data.posts;
-  const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) => dataToPostMeta(edge.node));
+  const posts: PostMeta[] = response.data.posts['edges'].map((edge: any) =>
+    dataToPostMeta(edge.node)
+  );
   return {
     posts,
     author,
     endCursor: pageInfo.endCursor,
-    hasNextPage: pageInfo.hasNextPage,
+    hasNextPage: pageInfo.hasNextPage
   };
 };
 
-export const getPostsByTag = async (tag: string, after: string | null = null): Promise<PostListByTagResponse> => {
+export const getPostsByTag = async (
+  tag: string,
+  after: string | null = null
+): Promise<PostListByTagResponse> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `
@@ -279,8 +295,8 @@ export const getPostsByTag = async (tag: string, after: string | null = null): P
                     name
                 }
             }
-            `,
-      }),
+            `
+      })
     })
   ).json();
   if (!response.data.tag) {
@@ -289,25 +305,27 @@ export const getPostsByTag = async (tag: string, after: string | null = null): P
 
   const { pageInfo } = response.data.posts;
   const tagName = response.data.tag.name;
-  const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) => dataToPostMeta(edge.node));
+  const posts: PostMeta[] = response.data.posts['edges'].map((edge: any) =>
+    dataToPostMeta(edge.node)
+  );
   return {
     posts,
     tag: tagName,
     tagSlug: tag,
     endCursor: pageInfo.endCursor,
-    hasNextPage: pageInfo.hasNextPage,
+    hasNextPage: pageInfo.hasNextPage
   };
 };
 
 export const getPostsByCategory = async (
   category: string,
-  after: string | null = null,
+  after: string | null = null
 ): Promise<PostListByCategoryResponse> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `
@@ -325,8 +343,8 @@ export const getPostsByCategory = async (
                     }
                 }
             }
-            `,
-      }),
+            `
+      })
     })
   ).json();
   if (!response.data.category) {
@@ -335,13 +353,15 @@ export const getPostsByCategory = async (
 
   const { pageInfo } = response.data.category.posts;
   const categoryName = response.data.category.name;
-  const posts: PostMeta[] = response.data.category.posts["edges"].map((edge: any) => dataToPostMeta(edge.node));
+  const posts: PostMeta[] = response.data.category.posts['edges'].map((edge: any) =>
+    dataToPostMeta(edge.node)
+  );
   return {
     posts,
     category: categoryName,
     categorySlug: category,
     endCursor: pageInfo.endCursor,
-    hasNextPage: pageInfo.hasNextPage,
+    hasNextPage: pageInfo.hasNextPage
   };
 };
 
@@ -361,19 +381,19 @@ export const getAllPosts = async (): Promise<PostMeta[]> => {
 export const getPosts = async (
   after: string | null = null,
   searchTerm: string | null = null,
-  count: number = globalConfig.maxPerFetch,
+  count: number = globalConfig.maxPerFetch
 ): Promise<PostListBySearchResponse> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `
             query AllPostsPaginated {
                 posts(where: {search: "${
-                  searchTerm ? decodeURI(searchTerm) : ""
+                  searchTerm ? decodeURI(searchTerm) : ''
                 }"}, first: ${count}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
@@ -384,26 +404,28 @@ export const getPosts = async (
                     }
                 }
             }
-            `,
-      }),
+            `
+      })
     })
   ).json();
   const { pageInfo } = response.data.posts;
-  const posts: PostMeta[] = response.data.posts["edges"].map((edge: any) => dataToPostMeta(edge.node));
+  const posts: PostMeta[] = response.data.posts['edges'].map((edge: any) =>
+    dataToPostMeta(edge.node)
+  );
   return {
     posts,
     searchTerm: searchTerm ? searchTerm : ``,
     endCursor: pageInfo.endCursor,
-    hasNextPage: pageInfo.hasNextPage,
+    hasNextPage: pageInfo.hasNextPage
   };
 };
 
 export const getTags = async (after: string | null = null): Promise<TagListResponse> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `
@@ -420,27 +442,27 @@ export const getTags = async (after: string | null = null): Promise<TagListRespo
                     }
                 }
               }
-            `,
-      }),
+            `
+      })
     })
   ).json();
   const { pageInfo } = response.data.tags;
-  const tags: Tag[] = dataToTags(response.data.tags["edges"].map((edge: any) => edge.node)).filter(
-    (tag) => tag.count > 0,
+  const tags: Tag[] = dataToTags(response.data.tags['edges'].map((edge: any) => edge.node)).filter(
+    (tag) => tag.count > 0
   );
   return {
     tags,
     endCursor: pageInfo.endCursor,
-    hasNextPage: pageInfo.hasNextPage,
+    hasNextPage: pageInfo.hasNextPage
   };
 };
 
 export const getCategories = async (): Promise<Category[]> => {
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `
@@ -454,8 +476,8 @@ export const getCategories = async (): Promise<Category[]> => {
                     }
                   }
               }
-            `,
-      }),
+            `
+      })
     })
   ).json();
   return dataToCategories(response.data.categories.nodes);
@@ -465,7 +487,7 @@ export const postComment = async (
   authToken: string,
   postId: number,
   parent: number,
-  content: string,
+  content: string
 ): Promise<boolean> => {
   if (!authToken) return false;
   const query = `
@@ -479,17 +501,17 @@ export const postComment = async (
     }`;
   const response = await (
     await fetch(globalConfig.graphqlApi, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`
       },
       body: JSON.stringify({
         query,
         variables: {
           content
         }
-      }),
+      })
     })
   ).json();
   return !!response.data.createComment.success;

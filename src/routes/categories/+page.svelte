@@ -1,8 +1,8 @@
 <script lang="ts">
-  import List from "$lib/components/reusable/List.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util/util";
-  import { t } from "$lib/util/translations";
-  import type { CategoryListResponse } from "$lib/util/types";
+  import List from '$lib/components/reusable/List.svelte';
+  import { getPageTitle, getPageUrl } from '$lib/util/util';
+  import { t } from '$lib/util/translations';
+  import type { CategoryListResponse } from '$lib/util/types';
 
   export let data: CategoryListResponse;
 </script>

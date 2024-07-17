@@ -5,12 +5,12 @@
 <script lang="ts">
   export let name: string | null = null;
   export let label: string | null = null;
-  export let type: "text" | "password" | "multiline" = "text";
+  export let type: 'text' | 'password' | 'multiline' = 'text';
   export let placeholder: string | null = null;
-  export let value: string = "";
+  export let value: string = '';
   export let rows = 5;
 
-  const elementId = "input_" + counter++;
+  const elementId = 'input_' + counter++;
   const elementIdSecondary = elementId;
   const handleInput = (event: Event) => {
     const target = event.target as HTMLInputElement;
@@ -19,20 +19,36 @@
 </script>
 
 <div class="input">
-  {#if type === "multiline"}
+  {#if type === 'multiline'}
     {#if label}
       <label for={elementId}>
         {label}
       </label>
     {/if}
-    <textarea class="editor" {rows} id={elementId} {name} {placeholder} {value} on:input={handleInput} />
+    <textarea
+      class="editor"
+      {rows}
+      id={elementId}
+      {name}
+      {placeholder}
+      {value}
+      on:input={handleInput}
+    />
   {:else}
     {#if label}
       <label for={elementIdSecondary}>
         {label}
       </label>
     {/if}
-    <input class="editor" id={elementIdSecondary} {name} {placeholder} {value} {type} on:input={handleInput} />
+    <input
+      class="editor"
+      id={elementIdSecondary}
+      {name}
+      {placeholder}
+      {value}
+      {type}
+      on:input={handleInput}
+    />
   {/if}
 </div>
 

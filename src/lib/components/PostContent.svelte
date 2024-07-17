@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { Post } from "$lib/util/types";
-  import { onDestroy, onMount } from "svelte";
-  import { browser } from "$app/environment";
-  import MusicPlayer from "$lib/components/MusicPlayer.svelte";
-  import { toast } from "@zerodevx/svelte-toast";
-  import { cleanGlobalScope, initGlobalScope, toastSettings } from "$lib/util/util";
-  import { t } from "$lib/util/translations";
+  import type { Post } from '$lib/util/types';
+  import { onDestroy, onMount } from 'svelte';
+  import { browser } from '$app/environment';
+  import MusicPlayer from '$lib/components/MusicPlayer.svelte';
+  import { toast } from '@zerodevx/svelte-toast';
+  import { cleanGlobalScope, initGlobalScope, toastSettings } from '$lib/util/util';
+  import { t } from '$lib/util/translations';
 
   export let post: Post;
   let scriptElements: HTMLScriptElement[] = [];
@@ -20,7 +20,7 @@
             ? t.components.postContent.errorsCountPlural
             : t.components.postContent.errorsCountSingular
         }`,
-        post.validationResult.results[0].messages,
+        post.validationResult.results[0].messages
       );
       toast.push(t.components.postContent.validationError, toastSettings.error);
     } else {
@@ -34,26 +34,26 @@
 
   const createErrorReporter = () => {
     if (!browser) return;
-    window.addEventListener("error", reportError);
+    window.addEventListener('error', reportError);
   };
 
   const cleanErrorReporter = () => {
     if (!browser) return;
-    window.removeEventListener("error", reportError);
+    window.removeEventListener('error', reportError);
   };
 
   const runUserScripts = async (script: string, scriptFiles: string[] = []) => {
-    let finalScript = "";
-    const scriptElement = document.createElement("script");
+    let finalScript = '';
+    const scriptElement = document.createElement('script');
     const loadedScripts = await Promise.all(
       scriptFiles.map(async (fileUrl) => {
-        if (!fileUrl.startsWith("https")) return "";
+        if (!fileUrl.startsWith('https')) return '';
         const response = await fetch(fileUrl);
         return await response.text();
-      }),
+      })
     );
     loadedScripts
-      .filter((loadedScript) => loadedScript != "")
+      .filter((loadedScript) => loadedScript != '')
       .forEach((loadedScript) => {
         finalScript += loadedScript;
       });
@@ -64,14 +64,14 @@
   };
 
   const runScripts = async () => {
-    if (post.content.indexOf("<script>") === -1) {
+    if (post.content.indexOf('<script>') === -1) {
       await runUserScripts(post.scripts, post.scriptFiles);
     }
 
     // Run JS in post content
     const doc = document.implementation.createHTMLDocument(); // Sandbox
     doc.body.innerHTML = post.content;
-    [].map.call(doc.getElementsByTagName("script"), async (scriptTag: HTMLScriptElement) => {
+    [].map.call(doc.getElementsByTagName('script'), async (scriptTag: HTMLScriptElement) => {
       await runUserScripts(scriptTag.innerText);
     });
   };
@@ -105,7 +105,10 @@
     {t.components.postContent.notMobileFriendly}
   </div>
 {/if}
-<section class="vertically-separated {post.initialLetter ? 'large-initial-letter' : ''}" id="post-content">
+<section
+  class="vertically-separated {post.initialLetter ? 'large-initial-letter' : ''}"
+  id="post-content"
+>
   {@html post.content}
 </section>
 <MusicPlayer musicUrlArray={post.music} resetMusicButtonStyles={post.resetMusicButtons} />

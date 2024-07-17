@@ -1,8 +1,8 @@
-import { auth } from "$lib/util/stores";
-import { toast } from "@zerodevx/svelte-toast";
-import { t } from "$lib/util/translations";
-import { toastSettings } from "$lib/util/util";
-import { localConfig } from "$lib/util/config";
+import { auth } from '$lib/util/stores';
+import { toast } from '@zerodevx/svelte-toast';
+import { t } from '$lib/util/translations';
+import { toastSettings } from '$lib/util/util';
+import { localConfig } from '$lib/util/config';
 
 export const loadLoginStatus = () => {
   if (localStorage !== undefined) {
@@ -19,9 +19,9 @@ export const logout = (): void => {
 };
 
 export const login = async (username: string, password: string) => {
-  const loginResult = await fetch("/api/auth", {
-    method: "POST",
-    body: JSON.stringify({ username, password }),
+  const loginResult = await fetch('/api/auth', {
+    method: 'POST',
+    body: JSON.stringify({ username, password })
   });
   if (!loginResult.ok) {
     toast.push(t.toasts.loginFailed, toastSettings.error);

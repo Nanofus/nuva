@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { globalConfig } from "$lib/util/config";
-  import type { CommentMeta } from "$lib/util/types";
-  import { t } from "$lib/util/translations";
+  import { globalConfig } from '$lib/util/config';
+  import type { CommentMeta } from '$lib/util/types';
+  import { t } from '$lib/util/translations';
 
   export let comments: CommentMeta[];
 </script>

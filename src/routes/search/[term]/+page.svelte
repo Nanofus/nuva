@@ -1,13 +1,13 @@
 <script lang="ts">
-  import PostList from "$lib/components/PostList.svelte";
-  import type { PostListBySearchResponse } from "$lib/util/types";
-  import Button from "$lib/components/reusable/Button.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util/util";
-  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { onMount } from "svelte";
-  import { scrolledToBottom } from "$lib/util/stores";
-  import { t } from "$lib/util/translations";
-  import { getPosts } from "$lib/client/api";
+  import PostList from '$lib/components/PostList.svelte';
+  import type { PostListBySearchResponse } from '$lib/util/types';
+  import Button from '$lib/components/reusable/Button.svelte';
+  import { getPageTitle, getPageUrl } from '$lib/util/util';
+  import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
+  import { onMount } from 'svelte';
+  import { scrolledToBottom } from '$lib/util/stores';
+  import { t } from '$lib/util/translations';
+  import { getPosts } from '$lib/client/api';
 
   export let data: PostListBySearchResponse;
   let fetching = false;
@@ -19,13 +19,15 @@
       posts: [...data.posts, ...newData.posts],
       searchTerm: data.searchTerm,
       endCursor: newData.endCursor,
-      hasNextPage: newData.hasNextPage,
+      hasNextPage: newData.hasNextPage
     };
     fetching = false;
   };
 
   onMount(() => {
-    scrolledToBottom.subscribe((scrolled) => scrolled && data.hasNextPage && !fetching && fetchMorePosts());
+    scrolledToBottom.subscribe(
+      (scrolled) => scrolled && data.hasNextPage && !fetching && fetchMorePosts()
+    );
   });
 </script>
 

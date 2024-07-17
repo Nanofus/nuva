@@ -1,32 +1,34 @@
 <script lang="ts">
-  import type { PostListByCategoryResponse } from "$lib/util/types";
-  import PostList from "$lib/components/PostList.svelte";
-  import Button from "$lib/components/reusable/Button.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util/util";
-  import LoadingSpinner from "$lib/components/reusable/LoadingSpinner.svelte";
-  import { onMount } from "svelte";
-  import { scrolledToBottom } from "$lib/util/stores";
-  import { t } from "$lib/util/translations";
-  import { getPosts } from "$lib/client/api";
+  import type { PostListByCategoryResponse } from '$lib/util/types';
+  import PostList from '$lib/components/PostList.svelte';
+  import Button from '$lib/components/reusable/Button.svelte';
+  import { getPageTitle, getPageUrl } from '$lib/util/util';
+  import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
+  import { onMount } from 'svelte';
+  import { scrolledToBottom } from '$lib/util/stores';
+  import { t } from '$lib/util/translations';
+  import { getPosts } from '$lib/client/api';
 
   export let data: PostListByCategoryResponse;
   let fetching = false;
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPosts("category", data.categorySlug, data.endCursor, null);
+    const newData = await getPosts('category', data.categorySlug, data.endCursor, null);
     data = {
       posts: [...data.posts, ...newData.posts],
       categorySlug: data.categorySlug,
       category: data.category,
       endCursor: newData.endCursor,
-      hasNextPage: newData.hasNextPage,
+      hasNextPage: newData.hasNextPage
     };
     fetching = false;
   };
 
   onMount(() => {
-    scrolledToBottom.subscribe((scrolled) => scrolled && data.hasNextPage && !fetching && fetchMorePosts());
+    scrolledToBottom.subscribe(
+      (scrolled) => scrolled && data.hasNextPage && !fetching && fetchMorePosts()
+    );
   });
 </script>
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Search from "$lib/components/Search.svelte";
-  import { getPageTitle, getPageUrl } from "$lib/util/util";
-  import { t } from "$lib/util/translations";
+  import Search from '$lib/components/Search.svelte';
+  import { getPageTitle, getPageUrl } from '$lib/util/util';
+  import { t } from '$lib/util/translations';
 </script>
 
 <svelte:head>

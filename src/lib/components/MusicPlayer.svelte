@@ -3,12 +3,12 @@
 Musicmancer 2023 Edition
 -->
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
-  import Button from "$lib/components/reusable/Button.svelte";
-  import { formatSecondsToMMSS, loadSetting, saveSetting } from "$lib/util/util";
-  import { localConfig } from "$lib/util/config";
-  import { parseBlob } from "music-metadata";
-  import { browser } from "$app/environment";
+  import { onDestroy, onMount } from 'svelte';
+  import Button from '$lib/components/reusable/Button.svelte';
+  import { formatSecondsToMMSS, loadSetting, saveSetting } from '$lib/util/util';
+  import { localConfig } from '$lib/util/config';
+  import { parseBlob } from 'music-metadata';
+  import { browser } from '$app/environment';
 
   interface AudioMetadata {
     title: string;
@@ -38,7 +38,7 @@ Musicmancer 2023 Edition
 
   // This runs before parent onMount, so the audio elements exist when user scripts run
   onMount(() => {
-    volume = loadSetting("volume") || localConfig.defaultVolume;
+    volume = loadSetting('volume') || localConfig.defaultVolume;
     initializeAudioElements();
   });
 
@@ -47,7 +47,7 @@ Musicmancer 2023 Edition
     generatedElements.forEach((element) => element.remove());
     clearInterval(seekInterval);
     clearInterval(fadeOutInterval);
-    if (browser) document.querySelector("#layout")?.classList.remove("bottom-padded");
+    if (browser) document.querySelector('#layout')?.classList.remove('bottom-padded');
   });
 
   const pauseOnEnded = () => {
@@ -56,7 +56,7 @@ Musicmancer 2023 Edition
   };
 
   const play = async (index: number) => {
-    if (!currentAudioElement) document.querySelector("#layout")?.classList.add("bottom-padded");
+    if (!currentAudioElement) document.querySelector('#layout')?.classList.add('bottom-padded');
 
     const newAudioData = audioDataArray[index];
     if (currentAudioElement == newAudioData.audioElement) {
@@ -77,9 +77,9 @@ Musicmancer 2023 Edition
       const waitUntilOthersFadedInterval = setInterval(async () => {
         fadeInProgress = true;
         if (!othersStillPlaying()) {
-          currentAudioElement?.removeEventListener("ended", pauseOnEnded);
+          currentAudioElement?.removeEventListener('ended', pauseOnEnded);
           currentAudioElement = newPlayerAfterFade;
-          currentAudioElement.addEventListener("ended", pauseOnEnded);
+          currentAudioElement.addEventListener('ended', pauseOnEnded);
           await (<HTMLAudioElement>currentAudioElement).play();
           paused = false;
           fadeInProgress = false;
@@ -97,9 +97,9 @@ Musicmancer 2023 Edition
         return;
       }
     displayedMetadata = {
-      title: "N/A",
-      artist: "N/A",
-      album: "N/A",
+      title: 'N/A',
+      artist: 'N/A',
+      album: 'N/A'
     };
   };
 
@@ -110,24 +110,24 @@ Musicmancer 2023 Edition
     } else {
       throw new Error(`HTTP error status=${response.status}: ${response.statusText}`);
     }
-  }
+  };
 
   const processMetadata = async () => {
     for (const audioData of audioDataArray) {
       try {
         const metadata = await fetchFromUrl(audioData.src);
-        audioData.metadata.title = metadata.common.title ? metadata.common.title : "N/A";
-        audioData.metadata.artist = metadata.common.artist ? metadata.common.artist : "N/A";
-        audioData.metadata.album = metadata.common.album ? metadata.common.album : "N/A";
+        audioData.metadata.title = metadata.common.title ? metadata.common.title : 'N/A';
+        audioData.metadata.artist = metadata.common.artist ? metadata.common.artist : 'N/A';
+        audioData.metadata.album = metadata.common.album ? metadata.common.album : 'N/A';
         if (!currentAudioElement) continue;
         if (infoboxVisible && currentAudioElement?.src === audioData.src) {
           updateInfoBox(audioData.src);
         }
       } catch (error: any) {
         console.error(error.message);
-        audioData.metadata.title = "N/A";
-        audioData.metadata.artist = "N/A";
-        audioData.metadata.album = "N/A";
+        audioData.metadata.title = 'N/A';
+        audioData.metadata.artist = 'N/A';
+        audioData.metadata.album = 'N/A';
       }
     }
   };
@@ -135,23 +135,26 @@ Musicmancer 2023 Edition
   const initializeAudioElements = () => {
     let autoIndex = 0;
     let totalIndex = 0;
-    const postContent = document.querySelector("#post-content");
+    const postContent = document.querySelector('#post-content');
     if (!postContent) return;
-    const audioElements = postContent.querySelectorAll("audio");
+    const audioElements = postContent.querySelectorAll('audio');
     // Add a div.audio-button element next to the audio elements
     audioElements.forEach((audioElement) => {
       // Start preloading the audio
-      audioElement.preload = "auto";
+      audioElement.preload = 'auto';
       // Get data from audio element
-      let audioSrc = audioElement.getAttribute("src");
+      let audioSrc = audioElement.getAttribute('src');
       if (!audioSrc) return;
-      if (audioSrc === "#auto") {
+      if (audioSrc === '#auto') {
         audioSrc = musicUrlArray[autoIndex];
         autoIndex++;
-      } else if (audioSrc[0] === "#") {
+      } else if (audioSrc[0] === '#') {
         audioSrc = musicUrlArray[parseInt(audioSrc.slice(1))];
       }
-      audioSrc = audioSrc.includes("\r") || audioSrc.includes("\n") ? audioSrc.slice(0, audioSrc.length - 1) : audioSrc;
+      audioSrc =
+        audioSrc.includes('\r') || audioSrc.includes('\n')
+          ? audioSrc.slice(0, audioSrc.length - 1)
+          : audioSrc;
       audioElement.src = audioSrc;
       audioElement.volume = volume / 100;
       audioElement.currentTime = 0;
@@ -159,16 +162,16 @@ Musicmancer 2023 Edition
       audioDataArray.push({
         src: audioSrc,
         audioElement: audioElement,
-        isEffect: audioElement.classList.contains("effect"),
+        isEffect: audioElement.classList.contains('effect'),
         metadata: {
-          title: "",
-          artist: "",
-          album: "",
-        },
+          title: '',
+          artist: '',
+          album: ''
+        }
       });
 
       // Create audio play button
-      if (!audioElement.classList.contains("hidden") && !audioElement.hasAttribute("controls"))
+      if (!audioElement.classList.contains('hidden') && !audioElement.hasAttribute('controls'))
         createAudioButton(audioElement, totalIndex);
       totalIndex++;
     });
@@ -177,19 +180,19 @@ Musicmancer 2023 Edition
   };
 
   const createAudioButton = (audioElement: HTMLAudioElement, index: number) => {
-    const audioButton = document.createElement("button");
+    const audioButton = document.createElement('button');
     generatedElements.push(audioButton);
-    audioButton.classList.add("audio-button", `index-${index}`);
-    resetMusicButtonStyles && audioButton.classList.add("minimal");
+    audioButton.classList.add('audio-button', `index-${index}`);
+    resetMusicButtonStyles && audioButton.classList.add('minimal');
 
     // Button content
     let buttonContent = audioElement.dataset.content;
     audioButton.innerHTML = buttonContent
       ? `<span>${buttonContent}</span>`
       : `<span class="material-icons">music_note</span>`;
-    audioElement.removeAttribute("data-content");
+    audioElement.removeAttribute('data-content');
 
-    audioButton.addEventListener("click", () => play(parseInt(audioButton.classList[1].slice(6))));
+    audioButton.addEventListener('click', () => play(parseInt(audioButton.classList[1].slice(6))));
     audioElement.after(audioButton);
     audioButton.appendChild(audioElement);
   };
@@ -210,13 +213,16 @@ Musicmancer 2023 Edition
   };
 
   // Update volume based on bar
-  $: audioDataArray.map((data) => data.audioElement).forEach((element) => (element.volume = volume / 100));
+  $: audioDataArray
+    .map((data) => data.audioElement)
+    .forEach((element) => (element.volume = volume / 100));
 
   // Save volume
-  $: volume && saveSetting("volume", volume);
+  $: volume && saveSetting('volume', volume);
 
   // Mute
-  $: currentAudioElement && (muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
+  $: currentAudioElement &&
+    (muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
 
   const unpause = async () => {
     if (currentAudioElement) {
@@ -238,7 +244,8 @@ Musicmancer 2023 Edition
           ? parseFloat(audioData.audioElement.dataset.fadeOutTime)
           : 1;
         let newVolume =
-          audioData.audioElement.volume - (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
+          audioData.audioElement.volume -
+          (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
         if (newVolume < 0) newVolume = 0;
         audioData.audioElement.volume = newVolume;
       } else {
@@ -253,7 +260,11 @@ Musicmancer 2023 Edition
   const othersStillPlaying = () => {
     return (
       audioDataArray.filter((audioData) => {
-        return audioData.audioElement !== newPlayerAfterFade && !audioData.isEffect && !audioData.audioElement.paused;
+        return (
+          audioData.audioElement !== newPlayerAfterFade &&
+          !audioData.isEffect &&
+          !audioData.audioElement.paused
+        );
       }).length > 0
     );
   };
@@ -286,7 +297,14 @@ Musicmancer 2023 Edition
         <Button icon="volume_mute" disabled={fadeInProgress} on:click={() => (muted = !muted)} />
       {/if}
     </div>
-    <input class="volume-bar" disabled={fadeInProgress} type="range" min="0" max="100" bind:value={volume} />
+    <input
+      class="volume-bar"
+      disabled={fadeInProgress}
+      type="range"
+      min="0"
+      max="100"
+      bind:value={volume}
+    />
     <div>
       <Button
         icon="info"
@@ -298,7 +316,7 @@ Musicmancer 2023 Edition
       />
     </div>
   </div>
-  <table id="music-info-box" class={infoboxVisible ? "" : "hidden"}>
+  <table id="music-info-box" class={infoboxVisible ? '' : 'hidden'}>
     <tr>
       <th colspan="3">Song Metadata</th>
     </tr>

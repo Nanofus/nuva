@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { Comment, Post } from "$lib/util/types";
-  import CommentForm from "$lib/components/CommentForm.svelte";
-  import { createEventDispatcher } from "svelte";
-  import { browser } from "$app/environment";
-  import Button from "$lib/components/reusable/Button.svelte";
-  import { t } from "$lib/util/translations";
-  import { auth } from "$lib/util/stores";
-  import { globalConfig } from "$lib/util/config";
+  import type { Comment, Post } from '$lib/util/types';
+  import CommentForm from '$lib/components/CommentForm.svelte';
+  import { createEventDispatcher } from 'svelte';
+  import { browser } from '$app/environment';
+  import Button from '$lib/components/reusable/Button.svelte';
+  import { t } from '$lib/util/translations';
+  import { auth } from '$lib/util/stores';
+  import { globalConfig } from '$lib/util/config';
 
   export let comment: Comment;
   export let post: Post;
@@ -16,7 +16,7 @@
 
   const commentSent = () => {
     replyFormOpen = false;
-    dispatch("commentSent");
+    dispatch('commentSent');
   };
 
   const isCurrentUser = () => {
@@ -72,7 +72,7 @@
 
       .comment-author::before {
         font-family: var(--icon-font);
-        content: "history_edu";
+        content: 'history_edu';
         position: relative;
         top: 0.2rem;
         margin-right: 0.3rem;

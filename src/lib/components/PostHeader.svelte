@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { globalConfig } from "$lib/util/config";
-  import type { Post } from "$lib/util/types";
-  import { t } from "$lib/util/translations";
+  import { globalConfig } from '$lib/util/config';
+  import type { Post } from '$lib/util/types';
+  import { t } from '$lib/util/translations';
 
   export let post: Post;
 </script>
@@ -20,7 +20,8 @@
     <span class="post-authors">
       <span class="author-list">
         {#each post.coAuthors as author, i}
-          <a href="/authors/{encodeURI(author)}">{author}</a>{#if i !== post.coAuthors.length - 1}<span>, </span>{/if}
+          <a href="/authors/{encodeURI(author)}">{author}</a
+          >{#if i !== post.coAuthors.length - 1}<span>, </span>{/if}
         {/each}
       </span>
     </span>
@@ -52,16 +53,16 @@
     }
 
     .post-categories::before {
-      content: "folder";
+      content: 'folder';
     }
     .post-date::before {
-      content: "calendar_today";
+      content: 'calendar_today';
     }
     .post-authors::before {
-      content: "history_edu";
+      content: 'history_edu';
     }
     .post-comments-link::before {
-      content: "forum";
+      content: 'forum';
     }
   }
 </style>

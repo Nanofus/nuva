@@ -1,13 +1,15 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { postOptions } from "$lib/util/stores";
-  import { getRandomBannerUrl } from "$lib/util/util";
-  import { globalConfig } from "$lib/util/config";
-  import { page } from "$app/stores";
+  import { onMount } from 'svelte';
+  import { postOptions } from '$lib/util/stores';
+  import { getRandomBannerUrl } from '$lib/util/util';
+  import { globalConfig } from '$lib/util/config';
+  import { page } from '$app/stores';
 
   let bannerUrl = getRandomBannerUrl();
   let bannerVisible = $page.data.bannerVisible ? $page.data.bannerVisible : true;
-  let customBannerUrl: string | null = $page.data.customBanner ? `url("${$page.data.customBanner}")` : null;
+  let customBannerUrl: string | null = $page.data.customBanner
+    ? `url("${$page.data.customBanner}")`
+    : null;
 
   onMount(() => {
     postOptions.subscribe((options) => {

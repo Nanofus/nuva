@@ -34,7 +34,7 @@
   width: var(--thumb-width);
 }
 
-[type="range"] {
+[type='range'] {
   -webkit-appearance: none;
   background: transparent;
   margin: calc(var(--thumb-height) / 2) 0;
@@ -65,7 +65,9 @@
     @include thumb;
     -webkit-appearance: none;
     margin-top: calc(
-      calc(calc(-1 * var(--track-border-width) * 2 + var(--track-height)) / 2) - calc(var(--thumb-height) / 2)
+      calc(calc(-1 * var(--track-border-width) * 2 + var(--track-height)) / 2) - calc(
+          var(--thumb-height) / 2
+        )
     );
   }
 

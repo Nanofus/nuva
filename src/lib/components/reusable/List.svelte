@@ -2,7 +2,7 @@
   export let stagger: boolean = false;
 </script>
 
-<ul class={stagger ? "stagger" : ""}>
+<ul class={stagger ? 'stagger' : ''}>
   <slot />
 </ul>
 

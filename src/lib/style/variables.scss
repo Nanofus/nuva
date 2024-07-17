@@ -18,7 +18,8 @@
   --header-shadow: 0 0 1rem rgba(0, 0, 0, 0.9); // Shadow for headers
   --subtle-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.9);
   --music-button-shadow: 0.1rem 0.2rem 0.5rem rgba(0, 0, 0, 0.6); // Shadow for music buttons
-  --banner-shadow: 0 0 0.1rem rgba(0, 0, 0, 1), 0 0 0.5rem rgba(0, 0, 0, 0.9), 0 0 1rem rgba(0, 0, 0, 0.9); // Shadow for text in banner
+  --banner-shadow: 0 0 0.1rem rgba(0, 0, 0, 1), 0 0 0.5rem rgba(0, 0, 0, 0.9),
+    0 0 1rem rgba(0, 0, 0, 0.9); // Shadow for text in banner
   --scroll-hinting-shadow-color: rgba(
     0,
     0,
@@ -43,24 +44,24 @@
 /* Typography */
 
 :root {
-  --body-text-font-family: "Source Serif 4", "Times New Roman", serif; // Font family for body text
-  --header-font-family: "Cinzel", serif; // Font family for headers
-  --header-secondary-font-family: "Cinzel", serif; // Font family for secondary headers
-  --accent-font-family: "Source Code Pro", monospace; // Font family for secondary text areas such as metadata
-  --code-font-family: "Source Code Pro", monospace; // Font family for code blocks
-  --nav-font-family: "Source Serif 4", "Times New Roman", serif; // Font family for navigation
+  --body-text-font-family: 'Source Serif 4', 'Times New Roman', serif; // Font family for body text
+  --header-font-family: 'Cinzel', serif; // Font family for headers
+  --header-secondary-font-family: 'Cinzel', serif; // Font family for secondary headers
+  --accent-font-family: 'Source Code Pro', monospace; // Font family for secondary text areas such as metadata
+  --code-font-family: 'Source Code Pro', monospace; // Font family for code blocks
+  --nav-font-family: 'Source Serif 4', 'Times New Roman', serif; // Font family for navigation
   --font-size-body: 1rem; // Font size for body text
   --font-size-h1: 3rem; // Font size for h1
   --font-size-h2: 1.8rem; // Font size for h2
   --font-size-h4: 1.5rem; // Font size for h4
-  --icon-font: "Material Icons", sans-serif;
+  --icon-font: 'Material Icons', sans-serif;
 }
 
 /* Images */
 
 :root {
   //--background-image-default: url("/images/bg.webp"); // Default background image
-  --hr-background-image: url("/images/hrbg.png"); // Background image for horizontal rules
+  --hr-background-image: url('/images/hrbg.png'); // Background image for horizontal rules
 }
 
 /* Sizing */

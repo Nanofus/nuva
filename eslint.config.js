@@ -49,7 +49,8 @@ export default [
       '**/.DS_STORE',
       'node_modules/',
       'public/',
-      'static/'
+      'static/',
+      '.vercel/'
     ]
   }
 ];

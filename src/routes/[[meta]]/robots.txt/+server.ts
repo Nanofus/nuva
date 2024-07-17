@@ -1,5 +1,5 @@
-import { globalConfig } from "$lib/util/config";
-import type { RequestHandler } from "@sveltejs/kit";
+import { globalConfig } from '$lib/util/config';
+import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async () => {
   return new Response(
@@ -9,8 +9,8 @@ Allow: /
 Sitemap: ${globalConfig.baseUrl}/sitemap.xml`,
     {
       headers: {
-        "Content-Type": "text/plain",
-      },
-    },
+        'Content-Type': 'text/plain'
+      }
+    }
   );
 };

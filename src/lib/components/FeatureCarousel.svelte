@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { globalConfig, localConfig } from "$lib/util/config";
-  import type { PostMeta } from "$lib/util/types";
-  import FeaturedPost from "$lib/components/FeaturedPost.svelte";
-  import { browser } from "$app/environment";
-  import { onDestroy, onMount } from "svelte";
+  import { globalConfig, localConfig } from '$lib/util/config';
+  import type { PostMeta } from '$lib/util/types';
+  import FeaturedPost from '$lib/components/FeaturedPost.svelte';
+  import { browser } from '$app/environment';
+  import { onDestroy, onMount } from 'svelte';
 
   export let postList: PostMeta[];
 
@@ -28,13 +28,14 @@
       n < 0
         ? globalConfig.featuredPostsCount + (n % globalConfig.featuredPostsCount)
         : n % globalConfig.featuredPostsCount;
-    wrapper?.style.setProperty("margin-left", newSlide * -100 + "%");
-    dots[currentSlide]?.classList.remove("active");
-    dots[newSlide]?.classList.add("active");
+    wrapper?.style.setProperty('margin-left', newSlide * -100 + '%');
+    dots[currentSlide]?.classList.remove('active');
+    dots[newSlide]?.classList.add('active');
     currentSlide = newSlide;
   };
 
-  let interval: NodeJS.Timer;
+  // eslint-disable-next-line no-undef
+  let interval: NodeJS.Timeout;
 
   onMount(() => {
     interval = setInterval(() => {
@@ -48,7 +49,11 @@
   onDestroy(() => clearInterval(interval));
 </script>
 
-<div class="featured-posts-wrapper" bind:this={wrapper} style="width: {globalConfig.featuredPostsCount * 100}%">
+<div
+  class="featured-posts-wrapper"
+  bind:this={wrapper}
+  style="width: {globalConfig.featuredPostsCount * 100}%"
+>
   {#each postList.slice(0, globalConfig.featuredPostsCount) as post}
     <FeaturedPost postMeta={post} />
   {/each}
@@ -56,10 +61,10 @@
 <button class="prev material-icons" on:click={prevSlide}>chevron_left</button>
 <button class="next material-icons" on:click={nextSlide}>chevron_right</button>
 <div class="dots">
-  {#each dots as _, index (index)}
+  {#each dots as element, index (index)}
     <button
       class="dot {index <= 0 ? 'active' : ''}"
-      bind:this={dots[index]}
+      bind:this={element}
       on:click={() => {
         showSlide(index);
         hasUserInteracted = true;

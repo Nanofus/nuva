@@ -1,7 +1,7 @@
-import type { RequestHandler } from "@sveltejs/kit";
-import { error, json } from "@sveltejs/kit";
-import { getCommentsForPost, postComment } from "$lib/server/database";
-import { t } from "$lib/util/translations";
+import type { RequestHandler } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
+import { getCommentsForPost, postComment } from '$lib/server/database';
+import { t } from '$lib/util/translations';
 
 export const GET: RequestHandler = async ({ params }) => {
   if (!params.slug) throw error(404, t.errors.e404);
@@ -9,7 +9,7 @@ export const GET: RequestHandler = async ({ params }) => {
 };
 
 export const POST: RequestHandler = async ({ params, request }) => {
-  const authToken = request.headers.get("Authorization")?.split(" ")[1];
+  const authToken = request.headers.get('Authorization')?.split(' ')[1];
   if (!authToken) throw error(403, t.errors.e403);
   const body = await request.json();
   if (!params.slug) throw error(404, t.errors.e404);

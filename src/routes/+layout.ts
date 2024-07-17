@@ -1,4 +1,4 @@
-import type { Load } from "@sveltejs/kit";
+import type { Load } from '@sveltejs/kit';
 
 export const load: Load = async ({ url, data }) => {
   const config = data?.config;
@@ -6,6 +6,6 @@ export const load: Load = async ({ url, data }) => {
 
   return {
     pathname,
-    config,
+    config
   };
 };

@@ -1,28 +1,28 @@
-import type { Hierarchical, PostMeta } from "$lib/util/types";
-import { globalConfig, localConfig } from "$lib/util/config";
-import { browser } from "$app/environment";
-import { scrolledToBottom } from "$lib/util/stores";
+import type { Hierarchical, PostMeta } from '$lib/util/types';
+import { globalConfig, localConfig } from '$lib/util/config';
+import { browser } from '$app/environment';
+import { scrolledToBottom } from '$lib/util/stores';
 
 export const toastSettings = {
   error: {
     theme: {
-      "--toastBackground": "var(--error-background)",
+      '--toastBackground': 'var(--error-background)'
     },
     initial: 0,
-    dismissable: true,
+    dismissable: true
   },
   success: {
     theme: {
-      "--toastBackground": "var(--success-background)",
+      '--toastBackground': 'var(--success-background)'
     },
-    dismissable: false,
+    dismissable: false
   },
   info: {
     theme: {
-      "--toastBackground": "var(--info-background)",
+      '--toastBackground': 'var(--info-background)'
     },
-    dismissable: false,
-  },
+    dismissable: false
+  }
 };
 
 export const filterExcludedCategories = (posts: PostMeta[]) =>
@@ -30,7 +30,7 @@ export const filterExcludedCategories = (posts: PostMeta[]) =>
     (post) =>
       !post.categories
         .map((cat) => cat.slug)
-        .some((slug) => globalConfig.categoriesExcludedFromAllPosts.includes(slug)),
+        .some((slug) => globalConfig.categoriesExcludedFromAllPosts.includes(slug))
   );
 
 export const objectsToHierarchy = (arr: Hierarchical[]) => {
@@ -64,14 +64,14 @@ export const handleViewportResize = () => {
   if (!browser) return;
   const scroller = document.scrollingElement as HTMLElement;
   document
-    .querySelector<HTMLElement>(":root")
-    ?.style.setProperty("--scrollbar-width", `${window.innerWidth - scroller.clientWidth}px`);
+    .querySelector<HTMLElement>(':root')
+    ?.style.setProperty('--scrollbar-width', `${window.innerWidth - scroller.clientWidth}px`);
   if (!window.visualViewport) return;
   document
-    .querySelector<HTMLElement>(":root")
+    .querySelector<HTMLElement>(':root')
     ?.style.setProperty(
-      "--bleed-buffer",
-      `${Math.round((window.visualViewport.width + Number.EPSILON) * 100) / 100 - scroller.clientWidth}px`,
+      '--bleed-buffer',
+      `${Math.round((window.visualViewport.width + Number.EPSILON) * 100) / 100 - scroller.clientWidth}px`
     );
 };
 
@@ -85,18 +85,19 @@ export const handleScrolledToBottom = () => {
   scrolledToBottom.set(currentScroll + localConfig.bottomScrollThreshold > documentHeight);
 };
 
-export const getPageTitle = (title: string) => (title ? `${title} – ${globalConfig.siteName}` : globalConfig.siteName);
+export const getPageTitle = (title: string) =>
+  title ? `${title} – ${globalConfig.siteName}` : globalConfig.siteName;
 
 export const getPageUrl = (route: string) => `${globalConfig.baseUrl}/${route}`;
 
 export const formatSecondsToMMSS = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
   const secondsRemainder = Math.floor(seconds % 60);
-  return `${minutes}:${secondsRemainder < 10 ? "0" : ""}${secondsRemainder}`;
+  return `${minutes}:${secondsRemainder < 10 ? '0' : ''}${secondsRemainder}`;
 };
 
 export const stripHtml = (html: string) => {
-  return html.replace(/<(.|\n)*?>/g, "");
+  return html.replace(/<(.|\n)*?>/g, '');
 };
 
 export const getRandomBannerUrl = (seed = 0) =>
@@ -109,7 +110,7 @@ export const initGlobalScope = () => {
   window.nuvaGlobal = {
     onPostDestroy: undefined,
     saveSetting: saveSetting,
-    loadSetting: loadSetting,
+    loadSetting: loadSetting
   };
 };
 
@@ -128,8 +129,8 @@ export const createBaseSettings = () => {
     localStorage.setItem(
       localConfig.localStorageSettingsKey,
       JSON.stringify({
-        volume: localConfig.defaultVolume,
-      }),
+        volume: localConfig.defaultVolume
+      })
     );
   }
 };

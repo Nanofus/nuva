@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { t } from "$lib/util/translations";
-  import { globalConfig } from "$lib/util/config";
+  import { t } from '$lib/util/translations';
+  import { globalConfig } from '$lib/util/config';
 </script>
 
 <footer>
@@ -26,7 +26,7 @@
       margin-right: 1rem;
 
       &:before {
-        content: "|";
+        content: '|';
       }
     }
 
