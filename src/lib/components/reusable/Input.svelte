@@ -1,14 +1,25 @@
-<script context="module" lang="ts">
+<script module lang="ts">
   let counter: number = 0;
 </script>
 
 <script lang="ts">
-  export let name: string | null = null;
-  export let label: string | null = null;
-  export let type: 'text' | 'password' | 'multiline' = 'text';
-  export let placeholder: string | null = null;
-  export let value: string = '';
-  export let rows = 5;
+  interface Props {
+    name?: string | null;
+    label?: string | null;
+    type?: 'text' | 'password' | 'multiline';
+    placeholder?: string | null;
+    value?: string;
+    rows?: number;
+  }
+
+  let {
+    name = null,
+    label = null,
+    type = 'text',
+    placeholder = null,
+    value = $bindable(''),
+    rows = 5
+  }: Props = $props();
 
   const elementId = 'input_' + counter++;
   const elementIdSecondary = elementId;
@@ -32,8 +43,8 @@
       {name}
       {placeholder}
       {value}
-      on:input={handleInput}
-    />
+      oninput={handleInput}
+></textarea>
   {:else}
     {#if label}
       <label for={elementIdSecondary}>
@@ -47,7 +58,7 @@
       {placeholder}
       {value}
       {type}
-      on:input={handleInput}
+      oninput={handleInput}
     />
   {/if}
 </div>

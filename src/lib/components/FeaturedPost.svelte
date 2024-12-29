@@ -2,7 +2,11 @@
   import type { PostMeta } from '$lib/util/types';
   import { getRandomBannerUrl } from '$lib/util/util';
 
-  export let postMeta: PostMeta;
+  interface Props {
+    postMeta: PostMeta;
+  }
+
+  let { postMeta }: Props = $props();
 </script>
 
 <div

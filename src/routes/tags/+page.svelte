@@ -9,8 +9,12 @@
   import { t } from '$lib/util/translations';
   import { getTags } from '$lib/client/api';
 
-  export let data: TagListResponse;
-  let fetching = false;
+  interface Props {
+    data: TagListResponse;
+  }
+
+  let { data = $bindable() }: Props = $props();
+  let fetching = $state(false);
 
   const fetchMoreTags = async () => {
     fetching = true;
@@ -44,7 +48,7 @@
 </div>
 <br />
 {#if data.hasNextPage && !fetching}
-  <Button link on:click={fetchMoreTags}>{t.common.loadMore}</Button>
+  <Button link onclick={fetchMoreTags}>{t.common.loadMore}</Button>
 {:else if fetching}
   <LoadingSpinner />
 {/if}

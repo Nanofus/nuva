@@ -1,7 +1,11 @@
 <script lang="ts">
   import type { Post } from '$lib/util/types';
 
-  export let post: Post;
+  interface Props {
+    post: Post;
+  }
+
+  let { post }: Props = $props();
 </script>
 
 <div id="previous-next-post">

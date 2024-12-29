@@ -8,8 +8,12 @@
   import { t } from '$lib/util/translations';
   import { getPosts } from '$lib/client/api';
 
-  export let data: PostListResponse;
-  let fetching = false;
+  interface Props {
+    data: PostListResponse;
+  }
+
+  let { data = $bindable() }: Props = $props();
+  let fetching = $state(false);
 
   const fetchMorePosts = async () => {
     fetching = true;

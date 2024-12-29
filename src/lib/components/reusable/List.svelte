@@ -1,9 +1,14 @@
 <script lang="ts">
-  export let stagger: boolean = false;
+  interface Props {
+    stagger?: boolean;
+    children?: import('svelte').Snippet;
+  }
+
+  let { stagger = false, children }: Props = $props();
 </script>
 
 <ul class={stagger ? 'stagger' : ''}>
-  <slot />
+  {@render children?.()}
 </ul>
 
 <style lang="scss">

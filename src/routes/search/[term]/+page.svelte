@@ -9,8 +9,12 @@
   import { t } from '$lib/util/translations';
   import { getPosts } from '$lib/client/api';
 
-  export let data: PostListBySearchResponse;
-  let fetching = false;
+  interface Props {
+    data: PostListBySearchResponse;
+  }
+
+  let { data = $bindable() }: Props = $props();
+  let fetching = $state(false);
 
   const fetchMorePosts = async () => {
     fetching = true;
@@ -40,7 +44,7 @@
 <h1>{t.pages.searchResults.title}: {data.searchTerm}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
-  <Button link on:click={fetchMorePosts}>{t.common.loadMore}</Button>
+  <Button link onclick={fetchMorePosts}>{t.common.loadMore}</Button>
 {:else if fetching}
   <LoadingSpinner />
 {/if}

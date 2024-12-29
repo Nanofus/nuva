@@ -10,8 +10,12 @@
   import { t } from '$lib/util/translations';
   import { toast } from '@zerodevx/svelte-toast';
 
-  export let data: PostResponse;
-  let noAccess = false;
+  interface Props {
+    data: PostResponse;
+  }
+
+  let { data = $bindable() }: Props = $props();
+  let noAccess = $state(false);
 
   const scrollToAnchor = () => {
     const { hash } = document.location;

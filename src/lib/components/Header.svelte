@@ -6,10 +6,10 @@
   import { page } from '$app/stores';
 
   let bannerUrl = getRandomBannerUrl();
-  let bannerVisible = $page.data.bannerVisible ? $page.data.bannerVisible : true;
-  let customBannerUrl: string | null = $page.data.customBanner
+  let bannerVisible = $state($page.data.bannerVisible ? $page.data.bannerVisible : true);
+  let customBannerUrl: string | null = $state($page.data.customBanner
     ? `url("${$page.data.customBanner}")`
-    : null;
+    : null);
 
   onMount(() => {
     postOptions.subscribe((options) => {

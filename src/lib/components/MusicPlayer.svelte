@@ -274,9 +274,9 @@ Musicmancer 2023 Edition
   <div class="audio-player">
     <div>
       {#if paused}
-        <Button icon="play_arrow" disabled={fadeInProgress} on:click={unpause} />
+        <Button icon="play_arrow" disabled={fadeInProgress} onclick={unpause} />
       {:else}
-        <Button icon="pause" disabled={fadeInProgress} on:click={pause} />
+        <Button icon="pause" disabled={fadeInProgress} onclick={pause} />
       {/if}
     </div>
     <time class="current-time" bind:this={currentTime} />
@@ -292,9 +292,9 @@ Musicmancer 2023 Edition
     <time class="duration">{formatSecondsToMMSS(currentAudioElement.duration)}</time>
     <div>
       {#if !muted}
-        <Button icon="volume_up" disabled={fadeInProgress} on:click={() => (muted = !muted)} />
+        <Button icon="volume_up" disabled={fadeInProgress} onclick={() => (muted = !muted)} />
       {:else}
-        <Button icon="volume_mute" disabled={fadeInProgress} on:click={() => (muted = !muted)} />
+        <Button icon="volume_mute" disabled={fadeInProgress} onclick={() => (muted = !muted)} />
       {/if}
     </div>
     <input
@@ -309,7 +309,7 @@ Musicmancer 2023 Edition
       <Button
         icon="info"
         disabled={fadeInProgress}
-        on:click={() => {
+        onclick={() => {
           if (currentAudioElement) updateInfoBox(currentAudioElement.src);
           infoboxVisible = !infoboxVisible;
         }}
@@ -317,6 +317,7 @@ Musicmancer 2023 Edition
     </div>
   </div>
   <table id="music-info-box" class={infoboxVisible ? '' : 'hidden'}>
+    <tbody>
     <tr>
       <th colspan="3">Song Metadata</th>
     </tr>
@@ -337,6 +338,7 @@ Musicmancer 2023 Edition
         <td>{displayedMetadata.album}</td>
       </tr>
     {/if}
+    </tbody>
   </table>
 {/if}
 

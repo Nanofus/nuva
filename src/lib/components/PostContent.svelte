@@ -7,7 +7,11 @@
   import { cleanGlobalScope, initGlobalScope, toastSettings } from '$lib/util/util';
   import { t } from '$lib/util/translations';
 
-  export let post: Post;
+  interface Props {
+    post: Post;
+  }
+
+  let { post }: Props = $props();
   let scriptElements: HTMLScriptElement[] = [];
 
   const reportValidation = () => {

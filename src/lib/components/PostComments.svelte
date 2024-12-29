@@ -7,8 +7,12 @@
   import { auth } from '$lib/util/stores';
   import { getCommentsByPost } from '$lib/client/api';
 
-  export let post: Post;
-  let replyFormOpen = false;
+  interface Props {
+    post: Post;
+  }
+
+  let { post = $bindable() }: Props = $props();
+  let replyFormOpen = $state(false);
 
   const refreshComments = async () => {
     replyFormOpen = false;
@@ -25,7 +29,7 @@
     <CommentView on:commentSent={refreshComments} {post} {comment} />
   {/each}
   {#if !replyFormOpen && $auth}
-    <Button link on:click={() => (replyFormOpen = true)}>{t.common.comment}</Button>
+    <Button link onclick={() => (replyFormOpen = true)}>{t.common.comment}</Button>
   {:else}
     <CommentForm
       on:commentSent={refreshComments}

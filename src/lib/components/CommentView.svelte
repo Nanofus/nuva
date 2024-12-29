@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CommentView from './CommentView.svelte';
   import type { Comment, Post } from '$lib/util/types';
   import CommentForm from '$lib/components/CommentForm.svelte';
   import { createEventDispatcher } from 'svelte';
@@ -8,9 +9,13 @@
   import { auth } from '$lib/util/stores';
   import { globalConfig } from '$lib/util/config';
 
-  export let comment: Comment;
-  export let post: Post;
-  let replyFormOpen = false;
+  interface Props {
+    comment: Comment;
+    post: Post;
+  }
+
+  let { comment, post }: Props = $props();
+  let replyFormOpen = $state(false);
 
   const dispatch = createEventDispatcher();
 
@@ -40,14 +45,14 @@
   <div class="comment-content">{@html comment.content}</div>
   <div class="child-comments">
     {#each comment.children as child}
-      <svelte:self on:commentSent={commentSent} comment={child} {post} />
+      <CommentView on:commentSent={commentSent} comment={child} {post} />
     {/each}
   </div>
   {#if isCurrentUser()}
     <a target="_blank" href="{globalConfig.urls.commentEdit}{comment._id}">{t.common.edit}</a>
   {/if}
   {#if !replyFormOpen && $auth}
-    <Button link on:click={() => (replyFormOpen = true)}>{t.common.reply}</Button>
+    <Button link onclick={() => (replyFormOpen = true)}>{t.common.reply}</Button>
   {:else}
     <CommentForm
       on:commentSent={commentSent}

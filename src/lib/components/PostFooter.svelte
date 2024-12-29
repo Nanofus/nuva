@@ -5,7 +5,11 @@
   import PostAuthors from '$lib/components/PostAuthors.svelte';
   import PostNextAndPrevious from '$lib/components/PostNextAndPrevious.svelte';
 
-  export let post: Post;
+  interface Props {
+    post: Post;
+  }
+
+  let { post }: Props = $props();
 </script>
 
 <footer class="vertically-separated" id="post-footer">

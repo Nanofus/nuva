@@ -1,17 +1,28 @@
 <script lang="ts">
-  export let href = '';
-  let openInNewTab = false;
+  import { run } from 'svelte/legacy';
 
-  $: href.indexOf('http') === 0 && (openInNewTab = true);
+  interface Props {
+    href?: string;
+    children?: import('svelte').Snippet;
+    onclick?: () => void;
+    onkeydown?: () => void;
+  }
+
+  let { href = '', children, onclick, onkeydown }: Props = $props();
+  let openInNewTab = $state(false);
+
+  run(() => {
+    href.indexOf('http') === 0 && (openInNewTab = true);
+  });
 </script>
 
 {#if href}
-  <a {href} target={openInNewTab ? '_blank' : ''} on:click>
-    <slot />
+  <a {href} target={openInNewTab ? '_blank' : ''} onclick={onclick}>
+    {@render children?.()}
   </a>
 {:else}
-  <div role="button" on:click on:keypress tabindex="0">
-    <slot />
+  <div role="button" onclick={onclick} onkeydown={onkeydown} tabindex="0">
+    {@render children?.()}
   </div>
 {/if}
 

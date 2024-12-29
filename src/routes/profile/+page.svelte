@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import Login from '$lib/components/Login.svelte';
   import { getPageTitle, getPageUrl, loadSetting, saveSetting } from '$lib/util/util';
   import { auth } from '$lib/util/stores';
@@ -7,9 +9,11 @@
   import { localConfig } from '$lib/util/config';
   import { t } from '$lib/util/translations';
 
-  let volume = loadSetting('volume') || localConfig.defaultVolume;
+  let volume = $state(loadSetting('volume') || localConfig.defaultVolume);
 
-  $: volume && saveSetting('volume', volume);
+  run(() => {
+    volume && saveSetting('volume', volume);
+  });
 </script>
 
 <svelte:head>

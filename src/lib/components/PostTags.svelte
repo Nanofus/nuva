@@ -2,7 +2,11 @@
   import Pill from '$lib/components/reusable/Pill.svelte';
   import type { Tag } from '$lib/util/types';
 
-  export let tags: Tag[];
+  interface Props {
+    tags: Tag[];
+  }
+
+  let { tags }: Props = $props();
 </script>
 
 <div class="vertically-separated" id="tags">

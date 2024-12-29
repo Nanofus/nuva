@@ -1,7 +1,11 @@
 <script lang="ts">
   import type { Category } from '$lib/util/types';
 
-  export let categories: Category[];
+  interface Props {
+    categories: Category[];
+  }
+
+  let { categories }: Props = $props();
 </script>
 
 <ul class="categories">

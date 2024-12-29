@@ -6,7 +6,11 @@
   import { t } from '$lib/util/translations';
   import FeatureCarousel from '$lib/components/FeatureCarousel.svelte';
 
-  export let data: { posts: PostMeta[]; comments: CommentMeta[] };
+  interface Props {
+    data: { posts: PostMeta[]; comments: CommentMeta[] };
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <svelte:head>

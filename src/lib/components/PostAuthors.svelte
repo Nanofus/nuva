@@ -1,7 +1,11 @@
 <script lang="ts">
   import type { Post } from '$lib/util/types';
 
-  export let post: Post;
+  interface Props {
+    post: Post;
+  }
+
+  let { post }: Props = $props();
 </script>
 
 <div class="vertically-separated" id="authors">
@@ -9,7 +13,7 @@
     <div class="author-list">
       {#each post.coAuthors as author, i}
         <a href="/authors/{encodeURI(author)}">{author}</a
-        >{#if i !== post.coAuthors.length - 1}<span>, </span>{/if}
+        >{#if i !== post.coAuthors.length - 1}<span>,&nbsp;</span>{/if}
       {/each}
     </div>
   {/if}

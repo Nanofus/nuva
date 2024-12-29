@@ -3,7 +3,11 @@
   import type { Post } from '$lib/util/types';
   import { t } from '$lib/util/translations';
 
-  export let post: Post;
+  interface Props {
+    post: Post;
+  }
+
+  let { post }: Props = $props();
 </script>
 
 <header id="post-header">
@@ -21,7 +25,7 @@
       <span class="author-list">
         {#each post.coAuthors as author, i}
           <a href="/authors/{encodeURI(author)}">{author}</a
-          >{#if i !== post.coAuthors.length - 1}<span>, </span>{/if}
+          >{#if i !== post.coAuthors.length - 1}<span>,&nbsp;</span>{/if}
         {/each}
       </span>
     </span>

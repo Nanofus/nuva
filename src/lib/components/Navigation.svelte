@@ -7,9 +7,9 @@
   import { globalConfig } from '$lib/util/config';
   import { page } from '$app/stores';
 
-  let smallLogo: HTMLElement;
-  let menuOpen = false;
-  let stickyMenu = true;
+  let smallLogo: HTMLElement = $state();
+  let menuOpen = $state(false);
+  let stickyMenu = $state(true);
   let bannerVisible = $page.data.bannerVisible ? $page.data.bannerVisible : true;
 
   const getTotalNavigationHeight = () => {
@@ -66,7 +66,7 @@
         <NavItem href="/"><h1>{globalConfig.siteName}</h1></NavItem>
       </div>
       <div class="section-menu">
-        <NavItem on:click={toggleMenu} on:keypress={toggleMenu}>
+        <NavItem onclick={toggleMenu} onkeydown={toggleMenu}>
           <div class="hamburger-menu">
             {#if !menuOpen}
               <span class="material-icons">menu</span>
@@ -79,8 +79,8 @@
     </div>
     <div
       class="section-menu-items {menuOpen ? 'menu-open' : ''}"
-      on:click={menuClicked}
-      on:keypress={menuClicked}
+      onclick={menuClicked}
+      onkeypress={menuClicked}
       role="button"
       tabindex="0"
     >
@@ -98,7 +98,7 @@
       >
       <NavItem href="/search">{t.components.navigation.search}</NavItem>
     </div>
-    <div class="section-filler" />
+    <div class="section-filler"></div>
   </div>
 </nav>
 

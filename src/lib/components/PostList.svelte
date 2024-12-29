@@ -13,6 +13,7 @@
 </script>
 
 <table>
+  <tbody>
   <tr class="table-header">
     <td class="link">{t.components.postList.title}</td>
     <td class="comment-count hidden-mobile material-icons">forum</td>
@@ -28,10 +29,11 @@
       <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ''}</td>
       <td class="date">{post.date.toLocaleDateString(globalConfig.locale)}</td>
       <td class="authors hidden-mobile"
-        ><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td
+      ><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td
       >
     </tr>
   {/each}
+  </tbody>
 </table>
 
 <style lang="scss">

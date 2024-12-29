@@ -1,10 +1,15 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  export let href: string | null = null;
-  export let sizeByCount: number | boolean = false;
+  interface Props {
+    href?: string | null;
+    sizeByCount?: number | boolean;
+    children?: import('svelte').Snippet;
+  }
 
-  let pill: HTMLElement;
+  let { href = null, sizeByCount = false, children }: Props = $props();
+
+  let pill: HTMLElement = $state();
 
   onMount(() => {
     if (!sizeByCount) return;
@@ -15,10 +20,10 @@
 <div bind:this={pill} class="pill">
   {#if href}
     <a {href}>
-      <slot />
+      {@render children?.()}
     </a>
   {:else}
-    <slot />
+    {@render children?.()}
   {/if}
 </div>
 

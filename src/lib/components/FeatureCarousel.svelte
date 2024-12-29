@@ -5,12 +5,16 @@
   import { browser } from '$app/environment';
   import { onDestroy, onMount } from 'svelte';
 
-  export let postList: PostMeta[];
+  interface Props {
+    postList: PostMeta[];
+  }
+
+  let { postList }: Props = $props();
 
   let currentSlide = 0;
-  let hasUserInteracted = false;
-  let wrapper: HTMLDivElement;
-  let dots: HTMLButtonElement[] = Array(globalConfig.featuredPostsCount);
+  let hasUserInteracted = $state(false);
+  let wrapper: HTMLDivElement | undefined = $state();
+  let dots: HTMLButtonElement[] = $state(Array(globalConfig.featuredPostsCount));
 
   const prevSlide = () => {
     showSlide(currentSlide - 1);
@@ -58,14 +62,14 @@
     <FeaturedPost postMeta={post} />
   {/each}
 </div>
-<button class="prev material-icons" on:click={prevSlide}>chevron_left</button>
-<button class="next material-icons" on:click={nextSlide}>chevron_right</button>
+<button class="prev material-icons" onclick={prevSlide}>chevron_left</button>
+<button class="next material-icons" onclick={nextSlide}>chevron_right</button>
 <div class="dots">
-  {#each dots as element, index (index)}
+  {#each dots as _, index (index)}
     <button
       class="dot {index <= 0 ? 'active' : ''}"
-      bind:this={element}
-      on:click={() => {
+      bind:this={dots[index]}
+      onclick={() => {
         showSlide(index);
         hasUserInteracted = true;
       }}

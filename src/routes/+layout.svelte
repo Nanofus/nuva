@@ -18,9 +18,9 @@
   import { loadLoginStatus } from '$lib/client/auth';
   import { globalConfig } from '$lib/util/config';
 
-  export let data;
+  let { data, children } = $props();
 
-  let fullWidth: boolean = $page.data.fullWidth ? $page.data.fullWidth : false;
+  let fullWidth: boolean = $state($page.data.fullWidth ? $page.data.fullWidth : false);
 
   onMount(() => {
     createBaseSettings();
@@ -60,7 +60,7 @@
     {#key data.pathname}
       <div class="transition" in:fade={{ duration: 150, delay: 0 }}>
         {#if !$navigating}
-          <slot />
+          {@render children?.()}
         {/if}
       </div>
     {/key}

@@ -1,12 +1,26 @@
 <script lang="ts">
-  export let icon: string | null = null;
-  export let disabled: boolean = false;
-  export let link: boolean = false;
+  interface Props {
+    icon?: string | null;
+    disabled?: boolean;
+    link?: boolean;
+    children?: import('svelte').Snippet;
+    onclick?: () => void;
+    onkeydown?: () => void;
+  }
+
+  let {
+    icon = null,
+    disabled = false,
+    link = false,
+    children,
+    onclick,
+    onkeydown
+  }: Props = $props();
 </script>
 
-<button class={link ? 'link-button' : ''} {disabled} on:click>
+<button class={link ? 'link-button' : ''} {disabled} onclick={onclick} onkeydown={onkeydown}>
   {#if icon}
     <span class="icon material-icons">{icon}</span>
   {/if}
-  <slot />
+  {@render children?.()}
 </button>

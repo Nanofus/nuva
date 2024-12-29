@@ -9,9 +9,9 @@
   import { toastSettings } from '$lib/util/util';
   import { t } from '$lib/util/translations';
 
-  let passwordInput = '';
-  let usernameInput = '';
-  let submitted = false;
+  let passwordInput = $state('');
+  let usernameInput = $state('');
+  let submitted = $state(false);
 
   const handleLogin = async () => {
     if (!usernameInput || !passwordInput) {
@@ -34,14 +34,14 @@
         bind:value={passwordInput}
       />
       {#if !submitted}
-        <Button on:click={handleLogin}>{t.components.login.login}</Button>
+        <Button onclick={handleLogin}>{t.components.login.login}</Button>
       {:else}
         <LoadingSpinner />
       {/if}
     </Form>
   {:else}
     <div class="user-info">
-      <Button on:click={() => logout()}>{t.components.login.logout}</Button>
+      <Button onclick={() => logout()}>{t.components.login.logout}</Button>
     </div>
   {/if}
 </div>

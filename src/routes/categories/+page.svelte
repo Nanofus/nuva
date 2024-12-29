@@ -4,7 +4,11 @@
   import { t } from '$lib/util/translations';
   import type { CategoryListResponse } from '$lib/util/types';
 
-  export let data: CategoryListResponse;
+  interface Props {
+    data: CategoryListResponse;
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <svelte:head>

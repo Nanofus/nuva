@@ -7,20 +7,22 @@
 </script>
 
 <table>
-  <tr class="table-header">
-    <td class="link">{t.components.commentList.post}</td>
-    <td class="date">{t.components.commentList.date}</td>
-    <td class="commenter">{t.components.commentList.commenter}</td>
-  </tr>
-  {#each comments as comment}
-    <tr>
-      <td class="link">
-        <a href="/posts/{comment.postSlug}#comment-{comment._id}">{comment.postTitle}</a>
-      </td>
-      <td class="date">{comment.date.toLocaleDateString(globalConfig.locale)}</td>
-      <td class="commenter"><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td>
+  <tbody>
+    <tr class="table-header">
+      <td class="link">{t.components.commentList.post}</td>
+      <td class="date">{t.components.commentList.date}</td>
+      <td class="commenter">{t.components.commentList.commenter}</td>
     </tr>
-  {/each}
+    {#each comments as comment}
+      <tr>
+        <td class="link">
+          <a href="/posts/{comment.postSlug}#comment-{comment._id}">{comment.postTitle}</a>
+        </td>
+        <td class="date">{comment.date.toLocaleDateString(globalConfig.locale)}</td>
+        <td class="commenter"><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td>
+      </tr>
+    {/each}
+  </tbody>
 </table>
 
 <style lang="scss">

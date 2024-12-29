@@ -10,13 +10,22 @@
   import { t } from '$lib/util/translations';
   import { auth } from '$lib/util/stores';
 
-  export let parent: number;
-  export let postId: number;
-  export let postSlug: string;
-  export let isReply: boolean;
+  interface Props {
+    parent: number;
+    postId: number;
+    postSlug: string;
+    isReply: boolean;
+  }
 
-  let sending: boolean = false;
-  let content: string = '';
+  let {
+    parent,
+    postId,
+    postSlug,
+    isReply
+  }: Props = $props();
+
+  let sending: boolean = $state(false);
+  let content: string = $state('');
 
   const dispatch = createEventDispatcher();
 
@@ -50,8 +59,8 @@
           bind:value={content}
         />
         <div class="button-group">
-          <Button link on:click={() => dispatch('close')}>{t.common.close}</Button>
-          <Button on:click={sendComment}>{t.common.send}</Button>
+          <Button link onclick={() => dispatch('close')}>{t.common.close}</Button>
+          <Button onclick={sendComment}>{t.common.send}</Button>
         </div>
       </Form>
     {/if}
