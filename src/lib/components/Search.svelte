@@ -20,7 +20,10 @@
 </script>
 
 <div class="search-area">
-  <Form on:submit={() => (submitted = true)}>
+  <Form onsubmit={(e: Event) => {
+    e.preventDefault();
+    submitted = true;
+  }}>
     <Input bind:value={searchTerm} placeholder={t.components.search.searchTerms} />
     {#if !submitted}
       <Button icon="search" onclick={search} onkeydown={search}>{t.components.search.search}</Button

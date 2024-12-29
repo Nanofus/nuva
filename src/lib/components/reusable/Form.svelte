@@ -1,23 +1,16 @@
 <script lang="ts">
-  import { preventDefault } from 'svelte/legacy';
-
-  import { createEventDispatcher } from 'svelte';
-
   interface Props {
     vertical?: boolean;
     children?: import('svelte').Snippet;
+    onsubmit?: (e: Event) => void;
   }
 
-  let { vertical = false, children }: Props = $props();
-
-  const dispatch = createEventDispatcher();
+  let { vertical = false, children, onsubmit }: Props = $props();
 </script>
 
 <form
   class={vertical ? 'vertical' : ''}
-  onsubmit={preventDefault(() => {
-    dispatch('submit');
-  })}
+  onsubmit={onsubmit}
 >
   {@render children?.()}
 </form>

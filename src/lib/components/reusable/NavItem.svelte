@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   interface Props {
     href?: string;
     children?: import('svelte').Snippet;
@@ -11,7 +9,7 @@
   let { href = '', children, onclick, onkeydown }: Props = $props();
   let openInNewTab = $state(false);
 
-  run(() => {
+  $effect(() => {
     href.indexOf('http') === 0 && (openInNewTab = true);
   });
 </script>
