@@ -10,16 +10,16 @@
   let openInNewTab = $state(false);
 
   $effect(() => {
-    href.indexOf('http') === 0 && (openInNewTab = true);
+    if (href.indexOf('http') === 0) openInNewTab = true;
   });
 </script>
 
 {#if href}
-  <a {href} target={openInNewTab ? '_blank' : ''} onclick={onclick}>
+  <a {href} target={openInNewTab ? '_blank' : ''} {onclick}>
     {@render children?.()}
   </a>
 {:else}
-  <div role="button" onclick={onclick} onkeydown={onkeydown} tabindex="0">
+  <div role="button" {onclick} {onkeydown} tabindex="0">
     {@render children?.()}
   </div>
 {/if}

@@ -14,25 +14,25 @@
 
 <table>
   <tbody>
-  <tr class="table-header">
-    <td class="link">{t.components.postList.title}</td>
-    <td class="comment-count hidden-mobile material-icons">forum</td>
-    <td class="date">{t.components.postList.date}</td>
-    <td class="authors hidden-mobile">{t.components.postList.author}</td>
-  </tr>
-  {#each posts as post}
-    <tr class={post.mobileFriendly ? '' : 'mobile-unfriendly'}>
-      <td class="link">
-        <a href="/posts/{post.slug}">{post.title}</a>
-        <span class="categories">{parseCategories(post.categories)}</span>
-      </td>
-      <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ''}</td>
-      <td class="date">{post.date.toLocaleDateString(globalConfig.locale)}</td>
-      <td class="authors hidden-mobile"
-      ><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td
-      >
+    <tr class="table-header">
+      <td class="link">{t.components.postList.title}</td>
+      <td class="comment-count hidden-mobile material-icons">forum</td>
+      <td class="date">{t.components.postList.date}</td>
+      <td class="authors hidden-mobile">{t.components.postList.author}</td>
     </tr>
-  {/each}
+    {#each posts as post}
+      <tr class={post.mobileFriendly ? '' : 'mobile-unfriendly'}>
+        <td class="link">
+          <a href="/posts/{post.slug}">{post.title}</a>
+          <span class="categories">{parseCategories(post.categories)}</span>
+        </td>
+        <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ''}</td>
+        <td class="date">{post.date.toLocaleDateString(globalConfig.locale)}</td>
+        <td class="authors hidden-mobile"
+          ><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td
+        >
+      </tr>
+    {/each}
   </tbody>
 </table>
 

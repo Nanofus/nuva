@@ -18,7 +18,7 @@
   }: Props = $props();
 </script>
 
-<button class={link ? 'link-button' : ''} {disabled} onclick={onclick} onkeydown={onkeydown}>
+<button class={link ? 'link-button' : ''} {disabled} {onclick} {onkeydown}>
   {#if icon}
     <span class="icon material-icons">{icon}</span>
   {/if}

@@ -17,12 +17,7 @@
     isReply: boolean;
   }
 
-  let {
-    parent,
-    postId,
-    postSlug,
-    isReply
-  }: Props = $props();
+  let { parent, postId, postSlug, isReply }: Props = $props();
 
   let sending: boolean = $state(false);
   let content: string = $state('');

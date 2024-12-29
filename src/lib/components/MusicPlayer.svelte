@@ -183,7 +183,7 @@ Musicmancer 2023 Edition
     const audioButton = document.createElement('button');
     generatedElements.push(audioButton);
     audioButton.classList.add('audio-button', `index-${index}`);
-    resetMusicButtonStyles && audioButton.classList.add('minimal');
+    if (resetMusicButtonStyles) audioButton.classList.add('minimal');
 
     // Button content
     let buttonContent = audioElement.dataset.content;
@@ -209,7 +209,7 @@ Musicmancer 2023 Edition
   // Use the seek bar to seek the audio
   const handleSeek = (input: Event) => {
     const target = input.target as HTMLInputElement;
-    currentAudioElement && (currentAudioElement.currentTime = parseInt(target.value) / 1000);
+    if (currentAudioElement) currentAudioElement.currentTime = parseInt(target.value) / 1000;
   };
 
   // Update volume based on bar
@@ -218,11 +218,16 @@ Musicmancer 2023 Edition
     .forEach((element) => (element.volume = volume / 100));
 
   // Save volume
-  $: volume && saveSetting('volume', volume);
+  $: if (volume) saveSetting('volume', volume);
 
   // Mute
-  $: currentAudioElement &&
-    (muted ? (currentAudioElement.volume = 0) : (currentAudioElement.volume = volume / 100));
+  $: if (currentAudioElement) {
+    if (muted) {
+      currentAudioElement.volume = 0;
+    } else {
+      currentAudioElement.volume = volume / 100;
+    }
+  }
 
   const unpause = async () => {
     if (currentAudioElement) {
@@ -233,7 +238,7 @@ Musicmancer 2023 Edition
 
   const pause = () => {
     paused = true;
-    currentAudioElement && currentAudioElement.pause();
+    if (currentAudioElement) currentAudioElement.pause();
   };
 
   const fadeOutInterval = setInterval(() => {
@@ -279,7 +284,7 @@ Musicmancer 2023 Edition
         <Button icon="pause" disabled={fadeInProgress} onclick={pause} />
       {/if}
     </div>
-    <time class="current-time" bind:this={currentTime} />
+    <time class="current-time" bind:this={currentTime}></time>
     <input
       class="seek-bar"
       disabled={fadeInProgress}
@@ -318,26 +323,26 @@ Musicmancer 2023 Edition
   </div>
   <table id="music-info-box" class={infoboxVisible ? '' : 'hidden'}>
     <tbody>
-    <tr>
-      <th colspan="3">Song Metadata</th>
-    </tr>
-    {#if displayedMetadata}
       <tr>
-        <td class="material-icons">music_note</td>
-        <td>Song title:</td>
-        <td>{displayedMetadata.title}</td>
+        <th colspan="3">Song Metadata</th>
       </tr>
-      <tr>
-        <td class="material-icons">person</td>
-        <td>Artist:</td>
-        <td>{displayedMetadata.artist}</td>
-      </tr>
-      <tr>
-        <td class="material-icons">album</td>
-        <td>Album:</td>
-        <td>{displayedMetadata.album}</td>
-      </tr>
-    {/if}
+      {#if displayedMetadata}
+        <tr>
+          <td class="material-icons">music_note</td>
+          <td>Song title:</td>
+          <td>{displayedMetadata.title}</td>
+        </tr>
+        <tr>
+          <td class="material-icons">person</td>
+          <td>Artist:</td>
+          <td>{displayedMetadata.artist}</td>
+        </tr>
+        <tr>
+          <td class="material-icons">album</td>
+          <td>Album:</td>
+          <td>{displayedMetadata.album}</td>
+        </tr>
+      {/if}
     </tbody>
   </table>
 {/if}

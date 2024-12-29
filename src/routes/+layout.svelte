@@ -34,8 +34,10 @@
   });
 
   onDestroy(() => {
-    browser && document.removeEventListener('scroll', handleScrolledToBottom);
-    browser && window.removeEventListener('resize', handleViewportResize);
+    if (browser) {
+      document.removeEventListener('scroll', handleScrolledToBottom);
+      window.removeEventListener('resize', handleViewportResize);
+    }
   });
 </script>
 

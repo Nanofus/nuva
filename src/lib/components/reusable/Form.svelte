@@ -8,10 +8,7 @@
   let { vertical = false, children, onsubmit }: Props = $props();
 </script>
 
-<form
-  class={vertical ? 'vertical' : ''}
-  onsubmit={onsubmit}
->
+<form class={vertical ? 'vertical' : ''} {onsubmit}>
   {@render children?.()}
 </form>
 
@@ -20,11 +17,5 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-
-    &.vertical {
-      > :not(:last-child) {
-        margin-bottom: 1rem;
-      }
-    }
   }
 </style>

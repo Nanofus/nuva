@@ -19,7 +19,9 @@
           <a href="/posts/{comment.postSlug}#comment-{comment._id}">{comment.postTitle}</a>
         </td>
         <td class="date">{comment.date.toLocaleDateString(globalConfig.locale)}</td>
-        <td class="commenter"><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td>
+        <td class="commenter"
+          ><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td
+        >
       </tr>
     {/each}
   </tbody>

@@ -10,7 +10,7 @@
   let volume = $state(loadSetting('volume') || localConfig.defaultVolume);
 
   $effect(() => {
-    volume && saveSetting('volume', volume);
+    if (volume) saveSetting('volume', volume);
   });
 </script>
 

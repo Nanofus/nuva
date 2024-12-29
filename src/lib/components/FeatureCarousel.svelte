@@ -67,6 +67,7 @@
 <div class="dots">
   {#each dots as _, index (index)}
     <button
+      aria-label="Slide"
       class="dot {index <= 0 ? 'active' : ''}"
       bind:this={dots[index]}
       onclick={() => {

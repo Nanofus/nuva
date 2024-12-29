@@ -25,10 +25,13 @@
 
 <div class="login-area">
   {#if !$auth}
-    <Form vertical={true} onsubmit={(e: Event) => {
-      e.preventDefault();
-      submitted = true}
-    }>
+    <Form
+      vertical={true}
+      onsubmit={(e: Event) => {
+        e.preventDefault();
+        submitted = true;
+      }}
+    >
       <Input label={t.components.login.username} name="username" bind:value={usernameInput} />
       <Input
         label={t.components.login.password}

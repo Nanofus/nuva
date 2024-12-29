@@ -44,7 +44,7 @@
       {placeholder}
       {value}
       oninput={handleInput}
-></textarea>
+    ></textarea>
   {:else}
     {#if label}
       <label for={elementIdSecondary}>

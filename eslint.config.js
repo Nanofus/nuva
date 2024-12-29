@@ -30,15 +30,7 @@ export default [
   {
     rules: {
       'svelte/no-at-html-tags': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/ban-types': [
-        'error',
-        {
-          types: {
-            Function: false
-          }
-        }
-      ]
+      '@typescript-eslint/no-explicit-any': 'off'
     }
   },
   {
