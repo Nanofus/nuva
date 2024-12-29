@@ -2,7 +2,7 @@
 node_modules
 dist
 test-results/
-package-lock.json
+pnpm-lock.yaml
 yarn.lock
 vite.config.js.timestamp-*
 /packages/create-svelte/template/CHANGELOG.md
