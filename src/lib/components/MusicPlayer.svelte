@@ -15,6 +15,7 @@ Musicmancer 2023 Edition
     artist: string;
     album: string;
   }
+
   interface AudioData {
     src: string;
     audioElement: HTMLAudioElement;
@@ -22,19 +23,23 @@ Musicmancer 2023 Edition
     metadata: AudioMetadata;
   }
 
-  export let musicUrlArray: string[] = [];
-  export let resetMusicButtonStyles: boolean;
+  interface Props {
+    musicUrlArray: string[];
+    resetMusicButtonStyles: boolean;
+  }
 
-  let currentAudioElement: HTMLAudioElement | null;
+  let { musicUrlArray, resetMusicButtonStyles }: Props = $props();
+
+  let currentAudioElement: HTMLAudioElement | undefined = $state(undefined);
   let generatedElements: HTMLButtonElement[] = [];
-  let paused = true;
-  let muted = false;
-  let fadeInProgress = false;
+  let paused = $state(true);
+  let muted = $state(false);
+  let fadeInProgress = $state(false);
   let newPlayerAfterFade: HTMLAudioElement;
-  let volume = 0;
+  let volume = $state(0);
   let audioDataArray: AudioData[] = [];
-  let infoboxVisible = false;
-  let displayedMetadata: AudioMetadata;
+  let infoboxVisible = $state(false);
+  let displayedMetadata: AudioMetadata | undefined = $state(undefined);
 
   // This runs before parent onMount, so the audio elements exist when user scripts run
   onMount(() => {
@@ -198,12 +203,12 @@ Musicmancer 2023 Edition
   };
 
   // Update the seek bar and current time as the audio plays
-  let currentTime: HTMLTimeElement;
-  let seekBar: HTMLInputElement;
+  let currentTime: HTMLTimeElement | undefined = $state(undefined);
+  let seekBar: HTMLInputElement | undefined = $state(undefined);
   const seekInterval = setInterval(() => {
     if (currentAudioElement) {
-      seekBar.value = String(Math.floor(1000 * currentAudioElement.currentTime));
-      currentTime.innerHTML = String(formatSecondsToMMSS(currentAudioElement.currentTime));
+      if (seekBar) seekBar.value = String(Math.floor(1000 * currentAudioElement.currentTime));
+      if (currentTime) currentTime.innerHTML = String(formatSecondsToMMSS(currentAudioElement.currentTime));
     }
   }, 50);
   // Use the seek bar to seek the audio
@@ -213,21 +218,27 @@ Musicmancer 2023 Edition
   };
 
   // Update volume based on bar
-  $: audioDataArray
-    .map((data) => data.audioElement)
-    .forEach((element) => (element.volume = volume / 100));
+  $effect(() => {
+    audioDataArray
+      .map((data) => data.audioElement)
+      .forEach((element) => (element.volume = volume / 100));
+  });
 
   // Save volume
-  $: if (volume) saveSetting('volume', volume);
+  $effect(() => {
+    if (volume) saveSetting('volume', volume);
+  });
 
   // Mute
-  $: if (currentAudioElement) {
-    if (muted) {
-      currentAudioElement.volume = 0;
-    } else {
-      currentAudioElement.volume = volume / 100;
+  $effect(() => {
+    if (currentAudioElement) {
+      if (muted) {
+        currentAudioElement.volume = 0;
+      } else {
+        currentAudioElement.volume = volume / 100;
+      }
     }
-  }
+  });
 
   const unpause = async () => {
     if (currentAudioElement) {
@@ -292,7 +303,7 @@ Musicmancer 2023 Edition
       bind:this={seekBar}
       min="0"
       max={Math.floor(1000 * currentAudioElement.duration)}
-      on:input={handleSeek}
+      oninput={handleSeek}
     />
     <time class="duration">{formatSecondsToMMSS(currentAudioElement.duration)}</time>
     <div>
@@ -323,26 +334,26 @@ Musicmancer 2023 Edition
   </div>
   <table id="music-info-box" class={infoboxVisible ? '' : 'hidden'}>
     <tbody>
+    <tr>
+      <th colspan="3">Song Metadata</th>
+    </tr>
+    {#if displayedMetadata}
       <tr>
-        <th colspan="3">Song Metadata</th>
+        <td class="material-icons">music_note</td>
+        <td>Song title:</td>
+        <td>{displayedMetadata.title}</td>
       </tr>
-      {#if displayedMetadata}
-        <tr>
-          <td class="material-icons">music_note</td>
-          <td>Song title:</td>
-          <td>{displayedMetadata.title}</td>
-        </tr>
-        <tr>
-          <td class="material-icons">person</td>
-          <td>Artist:</td>
-          <td>{displayedMetadata.artist}</td>
-        </tr>
-        <tr>
-          <td class="material-icons">album</td>
-          <td>Album:</td>
-          <td>{displayedMetadata.album}</td>
-        </tr>
-      {/if}
+      <tr>
+        <td class="material-icons">person</td>
+        <td>Artist:</td>
+        <td>{displayedMetadata.artist}</td>
+      </tr>
+      <tr>
+        <td class="material-icons">album</td>
+        <td>Album:</td>
+        <td>{displayedMetadata.album}</td>
+      </tr>
+    {/if}
     </tbody>
   </table>
 {/if}
@@ -435,6 +446,7 @@ Musicmancer 2023 Edition
   :global(#layout) {
     transition: padding-bottom 500ms ease-out;
   }
+
   :global(#layout.bottom-padded) {
     padding-bottom: 2rem;
   }
