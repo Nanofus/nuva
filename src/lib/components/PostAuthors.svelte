@@ -13,7 +13,8 @@
     <div class="author-list">
       {#each post.coAuthors as author, i}
         <a href="/authors/{encodeURI(author)}">{author}</a
-        >{#if i !== post.coAuthors.length - 1},<span>&#32;</span>{/if}
+        >{#if i !== post.coAuthors.length - 1},<div>&#32;</div>
+      {/if}
       {/each}
     </div>
   {/if}
