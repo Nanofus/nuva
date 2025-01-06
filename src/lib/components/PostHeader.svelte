@@ -1,41 +1,42 @@
 <script lang="ts">
-  import { globalConfig } from '$lib/util/config';
-  import type { Post } from '$lib/util/types';
-  import { t } from '$lib/util/translations';
+  import {globalConfig} from '$lib/util/config';
+  import type {Post} from '$lib/util/types';
+  import {t} from '$lib/util/translations';
 
   interface Props {
     post: Post;
   }
 
-  let { post }: Props = $props();
+  let {post}: Props = $props();
 </script>
 
 <header id="post-header">
-  <h1 id="post-title">{post.title}</h1>
-  <div id="post-meta">
+    <h1 id="post-title">{post.title}</h1>
+    <div id="post-meta">
     <span class="post-categories">
       {#each post.categories as category}
         <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a></span>
       {/each}
     </span>
-    <time class="post-date" datetime={post.date.toISOString()}>
-      {post.date.toLocaleDateString(globalConfig.locale)}
-    </time>
-    <span class="post-authors">
+        <time class="post-date" datetime={post.date.toISOString()}>
+            {post.date.toLocaleDateString(globalConfig.locale)}
+        </time>
+        <span class="post-authors">
       <span class="author-list">
         {#each post.coAuthors as author, i}
           <a href="/authors/{encodeURI(author)}">{author}</a
-          >{#if i !== post.coAuthors.length - 1},<div>&#32;</div>{/if}
+          >
+            {#if i !== post.coAuthors.length - 1},<span class="display: block;">,&#32;</span>{/if}
         {/each}
       </span>
     </span>
-    <span class="post-comments-link">
+        <span class="post-comments-link">
       <a href="#comments"
-        >{post.commentCount ? post.commentCount : 0}
-        {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a
+      >{post.commentCount ? post.commentCount : 0}
+          {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a
       >
     </span>
-  </div>
+    </div>
 </header>
 
 <style lang="scss">
@@ -59,12 +60,15 @@
     .post-categories::before {
       content: 'folder';
     }
+
     .post-date::before {
       content: 'calendar_today';
     }
+
     .post-authors::before {
       content: 'history_edu';
     }
+
     .post-comments-link::before {
       content: 'forum';
     }
