@@ -69,8 +69,4 @@
       content: 'forum';
     }
   }
-
-  .author-list {
-    word-break: break-all;
-  }
 </style>

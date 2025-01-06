@@ -58,10 +58,6 @@
       font-style: italic;
       color: var(--text-dark);
     }
-    
-    .author-list {
-      word-break: break-all;
-    }
 
     &:hover {
       text-decoration: none;
