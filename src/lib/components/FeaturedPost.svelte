@@ -1,30 +1,32 @@
 <script lang="ts">
-  import type {PostMeta} from '$lib/util/types';
-  import {getRandomBannerUrl} from '$lib/util/util';
+  import type { PostMeta } from '$lib/util/types';
+  import { getRandomBannerUrl } from '$lib/util/util';
 
   interface Props {
     postMeta: PostMeta;
   }
 
-  let {postMeta}: Props = $props();
+  let { postMeta }: Props = $props();
 </script>
 
 <div
-        class="featured-post"
-        style="background-image: {postMeta.featuredImage
+  class="featured-post"
+  style="background-image: {postMeta.featuredImage
     ? `url(${postMeta.featuredImage})`
     : getRandomBannerUrl(1)}"
 >
-    <p class="authors">
+  <p class="authors">
     <span class="author-list">
       {#each postMeta.coAuthors as author, i}
-        <a href="/authors/{encodeURI(author)}">{author}</a>
-          {#if i !== postMeta.coAuthors.length - 1},{' '}{/if}
+        <span
+          ><a href="/authors/{encodeURI(author)}">{author}</a
+          >{#if i !== postMeta.coAuthors.length - 1},{' '}{/if}</span
+        >
       {/each}
     </span>
-    </p>
-    <h1><a href="/posts/{postMeta.slug}">{@html postMeta.title}</a></h1>
-    <p>{@html postMeta.description ? postMeta.description : ''}</p>
+  </p>
+  <h1><a href="/posts/{postMeta.slug}">{@html postMeta.title}</a></h1>
+  <p>{@html postMeta.description ? postMeta.description : ''}</p>
 </div>
 
 <style lang="scss">

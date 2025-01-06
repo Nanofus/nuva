@@ -208,7 +208,8 @@ Musicmancer 2023 Edition
   const seekInterval = setInterval(() => {
     if (currentAudioElement) {
       if (seekBar) seekBar.value = String(Math.floor(1000 * currentAudioElement.currentTime));
-      if (currentTime) currentTime.innerHTML = String(formatSecondsToMMSS(currentAudioElement.currentTime));
+      if (currentTime)
+        currentTime.innerHTML = String(formatSecondsToMMSS(currentAudioElement.currentTime));
     }
   }, 50);
   // Use the seek bar to seek the audio
@@ -334,26 +335,26 @@ Musicmancer 2023 Edition
   </div>
   <table id="music-info-box" class={infoboxVisible ? '' : 'hidden'}>
     <tbody>
-    <tr>
-      <th colspan="3">Song Metadata</th>
-    </tr>
-    {#if displayedMetadata}
       <tr>
-        <td class="material-icons">music_note</td>
-        <td>Song title:</td>
-        <td>{displayedMetadata.title}</td>
+        <th colspan="3">Song Metadata</th>
       </tr>
-      <tr>
-        <td class="material-icons">person</td>
-        <td>Artist:</td>
-        <td>{displayedMetadata.artist}</td>
-      </tr>
-      <tr>
-        <td class="material-icons">album</td>
-        <td>Album:</td>
-        <td>{displayedMetadata.album}</td>
-      </tr>
-    {/if}
+      {#if displayedMetadata}
+        <tr>
+          <td class="material-icons">music_note</td>
+          <td>Song title:</td>
+          <td>{displayedMetadata.title}</td>
+        </tr>
+        <tr>
+          <td class="material-icons">person</td>
+          <td>Artist:</td>
+          <td>{displayedMetadata.artist}</td>
+        </tr>
+        <tr>
+          <td class="material-icons">album</td>
+          <td>Album:</td>
+          <td>{displayedMetadata.album}</td>
+        </tr>
+      {/if}
     </tbody>
   </table>
 {/if}
