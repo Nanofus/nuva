@@ -26,7 +26,7 @@
         {#each post.coAuthors as author, i}
           <a href="/authors/{encodeURI(author)}">{author}</a
           >
-            {#if i !== post.coAuthors.length - 1},<span class="display: block;">,&#32;</span>{/if}
+            {#if i !== post.coAuthors.length - 1}<span class="display: block;">,&#32;</span>{/if}
         {/each}
       </span>
     </span>
