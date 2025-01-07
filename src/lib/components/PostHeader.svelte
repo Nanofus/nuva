@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { globalConfig } from '$lib/util/config';
+  import { getConfig } from '$lib/util/config';
   import type { Post } from '$lib/util/types';
   import { t } from '$lib/util/translations';
 
@@ -19,7 +19,7 @@
       {/each}
     </span>
     <time class="post-date" datetime={post.date.toISOString()}>
-      {post.date.toLocaleDateString(globalConfig.locale)}
+      {post.date.toLocaleDateString(getConfig().locale)}
     </time>
     <span class="post-authors">
       <span class="author-list">

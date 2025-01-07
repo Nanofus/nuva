@@ -7,7 +7,7 @@ import {
   setLatestCommentId,
   setLatestPostSlug
 } from '$lib/server/database';
-import { globalConfig } from '$lib/util/config';
+import { getConfig } from '$lib/util/config';
 import { fireCommentHook, firePostHook } from '$lib/server/webhooks.discord';
 import type { CommentMeta, PostMeta } from '$lib/util/types';
 
@@ -21,7 +21,7 @@ export const latestPostHook = async () => {
     (post) => post.date.getTime() > latestPost.date.getTime()
   );
   for (const post of announcedPosts) {
-    for (const hook of globalConfig.webhooks.newPost) {
+    for (const hook of getConfig().webhooks.newPost) {
       if (!(await firePostHook(hook, post))) console.error('Failed to fire webhook', hook.url);
     }
   }
@@ -51,7 +51,7 @@ export const latestCommentHook = async () => {
       })
   );
   for (const announcedComment of announcedComments) {
-    for (const hook of globalConfig.webhooks.newComment) {
+    for (const hook of getConfig().webhooks.newComment) {
       if (!(await fireCommentHook(hook, announcedComment.post, announcedComment.comment)))
         console.error('Failed to fire webhook', hook.url);
     }

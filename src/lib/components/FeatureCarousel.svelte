@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { globalConfig, localConfig } from '$lib/util/config';
+  import { getConfig, localConfig } from '$lib/util/config';
   import type { PostMeta } from '$lib/util/types';
   import FeaturedPost from '$lib/components/FeaturedPost.svelte';
   import { browser } from '$app/environment';
@@ -14,7 +14,7 @@
   let currentSlide = 0;
   let hasUserInteracted = $state(false);
   let wrapper: HTMLDivElement | undefined = $state();
-  let dots: HTMLButtonElement[] = $state(Array(globalConfig.featuredPostsCount));
+  let dots: HTMLButtonElement[] = $state(Array(getConfig().featuredPostsCount));
 
   const prevSlide = () => {
     showSlide(currentSlide - 1);
@@ -30,8 +30,8 @@
     if (!browser) return;
     let newSlide =
       n < 0
-        ? globalConfig.featuredPostsCount + (n % globalConfig.featuredPostsCount)
-        : n % globalConfig.featuredPostsCount;
+        ? getConfig().featuredPostsCount + (n % getConfig().featuredPostsCount)
+        : n % getConfig().featuredPostsCount;
     wrapper?.style.setProperty('margin-left', newSlide * -100 + '%');
     dots[currentSlide]?.classList.remove('active');
     dots[newSlide]?.classList.add('active');
@@ -56,9 +56,9 @@
 <div
   class="featured-posts-wrapper"
   bind:this={wrapper}
-  style="width: {globalConfig.featuredPostsCount * 100}%"
+  style="width: {getConfig().featuredPostsCount * 100}%"
 >
-  {#each postList.slice(0, globalConfig.featuredPostsCount) as post}
+  {#each postList.slice(0, getConfig().featuredPostsCount) as post}
     <FeaturedPost postMeta={post}/>
   {/each}
 </div>

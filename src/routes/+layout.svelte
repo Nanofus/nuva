@@ -16,7 +16,7 @@
   import '$lib/style/input-range.scss';
   import '$lib/style/theme.scss';
   import { loadLoginStatus } from '$lib/client/auth';
-  import { globalConfig } from '$lib/util/config';
+  import { getConfig } from '$lib/util/config';
 
   let { data, children } = $props();
 
@@ -42,10 +42,10 @@
 </script>
 
 <svelte:head>
-  <meta content={globalConfig.siteName} property="og:site_name" />
-  <meta content={globalConfig.locale.replace('-', '_')} property="og:locale" />
+  <meta content={getConfig().siteName} property="og:site_name" />
+  <meta content={getConfig().locale.replace('-', '_')} property="og:locale" />
   <meta content="website" property="og:type" />
-  {#each globalConfig.externalStylesheets as stylesheet}
+  {#each getConfig().externalStylesheets as stylesheet}
     <link href={stylesheet} rel="stylesheet" />
   {/each}
 </svelte:head>

@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { postOptions } from '$lib/util/stores';
   import { getRandomBannerUrl } from '$lib/util/util';
-  import { globalConfig } from '$lib/util/config';
+  import { getConfig } from '$lib/util/config';
   import { page } from '$app/state';
 
   let bannerUrl = getRandomBannerUrl();
@@ -22,8 +22,8 @@
 {#if bannerVisible}
   <header style="background-image: {customBannerUrl ? customBannerUrl : bannerUrl}">
     <a href="/">
-      <h1>{globalConfig.siteName}</h1>
-      <h2>{globalConfig.subHeader}</h2>
+      <h1>{getConfig().siteName}</h1>
+      <h2>{getConfig().subHeader}</h2>
     </a>
   </header>
 {/if}

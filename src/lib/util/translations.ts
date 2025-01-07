@@ -1,5 +1,5 @@
 import type { Localization } from '$lib/util/types';
-import { globalConfig } from '$lib/util/config';
+import { getConfig } from '$lib/util/config';
 
 const translations: { [key: string]: Localization } = {
   'en-US': {
@@ -250,4 +250,4 @@ const translations: { [key: string]: Localization } = {
   }
 };
 
-export const t = translations[globalConfig.locale];
+export const t = translations[getConfig().locale];

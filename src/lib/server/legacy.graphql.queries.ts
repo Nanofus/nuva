@@ -1,4 +1,4 @@
-import { globalConfig } from '$lib/util/config';
+import { getConfig } from '$lib/util/config';
 
 export const QUERIES = {
   pageInfo: `
@@ -81,7 +81,7 @@ export const QUERIES = {
                 name
             }
         }
-        tags(first: ${globalConfig.maxPerFetch}) {
+        tags(first: ${getConfig().maxPerFetch}) {
             nodes {
                 name
                 slug

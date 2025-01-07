@@ -1,5 +1,5 @@
 import type { Hierarchical, PostMeta } from '$lib/util/types';
-import { globalConfig, localConfig } from '$lib/util/config';
+import { getConfig, localConfig } from '$lib/util/config';
 import { browser } from '$app/environment';
 import { scrolledToBottom } from '$lib/util/stores';
 
@@ -30,7 +30,7 @@ export const filterExcludedCategories = (posts: PostMeta[]) =>
     (post) =>
       !post.categories
         .map((cat) => cat.slug)
-        .some((slug) => globalConfig.categoriesExcludedFromAllPosts.includes(slug))
+        .some((slug) => getConfig().categoriesExcludedFromAllPosts.includes(slug))
   );
 
 export const objectsToHierarchy = (arr: Hierarchical[]) => {
@@ -86,9 +86,9 @@ export const handleScrolledToBottom = () => {
 };
 
 export const getPageTitle = (title: string) =>
-  title ? `${title} – ${globalConfig.siteName}` : globalConfig.siteName;
+  title ? `${title} – ${getConfig().siteName}` : getConfig().siteName;
 
-export const getPageUrl = (route: string) => `${globalConfig.baseUrl}/${route}`;
+export const getPageUrl = (route: string) => `${getConfig().baseUrl}/${route}`;
 
 export const formatSecondsToMMSS = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
@@ -101,7 +101,7 @@ export const stripHtml = (html: string) => {
 };
 
 export const getRandomBannerUrl = (seed = 0) =>
-  `url("/images/banners/banner-${((new Date().getMinutes() + seed) % globalConfig.bannerCount) + 1}.png")`;
+  `url("/images/banners/banner-${((new Date().getMinutes() + seed) % getConfig().bannerCount) + 1}.png")`;
 
 export const initGlobalScope = () => {
   if (!browser || window.nuvaGlobal) {

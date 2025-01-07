@@ -1,6 +1,6 @@
 import type { Category, PostMeta, Tag } from '$lib/util/types';
 import { getAllPosts, getCategories, getTags } from '$lib/server/database';
-import { globalConfig } from '$lib/util/config';
+import { getConfig } from '$lib/util/config';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async () => {
@@ -23,22 +23,22 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
   xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
 >
   <url>
-    <loc>${globalConfig.baseUrl}</loc>
+    <loc>${getConfig().baseUrl}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>${globalConfig.baseUrl}/posts</loc>
+    <loc>${getConfig().baseUrl}/posts</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>${globalConfig.baseUrl}/categories</loc>
+    <loc>${getConfig().baseUrl}/categories</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>${globalConfig.baseUrl}/tags</loc>
+    <loc>${getConfig().baseUrl}/tags</loc>
     <changefreq>daily</changefreq>
     <priority>0.4</priority>
   </url>
@@ -46,7 +46,7 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     .map(
       (category) => `
   <url>
-    <loc>${globalConfig.baseUrl}/categories/${category.slug}</loc>
+    <loc>${getConfig().baseUrl}/categories/${category.slug}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -57,7 +57,7 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     .map(
       (tag) => `
   <url>
-    <loc>${globalConfig.baseUrl}/tags/${tag.slug}</loc>
+    <loc>${getConfig().baseUrl}/tags/${tag.slug}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -68,7 +68,7 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     .map(
       (post) => `
   <url>
-    <loc>${globalConfig.baseUrl}/posts/${post.slug}</loc>
+    <loc>${getConfig().baseUrl}/posts/${post.slug}</loc>
     <changefreq>weekly</changefreq>
     <lastmod>${post.date}</lastmod>
     <priority>0.3</priority>

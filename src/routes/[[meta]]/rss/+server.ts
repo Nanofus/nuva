@@ -1,6 +1,6 @@
 import { getLatestPosts } from '$lib/server/database';
 import type { PostMeta } from '$lib/util/types';
-import { globalConfig } from '$lib/util/config';
+import { getConfig } from '$lib/util/config';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async () => {
@@ -14,18 +14,18 @@ export const GET: RequestHandler = async () => {
 const rss = (posts: PostMeta[]) => `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-<atom:link href="${globalConfig.baseUrl}/rss" rel="self" type="application/rss+xml" />
-<title>${globalConfig.siteName}</title>
-<link>${globalConfig.baseUrl}</link>
-<description>${globalConfig.subHeader}</description>
+<atom:link href="${getConfig().baseUrl}/rss" rel="self" type="application/rss+xml" />
+<title>${getConfig().siteName}</title>
+<link>${getConfig().baseUrl}</link>
+<description>${getConfig().subHeader}</description>
 ${posts
     .map((post) => {
       return `<item>
-<guid>${globalConfig.baseUrl}/posts/${post.slug}</guid>
+<guid>${getConfig().baseUrl}/posts/${post.slug}</guid>
 <title>${post.title}</title>
-<link>${globalConfig.baseUrl}/posts/${post.slug}</link>
+<link>${getConfig().baseUrl}/posts/${post.slug}</link>
 <author>${post.author}</author>
-<language>${globalConfig.locale}</language>
+<language>${getConfig().locale}</language>
 <description>${post.description || ''}</description>
 <pubDate>${new Date(post.date).toUTCString()}</pubDate>
 </item>`;

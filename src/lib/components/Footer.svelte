@@ -1,16 +1,16 @@
 <script lang="ts">
   import { t } from '$lib/util/translations';
-  import { globalConfig } from '$lib/util/config';
+  import { getConfig } from '$lib/util/config';
 </script>
 
 <footer>
   <div class="footer-content">
-    <span>{globalConfig.copyright}</span>
+    <span>{getConfig().copyright}</span>
     <span class="separator"></span>
-    <span><a href="{globalConfig.baseUrl}/rss" target="_blank">RSS</a></span>
+    <span><a href="{getConfig().baseUrl}/rss" target="_blank">RSS</a></span>
     <span class="separator"></span>
     <span>
-      <a href={globalConfig.urls.feedback} target="_blank">{t.components.footer.feedback}</a>
+      <a href={getConfig().urls.feedback} target="_blank">{t.components.footer.feedback}</a>
     </span>
   </div>
 </footer>

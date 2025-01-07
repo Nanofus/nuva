@@ -7,7 +7,7 @@
   import Button from '$lib/components/reusable/Button.svelte';
   import { t } from '$lib/util/translations';
   import { auth } from '$lib/util/stores';
-  import { globalConfig } from '$lib/util/config';
+  import { getConfig } from '$lib/util/config';
 
   interface Props {
     comment: Comment;
@@ -40,7 +40,7 @@
 <div class="comment {isHighlighted() ? 'highlighted' : ''}" id="comment-{comment._id}">
   <header class="comment-header">
     <span class="comment-author"> {comment.author}</span>
-    <span class="comment-date">{comment.date.toLocaleDateString(globalConfig.locale)}</span>
+    <span class="comment-date">{comment.date.toLocaleDateString(getConfig().locale)}</span>
   </header>
   <div class="comment-content">{@html comment.content}</div>
   <div class="child-comments">
@@ -49,7 +49,7 @@
     {/each}
   </div>
   {#if isCurrentUser()}
-    <a target="_blank" href="{globalConfig.urls.commentEdit}{comment._id}">{t.common.edit}</a>
+    <a target="_blank" href="{getConfig().urls.commentEdit}{comment._id}">{t.common.edit}</a>
   {/if}
   {#if !replyFormOpen && $auth}
     <Button link onclick={() => (replyFormOpen = true)}>{t.common.reply}</Button>
