@@ -11,11 +11,18 @@ export const localConfig: LocalConfig = {
   featuredPostRotationInterval: 10000
 };
 
-export const getConfig = async () => {
+export const loadServerConfig = async () => {
   const edgeConfigClient = createClient(import.meta.env.VITE_EDGE_CONFIG);
   return (await edgeConfigClient.getAll()) as Config;
 };
 
+export const loadClientConfig = async () => {
+  clientConfig = await (await fetch('/api/config')).json();
+}
+
+let clientConfig: Config | undefined = undefined;
+const serverConfig: Config | undefined = browser ? undefined : await loadServerConfig();
+
 export const globalConfig: Config = browser
-  ? await (await fetch('/api/config')).json()
-  : await getConfig();
+  ? clientConfig!
+  : serverConfig!;
