@@ -24,7 +24,6 @@ let clientConfig: Config | undefined = undefined;
 const serverConfig: Config | undefined = browser ? undefined : await loadServerConfig();
 
 export const getConfig: () => Config = () => {
-  console.log('getConfig', browser, clientConfig, serverConfig);
   if (browser) {
     return clientConfig!;
   }
