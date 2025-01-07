@@ -3,7 +3,7 @@
   import { fade } from 'svelte/transition';
   import { SvelteToast } from '@zerodevx/svelte-toast';
   import { browser } from '$app/environment';
-  import { navigating, page } from '$app/stores';
+  import { navigating, page } from '$app/state';
   import { createBaseSettings, handleScrolledToBottom, handleViewportResize } from '$lib/util/util';
   import { auth, postOptions } from '$lib/util/stores';
   import Header from '$lib/components/Header.svelte';
@@ -20,7 +20,7 @@
 
   let { data, children } = $props();
 
-  let fullWidth: boolean = $state($page.data.fullWidth ? $page.data.fullWidth : false);
+  let fullWidth: boolean = $state(page.data.fullWidth ? page.data.fullWidth : false);
 
   onMount(() => {
     createBaseSettings();
@@ -54,14 +54,14 @@
   <Header />
   <Navigation />
   <main>
-    {#if $navigating}
+    {#if navigating}
       <div class="full-page-loader">
         <LoadingSpinner />
       </div>
     {/if}
     {#key data.pathname}
       <div class="transition" in:fade={{ duration: 150, delay: 0 }}>
-        {#if !$navigating}
+        {#if !navigating}
           {@render children?.()}
         {/if}
       </div>

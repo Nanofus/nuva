@@ -5,12 +5,12 @@
   import { auth, postOptions } from '$lib/util/stores';
   import { t } from '$lib/util/translations';
   import { globalConfig } from '$lib/util/config';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
 
-  let smallLogo: HTMLElement = $state();
+  let smallLogo: HTMLElement | undefined = $state();
   let menuOpen = $state(false);
   let stickyMenu = $state(true);
-  let bannerVisible = $page.data.bannerVisible ? $page.data.bannerVisible : true;
+  let bannerVisible = page.data.bannerVisible ? page.data.bannerVisible : true;
 
   const getTotalNavigationHeight = () => {
     return document.querySelector('header')?.offsetHeight || 0;
@@ -28,11 +28,11 @@
       isMobile() ||
       !bannerVisible
     ) {
-      smallLogo.style.opacity = '1';
-      smallLogo.style.pointerEvents = 'auto';
+      smallLogo!.style.opacity = '1';
+      smallLogo!.style.pointerEvents = 'auto';
     } else {
-      smallLogo.style.opacity = '0';
-      smallLogo.style.pointerEvents = 'none';
+      smallLogo!.style.opacity = '0';
+      smallLogo!.style.pointerEvents = 'none';
     }
   };
 
@@ -80,7 +80,7 @@
     <div
       class="section-menu-items {menuOpen ? 'menu-open' : ''}"
       onclick={menuClicked}
-      onkeypress={menuClicked}
+      onkeydown={menuClicked}
       role="button"
       tabindex="0"
     >

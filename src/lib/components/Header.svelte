@@ -3,12 +3,12 @@
   import { postOptions } from '$lib/util/stores';
   import { getRandomBannerUrl } from '$lib/util/util';
   import { globalConfig } from '$lib/util/config';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
 
   let bannerUrl = getRandomBannerUrl();
-  let bannerVisible = $state($page.data.bannerVisible ? $page.data.bannerVisible : true);
+  let bannerVisible = $state(page.data.bannerVisible ? page.data.bannerVisible : true);
   let customBannerUrl: string | null = $state(
-    $page.data.customBanner ? `url("${$page.data.customBanner}")` : null
+    page.data.customBanner ? `url("${page.data.customBanner}")` : null
   );
 
   onMount(() => {
