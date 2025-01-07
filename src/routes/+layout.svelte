@@ -10,8 +10,6 @@
   import Footer from '$lib/components/Footer.svelte';
   import Navigation from '$lib/components/Navigation.svelte';
   import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-
-  // Styles
   import '$lib/style/variables.scss';
   import '$lib/style/input-range.scss';
   import '$lib/style/theme.scss';
