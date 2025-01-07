@@ -37,8 +37,6 @@
     "vite": "^6.0.7"
   },
   "dependencies": {
-    "@auth/core": "0.37.4",
-    "@auth/sveltekit": "^1.7.4",
     "@sindresorhus/slugify": "^2.2.1",
     "@vercel/edge-config": "^1.4.0",
     "@vercel/postgres": "^0.10.0",
