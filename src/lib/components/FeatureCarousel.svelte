@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { globalConfig, localConfig } from '$lib/util/config';
-  import type { PostMeta } from '$lib/util/types';
+  import {globalConfig, localConfig} from '$lib/util/config';
+  import type {PostMeta} from '$lib/util/types';
   import FeaturedPost from '$lib/components/FeaturedPost.svelte';
-  import { browser } from '$app/environment';
-  import { onDestroy, onMount } from 'svelte';
+  import {browser} from '$app/environment';
+  import {onDestroy, onMount} from 'svelte';
 
   interface Props {
     postList: PostMeta[];
   }
 
-  let { postList }: Props = $props();
+  let {postList}: Props = $props();
 
   let currentSlide = 0;
   let hasUserInteracted = $state(false);
@@ -59,18 +59,21 @@
   style="width: {globalConfig.featuredPostsCount * 100}%"
 >
   {#each postList.slice(0, globalConfig.featuredPostsCount) as post}
-    <FeaturedPost postMeta={post} />
+    <FeaturedPost postMeta={post}/>
   {/each}
 </div>
 <button class="prev material-icons" onclick={prevSlide}>chevron_left</button>
 <button class="next material-icons" onclick={nextSlide}>chevron_right</button>
 <div class="dots">
+  <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
   {#each dots as _, index (index)}
     <button
       aria-label="Slide"
       class="dot {index <= 0 ? 'active' : ''}"
       bind:this={dots[index]}
       onclick={() => {
+        
+        
         showSlide(index);
         hasUserInteracted = true;
       }}

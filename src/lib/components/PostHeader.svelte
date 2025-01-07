@@ -25,15 +25,15 @@
       <span class="author-list">
         {#each post.coAuthors as author, i}
           <span
-            ><a href="/authors/{encodeURI(author)}">{author}</a
-            >{#if i !== post.coAuthors.length - 1},{' '}{/if}</span
+          ><a href="/authors/{encodeURI(author)}">{author}</a
+          >{#if i !== post.coAuthors.length - 1},{' '}{/if}</span
           >
         {/each}
       </span>
     </span>
     <span class="post-comments-link">
       <a href="#comments"
-        >{post.commentCount ? post.commentCount : 0}
+      >{post.commentCount ? post.commentCount : 0}
         {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a
       >
     </span>

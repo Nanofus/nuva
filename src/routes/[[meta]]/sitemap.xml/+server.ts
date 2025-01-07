@@ -54,16 +54,16 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     )
     .join('')}
     ${tags
-      .map(
-        (tag) => `
+    .map(
+      (tag) => `
   <url>
     <loc>${globalConfig.baseUrl}/tags/${tag.slug}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   `
-      )
-      .join('')}
+    )
+    .join('')}
   ${posts
     .map(
       (post) => `

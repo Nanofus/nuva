@@ -37,7 +37,7 @@
 <svelte:head>
   <title>{getPageTitle(t.pages.tags.title)}</title>
   <meta content={t.pages.tags.title} property="og:title" />
-  <meta content={getPageUrl(`tags`)} property="og:url" />
+  <meta content={getPageUrl('tags')} property="og:url" />
 </svelte:head>
 
 <h1>{t.pages.tags.title}</h1>

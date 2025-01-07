@@ -97,7 +97,7 @@ const translations: { [key: string]: Localization } = {
         title: 'All Releases'
       },
       post: {
-        noAccess: "Post not found or you don't have access to it."
+        noAccess: 'Post not found or you don\'t have access to it.'
       },
       tags: {
         title: 'Tags'

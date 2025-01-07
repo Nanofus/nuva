@@ -45,9 +45,9 @@ export const getPosts = async (
 ): Promise<PostListResponse> => {
   const postListResponse = await (
     await getRequest(
-      `/api/posts?${by ? `by=${by}` : ``}${forValue ? `for=${forValue}` : ``}${
-        searchTerm ? `&search=${encodeURI(searchTerm)}` : ``
-      }${after ? `&after=${encodeURI(after)}` : ``}`
+      `/api/posts?${by ? `by=${by}` : ''}${forValue ? `for=${forValue}` : ''}${
+        searchTerm ? `&search=${encodeURI(searchTerm)}` : ''
+      }${after ? `&after=${encodeURI(after)}` : ''}`
     )
   ).json();
   postListResponse.posts.forEach((post: PostMeta) => {
@@ -57,7 +57,7 @@ export const getPosts = async (
 };
 
 export const getTags = async (after: string | null): Promise<TagListResponse> => {
-  return await (await getRequest(`/api/tags?${after ? `after=${encodeURI(after)}` : ``}`)).json();
+  return await (await getRequest(`/api/tags?${after ? `after=${encodeURI(after)}` : ''}`)).json();
 };
 
 export const getCategories = async (): Promise<Category[]> => {

@@ -19,8 +19,8 @@ const rss = (posts: PostMeta[]) => `<?xml version="1.0" encoding="UTF-8" ?>
 <link>${globalConfig.baseUrl}</link>
 <description>${globalConfig.subHeader}</description>
 ${posts
-  .map((post) => {
-    return `<item>
+    .map((post) => {
+      return `<item>
 <guid>${globalConfig.baseUrl}/posts/${post.slug}</guid>
 <title>${post.title}</title>
 <link>${globalConfig.baseUrl}/posts/${post.slug}</link>
@@ -29,8 +29,8 @@ ${posts
 <description>${post.description || ''}</description>
 <pubDate>${new Date(post.date).toUTCString()}</pubDate>
 </item>`;
-  })
-  .join('')}
+    })
+    .join('')}
 </channel>
 </rss>
 `;

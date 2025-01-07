@@ -20,7 +20,7 @@
         </td>
         <td class="date">{comment.date.toLocaleDateString(globalConfig.locale)}</td>
         <td class="commenter"
-          ><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td
+        ><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td
         >
       </tr>
     {/each}

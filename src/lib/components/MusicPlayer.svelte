@@ -194,7 +194,7 @@ Musicmancer 2023 Edition
     let buttonContent = audioElement.dataset.content;
     audioButton.innerHTML = buttonContent
       ? `<span>${buttonContent}</span>`
-      : `<span class="material-icons">music_note</span>`;
+      : '<span class="material-icons">music_note</span>';
     audioElement.removeAttribute('data-content');
 
     audioButton.addEventListener('click', () => play(parseInt(audioButton.classList[1].slice(6))));
@@ -262,7 +262,7 @@ Musicmancer 2023 Edition
           : 1;
         let newVolume =
           audioData.audioElement.volume -
-          (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
+            (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
         if (newVolume < 0) newVolume = 0;
         audioData.audioElement.volume = newVolume;
       } else {

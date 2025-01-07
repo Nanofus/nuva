@@ -238,8 +238,8 @@ export const getPostsByAuthor = async (
         query: `
             query PostsByAuthor {
                 posts(where: {authorName: "${decodeURI(author)}"}, first: ${
-                  globalConfig.maxPerFetch
-                }, after: "${after}") {
+      globalConfig.maxPerFetch
+    }, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -393,8 +393,8 @@ export const getPosts = async (
         query: `
             query AllPostsPaginated {
                 posts(where: {search: "${
-                  searchTerm ? decodeURI(searchTerm) : ''
-                }"}, first: ${count}, after: "${after}") {
+    searchTerm ? decodeURI(searchTerm) : ''
+    }"}, first: ${count}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -414,7 +414,7 @@ export const getPosts = async (
   );
   return {
     posts,
-    searchTerm: searchTerm ? searchTerm : ``,
+    searchTerm: searchTerm ? searchTerm : '',
     endCursor: pageInfo.endCursor,
     hasNextPage: pageInfo.hasNextPage
   };

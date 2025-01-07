@@ -16,7 +16,7 @@
 <svelte:head>
   <title>{getPageTitle(t.pages.index.title)}</title>
   <meta content={t.pages.index.title} property="og:title" />
-  <meta content={getPageUrl(`/`)} property="og:url" />
+  <meta content={getPageUrl('/')} property="og:url" />
 </svelte:head>
 
 <div id="feature-carousel-wrapper" class="vertically-separated-top hidden-mobile">
