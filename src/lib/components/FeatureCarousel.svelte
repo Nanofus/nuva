@@ -1,15 +1,15 @@
 <script lang="ts">
-  import {globalConfig, localConfig} from '$lib/util/config';
-  import type {PostMeta} from '$lib/util/types';
+  import { globalConfig, localConfig } from '$lib/util/config';
+  import type { PostMeta } from '$lib/util/types';
   import FeaturedPost from '$lib/components/FeaturedPost.svelte';
-  import {browser} from '$app/environment';
-  import {onDestroy, onMount} from 'svelte';
+  import { browser } from '$app/environment';
+  import { onDestroy, onMount } from 'svelte';
 
   interface Props {
     postList: PostMeta[];
   }
 
-  let {postList}: Props = $props();
+  let { postList }: Props = $props();
 
   let currentSlide = 0;
   let hasUserInteracted = $state(false);

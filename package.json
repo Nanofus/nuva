@@ -49,7 +49,6 @@
     "@zerodevx/svelte-toast": "^0.9.6",
     "html-validate": "^9.1.0",
     "kysely": "^0.27.5",
-    "mdsvex": "^0.12.3",
     "music-metadata": "^10.6.4",
     "prisma": "^6.1.0",
     "prisma-kysely": "^1.8.0"

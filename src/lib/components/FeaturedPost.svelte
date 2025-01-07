@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type {PostMeta} from '$lib/util/types';
-  import {getRandomBannerUrl} from '$lib/util/util';
+  import type { PostMeta } from '$lib/util/types';
+  import { getRandomBannerUrl } from '$lib/util/util';
 
   interface Props {
     postMeta: PostMeta;
   }
 
-  let {postMeta}: Props = $props();
+  let { postMeta }: Props = $props();
 </script>
 
 <div

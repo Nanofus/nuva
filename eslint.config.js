@@ -33,6 +33,7 @@ export default [
       'indent': ['error', 2],
       'svelte/indent': 'error',
       'quotes': ['error', 'single'],
+      'object-curly-spacing': ['error', 'always'],
     }
   },
   {
