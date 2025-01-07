@@ -36,9 +36,12 @@ export const latestCommentHook = async () => {
     (a, b) => a.date.getTime() - b.date.getTime()
   );
   let latestComment: CommentMeta | undefined;
+  let index = 0;
   while (!latestComment) {
     latestComment = latestComments.find((comment) => comment._id === latestCommentId);
     latestCommentId = latestCommentId - 1;
+    index++;
+    if (index > 100) return;
   }
   const announcedComments = await Promise.all(
     latestComments

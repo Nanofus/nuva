@@ -5,7 +5,7 @@ import { t } from '$lib/util/translations';
 
 export const GET: RequestHandler = async ({ request }) => {
   const authHeader = request.headers.get('authorization');
-  if (authHeader !== process.env.CRON_SECRET) throw error(401, t.errors.e401);
+  //if (authHeader !== process.env.CRON_SECRET) throw error(401, t.errors.e401);
   await latestPostHook();
   await latestCommentHook();
   return json({ success: true });
