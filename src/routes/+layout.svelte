@@ -54,14 +54,14 @@
   <Header />
   <Navigation />
   <main>
-    {#if navigating}
+    {#if navigating.to}
       <div class="full-page-loader">
         <LoadingSpinner />
       </div>
     {/if}
     {#key data.pathname}
       <div class="transition" in:fade={{ duration: 150, delay: 0 }}>
-        {#if !navigating}
+        {#if !navigating.to}
           {@render children?.()}
         {/if}
       </div>
