@@ -1,3 +1,6 @@
+<script lang="ts">
+</script>
+
 <div class="loading-spinner">
   <div class="lds-ellipsis">
     <div></div>
