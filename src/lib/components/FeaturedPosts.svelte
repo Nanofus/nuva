@@ -14,11 +14,11 @@
   id="featured-posts-wrapper" class="vertically-separated-top hidden-mobile"
 >
   <div id="major-featured">
-    <FeaturedPost postMeta={postList[0]}/>
+    <FeaturedPost --header-size="1em" postMeta={postList[0]}/>
   </div>
   <div id="minor-featured">
     {#each postList.slice(1, 4) as post}
-      <FeaturedPost postMeta={post}/>
+      <FeaturedPost --header-size="0.6em" postMeta={post}/>
     {/each}
   </div>
 </div>

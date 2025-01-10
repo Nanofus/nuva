@@ -16,12 +16,10 @@
     ? `url(${postMeta.featuredImage})`
     : ''}"
 >
-  <p class="authors">
-    <span class="author-list">
-      <AuthorList authors={postMeta.coAuthors} />
-    </span>
-  </p>
   <h1><a href="/posts/{postMeta.slug}">{@html postMeta.title}</a></h1>
+  <p class="authors">
+    <AuthorList --author-link-color="var(--text-dark)" authors={postMeta.coAuthors} />
+  </p>
   <p>{@html postMeta.description ? postMeta.description : ''}</p>
 </div>
 
@@ -41,14 +39,13 @@
     border-radius: calc(var(--border-radius) * 2);
 
     h1 {
-      margin-top: 0;
       margin-bottom: 0;
       text-align: left;
       text-shadow: var(--banner-shadow);
-      line-height: 2.8rem;
+      line-height: 1.7rem;
 
       a {
-        font-size: 0.75em;
+        font-size: var(--header-size, 0.75em);
       }
     }
 
