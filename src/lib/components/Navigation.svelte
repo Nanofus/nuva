@@ -9,7 +9,7 @@
 
   let smallLogo: HTMLElement | undefined = $state();
   let menuOpen = $state(false);
-  let stickyMenu = $state(true);
+  let stickyMenu = $state(false);
   let bannerVisible = page.data.bannerVisible ? page.data.bannerVisible : true;
 
   const getTotalNavigationHeight = () => {
