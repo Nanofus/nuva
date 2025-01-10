@@ -101,7 +101,7 @@ export const stripHtml = (html: string) => {
 };
 
 export const getRandomBannerUrl = (seed = 0) =>
-  `url("/images/banners/banner-${((new Date().getMinutes() + seed) % getConfig().bannerCount) + 1}.png")`;
+  `url("/images/banners/banner-${((new Date().getMinutes() + seed) % 1) + 1}.png")`;
 
 export const initGlobalScope = () => {
   if (!browser || window.nuvaGlobal) {

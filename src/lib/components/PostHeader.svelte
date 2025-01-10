@@ -2,6 +2,7 @@
   import { getConfig } from '$lib/util/config';
   import type { Post } from '$lib/util/types';
   import { t } from '$lib/util/translations';
+  import AuthorList from '$lib/components/reusable/AuthorList.svelte';
 
   interface Props {
     post: Post;
@@ -23,12 +24,7 @@
     </time>
     <span class="post-authors">
       <span class="author-list">
-        {#each post.coAuthors as author, i}
-          <span
-          ><a href="/authors/{encodeURI(author)}">{author}</a
-          >{#if i !== post.coAuthors.length - 1},{' '}{/if}</span
-          >
-        {/each}
+        <AuthorList authors={post.coAuthors} />
       </span>
     </span>
     <span class="post-comments-link">

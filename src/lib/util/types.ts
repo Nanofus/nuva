@@ -4,7 +4,6 @@ export type LocalConfig = {
   localStorageSettingsKey: string;
   defaultVolume: number;
   musicFadeSpeed: number;
-  featuredPostRotationInterval: number;
 };
 
 export type WebhookMeta = {
@@ -25,8 +24,6 @@ export type Config = {
   subHeader: string; // Subheader for site
   copyright: string; // Copyright notice
   categoriesExcludedFromAllPosts: string[]; // Categories to exclude from all posts page
-  bannerCount: number; // Number of banners
-  featuredPostsCount: number; // Number of features posts in the carousel
   urls: {
     soundtracks: string; // URL for soundtracks page
     writingGuide: string; // URL for writing guide

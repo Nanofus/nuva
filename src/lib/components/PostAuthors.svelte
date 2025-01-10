@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Post } from '$lib/util/types';
+  import AuthorList from '$lib/components/reusable/AuthorList.svelte';
 
   interface Props {
     post: Post;
@@ -11,10 +12,7 @@
 <div class="vertically-separated" id="authors">
   {#if post.coAuthors.length > 0}
     <div class="author-list">
-      {#each post.coAuthors as author, i}
-        <span><a href="/authors/{encodeURI(author)}">{author}</a>
-          {#if i !== post.coAuthors.length - 1},{' '}{/if}</span>
-      {/each}
+      <AuthorList authors={post.coAuthors} />
     </div>
   {/if}
   {#if post.artists.length > 0}

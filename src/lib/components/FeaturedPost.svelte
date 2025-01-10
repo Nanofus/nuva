@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { PostMeta } from '$lib/util/types';
   import { getRandomBannerUrl } from '$lib/util/util';
+  import AuthorList from '$lib/components/reusable/AuthorList.svelte';
 
   interface Props {
     postMeta: PostMeta;
@@ -13,14 +14,11 @@
   class="featured-post"
   style="background-image: {postMeta.featuredImage
     ? `url(${postMeta.featuredImage})`
-    : getRandomBannerUrl(1)}"
+    : ''}"
 >
   <p class="authors">
     <span class="author-list">
-      {#each postMeta.coAuthors as author, i}
-        <span><a href="/authors/{encodeURI(author)}">{author}</a>
-          {#if i !== postMeta.coAuthors.length - 1},{' '}{/if}</span>
-      {/each}
+      <AuthorList authors={postMeta.coAuthors} />
     </span>
   </p>
   <h1><a href="/posts/{postMeta.slug}">{@html postMeta.title}</a></h1>
@@ -31,7 +29,6 @@
   .featured-post {
     background-position: center;
     background-size: cover;
-    filter: grayscale(80%);
     color: var(--text-dark);
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.4);
     text-shadow: var(--banner-shadow);
@@ -40,7 +37,8 @@
     flex: 1;
     box-sizing: border-box;
     padding: 1.5rem 4rem 2.5rem;
-    border-radius: var(--border-radius);
+    min-height: 24rem;
+    border-radius: calc(var(--border-radius) * 2);
 
     h1 {
       margin-top: 0;
