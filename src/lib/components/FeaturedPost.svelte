@@ -14,7 +14,7 @@
   class="featured-post"
   style="background-image: {postMeta.featuredImage
     ? `url(${postMeta.featuredImage})`
-    : getConfig().defaultFeaturedImage || ''}"
+    : `url(${getConfig().defaultFeaturedImage})` || ''}"
 >
   <h1><a href="/posts/{postMeta.slug}">{@html postMeta.title}</a></h1>
   <p class="authors">
