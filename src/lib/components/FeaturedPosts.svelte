@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { getConfig } from '$lib/util/config';
   import type { PostMeta } from '$lib/util/types';
   import FeaturedPost from '$lib/components/FeaturedPost.svelte';
 

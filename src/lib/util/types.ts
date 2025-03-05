@@ -37,6 +37,7 @@ export type Config = {
     newComment: WebhookMeta[]; // URLs for new comment webhooks
   };
   externalStylesheets: string[]; // External stylesheets to load
+  defaultFeaturedImage: string; // Default featured image for posts
 };
 
 export type Localization = {

@@ -7,8 +7,7 @@ export const localConfig: LocalConfig = {
   localStorageAuthKey: 'auth',
   localStorageSettingsKey: 'settings',
   defaultVolume: 50,
-  musicFadeSpeed: 1,
-  featuredPostRotationInterval: 10000
+  musicFadeSpeed: 1
 };
 
 export const loadServerConfig = async () => {
