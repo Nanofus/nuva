@@ -8,7 +8,7 @@ import { fireCommentHook, firePostHook } from '$lib/server/webhooks.discord';
 import type { CommentMeta, PostMeta } from '$lib/util/types';
 
 export const latestPostHook = async () => {
-  const latestPosts = (await getLatestPosts()).sort((a, b) => a.date.getTime() - b.date.getTime());
+  const latestPosts = (await getLatestPosts()).sort((a, b) => b.date.getTime() - a.date.getTime());
   const latestPost = latestPosts[0];
   for (const hook of getConfig().webhooks.newPost) {
     if (!(await firePostHook(hook, latestPost))) console.error('Failed to fire webhook', hook.url);
@@ -17,7 +17,7 @@ export const latestPostHook = async () => {
 
 export const latestCommentHook = async () => {
   const latestComments = (await getLatestComments()).sort(
-    (a, b) => a.date.getTime() - b.date.getTime()
+    (a, b) => b.date.getTime() - a.date.getTime()
   );
   const latestComment: CommentMeta | undefined = latestComments[0];
   const announcedComment = {
