@@ -100,8 +100,9 @@ export const stripHtml = (html: string) => {
   return html.replace(/<(.|\n)*?>/g, '');
 };
 
+// Uses minutes so that the banner does not change after hydration
 export const getRandomBannerUrl = (seed = 0) =>
-  `url("/images/banners/banner-${((new Date().getMinutes() + seed) % 1) + 1}.png")`;
+  `url("${getConfig().banners[Math.floor((new Date().getMinutes() + seed) * getConfig().banners.length) % getConfig().banners.length]}")`;
 
 export const initGlobalScope = () => {
   if (!browser || window.nuvaGlobal) {

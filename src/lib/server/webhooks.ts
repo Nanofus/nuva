@@ -19,7 +19,7 @@ export const latestCommentHook = async () => {
   const latestComments = (await getLatestComments()).sort(
     (a, b) => b.date.getTime() - a.date.getTime()
   );
-  const latestComment: CommentMeta | undefined = latestComments[0];
+  const latestComment: CommentMeta = latestComments[0];
   const announcedComment = {
     comment: latestComment,
     post: (await getPostMeta(latestComment.postSlug)) as PostMeta

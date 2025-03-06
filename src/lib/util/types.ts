@@ -24,6 +24,7 @@ export type Config = {
   subHeader: string; // Subheader for site
   copyright: string; // Copyright notice
   categoriesExcludedFromAllPosts: string[]; // Categories to exclude from all posts page
+  banners: string[]; // URLs for banners
   urls: {
     soundtracks: string; // URL for soundtracks page
     writingGuide: string; // URL for writing guide
