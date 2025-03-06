@@ -35,7 +35,7 @@
     flex: 1;
     box-sizing: border-box;
     padding: 1.5rem 4rem 2.5rem;
-    min-height: 24rem;
+    min-height: var(--min-height, 24rem);
     border-radius: calc(var(--border-radius) * 2);
 
     h1 {
