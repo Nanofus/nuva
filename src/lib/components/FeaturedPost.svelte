@@ -24,12 +24,6 @@
 </div>
 
 <style lang="scss">
-  .featured-post > * {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 0.25rem;
-    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.6), 0 0 0.25rem rgba(0, 0, 0, 0.6), 0 0 0.25rem rgba(0, 0, 0, 0.6);
-  }
-  
   .featured-post {
     background-position: center;
     background-size: cover;
