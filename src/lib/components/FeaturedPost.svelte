@@ -42,7 +42,7 @@
       margin-bottom: 0;
       text-align: left;
       text-shadow: var(--banner-shadow);
-      line-height: 1.7rem;
+      line-height: var(--line-height, 1.7rem);
 
       a {
         font-size: var(--header-size, 0.75em);
