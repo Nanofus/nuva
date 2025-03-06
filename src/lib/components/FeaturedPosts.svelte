@@ -38,4 +38,10 @@
         gap: 1rem;
       }
     }
+    
+    @media screen and (max-width: 60rem) {
+      #minor-featured {
+        flex-direction: column;
+      }
+    }
 </style>
