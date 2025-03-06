@@ -29,6 +29,7 @@ export type Config = {
     soundtracks: string; // URL for soundtracks page
     writingGuide: string; // URL for writing guide
     commentEdit: string; // URL for comment edit page
+    postEdit: string; // URL for post edit page
     writing: string; // URL for writing page
     feedback: string; // URL for feedback page
   };

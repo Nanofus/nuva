@@ -3,12 +3,22 @@
   import type { Post } from '$lib/util/types';
   import { t } from '$lib/util/translations';
   import AuthorList from '$lib/components/reusable/AuthorList.svelte';
+  import { browser } from '$app/environment';
+  import { auth } from '$lib/util/stores';
 
   interface Props {
     post: Post;
   }
 
   let { post }: Props = $props();
+
+  const isCurrentUser = () => {
+    if (browser) {
+      const user = $auth?.displayName;
+      if (!user) return false;
+      return post.coAuthors.includes(user);
+    }
+  };
 </script>
 
 <header id="post-header">
@@ -24,7 +34,7 @@
     </time>
     <span class="post-authors">
       <span class="author-list">
-        <AuthorList authors={post.coAuthors} />
+        <AuthorList authors={post.coAuthors}/>
       </span>
     </span>
     <span class="post-comments-link">
@@ -33,6 +43,11 @@
         {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a
       >
     </span>
+    {#if isCurrentUser()}
+      <span class="post-edit">
+        <a target="_blank" href={getConfig().urls.postEdit.replace('{ID}', ''+post._id)}>{t.common.edit}</a>
+      </span>
+    {/if}
   </div>
 </header>
 
@@ -68,6 +83,10 @@
 
     .post-comments-link::before {
       content: 'forum';
+    }
+
+    .post-edit::before {
+      content: 'edit';
     }
   }
 </style>
