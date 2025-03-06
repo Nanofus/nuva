@@ -11,14 +11,6 @@
   }
 
   let { post }: Props = $props();
-
-  const isCurrentUser = () => {
-    if (browser) {
-      const user = $auth?.displayName;
-      if (!user) return false;
-      return post.coAuthors.includes(user);
-    }
-  };
 </script>
 
 <header id="post-header">
@@ -43,7 +35,7 @@
         {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a
       >
     </span>
-    {#if isCurrentUser()}
+    {#if !!$auth}
       <span class="post-edit">
         <a target="_blank" href={getConfig().urls.postEdit.replace('{ID}', ''+post._id)}>{t.common.edit}</a>
       </span>
