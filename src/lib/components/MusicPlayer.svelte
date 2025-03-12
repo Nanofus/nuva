@@ -181,7 +181,7 @@ Musicmancer 2023 Edition
       totalIndex++;
     });
 
-    processMetadata();
+  //processMetadata();
   };
 
   const createAudioButton = (audioElement: HTMLAudioElement, index: number) => {
@@ -322,16 +322,18 @@ Musicmancer 2023 Edition
       max="100"
       bind:value={volume}
     />
-    <div>
-      <Button
-        icon="info"
-        disabled={fadeInProgress}
-        onclick={() => {
-          if (currentAudioElement) updateInfoBox(currentAudioElement.src);
-          infoboxVisible = !infoboxVisible;
-        }}
-      />
-    </div>
+    {#if false}
+      <div>
+        <Button
+          icon="info"
+          disabled={fadeInProgress}
+          onclick={() => {
+            if (currentAudioElement) updateInfoBox(currentAudioElement.src);
+            infoboxVisible = !infoboxVisible;
+          }}
+        />
+      </div>
+    {/if}
   </div>
   <table id="music-info-box" class={infoboxVisible ? '' : 'hidden'}>
     <tbody>
