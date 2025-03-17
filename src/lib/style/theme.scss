@@ -167,10 +167,14 @@ article {
 
 // Screen is larger than white area
 @media screen and (min-width: 76rem) {
+  #layout {
+    margin: auto 0 auto calc((var(--viewport-width) - var(--page-max-width)) / 2);
+  }
+
   .full-width,
   .background:not(.max) {
-    margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2 + var(--bleed-buffer));
-    max-width: calc(var(--page-max-width) + var(--bleed-buffer));
+    margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
+    max-width: calc(var(--page-max-width));
   }
 
   .background.max:not(.repeat) {
@@ -516,8 +520,8 @@ img {
 @media screen and (min-width: 76rem) {
   // var(--max-page-width)
   .grid-layout {
-    margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2 + var(--bleed-buffer));
-    max-width: calc(var(--page-max-width) + var(--bleed-buffer));
+    margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
+    max-width: calc(var(--page-max-width));
   }
 }
 
