@@ -167,7 +167,7 @@ article {
 
 // Screen is larger than white area
 @media screen and (min-width: 76rem) {
-  #layout {
+  #layout:not(.wide) {
     margin: auto 0 auto calc((var(--viewport-width) - var(--page-max-width)) / 2);
   }
 
