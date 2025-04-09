@@ -30,7 +30,8 @@ const translations: { [key: string]: Localization } = {
         commenter: 'Commenter'
       },
       footer: {
-        feedback: 'Feedback'
+        feedback: 'Feedback',
+        about: 'About'
       },
       login: {
         fillBothFields: 'Fill both fields.',
@@ -153,7 +154,8 @@ const translations: { [key: string]: Localization } = {
         commenter: 'Kommentoija'
       },
       footer: {
-        feedback: 'Palaute'
+        feedback: 'Palaute',
+        about: 'Meistä'
       },
       login: {
         fillBothFields: 'Täytä molemmat kentät.',

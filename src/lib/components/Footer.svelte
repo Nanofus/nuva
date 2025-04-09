@@ -12,6 +12,10 @@
     <span>
       <a href={getConfig().urls.feedback} target="_blank">{t.components.footer.feedback}</a>
     </span>
+    <span class="separator"></span>
+    <span>
+      <a href={getConfig().urls.about} target="_blank">{t.components.footer.about}</a>
+    </span>
   </div>
 </footer>
 

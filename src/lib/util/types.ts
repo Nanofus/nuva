@@ -32,6 +32,7 @@ export type Config = {
     postEdit: string; // URL for post edit page
     writing: string; // URL for writing page
     feedback: string; // URL for feedback page
+    about: string; // URL for about page
   };
   webhooks: {
     password: string;
@@ -71,6 +72,7 @@ export type Localization = {
     };
     footer: {
       feedback: string;
+      about: string;
     };
     login: {
       fillBothFields: string;
