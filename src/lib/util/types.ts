@@ -41,6 +41,7 @@ export type Config = {
   };
   externalStylesheets: string[]; // External stylesheets to load
   defaultFeaturedImage: string; // Default featured image for posts
+  isrBypassToken: string; // Token for ISR bypass
 };
 
 export type Localization = {
