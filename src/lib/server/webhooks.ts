@@ -1,5 +1,5 @@
 import {
-  getLatestComments,
+  getCommentById,
   getLatestPosts,
   getPostMeta
 } from '$lib/server/database';
@@ -15,11 +15,8 @@ export const latestPostHook = async () => {
   }
 };
 
-export const latestCommentHook = async () => {
-  const latestComments = (await getLatestComments()).sort(
-    (a, b) => b.date.getTime() - a.date.getTime()
-  );
-  const latestComment: CommentMeta = latestComments[0];
+export const latestCommentHook = async (id: number) => {
+  const latestComment: CommentMeta = await getCommentById(id);
   const announcedComment = {
     comment: latestComment,
     post: (await getPostMeta(latestComment.postSlug)) as PostMeta
