@@ -23,10 +23,10 @@ export const QUERIES = {
             }
         }
         additionalFields {
-            custombanner
-            featuredimage
+            customBanner
+            featuredImage
             description
-            mobilefriendly
+            mobileFriendly
         }
         categories {
             nodes {
@@ -59,21 +59,23 @@ export const QUERIES = {
             title
         }
         additionalFields {
-            custombanner
-            featuredimage
+            customBanner
+            featuredImage
             description
-            initialletter
+            initialLetter
             artists {
-                name
+                nodes {
+                    name
+                }
             }
-            bannervisible
-            fullwidth
-            mobilefriendly
+            bannerVisible
+            fullWidth
+            mobileFriendly
             scripts
-            scriptfiles
+            scriptFiles
             styles
             music
-            resetmusicbuttons
+            resetMusicButtons
         }
         categories {
             nodes {

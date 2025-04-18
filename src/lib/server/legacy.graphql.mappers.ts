@@ -23,10 +23,10 @@ export const dataToPostMeta = (data: any): PostMeta => ({
     slug: category.slug,
     name: category.name
   })),
-  customBanner: data.additionalFields.custombanner,
-  featuredImage: data.additionalFields.featuredimage,
+  customBanner: data.additionalFields.customBanner,
+  featuredImage: data.additionalFields.featuredImage,
   description: data.additionalFields.description,
-  mobileFriendly: data.additionalFields.mobilefriendly,
+  mobileFriendly: data.additionalFields.mobileFriendly,
   commentCount: data.commentCount
 });
 
@@ -78,24 +78,24 @@ export const dataToPost = (data: any): Post | null => {
 
         return a.localeCompare(b);
       }),
-    artists: data.additionalFields.artists
-      ? data.additionalFields.artists.map((artist: any) => artist.name)
+    artists: data.additionalFields.artists.nodes
+      ? data.additionalFields.artists.nodes.map((artist: any) => artist.name)
       : [],
-    bannerVisible: data.additionalFields.bannervisible,
-    fullWidth: data.additionalFields.fullwidth ? data.additionalFields.fullwidth : false,
-    customBanner: data.additionalFields.custombanner,
-    featuredImage: data.additionalFields.featuredimage,
+    bannerVisible: data.additionalFields.bannerVisible,
+    fullWidth: data.additionalFields.fullWidth ? data.additionalFields.fullWidth : false,
+    customBanner: data.additionalFields.customBanner,
+    featuredImage: data.additionalFields.featuredImage,
     description: data.additionalFields.description,
     commentCount: data.commentCount,
-    initialLetter: data.additionalFields.initialletter,
-    mobileFriendly: data.additionalFields.mobilefriendly,
+    initialLetter: data.additionalFields.initialLetter,
+    mobileFriendly: data.additionalFields.mobileFriendly,
     scripts: data.additionalFields.scripts,
     styles: data.additionalFields.styles,
-    scriptFiles: data.additionalFields.scriptfiles
+    scriptFiles: data.additionalFields.scriptFiles
       ? data.additionalFields.scriptfiles.split('\n')
       : [],
     music: data.additionalFields.music ? data.additionalFields.music.split('\n') : [],
-    resetMusicButtons: data.additionalFields.resetmusicbuttons,
+    resetMusicButtons: data.additionalFields.resetMusicButtons,
     content: data.content,
     previous: data.previous
       ? {
