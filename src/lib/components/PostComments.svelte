@@ -29,16 +29,18 @@
   {#each post.comments as comment (comment.date)}
     <CommentView on:commentSent={refreshComments} {post} {comment} />
   {/each}
-  {#if !replyFormOpen && $auth}
-    <Button link onclick={() => (replyFormOpen = true)}>{t.common.comment}</Button>
-  {:else}
-    <CommentForm
-      on:commentSent={refreshComments}
-      on:close={() => (replyFormOpen = false)}
-      parent={0}
-      postId={post._id}
-      postSlug={post.slug}
-      isReply={false}
-    />
+  {#if !post.previewMode}
+    {#if !replyFormOpen && $auth}
+      <Button link onclick={() => (replyFormOpen = true)}>{t.common.comment}</Button>
+    {:else}
+      <CommentForm
+        on:commentSent={refreshComments}
+        on:close={() => (replyFormOpen = false)}
+        parent={0}
+        postId={post._id}
+        postSlug={post.slug}
+        isReply={false}
+      />
+    {/if}
   {/if}
 </div>

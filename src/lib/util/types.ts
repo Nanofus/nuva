@@ -211,6 +211,7 @@ export type Post = {
   tags: Tag[];
   comments: Comment[];
   validationResult: any;
+  previewMode?: boolean;
 } & PostMeta;
 
 export type Category = {
