@@ -92,7 +92,7 @@ export const dataToPost = (data: any): Post | null => {
     scripts: data.additionalFields.scripts,
     styles: data.additionalFields.styles,
     scriptFiles: data.additionalFields.scriptFiles
-      ? data.additionalFields.scriptfiles.split('\n')
+      ? data.additionalFields.scriptFiles.split('\n')
       : [],
     music: data.additionalFields.music ? data.additionalFields.music.split('\n') : [],
     resetMusicButtons: data.additionalFields.resetMusicButtons,

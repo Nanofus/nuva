@@ -421,14 +421,13 @@ export const getPosts = async (
 };
 
 export const getTags = async (after: string | null = null): Promise<TagListResponse> => {
-  const response = await (
-    await fetch(getConfig().graphqlApi, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        query: `
+  const response = await fetch(getConfig().graphqlApi, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      query: `
             query AllTagsPaginated {
                 tags(first: ${getConfig().maxPerFetch}, after: "${after}") {
                     ${QUERIES.pageInfo}
@@ -443,11 +442,11 @@ export const getTags = async (after: string | null = null): Promise<TagListRespo
                 }
               }
             `
-      })
     })
-  ).json();
-  const { pageInfo } = response.data.tags;
-  const tags: Tag[] = dataToTags(response.data.tags['edges'].map((edge: any) => edge.node)).filter(
+  });
+  const jsonResponse = await response.json();
+  const { pageInfo } = jsonResponse.data.tags;
+  const tags: Tag[] = dataToTags(jsonResponse.data.tags['edges'].map((edge: any) => edge.node)).filter(
     (tag) => tag.count > 0
   );
   return {
