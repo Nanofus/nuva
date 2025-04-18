@@ -1,5 +1,5 @@
 import { error, type Load } from '@sveltejs/kit';
-import { getPosts } from '$lib/server/database';
+import { getEveryPost, getPosts } from '$lib/server/database';
 import type { PostListResponse } from '$lib/util/types';
 import { filterExcludedCategories } from '$lib/util/util';
 import { t } from '$lib/util/translations';
@@ -13,7 +13,7 @@ export const config = {
 };
 
 export const load: Load = async (): Promise<PostListResponse> => {
-  const response = await getPosts();
+  const response = await getEveryPost();
   if (response) {
     response.posts = filterExcludedCategories(response.posts);
     return response;

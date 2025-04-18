@@ -9,7 +9,7 @@ import type {
   PostListByAuthorResponse,
   PostListByCategoryResponse,
   PostListBySearchResponse,
-  PostListByTagResponse,
+  PostListByTagResponse, PostListResponse,
   PostMeta,
   Tag,
   TagListResponse
@@ -356,6 +356,37 @@ export const getAllPosts = async (): Promise<PostMeta[]> => {
     else latestAfter = response.endCursor;
   }
   return allPosts.sort((a, b) => a.date.getTime() - b.date.getTime());
+};
+
+export const getEveryPost = async (): Promise<PostListResponse> => {
+  const response = await (
+    await fetch(getConfig().graphqlApi, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: `
+            query AllPostsPaginated {
+                posts(first: ${getConfig().maxPerFetch}) {
+                    nodes {
+                        ${QUERIES.postMeta}
+                    }
+                }
+            }
+            `
+      })
+    })
+  ).json();
+  console.log(response.data.posts.nodes);
+  const posts: PostMeta[] = response.data.posts.nodes.map((node: any) =>
+    dataToPostMeta(node)
+  );
+  return {
+    posts,
+    endCursor: '',
+    hasNextPage: false,
+  };
 };
 
 export const getPosts = async (
