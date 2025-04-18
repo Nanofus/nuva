@@ -17,6 +17,7 @@
   const refreshComments = async () => {
     replyFormOpen = false;
     post.comments = await getCommentsByPost(post.slug);
+    post = post;
   };
 </script>
 
@@ -25,7 +26,7 @@
     {post.commentCount ? post.commentCount : 0}
     {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}
   </h2>
-  {#each post.comments as comment}
+  {#each post.comments as comment (comment.date)}
     <CommentView on:commentSent={refreshComments} {post} {comment} />
   {/each}
   {#if !replyFormOpen && $auth}
