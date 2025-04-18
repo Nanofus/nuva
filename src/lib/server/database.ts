@@ -374,7 +374,7 @@ export const getPosts = async (
             query AllPostsPaginated {
                 posts(where: {search: "${
     searchTerm ? decodeURI(searchTerm) : ''
-    }"}, first: ${count}, after: "${after}") {
+    }"}, first: ${count}${after != null ? `, after: "${after}"` : ''}) {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
