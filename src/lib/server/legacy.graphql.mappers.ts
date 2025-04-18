@@ -78,7 +78,7 @@ export const dataToPost = (data: any): Post | null => {
 
         return a.localeCompare(b);
       }),
-    artists: data.additionalFields.artists.nodes
+    artists: data.additionalFields.artists?.nodes
       ? data.additionalFields.artists.nodes.map((artist: any) => artist.name)
       : [],
     bannerVisible: data.additionalFields.bannerVisible,
