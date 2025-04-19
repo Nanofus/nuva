@@ -16,8 +16,8 @@
   <h1 id="post-title">{post.title}</h1>
   <div id="post-meta">
     <span class="post-categories">
-      {#each post.categories as category (category.slug)}
-        <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a></span>
+      {#each post.categories as category, i (category.slug)}
+        <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a>{#if i !== post.categories.length - 1},{' '}{/if}</span>
       {/each}
     </span>
     <time class="post-date" datetime={post.date.toISOString()}>

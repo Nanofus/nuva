@@ -10,7 +10,7 @@
 </script>
 
 <div class="vertically-separated" id="tags">
-  {#each tags as tag}
+  {#each tags as tag (tag)}
     <Pill sizeByCount={false} href="/tags/{tag.slug}">{tag.name}</Pill>
   {/each}
 </div>

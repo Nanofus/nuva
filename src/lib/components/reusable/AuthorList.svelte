@@ -3,7 +3,7 @@
 </script>
 
 <span class="author-list">
-  {#each authors as author, i}
+  {#each authors as author, i (author)}
     <span><a href="/authors/{encodeURI(author)}">{author}</a>{#if i !== authors.length - 1},{' '}{/if}</span>
   {/each}
 </span>
