@@ -1,5 +1,4 @@
 import { ISR_BYPASS_TOKEN } from '$env/static/private';
-import { serverConfig } from '$lib/server/config';
 import { clientConfig } from '$lib/client/config';
 
 // Invalidation requests for ISR cache for each page with ISR enabled.
@@ -11,15 +10,16 @@ export const defaultIsrConfig = {
   }
 };
 
-const requestData = {
+const requestConfig = {
   method: 'HEAD',
   headers: {
     Authorization: 'Bearer ' + import.meta.env.VITE_WEBHOOK_SECRET,
-    'x-prerender-revalidate': ISR_BYPASS_TOKEN,
+    'x-prerender-revalidate': ISR_BYPASS_TOKEN
   }
 };
 
 export const invalidateByPost = (postData: any) => {
+  throw (new Error('Invalidate by post is not implemented yet' + postData.post.post_name + ', ' + postData.post_id));
   invalidatePost(postData.post.post_name);
   invalidatePost(postData.post_id);
   invalidateFrontPage();
@@ -27,35 +27,35 @@ export const invalidateByPost = (postData: any) => {
   invalidateCategoriesPage();
   invalidatePostsPage();
   invalidateYearPage(postData.post.post_date.split('-')[0]);
-}
+};
 
 export const invalidateByComment = (commentData: any) => {
   invalidatePost(commentData.current_post_data.post_name);
   invalidatePost(commentData.current_post_id);
   invalidateFrontPage();
   invalidateYearPage(commentData.current_post_data.post_date.split('-')[0]);
-}
+};
 
 export const invalidatePost = (slug: string) => {
-  fetch(new Request(clientConfig.baseUrl + '/posts/' + slug, requestData)).then();
-}
+  fetch(new Request(clientConfig.baseUrl + '/posts/' + slug, requestConfig)).then();
+};
 
 export const invalidateFrontPage = () => {
-  fetch(new Request(clientConfig.baseUrl + '/', requestData)).then();
-}
+  fetch(new Request(clientConfig.baseUrl + '/', requestConfig)).then();
+};
 
 export const invalidatePostsPage = () => {
-  fetch(new Request(clientConfig.baseUrl + '/posts', requestData)).then();
-}
+  fetch(new Request(clientConfig.baseUrl + '/posts', requestConfig)).then();
+};
 
 export const invalidateTagsPage = () => {
-  fetch(new Request(clientConfig.baseUrl + '/tags', requestData)).then();
-}
+  fetch(new Request(clientConfig.baseUrl + '/tags', requestConfig)).then();
+};
 
 export const invalidateCategoriesPage = () => {
-  fetch(new Request(clientConfig.baseUrl + '/categories', requestData)).then();
-}
+  fetch(new Request(clientConfig.baseUrl + '/categories', requestConfig)).then();
+};
 
 export const invalidateYearPage = (year: string) => {
-  fetch(new Request(clientConfig.baseUrl + '/posts/year/' + year, requestData)).then();
-}
+  fetch(new Request(clientConfig.baseUrl + '/posts/year/' + year, requestConfig)).then();
+};
