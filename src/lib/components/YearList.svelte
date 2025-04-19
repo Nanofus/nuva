@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { YearResponse } from '$lib/util/types';
+  import { getConfig } from '$lib/util/config';
 
   interface Props {
     years: YearResponse['years'];
@@ -11,7 +12,7 @@
 <div class="year-list">
   {#each years as year (year.year)}
     <a href={`/posts/year/${year.year}`}>
-      <div class="year-card" style={year.featuredImage ? `background-image: url("${year.featuredImage}");` : ''}>
+      <div class="year-card" style={year.featuredImage ? `background-image: url("${year.featuredImage}");` : `background-image: url("${getConfig().defaultYearFeaturedImage}");`}>
         <h1>
           {year.year}
         </h1>
@@ -47,12 +48,11 @@
     flex-direction: column;
     flex: 1;
     box-sizing: border-box;
-    padding: 1.5rem 4rem 2.5rem;
-    min-height: 12rem;
+    padding: 2.5rem 4rem 2.5rem;
     border-radius: calc(var(--border-radius) * 2);
 
     h1 {
-      margin-bottom: 0;
+      margin: 0;
       text-align: left;
       text-shadow: var(--banner-shadow);
       line-height: var(--line-height, initial);
