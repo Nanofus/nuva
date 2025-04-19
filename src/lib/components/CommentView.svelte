@@ -44,12 +44,12 @@
   </header>
   <div class="comment-content">{@html comment.content}</div>
   <div class="child-comments">
-    {#each comment.children as child}
+    {#each comment.children as child (child._id)}
       <CommentView on:commentSent={commentSent} comment={child} {post} />
     {/each}
   </div>
   {#if isCurrentUser()}
-    <a target="_blank" href="{getConfig().urls.commentEdit}{comment._id}">{t.common.edit}</a>
+    <Button link onclick={() => (document.location = `${getConfig().urls.commentEdit}${comment._id}`)}>{t.common.edit}</Button>
   {/if}
   {#if !replyFormOpen && $auth}
     <Button link onclick={() => (replyFormOpen = true)}>{t.common.reply}</Button>
