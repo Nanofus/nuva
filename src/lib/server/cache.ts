@@ -19,7 +19,6 @@ const requestConfig = {
 };
 
 export const invalidateByPost = (postData: any) => {
-  throw (new Error('Invalidate by post is not implemented yet' + postData.post.post_name + ', ' + postData.post_id));
   invalidatePost(postData.post.post_name);
   invalidatePost(postData.post_id);
   invalidateFrontPage();
