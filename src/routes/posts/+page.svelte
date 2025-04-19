@@ -1,37 +1,14 @@
 <script lang="ts">
-  import PostList from '$lib/components/PostList.svelte';
-  import type { PostListResponse } from '$lib/util/types';
-  import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-  import { filterExcludedCategories, getPageTitle, getPageUrl } from '$lib/util/util';
-  import { onMount } from 'svelte';
-  import { scrolledToBottom } from '$lib/util/stores';
+  import type { YearResponse } from '$lib/util/types';
+  import { getPageTitle, getPageUrl } from '$lib/util/util';
   import { t } from '$lib/util/translations';
-  import { getPosts } from '$lib/client/api';
+  import YearList from '$lib/components/YearList.svelte';
 
   interface Props {
-    data: PostListResponse;
+    data: YearResponse;
   }
 
   let { data = $bindable() }: Props = $props();
-  let fetching = $state(false);
-
-  const fetchMorePosts = async () => {
-    fetching = true;
-    const newData = await getPosts(null, null, data.endCursor, null);
-    data = {
-      posts: filterExcludedCategories([...data.posts, ...newData.posts]),
-      endCursor: newData.endCursor,
-      hasNextPage: newData.hasNextPage
-    };
-    fetching = false;
-    if (data.hasNextPage) fetchMorePosts();
-  };
-
-  onMount(() => {
-    scrolledToBottom.subscribe(
-      (scrolled) => scrolled && data.hasNextPage && !fetching && fetchMorePosts()
-    );
-  });
 </script>
 
 <svelte:head>
@@ -41,9 +18,4 @@
 </svelte:head>
 
 <h1>{t.pages.posts.title}</h1>
-<PostList posts={data.posts} />
-<div class="vertically-separated">
-  {#if fetching}
-    <LoadingSpinner />
-  {/if}
-</div>
+<YearList years={data.years} />

@@ -77,6 +77,7 @@ const translations: { [key: string]: Localization } = {
       volume: 'Audio Volume'
     },
     errors: {
+      e400: 'Bad request.',
       e401: 'Authentication failed.',
       e403: 'No access.',
       e404: 'Page not found.',
@@ -201,6 +202,7 @@ const translations: { [key: string]: Localization } = {
       volume: 'Äänenvoimakkuus'
     },
     errors: {
+      e400: 'Virheellinen pyyntö.',
       e401: 'Autentikaatio epäonnistui.',
       e403: 'Pääsy estetty.',
       e404: 'Sivua ei löytynyt',

@@ -13,6 +13,11 @@ export type WebhookMeta = {
   color: number;
 };
 
+export type YearMeta = {
+  year: number;
+  featuredImage: string | null;
+}
+
 export type Config = {
   baseUrl: string; // Domain for the app, used by sitemap and RSS
   graphqlApi: string; // Path to WordPress GraphQL API
@@ -41,7 +46,8 @@ export type Config = {
   };
   externalStylesheets: string[]; // External stylesheets to load
   defaultFeaturedImage: string; // Default featured image for posts
-  isrBypassToken: string; // Token for ISR bypass
+  isrBypassToken: string; // Token for ISR bypass,
+  years: YearMeta[]
 };
 
 export type Localization = {
@@ -119,6 +125,7 @@ export type Localization = {
     volume: string;
   };
   errors: {
+    e400: string;
     e401: string;
     e403: string;
     e404: string;
@@ -259,6 +266,10 @@ export type PostListResponse = {
   posts: PostMeta[];
 } & Paginated;
 
+export type PostListByYearResponse = {
+  year: number;
+} & PostListResponse;
+
 export type PostListBySearchResponse = {
   searchTerm: string;
 } & PostListResponse;
@@ -289,6 +300,10 @@ export type PostsAndCommentsResponse = {
   posts: PostMeta[];
   comments: CommentMeta[];
 };
+
+export type YearResponse = {
+  years: YearMeta[];
+}
 
 export type AuthData = {
   displayName: string;

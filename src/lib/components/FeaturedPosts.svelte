@@ -16,7 +16,7 @@
     <FeaturedPost --header-size="1em" postMeta={postList[0]}/>
   </div>
   <div id="minor-featured">
-    {#each postList.slice(1, 4) as post}
+    {#each postList.slice(1, 4) as post (post)}
       <FeaturedPost --header-size="0.6em" --line-height="1.7rem" --min-height="inherit" postMeta={post}/>
     {/each}
   </div>

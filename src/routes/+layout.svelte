@@ -43,7 +43,7 @@
   <meta content={getConfig().siteName} property="og:site_name" />
   <meta content={getConfig().locale.replace('-', '_')} property="og:locale" />
   <meta content="website" property="og:type" />
-  {#each getConfig().externalStylesheets as stylesheet}
+  {#each getConfig().externalStylesheets as stylesheet (stylesheet)}
     <link href={stylesheet} rel="stylesheet" />
   {/each}
 </svelte:head>

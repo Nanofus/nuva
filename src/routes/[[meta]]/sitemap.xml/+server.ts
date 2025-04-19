@@ -1,10 +1,10 @@
 import type { Category, PostMeta, Tag } from '$lib/util/types';
-import { getAllPosts, getCategories, getTags } from '$lib/server/database';
+import { getAllPostMetas, getCategories, getTags } from '$lib/server/database';
 import { getConfig } from '$lib/util/config';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async () => {
-  const body = sitemap(await getAllPosts(), await getCategories(), (await getTags()).tags);
+  const body = sitemap(await getAllPostMetas(), await getCategories(), (await getTags()).tags);
   const response = new Response(body);
   response.headers.set('Cache-Control', `max-age=${0}, s-maxage=${3600}`);
   response.headers.set('Content-Type', 'application/xml');

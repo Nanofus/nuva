@@ -9,7 +9,7 @@ import type {
   PostListByAuthorResponse,
   PostListByCategoryResponse,
   PostListBySearchResponse,
-  PostListByTagResponse, PostListResponse,
+  PostListByTagResponse, PostListByYearResponse, PostListResponse,
   PostMeta,
   Tag,
   TagListResponse
@@ -345,7 +345,7 @@ export const getPostsByCategory = async (
   };
 };
 
-export const getAllPosts = async (): Promise<PostMeta[]> => {
+export const getAllPostMetas = async (): Promise<PostMeta[]> => {
   let allPostsFetched = false;
   let allPosts: PostMeta[] = [];
   let latestAfter = null;
@@ -358,7 +358,7 @@ export const getAllPosts = async (): Promise<PostMeta[]> => {
   return allPosts.sort((a, b) => a.date.getTime() - b.date.getTime());
 };
 
-export const getEveryPost = async (): Promise<PostListResponse> => {
+export const getPostsByYear = async (year: number): Promise<PostListByYearResponse> => {
   const response = await (
     await fetch(getConfig().graphqlApi, {
       method: 'POST',
@@ -367,8 +367,11 @@ export const getEveryPost = async (): Promise<PostListResponse> => {
       },
       body: JSON.stringify({
         query: `
-            query AllPostsPaginated {
-                posts(first: ${getConfig().maxPerFetch}) {
+            query PostsByYear {
+                posts(first: ${getConfig().maxPerFetch}, where: { dateQuery: {
+                  column: DATE
+                  year: ${year}
+            }}) {
                     nodes {
                         ${QUERIES.postMeta}
                     }
@@ -378,12 +381,12 @@ export const getEveryPost = async (): Promise<PostListResponse> => {
       })
     })
   ).json();
-  console.log(response.data.posts.nodes);
   const posts: PostMeta[] = response.data.posts.nodes.map((node: any) =>
     dataToPostMeta(node)
   );
   return {
     posts,
+    year: Number(year),
     endCursor: '',
     hasNextPage: false,
   };
@@ -392,7 +395,7 @@ export const getEveryPost = async (): Promise<PostListResponse> => {
 export const getPosts = async (
   after: string | null = null,
   searchTerm: string | null = null,
-  count: number = getConfig().maxPerFetch
+  count: number = getConfig().maxPerFetch,
 ): Promise<PostListBySearchResponse> => {
   const response = await (
     await fetch(getConfig().graphqlApi, {
