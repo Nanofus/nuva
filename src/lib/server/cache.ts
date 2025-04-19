@@ -14,7 +14,7 @@ const requestData = {
   method: 'HEAD',
   headers: {
     Authorization: 'Bearer ' + import.meta.env.VITE_WEBHOOK_SECRET,
-    'x-prerender-revalidate:': ISR_BYPASS_TOKEN,
+    'x-prerender-revalidate': ISR_BYPASS_TOKEN,
   }
 };
 
