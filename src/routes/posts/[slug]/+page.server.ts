@@ -3,14 +3,9 @@ import { getPost } from '$lib/server/database';
 import type { PostResponse } from '$lib/util/types';
 import { t } from '$lib/util/translations';
 import { validateHTML } from '$lib/server/html-validator';
-import { ISR_BYPASS_TOKEN } from '$env/static/private';
+import { defaultIsrConfig } from '$lib/server/cache';
 
-export const config = {
-  isr: {
-    expiration: 60,
-    bypassToken: ISR_BYPASS_TOKEN
-  }
-};
+export const config = defaultIsrConfig;
 
 export const load: Load = async ({ params, url }): Promise<PostResponse> => {
   if (params.slug) {

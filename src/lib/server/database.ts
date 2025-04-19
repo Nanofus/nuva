@@ -9,7 +9,8 @@ import type {
   PostListByAuthorResponse,
   PostListByCategoryResponse,
   PostListBySearchResponse,
-  PostListByTagResponse, PostListByYearResponse, PostListResponse,
+  PostListByTagResponse,
+  PostListByYearResponse,
   PostMeta,
   Tag,
   TagListResponse
@@ -76,7 +77,8 @@ export const getLatestPosts = async () =>
 
 /* General queries */
 
-export const getPostMeta = async (slug: string): Promise<PostMeta | null> => {
+export const getPostMeta = async (slug: string,
+  authToken: string | null = null): Promise<PostMeta | null> => {
   const response = await (
     await fetch(getConfig().graphqlApi, {
       method: 'POST',
@@ -94,7 +96,31 @@ export const getPostMeta = async (slug: string): Promise<PostMeta | null> => {
       })
     })
   ).json();
-  return dataToPostMeta(response.data.post);
+  let post = dataToPostMeta(response.data.post);
+  if (!post) {
+    const response = await (
+      await fetch(getConfig().graphqlApi, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: authToken
+            ? `Bearer ${authToken}`
+            : `Bearer ${import.meta.env.VITE_WPGRAPHQL_AUTH_TOKEN}`
+        },
+        body: JSON.stringify({
+          query: `
+            query PostBySlug {
+                post(idType: DATABASE_ID, id: ${slug}) {
+                    ${QUERIES.postMeta}
+                }
+            }
+            `
+        })
+      })
+    ).json();
+    post = dataToPostMeta(response.data.post);
+  }
+  return post;
 };
 
 export const getPost = async (
@@ -218,8 +244,8 @@ export const getPostsByAuthor = async (
         query: `
             query PostsByAuthor {
                 posts(where: {authorName: "${decodeURI(author)}"}, first: ${
-          getConfig().maxPerFetch
-        }, after: "${after}") {
+      getConfig().maxPerFetch
+    }, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -388,14 +414,14 @@ export const getPostsByYear = async (year: number): Promise<PostListByYearRespon
     posts,
     year: Number(year),
     endCursor: '',
-    hasNextPage: false,
+    hasNextPage: false
   };
 };
 
 export const getPosts = async (
   after: string | null = null,
   searchTerm: string | null = null,
-  count: number = getConfig().maxPerFetch,
+  count: number = getConfig().maxPerFetch
 ): Promise<PostListBySearchResponse> => {
   const response = await (
     await fetch(getConfig().graphqlApi, {

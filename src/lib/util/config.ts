@@ -17,7 +17,7 @@ export const loadServerConfig = async () => {
 
 export const loadClientConfig = async () => {
   clientConfig = await (await fetch('/api/config')).json();
-}
+};
 
 let clientConfig: Config | undefined = undefined;
 const serverConfig: Config | undefined = browser ? undefined : await loadServerConfig();
@@ -27,4 +27,4 @@ export const getConfig: () => Config = () => {
     return clientConfig!;
   }
   return serverConfig!;
-}
+};

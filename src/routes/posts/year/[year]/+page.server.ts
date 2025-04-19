@@ -3,14 +3,9 @@ import type { PostListByYearResponse } from '$lib/util/types';
 import { filterExcludedCategories } from '$lib/util/util';
 import { t } from '$lib/util/translations';
 import { getPostsByYear } from '$lib/server/database';
-import { ISR_BYPASS_TOKEN } from '$env/static/private';
+import { defaultIsrConfig } from '$lib/server/cache';
 
-export const config = {
-  isr: {
-    expiration: 60,
-    bypassToken: ISR_BYPASS_TOKEN
-  }
-};
+export const config = defaultIsrConfig;
 
 export const load: Load = async ({ params }): Promise<PostListByYearResponse> => {
   if (!params.year || isNaN(Number(params.year))) throw error(400, t.errors.e400);

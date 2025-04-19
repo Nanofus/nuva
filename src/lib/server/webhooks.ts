@@ -1,8 +1,4 @@
-import {
-  getLatestComments,
-  getLatestPosts,
-  getPostMeta
-} from '$lib/server/database';
+import { getLatestComments, getLatestPosts, getPostMeta } from '$lib/server/database';
 import { getConfig } from '$lib/util/config';
 import { fireCommentHook, firePostHook } from '$lib/server/webhooks.discord';
 import type { CommentMeta, PostMeta } from '$lib/util/types';
