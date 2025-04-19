@@ -22,20 +22,31 @@
 {#if bannerVisible}
   <header style="background-image: {customBannerUrl ? customBannerUrl : bannerUrl}">
     <a href="/">
-      <h1>{getConfig().siteName}</h1>
-      <h2>{getConfig().subHeader}</h2>
+      <div class="title">
+        <h1>{getConfig().siteName}</h1>
+        <h2>{getConfig().subHeader}</h2>
+      </div>
     </a>
   </header>
 {/if}
 
 <style lang="scss">
   a {
-    display: block;
-    height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
-    padding-top: 3.5em;
+    height: 100%;
+    width: 100%;
 
     &:hover {
       text-decoration: none;
+    }
+    
+    > .title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      text-align: center;
     }
   }
 
@@ -44,6 +55,9 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   h1,
