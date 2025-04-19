@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type { Post, PostResponse } from '$lib/util/types';
+  import type { Post, PostResponse } from '$lib/types';
   import PostHeader from '$lib/components/PostHeader.svelte';
   import PostFooter from '$lib/components/PostFooter.svelte';
   import PostContent from '$lib/components/PostContent.svelte';
   import { onDestroy, onMount } from 'svelte';
   import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-  import { getPageTitle, getPageUrl, recursivelyConvertDates } from '$lib/util/util';
-  import { auth, postOptions } from '$lib/util/stores';
-  import { t } from '$lib/util/translations';
+  import { getPageTitle, getPageUrl, recursivelyConvertDates } from '$lib/client/util';
+  import { auth, postOptions } from '$lib/client/stores';
+  import { t } from '$lib/client/localization';
   import { toast } from '@zerodevx/svelte-toast';
 
   interface Props {

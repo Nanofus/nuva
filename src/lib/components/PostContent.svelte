@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { Post } from '$lib/util/types';
+  import type { Post } from '$lib/types';
   import { onDestroy, onMount } from 'svelte';
   import { browser } from '$app/environment';
   import MusicPlayer from '$lib/components/MusicPlayer.svelte';
   import { toast } from '@zerodevx/svelte-toast';
-  import { cleanGlobalScope, initGlobalScope, toastSettings } from '$lib/util/util';
-  import { t } from '$lib/util/translations';
+  import { cleanGlobalScope, initGlobalScope, toastSettings } from '$lib/client/util';
+  import { t } from '$lib/client/localization';
 
   interface Props {
     post: Post;

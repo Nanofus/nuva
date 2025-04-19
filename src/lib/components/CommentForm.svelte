@@ -5,10 +5,10 @@
   import Button from '$lib/components/reusable/Button.svelte';
   import Input from '$lib/components/reusable/Input.svelte';
   import Form from '$lib/components/reusable/Form.svelte';
-  import { toastSettings } from '$lib/util/util';
+  import { toastSettings } from '$lib/client/util';
   import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-  import { t } from '$lib/util/translations';
-  import { auth } from '$lib/util/stores';
+  import { t } from '$lib/client/localization';
+  import { auth } from '$lib/client/stores';
 
   interface Props {
     parent: number;

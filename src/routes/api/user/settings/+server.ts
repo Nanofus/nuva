@@ -1,5 +1,5 @@
 import { error, json } from '@sveltejs/kit';
-import { t } from '$lib/util/translations';
+import { t } from '$lib/client/localization';
 import { authenticated } from '$lib/server/auth';
 
 export const GET = async ({ request }: { request: any }) => {

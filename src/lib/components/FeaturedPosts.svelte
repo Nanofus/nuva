@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PostMeta } from '$lib/util/types';
+  import type { PostMeta } from '$lib/types';
   import FeaturedPost from '$lib/components/FeaturedPost.svelte';
 
   interface Props {
@@ -16,7 +16,7 @@
     <FeaturedPost --header-size="1em" postMeta={postList[0]}/>
   </div>
   <div id="minor-featured">
-    {#each postList.slice(1, 4) as post (post)}
+    {#each postList.slice(1, 4) as post (post.slug)}
       <FeaturedPost --header-size="0.6em" --line-height="1.7rem" --min-height="inherit" postMeta={post}/>
     {/each}
   </div>

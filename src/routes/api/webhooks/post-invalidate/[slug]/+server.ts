@@ -1,6 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { error, json } from '@sveltejs/kit';
-import { t } from '$lib/util/translations';
+import { t } from '$lib/client/localization';
 import { invalidateByPost } from '$lib/server/cache';
 
 export const POST: RequestHandler = async ({ params, request }) => {

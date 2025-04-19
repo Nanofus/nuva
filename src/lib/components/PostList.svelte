@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Category, PostMeta } from '$lib/util/types';
-  import { t } from '$lib/util/translations';
-  import { getConfig } from '$lib/util/config';
+  import type { Category, PostMeta } from '$lib/types';
+  import { t } from '$lib/client/localization';
+  import { clientConfig } from '$lib/client/config';
 
   export let posts: PostMeta[];
 
@@ -20,14 +20,14 @@
       <td class="date">{t.components.postList.date}</td>
       <td class="authors hidden-mobile">{t.components.postList.author}</td>
     </tr>
-    {#each posts as post}
+    {#each posts as post (post.slug)}
       <tr class={post.mobileFriendly ? '' : 'mobile-unfriendly'}>
         <td class="link">
           <a href="/posts/{post.slug}">{post.title}</a>
           <span class="categories">{parseCategories(post.categories)}</span>
         </td>
         <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ''}</td>
-        <td class="date">{post.date.toLocaleDateString(getConfig().locale)}</td>
+        <td class="date">{post.date.toLocaleDateString(clientConfig.locale)}</td>
         <td class="authors hidden-mobile"
         ><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td
         >

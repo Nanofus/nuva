@@ -1,7 +1,7 @@
 import { error, type Load } from '@sveltejs/kit';
 import { getPost } from '$lib/server/database';
-import type { PostResponse } from '$lib/util/types';
-import { t } from '$lib/util/translations';
+import type { PostResponse } from '$lib/types';
+import { t } from '$lib/client/localization';
 import { validateHTML } from '$lib/server/html-validator';
 import { defaultIsrConfig } from '$lib/server/cache';
 

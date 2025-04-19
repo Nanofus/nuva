@@ -2,9 +2,9 @@
   import NavItem from '$lib/components/reusable/NavItem.svelte';
   import { onDestroy, onMount } from 'svelte';
   import { browser } from '$app/environment';
-  import { auth, postOptions } from '$lib/util/stores';
-  import { t } from '$lib/util/translations';
-  import { getConfig } from '$lib/util/config';
+  import { auth, postOptions } from '$lib/client/stores';
+  import { t } from '$lib/client/localization';
+  import { clientConfig } from '$lib/client/config';
   import { page } from '$app/state';
 
   let smallLogo: HTMLElement | undefined = $state();
@@ -63,7 +63,7 @@
   <div class="nav-wrapper">
     <div class="section-logo-area">
       <div bind:this={smallLogo} class="section-logo">
-        <NavItem href="/"><h1>{getConfig().siteName}</h1></NavItem>
+        <NavItem href="/"><h1>{clientConfig.siteName}</h1></NavItem>
       </div>
       <div class="section-menu">
         <NavItem onclick={toggleMenu} onkeydown={toggleMenu}>
@@ -88,10 +88,10 @@
       <NavItem href="/posts">{t.components.navigation.posts}</NavItem>
       <NavItem href="/categories">{t.components.navigation.categories}</NavItem>
       <NavItem href="/tags">{t.components.navigation.tags}</NavItem>
-      <NavItem href={getConfig().urls.writingGuide}>{t.components.navigation.guide}</NavItem>
-      <NavItem href={getConfig().urls.soundtracks}>{t.components.navigation.soundtracks}</NavItem>
+      <NavItem href={clientConfig.urls.writingGuide}>{t.components.navigation.guide}</NavItem>
+      <NavItem href={clientConfig.urls.soundtracks}>{t.components.navigation.soundtracks}</NavItem>
       {#if $auth}
-        <NavItem href={getConfig().urls.writing}>{t.components.navigation.write}</NavItem>
+        <NavItem href={clientConfig.urls.writing}>{t.components.navigation.write}</NavItem>
       {/if}
       <NavItem href="/profile"
       >{$auth ? t.components.navigation.profile : t.components.navigation.login}</NavItem

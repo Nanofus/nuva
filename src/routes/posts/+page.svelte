@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { YearResponse } from '$lib/util/types';
-  import { getPageTitle, getPageUrl } from '$lib/util/util';
-  import { t } from '$lib/util/translations';
+  import type { YearResponse } from '$lib/types';
+  import { getPageTitle, getPageUrl } from '$lib/client/util';
+  import { t } from '$lib/client/localization';
   import YearList from '$lib/components/YearList.svelte';
 
   interface Props {

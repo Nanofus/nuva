@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { Post } from '$lib/util/types';
+  import type { Post } from '$lib/types';
   import CommentForm from '$lib/components/CommentForm.svelte';
   import Button from '$lib/components/reusable/Button.svelte';
-  import { t } from '$lib/util/translations';
+  import { t } from '$lib/client/localization';
   import CommentView from '$lib/components/CommentView.svelte';
-  import { auth } from '$lib/util/stores';
+  import { auth } from '$lib/client/stores';
   import { getCommentsByPost } from '$lib/client/api';
 
   interface Props {

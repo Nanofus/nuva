@@ -1,13 +1,13 @@
 <script lang="ts">
   import CommentView from './CommentView.svelte';
-  import type { Comment, Post } from '$lib/util/types';
+  import type { Comment, Post } from '$lib/types';
   import CommentForm from '$lib/components/CommentForm.svelte';
   import { createEventDispatcher } from 'svelte';
   import { browser } from '$app/environment';
   import Button from '$lib/components/reusable/Button.svelte';
-  import { t } from '$lib/util/translations';
-  import { auth } from '$lib/util/stores';
-  import { getConfig } from '$lib/util/config';
+  import { t } from '$lib/client/localization';
+  import { auth } from '$lib/client/stores';
+  import { clientConfig } from '$lib/client/config';
 
   interface Props {
     comment: Comment;
@@ -40,7 +40,7 @@
 <div class="comment {isHighlighted() ? 'highlighted' : ''}" id="comment-{comment._id}">
   <header class="comment-header">
     <span class="comment-author"> {comment.author}</span>
-    <span class="comment-date">{comment.date.toLocaleDateString(getConfig().locale)}</span>
+    <span class="comment-date">{comment.date.toLocaleDateString(clientConfig.locale)}</span>
   </header>
   <div class="comment-content">{@html comment.content}</div>
   <div class="child-comments">
@@ -49,7 +49,7 @@
     {/each}
   </div>
   {#if isCurrentUser()}
-    <Button link onclick={() => (document.location = `${getConfig().urls.commentEdit}${comment._id}`)}>{t.common.edit}</Button>
+    <Button link onclick={() => (document.location = `${clientConfig.urls.commentEdit}${comment._id}`)}>{t.common.edit}</Button>
   {/if}
   {#if !replyFormOpen && $auth}
     <Button link onclick={() => (replyFormOpen = true)}>{t.common.reply}</Button>

@@ -1,7 +1,7 @@
 import { error, type Load } from '@sveltejs/kit';
 import { getCategories } from '$lib/server/database';
-import { t } from '$lib/util/translations';
-import type { CategoryListResponse } from '$lib/util/types';
+import { t } from '$lib/client/localization';
+import type { CategoryListResponse } from '$lib/types';
 import { defaultIsrConfig } from '$lib/server/cache';
 
 export const config = defaultIsrConfig;

@@ -1,8 +1,8 @@
 import { error, type Load } from '@sveltejs/kit';
 import { getLatestComments, getLatestPosts } from '$lib/server/database';
-import type { PostsAndCommentsResponse } from '$lib/util/types';
-import { filterExcludedCategories } from '$lib/util/util';
-import { t } from '$lib/util/translations';
+import type { PostsAndCommentsResponse } from '$lib/types';
+import { filterExcludedCategories } from '$lib/server/util';
+import { t } from '$lib/client/localization';
 import { defaultIsrConfig } from '$lib/server/cache';
 
 export const config = defaultIsrConfig;

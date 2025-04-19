@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { PostMeta } from '$lib/util/types';
-  import { getConfig } from '$lib/util/config';
+  import type { PostMeta } from '$lib/types';
   import AuthorList from '$lib/components/reusable/AuthorList.svelte';
+  import { clientConfig } from '$lib/client/config';
 
   interface Props {
     postMeta: PostMeta;
@@ -14,7 +14,7 @@
   class="featured-post"
   style="background-image: {postMeta.featuredImage
     ? `url(${postMeta.featuredImage})`
-    : `url(${getConfig().defaultFeaturedImage})`}"
+    : `url(${clientConfig.defaultFeaturedImage})`}"
 >
   <h1><a href="/posts/{postMeta.slug}">{@html postMeta.title}</a></h1>
   <p class="authors">

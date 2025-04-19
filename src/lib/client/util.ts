@@ -1,7 +1,7 @@
-import type { Hierarchical, PostMeta } from '$lib/util/types';
-import { getConfig, localConfig } from '$lib/util/config';
+import type { HierarchicalWithDate } from '$lib/types';
+import { clientConfig } from '$lib/client/config';
 import { browser } from '$app/environment';
-import { scrolledToBottom } from '$lib/util/stores';
+import { scrolledToBottom } from '$lib/client/stores';
 
 export const toastSettings = {
   error: {
@@ -25,41 +25,6 @@ export const toastSettings = {
   }
 };
 
-export const filterExcludedCategories = (posts: PostMeta[]) =>
-  posts.filter(
-    (post) =>
-      !post.categories
-        .map((cat) => cat.slug)
-        .some((slug) => getConfig().categoriesExcludedFromAllPosts.includes(slug))
-  );
-
-export const objectsToHierarchy = (arr: Hierarchical[]) => {
-  const arrMap = new Map(arr.map((item: Hierarchical) => [item._id, item]));
-  const tree: Hierarchical[] = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    const item = arr[i];
-
-    if (item._parentId) {
-      const parentItem = arrMap.get(item._parentId);
-
-      if (parentItem) {
-        const { children } = parentItem;
-
-        if (children) {
-          parentItem.children.push(item);
-        } else {
-          parentItem.children = [item];
-        }
-      }
-    } else {
-      tree.push(item);
-    }
-  }
-
-  return tree;
-};
-
 export const handleViewportResize = () => {
   if (!browser) return;
   const scroller = document.scrollingElement as HTMLElement;
@@ -67,14 +32,14 @@ export const handleViewportResize = () => {
     .querySelector<HTMLElement>(':root')
     ?.style.setProperty('--scrollbar-width', `${window.innerWidth - scroller.clientWidth}px`);
   if (!window.visualViewport) return;
-/*
-  document
-    .querySelector<HTMLElement>(':root')
-    ?.style.setProperty(
-      '--bleed-buffer',
-      `${Math.round((window.visualViewport.width + Number.EPSILON) * 100) / 100 - scroller.clientWidth}px`
-    );
-*/
+  /*
+    document
+      .querySelector<HTMLElement>(':root')
+      ?.style.setProperty(
+        '--bleed-buffer',
+        `${Math.round((window.visualViewport.width + Number.EPSILON) * 100) / 100 - scroller.clientWidth}px`
+      );
+  */
 };
 
 export const handleScrolledToBottom = () => {
@@ -84,13 +49,13 @@ export const handleScrolledToBottom = () => {
 
   const documentHeight = document.body.scrollHeight;
   const currentScroll = window.scrollY + window.innerHeight;
-  scrolledToBottom.set(currentScroll + localConfig.bottomScrollThreshold > documentHeight);
+  scrolledToBottom.set(currentScroll + clientConfig.bottomScrollThreshold > documentHeight);
 };
 
 export const getPageTitle = (title: string) =>
-  title ? `${title} – ${getConfig().siteName}` : getConfig().siteName;
+  title ? `${title} – ${clientConfig.siteName}` : clientConfig.siteName;
 
-export const getPageUrl = (route: string) => `${getConfig().baseUrl}/${route}`;
+export const getPageUrl = (route: string) => `${clientConfig.baseUrl}/${route}`;
 
 export const formatSecondsToMMSS = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
@@ -104,7 +69,7 @@ export const stripHtml = (html: string) => {
 
 // Uses minutes so that the banner does not change after hydration
 export const getRandomBannerUrl = (seed = 0) =>
-  `url("${getConfig().banners[Math.floor((new Date().getMinutes() + seed) * getConfig().banners.length) % getConfig().banners.length]}")`;
+  `url("${clientConfig.banners[Math.floor((new Date().getMinutes() + seed) * clientConfig.banners.length) % clientConfig.banners.length]}")`;
 
 export const initGlobalScope = () => {
   if (!browser || window.nuvaGlobal) {
@@ -128,11 +93,11 @@ export const cleanGlobalScope = () => {
 };
 
 export const createBaseSettings = () => {
-  if (browser && !localStorage.getItem(localConfig.localStorageSettingsKey)) {
+  if (browser && !localStorage.getItem(clientConfig.localStorageSettingsKey)) {
     localStorage.setItem(
-      localConfig.localStorageSettingsKey,
+      clientConfig.localStorageSettingsKey,
       JSON.stringify({
-        volume: localConfig.defaultVolume
+        volume: clientConfig.defaultVolume
       })
     );
   }
@@ -140,25 +105,22 @@ export const createBaseSettings = () => {
 
 export const saveSetting = (key: string, value: any) => {
   if (browser) {
-    const settings = JSON.parse(localStorage.getItem(localConfig.localStorageSettingsKey)!);
+    const settings = JSON.parse(localStorage.getItem(clientConfig.localStorageSettingsKey)!);
     settings[key] = value;
-    localStorage.setItem(localConfig.localStorageSettingsKey, JSON.stringify(settings));
+    localStorage.setItem(clientConfig.localStorageSettingsKey, JSON.stringify(settings));
   }
 };
 
 export const loadSetting = (key: string) => {
   if (browser) {
-    if (localStorage.getItem(localConfig.localStorageSettingsKey)) {
-      return JSON.parse(localStorage.getItem(localConfig.localStorageSettingsKey)!)[key];
+    if (localStorage.getItem(clientConfig.localStorageSettingsKey)) {
+      return JSON.parse(localStorage.getItem(clientConfig.localStorageSettingsKey)!)[key];
     }
   }
 
   return null;
 };
 
-type HierarchicalWithDate = {
-  date: Date;
-} & Hierarchical;
 export const recursivelyConvertDates = (arr: HierarchicalWithDate[]) => {
   return arr.map((item) => {
     if (item.date) {

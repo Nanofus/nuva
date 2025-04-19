@@ -1,11 +1,3 @@
-export type LocalConfig = {
-  bottomScrollThreshold: number;
-  localStorageAuthKey: string;
-  localStorageSettingsKey: string;
-  defaultVolume: number;
-  musicFadeSpeed: number;
-};
-
 export type WebhookMeta = {
   url: string;
   contentText: string;
@@ -18,17 +10,17 @@ export type YearMeta = {
   featuredImage: string | null;
 }
 
-export type Config = {
+export type ClientConfig = {
+  bottomScrollThreshold: number;
+  localStorageAuthKey: string;
+  localStorageSettingsKey: string;
+  defaultVolume: number;
+  musicFadeSpeed: number;
   baseUrl: string; // Domain for the app, used by sitemap and RSS
-  graphqlApi: string; // Path to WordPress GraphQL API
-  maxPerFetch: number; // Max posts to get per fetch (WP GraphQL API has a limit of 100)
-  latestPostsPerFetch: number; // Max posts to get per fetch on front page
-  latestCommentsPerFetch: number; // Max comments to get per fetch on front page
   locale: string; // Locale for language, "en-US"/"fi-FI"
   siteName: string; // Name of site
   subHeader: string; // Subheader for site
   copyright: string; // Copyright notice
-  categoriesExcludedFromAllPosts: string[]; // Categories to exclude from all posts page
   banners: string[]; // URLs for banners
   urls: {
     soundtracks: string; // URL for soundtracks page
@@ -39,16 +31,22 @@ export type Config = {
     feedback: string; // URL for feedback page
     about: string; // URL for about page
   };
+  externalStylesheets: string[]; // External stylesheets to load
+  defaultFeaturedImage: string; // Default featured image for posts
+  defaultYearFeaturedImage: string;
+  years: YearMeta[]
+}
+
+export type ServerConfig = {
+  graphqlApi: string; // Path to WordPress GraphQL API
+  maxPerFetch: number; // Max posts to get per fetch (WP GraphQL API has a limit of 100)
+  latestPostsPerFetch: number; // Max posts to get per fetch on front page
+  latestCommentsPerFetch: number; // Max comments to get per fetch on front page
+  categoriesExcludedFromAllPosts: string[]; // Categories to exclude from all posts page
   webhooks: {
-    password: string;
     newPost: WebhookMeta[]; // URLs for new post webhooks
     newComment: WebhookMeta[]; // URLs for new comment webhooks
   };
-  externalStylesheets: string[]; // External stylesheets to load
-  defaultFeaturedImage: string; // Default featured image for posts
-  isrBypassToken: string; // Token for ISR bypass,
-  defaultYearFeaturedImage: string;
-  years: YearMeta[]
 };
 
 export type Localization = {
@@ -182,6 +180,10 @@ export type Hierarchical = {
   _parentId: number;
   children: Hierarchical[];
 };
+
+export type HierarchicalWithDate = {
+  date: Date;
+} & Hierarchical;
 
 export type PostMeta = {
   title: string;

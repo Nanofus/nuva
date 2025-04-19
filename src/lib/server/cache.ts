@@ -1,5 +1,6 @@
-import { getConfig } from '$lib/util/config';
 import { ISR_BYPASS_TOKEN } from '$env/static/private';
+import { serverConfig } from '$lib/server/config';
+import { clientConfig } from '$lib/client/config';
 
 // Invalidation requests for ISR cache for each page with ISR enabled.
 
@@ -36,25 +37,25 @@ export const invalidateByComment = (commentData: any) => {
 }
 
 export const invalidatePost = (slug: string) => {
-  fetch(new Request(getConfig().baseUrl + '/posts/' + slug, requestData)).then();
+  fetch(new Request(clientConfig.baseUrl + '/posts/' + slug, requestData)).then();
 }
 
 export const invalidateFrontPage = () => {
-  fetch(new Request(getConfig().baseUrl + '/', requestData)).then();
+  fetch(new Request(clientConfig.baseUrl + '/', requestData)).then();
 }
 
 export const invalidatePostsPage = () => {
-  fetch(new Request(getConfig().baseUrl + '/posts', requestData)).then();
+  fetch(new Request(clientConfig.baseUrl + '/posts', requestData)).then();
 }
 
 export const invalidateTagsPage = () => {
-  fetch(new Request(getConfig().baseUrl + '/tags', requestData)).then();
+  fetch(new Request(clientConfig.baseUrl + '/tags', requestData)).then();
 }
 
 export const invalidateCategoriesPage = () => {
-  fetch(new Request(getConfig().baseUrl + '/categories', requestData)).then();
+  fetch(new Request(clientConfig.baseUrl + '/categories', requestData)).then();
 }
 
 export const invalidateYearPage = (year: string) => {
-  fetch(new Request(getConfig().baseUrl + '/posts/year/' + year, requestData)).then();
+  fetch(new Request(clientConfig.baseUrl + '/posts/year/' + year, requestData)).then();
 }

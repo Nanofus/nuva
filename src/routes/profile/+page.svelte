@@ -1,13 +1,13 @@
 <script lang="ts">
   import Login from '$lib/components/Login.svelte';
-  import { getPageTitle, getPageUrl, loadSetting, saveSetting } from '$lib/util/util';
-  import { auth } from '$lib/util/stores';
+  import { getPageTitle, getPageUrl, loadSetting, saveSetting } from '$lib/client/util';
+  import { auth } from '$lib/client/stores';
   import SettingItem from '$lib/components/reusable/SettingItem.svelte';
   import Settings from '$lib/components/Settings.svelte';
-  import { localConfig } from '$lib/util/config';
-  import { t } from '$lib/util/translations';
+  import { clientConfig } from '$lib/client/config';
+  import { t } from '$lib/client/localization';
 
-  let volume = $state(loadSetting('volume') || localConfig.defaultVolume);
+  let volume = $state(loadSetting('volume') || clientConfig.defaultVolume);
 
   $effect(() => {
     if (volume) saveSetting('volume', volume);

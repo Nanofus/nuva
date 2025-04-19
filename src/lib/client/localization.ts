@@ -1,7 +1,7 @@
-import type { Localization } from '$lib/util/types';
-import { getConfig } from '$lib/util/config';
+import type { Localization } from '$lib/types';
+import { clientConfig } from '$lib/client/config';
 
-const translations: { [key: string]: Localization } = {
+const localization: { [key: string]: Localization } = {
   'en-US': {
     common: {
       loadMore: 'Load more',
@@ -254,4 +254,4 @@ const translations: { [key: string]: Localization } = {
   }
 };
 
-export const t = translations[getConfig().locale];
+export const t = localization[clientConfig.locale];

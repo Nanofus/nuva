@@ -5,8 +5,8 @@ Musicmancer 2023 Edition
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
   import Button from '$lib/components/reusable/Button.svelte';
-  import { formatSecondsToMMSS, loadSetting, saveSetting } from '$lib/util/util';
-  import { localConfig } from '$lib/util/config';
+  import { formatSecondsToMMSS, loadSetting, saveSetting } from '$lib/client/util';
+  import { clientConfig } from '$lib/client/config';
   import { parseBlob } from 'music-metadata';
   import { browser } from '$app/environment';
 
@@ -43,7 +43,7 @@ Musicmancer 2023 Edition
 
   // This runs before parent onMount, so the audio elements exist when user scripts run
   onMount(() => {
-    volume = loadSetting('volume') || localConfig.defaultVolume;
+    volume = loadSetting('volume') || clientConfig.defaultVolume;
     initializeAudioElements();
   });
 
@@ -262,7 +262,7 @@ Musicmancer 2023 Edition
           : 1;
         let newVolume =
           audioData.audioElement.volume -
-            (0.01 * localConfig.musicFadeSpeed * (volume / 100)) / customModifier;
+            (0.01 * clientConfig.musicFadeSpeed * (volume / 100)) / customModifier;
         if (newVolume < 0) newVolume = 0;
         audioData.audioElement.volume = newVolume;
       } else {

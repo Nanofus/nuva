@@ -1,6 +1,6 @@
 <script lang="ts">
   import Pill from '$lib/components/reusable/Pill.svelte';
-  import type { Tag } from '$lib/util/types';
+  import type { Tag } from '$lib/types';
 
   interface Props {
     tags: Tag[];

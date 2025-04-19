@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "@sindresorhus/slugify": "^2.2.1",
-    "@vercel/edge-config": "^1.4.0",
     "@vercel/postgres": "^0.10.0",
     "@vercel/postgres-kysely": "^0.10.0",
     "@zerodevx/svelte-toast": "^0.9.6",

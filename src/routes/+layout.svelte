@@ -4,8 +4,8 @@
   import { SvelteToast } from '@zerodevx/svelte-toast';
   import { browser } from '$app/environment';
   import { navigating, page } from '$app/state';
-  import { createBaseSettings, handleScrolledToBottom, handleViewportResize } from '$lib/util/util';
-  import { auth, postOptions } from '$lib/util/stores';
+  import { createBaseSettings, handleScrolledToBottom, handleViewportResize } from '$lib/client/util';
+  import { auth, postOptions } from '$lib/client/stores';
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import Navigation from '$lib/components/Navigation.svelte';
@@ -13,8 +13,8 @@
   import '$lib/style/variables.scss';
   import '$lib/style/input-range.scss';
   import '$lib/style/theme.scss';
-  import { loadLoginStatus } from '$lib/client/auth';
-  import { getConfig } from '$lib/util/config';
+  import { getLoginStatus } from '$lib/client/auth';
+  import { clientConfig } from '$lib/client/config';
 
   let { data, children } = $props();
 
@@ -25,7 +25,7 @@
     handleViewportResize();
     document.addEventListener('scroll', handleScrolledToBottom);
     window.addEventListener('resize', handleViewportResize);
-    if (!$auth) loadLoginStatus();
+    if (!$auth) getLoginStatus();
     postOptions.subscribe((options) => {
       fullWidth = options.fullWidth;
     });
@@ -40,10 +40,10 @@
 </script>
 
 <svelte:head>
-  <meta content={getConfig().siteName} property="og:site_name" />
-  <meta content={getConfig().locale.replace('-', '_')} property="og:locale" />
+  <meta content={clientConfig.siteName} property="og:site_name" />
+  <meta content={clientConfig.locale.replace('-', '_')} property="og:locale" />
   <meta content="website" property="og:type" />
-  {#each getConfig().externalStylesheets as stylesheet (stylesheet)}
+  {#each clientConfig.externalStylesheets as stylesheet (stylesheet)}
     <link href={stylesheet} rel="stylesheet" />
   {/each}
 </svelte:head>

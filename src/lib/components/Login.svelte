@@ -1,13 +1,13 @@
 <script lang="ts">
   import { login, logout } from '$lib/client/auth';
-  import { auth } from '$lib/util/stores';
+  import { auth } from '$lib/client/stores';
   import Button from '$lib/components/reusable/Button.svelte';
   import Input from '$lib/components/reusable/Input.svelte';
   import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
   import Form from '$lib/components/reusable/Form.svelte';
   import { toast } from '@zerodevx/svelte-toast';
-  import { toastSettings } from '$lib/util/util';
-  import { t } from '$lib/util/translations';
+  import { toastSettings } from '$lib/client/util';
+  import { t } from '$lib/client/localization';
 
   let passwordInput = $state('');
   let usernameInput = $state('');

@@ -1,4 +1,4 @@
-import { getConfig } from '$lib/util/config';
+import { clientConfig } from '$lib/client/config';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async () => {
@@ -6,7 +6,7 @@ export const GET: RequestHandler = async () => {
     `User-agent: *
 Allow: /
   
-Sitemap: ${getConfig().baseUrl}/sitemap.xml`,
+Sitemap: ${clientConfig.baseUrl}/sitemap.xml`,
     {
       headers: {
         'Content-Type': 'text/plain'

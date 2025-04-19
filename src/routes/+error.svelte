@@ -1,7 +1,7 @@
 <script>
   import { page } from '$app/state';
-  import { getPageTitle } from '$lib/util/util';
-  import { t } from '$lib/util/translations';
+  import { getPageTitle } from '$lib/client/util.js';
+  import { t } from '$lib/client/localization.ts';
 </script>
 
 <svelte:head>

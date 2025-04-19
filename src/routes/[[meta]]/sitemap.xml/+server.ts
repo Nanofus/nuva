@@ -1,7 +1,7 @@
-import type { Category, PostMeta, Tag } from '$lib/util/types';
+import type { Category, PostMeta, Tag } from '$lib/types';
 import { getAllPostMetas, getCategories, getTags } from '$lib/server/database';
-import { getConfig } from '$lib/util/config';
 import type { RequestHandler } from '@sveltejs/kit';
+import { clientConfig } from '$lib/client/config';
 
 export const GET: RequestHandler = async () => {
   const body = sitemap(await getAllPostMetas(), await getCategories(), (await getTags()).tags);
@@ -23,22 +23,22 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
   xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
 >
   <url>
-    <loc>${getConfig().baseUrl}</loc>
+    <loc>${clientConfig.baseUrl}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>${getConfig().baseUrl}/posts</loc>
+    <loc>${clientConfig.baseUrl}/posts</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>${getConfig().baseUrl}/categories</loc>
+    <loc>${clientConfig.baseUrl}/categories</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>${getConfig().baseUrl}/tags</loc>
+    <loc>${clientConfig.baseUrl}/tags</loc>
     <changefreq>daily</changefreq>
     <priority>0.4</priority>
   </url>
@@ -46,7 +46,7 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     .map(
       (category) => `
   <url>
-    <loc>${getConfig().baseUrl}/categories/${category.slug}</loc>
+    <loc>${clientConfig.baseUrl}/categories/${category.slug}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -57,7 +57,7 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     .map(
       (tag) => `
   <url>
-    <loc>${getConfig().baseUrl}/tags/${tag.slug}</loc>
+    <loc>${clientConfig.baseUrl}/tags/${tag.slug}</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -68,7 +68,7 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     .map(
       (post) => `
   <url>
-    <loc>${getConfig().baseUrl}/posts/${post.slug}</loc>
+    <loc>${clientConfig.baseUrl}/posts/${post.slug}</loc>
     <changefreq>weekly</changefreq>
     <lastmod>${post.date}</lastmod>
     <priority>0.3</priority>

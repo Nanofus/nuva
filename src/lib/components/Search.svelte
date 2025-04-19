@@ -3,9 +3,9 @@
   import Input from '$lib/components/reusable/Input.svelte';
   import Form from '$lib/components/reusable/Form.svelte';
   import { toast } from '@zerodevx/svelte-toast';
-  import { toastSettings } from '$lib/util/util';
+  import { toastSettings } from '$lib/client/util';
   import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-  import { t } from '$lib/util/translations';
+  import { t } from '$lib/client/localization';
 
   let searchTerm = $state('');
   let submitted = $state(false);

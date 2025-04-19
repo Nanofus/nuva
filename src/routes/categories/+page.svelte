@@ -1,8 +1,8 @@
 <script lang="ts">
   import List from '$lib/components/reusable/List.svelte';
-  import { getPageTitle, getPageUrl } from '$lib/util/util';
-  import { t } from '$lib/util/translations';
-  import type { CategoryListResponse } from '$lib/util/types';
+  import { getPageTitle, getPageUrl } from '$lib/client/util';
+  import { t } from '$lib/client/localization';
+  import type { CategoryListResponse } from '$lib/types';
 
   interface Props {
     data: CategoryListResponse;

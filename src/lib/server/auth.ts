@@ -1,9 +1,9 @@
-import type { AuthData } from '$lib/util/types';
-import { getConfig } from '$lib/util/config';
+import type { AuthData } from '$lib/types';
+import { serverConfig } from '$lib/server/config';
 
 export const login = async (username: string, password: string): Promise<AuthData> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export const login = async (username: string, password: string): Promise<AuthDat
 
 const isAuthTokenValid = async (authToken: string): Promise<boolean> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { getConfig } from '$lib/util/config';
-  import type { Post } from '$lib/util/types';
-  import { t } from '$lib/util/translations';
+  import type { Post } from '$lib/types';
+  import { t } from '$lib/client/localization';
   import AuthorList from '$lib/components/reusable/AuthorList.svelte';
-  import { browser } from '$app/environment';
-  import { auth } from '$lib/util/stores';
+  import { auth } from '$lib/client/stores';
+  import { clientConfig } from '$lib/client/config';
 
   interface Props {
     post: Post;
@@ -17,12 +16,12 @@
   <h1 id="post-title">{post.title}</h1>
   <div id="post-meta">
     <span class="post-categories">
-      {#each post.categories as category}
+      {#each post.categories as category (category.slug)}
         <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a></span>
       {/each}
     </span>
     <time class="post-date" datetime={post.date.toISOString()}>
-      {post.date.toLocaleDateString(getConfig().locale)}
+      {post.date.toLocaleDateString(clientConfig.locale)}
     </time>
     <span class="post-authors">
       <span class="author-list">
@@ -37,7 +36,7 @@
     </span>
     {#if !!$auth}
       <span class="post-edit">
-        <a target="_blank" href={getConfig().urls.postEdit.replace('{ID}', ''+post._id)}>{t.common.edit}</a>
+        <a target="_blank" href={clientConfig.urls.postEdit.replace('{ID}', ''+post._id)}>{t.common.edit}</a>
       </span>
     {/if}
   </div>

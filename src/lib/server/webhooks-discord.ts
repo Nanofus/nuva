@@ -1,9 +1,9 @@
-import { getConfig } from '$lib/util/config';
-import type { CommentMeta, PostMeta, WebhookMeta } from '$lib/util/types';
-import { stripHtml } from '$lib/util/util';
-import { t } from '$lib/util/translations';
+import type { CommentMeta, PostMeta, WebhookMeta } from '$lib/types';
+import { stripHtml } from '$lib/client/util';
+import { t } from '$lib/client/localization';
+import { clientConfig } from '$lib/client/config';
 
-export const firePostHook = async (meta: WebhookMeta, post: PostMeta) => {
+export const discordPostHook = async (meta: WebhookMeta, post: PostMeta) => {
   return (
     await fetch(meta.url, {
       method: 'POST',
@@ -16,11 +16,11 @@ export const firePostHook = async (meta: WebhookMeta, post: PostMeta) => {
           {
             title: post.title,
             description: post.description ? stripHtml(post.description) : '',
-            url: getConfig().baseUrl + '/posts/' + post.slug,
+            url: clientConfig.baseUrl + '/posts/' + post.slug,
             color: meta.color,
             author: {
               name: post.author,
-              url: getConfig().baseUrl + '/authors/' + post.author,
+              url: clientConfig.baseUrl + '/authors/' + post.author,
               icon_url: meta.icon
             },
             image: {
@@ -33,7 +33,7 @@ export const firePostHook = async (meta: WebhookMeta, post: PostMeta) => {
   ).ok;
 };
 
-export const fireCommentHook = async (meta: WebhookMeta, post: PostMeta, comment: CommentMeta) => {
+export const discordCommentHook = async (meta: WebhookMeta, post: PostMeta, comment: CommentMeta) => {
   return (
     await fetch(meta.url, {
       method: 'POST',
@@ -45,11 +45,11 @@ export const fireCommentHook = async (meta: WebhookMeta, post: PostMeta, comment
         embeds: [
           {
             title: t.webhooks.newComment + post.title,
-            url: getConfig().baseUrl + '/posts/' + post.slug + '#comment-' + comment._id,
+            url: clientConfig.baseUrl + '/posts/' + post.slug + '#comment-' + comment._id,
             color: meta.color,
             author: {
               name: comment.author,
-              url: getConfig().baseUrl + '/authors/' + comment.author,
+              url: clientConfig.baseUrl + '/authors/' + comment.author,
               icon_url: meta.icon
             }
           }

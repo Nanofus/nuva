@@ -1,6 +1,6 @@
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { getPost } from '$lib/server/database';
-import { t } from '$lib/util/translations';
+import { t } from '$lib/client/localization';
 import { validateHTML } from '$lib/server/html-validator';
 
 export const GET: RequestHandler = async ({ url, params, request }) => {

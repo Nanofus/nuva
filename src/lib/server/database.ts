@@ -14,8 +14,7 @@ import type {
   PostMeta,
   Tag,
   TagListResponse
-} from '$lib/util/types';
-import { getConfig } from '$lib/util/config';
+} from '$lib/types';
 import {
   dataToCategories,
   dataToCommentMetas,
@@ -23,11 +22,12 @@ import {
   dataToPost,
   dataToPostMeta,
   dataToTags
-} from '$lib/server/legacy.graphql.mappers';
-import { QUERIES } from '$lib/server/legacy.graphql.queries';
-import { objectsToHierarchy } from '$lib/util/util';
+} from '$lib/server/wpgraphql-mappers';
+import { QUERIES } from '$lib/server/wpgraphql-queries';
+import { objectsToHierarchy } from '$lib/server/util';
 import { error } from '@sveltejs/kit';
-import { t } from '$lib/util/translations';
+import { t } from '$lib/client/localization';
+import { serverConfig } from '$lib/server/config';
 
 const db = createKysely<DB>({
   connectionString: import.meta.env.VITE_POSTGRES_URL
@@ -37,7 +37,7 @@ const db = createKysely<DB>({
 
 export const getLatestComments = async (): Promise<CommentMeta[]> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export const getLatestComments = async (): Promise<CommentMeta[]> => {
       body: JSON.stringify({
         query: `
             query LatestComments {
-                comments(first: ${getConfig().latestCommentsPerFetch}) {
+                comments(first: ${serverConfig.latestCommentsPerFetch}) {
                     nodes {
                         databaseId
                         author {
@@ -73,14 +73,14 @@ export const getLatestComments = async (): Promise<CommentMeta[]> => {
 };
 
 export const getLatestPosts = async () =>
-  (await getPosts(null, null, getConfig().latestPostsPerFetch)).posts;
+  (await getPosts(null, null, serverConfig.latestPostsPerFetch)).posts;
 
 /* General queries */
 
 export const getPostMeta = async (slug: string,
   authToken: string | null = null): Promise<PostMeta | null> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ export const getPostMeta = async (slug: string,
   let post = dataToPostMeta(response.data.post);
   if (!post) {
     const response = await (
-      await fetch(getConfig().graphqlApi, {
+      await fetch(serverConfig.graphqlApi, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ export const getPost = async (
   authToken: string | null = null
 ): Promise<Post | null> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ export const getPost = async (
   let post = dataToPost(response.data.post);
   if (!post) {
     const response = await (
-      await fetch(getConfig().graphqlApi, {
+      await fetch(serverConfig.graphqlApi, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -196,7 +196,7 @@ const getCommentsForPostPaginated = async (
   after: string | null = null
 ): Promise<CommentResponse> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -205,7 +205,7 @@ const getCommentsForPostPaginated = async (
         query: `
             query CommentsForPostBySlug {
                 post(idType: SLUG, id: "${slug}") {
-		                comments(first: ${getConfig().maxPerFetch}, after: "${after}") {
+		                comments(first: ${serverConfig.maxPerFetch}, after: "${after}") {
 		                    ${QUERIES.pageInfo}
 		                    edges {
 		                        cursor
@@ -235,7 +235,7 @@ export const getPostsByAuthor = async (
   after: string | null = null
 ): Promise<PostListByAuthorResponse> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -244,7 +244,7 @@ export const getPostsByAuthor = async (
         query: `
             query PostsByAuthor {
                 posts(where: {authorName: "${decodeURI(author)}"}, first: ${
-      getConfig().maxPerFetch
+      serverConfig.maxPerFetch
     }, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
@@ -280,7 +280,7 @@ export const getPostsByTag = async (
   after: string | null = null
 ): Promise<PostListByTagResponse> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -288,7 +288,7 @@ export const getPostsByTag = async (
       body: JSON.stringify({
         query: `
             query PostsByTag {
-                posts(where: {tagSlugIn: "${tag}"}, first: ${getConfig().maxPerFetch}, after: "${after}") {
+                posts(where: {tagSlugIn: "${tag}"}, first: ${serverConfig.maxPerFetch}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -328,7 +328,7 @@ export const getPostsByCategory = async (
   after: string | null = null
 ): Promise<PostListByCategoryResponse> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -338,7 +338,7 @@ export const getPostsByCategory = async (
             query PostsByCategory {
                 category(id: "${category}", idType: SLUG) {
                     name
-                    posts(first: ${getConfig().maxPerFetch}, after: "${after}") {
+                    posts(first: ${serverConfig.maxPerFetch}, after: "${after}") {
                         ${QUERIES.pageInfo}
                         edges {
                             cursor
@@ -386,7 +386,7 @@ export const getAllPostMetas = async (): Promise<PostMeta[]> => {
 
 export const getPostsByYear = async (year: number): Promise<PostListByYearResponse> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -394,7 +394,7 @@ export const getPostsByYear = async (year: number): Promise<PostListByYearRespon
       body: JSON.stringify({
         query: `
             query PostsByYear {
-                posts(first: ${getConfig().maxPerFetch}, where: { dateQuery: {
+                posts(first: ${serverConfig.maxPerFetch}, where: { dateQuery: {
                   column: DATE
                   year: ${year}
             }}) {
@@ -421,10 +421,10 @@ export const getPostsByYear = async (year: number): Promise<PostListByYearRespon
 export const getPosts = async (
   after: string | null = null,
   searchTerm: string | null = null,
-  count: number = getConfig().maxPerFetch
+  count: number = serverConfig.maxPerFetch
 ): Promise<PostListBySearchResponse> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -460,7 +460,7 @@ export const getPosts = async (
 };
 
 export const getTags = async (after: string | null = null): Promise<TagListResponse> => {
-  const response = await fetch(getConfig().graphqlApi, {
+  const response = await fetch(serverConfig.graphqlApi, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -468,7 +468,7 @@ export const getTags = async (after: string | null = null): Promise<TagListRespo
     body: JSON.stringify({
       query: `
             query AllTagsPaginated {
-                tags(first: ${getConfig().maxPerFetch}, after: "${after}") {
+                tags(first: ${serverConfig.maxPerFetch}, after: "${after}") {
                     ${QUERIES.pageInfo}
                     edges {
                         cursor
@@ -497,7 +497,7 @@ export const getTags = async (after: string | null = null): Promise<TagListRespo
 
 export const getCategories = async (): Promise<Category[]> => {
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -538,7 +538,7 @@ export const postComment = async (
         }
     }`;
   const response = await (
-    await fetch(getConfig().graphqlApi, {
+    await fetch(serverConfig.graphqlApi, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

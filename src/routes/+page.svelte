@@ -1,9 +1,9 @@
 <script lang="ts">
   import PostList from '$lib/components/PostList.svelte';
-  import type { CommentMeta, PostMeta } from '$lib/util/types';
-  import { getPageTitle, getPageUrl } from '$lib/util/util';
+  import type { CommentMeta, PostMeta } from '$lib/types';
+  import { getPageTitle, getPageUrl } from '$lib/client/util';
   import CommentList from '$lib/components/CommentList.svelte';
-  import { t } from '$lib/util/translations';
+  import { t } from '$lib/client/localization';
   import FeaturedPosts from '$lib/components/FeaturedPosts.svelte';
 
   interface Props {

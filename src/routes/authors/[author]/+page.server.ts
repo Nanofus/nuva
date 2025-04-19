@@ -1,7 +1,7 @@
 import { error, type Load } from '@sveltejs/kit';
 import { getPostsByAuthor } from '$lib/server/database';
-import type { PostListByAuthorResponse } from '$lib/util/types';
-import { t } from '$lib/util/translations';
+import type { PostListByAuthorResponse } from '$lib/types';
+import { t } from '$lib/client/localization';
 
 export const load: Load = async ({ params }): Promise<PostListByAuthorResponse> => {
   if (params.author) {

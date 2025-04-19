@@ -1,5 +1,5 @@
-import type { Category, Comment, CommentMeta, Post, PostMeta, Tag } from '$lib/util/types';
-import { objectsToHierarchy } from '$lib/util/util';
+import type { Category, Comment, CommentMeta, Post, PostMeta, Tag } from '$lib/types';
+import { objectsToHierarchy } from '$lib/server/util';
 
 export const dataToPostMeta = (data: any): PostMeta => ({
   title: data.title,

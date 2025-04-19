@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
-import { auth } from '$lib/util/stores';
-import type { Category, Comment, PostListResponse, PostMeta, TagListResponse } from '$lib/util/types';
-import { recursivelyConvertDates } from '$lib/util/util';
+import { auth } from '$lib/client/stores';
+import type { Category, Comment, PostListResponse, PostMeta, TagListResponse } from '$lib/types';
+import { recursivelyConvertDates } from '$lib/client/util';
 
 export type RequestParams = {
   [key: string]: any;

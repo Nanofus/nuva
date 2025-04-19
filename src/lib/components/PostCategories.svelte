@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Category } from '$lib/util/types';
+  import type { Category } from '$lib/types';
 
   interface Props {
     categories: Category[];

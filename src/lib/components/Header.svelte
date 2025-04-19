@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { postOptions } from '$lib/util/stores';
-  import { getRandomBannerUrl } from '$lib/util/util';
-  import { getConfig } from '$lib/util/config';
+  import { postOptions } from '$lib/client/stores';
+  import { getRandomBannerUrl } from '$lib/client/util';
   import { page } from '$app/state';
+  import { clientConfig } from '$lib/client/config';
 
   let bannerUrl = getRandomBannerUrl();
   let bannerVisible = $state(page.data.bannerVisible ? page.data.bannerVisible : true);
@@ -23,8 +23,8 @@
   <header style="background-image: {customBannerUrl ? customBannerUrl : bannerUrl}">
     <a href="/">
       <div class="title">
-        <h1>{getConfig().siteName}</h1>
-        <h2>{getConfig().subHeader}</h2>
+        <h1>{clientConfig.siteName}</h1>
+        <h2>{clientConfig.subHeader}</h2>
       </div>
     </a>
   </header>

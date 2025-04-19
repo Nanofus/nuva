@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { YearResponse } from '$lib/util/types';
-  import { getConfig } from '$lib/util/config';
+  import type { YearResponse } from '$lib/types';
+  import { clientConfig } from '$lib/client/config';
 
   interface Props {
     years: YearResponse['years'];
@@ -12,7 +12,7 @@
 <div class="year-list">
   {#each years as year (year.year)}
     <a href={`/posts/year/${year.year}`}>
-      <div class="year-card" style={year.featuredImage ? `background-image: url("${year.featuredImage}");` : `background-image: url("${getConfig().defaultYearFeaturedImage}");`}>
+      <div class="year-card" style={year.featuredImage ? `background-image: url("${year.featuredImage}");` : `background-image: url("${clientConfig.defaultYearFeaturedImage}");`}>
         <h1>
           {year.year}
         </h1>

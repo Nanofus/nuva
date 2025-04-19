@@ -5,21 +5,19 @@ fanfiction project. The eventual goal is to remove WordPress from the equation.
 
 Might also be usable for other use cases, and as learning material, so feel free to fork and tinker.
 
-Tech stack: SvelteKit, TypeScript, SASS, Kysely, Prisma, Postgres, AWS S3.
+Tech stack: SvelteKit, TypeScript, SASS, Kysely, Prisma, Postgres, AWS S3, Vercel.
 
 The production environment runs on Vercel. There's a couple of Vercel-specific things in the repo, which you should replace if not hosting in Vercel. These are:
 
 - `svelte.config.js` uses `@sveltejs/adapter-vercel`. Replace with `@sveltejs/adapter-node` or other adapter.
-- `src/lib/server/api.ts` connects to Postgres using `@vercel/postgres`, and can be directly replaced with `node-postgres`.
-- `src/lib/util/config` provides the main configuration through `@vercel/edge-config`, and can be replaced with a simple object. You can see the schema in `src/lib/util/types`.
+- `src/lib/server/database.ts` connects to Postgres using `@vercel/postgres`, and can be directly replaced with `node-postgres`.
+- `src/lib/server/cache.ts` manages caching using Vercel ISR.
 
 ## Development
 
-First, install dependencies with `pnpm install` (or other package manager).
+First, install dependencies with `npm install`.
 
-If you're using Vercel, create a Postgres database and Edge Config store there, then add the credentials to `.env`. Note that the env variables need to have the `VITE_` prefix.
-
-Otherwise, host Postgres elsewhere (and update `.env` like above) and replace Edge Config with a config object in `src/lib/util/config.ts` (see schema in `src/lib/util/types`).
+If you're using Vercel, create a Postgres database there, then add the credentials to `.env`. Note that the env variables need to have the `VITE_` prefix. Otherwise, host Postgres elsewhere (and update `.env` like above).
 
 Populate the Postgres database with Prisma:
 

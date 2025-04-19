@@ -1,20 +1,20 @@
 <script lang="ts">
-  import { t } from '$lib/util/translations';
-  import { getConfig } from '$lib/util/config';
+  import { t } from '$lib/client/localization';
+  import { clientConfig } from '$lib/client/config';
 </script>
 
 <footer>
   <div class="footer-content">
-    <span>{getConfig().copyright}</span>
+    <span>{clientConfig.copyright}</span>
     <span class="separator"></span>
-    <span><a href="{getConfig().baseUrl}/rss" target="_blank">RSS</a></span>
+    <span><a href="{clientConfig.baseUrl}/rss" target="_blank">RSS</a></span>
     <span class="separator"></span>
     <span>
-      <a href={getConfig().urls.feedback} target="_blank">{t.components.footer.feedback}</a>
+      <a href={clientConfig.urls.feedback} target="_blank">{t.components.footer.feedback}</a>
     </span>
     <span class="separator"></span>
     <span>
-      <a href={getConfig().urls.about} target="_blank">{t.components.footer.about}</a>
+      <a href={clientConfig.urls.about} target="_blank">{t.components.footer.about}</a>
     </span>
   </div>
 </footer>

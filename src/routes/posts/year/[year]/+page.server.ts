@@ -1,7 +1,7 @@
 import { error, type Load } from '@sveltejs/kit';
-import type { PostListByYearResponse } from '$lib/util/types';
-import { filterExcludedCategories } from '$lib/util/util';
-import { t } from '$lib/util/translations';
+import type { PostListByYearResponse } from '$lib/types';
+import { filterExcludedCategories } from '$lib/server/util';
+import { t } from '$lib/client/localization';
 import { getPostsByYear } from '$lib/server/database';
 import { defaultIsrConfig } from '$lib/server/cache';
 

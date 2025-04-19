@@ -1,7 +1,7 @@
 <script lang="ts">
   import PostList from '$lib/components/PostList.svelte';
-  import type { PostListByYearResponse } from '$lib/util/types';
-  import { getPageTitle, getPageUrl } from '$lib/util/util';
+  import type { PostListByYearResponse } from '$lib/types';
+  import { getPageTitle, getPageUrl } from '$lib/client/util';
 
   interface Props {
     data: PostListByYearResponse;
