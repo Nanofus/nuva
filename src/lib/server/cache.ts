@@ -18,43 +18,47 @@ const requestConfig = {
   }
 };
 
-export const invalidateByPost = (postData: any) => {
-  invalidatePost(postData.post.post_name);
-  invalidatePost(postData.post_id);
-  invalidateFrontPage();
-  invalidateTagsPage();
-  invalidateCategoriesPage();
-  invalidatePostsPage();
-  invalidateYearPage(postData.post.post_date.split('-')[0]);
+export const invalidateByPost = async (postData: any) => {
+  await Promise.all([
+    invalidatePost(postData.post.post_name),
+    invalidatePost(postData.post_id),
+    invalidateFrontPage(),
+    invalidateTagsPage(),
+    invalidateCategoriesPage(),
+    invalidatePostsPage(),
+    invalidateYearPage(postData.post.post_date.split('-')[0])
+  ]);
 };
 
-export const invalidateByComment = (commentData: any) => {
-  invalidatePost(commentData.current_post_data.post_name);
-  invalidatePost(commentData.current_post_id);
-  invalidateFrontPage();
-  invalidateYearPage(commentData.current_post_data.post_date.split('-')[0]);
+export const invalidateByComment = async (commentData: any) => {
+  await Promise.all([
+    invalidatePost(commentData.current_post_data.post_name),
+    invalidatePost(commentData.current_post_id),
+    invalidateFrontPage(),
+    invalidateYearPage(commentData.current_post_data.post_date.split('-')[0])
+  ]);
 };
 
-export const invalidatePost = (slug: string) => {
-  fetch(new Request(clientConfig.baseUrl + '/posts/' + slug, requestConfig)).then();
+export const invalidatePost = (slug: string): Promise<Response> => {
+  return fetch(new Request(clientConfig.baseUrl + '/posts/' + slug, requestConfig));
 };
 
-export const invalidateFrontPage = () => {
-  fetch(new Request(clientConfig.baseUrl + '/', requestConfig)).then();
+export const invalidateFrontPage = (): Promise<Response> => {
+  return fetch(new Request(clientConfig.baseUrl + '/', requestConfig));
 };
 
-export const invalidatePostsPage = () => {
-  fetch(new Request(clientConfig.baseUrl + '/posts', requestConfig)).then();
+export const invalidatePostsPage = (): Promise<Response> => {
+  return fetch(new Request(clientConfig.baseUrl + '/posts', requestConfig));
 };
 
-export const invalidateTagsPage = () => {
-  fetch(new Request(clientConfig.baseUrl + '/tags', requestConfig)).then();
+export const invalidateTagsPage = (): Promise<Response> => {
+  return fetch(new Request(clientConfig.baseUrl + '/tags', requestConfig));
 };
 
-export const invalidateCategoriesPage = () => {
-  fetch(new Request(clientConfig.baseUrl + '/categories', requestConfig)).then();
+export const invalidateCategoriesPage = (): Promise<Response> => {
+  return fetch(new Request(clientConfig.baseUrl + '/categories', requestConfig));
 };
 
-export const invalidateYearPage = (year: string) => {
-  fetch(new Request(clientConfig.baseUrl + '/posts/year/' + year, requestConfig)).then();
+export const invalidateYearPage = (year: string): Promise<Response> => {
+  return fetch(new Request(clientConfig.baseUrl + '/posts/year/' + year, requestConfig));
 };
