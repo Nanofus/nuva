@@ -32,67 +32,67 @@ export const clientConfig: ClientConfig = {
   years: [
     {
       year: 2025,
-      featuredImage: 'https://meri.klaanon.fi/matorotbs/Saalistajat/sotaomppuromaani2.png'
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2025.png'
     },
     {
       year: 2024,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2024.png'
     },
     {
       year: 2023,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2023.png'
     },
     {
       year: 2022,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2022.png'
     },
     {
       year: 2021,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2021.png'
     },
     {
       year: 2020,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2020.png'
     },
     {
       year: 2019,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2019.png'
     },
     {
       year: 2018,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2018.png'
     },
     {
       year: 2017,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2017.png'
     },
     {
       year: 2016,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2016.png'
     },
     {
       year: 2015,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2015.png'
     },
     {
       year: 2014,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2014.png'
     },
     {
       year: 2013,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2013.png'
     },
     {
       year: 2012,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2012.png'
     },
     {
       year: 2011,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2011.png'
     },
     {
       year: 2010,
-      featuredImage: null
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2010.png'
     }
   ]
 };
