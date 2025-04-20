@@ -76,7 +76,7 @@ export const clientConfig: ClientConfig = {
     },
     {
       year: 2014,
-      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2014.png'
+      featuredImage: 'https://meri.klaanon.fi/snowie/Oheiset/bigger-rastas-10-w.png'
     },
     {
       year: 2013,
