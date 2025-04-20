@@ -12,7 +12,7 @@ export const serverConfig: ServerConfig = {
   webhooks: {
     newPost: [
       {
-        url: 'https://discord.com/api/webhooks/1135971231879938168/RZALlCnkru8bnsyC59Gusc5-FyrrZx3Fyi0YDQL5L9L6BTUwvo-x49DdrV19OB02LAJh',
+        url: import.meta.env.VITE_WEBHOOK_URL,
         contentText: '<@&427145052276391937>',
         color: 9364469,
         icon: 'https://klaanon.fi/favicon.png'
@@ -20,7 +20,7 @@ export const serverConfig: ServerConfig = {
     ],
     newComment: [
       {
-        url: 'https://discord.com/api/webhooks/1135971231879938168/RZALlCnkru8bnsyC59Gusc5-FyrrZx3Fyi0YDQL5L9L6BTUwvo-x49DdrV19OB02LAJh',
+        url: import.meta.env.VITE_WEBHOOK_URL,
         contentText: '',
         color: 9760685,
         icon: 'https://klaanon.fi/favicon.png'
