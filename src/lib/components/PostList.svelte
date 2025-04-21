@@ -4,7 +4,8 @@
   import { clientConfig } from '$lib/client/config';
 
   export let posts: PostMeta[];
-
+  export let reverse: boolean | undefined = false;
+  
   const parseCategories = (categories: Category[]) => {
     categories = categories.filter((c) => c.slug !== 'rope');
     if (categories.length === 0) return '';
@@ -20,7 +21,7 @@
       <td class="date">{t.components.postList.date}</td>
       <td class="authors hidden-mobile">{t.components.postList.author}</td>
     </tr>
-    {#each posts as post (post.slug)}
+    {#each (reverse ? posts.reverse() : posts) as post (post.slug)}
       <tr class={post.mobileFriendly ? '' : 'mobile-unfriendly'}>
         <td class="link">
           <a href="/posts/{post.slug}">{post.title}</a>

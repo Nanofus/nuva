@@ -30,7 +30,7 @@
     <a href="/posts/year/{nextYear}">{nextYear}</a>
   </h3>
 </div>
-<PostList posts={data.posts} />
+<PostList posts={data.posts} reverse={true} />
 
 <style lang="scss">
   .year-header {
