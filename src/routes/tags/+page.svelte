@@ -42,7 +42,7 @@
 
 <h1>{t.pages.tags.title}</h1>
 <div class="tags">
-  {#each data.tags as tag}
+  {#each data.tags as tag (tag.slug)}
     <Pill sizeByCount={tag.count} href="/tags/{tag.slug}">{tag.name}</Pill>
   {/each}
 </div>
