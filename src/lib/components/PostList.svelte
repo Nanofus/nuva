@@ -19,7 +19,7 @@
       <td class="link">{t.components.postList.title}</td>
       <td class="comment-count hidden-mobile material-icons">forum</td>
       <td class="date">{t.components.postList.date}</td>
-      <td class="authors hidden-mobile">{t.components.postList.author}</td>
+      <td class="authors hidden-mobile">{t.components.postList.author.name}</td>
     </tr>
     {#each (reverse ? posts.reverse() : posts) as post (post.slug)}
       <tr class={post.mobileFriendly ? '' : 'mobile-unfriendly'}>
@@ -30,7 +30,7 @@
         <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ''}</td>
         <td class="date">{post.date.toLocaleDateString(clientConfig.locale)}</td>
         <td class="authors hidden-mobile"
-        ><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td
+        ><a href="/authors/{encodeURI(post.author.slug)}">{post.author.name}</a></td
         >
       </tr>
     {/each}

@@ -187,12 +187,17 @@ export type HierarchicalWithDate = {
   date: Date;
 } & Hierarchical;
 
+export type Author = {
+  name: string;
+  slug: string;
+}
+
 export type PostMeta = {
   title: string;
   slug: string;
   date: Date;
-  author: string;
-  coAuthors: string[];
+  author: Author;
+  coAuthors: Author[];
   categories: Category[];
   customBanner: string;
   featuredImage: string;
@@ -208,7 +213,7 @@ export type Post = {
   styles: string;
   scriptFiles: string[];
   music: string[];
-  artists: string[];
+  artists: Author[];
   bannerVisible: boolean;
   fullWidth: boolean;
   resetMusicButtons: boolean;
@@ -241,14 +246,14 @@ export type Tag = {
 
 export type Comment = {
   date: Date;
-  author: string;
+  author: Author;
   content: string;
 } & Hierarchical;
 
 export type CommentMeta = {
   _id: number;
   date: Date;
-  author: string;
+  author: Author;
   postSlug: string;
   postTitle: string;
 };
@@ -280,7 +285,7 @@ export type PostListBySearchResponse = {
 } & PostListResponse;
 
 export type PostListByAuthorResponse = {
-  author: string;
+  author: Author;
 } & PostListResponse;
 
 export type PostListByCategoryResponse = {

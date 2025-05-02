@@ -18,7 +18,7 @@
 
   const fetchMorePosts = async () => {
     fetching = true;
-    const newData = await getPosts('author', data.author, data.endCursor, null);
+    const newData = await getPosts('author', data.author.slug, data.endCursor, null);
     data = {
       posts: [...data.posts, ...newData.posts],
       author: data.author,
@@ -36,12 +36,12 @@
 </script>
 
 <svelte:head>
-  <title>{getPageTitle(data.author)}</title>
-  <meta content={data.author} property="og:title" />
-  <meta content={getPageUrl(`authors/${encodeURI(data.author)}`)} property="og:url" />
+  <title>{getPageTitle(data.author.name)}</title>
+  <meta content={data.author.name} property="og:title" />
+  <meta content={getPageUrl(`authors/${encodeURI(data.author.slug)}`)} property="og:url" />
 </svelte:head>
 
-<h1>{t.pages.author.title}: {data.author}</h1>
+<h1>{t.pages.author.title}: {data.author.name}</h1>
 <PostList posts={data.posts} />
 {#if data.hasNextPage && !fetching}
   <Button link onclick={fetchMorePosts}>{t.common.loadMore}</Button>

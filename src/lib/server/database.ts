@@ -1,6 +1,7 @@
 import { createKysely } from '@vercel/postgres-kysely';
 import type { DB } from '$lib/server/database.types';
 import type {
+  Author,
   Category,
   Comment,
   CommentMeta,
@@ -48,9 +49,12 @@ export const getLatestComments = async (): Promise<CommentMeta[]> => {
                 comments(first: ${serverConfig.latestCommentsPerFetch}) {
                     nodes {
                         databaseId
-                        author {
+                        author {  
                           node {
-                            name
+                            ... on User {
+                              name
+                              slug
+                            }
                           }
                         }
                         date
@@ -262,6 +266,25 @@ export const getPostsByAuthor = async (
   if (response.data.posts['edges'].length === 0) {
     throw error(404, t.errors.e404);
   }
+  const authorResponse = await (
+    await fetch(serverConfig.graphqlApi, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: `
+            query AuthorByName {
+                user(idType: SLUG, id: "${decodeURI(author)}") {
+                    name
+                    slug
+                }
+            }
+            `
+      })
+    })
+  ).json();
+  const authorData: Author = authorResponse.data.user;
 
   const { pageInfo } = response.data.posts;
   const posts: PostMeta[] = response.data.posts['edges'].map((edge: any) =>
@@ -269,7 +292,7 @@ export const getPostsByAuthor = async (
   );
   return {
     posts,
-    author,
+    author: authorData,
     endCursor: pageInfo.endCursor,
     hasNextPage: pageInfo.hasNextPage
   };

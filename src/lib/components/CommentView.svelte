@@ -28,7 +28,7 @@
     if (browser) {
       const user = $auth?.displayName;
       if (!user) return false;
-      return user === comment.author;
+      return user === comment.author.name;
     }
   };
 
@@ -39,7 +39,7 @@
 
 <div class="comment {isHighlighted() ? 'highlighted' : ''}" id="comment-{comment._id}">
   <header class="comment-header">
-    <span class="comment-author"> {comment.author}</span>
+    <span class="comment-author">{comment.author.name}</span>
     <span class="comment-date">{comment.date.toLocaleDateString(clientConfig.locale)}</span>
   </header>
   <div class="comment-content">{@html comment.content}</div>
