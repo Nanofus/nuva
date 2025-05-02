@@ -20,7 +20,7 @@
         <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a>{#if i !== post.categories.length - 1},{' '}{/if}</span>
       {/each}
     </span>
-    <time class="post-date" datetime={post.date.toISOString()}>
+    <time class="post-date" datetime={post.date.toLocaleString()} title={post.date.toLocaleString()}>
       {post.date.toLocaleDateString(clientConfig.locale)}
     </time>
     <span class="post-authors">

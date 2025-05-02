@@ -27,7 +27,7 @@ ${posts
 <author>${post.author}</author>
 <language>${clientConfig.locale}</language>
 <description>${post.description || ''}</description>
-<pubDate>${new Date(post.date).toUTCString()}</pubDate>
+<pubDate>${new Date(post.date).toLocaleString()}</pubDate>
 </item>`;
     })
     .join('')}
