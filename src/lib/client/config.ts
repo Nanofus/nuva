@@ -17,7 +17,8 @@ export const clientConfig: ClientConfig = {
     postEdit: 'https://wp.klaanon.fi/wp/wp-admin/post.php?post={ID}&action=edit',
     writing: 'https://wp.klaanon.fi/wp/wp-admin/edit.php',
     feedback: 'https://discord.com/channels/1043556208700833792/1131238873024966809',
-    about: 'https://klaanon.fi/posts/meista'
+    about: 'https://klaanon.fi/posts/meista',
+    extraContent: 'https://klaanon.fi/posts/oheismateriaali'
   },
   externalStylesheets: [
     'https://meri.klaanon.fi/fonts/fontit.css',

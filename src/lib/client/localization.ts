@@ -67,6 +67,7 @@ const localization: { [key: string]: Localization } = {
         search: 'Search',
         guide: 'Formatting Guide',
         soundtracks: 'Soundtracks',
+        extraContent: 'Extra Content',
         write: 'Write',
         login: 'Login',
         profile: 'Profile'
@@ -192,6 +193,7 @@ const localization: { [key: string]: Localization } = {
         search: 'Haku',
         guide: 'Muotoiluopas',
         soundtracks: 'Soundtrackit',
+        extraContent: 'Oheismateriaali',
         write: 'Kirjoita',
         login: 'Kirjaudu',
         profile: 'Profiili'

@@ -30,6 +30,7 @@ export type ClientConfig = {
     writing: string; // URL for writing page
     feedback: string; // URL for feedback page
     about: string; // URL for about page
+    extraContent: string; // URL for extra content page
   };
   externalStylesheets: string[]; // External stylesheets to load
   defaultFeaturedImage: string; // Default featured image for posts
@@ -114,6 +115,7 @@ export type Localization = {
       search: string;
       guide: string;
       soundtracks: string;
+      extraContent: string;
       write: string;
       login: string;
       profile: string;

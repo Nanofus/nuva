@@ -90,6 +90,7 @@
       <NavItem href="/tags">{t.components.navigation.tags}</NavItem>
       <NavItem href={clientConfig.urls.writingGuide}>{t.components.navigation.guide}</NavItem>
       <NavItem href={clientConfig.urls.soundtracks}>{t.components.navigation.soundtracks}</NavItem>
+      <NavItem href={clientConfig.urls.extraContent}>{t.components.navigation.extraContent}</NavItem>
       {#if $auth}
         <NavItem href={clientConfig.urls.writing}>{t.components.navigation.write}</NavItem>
       {/if}
