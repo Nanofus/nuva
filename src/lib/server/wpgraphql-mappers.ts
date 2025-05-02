@@ -103,8 +103,8 @@ export const dataToPost = (data: any): Post | null => {
     artists: data.additionalFields.artists?.nodes
       ? data.additionalFields.artists.nodes.map((artist: any) => {
         return {
-          name: artist.displayName,
-          slug: artist.username
+          name: artist.name,
+          slug: artist.slug
         }
       })
       : [],
