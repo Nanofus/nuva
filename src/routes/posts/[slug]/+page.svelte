@@ -96,10 +96,12 @@
   {/if}
 </svelte:head>
 
-{#if data.post && data.post.content}
+{#if data.post}
   <article>
     <PostHeader post={data.post} />
-    <PostContent post={data.post} />
+    {#if data.post.content}
+      <PostContent post={data.post} />
+    {/if}
     <PostFooter post={data.post} />
   </article>
 {:else if noAccess}
