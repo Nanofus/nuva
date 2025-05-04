@@ -156,7 +156,7 @@ export const dataToCategories = (data: any): Category[] => {
     children: [],
     _id: category.databaseId,
     _parentId: category.parentDatabaseId
-  }));
+  })).filter((category: { slug: string; }) => category.slug != 'user-visibility');
   return objectsToHierarchy(categories) as Category[];
 };
 

@@ -97,7 +97,7 @@ export const QUERIES = {
         }
         commentCount
         content`,
-  postComment: `
+  comment: `
         date
         author {
             node {

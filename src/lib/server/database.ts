@@ -214,7 +214,7 @@ const getCommentsForPostPaginated = async (
 		                    edges {
 		                        cursor
 		                        node {
-																${QUERIES.postComment}
+																${QUERIES.comment}
 		                        }
 		                    }
 		                }
