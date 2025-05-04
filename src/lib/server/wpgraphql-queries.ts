@@ -96,19 +96,5 @@ export const QUERIES = {
             }
         }
         commentCount
-        content`,
-  comment: `
-        date
-        author {
-            node {
-              name
-              ... on User {
-                name
-                slug
-              }
-            }
-        }
-        content
-        databaseId
-        parentDatabaseId`
+        content`
 };

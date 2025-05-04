@@ -51,10 +51,7 @@ export const getLatestComments = async (): Promise<CommentMeta[]> => {
                         databaseId
                         author {  
                           node {
-                            ... on User {
-                              name
-                              slug
-                            }
+                            name
                           }
                         }
                         date
@@ -214,7 +211,15 @@ const getCommentsForPostPaginated = async (
 		                    edges {
 		                        cursor
 		                        node {
-																${QUERIES.comment}
+																date
+                                author {
+                                    node {
+                                      name
+                                    }
+                                }
+                                content
+                                databaseId
+                                parentDatabaseId
 		                        }
 		                    }
 		                }
