@@ -28,7 +28,9 @@
           <span class="categories">{parseCategories(post.categories)}</span>
         </td>
         <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ''}</td>
-        <td class="date">{post.date.toLocaleDateString(clientConfig.locale)}</td>
+        <td class="date"><time class="post-date" datetime={post.date.toLocaleString()} title={post.date.toLocaleString()}>
+          {post.date.toLocaleDateString(clientConfig.locale)}
+        </time></td>
         <td class="authors hidden-mobile"
         ><a href="/authors/{encodeURI(post.author.slug)}">{post.author.name}</a></td
         >
