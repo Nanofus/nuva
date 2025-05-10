@@ -193,6 +193,7 @@ const localization: { [key: string]: Localization } = {
         search: 'Haku',
         guide: 'Muotoiluopas',
         soundtracks: 'Soundtrackit',
+        characters: 'Hahmot',
         extraContent: 'Liitteet',
         write: 'Kirjoita',
         login: 'Kirjaudu',

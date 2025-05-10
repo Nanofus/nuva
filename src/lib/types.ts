@@ -30,6 +30,7 @@ export type ClientConfig = {
     writing: string; // URL for writing page
     feedback: string; // URL for feedback page
     about: string; // URL for about page
+    characters: string;
     extraContent: string; // URL for extra content page
   };
   externalStylesheets: string[]; // External stylesheets to load
@@ -115,6 +116,7 @@ export type Localization = {
       search: string;
       guide: string;
       soundtracks: string;
+      characters: string;
       extraContent: string;
       write: string;
       login: string;
