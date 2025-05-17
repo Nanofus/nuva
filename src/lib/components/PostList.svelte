@@ -29,7 +29,7 @@
         </td>
         <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ''}</td>
         <td class="date"><time class="post-date" datetime={post.date.toLocaleString()} title={post.date.toLocaleString()}>
-          {post.date.toLocaleDateString(clientConfig.locale)}
+          <a href={`/posts/date/${post.date.getFullYear()}-${post.date.getMonth() + 1}-${post.date.getDate()}`}>{post.date.toLocaleDateString(clientConfig.locale)}</a>
         </time></td>
         <td class="authors hidden-mobile"
         ><a href="/authors/{encodeURI(post.author.slug)}">{post.author.name}</a></td

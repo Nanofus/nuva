@@ -35,6 +35,7 @@ export const dataToPostMeta = (data: any): PostMeta => ({
   featuredImage: data.additionalFields.featuredImage,
   description: data.additionalFields.description,
   mobileFriendly: data.additionalFields.mobileFriendly,
+  metaPage: data.additionalFields.metapage, 
   commentCount: data.commentCount
 });
 
@@ -109,6 +110,7 @@ export const dataToPost = (data: any): Post | null => {
       })
       : [],
     bannerVisible: data.additionalFields.bannerVisible,
+    metaPage: data.additionalFields.metapage,
     fullWidth: data.additionalFields.fullWidth ? data.additionalFields.fullWidth : false,
     customBanner: data.additionalFields.customBanner,
     featuredImage: data.additionalFields.featuredImage,

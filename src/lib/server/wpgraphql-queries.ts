@@ -29,6 +29,7 @@ export const QUERIES = {
             featuredImage
             description
             mobileFriendly
+            metapage
         }
         categories {
             nodes {
@@ -74,6 +75,7 @@ export const QUERIES = {
                 }
             }
             bannerVisible
+            metapage
             fullWidth
             mobileFriendly
             scripts

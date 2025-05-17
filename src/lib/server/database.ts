@@ -8,7 +8,7 @@ import type {
   CommentResponse,
   Post,
   PostListByAuthorResponse,
-  PostListByCategoryResponse,
+  PostListByCategoryResponse, PostListByDateResponse,
   PostListBySearchResponse,
   PostListByTagResponse,
   PostListByYearResponse,
@@ -441,6 +441,45 @@ export const getPostsByYear = async (year: number): Promise<PostListByYearRespon
   return {
     posts,
     year: Number(year),
+    endCursor: '',
+    hasNextPage: false
+  };
+};
+
+export const getPostsByDate = async (date: string): Promise<PostListByDateResponse> => {
+  const dateParts = date.split('-');
+  const year = dateParts[0];
+  let month = dateParts[1];
+  let day = dateParts[2];
+  if (day[0] === '0') day = day.substring(1);
+  if (month[0] === '0') month = month.substring(1);
+  const response = await (
+    await fetch(serverConfig.graphqlApi, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: `
+            query PostsByYear {
+                posts(first: ${serverConfig.maxPerFetch}, where: { dateQuery: {
+                  day: ${day}, month: ${month}, year: ${year}
+            }}) {
+                    nodes {
+                        ${QUERIES.postMeta}
+                    }
+                }
+            }
+            `
+      })
+    })
+  ).json();
+  const posts: PostMeta[] = response.data.posts.nodes.map((node: any) =>
+    dataToPostMeta(node)
+  );
+  return {
+    posts,
+    date: date,
     endCursor: '',
     hasNextPage: false
   };

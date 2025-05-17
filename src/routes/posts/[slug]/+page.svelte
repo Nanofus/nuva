@@ -85,10 +85,12 @@
     <meta content={getPageTitle(data.post.title)} property="og:title" />
     <meta content={data.post.description} name="og:description" />
     <meta content="article" property="og:type" />
-    <meta content={getPageUrl(`posts/${data.slug}`)} property="og:url" />
-    <meta content={data.post.coAuthors?.join(', ')} property="article:author" />
-    {#if data.post.date}
-      <meta content={data.post.date?.toLocaleDateString(clientConfig.locale)} property="article:published_time" />
+    {#if !data.post.metaPage}
+      <meta content={getPageUrl(`posts/${data.slug}`)} property="og:url" />
+      <meta content={data.post.coAuthors?.join(', ')} property="article:author" />
+      {#if data.post.date}
+        <meta content={data.post.date?.toLocaleDateString(clientConfig.locale)} property="article:published_time" />
+      {/if}
     {/if}
     {#if data.post.featuredImage}
       <meta content={data.post.featuredImage} property="og:image" />

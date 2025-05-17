@@ -13,10 +13,12 @@
 </script>
 
 <footer class="vertically-separated" id="post-footer">
-  <PostAuthors {post} />
-  <PostTags tags={post.tags} />
-  <PostNextAndPrevious {post} />
-  <PostComments {post} />
+  {#if !post.metaPage}
+    <PostAuthors {post} />
+    <PostTags tags={post.tags} />
+    <PostNextAndPrevious {post} />
+    <PostComments {post} />
+  {/if}
 </footer>
 
 <style lang="scss">

@@ -205,6 +205,7 @@ export type PostMeta = {
   featuredImage: string;
   description: string;
   mobileFriendly: boolean;
+  metaPage: boolean;
   commentCount: number;
 };
 
@@ -217,6 +218,7 @@ export type Post = {
   music: string[];
   artists: Author[];
   bannerVisible: boolean;
+  metaPage: boolean;
   fullWidth: boolean;
   resetMusicButtons: boolean;
   content: string;
@@ -280,6 +282,10 @@ export type PostListResponse = {
 
 export type PostListByYearResponse = {
   year: number;
+} & PostListResponse;
+
+export type PostListByDateResponse = {
+  date: string;
 } & PostListResponse;
 
 export type PostListBySearchResponse = {
