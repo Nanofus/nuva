@@ -94,6 +94,7 @@
     {/if}
     {#if data.post.featuredImage}
       <meta content={data.post.featuredImage} property="og:image" />
+      <meta name="twitter:card" content="summary_large_image" />
     {/if}
   {/if}
 </svelte:head>
