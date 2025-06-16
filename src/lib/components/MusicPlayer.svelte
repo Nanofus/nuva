@@ -458,7 +458,7 @@ Musicmancer 2023 Edition
     max-width: calc(var(--viewport-width - 2rem));
     background-color: var(--accent);
     position: fixed;
-    right: 1rem;
+    right: 0rem;
     bottom: 2rem;
     color: var(--text-dark);
     padding: 0.5rem;
