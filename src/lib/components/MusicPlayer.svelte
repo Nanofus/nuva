@@ -352,7 +352,7 @@ Musicmancer 2023 Edition
         </tr>
         <tr>
           <td class="material-icons">album</td>
-          <td>{t.musicMetadata.artist}:</td>
+          <td>{t.musicMetadata.album}:</td>
           <td>{displayedMetadata.album}</td>
         </tr>
       {/if}
