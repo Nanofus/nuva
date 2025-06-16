@@ -9,6 +9,7 @@ Musicmancer 2023 Edition
   import { clientConfig } from '$lib/client/config';
   import { parseBlob } from 'music-metadata';
   import { browser } from '$app/environment';
+  import { t } from '$lib/client/localization';
 
   interface AudioMetadata {
     title: string;
@@ -336,22 +337,22 @@ Musicmancer 2023 Edition
   <table id="music-info-box" class={infoboxVisible ? '' : 'hidden'}>
     <tbody>
       <tr>
-        <th colspan="3">Song Metadata</th>
+        <th colspan="3">{t.musicMetadata.title}</th>
       </tr>
       {#if displayedMetadata}
         <tr>
           <td class="material-icons">music_note</td>
-          <td>Song title:</td>
+          <td>{t.musicMetadata.songTitle}:</td>
           <td>{displayedMetadata.title}</td>
         </tr>
         <tr>
           <td class="material-icons">person</td>
-          <td>Artist:</td>
+          <td>{t.musicMetadata.artist}:</td>
           <td>{displayedMetadata.artist}</td>
         </tr>
         <tr>
           <td class="material-icons">album</td>
-          <td>Album:</td>
+          <td>{t.musicMetadata.artist}:</td>
           <td>{displayedMetadata.album}</td>
         </tr>
       {/if}

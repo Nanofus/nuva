@@ -69,6 +69,12 @@ export type Localization = {
     loginFailed: string;
     loggedOut: string;
   };
+  musicMetadata: {
+    title: string;
+    songTitle: string;
+    artist: string;
+    album: string;
+  };
   components: {
     commentForm: {
       emptyComment: string;
