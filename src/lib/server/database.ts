@@ -499,7 +499,7 @@ export const getPosts = async (
       body: JSON.stringify({
         query: `
             query AllPostsPaginated {
-                posts(${searchTerm != null ? `where: {search: "${searchTerm ? decodeURI(searchTerm) : ''
+                posts(${searchTerm != null ? `where: {search: "${searchTerm ? decodeURI(searchTerm).replaceAll('"', '\\"') : ''
     }"}, ` : ''}first: ${count}${after != null ? `, after: "${after}"` : ''}) {
                     ${QUERIES.pageInfo}
                     edges {
