@@ -3,6 +3,9 @@ import { getAllPostMetas, getCategories, getTags } from '$lib/server/database';
 import type { RequestHandler } from '@sveltejs/kit';
 import { clientConfig } from '$lib/client/config';
 
+// TODO: Only generated on build, not on every request
+export const prerender = true;
+
 export const GET: RequestHandler = async () => {
   const body = sitemap(await getAllPostMetas(), await getCategories(), (await getTags()).tags);
   const response = new Response(body);
