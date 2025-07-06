@@ -24,7 +24,7 @@ export const clientConfig: ClientConfig = {
     'https://meri.klaanon.fi/fonts/font_class.css'
   ],
   baseUrl: 'https://klaanon.fi',
-  defaultFeaturedImage: 'https://s3.eu-north-1.amazonaws.com/meri.klaanon.fi/matorotbs/kaupunki_pelkaa_minua_olen_nahnyt_sen_naamion_alle+%E2%80%93+kopio.png',
+  defaultFeaturedImage: 'https://meri.klaanon.fi/matorotbs/kaupunki_pelkaa_minua_olen_nahnyt_sen_naamion_alle+%E2%80%93+kopio.png',
   banners: [
     'https://meri.klaanon.fi/snowie/Oheiset/bigger-rastas-10-w.png'
   ],
