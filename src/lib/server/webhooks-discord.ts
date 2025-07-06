@@ -19,8 +19,8 @@ export const discordPostHook = async (meta: WebhookMeta, post: PostMeta) => {
             url: clientConfig.baseUrl + '/posts/' + post.slug,
             color: meta.color,
             author: {
-              name: post.author,
-              url: clientConfig.baseUrl + '/authors/' + post.author,
+              name: post.author.name,
+              url: clientConfig.baseUrl + '/authors/' + post.author.slug,
               icon_url: meta.icon
             },
             image: {
@@ -48,8 +48,8 @@ export const discordCommentHook = async (meta: WebhookMeta, post: PostMeta, comm
             url: clientConfig.baseUrl + '/posts/' + post.slug + '#comment-' + comment._id,
             color: meta.color,
             author: {
-              name: comment.author,
-              url: clientConfig.baseUrl + '/authors/' + comment.author,
+              name: comment.author.name,
+              url: clientConfig.baseUrl + '/authors/' + comment.author.slug,
               icon_url: meta.icon
             }
           }

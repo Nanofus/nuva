@@ -14,32 +14,34 @@
 
 <header id="post-header">
   <h1 id="post-title">{post.title}</h1>
-  <div id="post-meta">
-    <span class="post-categories">
-      {#each post.categories as category, i (category.slug)}
-        <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a>{#if i !== post.categories.length - 1},{' '}{/if}</span>
-      {/each}
-    </span>
-    <time class="post-date" datetime={post.date.toISOString()}>
-      {post.date.toLocaleDateString(clientConfig.locale)}
-    </time>
-    <span class="post-authors">
-      <span class="author-list">
-        <AuthorList authors={post.coAuthors}/>
+  {#if !post.metaPage}
+    <div id="post-meta">
+      <span class="post-categories">
+        {#each post.categories as category, i (category.slug)}
+          <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a>{#if i !== post.categories.length - 1},{' '}{/if}</span>
+        {/each}
       </span>
-    </span>
-    <span class="post-comments-link">
-      <a href="#comments"
-      >{post.commentCount ? post.commentCount : 0}
-        {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a
-      >
-    </span>
-    {#if !!$auth}
-      <span class="post-edit">
-        <a target="_blank" href={clientConfig.urls.postEdit.replace('{ID}', ''+post._id)}>{t.common.edit}</a>
+      <time class="post-date" datetime={post.date.toLocaleString()} title={post.date.toLocaleString()}>
+        <a href={`/posts/date/${post.date.getFullYear()}-${post.date.getMonth() + 1}-${post.date.getDate()}`}>{post.date.toLocaleDateString(clientConfig.locale)}</a>
+      </time>
+      <span class="post-authors">
+        <span class="author-list">
+          <AuthorList authors={post.coAuthors}/>
+        </span>
       </span>
-    {/if}
-  </div>
+      <span class="post-comments-link">
+        <a href="#comments"
+        >{post.commentCount ? post.commentCount : 0}
+          {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a
+        >
+      </span>
+      {#if !!$auth}
+        <span class="post-edit">
+          <a target="_blank" href={clientConfig.urls.postEdit.replace('{ID}', ''+post._id)}>{t.common.edit}</a>
+        </span>
+      {/if}
+    </div>
+  {/if}
 </header>
 
 <style lang="scss">

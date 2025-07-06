@@ -4,7 +4,8 @@
   import { clientConfig } from '$lib/client/config';
 
   export let posts: PostMeta[];
-
+  export let reverse: boolean | undefined = false;
+  
   const parseCategories = (categories: Category[]) => {
     categories = categories.filter((c) => c.slug !== 'rope');
     if (categories.length === 0) return '';
@@ -20,16 +21,18 @@
       <td class="date">{t.components.postList.date}</td>
       <td class="authors hidden-mobile">{t.components.postList.author}</td>
     </tr>
-    {#each posts as post (post.slug)}
+    {#each (reverse ? posts.reverse() : posts) as post (post.slug)}
       <tr class={post.mobileFriendly ? '' : 'mobile-unfriendly'}>
         <td class="link">
           <a href="/posts/{post.slug}">{post.title}</a>
           <span class="categories">{parseCategories(post.categories)}</span>
         </td>
         <td class="comment-count hidden-mobile">{post.commentCount ? post.commentCount : ''}</td>
-        <td class="date">{post.date.toLocaleDateString(clientConfig.locale)}</td>
+        <td class="date"><time class="post-date" datetime={post.date.toLocaleString()} title={post.date.toLocaleString()}>
+          <a href={`/posts/date/${post.date.getFullYear()}-${post.date.getMonth() + 1}-${post.date.getDate()}`}>{post.date.toLocaleDateString(clientConfig.locale)}</a>
+        </time></td>
         <td class="authors hidden-mobile"
-        ><a href="/authors/{encodeURI(post.author)}">{post.author}</a></td
+        ><a href="/authors/{encodeURI(post.author.slug)}">{post.author.name}</a></td
         >
       </tr>
     {/each}

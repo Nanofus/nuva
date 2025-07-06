@@ -9,6 +9,7 @@
   import { auth, postOptions } from '$lib/client/stores';
   import { t } from '$lib/client/localization';
   import { toast } from '@zerodevx/svelte-toast';
+  import { clientConfig } from '$lib/client/config';
 
   interface Props {
     data: PostResponse;
@@ -49,15 +50,7 @@
         return;
       }
     }
-    if (data.post.content) {
-      recursivelyConvertDates(data.post.comments);
-      postOptions.set({
-        bannerVisible: data.post.bannerVisible,
-        customBannerUrl: data.post.customBanner === '' ? null : data.post.customBanner,
-        stickyMenu: false,
-        fullWidth: data.post.fullWidth
-      });
-    }
+    setPostStyles();
     scrollToAnchor();
   });
 
@@ -70,6 +63,20 @@
       fullWidth: false
     });
   });
+
+  const setPostStyles = () => {
+    if (data.post && data.post.content) {
+      recursivelyConvertDates(data.post.comments);
+      postOptions.set({
+        bannerVisible: data.post.bannerVisible,
+        customBannerUrl: data.post.customBanner === '' ? null : data.post.customBanner,
+        stickyMenu: false,
+        fullWidth: data.post.fullWidth
+      });
+    }
+  };
+
+  setPostStyles();
 </script>
 
 <svelte:head>
@@ -78,21 +85,26 @@
     <meta content={getPageTitle(data.post.title)} property="og:title" />
     <meta content={data.post.description} name="og:description" />
     <meta content="article" property="og:type" />
-    <meta content={getPageUrl(`posts/${data.slug}`)} property="og:url" />
-    <meta content={data.post.coAuthors?.join(', ')} property="article:author" />
-    {#if data.post.date}
-      <meta content={data.post.date?.toDateString()} property="article:published_time" />
+    {#if !data.post.metaPage}
+      <meta content={getPageUrl(`posts/${data.slug}`)} property="og:url" />
+      <meta content={data.post.coAuthors?.join(', ')} property="article:author" />
+      {#if data.post.date}
+        <meta content={data.post.date?.toLocaleDateString(clientConfig.locale)} property="article:published_time" />
+      {/if}
     {/if}
     {#if data.post.featuredImage}
       <meta content={data.post.featuredImage} property="og:image" />
+      <meta name="twitter:card" content="summary_large_image" />
     {/if}
   {/if}
 </svelte:head>
 
-{#if data.post && data.post.content}
+{#if data.post}
   <article>
     <PostHeader post={data.post} />
-    <PostContent post={data.post} />
+    {#if data.post.content}
+      <PostContent post={data.post} />
+    {/if}
     <PostFooter post={data.post} />
   </article>
 {:else if noAccess}

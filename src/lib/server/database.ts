@@ -1,13 +1,14 @@
 import { createKysely } from '@vercel/postgres-kysely';
 import type { DB } from '$lib/server/database.types';
 import type {
+  Author,
   Category,
   Comment,
   CommentMeta,
   CommentResponse,
   Post,
   PostListByAuthorResponse,
-  PostListByCategoryResponse,
+  PostListByCategoryResponse, PostListByDateResponse,
   PostListBySearchResponse,
   PostListByTagResponse,
   PostListByYearResponse,
@@ -48,7 +49,7 @@ export const getLatestComments = async (): Promise<CommentMeta[]> => {
                 comments(first: ${serverConfig.latestCommentsPerFetch}) {
                     nodes {
                         databaseId
-                        author {
+                        author {  
                           node {
                             name
                           }
@@ -210,7 +211,15 @@ const getCommentsForPostPaginated = async (
 		                    edges {
 		                        cursor
 		                        node {
-																${QUERIES.postComment}
+																date
+                                author {
+                                    node {
+                                      name
+                                    }
+                                }
+                                content
+                                databaseId
+                                parentDatabaseId
 		                        }
 		                    }
 		                }
@@ -262,6 +271,25 @@ export const getPostsByAuthor = async (
   if (response.data.posts['edges'].length === 0) {
     throw error(404, t.errors.e404);
   }
+  const authorResponse = await (
+    await fetch(serverConfig.graphqlApi, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: `
+            query AuthorByName {
+                user(idType: SLUG, id: "${decodeURI(author)}") {
+                    name
+                    slug
+                }
+            }
+            `
+      })
+    })
+  ).json();
+  const authorData: Author = authorResponse.data.user;
 
   const { pageInfo } = response.data.posts;
   const posts: PostMeta[] = response.data.posts['edges'].map((edge: any) =>
@@ -269,7 +297,7 @@ export const getPostsByAuthor = async (
   );
   return {
     posts,
-    author,
+    author: authorData,
     endCursor: pageInfo.endCursor,
     hasNextPage: pageInfo.hasNextPage
   };
@@ -418,6 +446,45 @@ export const getPostsByYear = async (year: number): Promise<PostListByYearRespon
   };
 };
 
+export const getPostsByDate = async (date: string): Promise<PostListByDateResponse> => {
+  const dateParts = date.split('-');
+  const year = dateParts[0];
+  let month = dateParts[1];
+  let day = dateParts[2];
+  if (day[0] === '0') day = day.substring(1);
+  if (month[0] === '0') month = month.substring(1);
+  const response = await (
+    await fetch(serverConfig.graphqlApi, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: `
+            query PostsByYear {
+                posts(first: ${serverConfig.maxPerFetch}, where: { dateQuery: {
+                  day: ${day}, month: ${month}, year: ${year}
+            }}) {
+                    nodes {
+                        ${QUERIES.postMeta}
+                    }
+                }
+            }
+            `
+      })
+    })
+  ).json();
+  const posts: PostMeta[] = response.data.posts.nodes.map((node: any) =>
+    dataToPostMeta(node)
+  );
+  return {
+    posts,
+    date: date,
+    endCursor: '',
+    hasNextPage: false
+  };
+};
+
 export const getPosts = async (
   after: string | null = null,
   searchTerm: string | null = null,
@@ -432,7 +499,7 @@ export const getPosts = async (
       body: JSON.stringify({
         query: `
             query AllPostsPaginated {
-                posts(${searchTerm != null ? `where: {search: "${searchTerm ? decodeURI(searchTerm) : ''
+                posts(${searchTerm != null ? `where: {search: "${searchTerm ? decodeURI(searchTerm).replaceAll('"', '\\"') : ''
     }"}, ` : ''}first: ${count}${after != null ? `, after: "${after}"` : ''}) {
                     ${QUERIES.pageInfo}
                     edges {

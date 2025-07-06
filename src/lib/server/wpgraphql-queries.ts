@@ -15,11 +15,13 @@ export const QUERIES = {
         author {
             node {
                 name
+                slug
             }
         }
         coAuthors(first: 20) {
             nodes {
                 displayName
+                name
             }
         }
         additionalFields {
@@ -27,6 +29,7 @@ export const QUERIES = {
             featuredImage
             description
             mobileFriendly
+            metapage
         }
         categories {
             nodes {
@@ -43,11 +46,13 @@ export const QUERIES = {
         author {
             node {
                 name
+                slug
             }
         }
         coAuthors(first: 20) {
             nodes {
                 displayName
+                name
             }
         }
         previous {
@@ -66,9 +71,11 @@ export const QUERIES = {
             artists {
                 nodes {
                     name
+                    slug
                 }
             }
             bannerVisible
+            metapage
             fullWidth
             mobileFriendly
             scripts
@@ -91,15 +98,5 @@ export const QUERIES = {
             }
         }
         commentCount
-        content`,
-  postComment: `
-        date
-        author {
-            node {
-                name
-            }
-        }
-        content
-        databaseId
-        parentDatabaseId`
+        content`
 };

@@ -30,6 +30,8 @@ export type ClientConfig = {
     writing: string; // URL for writing page
     feedback: string; // URL for feedback page
     about: string; // URL for about page
+    characters: string;
+    extraContent: string; // URL for extra content page
   };
   externalStylesheets: string[]; // External stylesheets to load
   defaultFeaturedImage: string; // Default featured image for posts
@@ -66,6 +68,12 @@ export type Localization = {
     commentFailed: string;
     loginFailed: string;
     loggedOut: string;
+  };
+  musicMetadata: {
+    title: string;
+    songTitle: string;
+    artist: string;
+    album: string;
   };
   components: {
     commentForm: {
@@ -114,6 +122,8 @@ export type Localization = {
       search: string;
       guide: string;
       soundtracks: string;
+      characters: string;
+      extraContent: string;
       write: string;
       login: string;
       profile: string;
@@ -185,17 +195,23 @@ export type HierarchicalWithDate = {
   date: Date;
 } & Hierarchical;
 
+export type Author = {
+  name: string;
+  slug: string;
+}
+
 export type PostMeta = {
   title: string;
   slug: string;
   date: Date;
-  author: string;
-  coAuthors: string[];
+  author: Author;
+  coAuthors: Author[];
   categories: Category[];
   customBanner: string;
   featuredImage: string;
   description: string;
   mobileFriendly: boolean;
+  metaPage: boolean;
   commentCount: number;
 };
 
@@ -206,8 +222,9 @@ export type Post = {
   styles: string;
   scriptFiles: string[];
   music: string[];
-  artists: string[];
+  artists: Author[];
   bannerVisible: boolean;
+  metaPage: boolean;
   fullWidth: boolean;
   resetMusicButtons: boolean;
   content: string;
@@ -239,14 +256,14 @@ export type Tag = {
 
 export type Comment = {
   date: Date;
-  author: string;
+  author: Author;
   content: string;
 } & Hierarchical;
 
 export type CommentMeta = {
   _id: number;
   date: Date;
-  author: string;
+  author: Author;
   postSlug: string;
   postTitle: string;
 };
@@ -273,12 +290,16 @@ export type PostListByYearResponse = {
   year: number;
 } & PostListResponse;
 
+export type PostListByDateResponse = {
+  date: string;
+} & PostListResponse;
+
 export type PostListBySearchResponse = {
   searchTerm: string;
 } & PostListResponse;
 
 export type PostListByAuthorResponse = {
-  author: string;
+  author: Author;
 } & PostListResponse;
 
 export type PostListByCategoryResponse = {

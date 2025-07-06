@@ -6,7 +6,9 @@ const config = {
   extensions: ['.svelte'],
   preprocess: [sveltePreprocess()],
   kit: {
-    adapter: adapter()
+    adapter: adapter({
+      maxDuration: 60
+    })
   }
 };
 

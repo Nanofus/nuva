@@ -17,7 +17,7 @@
   {/if}
   {#if post.artists.length > 0}
     <div class="artist-list">
-      {post.artists.join(', ')}
+      {post.artists.map(author => author.name).join(', ')}
     </div>
   {/if}
 </div>

@@ -1,23 +1,31 @@
-import type { Category, Comment, CommentMeta, Post, PostMeta, Tag } from '$lib/types';
+import type { Author, Category, Comment, CommentMeta, Post, PostMeta, Tag } from '$lib/types';
 import { objectsToHierarchy } from '$lib/server/util';
 
 export const dataToPostMeta = (data: any): PostMeta => ({
   title: data.title,
   slug: data.slug,
   date: new Date(data.rawDate),
-  author: data.author.node.name,
+  author: {
+    name: data.author.node.name,
+    slug: data.author.node.slug
+  },
   coAuthors: data.coAuthors.nodes
-    .map((author: any) => author.displayName)
-    .sort((a: string, b: string) => {
-      if (a === data.author.node.name) {
+    .map((author: any) => {
+      return {
+        name: author.displayName,
+        slug: author.name
+      }
+    })
+    .sort((a: Author, b: Author) => {
+      if (a.name === data.author.node.name) {
         return -1;
       }
 
-      if (b === data.author.node.name) {
+      if (b.name === data.author.node.name) {
         return 1;
       }
 
-      return a.localeCompare(b);
+      return a.name.localeCompare(b.name);
     }),
   categories: data.categories.nodes.map((category: any) => ({
     slug: category.slug,
@@ -27,6 +35,7 @@ export const dataToPostMeta = (data: any): PostMeta => ({
   featuredImage: data.additionalFields.featuredImage,
   description: data.additionalFields.description,
   mobileFriendly: data.additionalFields.mobileFriendly,
+  metaPage: data.additionalFields.metapage, 
   commentCount: data.commentCount
 });
 
@@ -34,7 +43,10 @@ export const dataToComments = (nodes: any): Comment[] => {
   return nodes.map(
     (comment: any): Comment => ({
       date: new Date(comment.date),
-      author: comment.author.node.name,
+      author: {
+        name: comment.author.node.name,
+        slug: comment.author.node.slug
+      },
       content: comment.content,
       children: [],
       _id: comment.databaseId,
@@ -47,7 +59,10 @@ export const dataToCommentMetas = (nodes: any): CommentMeta[] =>
   nodes.map(
     (comment: any): CommentMeta => ({
       date: new Date(comment.date),
-      author: comment.author.node.name,
+      author: {
+        name: comment.author.node.name,
+        slug: comment.author.node.slug
+      },
       postSlug: comment.commentedOn.node.slug,
       postTitle: comment.commentedOn.node.title,
       _id: comment.databaseId
@@ -64,24 +79,38 @@ export const dataToPost = (data: any): Post | null => {
     title: data.title,
     slug: data.slug,
     date: new Date(data.rawDate),
-    author: data.author.node.name,
+    author: {
+      name: data.author.node.name,
+      slug: data.author.node.slug
+    },
     coAuthors: data.coAuthors.nodes
-      .map((author: any) => author.displayName)
-      .sort((a: string, b: string) => {
-        if (a === data.author.node.name) {
+      .map((author: any) => {
+        return {
+          name: author.displayName,
+          slug: author.name
+        }
+      })
+      .sort((a: Author, b: Author) => {
+        if (a.name === data.author.node.name) {
           return -1;
         }
 
-        if (b === data.author.node.name) {
+        if (b.name === data.author.node.name) {
           return 1;
         }
 
-        return a.localeCompare(b);
+        return a.name.localeCompare(b.name);
       }),
     artists: data.additionalFields.artists?.nodes
-      ? data.additionalFields.artists.nodes.map((artist: any) => artist.name)
+      ? data.additionalFields.artists.nodes.map((artist: any) => {
+        return {
+          name: artist.name,
+          slug: artist.slug
+        }
+      })
       : [],
     bannerVisible: data.additionalFields.bannerVisible,
+    metaPage: data.additionalFields.metapage,
     fullWidth: data.additionalFields.fullWidth ? data.additionalFields.fullWidth : false,
     customBanner: data.additionalFields.customBanner,
     featuredImage: data.additionalFields.featuredImage,
@@ -129,7 +158,7 @@ export const dataToCategories = (data: any): Category[] => {
     children: [],
     _id: category.databaseId,
     _parentId: category.parentDatabaseId
-  }));
+  })).filter((category: { slug: string; }) => category.slug != 'user-visibility');
   return objectsToHierarchy(categories) as Category[];
 };
 

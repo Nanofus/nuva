@@ -19,12 +19,12 @@
 
 <h1>{t.pages.categories.title}</h1>
 <List>
-  {#each data.categories as category}
+  {#each data.categories as category (category._id)}
     <li>
       <a href="/categories/{category.slug}">{category.name}</a>
       {#if category.children.length > 0}
         <List stagger={true}>
-          {#each category.children as child}
+          {#each category.children as child (child._id)}
             <li>
               <a href="/categories/{child.slug}">{child.name}</a>
             </li>

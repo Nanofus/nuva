@@ -28,7 +28,7 @@
     if (browser) {
       const user = $auth?.displayName;
       if (!user) return false;
-      return user === comment.author;
+      return user === comment.author.name;
     }
   };
 
@@ -39,7 +39,13 @@
 
 <div class="comment {isHighlighted() ? 'highlighted' : ''}" id="comment-{comment._id}">
   <header class="comment-header">
-    <span class="comment-author"> {comment.author}</span>
+    <span class="comment-author">
+      {#if comment.author.slug}
+        <a class="author-link" href="/authors/{encodeURI(comment.author.slug)}">{comment.author.name}</a>
+      {:else}
+        {comment.author.name}
+      {/if}
+    </span>
     <span class="comment-date">{comment.date.toLocaleDateString(clientConfig.locale)}</span>
   </header>
   <div class="comment-content">{@html comment.content}</div>
@@ -66,6 +72,10 @@
 </div>
 
 <style lang="scss">
+  .author-link {
+    color: var(--text-light);
+  }
+  
   .comment {
     margin: 1rem 0;
     padding: 1rem;

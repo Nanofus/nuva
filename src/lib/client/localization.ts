@@ -20,6 +20,12 @@ const localization: { [key: string]: Localization } = {
       loginFailed: 'Login failed.',
       loggedOut: 'You logged out.'
     },
+    musicMetadata: {
+      title: 'Song metadata',
+      songTitle: 'Song title',
+      artist: 'Artist',
+      album: 'Album'
+    },
     components: {
       commentForm: {
         emptyComment: 'Comment cannot be empty.'
@@ -63,10 +69,12 @@ const localization: { [key: string]: Localization } = {
         frontPage: 'Front Page',
         posts: 'Releases',
         tags: 'Tags',
+        characters: 'Characters',
         categories: 'Categories',
         search: 'Search',
         guide: 'Formatting Guide',
         soundtracks: 'Soundtracks',
+        extraContent: 'Extra Content',
         write: 'Write',
         login: 'Login',
         profile: 'Profile'
@@ -145,6 +153,12 @@ const localization: { [key: string]: Localization } = {
       loginFailed: 'Kirjautuminen epäonnistui.',
       loggedOut: 'Kirjauduit ulos.'
     },
+    musicMetadata: {
+      title: 'Kappaleen metatiedot',
+      songTitle: 'Kappaleen nimi',
+      artist: 'Artisti',
+      album: 'Albumi'
+    },
     components: {
       commentForm: {
         emptyComment: 'Kommentti ei voi olla tyhjä.'
@@ -192,6 +206,8 @@ const localization: { [key: string]: Localization } = {
         search: 'Haku',
         guide: 'Muotoiluopas',
         soundtracks: 'Soundtrackit',
+        characters: 'Hahmot',
+        extraContent: 'Liitteet',
         write: 'Kirjoita',
         login: 'Kirjaudu',
         profile: 'Profiili'

@@ -9,7 +9,7 @@
 </script>
 
 <ul class="categories">
-  {#each categories as category}
+  {#each categories as category (category._id)}
     <li><a href="/categories/{category.slug}" class="category">{category.name}</a></li>
   {/each}
 </ul>

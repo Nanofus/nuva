@@ -18,9 +18,14 @@
         <td class="link">
           <a href="/posts/{comment.postSlug}#comment-{comment._id}">{comment.postTitle}</a>
         </td>
-        <td class="date">{comment.date.toLocaleDateString(clientConfig.locale)}</td>
+        <td class="date">
+          <time class="comment-date" datetime={comment.date.toLocaleString()}
+            title={comment.date.toLocaleString()}>
+            {comment.date.toLocaleDateString(clientConfig.locale)}
+          </time>
+        </td>
         <td class="commenter"
-        ><a href="/authors/{encodeURI(comment.author)}">{comment.author}</a></td
+        >{comment.author.name}</td
         >
       </tr>
     {/each}
