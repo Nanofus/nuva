@@ -385,7 +385,6 @@ Musicmancer 2023 Edition
     }
 
     &:hover {
-      background-color: var(--hover-light);
       cursor: pointer;
 
       &:disabled {

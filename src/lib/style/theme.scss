@@ -612,7 +612,7 @@ button {
 
   &:hover {
     cursor: pointer;
-    background: var(--hover);
+    filter: brightness(0.8);
     transition: 0s;
   }
 
