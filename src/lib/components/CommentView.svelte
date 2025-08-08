@@ -62,7 +62,6 @@
   {:else}
     <CommentForm
       on:commentSent={commentSent}
-      on:close={() => (replyFormOpen = false)}
       parent={comment._id}
       postId={post._id}
       postSlug={post.slug}

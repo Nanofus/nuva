@@ -54,7 +54,6 @@
           bind:value={content}
         />
         <div class="button-group">
-          <Button link onclick={() => dispatch('close')}>{t.common.close}</Button>
           <Button onclick={sendComment}>{t.common.send}</Button>
         </div>
       </Form>

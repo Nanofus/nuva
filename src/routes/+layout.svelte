@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
   import { SvelteToast } from '@zerodevx/svelte-toast';
   import { browser } from '$app/environment';
   import { navigating, page } from '$app/state';
@@ -58,7 +57,7 @@
       </div>
     {/if}
     {#key data.pathname}
-      <div class="transition" in:fade={{ duration: 150, delay: 0 }}>
+      <div class="transition">
         {#if !navigating.to}
           {@render children?.()}
         {/if}
