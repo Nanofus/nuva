@@ -1,6 +1,7 @@
 <script lang="ts">
   import { login, logout } from '$lib/client/auth';
   import { auth } from '$lib/client/stores';
+  import { browser } from '$app/environment';
   import Button from '$lib/components/reusable/Button.svelte';
   import Input from '$lib/components/reusable/Input.svelte';
   import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
@@ -24,7 +25,7 @@
 </script>
 
 <div class="login-area">
-  {#if !$auth}
+  {#if !$auth && browser}
     <Form
       vertical={true}
       onsubmit={(e: Event) => {
