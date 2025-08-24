@@ -14,11 +14,12 @@
 
 <header id="post-header">
   <h1 id="post-title">{post.title}</h1>
-  {#if !post.metaPage}
-    <div id="post-meta">
+  <div id="post-meta">
+    {#if !post.metaPage}
       <span class="post-categories">
         {#each post.categories as category, i (category.slug)}
-          <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a>{#if i !== post.categories.length - 1},{' '}{/if}</span>
+          <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a>
+            {#if i !== post.categories.length - 1},{' '}{/if}</span>
         {/each}
       </span>
       <time class="post-date" datetime={post.date.toLocaleString()} title={post.date.toLocaleString()}>
@@ -35,13 +36,13 @@
           {post.commentCount === 1 ? t.common.commentSingular : t.common.commentPlural}</a
         >
       </span>
-      {#if !!$auth}
-        <span class="post-edit">
-          <a target="_blank" href={clientConfig.urls.postEdit.replace('{ID}', ''+post._id)}>{t.common.edit}</a>
-        </span>
-      {/if}
-    </div>
-  {/if}
+    {/if}
+    {#if !!$auth}
+      <span class="post-edit">
+        <a target="_blank" href={clientConfig.urls.postEdit.replace('{ID}', ''+post._id)}>{t.common.edit}</a>
+      </span>
+    {/if}
+  </div>
 </header>
 
 <style lang="scss">
