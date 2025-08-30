@@ -93,6 +93,10 @@
       }
     }
   }
+  
+  .comment-content {
+    overflow-x: scroll;
+  }
 
   .comment-header {
     display: flex;
