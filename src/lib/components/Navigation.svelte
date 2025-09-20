@@ -88,8 +88,10 @@
       <NavItem href="/posts">{t.components.navigation.posts}</NavItem>
       <NavItem href="/categories">{t.components.navigation.categories}</NavItem>
       <NavItem href="/tags">{t.components.navigation.tags}</NavItem>
-      <NavItem href={clientConfig.urls.writingGuide}>{t.components.navigation.guide}</NavItem>
-      <NavItem href={clientConfig.urls.soundtracks}>{t.components.navigation.soundtracks}</NavItem>
+      {#if $auth}
+        <NavItem href={clientConfig.urls.writingGuide}>{t.components.navigation.guide}</NavItem>
+        <NavItem href={clientConfig.urls.soundtracks}>{t.components.navigation.soundtracks}</NavItem>
+      {/if}
       <NavItem href={clientConfig.urls.characters}>{t.components.navigation.characters}</NavItem>
       <NavItem href={clientConfig.urls.extraContent}>{t.components.navigation.extraContent}</NavItem>
       {#if $auth}
