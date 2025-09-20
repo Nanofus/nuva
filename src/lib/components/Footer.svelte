@@ -1,5 +1,6 @@
 <script lang="ts">
   import { t } from '$lib/client/localization';
+  import { auth } from '$lib/client/stores';
   import { clientConfig } from '$lib/client/config';
 </script>
 
@@ -8,10 +9,12 @@
     <span>{clientConfig.copyright}</span>
     <span class="separator"></span>
     <span><a href="{clientConfig.baseUrl}/rss" target="_blank">RSS</a></span>
-    <span class="separator"></span>
-    <span>
-      <a href={clientConfig.urls.feedback} target="_blank">{t.components.footer.feedback}</a>
-    </span>
+    {#if $auth}
+      <span class="separator"></span>
+      <span>
+        <a href={clientConfig.urls.feedback} target="_blank">{t.components.footer.feedback}</a>
+      </span>
+    {/if}
     <span class="separator"></span>
     <span>
       <a href={clientConfig.urls.about} target="_blank">{t.components.footer.about}</a>
