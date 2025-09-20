@@ -2,6 +2,7 @@
   import type { Post } from '$lib/types';
   import { onDestroy, onMount } from 'svelte';
   import { browser } from '$app/environment';
+  import { auth } from '$lib/client/stores';
   import MusicPlayer from '$lib/components/MusicPlayer.svelte';
   import { toast } from '@zerodevx/svelte-toast';
   import { cleanGlobalScope, initGlobalScope, toastSettings } from '$lib/client/util';
@@ -79,12 +80,17 @@
       await runUserScripts(scriptTag.innerText);
     });
   };
+  
+  const disableAudio = () => {
+    document.querySelectorAll('audio').forEach(e => e.remove());
+  }
 
   onMount(async () => {
     initGlobalScope();
     reportValidation();
     createErrorReporter();
     await runScripts();
+    if (!$auth) disableAudio();
   });
 
   const cleanScripts = () => {
@@ -115,8 +121,10 @@
 >
   {@html post.content}
 </section>
-<MusicPlayer musicUrlArray={post.music} resetMusicButtonStyles={post.resetMusicButtons} />
-
+{#if $auth}
+  <MusicPlayer musicUrlArray={post.music} resetMusicButtonStyles={post.resetMusicButtons} />
+{/if}
+    
 <style lang="scss">
   :global(section.large-initial-letter > p:first-child::first-letter) {
     float: left;
