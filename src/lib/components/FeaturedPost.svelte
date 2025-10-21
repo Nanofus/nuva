@@ -20,7 +20,7 @@
   <p class="authors">
     <AuthorList --author-link-color="var(--text-dark)" authors={postMeta.coAuthors} />
   </p>
-  <p>{@html postMeta.description ? postMeta.description : ''}</p>
+  <div>{@html postMeta.description ? postMeta.description : ''}</div>
 </div>
 
 <style lang="scss">
