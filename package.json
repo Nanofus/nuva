@@ -41,7 +41,7 @@
     "@vercel/postgres-kysely": "^0.10.0",
     "@zerodevx/svelte-toast": "^0.9.6",
     "html-validate": "^10.4.0",
-    "kysely": "^0.28.8",
+    "kysely": "^0.27.6",
     "music-metadata": "^11.10.3",
     "prisma": "^7.1.0",
     "prisma-kysely": "^2.2.1"
