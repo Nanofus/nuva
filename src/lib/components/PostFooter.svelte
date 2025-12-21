@@ -21,7 +21,7 @@
   {/if}
 </footer>
 
-<style lang="scss">
+<style>
   footer {
     margin-top: calc(2 * var(--vertical-separation-margin));
   }

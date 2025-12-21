@@ -70,7 +70,7 @@
   {/if}
 </div>
 
-<style lang="scss">
+<style>
   .author-link {
     color: var(--text-light);
   }

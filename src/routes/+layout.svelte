@@ -9,9 +9,9 @@
   import Footer from '$lib/components/Footer.svelte';
   import Navigation from '$lib/components/Navigation.svelte';
   import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
-  import '$lib/style/variables.scss';
-  import '$lib/style/input-range.scss';
-  import '$lib/style/theme.scss';
+  import '$lib/style/variables.css';
+  import '$lib/style/input-range.css';
+  import '$lib/style/theme.css';
   import { getLoginStatus } from '$lib/client/auth';
   import { clientConfig } from '$lib/client/config';
 
@@ -68,6 +68,3 @@
   <SvelteToast options={{ reversed: true, duration: 3000, intro: { y: -20 } }} />
 </div>
 
-<style lang="scss">
-  // All styles in theme.scss
-</style>

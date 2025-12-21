@@ -1,0 +1,109 @@
+/* Colors and theming */
+
+:root {
+  --text-light: rgba(0, 0, 0, 0.75); /* Color for text on light backgrounds */
+  --text-dark: rgba(255, 255, 255, 0.9); /* Color for text on dark backgrounds */
+  --text-light-secondary: rgba(0, 0, 0, 0.5); /* Accent color for text on light backgrounds */
+  --hover-transparent: rgba(255, 255, 255, 0.1); /* Transparent hover color for overlays */
+  --hover: #333333; /* Dark hover color */
+  --hover-medium: #666666; /* Dark hover color */
+  --hover-light: #cccccc; /* Light hover color */
+  --background-light: #ffffff; /* Background color for light backgrounds */
+  --background-dark: #000000; /* Background color for dark backgrounds */
+  --semi-transparent-light: rgba(255, 255, 255, 0.5);
+  --accent: #252322; /* Accent color for light backgrounds */
+  --link: #5a869d; /* Link color */
+  --link-hover: #7fa8c3; /* Link hover color */
+  --main-nav-background: linear-gradient(#252322, #0000000a) repeat scroll 0 0; /* Background for main navigation */
+  --header-shadow: 0 0 1rem rgba(0, 0, 0, 0.9); /* Shadow for headers */
+  --subtle-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.9);
+  --music-button-shadow: 0.1rem 0.2rem 0.5rem rgba(0, 0, 0, 0.6); /* Shadow for music buttons */
+  --banner-shadow: 0 0 0.1rem rgba(0, 0, 0, 1), 0 0 0.5rem rgba(0, 0, 0, 0.9),
+    0 0 1rem rgba(0, 0, 0, 0.9); /* Shadow for text in banner */
+  --scroll-hinting-shadow-color: rgba(
+    0,
+    0,
+    0,
+    0.3
+  ); /* Shadow color for the shadow that hints horizontal scrolling is possible on mobile */
+  --error: #f09896; /* Error text color */
+  --error-background: #f09896; /* Error background color */
+  --warning: #f7de50; /* Warning text color */
+  --warning-background: #f7de50; /* Warning background color */
+  --success: #94efad; /* Success text color */
+  --success-background: #94efad; /* Success background color */
+  --info: #8ee3f5; /* Info text color */
+  --info-background: #8ee3f5; /* Info background color */
+  --highlight: #f9dd4f; /* Highlight color */
+  --selection: #f9dd4f; /* Selection color */
+  --comment-background: rgba(0, 0, 0, 0.1); /* Background color for comments */
+  --highlight-border: 0.1rem solid var(--accent); /* Border for highlighted elements */
+  --subtle-border: 0.1rem solid var(--hover-light); /* Subtle border for elements */
+}
+
+/* Typography */
+
+:root {
+  --body-text-font-family: 'Source Serif 4', 'Times New Roman', serif; /* Font family for body text */
+  --header-font-family: 'Cinzel', serif; /* Font family for headers */
+  --header-secondary-font-family: 'Cinzel', serif; /* Font family for secondary headers */
+  --accent-font-family: 'Source Code Pro', monospace; /* Font family for secondary text areas such as metadata */
+  --code-font-family: 'Source Code Pro', monospace; /* Font family for code blocks */
+  --nav-font-family: 'Source Serif 4', 'Times New Roman', serif; /* Font family for navigation */
+  --font-size-body: 1rem; /* Font size for body text */
+  --font-size-h1: 3rem; /* Font size for h1 */
+  --font-size-h2: 1.8rem; /* Font size for h2 */
+  --font-size-h4: 1.5rem; /* Font size for h4 */
+  --icon-font: 'Material Icons', sans-serif;
+}
+
+/* Images */
+
+:root {
+  //--background-image-default: url("/images/bg.webp"); /* Default background image */
+  --hr-background-image: url('/images/hrbg.png'); /* Background image for horizontal rules */
+}
+
+/* Sizing */
+
+:root {
+  --header-banner-dimensions-ratio: 6; /* Dimensions of banner, width divided by height */
+  --page-max-width: 76rem; /* ~ 1200px, max width of "white area" */
+  --page-min-width: 22rem; /* ~ 350px, min width of "white area" */
+  --article-max-width: 38rem; /* Max width of article content */
+  --scrollbar-width: 0px;
+  --viewport-width: calc(100vw - var(--scrollbar-width)); /* Full width of page */
+  --viewport-height: 100vh; /* Full height of page */
+  --mobile-threshold: 41rem; /* Width at which mobile styles are applied */
+  --compact-navigation-threshold: 54rem; /* Width at which compact navigation is enabled */
+  --navigation-height: 3rem; /* Height of navigation bar */
+  --navigation-logo-size: 1.25rem; /* Size of small logo in navigation */
+  --footer-height: 5rem; /* Height of footer */
+  --mobile-horizontal-padding: 1rem; /* Horizontal padding on mobile around the edges of the screen */
+  --mobile-icon-size: 2.5rem; /* Hamburger menu icon size */
+  --vertical-separation-margin: 3rem; /* Vertical margin between sections */
+  --transition-speed: 0.3s; /* Speed of transitions */
+  --unfocus-speed: 0.15s; /* Speed of unfocus effect on buttons */
+  --border-radius: 0.25rem; /* Border radius of elements */
+  --blur-intensity: 0.5rem; /* Intensity of blur effect on navbar */
+  --column-horizontal-margin: 1.5rem; /* Horizontal margin between columns */
+  --initial-letter-size: 5rem; /* Size of initial letter */
+  --initial-letter-line-height: 4rem; /* Line height for initial letter, should be a bit less than size */
+  --initial-letter-margin: 0.5rem; /* Right margin of initial letter */
+  --max-z-index: 9999;
+}
+
+/* Toast */
+
+:root {
+  --toastContainerBottom: auto;
+  --toastContainerTop: 1rem;
+  --toastContainerRight: 1rem;
+  --toastContainerLeft: auto;
+  --toastContainerZIndex: 2;
+  --toastWidth: 18rem;
+  --toastBorderRadius: var(--border-radius);
+  --toastBoxShadow: var(--header-shadow);
+  --toastColor: var(--text-light);
+  --toastProgressBackground: var(--text-light);
+}

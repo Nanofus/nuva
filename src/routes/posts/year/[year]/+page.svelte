@@ -32,7 +32,7 @@
 </div>
 <PostList posts={data.posts} reverse={true} />
 
-<style lang="scss">
+<style>
   .year-header {
     display: flex;
     flex-direction: row;

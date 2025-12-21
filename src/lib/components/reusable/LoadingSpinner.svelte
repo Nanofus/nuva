@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style>
   .loading-spinner {
     transform: scale(0.6);
   }

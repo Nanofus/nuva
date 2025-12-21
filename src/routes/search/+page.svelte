@@ -12,6 +12,3 @@
 
 <h1>{t.pages.search.title}</h1>
 <Search />
-
-<style lang="scss">
-</style>

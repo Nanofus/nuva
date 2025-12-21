@@ -53,7 +53,7 @@
   {/if}
 </div>
 
-<style lang="scss">
+<style>
   .login-area {
     width: calc(var(--article-max-width) / 2);
   }

@@ -1,0 +1,83 @@
+:root {
+  --track-color: var(--text-dark);
+  --thumb-color: var(--link);
+  --thumb-hover-color: var(--link-hover);
+  --thumb-border-color: var(--track-color);
+  --track-border-color: var(--hover-light);
+  --thumb-radius: 1rem;
+  --thumb-height: 1.2rem;
+  --thumb-width: 1.2rem;
+  --thumb-border-width: 0.1rem;
+  --track-width: 100%;
+  --track-height: 0.5rem;
+  --track-border-width: 0.1rem;
+  --track-radius: 0.5rem;
+}
+
+[type='range'] {
+  -webkit-appearance: none;
+  background: transparent;
+  margin: calc(var(--thumb-height) / 2) 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: calc(var(--track-width) - 1rem);
+}
+
+[type='range']::-moz-focus-outer {
+  border: 0;
+}
+
+[type='range']:focus {
+  outline: 0;
+}
+
+[type='range']:focus::-webkit-slider-runnable-track {
+  background: var(--track-color);
+}
+
+[type='range']::-webkit-slider-runnable-track {
+  cursor: default;
+  height: var(--track-height);
+  transition: all 0.2s ease;
+  width: var(--track-width);
+  background: var(--track-color);
+  border: var(--track-border-width) solid var(--track-border-color);
+  border-radius: var(--track-radius);
+}
+
+[type='range']::-webkit-slider-thumb {
+  background: var(--thumb-color);
+  border: var(--thumb-border-width) solid var(--thumb-border-color);
+  border-radius: var(--thumb-radius);
+  box-sizing: border-box;
+  cursor: default;
+  height: var(--thumb-height);
+  width: var(--thumb-width);
+  -webkit-appearance: none;
+  margin-top: calc(calc(calc(-1 * var(--track-border-width) * 2 + var(--track-height)) / 2) - calc( var(--thumb-height) / 2 ));
+}
+
+[type='range']::-moz-range-track {
+  cursor: default;
+  height: var(--track-height);
+  transition: all 0.2s ease;
+  width: var(--track-width);
+  background: var(--track-color);
+  border: var(--track-border-width) solid var(--track-border-color);
+  border-radius: var(--track-radius);
+  height: calc(var(--track-height) / 2);
+}
+
+[type='range']::-moz-range-thumb {
+  background: var(--thumb-color);
+  border: var(--thumb-border-width) solid var(--thumb-border-color);
+  border-radius: var(--thumb-radius);
+  box-sizing: border-box;
+  cursor: default;
+  height: var(--thumb-height);
+  width: var(--thumb-width);
+}
+
+[type='range']:disabled::-webkit-slider-thumb, [type='range']:disabled::-moz-range-thumb, [type='range']:disabled::-webkit-slider-runnable-track {
+  cursor: not-allowed;
+}

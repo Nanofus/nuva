@@ -36,7 +36,7 @@
   </Form>
 </div>
 
-<style lang="scss">
+<style>
   .search-area {
     width: calc(var(--article-max-width) / 2);
   }

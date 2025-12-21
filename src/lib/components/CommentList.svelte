@@ -32,9 +32,8 @@
   </tbody>
 </table>
 
-<style lang="scss">
+<style>
   @media screen and (max-width: 41rem) {
-    // var(--mobile-threshold)
     .date {
       text-align: right;
     }

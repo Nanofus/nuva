@@ -61,7 +61,7 @@
   </div>
 {/if}
 
-<style lang="scss">
+<style>
   .button-group {
     display: flex;
     justify-content: flex-end;

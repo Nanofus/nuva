@@ -25,7 +25,7 @@
   {/if}
 </div>
 
-<style lang="scss">
+<style>
   #previous-next-post {
     display: flex;
     justify-content: space-between;

@@ -21,7 +21,7 @@
   {/each}
 </div>
 
-<style lang="scss">
+<style>
   .year-list {
     display: flex;
     flex-direction: column;

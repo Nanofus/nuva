@@ -24,7 +24,7 @@
   </div>
 {/if}
 
-<style lang="scss">
+<style>
   div,
   a {
     display: block;

@@ -30,7 +30,7 @@
   </header>
 {/if}
 
-<style lang="scss">
+<style>
   a {
     height: 100%;
     width: 100%;

@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style>
     #featured-posts-wrapper {
       display: flex;
       flex-direction: column;

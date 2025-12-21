@@ -10,7 +10,7 @@
   {@render children?.()}
 </div>
 
-<style lang="scss">
+<style>
   .settings-wrapper {
     width: 100%;
     max-width: var(--article-max-width);

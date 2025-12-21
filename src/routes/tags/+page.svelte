@@ -53,7 +53,7 @@
   <LoadingSpinner />
 {/if}
 
-<style lang="scss">
+<style>
   .tags {
     max-width: var(--article-max-width);
     text-align: center;

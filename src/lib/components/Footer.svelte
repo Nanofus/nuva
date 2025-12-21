@@ -22,7 +22,7 @@
   </div>
 </footer>
 
-<style lang="scss">
+<style>
   footer {
     height: var(--footer-height);
     color: var(--text-dark);

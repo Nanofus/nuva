@@ -15,7 +15,7 @@
   {/each}
 </div>
 
-<style lang="scss">
+<style>
   #tags {
     text-align: center;
   }

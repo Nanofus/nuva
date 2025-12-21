@@ -23,7 +23,7 @@
   <div>{@html postMeta.description ? postMeta.description : ''}</div>
 </div>
 
-<style lang="scss">
+<style>
   .featured-post {
     background-position: center;
     background-size: cover;

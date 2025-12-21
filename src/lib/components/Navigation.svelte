@@ -106,7 +106,7 @@
   </div>
 </nav>
 
-<style lang="scss">
+<style>
   nav {
     top: 0;
     margin: auto;
@@ -176,7 +176,6 @@
   }
 
   @media screen and (max-width: 54rem) {
-    // var(--compact-navigation-threshold)
     .nav-wrapper {
       display: block;
     }

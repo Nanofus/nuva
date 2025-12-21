@@ -209,8 +209,10 @@ Musicmancer 2023 Edition
   const seekInterval = setInterval(() => {
     if (currentAudioElement) {
       if (seekBar) seekBar.value = String(Math.floor(1000 * currentAudioElement.currentTime));
-      if (currentTime)
+      if (currentTime) {
+        // eslint-disable-next-line svelte/no-dom-manipulating
         currentTime.innerHTML = String(formatSecondsToMMSS(currentAudioElement.currentTime));
+      }
     }
   }, 50);
   // Use the seek bar to seek the audio
@@ -360,7 +362,7 @@ Musicmancer 2023 Edition
   </table>
 {/if}
 
-<style lang="scss">
+<style>
   :global(.audio-button) {
     display: block;
     width: 4em;

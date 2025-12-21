@@ -39,7 +39,7 @@
   <Login />
 </div>
 
-<style lang="scss">
+<style>
   .input-wrapper {
     width: 12rem;
   }

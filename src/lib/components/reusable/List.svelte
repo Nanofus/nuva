@@ -11,7 +11,7 @@
   {@render children?.()}
 </ul>
 
-<style lang="scss">
+<style>
   ul {
     max-width: var(--article-max-width);
     list-style: none;

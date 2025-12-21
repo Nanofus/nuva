@@ -63,7 +63,7 @@
   {/if}
 </div>
 
-<style lang="scss">
+<style>
   .input {
     display: flex;
     flex-direction: column;

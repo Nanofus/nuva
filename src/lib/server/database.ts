@@ -1,5 +1,3 @@
-import { createKysely } from '@vercel/postgres-kysely';
-import type { DB } from '$lib/server/database.types';
 import type {
   Author,
   Category,
@@ -29,10 +27,6 @@ import { objectsToHierarchy } from '$lib/server/util';
 import { error } from '@sveltejs/kit';
 import { t } from '$lib/client/localization';
 import { serverConfig } from '$lib/server/config';
-
-const db = createKysely<DB>({
-  connectionString: import.meta.env.VITE_POSTGRES_URL
-});
 
 /* Latest posts and comments */
 

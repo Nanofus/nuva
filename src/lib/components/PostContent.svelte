@@ -125,7 +125,7 @@
   <MusicPlayer musicUrlArray={post.music} resetMusicButtonStyles={post.resetMusicButtons} />
 {/if}
     
-<style lang="scss">
+<style>
   :global(section.large-initial-letter > p:first-child::first-letter) {
     float: left;
     font-size: var(--initial-letter-size);

@@ -14,7 +14,7 @@
   {/each}
 </ul>
 
-<style lang="scss">
+<style>
   .categories {
     list-style: none;
     padding: 0;

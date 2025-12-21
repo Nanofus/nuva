@@ -27,7 +27,7 @@
   {/if}
 </div>
 
-<style lang="scss">
+<style>
   div.pill {
     display: inline-block;
     background: rgba(0, 0, 0, 0.1);

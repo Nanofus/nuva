@@ -39,14 +39,13 @@
   </tbody>
 </table>
 
-<style lang="scss">
+<style>
   .comment-count {
     text-align: center;
     font-size: 1rem;
   }
 
   @media screen and (max-width: 41rem) {
-    // var(--mobile-threshold)
     .date {
       text-align: right;
     }

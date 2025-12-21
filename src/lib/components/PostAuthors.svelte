@@ -22,7 +22,7 @@
   {/if}
 </div>
 
-<style lang="scss">
+<style>
   #authors {
     font-family: var(--accent-font-family);
     text-align: center;

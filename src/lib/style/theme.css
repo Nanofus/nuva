@@ -1,7 +1,6 @@
+@charset "UTF-8";
 /* Main CSS file */
-
 /* Page structure */
-
 :root {
   scrollbar-gutter: stable;
 }
@@ -21,14 +20,12 @@ body {
   min-width: var(--page-min-width);
   width: 100%;
   max-width: var(--page-max-width);
-
-  &.wide {
-    max-width: 100%;
-
-    > main {
-      border-radius: 0;
-    }
-  }
+}
+#layout.wide {
+  max-width: 100%;
+}
+#layout.wide > main {
+  border-radius: 0;
 }
 
 main {
@@ -37,20 +34,23 @@ main {
   border-bottom-left-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
   height: auto;
-  min-height: calc(
-    var(--viewport-height) - var(--page-max-width) /
-      var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 *
-      var(--vertical-separation-margin)
-  );
-
-  border-color: transparent; // Transparent 1px border to fix an obscure
-  border-style: solid; // bug probably caused by a floating point
-  border-width: 0 1px; // rounding error
+  min-height: calc(var(--viewport-height) - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin));
+  border-color: transparent;
+  border-style: solid;
+  border-width: 0 1px;
 }
 
 /* Full-width */
+article {
+  max-width: var(--article-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: justify;
+}
 
-@mixin full-width {
+.full-width,
+.max-width {
   position: relative;
   left: calc(-1 * var(--viewport-width) / 2 + 50%);
   width: var(--viewport-width);
@@ -58,89 +58,54 @@ main {
   overflow: hidden;
 }
 
-@mixin article-width {
-  max-width: var(--article-max-width);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-article {
-  @include article-width;
-  width: 100%;
-  text-align: justify;
-}
-
-.full-width,
-.max-width {
-  @include full-width;
-}
-
 .background {
-  @include full-width;
+  position: relative;
+  left: calc(-1 * var(--viewport-width) / 2 + 50%);
+  overflow: hidden;
   min-width: var(--page-min-width);
   width: 100%;
   max-width: var(--page-max-width);
   background-repeat: no-repeat;
   background-position: top center;
   background-size: var(--page-max-width) auto;
-
-  &:not(.max) {
-    padding-left: calc(var(--article-max-width) / 2);
-    padding-right: calc(var(--article-max-width) / 2);
-  }
-  &.max {
-    padding-left: calc((var(--viewport-width) - var(--article-max-width)) / 2);
-    padding-right: calc((var(--viewport-width) - var(--article-max-width)) / 2);
-  }
-
-  &.repeat {
-    background-repeat: repeat;
-    background-size: auto;
-  }
-
-  &.fade,
-  &.fade-top {
-    padding-top: calc(var(--vertical-separation-margin) * 2);
-  }
-
-  &.fade,
-  &.fade-bottom {
-    padding-bottom: calc(var(--vertical-separation-margin) * 2);
-  }
-
-  &.fade:after,
-  &.fade:before,
-  &.fade-top:before,
-  &.fade-bottom:after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    pointer-events: none;
-    width: 100%;
-    height: calc(var(--vertical-separation-margin) * 2);
-  }
-
-  &.fade:after,
-  &.fade-bottom:after {
-    bottom: 0;
-    background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0),
-      var(--background-light) 100%
-    );
-  }
-
-  &.fade:before,
-  &.fade-top:after {
-    top: 0;
-    background-image: linear-gradient(to top, rgba(255, 255, 255, 0), var(--background-light) 100%);
-  }
+}
+.background:not(.max) {
+  padding-left: calc(var(--article-max-width) / 2);
+  padding-right: calc(var(--article-max-width) / 2);
+}
+.background.max {
+  padding-left: calc((var(--viewport-width) - var(--article-max-width)) / 2);
+  padding-right: calc((var(--viewport-width) - var(--article-max-width)) / 2);
+}
+.background.repeat {
+  background-repeat: repeat;
+  background-size: auto;
+}
+.background.fade, .background.fade-top {
+  padding-top: calc(var(--vertical-separation-margin) * 2);
+}
+.background.fade, .background.fade-bottom {
+  padding-bottom: calc(var(--vertical-separation-margin) * 2);
+}
+.background.fade:after, .background.fade:before, .background.fade-top:before, .background.fade-bottom:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: calc(var(--vertical-separation-margin) * 2);
+}
+.background.fade:after, .background.fade-bottom:after {
+  bottom: 0;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--background-light) 100%);
+}
+.background.fade:before, .background.fade-top:after {
+  top: 0;
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0), var(--background-light) 100%);
 }
 
-// Mobile screen size
 @media screen and (max-width: 41rem) {
-  // var(--mobile-threshold)
   main,
   .background:not(.max),
   .background.max {
@@ -148,42 +113,31 @@ article {
     padding-right: var(--mobile-horizontal-padding);
   }
 }
-
-// Screen is narrower than white area (incl. mobile)
 @media screen and (max-width: 76rem) {
-  // var(--max-page-width)
   main {
     border-radius: 0;
   }
 }
-
-// Screen is narrower than white area but wider than mobile
 @media screen and (max-width: 76rem) and (min-width: 41rem) {
   .background:not(.max) {
     padding-left: calc((var(--viewport-width) - var(--article-max-width)) / 2);
     padding-right: calc((var(--viewport-width) - var(--article-max-width)) / 2);
   }
 }
-
-// Screen is larger than white area
 @media screen and (min-width: 76rem) {
   #layout:not(.wide) {
     margin: auto 0 auto calc((var(--viewport-width) - var(--page-max-width)) / 2);
   }
-
   .full-width,
   .background:not(.max) {
     margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
     max-width: calc(var(--page-max-width));
   }
-
   .background.max:not(.repeat) {
     background-size: cover;
   }
 }
-
 /* Misc */
-
 ::selection {
   background-color: var(--selection);
 }
@@ -212,51 +166,39 @@ article {
     background-color: var(--highlight);
   }
   100% {
-    background-color: var(
-      --comment-background
-    ); // Currently only used for comments, so using comment background
+    background-color: var(--comment-background);
   }
 }
-
 /* Table */
-
 table {
   table-layout: auto;
   text-align: left;
   width: 100%;
   max-width: var(--article-max-width);
-
-  td {
-    min-width: 2rem;
-  }
-
-  td {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-
-    &:first-child {
-      padding-left: 0;
-    }
-
-    &:last-child {
-      padding-right: 0;
-    }
-  }
-
-  .table-header {
-    font-weight: bold;
-  }
+}
+table td {
+  min-width: 2rem;
+}
+table td {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+table td:first-child {
+  padding-left: 0;
+}
+table td:last-child {
+  padding-right: 0;
+}
+table .table-header {
+  font-weight: bold;
 }
 
 @media screen and (max-width: 41rem) {
-  // var(--mobile-threshold)
   table {
     width: 100%;
   }
 }
-
 /* Content styles */
-
 h1,
 h2,
 h3,
@@ -268,17 +210,25 @@ h4 {
   transition: font-size var(--transition-speed) ease-in-out;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  > a,
-  a:link,
-  a:visited {
-    color: var(--text-light);
-  }
+h1 > a,
+h1 a:link,
+h1 a:visited,
+h2 > a,
+h2 a:link,
+h2 a:visited,
+h3 > a,
+h3 a:link,
+h3 a:visited,
+h4 > a,
+h4 a:link,
+h4 a:visited,
+h5 > a,
+h5 a:link,
+h5 a:visited,
+h6 > a,
+h6 a:link,
+h6 a:visited {
+  color: var(--text-light);
 }
 
 h1 {
@@ -292,18 +242,16 @@ h2 {
   margin: 4rem 0 2rem;
   display: flex;
   justify-content: center;
-
-  &:before {
-    content: '—';
-    font-weight: lighter;
-    margin-right: 1rem;
-  }
-
-  &:after {
-    content: '—';
-    font-weight: lighter;
-    margin-left: 1rem;
-  }
+}
+h2:before {
+  content: "—";
+  font-weight: lighter;
+  margin-right: 1rem;
+}
+h2:after {
+  content: "—";
+  font-weight: lighter;
+  margin-left: 1rem;
 }
 
 h3 {
@@ -387,10 +335,9 @@ img {
   padding: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
-
-  &.error {
-    background-color: var(--error-background);
-  }
+}
+.info-box.error {
+  background-color: var(--error-background);
 }
 
 .material-icons.inline-icon {
@@ -402,16 +349,7 @@ img {
 .under-construction {
   width: 100%;
   height: 5rem;
-  background-image: linear-gradient(
-    45deg,
-    #000000 25%,
-    #ffd900 25%,
-    #ffd900 50%,
-    #000000 50%,
-    #000000 75%,
-    #ffd900 75%,
-    #ffd900 100%
-  );
+  background-image: linear-gradient(45deg, #000000 25%, #ffd900 25%, #ffd900 50%, #000000 50%, #000000 75%, #ffd900 75%, #ffd900 100%);
   background-size: 5rem;
   display: flex;
   justify-content: center;
@@ -420,7 +358,7 @@ img {
   color: white;
   font-size: 2rem;
   font-weight: bold;
-  font-family: 'Source Code Pro', monospace;
+  font-family: "Source Code Pro", monospace;
 }
 
 .hidden {
@@ -438,117 +376,80 @@ img {
   margin-right: auto;
 }
 
-// Mobile mode
 @media screen and (max-width: 41rem) {
-  // var(--mobile-threshold)
   h1 {
     font-size: 2.5rem;
   }
   h2 {
     font-size: 1.5rem;
   }
-
   .hidden-mobile {
     display: none !important;
   }
-
   .hidden-desktop {
     display: inherit !important;
   }
-
   #layout > header {
     height: calc(var(--viewport-width) / 3);
     font-size: 0.5rem;
   }
 }
-
 /* Columns */
-
-@mixin scroll-hint-shadow {
-  // The mighty scroll hinting shadow
-  background: /* Cover left */
-    linear-gradient(to right, var(--background-light) 30%, rgba(255, 255, 255, 0)) center left,
-    /* Cover right */ linear-gradient(to left, var(--background-light) 70%, rgba(255, 255, 255, 0))
-      center right,
-    /* Shadow left */
-      radial-gradient(farthest-side at 0 50%, var(--scroll-hinting-shadow-color), rgba(0, 0, 0, 0))
-      center left,
-    /* Shadow right */
-      radial-gradient(
-        farthest-side at 100% 50%,
-        var(--scroll-hinting-shadow-color),
-        rgba(0, 0, 0, 0)
-      )
-      center right;
-
-  background-repeat: no-repeat;
-  background-size:
-    6rem 100%,
-    6rem 100%,
-    1.5rem 100%,
-    1.5rem 100%;
-  background-attachment: local, local, scroll, scroll;
-}
-
 .grid-layout {
-  @include full-width;
-
+  position: relative;
+  left: calc(-1 * var(--viewport-width) / 2 + 50%);
+  width: var(--viewport-width);
+  max-width: var(--viewport-width);
+  overflow: hidden;
   display: grid;
   grid-template-columns: auto auto;
-
-  .grid-left,
-  .grid-middle,
-  .grid-right {
-    max-width: var(--article-max-width);
-    margin-left: var(--column-horizontal-margin);
-    margin-right: var(--column-horizontal-margin);
-  }
-
-  .grid-left {
-    grid-column: 1;
-  }
-
-  .grid-middle {
-    grid-column: 2;
-  }
-
-  .grid-right {
-    grid-column: 3;
-  }
+}
+.grid-layout .grid-left,
+.grid-layout .grid-middle,
+.grid-layout .grid-right {
+  max-width: var(--article-max-width);
+  margin-left: var(--column-horizontal-margin);
+  margin-right: var(--column-horizontal-margin);
+}
+.grid-layout .grid-left {
+  grid-column: 1;
+}
+.grid-layout .grid-middle {
+  grid-column: 2;
+}
+.grid-layout .grid-right {
+  grid-column: 3;
 }
 
-// Page is wider than white area
 @media screen and (min-width: 76rem) {
-  // var(--max-page-width)
   .grid-layout {
     margin-left: calc((var(--viewport-width) - var(--page-max-width)) / 2);
     max-width: calc(var(--page-max-width));
   }
 }
-
-// Mobile screen size
 @media screen and (max-width: 41rem) {
-  // var(--mobile-threshold)
   .grid-layout,
   .mobile-overflow {
-    @include full-width;
+    position: relative;
+    left: calc(-1 * var(--viewport-width) / 2 + 50%);
+    width: var(--viewport-width);
+    max-width: var(--viewport-width);
+    overflow: hidden;
     overflow-x: scroll;
-    @include scroll-hint-shadow;
+    background: linear-gradient(to right, var(--background-light) 30%, rgba(255, 255, 255, 0)) center left, linear-gradient(to left, var(--background-light) 70%, rgba(255, 255, 255, 0)) center right, radial-gradient(farthest-side at 0 50%, var(--scroll-hinting-shadow-color), rgba(0, 0, 0, 0)) center left, radial-gradient(farthest-side at 100% 50%, var(--scroll-hinting-shadow-color), rgba(0, 0, 0, 0)) center right;
+    background-repeat: no-repeat;
+    background-size: 6rem 100%, 6rem 100%, 1.5rem 100%, 1.5rem 100%;
+    background-attachment: local, local, scroll, scroll;
   }
-
-  .grid-layout {
-    .grid-left,
-    .grid-middle,
-    .grid-right {
-      min-width: calc(var(--article-max-width) / 2);
-      margin-left: var(--mobile-horizontal-padding);
-      margin-right: var(--mobile-horizontal-padding);
-    }
+  .grid-layout .grid-left,
+  .grid-layout .grid-middle,
+  .grid-layout .grid-right {
+    min-width: calc(var(--article-max-width) / 2);
+    margin-left: var(--mobile-horizontal-padding);
+    margin-right: var(--mobile-horizontal-padding);
   }
 }
-
 /* Page transitions */
-
 .full-page-loader {
   animation: fadeIn 1s forwards;
   animation-delay: 0.5s;
@@ -564,7 +465,6 @@ img {
     opacity: 1;
   }
 }
-
 .transition {
   display: flex;
   flex-direction: column;
@@ -572,7 +472,6 @@ img {
 }
 
 /* User inputs */
-
 button {
   align-self: center;
   width: fit-content;
@@ -584,50 +483,40 @@ button {
   border: 0;
   font-family: var(--body-text-font-family);
   font-size: 1rem;
-
-  &.link-button {
-    background: none;
-    color: var(--link);
-    border-radius: 0;
-    border: none;
-    font-size: inherit;
-
-    &:hover {
-      background: none;
-      color: var(--link-hover);
-      text-decoration: underline;
-    }
-  }
-
-  > * {
-    user-select: none;
-  }
-
-  .icon {
-    display: inline-block;
-    font-size: 1rem;
-    position: relative;
-    top: 0.2rem;
-  }
-
-  &:hover {
-    cursor: pointer;
-    filter: brightness(0.8);
-    transition: 0s;
-  }
-
-  &[disabled],
-  &:disabled {
-    color: var(--hover);
-    cursor: not-allowed;
-  }
+}
+button.link-button {
+  background: none;
+  color: var(--link);
+  border-radius: 0;
+  border: none;
+  font-size: inherit;
+}
+button.link-button:hover {
+  background: none;
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+button > * {
+  user-select: none;
+}
+button .icon {
+  display: inline-block;
+  font-size: 1rem;
+  position: relative;
+  top: 0.2rem;
+}
+button:hover {
+  cursor: pointer;
+  filter: brightness(0.8);
+  transition: 0s;
+}
+button[disabled], button:disabled {
+  color: var(--hover);
+  cursor: not-allowed;
 }
 
-input {
-  &[disabled],
-  &:disabled {
-    cursor: not-allowed;
-  }
+input[disabled], input:disabled {
+  cursor: not-allowed;
 }
 
 .editor,

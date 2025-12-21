@@ -1,20 +1,11 @@
 import ts from 'typescript-eslint';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
-import globals from 'globals';
 import svelteConfig from './svelte.config.js';
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
 export default [
   ...ts.configs.recommended,
   ...eslintPluginSvelte.configs['flat/recommended'],
-  {
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node
-      }
-    }
-  },
   {
     files: ['**/*.svelte'],
     languageOptions: {
@@ -26,6 +17,12 @@ export default [
   },
   {
     rules: {
+      'svelte/no-navigation-without-resolve': [
+        'error',
+        {
+          ignoreLinks: true,
+        }
+      ],
       'svelte/no-at-html-tags': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       'indent': ['error', 2],
