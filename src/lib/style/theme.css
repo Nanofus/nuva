@@ -35,9 +35,6 @@ main {
   border-bottom-right-radius: var(--border-radius);
   height: auto;
   min-height: calc(var(--viewport-height) - var(--page-max-width) / var(--header-banner-dimensions-ratio) - var(--navigation-height) - var(--footer-height) - 2 * var(--vertical-separation-margin));
-  border-color: transparent;
-  border-style: solid;
-  border-width: 0 1px;
 }
 
 /* Full-width */

@@ -52,6 +52,7 @@
 
   header {
     height: calc(var(--page-max-width) / var(--header-banner-dimensions-ratio));
+    width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

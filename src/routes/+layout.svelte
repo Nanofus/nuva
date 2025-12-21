@@ -2,7 +2,7 @@
   import { onDestroy, onMount } from 'svelte';
   import { SvelteToast } from '@zerodevx/svelte-toast';
   import { browser } from '$app/environment';
-  import { navigating, page } from '$app/state';
+  import { page } from '$app/state';
   import { createBaseSettings, handleScrolledToBottom, handleViewportResize } from '$lib/client/util';
   import { auth, postOptions } from '$lib/client/stores';
   import Header from '$lib/components/Header.svelte';
@@ -51,17 +51,8 @@
   <Header />
   <Navigation />
   <main>
-    {#if navigating.to}
-      <div class="full-page-loader">
-        <LoadingSpinner />
-      </div>
-    {/if}
     {#key data.pathname}
-      <div class="transition">
-        {#if !navigating.to}
-          {@render children?.()}
-        {/if}
-      </div>
+      {@render children()}
     {/key}
   </main>
   <Footer />
