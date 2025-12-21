@@ -4,10 +4,10 @@ import { clientConfig } from '$lib/client/config';
 // Invalidation requests for ISR cache for each page with ISR enabled.
 
 export const defaultIsrConfig = {
-  /*isr: {
-    expiration: false,
+  isr: {
+    expiration: 60, // `false` to keep cache until invalidation
     bypassToken: ISR_BYPASS_TOKEN
-  }*/
+  }
 };
 
 const requestConfig = {
