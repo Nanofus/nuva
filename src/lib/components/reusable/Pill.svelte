@@ -9,7 +9,7 @@
 
   let { href = null, sizeByCount = false, children }: Props = $props();
 
-  let pill: HTMLElement = $state();
+  let pill: HTMLElement;
 
   onMount(() => {
     if (!sizeByCount) return;

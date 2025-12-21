@@ -35,6 +35,11 @@
   const isHighlighted = () => {
     return post.coAuthors.indexOf(comment.author) > -1;
   };
+  
+  let commentChildren: Comment[] = $state([]);
+  $effect(() => {
+    commentChildren = comment.children as Comment[];
+  });
 </script>
 
 <div class="comment {isHighlighted() ? 'highlighted' : ''}" id="comment-{comment._id}">
@@ -50,7 +55,7 @@
   </header>
   <div class="comment-content">{@html comment.content}</div>
   <div class="child-comments">
-    {#each comment.children as child (child._id)}
+    {#each commentChildren as child (child._id)}
       <CommentView on:commentSent={commentSent} comment={child} {post} />
     {/each}
   </div>
