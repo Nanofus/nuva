@@ -8,14 +8,13 @@
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import Navigation from '$lib/components/Navigation.svelte';
-  import LoadingSpinner from '$lib/components/reusable/LoadingSpinner.svelte';
   import '$lib/style/variables.css';
   import '$lib/style/input-range.css';
   import '$lib/style/theme.css';
   import { getLoginStatus } from '$lib/client/auth';
   import { clientConfig } from '$lib/client/config';
 
-  let { data, children } = $props();
+  let { children } = $props();
 
   let fullWidth: boolean = $state(page.data.fullWidth ? page.data.fullWidth : false);
 
@@ -51,11 +50,9 @@
   <Header />
   <Navigation />
   <main>
-    {#key data.pathname}
-      <div>
-        {@render children?.()}
-      </div>
-    {/key}
+    <div>
+      {@render children?.()}
+    </div>
   </main>
   <Footer />
   <SvelteToast options={{ reversed: true, duration: 3000, intro: { y: -20 } }} />
