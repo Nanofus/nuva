@@ -1,4 +1,3 @@
-import js from '@eslint/js';
 import ts from 'typescript-eslint';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 import globals from 'globals';
@@ -6,7 +5,6 @@ import svelteConfig from './svelte.config.js';
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
 export default [
-  js.configs.recommended,
   ...ts.configs.recommended,
   ...eslintPluginSvelte.configs['flat/recommended'],
   {
