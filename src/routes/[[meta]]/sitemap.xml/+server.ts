@@ -3,8 +3,7 @@ import { getAllPostMetas, getCategories, getTags } from '$lib/server/database';
 import type { RequestHandler } from '@sveltejs/kit';
 import { clientConfig } from '$lib/client/config';
 
-// TODO: Only generated on build, not on every request
-export const prerender = true;
+//export const prerender = true;
 
 export const GET: RequestHandler = async () => {
   const body = sitemap(await getAllPostMetas(), await getCategories(), (await getTags()).tags);
@@ -14,7 +13,6 @@ export const GET: RequestHandler = async () => {
   return response;
 };
 
-// TODO: Authors
 const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
   `<?xml version="1.0" encoding="UTF-8" ?>
 <urlset
@@ -38,12 +36,10 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
   <url>
     <loc>${clientConfig.baseUrl}/categories</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
   </url>
   <url>
     <loc>${clientConfig.baseUrl}/tags</loc>
     <changefreq>daily</changefreq>
-    <priority>0.4</priority>
   </url>
   ${categories
     .map(
@@ -51,7 +47,6 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
   <url>
     <loc>${clientConfig.baseUrl}/categories/${category.slug}</loc>
     <changefreq>daily</changefreq>
-    <priority>0.7</priority>
   </url>
   `
     )
@@ -62,7 +57,6 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
   <url>
     <loc>${clientConfig.baseUrl}/tags/${tag.slug}</loc>
     <changefreq>daily</changefreq>
-    <priority>0.7</priority>
   </url>
   `
     )
@@ -74,7 +68,6 @@ const sitemap = (posts: PostMeta[], categories: Category[], tags: Tag[]) =>
     <loc>${clientConfig.baseUrl}/posts/${post.slug}</loc>
     <changefreq>weekly</changefreq>
     <lastmod>${post.date}</lastmod>
-    <priority>0.3</priority>
   </url>
   `
     )
