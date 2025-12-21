@@ -50,9 +50,7 @@
   <Header />
   <Navigation />
   <main>
-    <div>
-      {@render children?.()}
-    </div>
+    {@render children?.()}
   </main>
   <Footer />
   <SvelteToast options={{ reversed: true, duration: 3000, intro: { y: -20 } }} />
