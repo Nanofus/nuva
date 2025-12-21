@@ -52,7 +52,9 @@
   <Navigation />
   <main>
     {#key data.pathname}
-      {@render children()}
+      <div>
+        {@render children?.()}
+      </div>
     {/key}
   </main>
   <Footer />
