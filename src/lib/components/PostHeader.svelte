@@ -18,9 +18,7 @@
     {#if !post.metaPage}
       <span class="post-categories">
         {#each post.categories as category, i (category.slug)}
-          <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a>
-            <!-- eslint-disable -->
-            {#if i !== post.categories.length - 1},{' '}{/if}</span>
+          <span class="post-category"><a href="/categories/{category.slug}">{category.name}</a><!-- eslint-disable -->{#if i !== post.categories.length - 1},{' '}{/if}</span>
         {/each}
       </span>
       <time class="post-date" datetime={post.date.toLocaleString()} title={post.date.toLocaleString()}>
