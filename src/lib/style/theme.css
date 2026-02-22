@@ -1,9 +1,6 @@
 @charset "UTF-8";
 /* Main CSS file */
 /* Page structure */
-:root {
-  scrollbar-gutter: stable;
-}
 
 body {
   margin: 0;
