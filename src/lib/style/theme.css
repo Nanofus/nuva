@@ -384,7 +384,7 @@ img {
     display: none !important;
   }
   .hidden-desktop {
-    display: inherit !important;
+    display: unset !important;
   }
   #layout > header {
     height: calc(var(--viewport-width) / 3);
