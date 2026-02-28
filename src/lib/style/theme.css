@@ -1,9 +1,6 @@
 @charset "UTF-8";
 /* Main CSS file */
 /* Page structure */
-:root {
-  scrollbar-gutter: stable;
-}
 
 body {
   margin: 0;
@@ -387,7 +384,7 @@ img {
     display: none !important;
   }
   .hidden-desktop {
-    display: inherit !important;
+    display: unset !important;
   }
   #layout > header {
     height: calc(var(--viewport-width) / 3);

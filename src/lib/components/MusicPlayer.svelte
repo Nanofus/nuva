@@ -456,7 +456,7 @@ Musicmancer 2023 Edition
 
   table#music-info-box {
     width: auto;
-    max-width: calc(var(--viewport-width - 2rem));
+    max-width: calc(var(--viewport-width) - 2rem);
     background-color: var(--accent);
     position: fixed;
     right: 0rem;

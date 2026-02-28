@@ -27,11 +27,24 @@ export const toastSettings = {
 
 export const handleViewportResize = () => {
   if (!browser) return;
+  let scrollbarWidth;
+  try {
+    scrollbarWidth = viewport.segments[0].width - visualViewport.width;
+  } catch (e) {
+    scrollbarWidth = 0;
+    console.warn("The %cViewport%c interface is not supported.", "background-color: rgba(0,0,0,0.25)", "");
+  } finally {
+    document
+      .querySelector<HTMLElement>(':root')
+      ?.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+  }
+  /*
   const scroller = document.scrollingElement as HTMLElement;
   document
     .querySelector<HTMLElement>(':root')
     ?.style.setProperty('--scrollbar-width', `${window.innerWidth - scroller.clientWidth}px`);
   if (!window.visualViewport) return;
+  */
   /*
     document
       .querySelector<HTMLElement>(':root')
