@@ -33,6 +33,10 @@ export const clientConfig: ClientConfig = {
   defaultYearFeaturedImage: 'https://meri.klaanon.fi/matorotbs/Saalistajat/sotaomppuromaani2.png',
   years: [
     {
+      year: 2026,
+      featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2026.png'
+    },
+    {
       year: 2025,
       featuredImage: 'https://meri.klaanon.fi/bio-klaani/nuva/bannerit/2025.png'
     },
