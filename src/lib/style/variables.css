@@ -60,7 +60,6 @@
 /* Images */
 
 :root {
-  //--background-image-default: url("/images/bg.webp"); /* Default background image */
   --hr-background-image: url('/images/hrbg.png'); /* Background image for horizontal rules */
 }
 
